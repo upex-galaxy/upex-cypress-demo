@@ -1,0 +1,11 @@
+.DS_Store
+node_modules/
+cypress/videos
+cypress/screenshots
+TestReport/
+mochawesome-report/
+cypress-combined-report.json
+cypress/integration/dummy.js
+cypress/fixtures/url.json
+cypress/fixtures/data.txt
+abcd.html

@@ -1,0 +1,5 @@
+{
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"prettier.arrowParens": "avoid",
+	"cSpell.language": "en,es-ES"
+}
