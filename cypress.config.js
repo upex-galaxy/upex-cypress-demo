@@ -3,7 +3,7 @@ const {defineConfig} = require('cypress')
 module.exports = defineConfig({
 	watchForFileChanges: false,
 	chromeWebSecurity: false,
-	retries: 1,
+	retries: 0,
 	reporter: '../node_modules/mochawesome/src/mochawesome.js',
 	
 	e2e: {
