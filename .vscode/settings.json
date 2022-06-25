@@ -1,5 +1,26 @@
 {
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"prettier.arrowParens": "avoid",
-	"cSpell.language": "en,es-ES"
+	"cSpell.language": "en,es-ES",
+	"cucumberautocomplete.strictGherkinCompletion": true,
+	"cucumberautocomplete.strictGherkinValidation": false,
+	"cucumberautocomplete.customParameters": [
+		{
+			"parameter":"{ab}",
+			"value":"(a|b)"
+		}
+	],
+	"cucumberautocomplete.skipDocStringsFormat": true,
+	"cucumberautocomplete.formatConfOverride": {
+		"And": 3,
+		"But": "relative",
+	},
+	"cucumberautocomplete.onTypeFormat": true,
+	"editor.quickSuggestions": {
+		"comments": false,
+		"strings": true,
+		"other": true
+	},
+	"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
+	"cucumberautocomplete.stepRegExSymbol": "'"
 }
