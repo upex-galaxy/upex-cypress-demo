@@ -76,7 +76,8 @@
 		"*.cy.js": "Test-jsx",
 		"*.js": "Cypress",
 		"*.json": "Cypress",
-		"jsconfig.json": "Javascript-map"
+		"jsconfig.json": "Javascript-map",
+		"settings.json": "Vscode"
 	},
 	"material-icon-theme.folders.associations": {
 		"api-testing": "api",
@@ -86,5 +87,17 @@
 		"support": "Helper",
 		"component-test": "react-components",
 		"material-icons": "examples"
+	},
+	"cypressHelper.menuItems": {
+
+		"OpenCypress": false,
+		"RunCypress": false,
+		"GenerateCustomCommandTypes": true,
+		"GoToCustomCommand": false,
+		"FindCustomCommandReferences": true,
+		"FindStepDefinitionReferences": true,
+		"SchemaGenerator": false,
+		"ParseHAR": false,
+		"mockAutocomplete": false
 	},
 }
