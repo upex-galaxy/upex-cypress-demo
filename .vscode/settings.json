@@ -19,7 +19,7 @@
 	},
 	"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
 	"cucumberautocomplete.stepRegExSymbol": "'",
-	"window.zoomLevel": 3,
+	"window.zoomLevel": 2,
 	"workbench.colorTheme": "Winter is Coming (Dark Blue)",
 	"cSpell.language": "en,es",
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
@@ -72,7 +72,7 @@
 	],
 	"workbench.iconTheme": "material-icon-theme",
 	"material-icon-theme.files.associations": {
-		"*.tc.js": "Test-jsx",
+		"*.test.js": "Test-jsx",
 		"*.cy.js": "Test-jsx",
 		"*.js": "Cypress",
 		"*.json": "Cypress",
@@ -82,10 +82,12 @@
 	"material-icon-theme.folders.associations": {
 		"api-testing": "api",
 		"db-testing": "database",
+		"ui-testing": "app",
+		"component-testing": "Webpack",
+		"US": "Storybook",
 		"cucumber-test": "Resolver",
 		"fixtures": "container",
 		"support": "Helper",
-		"component-test": "react-components",
 		"material-icons": "examples"
 	},
 	"cypressHelper.menuItems": {
