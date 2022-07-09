@@ -6,7 +6,8 @@ describe('US # | TS # | TC#: aquí se escribe el escenario de prueba', () =>
 	})
 	it('Aquí puedes escribir un Paso de Acción', () =>
 	{
-		cy.get('.home-list a').first().click()
+		cy.get('.home-list a').first()
+			.click()
 	})
 	it('Aquí puedes escribir otro Paso de Acción', () =>
 	{
