@@ -1,4 +1,4 @@
-# Testing Automation - Cypress 10.2.0 + Cucumber
+# Testing Automation - Cypress 10.3.0 + Cucumber
 Cypress is a next generation front end testing tool built for the modern web. This is a sample project which you can use to start your E2E testing with Cypress.
 
 # How to Start
