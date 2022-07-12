@@ -1,3 +1,6 @@
+// Esto no es PageObjectModel como tal, pero es prácticamente lo mismo.
+// Cypress usa Commands como acciones más simples y fáciles de interpretar.
+
 describe("US 123 | TS 123 | TC1: CÓMO USAR LOS COMANDOS CUSTOM DE CYPRESS COMO PAGE-OBJECT-MODEL", () =>
 {
     it("Precondición: Usuario debe tener acceso y estar en la pag de Login", () =>

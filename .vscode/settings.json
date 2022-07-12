@@ -74,7 +74,9 @@
 	"material-icon-theme.files.associations": {
 		"*.test.js": "Test-jsx",
 		"*.cy.js": "Test-jsx",
+		"*.Page.json": "3d",
 		"*.js": "Cypress",
+		"commands.js": "webpack",
 		"*.json": "Cypress",
 		"jsconfig.json": "Javascript-map",
 		"settings.json": "Vscode"
@@ -86,9 +88,10 @@
 		"component-testing": "Webpack",
 		"DOM": "webpack",
 		"DesignPatterns": "context",
+		"How-to": "content",
 		"US": "Storybook",
 		"test-plan": "meta",
-		"scenarios": "rules",
+		"situations": "rules",
 		"smoke": "rules",
 		"sanity": "rules",
 		"regression": "rules",

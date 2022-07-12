@@ -6,7 +6,7 @@ describe("US 123 | TS 123 | TC1: CÓMO USAR LAS VARIABLES DE FIXTURE COMO EL DOM
     })
     it("Iniciar sesión correctamente con nombre y contraseña de usuario válido", () =>
     {
-        cy.fixture("DOM/sauce/loginPage").then((the) =>
+        cy.fixture("DOM/sauce/login.Page").then((the) =>
         {
             cy.get(the.input.username).type(the.data.user)
                 .should("have.value", the.data.user)        

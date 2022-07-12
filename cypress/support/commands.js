@@ -8,12 +8,11 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 import 'cypress-file-upload';
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+
+
 Cypress.Commands.add("Login", () =>
 {
-    cy.fixture("DOM/sauce/loginPage").then((the) =>
+    cy.fixture("DOM/sauce/login.Page").then((the) =>
         {
             cy.get(the.input.username).type(the.data.user)
             .should("have.value", the.data.user)
@@ -26,7 +25,7 @@ Cypress.Commands.add("Login", () =>
 })
 Cypress.Commands.add("CustomLogin", (user,password) =>
 {
-    cy.fixture("DOM/sauce/loginPage").then((the) =>
+    cy.fixture("DOM/sauce/login.Page").then((the) =>
         {
             cy.get(the.input.username).type(user)
             .should("have.value", user)
@@ -39,7 +38,7 @@ Cypress.Commands.add("CustomLogin", (user,password) =>
 })
 Cypress.Commands.add("ErrorCard", () =>
 {
-    cy.fixture("DOM/sauce/loginPage").then((the) =>
+    cy.fixture("DOM/sauce/login.Page").then((the) =>
         {
             cy.get(the.error)
                 .should("be.visible")
@@ -48,6 +47,8 @@ Cypress.Commands.add("ErrorCard", () =>
         })
 })
 
+// -- This is a parent command --
+// Cypress.Commands.add('login', (email, password) => { ... })
 //
 //
 // -- This is a child command --
