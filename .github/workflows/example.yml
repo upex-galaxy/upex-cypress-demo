@@ -9,7 +9,7 @@ on: [push]
   #       default: '']
 
 jobs:
-  in-sprint_test_#US-GX-5#GitHub_Integration_for_Xray:
+  in-sprint_test_US-GX-5_GitHub_Integration_for_Xray:
     runs-on: ubuntu-latest
     steps:
       - name: Github Actions
