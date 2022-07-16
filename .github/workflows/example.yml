@@ -18,6 +18,6 @@ jobs:
         uses: cypress-io/github-action@v4.1.1 
         with:
           browser: chrome
-          specs: cypress/e2e/cucumber-test/test-case-example/login.feature
+          spec: cypress/e2e/cucumber-test/test-case-example/login.feature
           
 
