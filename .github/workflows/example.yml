@@ -19,5 +19,10 @@ jobs:
         with:
           browser: chrome
           spec: cypress/e2e/cucumber-test/test-case-example/login.feature
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{secrets.CYPRESS_RECORD_KEY}}
+          GITHUB_TOKEN: ${{secrets.ELY_GITHUB_TOKEN}}
+          CYPRESS_PROJECT_ID: ${{secrets.CYPRESS_PROJECT_ID}}
           
 
