@@ -86,12 +86,12 @@
 		"db-testing": "database",
 		"ui-testing": "app",
 		"component-testing": "Webpack",
+		"test-case-example": "test",
 		"DOM": "webpack",
 		"DesignPatterns": "context",
 		"How-to": "content",
 		"US": "Storybook",
 		"test-plan": "meta",
-		"situations": "rules",
 		"smoke": "rules",
 		"sanity": "rules",
 		"regression": "rules",
@@ -99,7 +99,8 @@
 		"cucumber-test": "Resolver",
 		"fixtures": "container",
 		"support": "Helper",
-		"material-icons": "examples"
+		"material-icons": "examples",
+		"workflows": "github"
 	},
 	"cypressHelper.menuItems": {
 

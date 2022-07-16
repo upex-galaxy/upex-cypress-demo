@@ -1,0 +1,23 @@
+name: Example Test - CI Framework Test for Xray with Cypress and GitHub Actions
+
+on: [push]
+  # [workflow_dispatch:
+  #   inputs:
+  #     test_execution_key:
+  #       description: 'GX-5'
+  #       required: false
+  #       default: '']
+
+jobs:
+  in-sprint_test_#US-GX-5#GitHub_Integration_for_Xray:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Github Actions
+        uses: actions/checkout@v3
+      - name: Cypress Run
+        uses: cypress-io/github-action@v4.1.1 
+        with:
+          browser: chrome
+          specs: cypress/e2e/cucumber-test/test-case-example/login.feature
+          
+
