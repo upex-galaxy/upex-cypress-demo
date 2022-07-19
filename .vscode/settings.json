@@ -86,7 +86,7 @@
 		"db-testing": "database",
 		"ui-testing": "app",
 		"component-testing": "Webpack",
-		"test-case-example": "test",
+		"Test-Suite-example": "test",
 		"DOM": "webpack",
 		"DesignPatterns": "context",
 		"How-to": "content",
