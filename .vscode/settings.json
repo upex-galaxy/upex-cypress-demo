@@ -92,6 +92,7 @@
 		"How-to": "content",
 		"US": "Storybook",
 		"test-plan": "meta",
+		"test-reports": "log",
 		"smoke": "rules",
 		"sanity": "rules",
 		"regression": "rules",

@@ -29,9 +29,9 @@ jobs:
             - name: xray-action
               uses: mikepenz/xray-action@v2
               with:
-                  username: ${{ secrets.XRAY_CLIENT_ID }}
-                  password: ${{ secrets.XRAY_CLIENT_SECRET }}
-                  testFormat: 'cucumber'
-                  testPaths: 'reports/*.json'
+                  username: ${{secrets.XRAY_CLIENT_ID}}
+                  password: ${{secrets.XRAY_CLIENT_SECRET}}
+                  testFormat: 'junit'
+                  testPaths: 'cypress/reports/*.xml'
                   testExecKey: 'GX-5'
                   projectKey: 'GX'
