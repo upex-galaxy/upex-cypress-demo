@@ -31,7 +31,7 @@ jobs:
               with:
                   username: ${{ secrets.XRAY_CLIENT_ID }}
                   password: ${{ secrets.XRAY_CLIENT_SECRET }}
-                  testFormat: 'junit'
-                  testPaths: 'reports/*.xml'
+                  testFormat: 'cucumber'
+                  testPaths: 'reports/*.json'
                   testExecKey: 'GX-5'
                   projectKey: 'GX'
