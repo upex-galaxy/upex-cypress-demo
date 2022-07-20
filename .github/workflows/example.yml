@@ -26,7 +26,6 @@ jobs:
                   GITHUB_TOKEN: ${{secrets.ELY_GITHUB_TOKEN}}
                   CYPRESS_PROJECT_ID: ${{secrets.CYPRESS_PROJECT_ID}}
 
-            - name: xray-action
             - name: Get Xray Cloud API token
               env:
                 CLIENT_ID: ${{secrets.XRAY_CLIENT_ID}}
