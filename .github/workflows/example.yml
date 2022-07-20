@@ -35,3 +35,5 @@ jobs:
                   testPaths: 'cypress/test-reports/*.xml'
                   testExecKey: 'GX-5'
                   projectKey: 'GX'
+              env:
+                  GITHUB_TOKEN: ${{secrets.ELY_GITHUB_TOKEN}}
