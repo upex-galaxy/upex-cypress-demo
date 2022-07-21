@@ -87,6 +87,7 @@
 		"ui-testing": "app",
 		"component-testing": "Webpack",
 		"Test-Suite-example": "test",
+		"cucumber-json": "Resolver",
 		"DOM": "webpack",
 		"DesignPatterns": "context",
 		"How-to": "content",

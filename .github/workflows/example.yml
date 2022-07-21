@@ -26,12 +26,14 @@ jobs:
                   GITHUB_TOKEN: ${{secrets.ELY_GITHUB_TOKEN}}
                   CYPRESS_PROJECT_ID: ${{secrets.CYPRESS_PROJECT_ID}}
 
-            - name: Get Xray Cloud API token
+            - name: xray-action
+              uses: mikepenz/xray-action@v2
+              with:
+                username: ${{secrets.XRAY_CLIENT_ID}}
+                password: ${{secrets.XRAY_CLIENT_SECRET}}
+                testFormat: 'junit'
+                testPaths: 'xunit.xml'
+                testExecKey: 'GX-5'
+                projectKey: 'GX'
               env:
-                CLIENT_ID: ${{secrets.XRAY_CLIENT_ID}}
-                CLIENT_SECRET: ${{secrets.XRAY_CLIENT_SECRET}}
-              id: xray-token
-              run: |
-                echo ::set-output name=XRAY_TOKEN::$(curl -H "Content-Type: application/json" -X POST --data "{ \"client_id\": \"$CLIENT_ID\",\"client_secret\": \"$CLIENT_SECRET\" }" https://xray.cloud.getxray.app/api/v1/authenticate| tr -d '"')
-            - name: Submit results to Xray
-              run: 'curl -H "Content-Type: text/xml" -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}" --data @cypress/test-reports/*.xml  "https://xray.cloud.getxray.app/api/v2/import/execution/junit?projectKey=GX&testExecKey=GX-5"'
+                  GITHUB_TOKEN: ${{secrets.ELY_GITHUB_TOKEN}}
