@@ -8,9 +8,7 @@ Feature: Labs: CI Framework Test for Xray with Cypress and GitHub Actions
 	#So that the Tests can be updated from Jira Action.
 
 	@TC_GX-4 @TS_GX-3 @BDD @Cucumber @Feature @Gherkin
-	Scenario: US 2 | TS 3 | TC1: Check the Login correctly to Orange CRM Website
-	Scenario Outline: Login to Orange CRM Website
-
+	Scenario Outline: US 2 | TS 3 | TC1: Check the Login correctly to Orange CRM Website
 		Given User is at the login page
 		When User enters username as '<username>' and password as '<password>'
 		And User clicks on login button

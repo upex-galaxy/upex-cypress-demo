@@ -4,17 +4,17 @@
     "elements": [
       {
         "description": "",
-        "id": "labs:-ci-framework-test-for-xray-with-cypress-and-github-actions;login-to-orange-crm-website;;2",
+        "id": "labs:-ci-framework-test-for-xray-with-cypress-and-github-actions;us-2-|-ts-3-|-tc1:-check-the-login-correctly-to-orange-crm-website;;2",
         "keyword": "Scenario Outline",
-        "line": 20,
-        "name": "Login to Orange CRM Website",
+        "line": 18,
+        "name": "US 2 | TS 3 | TC1: Check the Login correctly to Orange CRM Website",
         "steps": [
           {
             "keyword": "Given ",
-            "line": 14,
+            "line": 12,
             "name": "User is at the login page",
             "result": {
-              "duration": 3971000000,
+              "duration": 3859000000,
               "status": "passed"
             },
             "match": {
@@ -23,10 +23,10 @@
           },
           {
             "keyword": "When ",
-            "line": 15,
+            "line": 13,
             "name": "User enters username as 'Admin' and password as 'admin123'",
             "result": {
-              "duration": 546000000,
+              "duration": 495000000,
               "status": "passed"
             },
             "match": {
@@ -35,10 +35,10 @@
           },
           {
             "keyword": "And ",
-            "line": 16,
+            "line": 14,
             "name": "User clicks on login button",
             "result": {
-              "duration": 4165000000,
+              "duration": 3653000000,
               "status": "passed"
             },
             "match": {
@@ -47,10 +47,10 @@
           },
           {
             "keyword": "Then ",
-            "line": 17,
+            "line": 15,
             "name": "User is able to successfully login to the Website",
             "result": {
-              "duration": 64000000,
+              "duration": 28000000,
               "status": "passed"
             },
             "match": {
@@ -91,6 +91,30 @@
           {
             "line": 2,
             "name": "@US_GX-2"
+          },
+          {
+            "line": 10,
+            "name": "@TC_GX-4"
+          },
+          {
+            "line": 10,
+            "name": "@TS_GX-3"
+          },
+          {
+            "line": 10,
+            "name": "@BDD"
+          },
+          {
+            "line": 10,
+            "name": "@Cucumber"
+          },
+          {
+            "line": 10,
+            "name": "@Feature"
+          },
+          {
+            "line": 10,
+            "name": "@Gherkin"
           }
         ]
       }

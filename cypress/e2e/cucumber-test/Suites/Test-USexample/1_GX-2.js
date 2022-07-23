@@ -1,6 +1,6 @@
 import { Given, When, And, Then } from "@badeball/cypress-cucumber-preprocessor";
 
-describe("Login to Orange CRM Website", () =>
+describe("US 2 | TS 3 | TC1: Check the Login correctly to Orange CRM Website", () =>
 {
     Given('User is at the login page', () =>
     {
