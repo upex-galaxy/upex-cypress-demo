@@ -78,6 +78,8 @@
 		"*.js": "Cypress",
 		"commands.js": "webpack",
 		"*.json": "Cypress",
+		".cypress-cucumber-preprocessorrc.json": "cucumber",
+		"cucumber-report.json": "cucumber",
 		"jsconfig.json": "Javascript-map",
 		"settings.json": "Vscode"
 	},
