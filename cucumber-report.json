@@ -14,7 +14,7 @@
             "line": 16,
             "name": "User is at the login page",
             "result": {
-              "duration": 2799000000,
+              "duration": 2635000000,
               "status": "passed"
             },
             "match": {
@@ -26,7 +26,7 @@
             "line": 17,
             "name": "User enters username as 'Admin' and password as 'admin123'",
             "result": {
-              "duration": 570000000,
+              "duration": 533000000,
               "status": "passed"
             },
             "match": {
@@ -38,7 +38,7 @@
             "line": 18,
             "name": "User clicks on login button",
             "result": {
-              "duration": 3707000000,
+              "duration": 3694000000,
               "status": "passed"
             },
             "match": {
@@ -50,7 +50,7 @@
             "line": 19,
             "name": "User is able to successfully login to the Website",
             "result": {
-              "duration": 106000000,
+              "duration": 112000000,
               "status": "passed"
             },
             "match": {
@@ -99,7 +99,7 @@
     "keyword": "Feature",
     "line": 3,
     "name": "Labs: CI Framework Test for Xray with Cypress and GitHub Actions",
-    "uri": "cypress\\e2e\\cucumber-test\\Suites\\Test-USexample\\1_GX-5.feature",
+    "uri": "cypress\\e2e\\cucumber-test\\Suites\\Test-USexample\\GX-5.feature",
     "tags": [
       {
         "line": 1,
