@@ -19,7 +19,7 @@ jobs:
               uses: cypress-io/github-action@v4.1.1
               with:
                   browser: chrome
-                  spec: cypress/e2e/cucumber-test/Suites/Test-USexample/GX-5.feature
+                  spec: cypress/e2e/cucumber-test/Suites/Test-USexample/1_GX-2.feature
                   record: true
               env:
                   CYPRESS_RECORD_KEY: ${{secrets.CYPRESS_RECORD_KEY}}
