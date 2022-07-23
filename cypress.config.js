@@ -4,15 +4,8 @@ module.exports = defineConfig({
 	projectId: "atyyam",
 	watchForFileChanges: false,
 	chromeWebSecurity: false,
+	reporter: 'mochawesome',
 	retries: 0,
-	reporter: 'cypress-multi-reporters',
-	reporterOptions: {
-		configFile: 'reporter-config.json'
-	},
-	reporterEnabled: 'spec, mocha-junit-reporter',
-	mochaJunitReporterReporterOptions: {
-		mochaFile: 'cypress/results/results-[hash].xml'
-	},
 	e2e: {
 		// We've imported your old cypress plugins here.
 		// You may want to clean this up later by importing these.

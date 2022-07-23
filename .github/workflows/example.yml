@@ -19,7 +19,7 @@ jobs:
               uses: cypress-io/github-action@v4.1.1
               with:
                   browser: chrome
-                  spec: cypress/e2e/cucumber-test/Test-Suite-example/GX-2-LoginTest.feature
+                  spec: cypress/e2e/cucumber-test/Suites/Test-USexample/1_GX-5.feature
                   record: true
               env:
                   CYPRESS_RECORD_KEY: ${{secrets.CYPRESS_RECORD_KEY}}
@@ -31,9 +31,7 @@ jobs:
               with:
                 username: ${{secrets.XRAY_CLIENT_ID}}
                 password: ${{secrets.XRAY_CLIENT_SECRET}}
-                testFormat: 'junit'
-                testPaths: 'xunit.xml'
+                testFormat: 'cucumber'
+                testPaths: 'cucumber-report.json'
                 testExecKey: 'GX-5'
                 projectKey: 'GX'
-              env:
-                  GITHUB_TOKEN: ${{secrets.ELY_GITHUB_TOKEN}}

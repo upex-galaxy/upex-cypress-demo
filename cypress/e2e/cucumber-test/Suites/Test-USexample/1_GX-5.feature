@@ -1,4 +1,4 @@
-@GX-5 @Cucumber @Cypress @GitHubActions @Labs @Xray
+@GX-5 @AutomationTriggered @Cucumber @Cypress @GitHubActions @Labs @Xray
 @US_GX-2
 Feature: Labs: CI Framework Test for Xray with Cypress and GitHub Actions
 	#As a Workspace Manager,

@@ -1,0 +1,138 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "labs:-ci-framework-test-for-xray-with-cypress-and-github-actions;login-to-orange-crm-website;;2",
+        "keyword": "Scenario Outline",
+        "line": 22,
+        "name": "Login to Orange CRM Website",
+        "steps": [
+          {
+            "keyword": "Given ",
+            "line": 16,
+            "name": "User is at the login page",
+            "result": {
+              "duration": 2799000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "not available:0"
+            }
+          },
+          {
+            "keyword": "When ",
+            "line": 17,
+            "name": "User enters username as 'Admin' and password as 'admin123'",
+            "result": {
+              "duration": 570000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "not available:0"
+            }
+          },
+          {
+            "keyword": "And ",
+            "line": 18,
+            "name": "User clicks on login button",
+            "result": {
+              "duration": 3707000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "not available:0"
+            }
+          },
+          {
+            "keyword": "Then ",
+            "line": 19,
+            "name": "User is able to successfully login to the Website",
+            "result": {
+              "duration": 106000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "not available:0"
+            }
+          }
+        ],
+        "type": "scenario",
+        "tags": [
+          {
+            "line": 1,
+            "name": "@GX-5"
+          },
+          {
+            "line": 1,
+            "name": "@AutomationTriggered"
+          },
+          {
+            "line": 1,
+            "name": "@Cucumber"
+          },
+          {
+            "line": 1,
+            "name": "@Cypress"
+          },
+          {
+            "line": 1,
+            "name": "@GitHubActions"
+          },
+          {
+            "line": 1,
+            "name": "@Labs"
+          },
+          {
+            "line": 1,
+            "name": "@Xray"
+          },
+          {
+            "line": 2,
+            "name": "@US_GX-2"
+          }
+        ]
+      }
+    ],
+    "id": "labs:-ci-framework-test-for-xray-with-cypress-and-github-actions",
+    "keyword": "Feature",
+    "line": 3,
+    "name": "Labs: CI Framework Test for Xray with Cypress and GitHub Actions",
+    "uri": "cypress\\e2e\\cucumber-test\\Suites\\Test-USexample\\1_GX-5.feature",
+    "tags": [
+      {
+        "line": 1,
+        "name": "@GX-5"
+      },
+      {
+        "line": 1,
+        "name": "@AutomationTriggered"
+      },
+      {
+        "line": 1,
+        "name": "@Cucumber"
+      },
+      {
+        "line": 1,
+        "name": "@Cypress"
+      },
+      {
+        "line": 1,
+        "name": "@GitHubActions"
+      },
+      {
+        "line": 1,
+        "name": "@Labs"
+      },
+      {
+        "line": 1,
+        "name": "@Xray"
+      },
+      {
+        "line": 2,
+        "name": "@US_GX-2"
+      }
+    ]
+  }
+]

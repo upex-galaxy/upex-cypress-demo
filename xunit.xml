@@ -1,4 +1,0 @@
-<testsuite name="Mocha Tests" tests="2" failures="0" errors="0" skipped="0" timestamp="Thu, 21 Jul 2022 01:12:00 GMT" time="10.465">
-<testcase classname="Labs: CI Framework Test for Xray with Cypress and GitHub Actions" name="US 2 | TS 3 | TC1: Check the Login correctly to Orange CRM Website" time="0.177"/>
-<testcase classname="Labs: CI Framework Test for Xray with Cypress and GitHub Actions" name="Login to Orange CRM Website (example #1)" time="6.555"/>
-</testsuite>
