@@ -13,7 +13,7 @@
 // the project's config changing)
 
 /**
- * @type {Cypress.PluginConfig}
+@type {Cypress.PluginConfig}
  */
 
 // Record Videos only on failed tests.

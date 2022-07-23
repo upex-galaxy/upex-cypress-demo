@@ -20,6 +20,7 @@ jobs:
               with:
                   browser: chrome
                   spec: cypress/e2e/cucumber-test/Suites/Test-USexample/GX-5.feature
+                  record: true
               env:
                   CYPRESS_RECORD_KEY: ${{secrets.CYPRESS_RECORD_KEY}}
                   GITHUB_TOKEN: ${{secrets.ELY_GITHUB_TOKEN}}
@@ -30,7 +31,7 @@ jobs:
               with:
                 username: ${{secrets.XRAY_CLIENT_ID}}
                 password: ${{secrets.XRAY_CLIENT_SECRET}}
-                testFormat: 'cucumber'
+                testFormat: 'junit'
                 testPaths: 'cucumber-report.json'
                 testExecKey: 'GX-5'
                 projectKey: 'GX'
