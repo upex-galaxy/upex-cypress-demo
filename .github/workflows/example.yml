@@ -25,13 +25,3 @@ jobs:
                   CYPRESS_RECORD_KEY: ${{secrets.CYPRESS_RECORD_KEY}}
                   GITHUB_TOKEN: ${{secrets.ELY_GITHUB_TOKEN}}
                   CYPRESS_PROJECT_ID: ${{secrets.CYPRESS_PROJECT_ID}}
-
-            - name: xray-action
-              uses: mikepenz/xray-action@v2
-              with:
-                username: ${{secrets.XRAY_CLIENT_ID}}
-                password: ${{secrets.XRAY_CLIENT_SECRET}}
-                testFormat: 'junit'
-                testPaths: 'cucumber-report.json'
-                testExecKey: 'GX-5'
-                projectKey: 'GX'
