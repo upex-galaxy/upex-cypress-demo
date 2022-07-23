@@ -3,14 +3,12 @@
 Feature: Labs: CI Framework Test for Xray with Cypress and GitHub Actions
 	#As a Workspace Manager,
 	#
-	#I want to test Cypress-GitHub Testing Result Integration; by clicking on a Jira Action, the CI tool can be triggered and run all of the associated test to this feature and update the test status back to Jira again.
+	#I want to test Cypress-GitHub TX Result Integration; by clicking on a Jira Action, the CI tool can be triggered and run all of the associated test to this feature and update the test status back to Jira again.
 	#
 	#So that the Tests can be updated from Jira Action.
 
 	@TC_GX-4 @TS_GX-3 @BDD @Cucumber @Feature @Gherkin
 	Scenario: US 2 | TS 3 | TC1: Check the Login correctly to Orange CRM Website
-Feature: Login Example
-
 	Scenario Outline: Login to Orange CRM Website
 
 		Given User is at the login page

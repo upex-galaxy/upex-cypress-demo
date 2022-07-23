@@ -6,15 +6,15 @@
         "description": "",
         "id": "labs:-ci-framework-test-for-xray-with-cypress-and-github-actions;login-to-orange-crm-website;;2",
         "keyword": "Scenario Outline",
-        "line": 22,
+        "line": 20,
         "name": "Login to Orange CRM Website",
         "steps": [
           {
             "keyword": "Given ",
-            "line": 16,
+            "line": 14,
             "name": "User is at the login page",
             "result": {
-              "duration": 2635000000,
+              "duration": 3971000000,
               "status": "passed"
             },
             "match": {
@@ -23,10 +23,10 @@
           },
           {
             "keyword": "When ",
-            "line": 17,
+            "line": 15,
             "name": "User enters username as 'Admin' and password as 'admin123'",
             "result": {
-              "duration": 533000000,
+              "duration": 546000000,
               "status": "passed"
             },
             "match": {
@@ -35,10 +35,10 @@
           },
           {
             "keyword": "And ",
-            "line": 18,
+            "line": 16,
             "name": "User clicks on login button",
             "result": {
-              "duration": 3694000000,
+              "duration": 4165000000,
               "status": "passed"
             },
             "match": {
@@ -47,10 +47,10 @@
           },
           {
             "keyword": "Then ",
-            "line": 19,
+            "line": 17,
             "name": "User is able to successfully login to the Website",
             "result": {
-              "duration": 112000000,
+              "duration": 64000000,
               "status": "passed"
             },
             "match": {
@@ -99,7 +99,7 @@
     "keyword": "Feature",
     "line": 3,
     "name": "Labs: CI Framework Test for Xray with Cypress and GitHub Actions",
-    "uri": "cypress\\e2e\\cucumber-test\\Suites\\Test-USexample\\GX-5.feature",
+    "uri": "cypress\\e2e\\cucumber-test\\Suites\\Test-USexample\\1_GX-2.feature",
     "tags": [
       {
         "line": 1,
