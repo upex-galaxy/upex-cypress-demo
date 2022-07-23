@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="1.2530" tests="1" failures="0">
+  <testsuite name="Root Suite" timestamp="2022-07-23T09:35:40" tests="0" file="cypress\e2e\test\DesignPatterns\1-HardCoding.cy.js" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Login Feature" timestamp="2022-07-23T09:35:40" tests="1" time="1.2320" failures="0">
+    <testcase name="US 2 | TS 123 | TC1: Validar iniciar sesión con parámetros correctos" time="1.2240" classname="Login Feature US 2 | TS 123 | TC1: Validar iniciar sesión con parámetros correctos">
+    </testcase>
+  </testsuite>
+</testsuites>

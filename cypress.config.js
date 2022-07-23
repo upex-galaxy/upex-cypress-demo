@@ -5,6 +5,13 @@ module.exports = defineConfig({
 	watchForFileChanges: false,
 	chromeWebSecurity: false,
 	reporter: 'mochawesome',
+	reporter: 'mocha-junit-reporter',
+	reporterOptions: {
+		mochaFile: 'reports/test-results.xml',
+		toConsole: true,
+		outputs: true,
+        testCaseSwitchClassnameAndName: true
+    },
 	retries: 0,
 	video: false,
 	e2e: {
