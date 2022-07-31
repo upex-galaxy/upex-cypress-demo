@@ -1,0 +1,10 @@
+{
+    "toggle":"[title='Toggle']",
+    "label": {
+        "checkbox": ".rct-checkbox",
+        "boxName": ".rct-title"
+    },
+    "outputMsg": ".text-success",
+    "expandAll": "[aria-label='Expand all']",
+    "collapseAll": "[aria-label='Collapse all']"
+}
