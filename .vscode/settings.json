@@ -93,7 +93,7 @@
 		"suite-example": "test",
 		"suites": "test",
 		"cucumber-json": "Resolver",
-		"DOM": "webpack",
+		"DOM": "class",
 		"DesignPatterns": "context",
 		"How-to": "content",
 		"US": "Storybook",
@@ -106,6 +106,7 @@
 		"cucumber-test": "Resolver",
 		"fixtures": "container",
 		"support": "Helper",
+		"xhr-fetch": "batch",
 		"material-icons": "examples",
 		"workflows": "github"
 	},

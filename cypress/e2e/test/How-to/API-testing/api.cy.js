@@ -53,12 +53,12 @@ describe("Ejemplo para demostrar cómo probar una API", () =>
                 name: "Card creada desde Cypress XD" // Creamos la Card agregándole un nombre (esto es opcional)
             }
         })
-            .then((response) =>
-            {
-                expect(response).to.be.an("object")
-                expect(response.status).to.eql(200)
-                expect(response.body.name).to.eql("Card creada desde Cypress XD")
-                cardID = response.body.id
+        .then((response) =>
+        {
+            expect(response).to.be.an("object")
+            expect(response.status).to.eql(200)
+            expect(response.body.name).to.eql("Card creada desde Cypress XD")
+            cardID = response.body.id
         })
     })
     it("REQUEST de Método PUT a la API de TRELLO para EDITAR UNA CARD", () =>
@@ -78,14 +78,14 @@ describe("Ejemplo para demostrar cómo probar una API", () =>
                 desc: "Esto es una descripción para editar la Card previamente creada" // Editamos la Descripción de la Card (esto es opcional)
             }
         })
-            .then((response) =>
-            {
-                expect(response).to.be.an("object")
-                expect(response.body.id).to.eql(cardID)
-                expect(response.status).to.eql(200)
-                expect(response.body.name).to.not.eql("Card creada desde Cypress XD")
-                expect(response.body.name).to.eql("Card editada por Cypress")
-                expect(response.body.desc).to.include("Esto es una descripción")
+        .then((response) =>
+        {
+            expect(response).to.be.an("object")
+            expect(response.body.id).to.eql(cardID)
+            expect(response.status).to.eql(200)
+            expect(response.body.name).to.not.eql("Card creada desde Cypress XD")
+            expect(response.body.name).to.eql("Card editada por Cypress")
+            expect(response.body.desc).to.include("Esto es una descripción")
         })
     })
     it("REQUEST de Método DELETE a la API de TRELLO para ELIMINAR UNA CARD", () =>
@@ -103,10 +103,10 @@ describe("Ejemplo para demostrar cómo probar una API", () =>
                 token: token
             }
         })
-            .then((response) =>
-            {
-                expect(response.body.limits).to.be.empty
-                expect(response.status).to.eql(200)
+        .then((response) =>
+        {
+            expect(response.body.limits).to.be.empty
+            expect(response.status).to.eql(200)
         })
     })
 })

@@ -31,7 +31,7 @@ describe('También se puede usar el método .selectFile() ya que viene con más 
 	})
 	it('File Upload using cypress-file-upload npm package', () =>
 	{
-		const filepath = 'cypress/fixtures/images/upex.png' //Usamos el Relative Path del archivo
+		const filepath = 'cypress/fixtures/images/upexlogo.png' //Usamos el Relative Path del archivo
 		cy.get('#file-upload').selectFile(filepath)
 		// Aquí usamos la sintaxis Método(directorioDelArchivo)
 		cy.get('#file-submit').click()
