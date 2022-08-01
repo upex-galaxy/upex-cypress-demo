@@ -1,11 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="10.7970" tests="2" failures="0">
-  <testsuite name="Root Suite" timestamp="2022-07-31T00:36:51" tests="0" file="cypress\e2e\test\Suites\Suite-A\RadioButton.cy.js" time="0.0000" failures="0">
-  </testsuite>
-  <testsuite name="Radio Button" timestamp="2022-07-31T00:36:51" tests="2" time="10.7730" failures="0">
-    <testcase name="US-GX-27 | TS 27 | TC1: Validar hacer click en el RB “yes”" time="5.8600" classname="Radio Button US-GX-27 | TS 27 | TC1: Validar hacer click en el RB “yes”">
-    </testcase>
-    <testcase name="US-GX-27 | TS 27 | TC2: Validar hacer click en el RB “impressive”" time="2.1040" classname="Radio Button US-GX-27 | TS 27 | TC2: Validar hacer click en el RB “impressive”">
-    </testcase>
-  </testsuite>
+<testsuites name="Mocha Tests" time="0.0020" tests="0" failures="0">
 </testsuites>

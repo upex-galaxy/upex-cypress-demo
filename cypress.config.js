@@ -1,10 +1,10 @@
 const {defineConfig} = require('cypress')
 
 module.exports = defineConfig({
-	projectId: 'atyyam',
+	projectId: 'te925i',
 	watchForFileChanges: false,
 	chromeWebSecurity: false,
-	reporter: 'mochawesome',
+	// reporter: 'mochawesome',
 	reporter: 'mocha-junit-reporter',
 	reporterOptions: {
 		mochaFile: 'reports/test-results.xml',
