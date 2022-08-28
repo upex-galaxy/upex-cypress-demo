@@ -8,6 +8,7 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 import 'cypress-file-upload';
+require('@4tw/cypress-drag-drop')
 
 
 Cypress.Commands.add("Login", () =>
@@ -45,6 +46,27 @@ Cypress.Commands.add("ErrorCard", () =>
                 .and("contain.text",
                     "Epic sadface: Username and password do not match any user in this service")
         })
+})
+Cypress.Commands.add("DragDrop", (obj, X, Y) =>
+{
+    cy.get(obj)
+        .move({ deltaX: X, deltaY: Y })
+    cy.get(obj)
+        .should("have.attr", "style",`position: relative; left: ${X}px; top: ${Y}px;`)
+})
+Cypress.Commands.add("DragDropX", (obj, X, Y) =>
+{
+    cy.get(obj)
+        .move({ deltaX: X, deltaY: Y })
+    cy.get(obj)
+        .should("have.attr", "style",`position: relative; left: ${X}px; top: 0px;`)
+})
+Cypress.Commands.add("DragDropY", (obj, X, Y) =>
+{
+    cy.get(obj)
+        .move({ deltaX: X, deltaY: Y })
+    cy.get(obj)
+        .should("have.attr", "style",`position: relative; left: 0px; top: ${Y}px;`)
 })
 
 // -- This is a parent command --
