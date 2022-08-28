@@ -1,0 +1,19 @@
+{
+    "Simple": {
+        "tab": "[data-rb-event-key='simple']",
+        "box": "#dragBox"
+    },
+    "AxisRestricted": {
+        "tab": "[data-rb-event-key='axisRestriction']",
+        "box": ["#restrictedX","#restrictedY"]
+    },
+    "ContainerRestricted": {
+        "tab": "[data-rb-event-key='containerRestriction']"
+    },
+    "CursorStyle": {
+        "tab": "[data-rb-event-key='cursorStyle']"
+    },
+    "Tab": {
+        "isSelected": "aria-selected"
+    }
+}

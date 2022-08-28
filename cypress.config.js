@@ -21,6 +21,6 @@ module.exports = defineConfig({
 			return require('./cypress/plugins/index.js')(on, config)
 		},
 		specPattern: ['**/*.feature', 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
-		baseUrl: 'https://www.saucedemo.com/',
+		baseUrl: 'https://demoqa.com/',
 	},
 })
