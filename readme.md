@@ -1,6 +1,6 @@
 [![CYPEX](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/f9y7eu/cypex&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/f9y7eu/runs)
 
-# Testing Automation - Cypress 10.3.0 + Cucumber
+# Testing Automation - Cypress 10.6.0 + Cucumber
 Cypress is a next generation front end testing tool built for the modern web. This is a sample project which you can use to start your E2E testing with Cypress.
 
 # How to Start
