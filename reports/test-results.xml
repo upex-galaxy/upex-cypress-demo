@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="0.0020" tests="0" failures="0">
+<testsuites name="Mocha Tests" time="15.9830" tests="1" failures="0">
+  <testsuite name="Root Suite" timestamp="2022-08-29T06:43:40" tests="0" file="cypress\e2e\cucumber-test\Suites\Test-USexample\1_GX-2.feature" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Labs: CI Framework Test for Xray with Cypress and GitHub Actions" timestamp="2022-08-29T06:43:40" tests="1" time="15.9210" failures="0">
+    <testcase name="US 2 | TS 3 | TC1: Check the Login correctly to Orange CRM Website (example #1)" time="12.8780" classname="Labs: CI Framework Test for Xray with Cypress and GitHub Actions US 2 | TS 3 | TC1: Check the Login correctly to Orange CRM Website (example #1)">
+    </testcase>
+  </testsuite>
 </testsuites>
