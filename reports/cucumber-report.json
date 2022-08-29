@@ -14,7 +14,7 @@
             "line": 12,
             "name": "User is at the login page",
             "result": {
-              "duration": 2682000000,
+              "duration": 9733000000,
               "status": "passed"
             },
             "match": {
@@ -26,7 +26,7 @@
             "line": 13,
             "name": "User enters username as 'Admin' and password as 'admin123'",
             "result": {
-              "duration": 518000000,
+              "duration": 1069000000,
               "status": "passed"
             },
             "match": {
@@ -38,7 +38,7 @@
             "line": 14,
             "name": "User clicks on login button",
             "result": {
-              "duration": 3286000000,
+              "duration": 1943000000,
               "status": "passed"
             },
             "match": {
@@ -50,7 +50,7 @@
             "line": 15,
             "name": "User is able to successfully login to the Website",
             "result": {
-              "duration": 62000000,
+              "duration": 48000000,
               "status": "passed"
             },
             "match": {
