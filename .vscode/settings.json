@@ -21,6 +21,7 @@
 	"cucumberautocomplete.stepRegExSymbol": "'",
 	"window.zoomLevel": 2,
 	"workbench.colorTheme": "SynthWave '84",
+	"workbench.colorTheme": "Shades of Purple",
 	"cSpell.language": "en,es",
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
