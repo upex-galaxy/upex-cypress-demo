@@ -15,7 +15,7 @@
 	"author": "Uper",
 	"license": "ISC",
 	"devDependencies": {
-		"@4tw/cypress-drag-drop": "2.2.1",
+		"@4tw/cypress-drag-drop": "^2.2.1",
 		"@badeball/cypress-cucumber-preprocessor": "12.1.0",
 		"@bahmutov/cypress-esbuild-preprocessor": "2.1.3",
 		"@esbuild-plugins/node-modules-polyfill": "0.1.4",
