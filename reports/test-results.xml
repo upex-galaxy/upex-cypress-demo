@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="0.0020" tests="0" failures="0">
+<testsuites name="Mocha Tests" time="8.8160" tests="2" failures="0">
+  <testsuite name="Root Suite" timestamp="2022-08-30T21:31:18" tests="0" file="cypress\e2e\test\Suites\GX-194\Iterations.Droggable.cy.js" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="US 194 ToolsQA | Interactions | Dragabble" timestamp="2022-08-30T21:31:18" tests="2" time="8.7670" failures="0">
+    <testcase name="US 194 | TS 200 | TC1: Check “Drag and Drop” successfully in any spot." time="7.9260" classname="US 194 ToolsQA | Interactions | Dragabble US 194 | TS 200 | TC1: Check “Drag and Drop” successfully in any spot.">
+    </testcase>
+    <testcase name="US 194 | TS 200 | TC2: Check “Drag and Drop” when it can only be moved horizontally." time="0.8010" classname="US 194 ToolsQA | Interactions | Dragabble US 194 | TS 200 | TC2: Check “Drag and Drop” when it can only be moved horizontally.">
+    </testcase>
+  </testsuite>
 </testsuites>
