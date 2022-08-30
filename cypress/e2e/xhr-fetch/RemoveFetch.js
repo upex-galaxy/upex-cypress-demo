@@ -13,3 +13,5 @@ Cypress.log = function (opts, ...other) {
 	}
 	return origLog(opts, ...other)
 }
+
+// ** COPIA Y PEGA EN CADA SUITE QUE SE REALICE CON UN SUT DE MUCHO FETCH Y XHR O PROBLEMAS DE EXCEPCIÓN 
