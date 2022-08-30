@@ -1,7 +1,7 @@
 const {defineConfig} = require('cypress')
 
 module.exports = defineConfig({
-	projectId: 'te925i',
+	projectId: '',
 	watchForFileChanges: false,
 	chromeWebSecurity: false,
 	// reporter: 'mochawesome',
