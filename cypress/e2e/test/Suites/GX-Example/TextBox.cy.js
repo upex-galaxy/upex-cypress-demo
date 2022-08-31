@@ -6,7 +6,7 @@ describe("Text Box", () =>
     })
     it("TS | TC1: Submit Form correctly", () =>
     {
-        cy.fixture("DOM/toolsqa/Elements/TextBoxPage").then((the) =>
+        cy.fixture("DOM/toolsqa/Elements/TextBox.Page").then((the) =>
         {
             cy.get(the.fullName.input).type(the.fullName.valid)
             cy.get(the.email.input).type(the.email.valid)

@@ -26,7 +26,7 @@ describe("CheckBox", () =>
     })
     it("TS | TC2: Validar hacer check en cada Label", () =>
     {
-        cy.fixture("DOM/toolsqa/Elements/CheckBoxPage").then((the) =>
+        cy.fixture("DOM/toolsqa/Elements/CheckBox.Page").then((the) =>
         {
             // Abrir Toggles:
             cy.get(the.toggle).eq(0).click()
