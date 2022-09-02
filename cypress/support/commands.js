@@ -69,6 +69,39 @@ Cypress.Commands.add("DragDropY", (obj, X, Y) =>
         .should("have.attr", "style",`position: relative; left: 0px; top: ${Y}px;`)
 })
 
+Cypress.Commands.add("LoginAdmin", () => {
+    cy.fixture("DOM/orange/Login.Page").then((the) =>
+        {
+            cy.get(the.input.username)
+                .type(the.data.username)
+                .should("have.value", the.data.username)
+            
+            cy.get(the.input.password)
+                .type(the.data.password)
+                .should("have.value", the.data.password)
+            
+            cy.get(the.button).click()
+
+            cy.url().should("contain","viewEmployeeList")
+        })
+})
+Cypress.Commands.add("LoginCustom", (username, password) => {
+    cy.fixture("DOM/orange/Login.Page").then((the) =>
+        {
+            cy.get(the.input.username)
+                .type(username)
+                .should("have.value", username)
+            
+            cy.get(the.input.password)
+                .type(password)
+                .should("have.value", password)
+            
+            cy.get(the.button).click()
+
+            cy.contains(the.Message.invalid).should("be.visible")
+        })
+})
+
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 //
