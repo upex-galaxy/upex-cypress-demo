@@ -1,0 +1,11 @@
+{
+    "image": {
+        "valid" : "div>img:first",
+        "broken" : "[src='/images/Toolsqa_1.jpg']"
+    },
+    "link": {
+        "valid": "p:contain('Click Here for Valid Link')",
+        "invalid": "p:contain('Click Here for Broken Link')"
+    },
+    "validUrl" : "http://demoqa.com"
+}
