@@ -1,3 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="0.0020" tests="0" failures="0">
+<testsuites name="Mocha Tests" time="11.8700" tests="4" failures="4">
+  <testsuite name="Root Suite" timestamp="2022-08-30T21:29:47" tests="0" file="cypress\e2e\test\How-to\UI-testing\uploadFiles.cy.js" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Ejemplo para demostrar cómo cargar un archivo con Cypress" timestamp="2022-08-30T21:29:47" tests="1" time="4.9260" failures="1">
+    <testcase name="File Upload using cypress-file-upload npm package" time="0.0000" classname="Ejemplo para demostrar cómo cargar un archivo con Cypress File Upload using cypress-file-upload npm package">
+      <failure message="A fixture file could not be found at any of the following paths:
+
+    &gt; cypress\fixtures\images\upex.png
+    &gt; cypress\fixtures\images\upex.png.[ext]
+
+Cypress looked for these file extensions at the provided path:
+
+    &gt; .json, .js, .coffee, .html, .txt, .csv, .png, .jpg, .jpeg, .gif, .tif, .tiff, .zip
+
+Provide a path to an existing fixture file." type="Error"><![CDATA[Error: A fixture file could not be found at any of the following paths:
+
+    > cypress\fixtures\images\upex.png
+    > cypress\fixtures\images\upex.png.[ext]
+
+Cypress looked for these file extensions at the provided path:
+
+    > .json, .js, .coffee, .html, .txt, .csv, .png, .jpg, .jpeg, .gif, .tif, .tiff, .zip
+
+Provide a path to an existing fixture file.
+    at Object.<anonymous> (C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\packages\server\lib\fixture.js:69:30)
+    at Object.tryCatcher (C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\packages\server\node_modules\bluebird\js\release\util.js:16:23)
+    at Promise._settlePromiseFromHandler (C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\packages\server\node_modules\bluebird\js\release\promise.js:547:31)
+    at Promise._settlePromise (C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\packages\server\node_modules\bluebird\js\release\promise.js:604:18)
+    at Promise._settlePromise0 (C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\packages\server\node_modules\bluebird\js\release\promise.js:649:10)
+    at Promise._settlePromises (C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\packages\server\node_modules\bluebird\js\release\promise.js:729:18)
+    at Promise._fulfill (C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\packages\server\node_modules\bluebird\js\release\promise.js:673:18)
+    at C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\packages\server\node_modules\bluebird\js\release\nodeback.js:42:21
+    at f (C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\node_modules\once\once.js:25:25)
+    at Glob.<anonymous> (C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\packages\server\node_modules\glob\glob.js:151:7)
+    at Glob.emit (node:events:526:28)
+    at Glob.emit (node:domain:475:12)
+    at Glob._finish (C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\packages\server\node_modules\glob\glob.js:197:8)
+    at done (C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\packages\server\node_modules\glob\glob.js:182:14)
+    at Glob._processSimple2 (C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\packages\server\node_modules\glob\glob.js:688:12)
+    at C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\packages\server\node_modules\glob\glob.js:676:10
+    at Glob._stat2 (C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\packages\server\node_modules\glob\glob.js:772:12)
+    at lstatcb_ (C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\packages\server\node_modules\glob\glob.js:764:12)
+    at RES (C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\node_modules\inflight\inflight.js:31:16)
+    at f (C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\node_modules\once\once.js:25:25)
+    at callback (C:\Users\Fer\AppData\Local\Cypress\Cache\10.6.0\Cypress\resources\app\packages\server\node_modules\graceful-fs\polyfills.js:299:20)
+    at FSReqCallback.oncomplete (node:fs:198:21)
+]]></failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="También se puede usar el método .selectFile() ya que viene con más opciones" timestamp="2022-08-30T21:29:52" tests="1" time="5.6790" failures="1">
+    <testcase name="File Upload using cypress-file-upload npm package" time="0.0000" classname="También se puede usar el método .selectFile() ya que viene con más opciones File Upload using cypress-file-upload npm package">
+      <failure message="Timed out retrying after 4000ms: Expected to find content: &apos;upex.png&apos; within the element: &lt;div#uploaded-files.panel.text-center&gt; but never did." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 4000ms: Expected to find content: 'upex.png' within the element: <div#uploaded-files.panel.text-center> but never did.
+    at Context.eval (https://the-internet.herokuapp.com/__cypress/tests?p=cypress\e2e\test\How-to\UI-testing\uploadFiles.cy.js:22:33)]]></failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="Ejemplo de .selectFile() con la opción de Drag-Drop" timestamp="2022-08-30T21:29:57" tests="1" time="0.5640" failures="1">
+    <testcase name="File Upload using cypress-file-upload npm package" time="0.0000" classname="Ejemplo de .selectFile() con la opción de Drag-Drop File Upload using cypress-file-upload npm package">
+      <failure message="`cy.selectFile(&quot;cypress/fixtures/images/upex.png&quot;)` failed because the file does not exist at the following path:
+
+`C:\Users\Fer\Desktop\cypex\Cypex\L1-cypex-demo\cypress\fixtures\images\upex.png`
+
+https://on.cypress.io/selectfile" type="CypressError"><![CDATA[CypressError: `cy.selectFile("cypress/fixtures/images/upex.png")` failed because the file does not exist at the following path:
+
+`C:\Users\Fer\Desktop\cypex\Cypex\L1-cypex-demo\cypress\fixtures\images\upex.png`
+
+https://on.cypress.io/selectfile
+    at https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:147024:78
+    at tryCatcher (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:11318:23)
+    at Promise._settlePromiseFromHandler (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:9253:31)
+    at Promise._settlePromise (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:9310:18)
+    at Promise._settlePromise0 (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:9355:10)
+    at Promise._settlePromises (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:9431:18)
+    at _drainQueueStep (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:6025:12)
+    at _drainQueue (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:6018:9)
+    at ../../node_modules/bluebird/js/release/async.js.Async._drainQueues (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:6034:5)
+    at Async.drainQueues (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:5904:14)
+From Your Spec Code:
+    at Context.eval (https://the-internet.herokuapp.com/__cypress/tests?p=cypress\e2e\test\How-to\UI-testing\uploadFiles.cy.js:31:30)]]></failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="Ejemplo de .selectFile() con la opción Múltiples archivos" timestamp="2022-08-30T21:29:58" tests="1" time="0.6850" failures="1">
+    <testcase name="File Upload using cypress-file-upload npm package" time="0.0000" classname="Ejemplo de .selectFile() con la opción Múltiples archivos File Upload using cypress-file-upload npm package">
+      <failure message="`cy.selectFile(&quot;cypress/fixtures/images/upex.png&quot;)` failed because the file does not exist at the following path:
+
+`C:\Users\Fer\Desktop\cypex\Cypex\L1-cypex-demo\cypress\fixtures\images\upex.png`
+
+https://on.cypress.io/selectfile" type="CypressError"><![CDATA[CypressError: `cy.selectFile("cypress/fixtures/images/upex.png")` failed because the file does not exist at the following path:
+
+`C:\Users\Fer\Desktop\cypex\Cypex\L1-cypex-demo\cypress\fixtures\images\upex.png`
+
+https://on.cypress.io/selectfile
+    at https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:147024:78
+    at tryCatcher (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:11318:23)
+    at Promise._settlePromiseFromHandler (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:9253:31)
+    at Promise._settlePromise (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:9310:18)
+    at Promise._settlePromise0 (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:9355:10)
+    at Promise._settlePromises (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:9431:18)
+    at _drainQueueStep (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:6025:12)
+    at _drainQueue (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:6018:9)
+    at ../../node_modules/bluebird/js/release/async.js.Async._drainQueues (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:6034:5)
+    at Async.drainQueues (https://the-internet.herokuapp.com/__cypress/runner/cypress_runner.js:5904:14)
+From Your Spec Code:
+    at Context.eval (https://the-internet.herokuapp.com/__cypress/tests?p=cypress\e2e\test\How-to\UI-testing\uploadFiles.cy.js:43:30)]]></failure>
+    </testcase>
+  </testsuite>
 </testsuites>
