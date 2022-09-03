@@ -1,23 +1,24 @@
-describe('US # | TS # | TC#: aquí se escribe el escenario de prueba', () =>
+describe('TS: US # : aquí se escribe el título de la User Story', () =>
 {
-	it('Aquí empiezas escribiendo una Precondición o más', () =>
+	before('Precondición: Aquí empiezas escribiendo una Precondición o más', () =>
 	{
 		cy.visit('https://example.cypress.io') // Esto es un Comando de Acción directa
+		cy.get('html')
 	})
-	it('Aquí puedes escribir un Paso de Acción', () =>
+	it('US # | TC#1: Aquí puedes escribir un Caso de Prueba', () =>
 	{
 		cy.get('[href="/commands/querying"]') // Sintaxis Comando Get de Selector de Atributos
 			.eq(2) // Esto es un método opcional
 			.click() // Esto es un método de Interacción
 	})
-	it('Aquí puedes escribir otro Paso de Acción', () =>
+	it('US # | TC#2: Aquí puedes escribir otro Caso de Prueba', () =>
 	{
 		cy.get("#query-btn") // Sintaxis Comando Get de Selector de IDs
-			.click() // Esto es un método de Interacción
+			.click() // Esto es un método de Interacción (Acción)
 	})
-	it("Aquí puedes escribir un Resultado Esperado de este Caso", () =>
+	it('US # | TC#3: Aquí puedes escribir otro Caso de Prueba', () =>
 	{
 		cy.get('.query-btn') // Sintaxis Comando Get de Selector de Clases
-			.should('contain', 'Button') // Assertion BDD para validar resultado esperado (de muchas formas)
+			.should('contain.text', 'Button') // Assertion BDD para validar resultado esperado (de muchas formas)
 	})
 })
