@@ -19,8 +19,13 @@
 	},
 	"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
 	"cucumberautocomplete.stepRegExSymbol": "'",
+<<<<<<< HEAD
 	"window.zoomLevel": -1,
 	"workbench.colorTheme": "Winter is Coming (Dark Blue)",
+=======
+	"window.zoomLevel": 2,
+	"workbench.colorTheme": "Shades of Purple",
+>>>>>>> 671a05b79ceb9d5fbcb8e3b09e78a92275a08026
 	"cSpell.language": "en,es",
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",

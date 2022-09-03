@@ -1,14 +1,13 @@
 [![CYPEX](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/f9y7eu/cypex&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/f9y7eu/runs)
 
-# Testing Automation - Cypress 10.3.0 + Cucumber
+# Testing Automation - Cypress 10.6.0 + Cucumber
 Cypress is a next generation front end testing tool built for the modern web. This is a sample project which you can use to start your E2E testing with Cypress.
 
 # How to Start
 1. Clone the project
 2. `npm i` - Install all the dependencies
 3. There are a lot dependencies that are not updated frequently in parallel with cypress. So while installing if you are seeing conflicts use`npm i --force`.
-4. Run `npm test` to execute the tests in Test Runner | Run `npx cypress run` to execute the tests in CLI
-5. To create HTML reports execute first `npm run test:cli` and then `npm run create:html:report`
+4. Run `npm test` to execute the tests in Test Runner | Run `npx cypress run` to execute the tests in CLI (and generate xml or cucumber reports)
 
 # Articles on Cypress
 - [How to Install Cypress](https://testersdock.com/how-to-install-cypress/)

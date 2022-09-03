@@ -1,0 +1,13 @@
+{
+    "label": {
+        "yes": "[for='yesRadio']",
+        "impressive": "[for='impressiveRadio']",
+        "no": "[for='noRadio']"
+    },
+    "radio": {
+        "yes": "#yesRadio",
+        "impressive": "#impressiveRadio",
+        "no": "#noRadio"
+    },
+    "output": ".text-success"
+}
