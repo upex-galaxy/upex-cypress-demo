@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites name="Mocha Tests" time="11.8700" tests="4" failures="4">
   <testsuite name="Root Suite" timestamp="2022-08-30T21:29:47" tests="0" file="cypress\e2e\test\How-to\UI-testing\uploadFiles.cy.js" time="0.0000" failures="0">
@@ -105,3 +106,5 @@ From Your Spec Code:
     </testcase>
   </testsuite>
 </testsuites>
+=======
+>>>>>>> origin/cypex

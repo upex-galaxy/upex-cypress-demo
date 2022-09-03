@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "cypress open",
-		"cy:cli": "cypress run"
+		"cy:run": "cypress run"
 	},
 	"keywords": [
 		"cypress",
@@ -30,7 +30,6 @@
 		"mocha-junit-reporter": "2.0.2",
 		"mochawesome": "7.1.3",
 		"mochawesome-merge": "4.2.1",
-		"mochawesome-report-generator": "6.2.0",
-		"multiple-cucumber-html-reporter": "2.0.0"
+		"mochawesome-report-generator": "6.2.0"
 	}
 }
