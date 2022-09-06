@@ -1,6 +1,6 @@
 describe('US # : aquí se escribe el título de la User Story', () =>
 {
-	before('Precondición: Aquí empiezas escribiendo una Precondición o más', () =>
+	beforeEach('Precondición: Aquí empiezas escribiendo una Precondición o más', () =>
 	{
 		cy.visit('https://example.cypress.io') // Esto es un Comando de Acción directa
 	})
