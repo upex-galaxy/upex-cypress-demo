@@ -18,12 +18,13 @@ describe('US 107 : ToolsQA | Alert-Frame-Window | Browser Windows', () => {
     })
     describe('US 107 | TS 261 | TC02: Validate to select button named "New Window"', () => {
         it('Validate handling a new pop-up window by clicking on the button named New Window', ()=>  {
+            cy.visit('https://demoqa.com/browser-windows')
             cy.window().then((win) => {
             cy.stub(win, 'open', url => {
                 win.location.href = 'https://demoqa.com/sample';
-            }).as("popup")
+            }).as('popup')
         })
-        cy.get('button').click()
+        cy.get('#windowButton').click()
         cy.get('@popup')
             .should("be.called")
         cy.get('h1')
@@ -33,12 +34,13 @@ describe('US 107 : ToolsQA | Alert-Frame-Window | Browser Windows', () => {
 
     describe('US 107 | TS 261 | TC03: Validate to select button named "New Window Message"', () => {
         it('Validate handling a new pop-up window message by clicking on the button named New Window', ()=>  {
+            cy.visit('https://demoqa.com/browser-windows')
             cy.window().then((win) => {
             cy.stub(win, 'open', url => {
-                win.location.href = 'https://demoqa.com/sample';
-            }).as("popup")
+                win.location.href = 'https://demoqa.com';
+            }).as('popup')
         })
-        cy.get('button').click()
+        cy.get('#messageWindowButton').click()
         cy.get('@popup')
             .should("be.called")
         cy.get('body')
