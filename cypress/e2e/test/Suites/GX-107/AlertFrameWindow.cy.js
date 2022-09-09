@@ -1,54 +1,43 @@
 describe('US 107 : ToolsQA | Alert-Frame-Window | Browser Windows', () => {
-    before('Precondition', () => {
+
+    beforeEach('Precondition', () => {
+
         cy.visit('https://demoqa.com/browser-windows')
         cy.url().should('contain', 'browser-windows')
-        }) // tutorial info by https://testersdock.com/cypress-new-window/
-        // https://github.com/cypress-io/cypress-example-recipes/tree/master/examples/testing-dom__tab-handling-links
-    
-    describe('US 107 | TS 261 | TC01: Validate handling a new tab window by clicking on the button named "New Tab"', () => {
-        it('Validate a new browser tab window to click the button named "New Tab', ()=> {
-            cy.get('#tabButton')
-                .invoke('removeAttr', 'btn btn-primary').click()
-            cy.visit('https://demoqa.com/sample')
-                cy.url().should('contain', 'sample')
-            cy.get('h1')
-                .should('have.text', 'This is a sample page')  //  browser tab 
-                                
-        })
     })
-    describe('US 107 | TS 261 | TC02: Validate to select button named "New Window"', () => {
-        it('Validate handling a new pop-up window by clicking on the button named New Window', ()=>  {
-            cy.visit('https://demoqa.com/browser-windows')
-            cy.window().then((win) => {
+    
+    it('US 107 | TS 261 | TC 01 - Validate a new browser tab window to click the button named New Tab', () => {
+        
+        cy.get('#tabButton').invoke('removeAttr', 'btn btn-primary').click()
+        cy.visit('https://demoqa.com/sample')
+        cy.url().should('contain', 'sample')
+        cy.get('h1').should('have.text', 'This is a sample page')
+    })
+
+    it('US 107 | TS 261 | TC 02 - Validate handling a new pop-up window by clicking on the button named New Window', () => {
+        
+        cy.visit('https://demoqa.com/browser-windows')
+        
+        cy.window().then((win) => {
             cy.stub(win, 'open', url => {
                 win.location.href = 'https://demoqa.com/sample';
             }).as('popup')
         })
+        
         cy.get('#windowButton').click()
-        cy.get('@popup')
-            .should("be.called")
-        cy.get('h1')
-            .should('have.text', 'This is a sample page')
-        })
+        cy.get('@popup').should("be.called")
+        cy.get('h1').should('have.text', 'This is a sample page')        
     })
-
-    describe('US 107 | TS 261 | TC03: Validate to select button named "New Window Message"', () => {
-        it('Validate handling a new pop-up window message by clicking on the button named New Window', ()=>  {
-            cy.visit('https://demoqa.com/browser-windows')
-            cy.window().then((win) => {
-            cy.stub(win, 'open', url => {
-                win.location.href = 'https://demoqa.com';
-            }).as('popup')
-        })
+    
+    it('US 107 | TS 261 | TC 03 - Validate handling a new pop-up window message by clicking on the button named New Window Message', ()=>  {
+        
         cy.get('#messageWindowButton').click()
-        cy.get('@popup')
-            .should("be.called")
-        cy.get('body')
-            .should('have.text', 'Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.')
-        })
+
+        cy.on('window:alert', (text) => {
+            expect(text).to.contains('Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.')
+        })// https://chercher.tech/cypress-io/alerts-popups-cypressio                
     })
 })
-
 
 // Command predeterminado para que no ocurran errores de excepciones: //
 Cypress.on('uncaught:exception', (err, runnable) => {
