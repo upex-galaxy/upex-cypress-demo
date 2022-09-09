@@ -38,7 +38,7 @@ describe('US 107 : ToolsQA | Alert-Frame-Window | Browser Windows', () => {
         })// https://chercher.tech/cypress-io/alerts-popups-cypressio                
     })
 })
-
+s
 // Command predeterminado para que no ocurran errores de excepciones: //
 Cypress.on('uncaught:exception', (err, runnable) => {
     // returning false here prevents Cypress from
