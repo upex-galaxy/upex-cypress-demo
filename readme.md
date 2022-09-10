@@ -1,16 +1,22 @@
 [![CYPEX](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/f9y7eu/cypex&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/f9y7eu/runs)
 
-# Testing Automation - Cypress 10.6.0 + Cucumber
-Cypress is a next generation front end testing tool built for the modern web. This is a sample project which you can use to start your E2E testing with Cypress.
+# Testing Automation - Cypress 10.7.0 + Cucumber
+![UPEX's Banners (linkedin) (1)](https://user-images.githubusercontent.com/91127281/189470339-acea5782-16f1-4f06-9ce0-df54fd3ead9d.png)
 
-# How to Start
-1. Clone the project
-2. `npm i` - Install all the dependencies
-3. There are a lot dependencies that are not updated frequently in parallel with cypress. So while installing if you are seeing conflicts use`npm i --force`.
-4. Run `npm test` to execute the tests in Test Runner | Run `npx cypress run` to execute the tests in CLI
-5. To create HTML reports execute first `npm run test:cli` and then `npm run create:html:report`
+Cypress es el MEJOR FRAMEWORK DE AUTOMATION E2E actualmente! No hay rival! Además de que es el framework más amigable para aprender!
+Aunque no es el único E2E en el mercado, y tampoco es el más usado como sí lo es Selenium. Pero es el MÁS POPULAR!
 
-# Articles on Cypress
+Cypress es un Franework de Automatización de Next Generation construido para web modernas. Esto es im simple proyecto el cual puedes usarlo para comenzar tu viaje por la Galaxia de la Automatización!
+
+# CÓMO EMPEZAR:
+1. Clona el Proyecto: `git clone <URLdelRepositorioGitHub>`
+2. Instala todas las dependencias: `npm i` (i de install) o puedes usar `npm i -f` (-f de force) por si estás teniendo conflictos al instalar.
+3. Corre el comando: `npx cypress open` o `npm test` (ya que en Package.json tenemos la variable "test" como el "cypress open") para abrir Cypress!
+4. Para correr pruebas en la terminal, corre: `npx cypress run` o `npm run file` (la variable "file" es "cypress run --browser chrome --spec" lo cual es un atajo para que podamos correr las pruebas de un directorio que especifiquemos y usando el navegador de Chrome), esto nos ayudará generar los archivos de Reportes!
+
+# Las Guías de UPEX para saber cómo trabajar en un Workspace Real están Confluence: [CYPRESS AL GRANO](https://upexgalaxy0.atlassian.net/wiki/spaces/UG/pages/524523)
+
+# Algunos Artículos de Cypress que puede interesarte:
 - [How to Install Cypress](https://testersdock.com/how-to-install-cypress/)
 - [Understanding Cypress Folder Structure](https://testersdock.com/cypress-folder-structure/)
 - [How to execute Cypress Tests using Test Runner and CLI](https://testersdock.com/cypress-test-runner-cli/)
