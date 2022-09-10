@@ -5,7 +5,7 @@ describe("US 123 | TS 123 | TC1: CÓMO USAR LOS COMANDOS CUSTOM DE CYPRESS COMO 
 {
     it("Precondición: Usuario debe tener acceso y estar en la pag de Login", () =>
     {
-        cy.visit("/")
+        cy.visit("https://www.saucedemo.com/")
     })
     it("Iniciar sesión correctamente con nombre y contraseña de usuario válido", () =>
     {
@@ -21,7 +21,7 @@ describe("US 123 | TS 123 | TC2: CÓMO USAR LOS COMANDOS CUSTOM DE CYPRESS COMO 
 {
     it("Precondición: Usuario debe tener acceso y estar en la pag de Login", () =>
     {
-        cy.visit("/")
+        cy.visit("https://www.saucedemo.com/")
     })
     it("Intentar hacer login con nombre y contraseña de usuario incorrecto", () =>
     {
