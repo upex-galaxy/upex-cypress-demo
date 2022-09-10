@@ -7,5 +7,6 @@
         "valid": "p:contain('Click Here for Valid Link')",
         "invalid": "p:contain('Click Here for Broken Link')"
     },
-    "validUrl" : "http://demoqa.com"
+    "validUrl" : "http://demoqa.com",
+    "invalidUrl": "http://the-internet.herokuapp.com/status_codes/500"
 }
