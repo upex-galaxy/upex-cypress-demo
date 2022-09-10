@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="3.5010" tests="3" failures="0">
-  <testsuite name="Root Suite" timestamp="2022-08-30T06:31:35" tests="0" file="cypress\e2e\test\How-to\sintaxis.cy.js" time="0.0000" failures="0">
+<testsuites name="Mocha Tests" time="10.4520" tests="3" failures="2">
+  <testsuite name="Root Suite" timestamp="2022-09-10T06:23:54" tests="0" file="cypress\e2e\test\Suites\sintaxis.cy.js" time="0.0000" failures="0">
   </testsuite>
-  <testsuite name="US # : aquí se escribe el título de la User Story" timestamp="2022-08-30T06:31:35" tests="3" time="3.4750" failures="0">
-    <testcase name="US # | TC#1: Aquí puedes escribir un Caso de Prueba" time="1.1500" classname="US # : aquí se escribe el título de la User Story US # | TC#1: Aquí puedes escribir un Caso de Prueba">
+  <testsuite name="US # : aquí se escribe el título de la User Story" timestamp="2022-09-10T06:23:54" tests="3" time="10.4350" failures="2">
+    <testcase name="US # | TC#1: Aquí puedes escribir un Caso de Prueba" time="0.4740" classname="US # : aquí se escribe el título de la User Story US # | TC#1: Aquí puedes escribir un Caso de Prueba">
     </testcase>
-    <testcase name="US # | TC#2: Aquí puedes escribir otro Caso de Prueba" time="0.1080" classname="US # : aquí se escribe el título de la User Story US # | TC#2: Aquí puedes escribir otro Caso de Prueba">
+    <testcase name="US # | TC#2: Aquí puedes escribir otro Caso de Prueba" time="0.0000" classname="US # : aquí se escribe el título de la User Story US # | TC#2: Aquí puedes escribir otro Caso de Prueba">
+      <failure message="Timed out retrying after 4000ms: Expected to find element: `#query-btn`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 4000ms: Expected to find element: `#query-btn`, but never found it.
+    at Context.eval (https://example.cypress.io/__cypress/tests?p=cypress\e2e\test\Suites\sintaxis.cy.js:11:10)]]></failure>
     </testcase>
-    <testcase name="US # | TC#3: Aquí puedes escribir otro Caso de Prueba" time="0.0200" classname="US # : aquí se escribe el título de la User Story US # | TC#3: Aquí puedes escribir otro Caso de Prueba">
+    <testcase name="US # | TC#3: Aquí puedes escribir otro Caso de Prueba" time="0.0000" classname="US # : aquí se escribe el título de la User Story US # | TC#3: Aquí puedes escribir otro Caso de Prueba">
+      <failure message="Timed out retrying after 4000ms: Expected to find element: `.query-btn`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 4000ms: Expected to find element: `.query-btn`, but never found it.
+    at Context.eval (https://example.cypress.io/__cypress/tests?p=cypress\e2e\test\Suites\sintaxis.cy.js:14:28)]]></failure>
     </testcase>
   </testsuite>
 </testsuites>
