@@ -1,0 +1,12 @@
+{
+    "button": {
+        "double": "Double Click Me",
+        "right": "Right Click Me",
+        "click": "button"
+    },
+    "output": {
+        "double": "You have done a double click",
+        "right": "You have done a right click",
+        "click": "You have done a dynamic click"
+    }
+}

@@ -10,6 +10,32 @@
 import 'cypress-file-upload';
 require('@4tw/cypress-drag-drop')
 
+Cypress.Commands.add("buttonDoubleClickMe", () =>
+{    
+    cy.fixture('DOM/toolsqa/Elements/Buttons.Page').then((the) =>
+    {
+        cy.contains(the.button.double).dblclick({ force: true });
+        cy.contains(the.output.double).should('contain.text', 'You have done a double click');
+    });
+});
+
+Cypress.Commands.add("buttonRightClickMe", () =>
+{
+    cy.fixture('DOM/toolsqa/Elements/Buttons.Page').then((the) =>
+    {
+        cy.contains(the.button.right).rightclick({ force: true });
+        cy.contains(the.output.right).should('contain.text', 'You have done a right click');
+    });
+});
+
+Cypress.Commands.add("buttonClickMe", () =>
+{
+    cy.fixture('DOM/toolsqa/Elements/Buttons.Page').then((the) =>
+    {
+        cy.get(the.button.click).eq(3).click({ force: true });
+        cy.contains(the.output.click).should('contain.text', 'You have done a dynamic click');
+    });
+});
 
 Cypress.Commands.add("Login", () =>
 {
