@@ -1,7 +1,7 @@
-.DS_Store
 node_modules/
 cypress/videos
 cypress/screenshots
+<<<<<<< HEAD
 TestReport/
 mochawesome-report/
 cypress-combined-report.json
@@ -15,3 +15,9 @@ settings.json
 =======
 settings.json
 >>>>>>> f4311b5919d72a98a76018fc21b9de226edc1704
+=======
+reports/test-results.xml
+reports/cucumber-report.json
+reports/cucumber-messages.ndjson
+.vscode/settings.json
+>>>>>>> origin/QA
