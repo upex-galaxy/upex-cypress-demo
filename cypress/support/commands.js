@@ -102,6 +102,22 @@ Cypress.Commands.add("LoginCustom", (username, password) => {
         })
 })
 
+Cypress.Commands.add("SignIn", (email, password) =>
+{
+    cy.session("signIn", () =>
+        {
+            cy.visit("https://opensource-demo.orangehrmlive.com/")
+            cy.url().should("contain","login")
+            cy.get("[name='username']")
+                .type(email)
+            cy.get("[name='password']")
+                .type(password)
+            cy.get("[type='submit']")
+                .click()
+            cy.url().should("contain","pim")
+        })
+})
+
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 //

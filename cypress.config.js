@@ -15,6 +15,7 @@ module.exports = defineConfig({
 	retries: 0,
 	video: false,
 	e2e: {
+		experimentalSessionAndOrigin: true,
 		// We've imported your old cypress plugins here.
 		// You may want to clean this up later by importing these.
 		setupNodeEvents(on, config) {
