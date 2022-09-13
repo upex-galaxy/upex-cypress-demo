@@ -4,9 +4,12 @@
         "broken" : "[src='/images/Toolsqa_1.jpg']"
     },
     "link": {
-        "valid": "p:contain('Click Here for Valid Link')",
-        "invalid": "p:contain('Click Here for Broken Link')"
+        "valid": "Click Here for Valid Link",
+        "invalid": "Click Here for Broken Link"
     },
-    "validUrl" : "http://demoqa.com",
-    "invalidUrl": "http://the-internet.herokuapp.com/status_codes/500"
+    "url":{
+        "Base":"https://demoqa.com/broken",
+        "valid" : "https://demoqa.com",
+        "invalid": "/status_codes/500"
+    }
 }
