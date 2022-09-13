@@ -32,12 +32,11 @@ describe('US 107 : ToolsQA | Alert-Frame-Window | Browser Windows', () => {
     it('US 107 | TS 261 | TC 03 - Validate handling a new pop-up window message by clicking on the button named New Window Message', ()=>  {
         
         cy.get('#messageWindowButton').click()
-        
-        cy.on('window:alert', (text) => {
-            expect(text).to.contains('Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.')
-        })// https://chercher.tech/cypress-io/alerts-popups-cypressio                
+        cy.title('about:blank') 
+
     })
-})
+    
+})// https://chercher.tech/cypress-io/alerts-popups-cypressio          
 
 // Command predeterminado para que no ocurran errores de excepciones: //
 Cypress.on('uncaught:exception', (err, runnable) => {
