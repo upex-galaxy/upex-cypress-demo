@@ -10,6 +10,83 @@
 import 'cypress-file-upload';
 require('@4tw/cypress-drag-drop')
 
+Cypress.Commands.add("alerta", () => {//activacion de la alerta
+    
+    cy.fixture("DOM/toolsqa/alertas/Alertas.Page").then((the) => {
+        cy.get(the.alertas.alert).eq(1)
+            .click()//hacer click en alerta
+        cy.on('window:alert', (text) => {
+            expect(text).to.contains(the.message.alert)
+        })
+    })//window:alert. Cuando se activa, Cypress pasará el argumento text
+    //que contiene el mensaje de alerta a la función de devolución de llamada,
+    // contra la cual podemos escribir una afirmación.
+})
+
+
+Cypress.Commands.add("alerta1", () => { //activacion de la alerta
+
+    cy.fixture("DOM/toolsqa/alertas/Alertas.Page").then((the) => {
+
+        cy.get(the.alertas.alerta).click()
+        cy.on('window:alert', (text) => {
+            expect(text).to.contains(the.message.alerta)
+        })
+    })
+})
+
+Cypress.Commands.add("Confirm", () => {//diálogo de confirmación 
+    
+    cy.fixture("DOM/toolsqa/alertas/Alertas.Page").then((the) => {
+        
+        cy.get(the.alertas.confirm).eq(3).click()
+        cy.on('window:confirm', (text) => {
+            expect(text).to.contains(the.message.confirm.confirm1)//estamos probando para asegurarnos de que nuestro mensaje ( text) 
+        })                                                          //incluya exactamente lo que queremos.
+        cy.get(the.alertas.result).contains(the.message.confirm.confirm2)
+    })//de manera predeterminada, Cypress presionará automáticamente "Ok" en nuestra confirmación. 
+})
+
+Cypress.Commands.add("ConfirmFalse", () => {//quisiéramos probar un caso de uso de alguien que hace clic en "Cancelar",
+    // podemos devolver falso en nuestra devolución de llamada de evento
+    
+    cy.fixture("DOM/toolsqa/alertas/Alertas.Page").then((the) => {
+        
+        cy.get(the.alertas.confirm).eq(3).click()
+        cy.on('window:confirm', (text) => {
+            expect(text).to.equal(the.message.confirm.confirm1)
+            return false
+        })
+    })
+})
+
+Cypress.Commands.add("aviso",()=>{//cypress no incluye un window:prompt
+
+    cy.fixture("DOM/toolsqa/alertas/Alertas.page").then((the) => {//debemos acceder primero a la ventana usando cy.window(),
+                              // donde luego "stub" ese evento de aviso, 
+            //junto con el mensaje de que queremos que Cypress regrese al diálogo de aviso.
+        
+    
+        cy.window().then(win => {
+            cy.get("button").filter(the.alertas.aviso).click()
+            cy.stub(win, 'prompt').returns(the.aviso1)
+    
+        })
+        cy.get(the.alertas.aviso2).should("exist",the.aviso2)
+    }) 
+    
+})
+Cypress.Commands.add("avisoFalse", () => {//Para probar la ruta de cancelación, 
+    //podemos usar el callsFakem y regresar null(tiene que ser null), 
+    //que luego le dirá a Cypress que queremos cancelar ese mensaje cuando se active.
+
+    cy.fixture("DOM/toolsqa/alertas/Alertas.page").then(()=>{
+        cy.window().then(win => {
+            cy.stub(win, 'prompt').callsFake(() => null)
+        })
+    })
+})
+
 
 Cypress.Commands.add("Login", () =>
 {
