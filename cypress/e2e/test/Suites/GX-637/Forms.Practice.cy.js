@@ -123,7 +123,8 @@ it('US-GX-637|TS-645|TC01 Validar poder enviar formulario colocando datos válid
     cy.get('#submit')
         .click({ force: true })
     cy.get('.modal-header')
-        .should('have.text', "Thanks for submitting the form")        
+            .should('have.text', "Thanks for submitting the form")   
+        hola
     }) 
 
 })   
