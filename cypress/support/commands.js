@@ -8,51 +8,29 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 import 'cypress-file-upload';
-require('@4tw/cypress-drag-drop')
+require('@4tw/cypress-drag-drop');
+require('cypress-downloadfile/lib/downloadFileCommand');
+require('cy-verify-downloads').addCustomCommand();
 
-<<<<<<< HEAD
-//Inicio Commands para el componente Element|TextBox
-Cypress.Commands.add("SubmitTextBoxFormSuccessfull", (name,email,currentAdr,permanentAdr) => {
-    cy.fixture("DOM/toolsqa/Elements/TextBox.Page").then((the) => {
-        //Si los datos name , currenAdr y permanent son null no se escribiran en el campo
-        name && cy.get(the.fullName.input)
-            .type(name)
-        email && cy.get(the.email.input)
-            .type(email)
-        currentAdr && cy.get(the.currentAdr.input)
-            .type(currentAdr)
-        permanentAdr && cy.get(the.permanentAdr.input)
-            .type(permanentAdr)
-        cy.get(the.SubmitBtn)
-            .click()
-        //Si el nombre es nulo no deberia aparecer en la respuesta
-        name && cy.get(the.Submit.Sucess.name).should('be.visible')
-        //Si el currentAdr es nulo no deberia aparecer en la respuesta
-        currentAdr && cy.get(the.Submit.Sucess.currentAdr).should('be.visible')
-        //Si el permanentAdr es nulo no deberia aparecer en la respuesta
-        permanentAdr && cy.get(the.Submit.Sucess.permanentAdr). should('be.visible')
-        //Si el email es nulo no deberia aparecer en la respuesta
-        email && cy.get(the.Submit.Sucess.email)
-    })
+Cypress.Commands.add("buttonClickDownload", (file) =>
+{
+    cy.fixture("DOM/toolsqa/Elements/UploadAndDownload.Page").then((the) =>
+    {
+        cy.get(the.downloadButton).click();
+        cy.verifyDownload(file);
+    });
+});
+
+Cypress.Commands.add("buttonClickChooseFile", (file) =>
+{    
+    cy.fixture("DOM/toolsqa/Elements/UploadAndDownload.Page").then((the) =>
+    {
+        const filepath = `images/${file}`;
+        cy.get('#uploadFile').attachFile(filepath);
+        cy.get('#uploadedFilePath').should('contain', file);
+    });
 })
-Cypress.Commands.add("FailSubmitTextBoxForm", (name, email, currentAdr, permanentAdr) => {
-    cy.fixture("DOM/toolsqa/Elements/TextBox.Page").then((the) => {
-        //Si los datos name , currenAdr y permanent son null no se escribiran en el campo
-        name && cy.get(the.fullName.input)
-            .type(name)
-        email && cy.get(the.email.input)
-            .type(email)
-        currentAdr && cy.get(the.currentAdr.input)
-            .type(currentAdr)
-        permanentAdr && cy.get(the.permanentAdr.input)
-            .type(permanentAdr)
-        cy.get(the.SubmitBtn)
-            .click()
-        cy.get(the.Submit.Fail).should('be.visible')
-    })
-})
-//Fin Commands para el componente Element|TextBox
-=======
+
 Cypress.Commands.add("alerta", () => {//activacion de la alerta
     
     cy.fixture("DOM/toolsqa/alertas/Alertas.Page").then((the) => {
@@ -129,8 +107,6 @@ Cypress.Commands.add("avisoFalse", () => {//Para probar la ruta de cancelación,
         })
     })
 })
-
->>>>>>> origin/QA
 
 Cypress.Commands.add("Login", () =>
 {

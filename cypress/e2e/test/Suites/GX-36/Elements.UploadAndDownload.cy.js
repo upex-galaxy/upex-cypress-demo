@@ -1,6 +1,8 @@
 describe('ToolsQA | Elements | Upload And Download', () =>
 {    
     const id = '36';
+    let fileName = '';
+    const file = 'upexlogo';
     
     beforeEach('Precondición: El usuario debe estar situado en la página web https://demoqa.com/upload-download', () =>
     {
@@ -12,30 +14,18 @@ describe('ToolsQA | Elements | Upload And Download', () =>
 
     it(`US-GX-${id} | TC 01 - Validar poder descargar un archivo cuando cuando se hace click en el botón "Download"`, () =>
     {
-        //cy.buttonClickDownload();
-        cy.fixture("DOM/toolsqa/Elements/UploadAndDownload.Page").then((the) =>
-        {            
-            cy.get(the.downloadButton).click();
-            cy.get(the.downloadButton).should('be.visible');
-        });
+        cy.get('[download]').invoke('attr', 'download').then((text) =>
+        {
+            fileName = text.toString();
+            cy.buttonClickDownload(fileName); 
+        });       
     });
 
     it(`US-GX-${id} | TC 02 - Validar poder cargar un archivo cuando se hace click en el botón "Choose File"`, () =>
     {
-        //cy.buttonClickChooseFile();
-        cy.fixture("DOM/toolsqa/Elements/UploadAndDownload.Page").then((the) =>
-        {            
-            const filepath = 'images/example.png';
-            cy.get('input[type="file"]').attachFile(filepath);
-            // Aquí usamos la sintaxis Método(directorioDelArchivo)
-            cy.get('#file-submit').click();
-            cy.get('#uploaded-files').contains('upex.png');	
-                cy.get(the.downloadButton).click();
-            cy.get(the.downloadButton).should('be.visible');
-        });
+        cy.buttonClickChooseFile(file);        
     });
 });
-
 
 // Comando predeterminado para que no ocurran errores de excepciones:
 Cypress.on('uncaught:exception', (err, runnable) =>
