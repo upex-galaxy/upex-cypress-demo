@@ -1,29 +1,27 @@
 describe('ToolsQA | Elements | Upload And Download', () =>
 {    
+    const url = 'https://demoqa.com/upload-download';
     const id = '36';
-    let fileName = '';
-    const file = 'upexlogo';
-    
+    let fileNameDownload = '';
+    const fileNameUpload = 'upexlogo';
+
     beforeEach('Precondición: El usuario debe estar situado en la página web https://demoqa.com/upload-download', () =>
     {
-        cy.visit('https://demoqa.com/upload-download');
-        cy.url().should("contain", "upload");
-        cy.clearCookies();
-        cy.clearLocalStorage();
+        cy.getUrl(url);
     });
 
     it(`US-GX-${id} | TC 01 - Validar poder descargar un archivo cuando cuando se hace click en el botón "Download"`, () =>
     {
         cy.get('[download]').invoke('attr', 'download').then((text) =>
         {
-            fileName = text.toString();
-            cy.buttonClickDownload(fileName); 
+            fileNameDownload = text.toString();
+            cy.buttonClickDownload(fileNameDownload); 
         });       
     });
 
     it(`US-GX-${id} | TC 02 - Validar poder cargar un archivo cuando se hace click en el botón "Choose File"`, () =>
     {
-        cy.buttonClickChooseFile(file);        
+        cy.buttonClickChooseFile(fileNameUpload);        
     });
 });
 
