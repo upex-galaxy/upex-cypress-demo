@@ -12,29 +12,29 @@ describe("Text Box", () =>
             cy.get(the.email.input).type(the.email.valid)
             cy.get(the.currentAdr.input).type(the.currentAdr.valid)
             cy.get(the.permanentAdr.input).type(the.permanentAdr.valid)
-            cy.get(the.Submit).click()
+            cy.get(the.SubmitBtn).click()
         })
     })
     it("TS | TC1: Submit Form correctly", () =>
     {
-        cy.fixture("DOM/toolsqa/Elements/TextBoxPage").then((the) =>
+        cy.fixture("DOM/toolsqa/Elements/TextBox.Page").then((the) =>
         {
             cy.get(the.fullName.input).should("be.empty")
             cy.get(the.email.input).should("be.empty")
             cy.get(the.currentAdr.input).should("be.empty")
             cy.get(the.permanentAdr.input).should("be.empty")
-            cy.get(the.Submit).click()
+            cy.get(the.SubmitBtn).click()
         })
     })
     it("TS | TC1: Submit Form correctly", () =>
     {
-        cy.fixture("DOM/toolsqa/Elements/TextBoxPage").then((the) =>
+        cy.fixture("DOM/toolsqa/Elements/TextBox.Page").then((the) =>
         {
             cy.get(the.fullName.input).type(the.fullName.valid)
             cy.get(the.email.input).type(the.email.noName)
             cy.get(the.currentAdr.input).type(the.currentAdr.valid)
             cy.get(the.permanentAdr.input).type(the.permanentAdr.valid)
-            cy.get(the.Submit).click()
+            cy.get(the.SubmitBtn).click()
         })
     })
 })
