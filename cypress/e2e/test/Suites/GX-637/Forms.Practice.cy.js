@@ -78,17 +78,17 @@ it('US-GX-637|TS-645|TC01 Validar poder enviar formulario colocando datos válid
     it('US-GX-637|TS-645|TC03 Validar No poder enviar formulario con datos inválidos', ()=>
     {
         cy.get('#firstName')
-        .type('hola')
-        .should('contain.value', "hola")
+        .type('1')
+        .should('contain.value', "1")
         cy.get('#lastName')
-        .type('chau')
-        .should('contain.value', "chau")
+        .type('2')
+        .should('contain.value', "2")
     cy.get('#userEmail')
-        .type('yes@yes.yes')
+        .type('yes@yes')
         .should('contain.value', "yes")
     cy.get('#userNumber')
-        .type('111112233')
-        .should('contain.value', "111")
+        .type('123456789')
+        .should('contain.value', "9")
     cy.get('.subjects-auto-complete__value-container')
         .type('English{enter}')
     cy.get('.css-12jo7m5')    
@@ -123,7 +123,7 @@ it('US-GX-637|TS-645|TC01 Validar poder enviar formulario colocando datos válid
     cy.get('#submit')
         .click({ force: true })
     cy.get('.modal-header')
-            .should('have.text', "Thanks for submitting the form")   
+        .should('be.not.exist')   
         hola
     }) 
 
