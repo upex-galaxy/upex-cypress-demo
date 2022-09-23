@@ -10,7 +10,7 @@ describe('ToolsQA|Forms|Practice Form', () => {
         cy.clearLocalStorage();
         
 })
-/*
+
 it('US-GX-637|TS-645|TC01 Validar poder enviar formulario colocando datos válidos y seleccionables', () =>
 {
 
@@ -65,27 +65,27 @@ it('US-GX-637|TS-645|TC01 Validar poder enviar formulario colocando datos válid
         
     
 })
-})
+
     it('US-GX-637|TS-645|TC02 Validar No poder enviar formulario con datos y seleccionables "null"', ()=>
     {
 
-    cy.get('#submit')
+    cy.get('#submit')                           //no encontré la forma de apuntar al recuadro rojo en name y lastname null
         .click()
     cy.get('.modal-header')
-        .should('be.not.exist')
+        .should('be.not.exist') 
     })
-*/
-    it('US-GX-637|TS-645|TC03 Validar No poder enviar formulario con datos inválidos', ()=>
+
+    it('US-GX-637|TS-645|TC03 Validar No poder enviar formulario con Nombre, apellido, email inválidos', ()=>
     {
-        cy.get('#firstName')
-        .type('1')
-        .should('contain.value', "1")
-        cy.get('#lastName')
-        .type('2')
-        .should('contain.value', "2")
+        cy.get('#firstName')                    //Debería no poder usar solo números como un nombre
+        .type('1')                              
+        .should('contain.value', "1")           
+        cy.get('#lastName')                     //Debería no poder usar solo números como un apellido
+        .type('2')                              
+        .should('contain.value', "2")           
     cy.get('#userEmail')
         .type('yes@yes')
-        .should('contain.value', "yes")
+        .should('contain.value', "yes")         
     cy.get('#userNumber')
         .type('123456789')
         .should('contain.value', "9")
@@ -123,8 +123,7 @@ it('US-GX-637|TS-645|TC01 Validar poder enviar formulario colocando datos válid
     cy.get('#submit')
         .click({ force: true })
     cy.get('.modal-header')
-        .should('be.not.exist')   
-        hola
+        .should('be.not.exist')           
     }) 
 
 })   
