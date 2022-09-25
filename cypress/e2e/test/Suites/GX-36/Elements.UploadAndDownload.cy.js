@@ -4,10 +4,11 @@ describe('ToolsQA | Elements | Upload And Download', () =>
     const id = '36';
     let fileNameDownload = '';
     const fileNameUpload = 'upexlogo';
+    const contain = 'upload';
 
     beforeEach('Precondición: El usuario debe estar situado en la página web https://demoqa.com/upload-download', () =>
     {
-        cy.getUrl(url);
+        cy.getUrl(url, contain);
     });
 
     it(`US-GX-${id} | TC 01 - Validar poder descargar un archivo cuando cuando se hace click en el botón "Download"`, () =>

@@ -12,10 +12,10 @@ require('@4tw/cypress-drag-drop');
 require('cypress-downloadfile/lib/downloadFileCommand');
 require('cy-verify-downloads').addCustomCommand();
 
-Cypress.Commands.add("getUrl", (url) =>
+Cypress.Commands.add("getUrl", (url, contain) =>
 {
     cy.visit(url);
-    cy.url().should("contain", "upload");
+    cy.url().should("contain", contain);
     cy.clearCookies();
     cy.clearLocalStorage();
 });
