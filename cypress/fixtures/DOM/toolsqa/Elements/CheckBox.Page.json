@@ -6,5 +6,12 @@
     },
     "outputMsg": ".text-success",
     "expandAll": "[aria-label='Expand all']",
-    "collapseAll": "[aria-label='Collapse all']"
+    "collapseAll": "[aria-label='Collapse all']",
+
+    "checkboxIs": {
+        "unCheck":".rct-icon-uncheck",
+        "Check":".rct-icon-check",
+        "halfCheck":".rct-icon-half-check"
+    },
+    "urlCheckbox":"https://demoqa.com/checkbox"
 }
