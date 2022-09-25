@@ -1,4 +1,6 @@
-const {defineConfig} = require('cypress')
+const { defineConfig } = require('cypress')
+const { downloadFile } = require('cypress-downloadfile/lib/addPlugin')
+const { isFileExist, findFiles } = require('cy-verify-downloads');
 
 module.exports = defineConfig({
 	projectId: '',
@@ -15,11 +17,14 @@ module.exports = defineConfig({
 	retries: 0,
 	video: false,
 	e2e: {
+		experimentalSessionAndOrigin: true,
 		// We've imported your old cypress plugins here.
 		// You may want to clean this up later by importing these.
 		setupNodeEvents(on, config) {
-			return require('./cypress/plugins/index.js')(on, config)
-		},
+			on('task', { downloadFile })
+			on('task', { isFileExist, findFiles })
+			return require('./cypress/plugins/index.js')(on, config)			
+		},		
 		specPattern: ['**/*.feature', 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
 		baseUrl: 'https://demoqa.com/',
 	},
