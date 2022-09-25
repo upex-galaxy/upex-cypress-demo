@@ -1,23 +1,7 @@
 node_modules/
 cypress/videos
 cypress/screenshots
-<<<<<<< HEAD
-TestReport/
-mochawesome-report/
-cypress-combined-report.json
-cypress/integration/dummy.js
-cypress/fixtures/url.json
-cypress/fixtures/data.txt
-abcd.html
-reports/
-<<<<<<< HEAD
-settings.json
-=======
-settings.json
->>>>>>> f4311b5919d72a98a76018fc21b9de226edc1704
-=======
 reports/test-results.xml
 reports/cucumber-report.json
 reports/cucumber-messages.ndjson
 .vscode/settings.json
->>>>>>> origin/QA
