@@ -22,6 +22,13 @@ describe('Ejemplo para demostrar cómo hacer un Mouseover', () => {
 			.should('be.visible')
 			.and("contain.text", "over the text field")
 	})
+	it('Hacer un MouseOver usando la nueva dependencia de REAL EVENT', () => {
+		cy.get('#toolTipTextField').realHover()
+		cy.get('.tooltip-inner')
+			.should('be.visible')
+			.and("contain.text", "over the text field")
+	})
+
 })
 
 
