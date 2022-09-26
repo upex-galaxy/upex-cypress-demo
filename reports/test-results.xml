@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="14.3820" tests="2" failures="0">
-  <testsuite name="Root Suite" timestamp="2022-09-20T02:14:51" tests="0" file="cypress\e2e\test\Suites\MyStore-GX-524\home.listaProdVisibles.cy.js" time="0.0000" failures="0">
+<testsuites name="Mocha Tests" time="11.5330" tests="2" failures="0">
+  <testsuite name="Root Suite" timestamp="2022-09-26T21:23:23" tests="0" file="cypress\e2e\test\Suites\GX-36\Elements.UploadAndDownload.cy.js" time="0.0000" failures="0">
   </testsuite>
-  <testsuite name="MyStore: Home-ListaProductosVisibles" timestamp="2022-09-20T02:14:51" tests="2" time="14.3660" failures="0">
-    <testcase name="TC1: Validar cantidad de elementos de la sección &quot;POPULAR&quot;" time="9.4780" classname="MyStore: Home-ListaProductosVisibles TC1: Validar cantidad de elementos de la sección &quot;POPULAR&quot;">
+  <testsuite name="ToolsQA | Elements | Upload And Download" timestamp="2022-09-26T21:23:23" tests="2" time="11.5030" failures="0">
+    <testcase name="US-GX-36 | TC 01 - Validar poder descargar un archivo cuando cuando se hace click en el botón &quot;Download&quot;" time="8.1600" classname="ToolsQA | Elements | Upload And Download US-GX-36 | TC 01 - Validar poder descargar un archivo cuando cuando se hace click en el botón &quot;Download&quot;">
     </testcase>
-    <testcase name="TC1: Validar cantidad de elementos de la sección &quot;BEST SELLERS&quot;" time="1.6200" classname="MyStore: Home-ListaProductosVisibles TC1: Validar cantidad de elementos de la sección &quot;BEST SELLERS&quot;">
+    <testcase name="US-GX-36 | TC 02 - Validar poder cargar un archivo cuando se hace click en el botón &quot;Choose File&quot;" time="3.3280" classname="ToolsQA | Elements | Upload And Download US-GX-36 | TC 02 - Validar poder cargar un archivo cuando se hace click en el botón &quot;Choose File&quot;">
     </testcase>
   </testsuite>
 </testsuites>
