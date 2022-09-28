@@ -223,6 +223,16 @@ Cypress.Commands.add("SignIn", (email, password) =>
         })
 })
 
+Cypress.Commands.add('confirmCaptcha', () => {
+    cy.get('[style="width: 304px; height: 78px;"] > div > iframe')
+        .first()
+        .then((recaptchaIframe) => {
+        const body = recaptchaIframe.contents()
+            cy.wrap(body).find('.recaptcha-checkbox-border').should('be.visible').click()
+            cy.wait(1000)
+        })
+})
+
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 //
