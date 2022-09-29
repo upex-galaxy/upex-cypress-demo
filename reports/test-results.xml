@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="22.5970" tests="4" failures="0">
+  <testsuite name="Root Suite" timestamp="2022-09-27T02:40:38" tests="0" file="cypress\e2e\test\Suites\GX-41\Elements.RadioButtons.cy.js" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="ToolsQA | Elements | Radio Buttons" timestamp="2022-09-27T02:40:38" tests="4" time="22.5560" failures="0">
+    <testcase name="US - GX-41 | TC1 : Validar que haya un total de 3 Radio Buttons (RB)" time="13.0770" classname="ToolsQA | Elements | Radio Buttons US - GX-41 | TC1 : Validar que haya un total de 3 Radio Buttons (RB)">
+    </testcase>
+    <testcase name="US - GX-41 | TC2:  Validar hacer click en el RB  “Yes“ " time="2.9840" classname="ToolsQA | Elements | Radio Buttons US - GX-41 | TC2:  Validar hacer click en el RB  “Yes“ ">
+    </testcase>
+    <testcase name="US - GX-41 | TC3:  Validar hacer Click en el RB “Impressive” " time="3.3470" classname="ToolsQA | Elements | Radio Buttons US - GX-41 | TC3:  Validar hacer Click en el RB “Impressive” ">
+    </testcase>
+    <testcase name="US - GX-41 | TC4: Intentar Validar hacer Click  en el RB  “No” estando inhabilitado " time="3.0280" classname="ToolsQA | Elements | Radio Buttons US - GX-41 | TC4: Intentar Validar hacer Click  en el RB  “No” estando inhabilitado ">
+    </testcase>
+  </testsuite>
+</testsuites>
