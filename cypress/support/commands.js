@@ -7,7 +7,7 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-import 'cypress-file-upload';
+import 'cypress-file-upload'; import 'cypress-wait-until';
 require('@4tw/cypress-drag-drop');
 require('cypress-downloadfile/lib/downloadFileCommand');
 require('cy-verify-downloads').addCustomCommand();
