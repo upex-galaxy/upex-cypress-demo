@@ -1,0 +1,15 @@
+{
+    "image": {
+        "valid" : "div>img:first",
+        "broken" : "[src='/images/Toolsqa_1.jpg']"
+    },
+    "link": {
+        "valid": "Click Here for Valid Link",
+        "invalid": "Click Here for Broken Link"
+    },
+    "url":{
+        "Base":"https://demoqa.com/broken",
+        "valid" : "https://demoqa.com",
+        "invalid": "/status_codes/500"
+    }
+}

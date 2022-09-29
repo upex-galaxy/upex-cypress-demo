@@ -6,7 +6,7 @@ describe("CheckBox", () =>
     })
     it.skip("TS | TC1: Validar toggle abrir y cerrar", () =>
     {
-        cy.fixture("DOM/toolsqa/Elements/CheckBoxPage").then((the) =>
+        cy.fixture("DOM/toolsqa/Elements/CheckBox.Page").then((the) =>
         {
             // Abrir Toggles:
             cy.get(the.toggle).eq(0).click()

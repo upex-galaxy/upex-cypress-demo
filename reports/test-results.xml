@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites name="Mocha Tests" time="217.6160" tests="10" failures="0">
   <testsuite name="Root Suite" timestamp="2022-09-28T13:01:18" tests="0" file="cypress\e2e\test\Suites\GX-726\bookStoreApplications.Register.cy.js" time="0.0000" failures="0">
@@ -25,3 +26,6 @@
     </testcase>
   </testsuite>
 </testsuites>
+=======
+
+>>>>>>> 89713ca2a08bd82eb8bb342fad83f4d909590f1a

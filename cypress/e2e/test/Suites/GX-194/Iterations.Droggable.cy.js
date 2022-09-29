@@ -6,9 +6,9 @@ describe("US 194 ToolsQA | Interactions | Dragabble", () =>
     const X = between(-300,400)
     const Y = between(-300, 300)
     
-    before(() =>
+    beforeEach(() =>
     {
-        cy.visit("/dragabble")
+        cy.visit("https://demoqa.com/dragabble")
         cy.url().should("contain","dragabble")
     })
     it("US 194 | TS 200 | TC1: Check “Drag and Drop” successfully in any spot.", () =>

@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 {"testRunStarted":{"timestamp":{"seconds":1664370075,"nanos":687000000}}}
 
 {"testRunFinished":{"timestamp":{"seconds":1664370295,"nanos":907000000}}}
+=======
+{"testRunStarted":{"timestamp":{"seconds":1664227399,"nanos":729000000}}}
+
+{"testRunFinished":{"timestamp":{"seconds":1664227415,"nanos":38000000}}}
+>>>>>>> 89713ca2a08bd82eb8bb342fad83f4d909590f1a

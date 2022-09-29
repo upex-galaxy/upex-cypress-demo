@@ -1,6 +1,6 @@
 {
 	"include": ["./node_modules/cypress", "cypress/**/*.js"],
 	"compilerOptions": {
-		"types": ["cypress", "cypress-file-upload"]
+		"types": ["cypress", "cypress-file-upload", "cypress-real-events"]
 	}
 }

@@ -1,0 +1,23 @@
+{
+    "alertas":{
+        "alert":"[type='button']",
+        "alerta":"button#timerAlertButton",
+        "confirm":"div button",
+        "result":"#confirmResult",
+        "aviso":"#promtButton",
+        "aviso2":"#promptResult"
+    },
+    "message":{
+        "alert":"You clicked a button",
+        "alerta":"This alert appeared after 5 seconds",
+        "confirm":{
+            "confirm1":"Do you confirm action?",
+            "confirm2":"You selected Ok"
+        }
+    },
+    "aviso1":"You entered Paola"
+
+    
+}
+
+
