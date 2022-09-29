@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="217.6160" tests="10" failures="0">
+  <testsuite name="Root Suite" timestamp="2022-09-28T13:01:18" tests="0" file="cypress\e2e\test\Suites\GX-726\bookStoreApplications.Register.cy.js" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="US GX-726 | ToolsQA | Book Store Applications | Register" timestamp="2022-09-28T13:01:18" tests="10" time="217.5940" failures="0">
+    <testcase name="US-GX-726 | TS-727 | TC1:  Validar registrar usuario con credenciales válidas" time="31.3980" classname="US GX-726 | ToolsQA | Book Store Applications | Register US-GX-726 | TS-727 | TC1:  Validar registrar usuario con credenciales válidas">
+    </testcase>
+    <testcase name="US-GX-726 | TS-727 | TC2:  Validar mensaje “please verify reCaptcha to register” al registrar usuario sin hacer click en el Captcha" time="9.4000" classname="US GX-726 | ToolsQA | Book Store Applications | Register US-GX-726 | TS-727 | TC2:  Validar mensaje “please verify reCaptcha to register” al registrar usuario sin hacer click en el Captcha">
+    </testcase>
+    <testcase name="US-GX-726 | TS-727 | TC3:  Validar que no permita registrar usuario al dejar el input “UserName” vacío" time="24.4410" classname="US GX-726 | ToolsQA | Book Store Applications | Register US-GX-726 | TS-727 | TC3:  Validar que no permita registrar usuario al dejar el input “UserName” vacío">
+    </testcase>
+    <testcase name="US-GX-726 | TS-727 | TC4: Validar comportamiento de los inputs “Fisrt Name” , “Last Name”, “Username”, “Password” al registrar usuario con campos vacíos" time="25.8360" classname="US GX-726 | ToolsQA | Book Store Applications | Register US-GX-726 | TS-727 | TC4: Validar comportamiento de los inputs “Fisrt Name” , “Last Name”, “Username”, “Password” al registrar usuario con campos vacíos">
+    </testcase>
+    <testcase name="US-GX-726 | TS-727 | TC5:  Validar que no permita registrar usuario con Password de menos de 8 caracteres" time="23.1330" classname="US GX-726 | ToolsQA | Book Store Applications | Register US-GX-726 | TS-727 | TC5:  Validar que no permita registrar usuario con Password de menos de 8 caracteres">
+    </testcase>
+    <testcase name="US-GX-726 | TS-727 | TC6:  Validar que no permita registrar usuario con Password sin un carácter en mayúscula (A-Z)" time="21.9220" classname="US GX-726 | ToolsQA | Book Store Applications | Register US-GX-726 | TS-727 | TC6:  Validar que no permita registrar usuario con Password sin un carácter en mayúscula (A-Z)">
+    </testcase>
+    <testcase name="US-GX-726 | TS-727 | TC7: Validar que no permita registrar usuario con Password sin un carácter en minúscula (a-z)" time="27.7130" classname="US GX-726 | ToolsQA | Book Store Applications | Register US-GX-726 | TS-727 | TC7: Validar que no permita registrar usuario con Password sin un carácter en minúscula (a-z)">
+    </testcase>
+    <testcase name="US-GX-726 | TS-727 | TC8: Validar que no permita registrar usuario con Password sin un carácter especial (!@#$*=+)" time="22.9730" classname="US GX-726 | ToolsQA | Book Store Applications | Register US-GX-726 | TS-727 | TC8: Validar que no permita registrar usuario con Password sin un carácter especial (!@#$*=+)">
+    </testcase>
+    <testcase name="US-GX-726 | TS-727 | TC9:  Validar que no permita registrar usuario previamente registrado" time="23.0890" classname="US GX-726 | ToolsQA | Book Store Applications | Register US-GX-726 | TS-727 | TC9:  Validar que no permita registrar usuario previamente registrado">
+    </testcase>
+    <testcase name="US-GX-726 | TS-727 | TC10: Validar ir a la pagina de Login" time="4.7060" classname="US GX-726 | ToolsQA | Book Store Applications | Register US-GX-726 | TS-727 | TC10: Validar ir a la pagina de Login">
+    </testcase>
+  </testsuite>
+</testsuites>
