@@ -1,12 +1,12 @@
 [![CYPEX](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/f9y7eu/cypex&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/f9y7eu/runs)
 
-# Testing Automation - Cypress 10.7.0 + Cucumber
+# Testing Automation - Cypress 10.8.0 + Cucumber
 ![UPEX's Banners (linkedin) (1)](https://user-images.githubusercontent.com/91127281/189470339-acea5782-16f1-4f06-9ce0-df54fd3ead9d.png)
 
 Cypress es el MEJOR FRAMEWORK DE AUTOMATION E2E actualmente! No hay rival! Además de que es el framework más amigable para aprender!
 Aunque no es el único E2E en el mercado, y tampoco es el más usado como sí lo es Selenium. Pero es el MÁS POPULAR!
 
-Cypress es un Franework de Automatización de Next Generation construido para web modernas. Esto es im simple proyecto el cual puedes usarlo para comenzar tu viaje por la Galaxia de la Automatización!
+Cypress es un Framework de Automatización de Next Generation construido para web modernas. Esto es un simple proyecto el cual puedes usarlo para comenzar tu viaje por la Galaxia de la Automatización! Aquí APRENDERÁS A CÓMO TRABAJAR EN EQUIPO!
 
 # CÓMO EMPEZAR:
 1. Clona el Proyecto: `git clone <URLdelRepositorioGitHub>`
@@ -14,7 +14,7 @@ Cypress es un Franework de Automatización de Next Generation construido para we
 3. Corre el comando: `npx cypress open` o `npm test` (ya que en Package.json tenemos la variable "test" como el "cypress open") para abrir Cypress!
 4. Para correr pruebas en la terminal, corre: `npx cypress run` o `npm run file` (la variable "file" es "cypress run --browser chrome --spec" lo cual es un atajo para que podamos correr las pruebas de un directorio que especifiquemos y usando el navegador de Chrome), esto nos ayudará generar los archivos de Reportes!
 
-# Las Guías de UPEX para saber cómo trabajar en un Workspace Real están Confluence: [CYPRESS AL GRANO](https://upexgalaxy0.atlassian.net/wiki/spaces/UG/pages/524523)
+# Las Guías de UPEX para saber cómo trabajar en un Workspace Real están Confluence: [CYPRESS AL GRANO](https://upexgalaxy1.atlassian.net/wiki/spaces/UG/pages/852822)
 
 # Algunos Artículos de Cypress que puede interesarte:
 - [How to Install Cypress](https://testersdock.com/how-to-install-cypress/)

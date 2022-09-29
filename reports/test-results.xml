@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites name="Mocha Tests" time="22.5970" tests="4" failures="0">
   <testsuite name="Root Suite" timestamp="2022-09-27T02:40:38" tests="0" file="cypress\e2e\test\Suites\GX-41\Elements.RadioButtons.cy.js" time="0.0000" failures="0">
@@ -13,3 +14,6 @@
     </testcase>
   </testsuite>
 </testsuites>
+=======
+
+>>>>>>> cypex

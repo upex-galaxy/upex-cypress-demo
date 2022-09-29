@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 {"testRunStarted":{"timestamp":{"seconds":1664246695,"nanos":26000000}}}
 
 {"testRunFinished":{"timestamp":{"seconds":1664246730,"nanos":602000000}}}
+=======
+{"testRunStarted":{"timestamp":{"seconds":1664227399,"nanos":729000000}}}
+
+{"testRunFinished":{"timestamp":{"seconds":1664227415,"nanos":38000000}}}
+>>>>>>> cypex
