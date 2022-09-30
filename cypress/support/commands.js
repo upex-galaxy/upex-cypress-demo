@@ -129,6 +129,7 @@ Cypress.Commands.add("Login", () =>
             cy.contains("Login").click()
         })
 })
+
 Cypress.Commands.add("CustomLogin", (user,password) =>
 {
     cy.fixture("DOM/sauce/login.Page").then((the) =>

@@ -1,0 +1,7 @@
+{
+    "url" : "https://demoqa.com/tool-tips",
+    "event": "mouseover",
+    "class": "tooltip-inner"
+
+
+}
