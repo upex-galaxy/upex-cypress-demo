@@ -2,10 +2,9 @@ describe('US-GX-641-ToolsQA | Elements | Text Box: Fill form and Submit', () =>{
 
 	beforeEach('Ingresar a la página', () => {
         cy.visit("https://demoqa.com/text-box")
-	    cy.url().should("contain", "text-box")
-	    cy.clearCookies()
-	    cy.clearLocalStorage()
-	   
+        cy.url().should("contain", "text-box")
+        cy.clearCookies()
+        cy.clearLocalStorage()
     })
 
 	it("TC01: Validar envío con campos válidos que aparezcan en la respuesta",  () => {
@@ -33,10 +32,8 @@ describe('US-GX-641-ToolsQA | Elements | Text Box: Fill form and Submit', () =>{
 				// Does not contain (minimum) 2 alphanumeric characters after “.”
 				//Mockup: “x@x.xx”
 				cy.fixture("DOM/toolsqa/Elements/TextBox1.Page").then((the) =>{
-					
-				     cy.NoEnvíoDeFormularioMailInvalido()
-		
-			    })
+                    cy.NoEnvíoDeFormularioMailInvalido()
+                })
 		});
 
 
