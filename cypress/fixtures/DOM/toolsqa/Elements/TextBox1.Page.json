@@ -1,0 +1,45 @@
+{
+    "name": {
+    "input": "#userName",
+    "valid": "Monica",
+    "null": ""
+    },
+    
+    "email": {
+        "input": "#userEmail",
+        "data": {
+        "valid": "moni@upex.com",
+        "null": ""
+        },
+        "datainv": ["moniupex.com",
+        "@upex.com",
+        "moni@upexcom",
+        "moni@.com",
+        "moni@upex.",
+        "moni@u.c",
+        "moni@upex.c"]    
+    },
+
+    "currentAd": {
+        "input": "#currentAddress",
+        "valid": "José C. Paz 1234",
+        "null": ""
+    },
+    "permanentAd": {
+        "input": "#permanentAddress",
+        "valid": "Argentina 100",
+        "null": ""
+    },
+    "SubmitBtn": "#submit",
+
+    "Submit":{
+        "Fail" : ".field-error",
+        "Sucess":{
+            "name":"#name",
+            "email":"#email",
+            "currentAdr":"#currentAddress",
+            "permanentAdr":"#permanentAddress"
+        }
+    }
+
+}
