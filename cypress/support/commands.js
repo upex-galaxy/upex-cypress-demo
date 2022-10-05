@@ -246,8 +246,7 @@ Cypress.Commands.add("NoEnvíoDeFormularioMailInvalido", ()=>{
     
     cy.fixture("DOM/toolsqa/Elements/TextBox1.Page").then((the) =>
     {
-        the.email.datainv.forEach(element => {
-                       
+        the.email.datainv.forEach(element => {                       
         cy.get(the.name.input).type(the.name.valid)
         cy.get(the.email.input).type(element).click({force: true})
         cy.get(the.currentAd.input).type(the.currentAd.valid)
