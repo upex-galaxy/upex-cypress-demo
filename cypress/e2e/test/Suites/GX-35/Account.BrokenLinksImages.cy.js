@@ -1,8 +1,5 @@
-     
-
 describe(" ToolsQA | Elements | Broken Links Images", () => {
- 
-   beforeEach("Precondicion: Usuario debe estar situado en la pagina QA", () => {
+  beforeEach("Precondicion: Usuario debe estar situado en la pagina QA", () => {
   //  cy.BrokenLinksAccess()
   cy.visit("https://demoqa.com/broken","broken")
   cy.url().should("contain", "broken")
@@ -30,26 +27,17 @@ describe(" ToolsQA | Elements | Broken Links Images", () => {
    cy.contains(the.link.TextLinkValid).click()
     cy.visit(the.link.linkValid, () => {
       cy.url().should("contain", "demo")
-      
-      
- })
-   })
+    })
+    })
   })
-  
- 
  it("US-GX-35| TC4: Validar link roto  cuando ingresa a la página principal.", () => {
-
   cy.fixture("DOM/toolsqa/Elements/BrokenLink.Page").then((the) => {
-  
   cy.contains(the.link.TextLinkValid).click()
     cy.visit(the.link.linkInvalid)  
       cy.url().should("contain", "500")
-  
-    
-  })
-   
     })
-  })
+    })
+})
  // Comando predeterminado para que no ocurran errores de excepciones:
   Cypress.on('uncaught:exception', (err, runnable) =>
   {// Returning false here prevents Cypress from.
