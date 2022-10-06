@@ -1,0 +1,17 @@
+{
+    "image":{
+        "imageValid":"[src='/images/Toolsqa.jpg']",
+        "imageInvalid": "[src='/images/Toolsqa_1.jpg']",
+        "TextValid":"Valid image",
+        "TextInvalid":"Broken image"
+    
+    },
+    "link":{
+    "linkValid": "https://demoqa.com",
+    "linkInvalid": "http://the-internet.herokuapp.com/status_codes/500",
+    "TextLinkValid":"Click Here for Valid Link",
+    "TextLinkInValid":"Click Here for Broken Link"
+    }
+
+    
+}
