@@ -12,5 +12,6 @@ describe("cy.waitUntil Test: Validate Waiting for an Element or Action shows up"
         
         cy.waitUntil(() =>
             cy.get(".title").then(obj => expect(obj.text()).to.eq("Products")))
+            
     })
 })  

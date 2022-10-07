@@ -29,11 +29,11 @@ describe("Ejemplo para demostrar cómo probar una API", () =>
                 token: token,
             }
         })
-            .then((response) =>
-            {
-                expect(response).to.be.an("object")
-                expect(response.status).to.eql(200)
-                expect(response.body.name).to.eql("🚩BACKLOG")
+        .then((response) =>
+        {
+            expect(response).to.be.an("object")
+            expect(response.status).to.eql(200)
+            expect(response.body.name).to.eql("🚩BACKLOG")
         })
     })
     it("REQUEST de Método POST a la API de TRELLO para CREAR UNA CARD", () =>
