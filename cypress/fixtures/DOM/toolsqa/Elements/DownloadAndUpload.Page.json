@@ -1,0 +1,10 @@
+{
+    "downloadButton": "#downloadButton",
+    "uploadFile": "#uploadFile",
+    "ruta": "C:/Users/delia/Downloads/sampleFile.jpeg",
+    "nameUploadfile": "C:/Users/delia/Downloads/sampleFile.jpeg",
+    "url" : "https://demoqa.com/upload-download",
+    "contain" : "upload-download",
+    "nameFile": "sampleFile.jpeg"
+
+}
