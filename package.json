@@ -6,7 +6,7 @@
 	"scripts": {
 		"test": "cypress open",
 		"file": "cypress run --browser chrome --spec",
-		"reporte":"cypress run --reporter mochawesome --spec"
+		"reporte": "cypress run --reporter mochawesome --spec"
 	},
 	"keywords": [
 		"cypress",
@@ -27,7 +27,7 @@
 		"cypress-grep": "2.6.1",
 		"cypress-mochawesome-reporter": "3.2.2",
 		"cypress-react-selector": "3.0.0",
-		"cypress-real-events": "^1.7.1",
+		"cypress-real-events": "1.7.1",
 		"cypress-recurse": "1.20.0",
 		"cypress-wait-until": "1.7.2",
 		"mocha": "10.0.0",
