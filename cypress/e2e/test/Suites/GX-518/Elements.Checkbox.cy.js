@@ -15,9 +15,12 @@ describe("US GX-518 | TS ✅ToolsQA | Elements | Check Box", () => {
         })
     })
     it.skip("TC2 | User expands a section of options with an arrow button (right)", () => {
-        cy.fixture("DOM/toosqa/Elements/CheckBox.Page").then((the) => {
+        cy.fixture("DOM/toolsqa/Elements/CheckBox.Page").then((the) => {
             cy.get(the.toggle).click()
-            cy.get(the.label.checkbox).should("have.length","4")
+            cy.contains(the.option,"Documents").within(() => {
+                cy.get(the.toggle).click()
+                cy.get(the.label.checkbox).should("have.length.greaterThan",1)
+            })
         })
     })
     it.skip("TC3 | User collapse all the possibilities with the “-” button", () => {
@@ -26,31 +29,72 @@ describe("US GX-518 | TS ✅ToolsQA | Elements | Check Box", () => {
             cy.get(".rct-text").siblings('ol').should("be.visible")
             cy.get(the.collapseAll).click()
             cy.get(".rct-text").siblings('ol').should("not.exist")
+            //Other way to valid this is throw the lenght (should have lenght eq 1 for the home checkbox)
         })
     })
-    it("TC4 | User collapse a selection of options with an arrow button (down)", () => {
+    it.skip("TC4 | User collapse a selection of options with an arrow button (down)", () => {
         cy.fixture("DOM/toolsqa/Elements/CheckBox.Page").then((the) => {
             cy.get(the.expandAll).click()
-            cy.contains("WorkSpace").parent().within(() => {
-                cy.get(the.label.checkbox).click()
+            cy.contains(the.option,"WorkSpace").within(() => {
+                cy.get(the.toggle).click()
+                cy.get(the.label.checkbox).should("have.length","1")
             })
-            cy.get(the.checkboxIs.Check).should("exist")
-            cy.get(the.checkboxIs.halfCheck).should("exist")
         })
     })
     it.skip("TC5 | User select all the options with the Home checkbox ", () => {
         cy.fixture("DOM/toolsqa/Elements/CheckBox.Page").then((the) => {
-            
+            cy.get(the.label.checkbox).click()
+            cy.get(the.expandAll).click()
+            cy.get(the.label.boxName).each(($label) => {
+                //Se obtiene el texto
+                let txt = $label.text()
+                //reemplazamos caracteres ".doc" y espacios con nada (basicamente los borramos)
+                txt = txt.replace(/.doc| /gi, "");
+                //Validamos que exista desabilitando el case sensitive
+                cy.get(the.outputMsg).contains(txt, { matchCase: false }).should("exist")
+            })
         })
     })
     it.skip("TC6 | User select a selection of options from a section checkbox ", () => {
         cy.fixture("DOM/toolsqa/Elements/CheckBox.Page").then((the) => {
-            
+            let texts = []
+            cy.get(the.expandAll).click()
+            cy.contains(the.option,"WorkSpace").within(() => {
+                cy.get(the.label.checkbox).eq(0).click()
+                cy.get(the.label.boxName).each(($label) => {
+                    //Se obtiene el texto
+                    let txt = ($label.text())
+                    //reemplazamos caracteres ".doc" y espacios con nada (basicamente los borramos)
+                    txt = txt.replace(/.doc| /gi, "");
+                    texts.push(txt)
+                })
+            })
+            texts.forEach(txt => {
+                //Validamos que exista desabilitando el case sensitive
+                cy.get(the.outputMsg).contains(txt, { matchCase: false }).should("exist")
+            });
         })
     })
-    it.skip("TC7 | User selects one checkbox from a section ", () => {
-        cy.fixture("DOM/toolsqa/Elements/CheckBox.Page").then((the) => {
+    it("TC7 | User selects one checkbox from a section ", function(){
+        cy.fixture("DOM/toolsqa/Elements/CheckBox.Page").then((the)=>{
             
+            cy.get(the.expandAll).click()
+            cy.contains(the.option, "Word File.doc").within(()=>{
+                cy.get(the.label.checkbox).click()
+                //Se obtiene el texto
+                cy.get(the.label.boxName).invoke('text').as('labelText')
+                /* cy.get(the.label.boxName).then(($label) => {
+                    let title = $label.text();
+                    //reemplazamos caracteres ".doc" y espacios con nada (basicamente los borramos)
+                    title = title.replace(/.doc| /gi, "");
+                    cy.wrap(title).as('labelText');
+                    cy.log(this.labelText);
+                }) */
+            })
+            cy.log(this.labelText);
+
+            //Validamos que exista desabilitando el case sensitive
+            cy.get(the.outputMsg).contains(this.labelText, { matchCase: false }).should("exist")
         })
     })
     it.skip("TC8 | User selects more than one checkbox from different sections", () => {

@@ -1,4 +1,5 @@
 {
+    "option":"li",
     "toggle":"[title='Toggle']",
     "label": {
         "checkbox": ".rct-checkbox",
