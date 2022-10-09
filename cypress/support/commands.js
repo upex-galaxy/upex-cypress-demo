@@ -223,6 +223,28 @@ Cypress.Commands.add("SignIn", (email, password) =>
         })
 })
 
+/* Checkbox commands */
+/* Al usar as debemor declarar el caso de puerba (it) o el command con function y no como arrow function ()=> */
+Cypress.Commands.add("clickCheckbox", function (checkbox){
+    cy.fixture("DOM/toolsqa/Elements/CheckBox.Page").then((the) => {
+        cy.contains(the.option, checkbox).within(()=>{
+            cy.get(the.label.checkbox).click()
+            //Se obtiene el texto
+            cy.get(the.label.boxName).then(($label) => {
+                let title = $label.text();
+                //reemplazamos caracteres ".doc" y espacios con nada (basicamente los borramos)
+                title = title.replace(/.doc| /gi, "");
+                cy.wrap(title).as('labelText');
+            })
+        }).then(()=> {
+            cy.log(this.labelText);
+            //Validamos que exista desabilitando el case sensitive
+            cy.get(the.outputMsg).contains(this.labelText, { matchCase: false }).should("exist")
+        })
+    })
+    
+})
+
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 //

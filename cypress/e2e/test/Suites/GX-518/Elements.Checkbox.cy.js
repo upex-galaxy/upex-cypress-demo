@@ -15,52 +15,91 @@ describe("US GX-518 | TS ✅ToolsQA | Elements | Check Box", () => {
         })
     })
     it.skip("TC2 | User expands a section of options with an arrow button (right)", () => {
-        cy.fixture("DOM/toosqa/Elements/CheckBox.Page").then((the) => {
+        cy.fixture("DOM/toolsqa/Elements/CheckBox.Page").then((the) => {
             cy.get(the.toggle).click()
-            cy.get(the.label.checkbox).should("have.length","4")
+            cy.contains(the.option,"Documents").within(() => {
+                cy.get(the.toggle).click()
+                cy.get(the.label.checkbox).should("have.length.greaterThan",1)
+            })
         })
     })
-    it.skip("TC3 | User collapse all the possibilities with the “-” button", () => {
+    it("TC3 | User collapse all the possibilities with the “-” button", () => {
         cy.fixture("DOM/toolsqa/Elements/CheckBox.Page").then((the) => {
             cy.get(the.expandAll).click()
-            cy.get(".rct-text").siblings('ol').should("be.visible")
+            cy.get(the.label.boxName).should("have.length.greaterThan",1)
             cy.get(the.collapseAll).click()
-            cy.get(".rct-text").siblings('ol').should("not.exist")
+            //if the element dont have attr lenght then is a single element not an array
+            cy.get(the.label.boxName).should("not.have.attr","lenght")
         })
     })
     it("TC4 | User collapse a selection of options with an arrow button (down)", () => {
         cy.fixture("DOM/toolsqa/Elements/CheckBox.Page").then((the) => {
             cy.get(the.expandAll).click()
-            cy.contains("WorkSpace").parent().within(() => {
-                cy.get(the.label.checkbox).click()
+            cy.contains(the.option,"WorkSpace").within(() => {
+                cy.get(the.toggle).click()
+                cy.get(the.label.checkbox).should("have.length","1")
             })
-            cy.get(the.checkboxIs.Check).should("exist")
-            cy.get(the.checkboxIs.halfCheck).should("exist")
         })
     })
-    it.skip("TC5 | User select all the options with the Home checkbox ", () => {
+    it("TC5 | User select all the options with the Home checkbox ", () => {
         cy.fixture("DOM/toolsqa/Elements/CheckBox.Page").then((the) => {
-            
+            cy.get(the.label.checkbox).click()
+            cy.get(the.expandAll).click()
+            cy.get(the.label.boxName).each(($label) => {
+                //Se obtiene el texto
+                let txt = $label.text()
+                //reemplazamos caracteres ".doc" y espacios con nada (basicamente los borramos)
+                txt = txt.replace(/.doc| /gi, "");
+                //Validamos que exista desabilitando el case sensitive
+                cy.get(the.outputMsg).contains(txt, { matchCase: false }).should("exist")
+            })
         })
     })
-    it.skip("TC6 | User select a selection of options from a section checkbox ", () => {
+    it("TC6 | User select a selection of options from a section checkbox ", () => {
         cy.fixture("DOM/toolsqa/Elements/CheckBox.Page").then((the) => {
-            
+            let texts = []
+            cy.get(the.expandAll).click()
+            cy.contains(the.checkboxParent.section,"WorkSpace").within(() => {
+                cy.get(the.label.checkbox).eq(0).click()
+                cy.get(the.label.boxName).each(($label) => {
+                    //Se obtiene el texto
+                    let txt = ($label.text())
+                    //reemplazamos caracteres ".doc" y espacios con nada (basicamente los borramos)
+                    txt = txt.replace(/.doc| /gi, "");
+                    texts.push(txt)
+                })
+            })
+            texts.forEach(txt => {
+                //Validamos que exista desabilitando el case sensitive
+                cy.get(the.outputMsg).contains(txt, { matchCase: false }).should("exist")
+            });
         })
     })
-    it.skip("TC7 | User selects one checkbox from a section ", () => {
+    it("TC7 | User selects one checkbox from a section ", ()=>{
+        cy.fixture("DOM/toolsqa/Elements/CheckBox.Page").then((the)=>{
+            cy.get(the.expandAll).click()
+            cy.clickCheckbox("Word File.doc")
+        })
+    })
+    it("TC8 | User selects more than one checkbox from different sections",()=>{
         cy.fixture("DOM/toolsqa/Elements/CheckBox.Page").then((the) => {
-            
+            cy.get(the.expandAll).click()
+            cy.clickCheckbox("Classified")
+            cy.clickCheckbox("Notes")
         })
     })
-    it.skip("TC8 | User selects more than one checkbox from different sections", () => {
+    it("TC9 | User selects more than one checkbox from the same section",function(){
         cy.fixture("DOM/toolsqa/Elements/CheckBox.Page").then((the) => {
-            
-        })
-    })
-    it.skip("TC9 | User selects more than one checkbox from the same section", () => {
-        cy.feature("DOM/toolsqa/Elements/CheckBox.Page").then((the) => {
-            
+            cy.get(the.expandAll).click()
+            cy.clickCheckbox("Commands")
+            cy.clickCheckbox("Notes")
+            cy.contains(the.checkboxParent.section, "Commands").within(() => {
+                cy.get(the.checkboxParent.desktop).invoke("text").as("labelText")
+            }).then(()=> {
+                cy.log(this.labelText);
+                //Validamos que exista desabilitando el case sensitive
+                cy.get(the.outputMsg).contains(this.labelText, { matchCase: false }).should("exist")
+            })
         })
     })
 })

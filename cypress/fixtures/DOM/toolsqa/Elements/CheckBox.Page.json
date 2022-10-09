@@ -1,4 +1,5 @@
 {
+    "option":"li",
     "toggle":"[title='Toggle']",
     "label": {
         "checkbox": ".rct-checkbox",
@@ -13,5 +14,12 @@
         "Check":".rct-icon-check",
         "halfCheck":".rct-icon-half-check"
     },
-    "urlCheckbox":"https://demoqa.com/checkbox"
+    "urlCheckbox":"https://demoqa.com/checkbox",
+
+    "checkboxParent":{
+        "home":"[for='tree-node-home']",
+        "desktop":"[for='tree-node-desktop']",
+        "downloads":"[for='tree-node-downloads']",
+        "section":".rct-node-parent"
+    }
 }
