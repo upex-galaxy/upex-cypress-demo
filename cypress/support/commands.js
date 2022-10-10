@@ -242,6 +242,11 @@ Cypress.Commands.add('clickCheckbox', function (checkbox) {
 	})
 })
 
+//Cypress.Commands.add('',
+// 👾🚩🚩🚩☝🏻☝🏻☝🏻COMIENZA A ESCRIBIR TU NUEVO COMMAND AQUÍ! A PARTIR DE ESTA LÍNEA DISPONIBLE☝🏻☝🏻☝🏻✅
+
+// 👾TUTORIAL-GUIDE:
+
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 //
