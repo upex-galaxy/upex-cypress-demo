@@ -2,21 +2,6 @@ describe("ToolsQA | Elements | Links", () => {
     beforeEach("Precondición: Visitar la página", () => {
         cy.visit("https://demoqa.com/links")
         cy.viewport(1368, 766)
-//________________________________________________________________________
-// Comando predeterminado para que no ocurran errores de excepciones:
-Cypress.on('uncaught:exception', (err, runnable) => {
-    // returning false here prevents Cypress from
-    // failing the test
-    return false
-})
-// Comando predeterminado para que no aparezcan los Fetch en el log del Test Runner:
-const origLog = Cypress.log
-Cypress.log = function (opts, ...other) {
-    if (opts.displayName === 'xhr'|| opts.displayName === 'fetch' && opts.url.startsWith('https://')) {
-        return
-    }
-    return origLog(opts, ...other)
-}
     })
     it("US-GX-1068 | TC#1: Validar que el link 'Home#1' redirecciona a su pagina con el nombre respectivo.", () => {
         cy.get("#simpleLink")
@@ -79,3 +64,20 @@ Cypress.log = function (opts, ...other) {
             .should('contain.text','Link has responded with staus ','404',' and status text ','Not Found')
     })     
 })
+
+
+//________________________________________________________________________
+// Comando predeterminado para que no ocurran errores de excepciones:
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // returning false here prevents Cypress from
+    // failing the test
+    return false
+})
+// Comando predeterminado para que no aparezcan los Fetch en el log del Test Runner:
+const origLog = Cypress.log
+Cypress.log = function (opts, ...other) {
+    if (opts.displayName === 'xhr'|| opts.displayName === 'fetch' && opts.url.startsWith('https://')) {
+        return
+    }
+    return origLog(opts, ...other)
+}
