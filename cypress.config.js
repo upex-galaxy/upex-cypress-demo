@@ -33,6 +33,6 @@ module.exports = defineConfig({
 		// Glob pattern to determine what test files to load:
 		specPattern: ['**/*.feature', 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
 		// Url used as prefix for cy.visit() or cy.request() command's url:
-		baseUrl: 'https://demoqa.com/'
+		baseUrl: 'https://demo.testim.io/'
 	}
 })
