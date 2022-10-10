@@ -1,10 +1,6 @@
 // ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
+// This example commands.js shows you how to create various custom commands and overwrite existing commands.
+// For more comprehensive examples of custom commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
 import 'cypress-file-upload'
@@ -12,6 +8,10 @@ import 'cypress-wait-until'
 require('@4tw/cypress-drag-drop')
 require('cypress-downloadfile/lib/downloadFileCommand')
 require('cy-verify-downloads').addCustomCommand()
+//require
+//require
+
+// 👾🚩🚩🚩NO ESCRIBAS UN NUEVO COMANDO EN ESTA LINEA, DIRÍGETE HASTA LA ÚLTIMA LINEA DISPONIBLE👇🏻👇🏻👇🏻✅
 
 Cypress.Commands.add('getUrl', (url, contain) => {
 	cy.visit(url)
