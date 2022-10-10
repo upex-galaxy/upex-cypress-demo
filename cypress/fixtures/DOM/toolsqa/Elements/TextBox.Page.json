@@ -1,0 +1,73 @@
+{
+    "fullName": {
+        "input": "#userName",
+        "valid": "Elyer Maldonado",
+        "null": ""
+    },
+    "email": {
+        "input": "#userEmail",
+        "valid": "saitest@upex.com",
+        "null": "",
+        "noName": "@upex.com",
+        "noAt": "saitestupex.com",
+        "noDomain": "saitest@.com",
+        "noDot": "saitest@upexcom",
+        "noExt": "saitest@upex.",
+        "oneExt": "saitest@upex.c",
+        "twoExt": "saitest@upex.co"
+    },
+    "currentAdr": {
+        "input": "#currentAddress",
+        "valid": "Av. Testing 1234",
+        "null": ""
+    },
+    "permanentAdr": {
+        "input": "#permanentAddress",
+        "valid": "IT Street 99",
+        "null": ""
+    },
+    "SubmitBtn": "#submit",
+    "TextBoxUrl":"https://demoqa.com/text-box",
+    "Submit":{
+        "Fail" : ".field-error",
+        "Sucess":{
+            "name":"#name",
+            "email":"#email",
+            "currentAdr":"#currentAddress",
+            "permanentAdr":"#permanentAddress"
+        }
+    },
+    "data":{
+        "name":{
+            "null":null,
+            "int":1234,
+            "space":" ",
+            "special":"S@m Smith",
+            "caracter":"Hall Jenkins",
+            "float":"253.256"
+        },
+        "email":{
+            "valid":"samSmith586@gmail.com",
+            "minReq":"a@y.ar",
+            "invalid":{
+                "null":null,
+                "space":" ",
+                "noAt":"samSmith586.com",
+                "noDomain":"samSmith586@.com",
+                "noDot":"samSmith586@gmail.com",
+                "noExt":"samSmith586@g",
+                "noName":"@yahoo.com",
+                "oneExt": "saitest@upex.c",
+                "special":"%samSm&th586@gma&l.c°m"
+            }
+        },
+        "Adr":{
+            "null":null,
+            "int":"Av Center 1423",
+            "space":" ",
+            "special":"@veniue Center",
+            "caracter":"Av Center",
+            "float":"Av 1532.568"
+        }
+    }
+}

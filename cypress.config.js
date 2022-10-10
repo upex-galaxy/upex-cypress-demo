@@ -1,4 +1,6 @@
-const { defineConfig } = require('cypress');
+const {defineConfig} = require('cypress')
+const {downloadFile} = require('cypress-downloadfile/lib/addPlugin')
+const {isFileExist, findFiles} = require('cy-verify-downloads')
 
 module.exports = defineConfig({
 	// @Ely: En GALAXY L1, no usaremos el projectId todavía, se establecerá null:
@@ -16,7 +18,7 @@ module.exports = defineConfig({
 		mochaFile: 'reports/test-results.xml',
 		toConsole: true,
 		outputs: true,
-        testCaseSwitchClassnameAndName: true
+		testCaseSwitchClassnameAndName: true,
 	},
 	// Number of times to retry a failed test. If a number is set, tests will retry in both runMode and openMode:
 	retries: 0,
@@ -25,15 +27,17 @@ module.exports = defineConfig({
 	// E2E Testing runner
 	e2e: {
 		// Enables cross-origin and improved session support, including the cy.origin and cy.session commands:
-		experimentalSessionAndOrigin: true, // Para poder ver el Test Run de pruebas API, ésto debe estar en FALSE.
+		experimentalSessionAndOrigin: true,
 		// Use Cypress plugins:
 		setupNodeEvents(on, config) {
-			return require('./cypress/plugins/index.js')(on, config)			
-		},		
+			on('task', {downloadFile})
+			on('task', {isFileExist, findFiles})
+			return require('./cypress/plugins/index.js')(on, config)
+		},
 		// Glob pattern to determine what test files to load:
 		specPattern: ['**/*.feature', 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
-		// Url used as prefix for cy.visit() or cy.request() command's url 
+		// Url used as prefix for cy.visit() or cy.request() command's url
 		// (NO USAR BASEURL SI SE EJECUTA UN INDEX.HTML):
-		// baseUrl: 'https://'
-	}
+		baseUrl: 'https://demoqa.com/',
+	},
 })

@@ -1,0 +1,25 @@
+{
+    "option":"li",
+    "toggle":"[title='Toggle']",
+    "label": {
+        "checkbox": ".rct-checkbox",
+        "boxName": ".rct-title"
+    },
+    "outputMsg": ".text-success",
+    "expandAll": "[aria-label='Expand all']",
+    "collapseAll": "[aria-label='Collapse all']",
+
+    "checkboxIs": {
+        "unCheck":".rct-icon-uncheck",
+        "Check":".rct-icon-check",
+        "halfCheck":".rct-icon-half-check"
+    },
+    "urlCheckbox":"https://demoqa.com/checkbox",
+
+    "checkboxParent":{
+        "home":"[for='tree-node-home']",
+        "desktop":"[for='tree-node-desktop']",
+        "downloads":"[for='tree-node-downloads']",
+        "section":".rct-node-parent"
+    }
+}
