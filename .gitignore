@@ -1,6 +1,7 @@
 node_modules/
 cypress/videos
 cypress/screenshots
+mochawesome-report/
 reports/test-results.xml
 reports/cucumber-report.json
 reports/cucumber-messages.ndjson

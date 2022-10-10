@@ -87,7 +87,7 @@
 		"api-testing": "api",
 		"db-testing": "database",
 		"ui-testing": "app",
-		"features": "rules",
+		"BDD Stories": "rules",
 		"feature-example": "rules",
 		"us-example": "Storybook",
 		"suite-example": "test",
