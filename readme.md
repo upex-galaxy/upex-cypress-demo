@@ -12,7 +12,8 @@ Cypress es un Franework de Automatización de Next Generation construido para we
 1. Clona el Proyecto: `git clone <URLdelRepositorioGitHub>`
 2. Instala todas las dependencias: `npm i` (i de install) o puedes usar `npm i -f` (-f de force) por si estás teniendo conflictos al instalar.
 3. Corre el comando: `npx cypress open` o `npm test` (ya que en Package.json tenemos la variable "test" como el "cypress open") para abrir Cypress!
-4. Para correr pruebas en la terminal, corre: npx cypress run o npm run file (la variable "file" es "cypress run --reporter mochawesome --browser chrome --spec" lo cual es un atajo para que podamos correr las pruebas de un directorio que especifiquemos, usando el navegador de Chrome, y generando un excelente reporte html), esto nos ayudará generar los archivos de Reportes XML para importarlos a Jira!
+4. Para correr pruebas en la terminal, corre: 
+`npm run file */**/<filename>` (la variable "file" es "cypress run --reporter mochawesome --browser chrome --spec" lo cual es un atajo para que podamos correr las pruebas de un directorio que especifiquemos, usando el navegador de Chrome, y generando un excelente reporte html), esto nos ayudará a generar los archivos de Reportes XML para importarlos a Jira!
 
 # Las Guías de UPEX para saber cómo trabajar en un Workspace Real están Confluence: [CYPRESS AL GRANO](https://upexgalaxy1.atlassian.net/wiki/spaces/UG/pages/852822)
 
