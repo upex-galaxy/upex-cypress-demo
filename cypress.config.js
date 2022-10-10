@@ -25,14 +25,15 @@ module.exports = defineConfig({
 	// E2E Testing runner
 	e2e: {
 		// Enables cross-origin and improved session support, including the cy.origin and cy.session commands:
-		experimentalSessionAndOrigin: true,
+		experimentalSessionAndOrigin: true, // Para poder ver el Test Run de pruebas API, ésto debe estar en FALSE.
 		// Use Cypress plugins:
 		setupNodeEvents(on, config) {
 			return require('./cypress/plugins/index.js')(on, config)			
 		},		
 		// Glob pattern to determine what test files to load:
 		specPattern: ['**/*.feature', 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
-		// Url used as prefix for cy.visit() or cy.request() command's url:
-		baseUrl: 'https://demo.testim.io/'
+		// Url used as prefix for cy.visit() or cy.request() command's url 
+		// (NO USAR BASEURL SI SE EJECUTA UN INDEX.HTML):
+		// baseUrl: 'https://'
 	}
 })

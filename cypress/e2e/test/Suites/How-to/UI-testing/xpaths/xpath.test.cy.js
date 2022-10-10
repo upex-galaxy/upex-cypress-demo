@@ -1,4 +1,5 @@
 // BaseURL NEEDS TO BE OFF BEFORE RUN THIS TEST
+// PARA CORRER ESTA PRUEBA, EL "BaseURL" DEBE ESTAR OFF (comentado básicamente)
 describe('cypress-xpath', () => {
     it('adds xpath command', () => {
       cy.log("BaseURL NEEDS TO BE OFF BEFORE RUN THIS TEST")
@@ -8,7 +9,7 @@ describe('cypress-xpath', () => {
   context('elements', () => {
       beforeEach(() => {
         // this URL is not gonna work if BaseURL is not set to OFF first
-      cy.visit('cypress/e2e/test/Suites/How-to/index.html');
+      cy.visit('cypress/e2e/test/Suites/How-to/UI-testing/xpaths/index.html');
     });
 
     it('finds h1', () => {
@@ -135,7 +136,7 @@ describe('cypress-xpath', () => {
 
   context('logging', () => {
     beforeEach(() => {
-      cy.visit('cypress/e2e/test/Suites/How-to/index.html');
+      cy.visit('cypress/e2e/test/Suites/How-to/UI-testing/xpaths/index.html');
     });
 
     it('should log by default', () => {
