@@ -5,7 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "cypress open",
-		"file": "cypress run --browser chrome --spec"
+		"file": "cypress run --browser chrome --spec",
+		"mocha": "cypress run --reporter mochawesome --browser chrome --spec"
 	},
 	"keywords": [
 		"cypress",
