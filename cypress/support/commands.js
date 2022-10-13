@@ -13,6 +13,27 @@ require('@4tw/cypress-drag-drop')
 require('cypress-downloadfile/lib/downloadFileCommand')
 require('cy-verify-downloads').addCustomCommand()
 
+Cypress.Commands.add('doubleClick', () => {
+	cy.fixture('DOM/toolsqa/Elements/Buttons.Page').then((the) => {
+		cy.get(the.doubleClickBtn).dblclick() // Double click on button
+		cy.contains(the.doubleClickMessage, /^You have done a double click/)
+	})
+})
+
+Cypress.Commands.add('rightClick', () => {
+	cy.fixture('DOM/toolsqa/Elements/Buttons.Page').then((the) => {
+		cy.contains('Right Click Me').rightclick()
+		cy.contains(the.rightClickMessage, /^You have done a right click/)
+	})
+})
+
+Cypress.Commands.add('btnClick', () => {
+	cy.fixture('DOM/toolsqa/Elements/Buttons.Page').then((the) => {
+		cy.get(the.clickBtn).eq(2).click() // Double click on button
+		cy.contains(the.dynamicClickMessage, /^You have done a dynamic click/)
+	})
+})
+
 Cypress.Commands.add('getUrl', (url, contain) => {
 	cy.visit(url)
 	cy.url().should('contain', contain)
