@@ -1,7 +1,8 @@
 describe(" ToolsQA | Elements | Broken Links Images", () => {   beforeEach("Precondicion: Usuario debe estar situado en la pagina QA", () => {
   //  cy.BrokenLinksAccess()
-  cy.visit("https://demoqa.com/broken","broken")
+  cy.visit("https://demoqa.com/broken")
   cy.url().should("contain", "broken")
+
 
   })
         
@@ -10,6 +11,9 @@ describe(" ToolsQA | Elements | Broken Links Images", () => {   beforeEach("Prec
 
       cy.contains(the.image.TextValid).should("be.visible")
       cy.get(the.image.imageValid).eq(1).should("be.visible")
+   
+
+      
     })
   })
 
@@ -26,6 +30,7 @@ describe(" ToolsQA | Elements | Broken Links Images", () => {   beforeEach("Prec
    cy.contains(the.link.TextLinkValid).click()
     cy.visit(the.link.linkValid, () => {
       cy.url().should("contain", "demo")
+      cy.wait(50000);
     })
     })
   })
@@ -35,7 +40,9 @@ describe(" ToolsQA | Elements | Broken Links Images", () => {   beforeEach("Prec
   
   
     cy.contains(the.link.TextLinkInValid).click()
-    cy.origin(the.link.linkInvalid, () => {  
+    cy.origin(the.link.linkInvalid, () => { 
+      cy.wait(50000);
+      
       cy.url().should("contain", "500")
     })
   })
