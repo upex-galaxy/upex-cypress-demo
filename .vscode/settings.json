@@ -3,13 +3,13 @@
 	"cucumberautocomplete.strictGherkinValidation": false,
 	"cucumberautocomplete.customParameters": [
 		{
-			"parameter":"{ab}",
-			"value":"(a|b)"
+			"parameter": "{ab}",
+			"value": "(a|b)"
 		}
 	],
 	"cucumberautocomplete.skipDocStringsFormat": true,
 	"cucumberautocomplete.formatConfOverride": {
-		"But": "relative",
+		"But": "relative"
 	},
 	"cucumberautocomplete.onTypeFormat": true,
 	"editor.quickSuggestions": {
@@ -20,7 +20,7 @@
 	"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
 	"cucumberautocomplete.stepRegExSymbol": "'",
 	"window.zoomLevel": 1,
-	"workbench.colorTheme": "Shades of Purple",
+	"workbench.colorTheme": "SynthWave '84",
 	"cSpell.language": "en,es",
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -39,9 +39,9 @@
 	"[feature]": {
 		"editor.defaultFormatter": "alexkrechik.cucumberautocomplete"
 	},
-	"editor.formatOnType": true,
-	"editor.formatOnPaste": false,
-	"editor.formatOnSave": false,
+	"editor.formatOnType": false,
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
 	"editor.accessibilitySupport": "off",
 	"editor.bracketPairColorization.independentColorPoolPerBracketType": true,
 	"python.formatting.provider": "autopep8",
@@ -53,23 +53,12 @@
 	"prettier.useTabs": true,
 	"prettier.arrowParens": "avoid",
 	"workbench.settings.editor": "json",
-	"cSpell.userWords": [
-		"appium",
-		"appiumby",
-		"Automator",
-		"badeball",
-		"chromedriver",
-		"demoqa",
-		"Elyer",
-		"Uper"
-	],
+	"cSpell.userWords": ["appium", "appiumby", "Automator", "badeball", "chromedriver", "demoqa", "Elyer", "Uper"],
 	"git.enableSmartCommit": true,
 	"editor.tabCompletion": "on",
 	"editor.lineHeight": 20,
 	"editor.cursorBlinking": "expand",
-	"cSpell.enableFiletypes": [
-		"cucumber"
-	],
+	"cSpell.enableFiletypes": ["cucumber"],
 	"workbench.iconTheme": "material-icon-theme",
 	"material-icon-theme.files.associations": {
 		"*.tx.js": "Test-jsx",
@@ -87,7 +76,7 @@
 		"api-testing": "api",
 		"db-testing": "database",
 		"ui-testing": "app",
-		"features": "rules",
+		"BDD Stories": "rules",
 		"feature-example": "rules",
 		"us-example": "Storybook",
 		"suite-example": "test",
@@ -121,4 +110,5 @@
 		"ParseHAR": false,
 		"mockAutocomplete": false
 	},
+	"cSpell.autoFormatConfigFile": true
 }
