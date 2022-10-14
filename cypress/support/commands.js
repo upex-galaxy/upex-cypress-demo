@@ -223,6 +223,21 @@ Cypress.Commands.add("SignIn", (email, password) =>
         })
 })
 
+Cypress.Commands.add("SelectItemRandom", (topRange) => {
+    cy.fixture("DOM/toolsqa/Iterations/Selectable.Page").then((the) => {
+        // generate random number 
+        let rand = Math.random();
+        // multiply with difference 
+        rand = Math.floor(rand * topRange );
+        cy.get(the.item.unSelected).filter(':visible').eq(rand).click()
+        cy.getCheckoutSelected().should("exist")
+    })
+})
+Cypress.Commands.add("getCheckoutSelected", () => {
+    cy.fixture("DOM/toolsqa/Iterations/Selectable.Page").then((the) => {
+        cy.get(the.item.selected).filter(".list-group-item")
+    })
+})
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 //
