@@ -245,6 +245,23 @@ Cypress.Commands.add("clickCheckbox", function (checkbox){
     
 })
 
+Cypress.Commands.add("SelectItemRandom", (topRange) => {
+    cy.fixture("DOM/toolsqa/Iterations/Selectable.Page").then((the) => {
+        // generate random number 
+        let rand = Math.random();
+        // multiply with difference 
+        rand = Math.floor(rand * topRange );
+        cy.get(the.item.unSelected).filter(':visible').eq(rand).click()
+        cy.getItemSelected().should("exist")
+    })
+})
+Cypress.Commands.add("getItemSelected", () => {
+    cy.fixture("DOM/toolsqa/Iterations/Selectable.Page").then((the) => {
+        cy.get(the.item.selected).filter(".list-group-item")
+    })
+})
+
+
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 //
