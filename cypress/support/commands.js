@@ -230,10 +230,10 @@ Cypress.Commands.add("SelectItemRandom", (topRange) => {
         // multiply with difference 
         rand = Math.floor(rand * topRange );
         cy.get(the.item.unSelected).filter(':visible').eq(rand).click()
-        cy.getCheckoutSelected().should("exist")
+        cy.getItemSelected().should("exist")
     })
 })
-Cypress.Commands.add("getCheckoutSelected", () => {
+Cypress.Commands.add("getItemSelected", () => {
     cy.fixture("DOM/toolsqa/Iterations/Selectable.Page").then((the) => {
         cy.get(the.item.selected).filter(".list-group-item")
     })

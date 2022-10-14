@@ -10,9 +10,9 @@ describe("US GX-1421 | TS: ✅ToolsQA | Interactions | Selectable", () => {
         cy.fixture("DOM/toolsqa/Iterations/Selectable.Page").then((the) => 
             cy.SelectItemRandom(the.itemCountTab.list).then(() => {
                 cy.get(the.tab.grid).click().then(() =>
-                cy.getCheckoutSelected().should("not.be.visible"))
+                cy.getItemSelected().should("not.be.visible"))
                 cy.get(the.tab.list).click().then(()=>
-                cy.getCheckoutSelected().should("be.visible"))
+                cy.getItemSelected().should("be.visible"))
             })
         )
     )
@@ -21,18 +21,18 @@ describe("US GX-1421 | TS: ✅ToolsQA | Interactions | Selectable", () => {
             cy.get(the.tab.grid).click().then(()=>
                 cy.SelectItemRandom(the.itemCountTab.grid).then(() => {
                     cy.get(the.tab.list).click().then(() =>
-                    cy.getCheckoutSelected().should("not.be.visible"))
+                    cy.getItemSelected().should("not.be.visible"))
                     
                     cy.get(the.tab.grid).click().then(()=>
-                    cy.getCheckoutSelected().should("be.visible"))
+                    cy.getItemSelected().should("be.visible"))
                 }))
         )
     })
     it("US GX-1421 | TS GX-1422 | TC3: Validate unselect a list item ", () => {
         cy.fixture("DOM/toolsqa/Iterations/Selectable.Page").then((the) => {
             cy.SelectItemRandom(the.itemCountTab.list).then(() => {
-                cy.getCheckoutSelected().click().then(() =>
-                    cy.getCheckoutSelected().should("not.exist"))
+                cy.getItemSelected().click().then(() =>
+                    cy.getItemSelected().should("not.exist"))
             })
         })
     })
@@ -40,8 +40,8 @@ describe("US GX-1421 | TS: ✅ToolsQA | Interactions | Selectable", () => {
         cy.fixture("DOM/toolsqa/Iterations/Selectable.Page").then((the) => {
             cy.get(the.tab.grid).click()
             cy.SelectItemRandom(the.itemCountTab.grid).then(() => {
-                cy.getCheckoutSelected().click().then(() =>
-                    cy.getCheckoutSelected().should("not.exist"))
+                cy.getItemSelected().click().then(() =>
+                    cy.getItemSelected().should("not.exist"))
             })
         })
     })
