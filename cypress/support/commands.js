@@ -274,11 +274,6 @@ Cypress.Commands.add('FailSubmitTextBoxForm', (name, email, currentAdr, permanen
 })
 //Fin Commands para el componente Element|TextBox
 
-//Cypress.Commands.add('',
-// 👾🚩🚩🚩☝🏻☝🏻☝🏻COMIENZA A ESCRIBIR TU NUEVO COMMAND AQUÍ! A PARTIR DE ESTA LÍNEA DISPONIBLE☝🏻☝🏻☝🏻✅
-
-// 👾TUTORIAL-GUIDE:
-
 Cypress.Commands.add('SelectItemRandom', (topRange) => {
 	cy.fixture('DOM/toolsqa/Iterations/Selectable.Page').then((the) => {
 		// generate random number
