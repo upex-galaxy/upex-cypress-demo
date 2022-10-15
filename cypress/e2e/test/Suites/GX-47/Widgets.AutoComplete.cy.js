@@ -1,18 +1,10 @@
-/// <reference types="cypress" />
-
 import AutoCompletePage from "./pages/AutoCompletePage"
 
 describe("US GX-47 | ToolsQA | Widgets | Auto-Complete", () => {
 
-    let the;
-    before("Load fixture data", () => {
-        cy.fixture("AutoComplete.json").then((data) => {
-            the = data;
-        })
-    })
-
+    
     beforeEach("Precondicion: El usuario debe de estar en la pagina: https://demoqa.com/auto-complete", () => {
-        cy.visit(the.url)
+        cy.visit("https://demoqa.com/auto-complete")
         cy.url().should("contain","auto-complete")
     
     })
