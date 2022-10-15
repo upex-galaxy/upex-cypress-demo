@@ -1,10 +1,6 @@
 // ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
+// This example commands.js shows you how to create various custom commands and overwrite existing commands.
+// For more comprehensive examples of custom commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
 import 'cypress-file-upload'
@@ -12,6 +8,31 @@ import 'cypress-wait-until'
 require('@4tw/cypress-drag-drop')
 require('cypress-downloadfile/lib/downloadFileCommand')
 require('cy-verify-downloads').addCustomCommand()
+//require
+//require
+
+// 👾🚩🚩🚩NO ESCRIBAS UN NUEVO COMANDO EN ESTA LINEA, DIRÍGETE HASTA LA ÚLTIMA LINEA DISPONIBLE👇🏻👇🏻👇🏻✅
+
+Cypress.Commands.add('doubleClick', () => {
+	cy.fixture('DOM/toolsqa/Elements/Buttons.Page').then((the) => {
+		cy.get(the.doubleClickBtn).dblclick() // Double click on button
+		cy.contains(the.doubleClickMessage, /^You have done a double click/)
+	})
+})
+
+Cypress.Commands.add('rightClick', () => {
+	cy.fixture('DOM/toolsqa/Elements/Buttons.Page').then((the) => {
+		cy.contains('Right Click Me').rightclick()
+		cy.contains(the.rightClickMessage, /^You have done a right click/)
+	})
+})
+
+Cypress.Commands.add('btnClick', () => {
+	cy.fixture('DOM/toolsqa/Elements/Buttons.Page').then((the) => {
+		cy.get(the.clickBtn).eq(2).click() // Double click on button
+		cy.contains(the.dynamicClickMessage, /^You have done a dynamic click/)
+	})
+})
 
 Cypress.Commands.add('getUrl', (url, contain) => {
 	cy.visit(url)
@@ -241,6 +262,60 @@ Cypress.Commands.add('clickCheckbox', function (checkbox) {
 			})
 	})
 })
+
+//Inicio Commands para el componente Element|TextBox
+Cypress.Commands.add('SubmitTextBoxFormSuccessfull', (name, email, currentAdr, permanentAdr) => {
+	cy.fixture('DOM/toolsqa/Elements/TextBox.Page').then((the) => {
+		//Si los datos name , currenAdr y permanent son null no se escribiran en el campo
+		name && cy.get(the.fullName.input).type(name)
+		email && cy.get(the.email.input).type(email)
+		currentAdr && cy.get(the.currentAdr.input).type(currentAdr)
+		permanentAdr && cy.get(the.permanentAdr.input).type(permanentAdr)
+		cy.get(the.SubmitBtn).click()
+		//Si el nombre es nulo no deberia aparecer en la respuesta
+		name && cy.get(the.Submit.Sucess.name).should('be.visible')
+		//Si el currentAdr es nulo no deberia aparecer en la respuesta
+		currentAdr && cy.get(the.Submit.Sucess.currentAdr).should('be.visible')
+		//Si el permanentAdr es nulo no deberia aparecer en la respuesta
+		permanentAdr && cy.get(the.Submit.Sucess.permanentAdr).should('be.visible')
+		//Si el email es nulo no deberia aparecer en la respuesta
+		email && cy.get(the.Submit.Sucess.email)
+	})
+})
+Cypress.Commands.add('FailSubmitTextBoxForm', (name, email, currentAdr, permanentAdr) => {
+	cy.fixture('DOM/toolsqa/Elements/TextBox.Page').then((the) => {
+		//Si los datos name , currenAdr y permanent son null no se escribiran en el campo
+		name && cy.get(the.fullName.input).type(name)
+		email && cy.get(the.email.input).type(email)
+		currentAdr && cy.get(the.currentAdr.input).type(currentAdr)
+		permanentAdr && cy.get(the.permanentAdr.input).type(permanentAdr)
+		cy.get(the.SubmitBtn).click()
+		cy.get(the.Submit.Fail).should('be.visible')
+	})
+})
+//Fin Commands para el componente Element|TextBox
+
+Cypress.Commands.add('SelectItemRandom', (topRange) => {
+	cy.fixture('DOM/toolsqa/Iterations/Selectable.Page').then((the) => {
+		// generate random number
+		let rand = Math.random()
+		// multiply with difference
+		rand = Math.floor(rand * topRange)
+		cy.get(the.item.unSelected).filter(':visible').eq(rand).click()
+		cy.getItemSelected().should('exist')
+	})
+})
+Cypress.Commands.add('getItemSelected', () => {
+	cy.fixture('DOM/toolsqa/Iterations/Selectable.Page').then((the) => {
+		cy.get(the.item.selected).filter('.list-group-item')
+	})
+})
+//Fin Commands para el componente Element|TextBox
+
+//Cypress.Commands.add('',
+// 👾🚩🚩🚩☝🏻☝🏻☝🏻COMIENZA A ESCRIBIR TU NUEVO COMMAND AQUÍ! A PARTIR DE ESTA LÍNEA DISPONIBLE☝🏻☝🏻☝🏻✅
+
+// 👾TUTORIAL-GUIDE:
 
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
