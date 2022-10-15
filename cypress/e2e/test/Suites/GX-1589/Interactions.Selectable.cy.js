@@ -38,4 +38,5 @@ describe('US GX-1589 | TS: ✅ToolsQA | Interactions | Selectable', () => {
         }
         return origLog(opts, ...other)
     }
+
 });
