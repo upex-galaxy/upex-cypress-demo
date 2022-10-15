@@ -40,8 +40,8 @@
 		"editor.defaultFormatter": "alexkrechik.cucumberautocomplete"
 	},
 	"editor.formatOnType": false,
-	"editor.formatOnPaste": true,
-	"editor.formatOnSave": true,
+	"editor.formatOnPaste": false,
+	"editor.formatOnSave": false,
 	"editor.accessibilitySupport": "off",
 	"editor.bracketPairColorization.independentColorPoolPerBracketType": true,
 	"python.formatting.provider": "autopep8",

@@ -3,8 +3,8 @@ const {downloadFile} = require('cypress-downloadfile/lib/addPlugin')
 const {isFileExist, findFiles} = require('cy-verify-downloads')
 
 module.exports = defineConfig({
-	// @Ely: En GALAXY L1, no usaremos el projectId todavía, se establecerá null:
-	projectId: '',
+	// @Ely: AHORA TENEMOS NUESTRO PROPIO CYPRESS DASHBOARD PARA VER NUESTRAS EJECUCIONES EN LA WEB:
+	projectId: '2pw67q',
 	// 1280×720 is considered to be the most suitable screen resolution for the desktop website version:
 	viewportWidth: 1280,
 	viewportHeight: 720,
