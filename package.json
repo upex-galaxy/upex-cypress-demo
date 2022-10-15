@@ -5,8 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "cypress open",
-		"file": "cypress run --browser chrome --spec",
-		"mocha": "cypress run --reporter mochawesome --browser chrome --spec"
+		"file": "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --spec"
 	},
 	"keywords": [
 		"cypress",
@@ -26,6 +25,7 @@
 		"cypress-file-upload": "5.0.8",
 		"cypress-grep": "2.6.1",
 		"cypress-mochawesome-reporter": "3.2.2",
+		"cypress-multi-reporters": "1.6.1",
 		"cypress-plugin-api": "1.2.1",
 		"cypress-react-selector": "3.0.0",
 		"cypress-real-events": "1.7.1",
