@@ -32,8 +32,9 @@ module.exports = (on, config) => {
 			})
 }
 
-//For Cypress file Download
+//For Cypress file Downloads
 const { downloadFile } = require('cypress-downloadfile/lib/addPlugin')
+const { verifyDownloadTasks } = require('cy-verify-downloads');
 
 //For connecting to SQL Server
 //Removed
@@ -41,6 +42,7 @@ const { downloadFile } = require('cypress-downloadfile/lib/addPlugin')
 // Modules
 module.exports = (on, config) => {
 	on('task', { downloadFile }) //Cypress file Download
+	on('task', { verifyDownloadTasks })
 	on('file:preprocessor', selectTestsWithGrep(config)) //Adding Tags to Tests
 	on('task', {
 		queryDb: (query) => {
