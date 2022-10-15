@@ -1,0 +1,8 @@
+{
+    "doubleClickBtn": "#doubleClickBtn",
+    "rightClickBtn": "#rightClickBtn",
+    "clickBtn": ".btn-primary",
+    "doubleClickMessage": "#doubleClickMessage",
+    "rightClickMessage": "#rightClickMessage",
+    "dynamicClickMessage": "#dynamicClickMessage"
+}
