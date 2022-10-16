@@ -9,11 +9,10 @@ Aunque no es el único E2E en el mercado, y tampoco es el más usado como sí lo
 Cypress es un Framework de Automatización de Next Generation construido para web modernas. Esto es im simple proyecto el cual puedes usarlo para comenzar tu viaje por la Galaxia de la Automatización!
 
 # CÓMO EMPEZAR:
-1. Clona el Proyecto: `git clone <URLdelRepositorioGitHub>`
-2. Instala todas las dependencias: `npm i` (i de install) o puedes usar `npm i -f` (-f de force) por si estás teniendo conflictos al instalar.
-3. Corre el comando: `npx cypress open` o `npm test` (ya que en Package.json tenemos la variable "test" como el "cypress open") para abrir Cypress!
-4. Para correr pruebas en la terminal, corre: 
-`npm run file */**/<filename>` (la variable "file" es "cypress run --reporter mochawesome --browser chrome --spec" lo cual es un atajo para que podamos correr las pruebas de un directorio que especifiquemos, usando el navegador de Chrome, y generando un excelente reporte html), esto nos ayudará a generar los archivos de Reportes XML para importarlos a Jira!
+1. **Clona el Proyecto**: `git clone <URLdelRepositorioGitHub>`
+2. **Instala todas las dependencias**: `npm i` (i de install) o puedes usar `npm i -f` (-f de force) por si estás teniendo conflictos al instalar.
+3. **Corre el comando**: `npx cypress open` o `npm test` (ya que en Package.json tenemos la variable "test" como el "cypress open") para abrir Cypress!
+4. **Para correr pruebas en la terminal, ejecuta**: `npm run file */**/<filename>`, donde la variable "**file**" es "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --record --key {key} --spec", cuyo atajo es para que podamos correr las pruebas de un directorio que especifiquemos, usando el navegador de Chrome, generando 1 Reporte XML para importar a Jira y otro para generar un hermoso html, y adicionalmente actualizar el Cypress Dashboard del Proyecto.
 
 # Las Guías de UPEX para saber cómo trabajar en un Workspace Real están Confluence: [CYPRESS AL GRANO](https://upexgalaxy1.atlassian.net/wiki/spaces/UG/pages/852822)
 
