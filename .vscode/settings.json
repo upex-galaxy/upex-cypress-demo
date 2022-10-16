@@ -79,6 +79,8 @@
 		"commands.js": "webpack",
 		"*.json": "Cypress",
 		".cypress-cucumber-preprocessorrc.json": "cucumber",
+		"cucumber-html-report.js": "cucumber",
+		"cucumber-json-formatter.exe": "cucumber",
 		"cucumber-report.json": "cucumber",
 		"jsconfig.json": "Javascript-map",
 		"settings.json": "Vscode"
@@ -93,6 +95,8 @@
 		"suite-example": "test",
 		"suites": "test",
 		"cucumber-json": "Resolver",
+		"cucumber-report.html": "Resolver",
+		"Features": "Resolver",
 		"DOM": "class",
 		"DesignPatterns": "context",
 		"How-to": "content",
