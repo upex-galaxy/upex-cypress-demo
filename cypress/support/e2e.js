@@ -23,3 +23,4 @@ import 'cypress-wait-until';
 // require('./commands')
 require('cypress-plugin-api')
 require('cy-verify-downloads').addCustomCommand();
+require('@cypress/xpath');

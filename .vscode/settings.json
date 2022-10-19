@@ -20,7 +20,7 @@
 	"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
 	"cucumberautocomplete.stepRegExSymbol": "'",
 	"window.zoomLevel": 1,
-	"workbench.colorTheme": "Shades of Purple",
+	"workbench.colorTheme": "Andromeda",
 	"cSpell.language": "en,es",
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -39,7 +39,10 @@
 	"[feature]": {
 		"editor.defaultFormatter": "alexkrechik.cucumberautocomplete"
 	},
-	"editor.formatOnType": true,
+	"[cucumber]": {
+		"editor.defaultFormatter": "CucumberOpen.cucumber-official"
+	},
+	"editor.formatOnType": false,
 	"editor.formatOnPaste": false,
 	"editor.formatOnSave": false,
 	"editor.accessibilitySupport": "off",
@@ -48,7 +51,7 @@
 	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
 	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
 	"html.format.wrapLineLength": 150,
-	"prettier.singleQuote": true,
+	"prettier.singleQuote": false,
 	"prettier.semi": false,
 	"prettier.useTabs": true,
 	"prettier.arrowParens": "avoid",
@@ -71,6 +74,7 @@
 		"cucumber"
 	],
 	"workbench.iconTheme": "material-icon-theme",
+	"material-icon-theme.folders.color": "#7cb342",
 	"material-icon-theme.files.associations": {
 		"*.tx.js": "Test-jsx",
 		"*.cy.js": "Test-js",
@@ -125,4 +129,25 @@
 		"ParseHAR": false,
 		"mockAutocomplete": false
 	},
+	"cucumber.features": [
+
+		"src/test/**/*.feature",
+		"cypress/2e2/cucumber-test/**/*.feature",
+		"tests/**/*.feature",
+		"*specs*/**/.feature"
+	],
+	"cucumber.glue": [
+		"src/test/**/*.java",
+		"features/**/*.ts",
+		"features/**/*.tsx",
+		"features/**/*.php",
+		"features/**/*.py",
+		"tests/**/*.py",
+		"tests/**/*.rs",
+		"features/**/*.rs",
+		"features/**/*.rb",
+		"*specs*/**/.cs",
+		"cypress/2e2/cucumber-test/**/*.js"
+	]
+	
 }
