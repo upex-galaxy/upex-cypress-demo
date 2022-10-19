@@ -60,6 +60,7 @@
 	"editor.cursorBlinking": "expand",
 	"cSpell.enableFiletypes": ["cucumber"],
 	"workbench.iconTheme": "material-icon-theme",
+	"material-icon-theme.folders.color": "#7cb342",
 	"material-icon-theme.files.associations": {
 		"*.tx.js": "Test-jsx",
 		"*.cy.js": "Test-js",
