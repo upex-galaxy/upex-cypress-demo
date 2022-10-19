@@ -23,7 +23,7 @@ module.exports = defineConfig({
 	// Number of times to retry a failed test. If a number is set, tests will retry in both runMode and openMode:
 	retries: 0,
 	// Whether Cypress will record a video of the test run when running on headless:
-	video: false,
+	video: true,
 	// E2E Testing runner
 	e2e: {
 		// Enables cross-origin and improved session support, including the cy.origin and cy.session commands:

@@ -1,0 +1,22 @@
+{
+    "LoginButton": {
+        "On": "Log in",
+        "Off": "cy.get('.ec_account_right > :nth-child(6) > .ec_account_dashboard_link')"
+    },
+    "username": {
+        "input": "#ec_account_login_email",
+        "data": {
+            "valid": "Isengard@gmail.com",
+            "invalid": "Uruk@gmail.com"
+        }
+    },
+    "password": {
+        "input": "#ec_account_login_password",
+        "data": {
+            "valid": "Isengard123",
+            "invalid": "towTowers"
+        }
+    },
+    "SubmitButton": "#display-account-login-form-start > .ec_cart_button_row > .ec_account_button",
+    "isSingnedIn": "sign out"
+}
