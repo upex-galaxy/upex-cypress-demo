@@ -1,20 +1,5 @@
 describe('US GX-1624 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 
-    // RemoveFetch - Predeterminado para que no ocurran errores de excepciones proporcionado por Upex-Galaxy:
-    Cypress.on('uncaught:exception', (err, runnable) => {
-        // returning false here prevents Cypress from
-        // failing the test
-        return false
-    })
-    // Comando predeterminado para que no aparezcan los Fetch en el log del Test Runner:
-    const origLog = Cypress.log
-    Cypress.log = function (opts, ...other) {
-        if (opts.displayName === 'xhr' || opts.displayName === 'fetch' && opts.url.startsWith('https://')) {
-            return
-        }
-        return origLog(opts, ...other)
-    }
-
     let PracticeFormData;
     const filepath = "images/upexlogo"
 
@@ -467,3 +452,19 @@ describe('US GX-1624 | TS: ✅ToolsQA | Forms | Practice Form', () => {
         cy.get(PracticeFormData.submit).click();
     });
 });
+
+
+// RemoveFetch - Predeterminado para que no ocurran errores de excepciones proporcionado por Upex-Galaxy:
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // returning false here prevents Cypress from
+    // failing the test
+    return false
+})
+// Comando predeterminado para que no aparezcan los Fetch en el log del Test Runner:
+const origLog = Cypress.log
+Cypress.log = function (opts, ...other) {
+    if (opts.displayName === 'xhr' || opts.displayName === 'fetch' && opts.url.startsWith('https://')) {
+        return
+    }
+    return origLog(opts, ...other)
+}
