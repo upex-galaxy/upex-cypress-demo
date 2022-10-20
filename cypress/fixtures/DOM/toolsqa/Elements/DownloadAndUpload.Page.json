@@ -1,0 +1,9 @@
+{
+    "downloadButton": "#downloadButton",
+    "uploadFile": "#uploadFile",
+    "nameUploadfile": "cypress/downloads/sampleFile.jpeg",
+    "url" : "https://demoqa.com/upload-download",
+    "contain" : "upload-download",
+    "nameFile": "sampleFile.jpeg"
+
+}

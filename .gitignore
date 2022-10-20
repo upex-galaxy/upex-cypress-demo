@@ -1,7 +1,7 @@
 node_modules/
 cypress/videos
+cypress/downloads
 cypress/screenshots
-reports/test-results.xml
-reports/cucumber-report.json
-reports/cucumber-messages.ndjson
+mochawesome-report/
+reports/
 .vscode/settings.json

@@ -33,13 +33,14 @@ module.exports = (on, config) => {
 }
 
 //For Cypress file Download
-const {downloadFile} = require('cypress-downloadfile/lib/addPlugin')
+const { downloadFile } = require('cypress-downloadfile/lib/addPlugin')
 
 //For connecting to SQL Server
 //Removed
 
+// Modules
 module.exports = (on, config) => {
-	on('task', {downloadFile}) //Cypress file Download
+	on('task', { downloadFile }) //Cypress file Download
 	on('file:preprocessor', selectTestsWithGrep(config)) //Adding Tags to Tests
 	on('task', {
 		queryDb: (query) => {

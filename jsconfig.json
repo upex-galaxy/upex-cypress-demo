@@ -1,6 +1,13 @@
 {
 	"include": ["./node_modules/cypress", "cypress/**/*.js"],
 	"compilerOptions": {
-		"types": ["cypress", "cypress-file-upload", "cypress-real-events"]
+		"types": ["cypress", "cypress-file-upload", "cypress-real-events", "cy-verify-downloads"]
+	},
+	"reporterEnabled": "mocha-junit-reporter, mochawesome",
+	"mochaJunitReporterReporterOptions": {
+		"mochaFile": "reports/test-results.xml"
+	},
+	"mochawesomeReporterReporterOptions": {
+		"mochaFile": "cucumber-report.json"
 	}
 }
