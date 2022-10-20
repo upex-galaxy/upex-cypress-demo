@@ -1,4 +1,4 @@
-/// <reference types="cypress" />
+//NO RUN TEST (XPATH DEPRECATED)
 require('cypress-xpath')
 
 describe("Tools QA | Interactions | Selectable", () => {

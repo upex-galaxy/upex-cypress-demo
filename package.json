@@ -31,7 +31,6 @@
 		"cypress-real-events": "1.7.1",
 		"cypress-recurse": "1.20.0",
 		"cypress-wait-until": "1.7.2",
-		"cypress-xpath": "2.0.1",
 		"mocha": "10.0.0",
 		"mocha-junit-reporter": "2.0.2",
 		"mochawesome": "7.1.3",
