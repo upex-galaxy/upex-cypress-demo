@@ -1,0 +1,62 @@
+{
+    "practiceFormUrl": "https://demoqa.com/automation-practice-form",
+    "submit": "#submit",
+    "passed": "rgb(40, 167, 69)",
+    "failed": "rgb(220, 53, 69)",
+    "closeLargeModal":"#closeLargeModal",
+
+
+    "fullName": {
+        "firstName": "#firstName",
+        "lastName": "#lastName",
+        "fName": "Daniel",
+        "lName": "Díaz"
+    },
+    "email": {
+        "input": "#userEmail",
+        "valid": "usuario@upex.com",
+        "noName": "@upex.com",
+        "noAt": "usuarioupex.com",
+        "noDomain": "usuario@.com",
+        "noDot": "usuario@upexcom",
+        "twoExt": "usuario@upex.co"
+    },
+    "genderCheckBox":{
+        "male" : "Male",
+        "female" : "Female",
+        "other" : "Other"
+    },
+    "mobile":{
+        "input": "#userNumber",
+        "valid": "1234567890"
+    },
+    "dataofbirth":{
+        "input": "#dateOfBirthInput",
+        "month": ".react-datepicker__month-select",
+        "year" : ".react-datepicker__year-select",
+        "day": ".react-datepicker__day--008",
+        "valueMonth": "May",
+        "valueYear": "1986"
+    },
+    "subjects":{
+        "input": "#subjectsInput",
+        "subject": "Arts",
+        "select": "#react-select-2-option-0"
+    },
+    "hobbies": {
+        "hobbie1":"Sports",
+        "hobbie2":"Reading",
+        "hobbie3":"Music"
+    },
+   "Picture":{
+    "input": "#uploadPicture",
+    "namePicture": "upexlogo"
+    },
+    "Adress": {
+        "input": "#currentAddress",
+        "valid": "Av. Patagonia 1624",
+        "stateandcityInput": ".css-1hwfws3",
+        "state":"NCR{enter}",
+        "city": "Delhi{enter}"
+        }
+}

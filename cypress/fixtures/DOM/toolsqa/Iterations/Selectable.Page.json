@@ -1,0 +1,15 @@
+{
+    "tab":{
+        "list":"#demo-tab-list",
+        "grid":"#demo-tab-grid"
+    },
+    "item":{
+        "unSelected":".list-group-item",
+        "selected":".active"
+    },
+    "itemCountTab":{
+        "list":"4",
+        "grid":"9"
+    },
+    "SelectedUrl":"https://demoqa.com/selectable"
+}
