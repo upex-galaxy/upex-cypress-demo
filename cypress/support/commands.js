@@ -37,12 +37,12 @@ Cypress.Commands.add('btnClick', () => {
 Cypress.Commands.add('getUrl', (url, title, contain, protocol, hostname) => 
 {
 	cy.visit(url);
-	cy.title().should('eq', title);
-	cy.url().should('contain', contain);
-	cy.location('protocol').should('contains', protocol);
-	cy.location('hostname').should('eq', hostname);
+	contain && cy.url().should('contain', contain);
+	title && cy.title().should('eq', title);
+	protocol && cy.location('protocol').should('contains', protocol);
+	hostname && cy.location('hostname').should('eq', hostname);
 	cy.clearCookies();
-	cy.clearLocalStorage();
+	cy.clearLocalStorage()
 });
 
 Cypress.Commands.add('buttonClickDownload', (file) => {
