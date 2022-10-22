@@ -1,4 +1,4 @@
-[![CYPEX](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/f9y7eu/cypex&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/f9y7eu/runs)
+[![CYPEX L1 DEMO](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/2pw67q&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/2pw67q/runs)
 
 # Testing Automation - Cypress 10.9.0 + Cucumber
 
@@ -10,10 +10,12 @@ Cypress es un Framework de Automatización de Next Generation construido para we
 
 # CÓMO EMPEZAR:
 
-1. Clona el Proyecto: `git clone <URLdelRepositorioGitHub>`
-2. Instala todas las dependencias: `npm i` (i de install) o puedes usar `npm i -f` (-f de force) por si estás teniendo conflictos al instalar.
-3. Corre el comando: `npx cypress open` o `npm test` (ya que en Package.json tenemos la variable "test" como el "cypress open") para abrir Cypress!
-4. Para correr pruebas en la terminal, corre: `npm run file */**/<filename>` (la variable "file" es "cypress run --reporter mochawesome --browser chrome --spec" lo cual es un atajo para que podamos correr las pruebas de un directorio que especifiquemos, usando el navegador de Chrome, y generando un excelente reporte html), esto nos ayudará a generar los archivos de Reportes XML para importarlos a Jira!
+1. **Clona el Proyecto**: `git clone <URLdelRepositorioGitHub>`
+2. **Instala todas las dependencias**: `npm i` (i de install) o puedes usar `npm i -f` (-f de force) por si estás teniendo conflictos al instalar.
+3. **Corre el comando**: `npx cypress open` o `npm test` (ya que en Package.json tenemos la variable "test" como el "cypress open") para abrir Cypress!
+4. **Para correr pruebas en la terminal, ejecuta**: `npm run file */**/<filename>`, donde la variable "file" es "*cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --record --key {key} --spec*", cuyo atajo es para que podamos correr las pruebas de un directorio que especifiquemos, usando el navegador de Chrome, generando 1 Reporte XML para importar a Jira y otro para generar un hermoso html, y adicionalmente actualizar el Cypress Dashboard del Proyecto.
+5. AHORA CON **CYPRESS DASHBOARD**, puedes ver todas las ejecuciones y resultados de prueba del proyecto!
+Visita: [CYPRESS DASHBOARD](https://dashboard.cypress.io/projects/2pw67q/analytics/runs-over-time)
 
 # Las Guías de UPEX para saber cómo trabajar en un Workspace Real están Confluence: [CYPRESS AL GRANO](https://upexgalaxy1.atlassian.net/wiki/spaces/UG/pages/852822)
 

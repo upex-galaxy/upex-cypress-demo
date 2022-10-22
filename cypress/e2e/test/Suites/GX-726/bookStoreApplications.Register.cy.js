@@ -1,4 +1,3 @@
-/// <reference types="cypress" />
 import registerPage, { capFirst } from "./pages/registerPage"
 import loginPage from "./pages/loginPage"
 

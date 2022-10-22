@@ -28,7 +28,7 @@
 		"editor.defaultFormatter": "vscode.html-language-features"
 	},
 	"[javascript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "vscode.typescript-language-features"
 	},
 	"[Typescript]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -40,8 +40,9 @@
 		"editor.defaultFormatter": "alexkrechik.cucumberautocomplete"
 	},
 	"editor.formatOnType": false,
-	"editor.formatOnPaste": true,
-	"editor.formatOnSave": true,
+	"editor.formatOnPaste": false,
+	"editor.formatOnSave": false,
+	"editor.wordWrap": "on",
 	"editor.accessibilitySupport": "off",
 	"editor.bracketPairColorization.independentColorPoolPerBracketType": true,
 	"python.formatting.provider": "autopep8",
@@ -53,13 +54,13 @@
 	"prettier.useTabs": true,
 	"prettier.arrowParens": "avoid",
 	"workbench.settings.editor": "json",
-	"cSpell.userWords": ["appium", "appiumby", "Automator", "badeball", "chromedriver", "demoqa", "Elyer", "Uper"],
 	"git.enableSmartCommit": true,
 	"editor.tabCompletion": "on",
 	"editor.lineHeight": 20,
 	"editor.cursorBlinking": "expand",
 	"cSpell.enableFiletypes": ["cucumber"],
 	"workbench.iconTheme": "material-icon-theme",
+	"material-icon-theme.folders.color": "#7cb342",
 	"material-icon-theme.files.associations": {
 		"*.tx.js": "Test-jsx",
 		"*.cy.js": "Test-js",
