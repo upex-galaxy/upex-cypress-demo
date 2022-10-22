@@ -1,0 +1,69 @@
+{
+	"firstName": {
+		"input": "input#firstName",
+		"valid": "John",
+		"containNumbers": "1234"
+	},
+	"lastName": {
+		"input": "#lastName",
+		"valid": "Doo",
+		"containNumbers": "1234"
+	},
+	"email": {
+		"input": "input[placeholder='name@example.com']",
+		"valid": "john@gmail.com",
+		"noExistDomain": "john@.com",
+		"noExistAt": "johngmail.com",
+		"noName": "@gmail.com",
+		"noExistPoint": "john@gmailcom",
+		"noExistExtension": "john@gmail."
+	},
+	"gender": {
+		"input": "label[for='gender-radio-1']",
+		"valid": "Male"
+	},
+	"mobile": {
+		"input": "input[placeholder='Mobile Number']",
+		"valid": "1234567890",
+		"invalidNineDigits": "123456789",
+		"invalidElevenDigits": "12345678901",
+		"invalidLetters": "abcd",
+		"invalidSpecialCharacters": "$%.,"
+	},
+	"dateOfBirth": {
+		"input": "form > div > div > div > div > input",
+		"month": "select.react-datepicker__month-select",
+		"year": "select.react-datepicker__year-select",
+		"day": "//div[contains(text(),'14')]",
+		"valid": "14 May,2000"
+	},
+	"subjects": {
+		"input": "input#subjectsInput",
+		"valid1": "Computer Science{enter}",
+		"valid2": "Computer Science"
+	},
+	"hobbies": {
+		"input": "input[type='checkbox']",
+		"valid": "Sports, Reading, Music"
+	},
+	"picture": {
+		"input": "//input[@id='uploadPicture']",
+		"valid": "upexlogo"
+	},
+	"currentAddress": {
+		"input": "//textarea[@id='currentAddress']",
+		"message": "Saint Andrews 777"
+	},
+	"state": {
+		"input": ".css-1hwfws3",
+		"select": "Rajasthan{enter}",
+		"valid": "Rajasthan"
+	},
+	"city": {
+		"input": ".css-1hwfws3",
+		"select": "Jaipur{enter}",
+		"valid": "Jaipur"
+	},
+	"submit": "button[type='submit']",
+	"output": "Thanks for submitting the form"
+}

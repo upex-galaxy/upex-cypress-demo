@@ -13,12 +13,16 @@ require('@4tw/cypress-drag-drop')
 require('cypress-downloadfile/lib/downloadFileCommand')
 require('cy-verify-downloads').addCustomCommand()
 
-Cypress.Commands.add('getUrl', (url, contain) => {
-	cy.visit(url)
-	cy.url().should('contain', contain)
-	cy.clearCookies()
-	cy.clearLocalStorage()
-})
+Cypress.Commands.add('getUrl', (url, title, contain, protocol, hostname) => 
+{
+	cy.visit(url);
+	cy.title().should('eq', title);
+	cy.url().should('contain', contain);
+	cy.location('protocol').should('contains', protocol);
+	cy.location('hostname').should('eq', hostname);
+	cy.clearCookies();
+	cy.clearLocalStorage();
+});
 
 Cypress.Commands.add('buttonClickDownload', (file) => {
 	cy.fixture('DOM/toolsqa/Elements/UploadAndDownload.Page').then((the) => {
