@@ -34,7 +34,7 @@ Cypress.Commands.add('btnClick', () => {
 	})
 })
 
-Cypress.Commands.add('getUrl', (url, title, contain, protocol, hostname) => 
+Cypress.Commands.add('getUrl', (url, contain, title, protocol, hostname) => 
 {
 	cy.visit(url);
 	contain && cy.url().should('contain', contain);

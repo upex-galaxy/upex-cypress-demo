@@ -20,7 +20,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 
 	beforeEach('Precondición: El usuario debe estar situado en la página web https://demoqa.com/automation-practice-form', () => 
 	{
-		cy.getUrl(url, title, contain, protocol, hostname);
+		cy.getUrl(url, contain, title, protocol, hostname);
 		cy.viewport(600, 800);		
 	});
 
