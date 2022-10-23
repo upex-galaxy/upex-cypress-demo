@@ -7,7 +7,8 @@
         "input": "#ec_account_login_email",
         "data": {
             "valid": "Isengard@gmail.com",
-            "invalid": "Uruk@gmail.com"
+            "invalid": "Uruk@gmail.com",
+            "incorrect": "Isengard.gmail.Sauron"
         }
     },
     "password": {
@@ -18,5 +19,16 @@
         }
     },
     "SubmitButton": "#display-account-login-form-start > .ec_cart_button_row > .ec_account_button",
-    "isSingnedIn": "sign out"
+    "isSingnedIn": "sign out",
+    
+    "register": {
+        "firstName": "#ec_account_register_first_name",
+        "lastName": "#ec_account_register_last_name",
+        "email": "#ec_account_register_email",
+        "reEmail": "#ec_account_register_retype_email",
+        "button": ".ec_cart_left > form > .ec_cart_button_row > .ec_account_button",
+        "regPass": "#ec_account_register_password",
+        "regRePass": "#ec_account_register_password_retype"
+        },
+    "assert": "be.visible"    
 }
