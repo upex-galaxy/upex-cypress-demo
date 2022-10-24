@@ -1,4 +1,4 @@
-describe('US GX-1624 | TS: ✅ToolsQA | Forms | Practice Form', () => {
+describe('US GX-1624 | TS: ✅ToolsQA | Forms | Practice Form', { keystrokeDelay: 0 }, () => {
 
     // RemoveFetch - Predeterminado para que no ocurran errores de excepciones proporcionado por Upex-Galaxy:
     Cypress.on('uncaught:exception', (err, runnable) => {
@@ -23,7 +23,7 @@ describe('US GX-1624 | TS: ✅ToolsQA | Forms | Practice Form', () => {
         cy.fixture('DOM/toolsqa/Elements/practiceFormPage.json').then(PFdata => { PracticeFormData = PFdata });
     })
 
-    it('GX-1624 | TC1: Validar la verificación de error en los campos “First Name” y “Last Name” si no contiene datos.', () => {
+    it.only('GX-1624 | TC1: Validar la verificación de error en los campos “First Name” y “Last Name” si no contiene datos.', () => {
         cy.viewport(1920, 1080);
         cy.visit(`${PracticeFormData.practiceFormUrl}`);
         cy.get(PracticeFormData.email.input).type(PracticeFormData.email.valid);
