@@ -1,4 +1,4 @@
-describe('US GX-1624 | TS: ✅ToolsQA | Forms | Practice Form', () => {
+describe('US GX-1624 | TS: ✅ToolsQA | Forms | Practice Form', { keystrokeDelay: 0 }, () => {
 
     let PracticeFormData;
     const filepath = "images/upexlogo"
