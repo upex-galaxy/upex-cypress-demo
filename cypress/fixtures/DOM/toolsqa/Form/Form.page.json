@@ -34,7 +34,6 @@
 		"input": "form > div > div > div > div > input",
 		"month": "select.react-datepicker__month-select",
 		"year": "select.react-datepicker__year-select",
-		"day": "//div[contains(text(),'14')]",
 		"valid": "14 May,2000"
 	},
 	"subjects": {
@@ -47,11 +46,11 @@
 		"valid": "Sports, Reading, Music"
 	},
 	"picture": {
-		"input": "//input[@id='uploadPicture']",
+		"input": "#uploadPicture",
 		"valid": "upexlogo"
 	},
 	"currentAddress": {
-		"input": "//textarea[@id='currentAddress']",
+		"input": "#currentAddress",
 		"message": "Saint Andrews 777"
 	},
 	"state": {

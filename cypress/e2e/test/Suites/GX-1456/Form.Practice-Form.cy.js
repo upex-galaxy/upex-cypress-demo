@@ -8,6 +8,8 @@ describe('ToolsQA | Forms | Practice Form', () =>
 	const id       = '1456';
 	const filepath = 'images/upexlogo';
 	const path     = 'DOM/toolsqa/Form/Form.page';
+	const month    = 'May';
+	const day      = '14';
 	let the;
 
 	before('Inicializar la data', () =>
@@ -24,7 +26,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 		cy.viewport(600, 800);		
 	});
 
-	xit(`US-GX-${id} | TC1: Validar poder registrarse correctamente cuando todos los campos son válidos`, () => 
+	it(`US-GX-${id} | TC1: Validar poder registrarse correctamente cuando todos los campos son válidos`, () => 
 	{
 		cy.get(the.firstName.input)
 			.clear()
@@ -62,8 +64,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.select('2000')
 			.should('exist', '2000');
 			
-		cy.xpath(the.dateOfBirth.day)
-			.contains('14')
+		cy.get(`[aria-label*='${month} ${day}th']`)	
 			.click();
 			
 		cy.get(the.subjects.input)
@@ -85,11 +86,11 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.click({force: true})
 			.should('exist');
 			
-		cy.xpath(the.picture.input)
+		cy.get(the.picture.input)
 			.attachFile(filepath)
 			.should('exist');
 			
-		cy.xpath(the.currentAddress.input)
+		cy.get(the.currentAddress.input)
 			.clear()
 			.type(the.currentAddress.message)
 			.should('exist');
@@ -112,7 +113,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.should('contain', 'Thanks for submitting the form');
 	});
 
-	xit(`US-GX-${id} | TC2: Validar poder registrarse correctamente cuando los campos "First Name", "Last Name", "Gender", "Mobile" y "Date of Birth" son válidos`, () => 
+	it(`US-GX-${id} | TC2: Validar poder registrarse correctamente cuando los campos "First Name", "Last Name", "Gender", "Mobile" y "Date of Birth" son válidos`, () => 
 	{
 		cy.get(the.firstName.input)
 			.clear()
@@ -145,8 +146,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.select('2000')
 			.should('exist', '2000');
 			
-		cy.xpath(the.dateOfBirth.day)
-			.contains('14')
+		cy.get(`[aria-label*='${month} ${day}th']`)
 			.click();
 			
 		cy.get(the.submit)
@@ -157,7 +157,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.should('contain', 'Thanks for submitting the form');
 	});
 
-	xit(`US-GX-${id} | TC3: Validar NO poder registrase correctamente cuando todos los campos son vacíos`, () => 
+	it(`US-GX-${id} | TC3: Validar NO poder registrase correctamente cuando todos los campos son vacíos`, () => 
 	{
 		cy.get(the.submit)
 			.click({force: true})
@@ -191,7 +191,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 		cy.get(the.hobbies.input)
 			.should('be.empty');
 		
-		cy.xpath(the.currentAddress.input)
+		cy.get(the.currentAddress.input)
 			.should('be.empty');	
 
 		cy.get(the.state.input)
@@ -203,7 +203,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.should('contain', '');
 	});
 
-	xit(`US-GX-${id} | TC4: Validar NO poder registrase correctamente cuando el campo "Email" contiene un dominio incorrecto`, () => 
+	it(`US-GX-${id} | TC4: Validar NO poder registrase correctamente cuando el campo "Email" contiene un dominio incorrecto`, () => 
 	{
 		cy.get(the.firstName.input)
 			.clear()
@@ -241,8 +241,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.select('2000')
 			.should('exist', '2000');
 			
-		cy.xpath(the.dateOfBirth.day)
-			.contains('14')
+		cy.get(`[aria-label*='${month} ${day}th']`)
 			.click();
 			
 		cy.get(the.subjects.input)
@@ -264,11 +263,11 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.click({force: true})
 			.should('exist');
 			
-		cy.xpath(the.picture.input)
+		cy.get(the.picture.input)
 			.attachFile(filepath)
 			.should('exist');
 			
-		cy.xpath(the.currentAddress.input)
+		cy.get(the.currentAddress.input)
 			.clear()
 			.type(the.currentAddress.message)
 			.should('exist');
@@ -292,7 +291,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.should('have.css', 'border-color', 'rgb(220, 53, 69)');
 	});
 
-	xit(`US-GX-${id} | TC5: Validar NO poder registrase correctamente cuando el campo "Email" NO contiene el símbolo arroba`, () => 
+	it(`US-GX-${id} | TC5: Validar NO poder registrase correctamente cuando el campo "Email" NO contiene el símbolo arroba`, () => 
 	{
 		cy.get(the.firstName.input)
 			.clear()
@@ -330,8 +329,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.select('2000')
 			.should('exist', '2000');
 		
-		cy.xpath(the.dateOfBirth.day)
-			.contains('14')
+		cy.get(`[aria-label*='${month} ${day}th']`)
 			.click();
 			
 		cy.get(the.subjects.input)
@@ -353,11 +351,11 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.click({force: true})
 			.should('exist');
 			
-		cy.xpath(the.picture.input)
+		cy.get(the.picture.input)
 			.attachFile(filepath)
 			.should('exist');
 			
-		cy.xpath(the.currentAddress.input)
+		cy.get(the.currentAddress.input)
 			.clear()
 			.type(the.currentAddress.message)
 			.should('exist');
@@ -381,7 +379,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.should('have.css', 'border-color', 'rgb(220, 53, 69)');
 	});
 
-	xit(`US-GX-${id} | TC6: Validar NO poder registrase correctamente cuando el campo "Email" NO contiene al menos 1 carácter alfanumérico antes del arroba`, () => 
+	it(`US-GX-${id} | TC6: Validar NO poder registrase correctamente cuando el campo "Email" NO contiene al menos 1 carácter alfanumérico antes del arroba`, () => 
 	{
 		cy.get(the.firstName.input)
 			.clear()
@@ -419,8 +417,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.select('2000')
 			.should('exist', '2000');
 			
-		cy.xpath(the.dateOfBirth.day)
-			.contains('14')
+		cy.get(`[aria-label*='${month} ${day}th']`)
 			.click();
 			
 		cy.get(the.subjects.input)
@@ -442,11 +439,11 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.click({force: true})
 			.should('exist');
 			
-		cy.xpath(the.picture.input)
+		cy.get(the.picture.input)
 			.attachFile(filepath)
 			.should('exist');
 			
-		cy.xpath(the.currentAddress.input)
+		cy.get(the.currentAddress.input)
 			.clear()
 			.type(the.currentAddress.message)
 			.should('exist');
@@ -470,7 +467,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.should('have.css', 'border-color', 'rgb(220, 53, 69)');
 	});
 
-	xit(`US-GX-${id} | TC7: Validar NO poder registrase correctamente cuando el campo "Email" NO contiene una extensión correcta`, () => 
+	it(`US-GX-${id} | TC7: Validar NO poder registrase correctamente cuando el campo "Email" NO contiene una extensión correcta`, () => 
 	{
 		cy.get(the.firstName.input)
 			.clear()
@@ -508,8 +505,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.select('2000')
 			.should('exist', '2000');
 			
-		cy.xpath(the.dateOfBirth.day)
-			.contains('14')
+		cy.get(`[aria-label*='${month} ${day}th']`)
 			.click();
 			
 		cy.get(the.subjects.input)
@@ -531,11 +527,11 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.click({force: true})
 			.should('exist');
 			
-		cy.xpath(the.picture.input)
+		cy.get(the.picture.input)
 			.attachFile(filepath)
 			.should('exist');
 			
-		cy.xpath(the.currentAddress.input)
+		cy.get(the.currentAddress.input)
 			.clear()
 			.type(the.currentAddress.message)
 			.should('exist');
@@ -559,7 +555,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.should('have.css', 'border-color', 'rgb(220, 53, 69)');
 	});
 
-	xit(`US-GX-${id} | TC8: Validar mensaje de Pop-Up contenga la data correspondiente después de enviar el form con todos los campos válidos`, () => 
+	it(`US-GX-${id} | TC8: Validar mensaje de Pop-Up contenga la data correspondiente después de enviar el form con todos los campos válidos`, () => 
 	{
 		cy.get(the.firstName.input)
 			.clear()
@@ -597,8 +593,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.select('2000')
 			.should('exist', '2000');
 			
-		cy.xpath(the.dateOfBirth.day)
-			.contains('14')
+		cy.get(`[aria-label*='${month} ${day}th']`)
 			.click();
 			
 		cy.get(the.subjects.input)
@@ -620,11 +615,11 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.click({force: true})
 			.should('exist');
 			
-		cy.xpath(the.picture.input)
+		cy.get(the.picture.input)
 			.attachFile(filepath)
 			.should('exist');
 			
-		cy.xpath(the.currentAddress.input)
+		cy.get(the.currentAddress.input)
 			.clear()
 			.type(the.currentAddress.message)
 			.should('exist');
@@ -688,7 +683,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.should('contain.text', the.state.valid + ' ' + the.city.valid);
 	});
 
-	xit(`US-GX-${id} | TC9: Validar NO poder registrase correctamente cuando el campo "Mobile" es igual a 9 dígitos`, () => 
+	it(`US-GX-${id} | TC9: Validar NO poder registrase correctamente cuando el campo "Mobile" es igual a 9 dígitos`, () => 
 	{
 		cy.get(the.firstName.input)
 			.clear()
@@ -726,8 +721,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.select('2000')
 			.should('exist', '2000');
 			
-		cy.xpath(the.dateOfBirth.day)
-			.contains('14')
+		cy.get(`[aria-label*='${month} ${day}th']`)
 			.click();
 			
 		cy.get(the.subjects.input)
@@ -749,11 +743,11 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.click({force: true})
 			.should('exist');
 			
-		cy.xpath(the.picture.input)
+		cy.get(the.picture.input)
 			.attachFile(filepath)
 			.should('exist');
 			
-		cy.xpath(the.currentAddress.input)
+		cy.get(the.currentAddress.input)
 			.clear()
 			.type(the.currentAddress.message)
 			.should('exist');
@@ -777,7 +771,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.should('have.css', 'border-color', 'rgb(220, 53, 69)');
 	});
 
-	xit(`US-GX-${id} | TC10: Validar NO poder registrase correctamente cuando el campo "Mobile" es igual a 11 dígitos`, () => 
+	it(`US-GX-${id} | TC10: Validar NO poder registrase correctamente cuando el campo "Mobile" es igual a 11 dígitos`, () => 
 	{
 		cy.get(the.firstName.input)
 			.clear()
@@ -815,8 +809,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.select('2000')
 			.should('exist', '2000');
 			
-		cy.xpath(the.dateOfBirth.day)
-			.contains('14')
+		cy.get(`[aria-label*='${month} ${day}th']`)
 			.click();
 			
 		cy.get(the.subjects.input)
@@ -838,11 +831,11 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.click({force: true})
 			.should('exist');
 			
-		cy.xpath(the.picture.input)
+		cy.get(the.picture.input)
 			.attachFile(filepath)
 			.should('exist');
 			
-		cy.xpath(the.currentAddress.input)
+		cy.get(the.currentAddress.input)
 			.clear()
 			.type(the.currentAddress.message)
 			.should('exist');
@@ -866,7 +859,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.should('have.css', 'border-color', 'rgb(220, 53, 69)');
 	});
 
-	xit(`US-GX-${id} | TC11: Validar NO poder registrase correctamente cuando el campo "Mobile" contiene sólo letras`, () => 
+	it(`US-GX-${id} | TC11: Validar NO poder registrase correctamente cuando el campo "Mobile" contiene sólo letras`, () => 
 	{
 		cy.get(the.firstName.input)
 			.clear()
@@ -904,8 +897,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.select('2000')
 			.should('exist', '2000');
 			
-		cy.xpath(the.dateOfBirth.day)
-			.contains('14')
+		cy.get(`[aria-label*='${month} ${day}th']`)
 			.click();
 			
 		cy.get(the.subjects.input)
@@ -927,11 +919,11 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.click({force: true})
 			.should('exist');
 			
-		cy.xpath(the.picture.input)
+		cy.get(the.picture.input)
 			.attachFile(filepath)
 			.should('exist');
 			
-		cy.xpath(the.currentAddress.input)
+		cy.get(the.currentAddress.input)
 			.clear()
 			.type(the.currentAddress.message)
 			.should('exist');
@@ -955,7 +947,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.should('have.css', 'border-color', 'rgb(220, 53, 69)');
 	});
 
-	xit(`US-GX-${id} | TC12: Validar NO poder registrase correctamente cuando el campo "Mobile" contiene carácteres especiales`, () => 
+	it(`US-GX-${id} | TC12: Validar NO poder registrase correctamente cuando el campo "Mobile" contiene carácteres especiales`, () => 
 	{
 		cy.get(the.firstName.input)
 			.clear()
@@ -993,8 +985,7 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.select('2000')
 			.should('exist', '2000');
 		
-		cy.xpath(the.dateOfBirth.day)
-			.contains('14')
+		cy.get(`[aria-label*='${month} ${day}th']`)
 			.click();
 		
 		cy.get(the.subjects.input)
@@ -1016,11 +1007,11 @@ describe('ToolsQA | Forms | Practice Form', () =>
 			.click({force: true})
 			.should('exist');
 		
-		cy.xpath(the.picture.input)
+		cy.get(the.picture.input)
 			.attachFile(filepath)
 			.should('exist');
 		
-		cy.xpath(the.currentAddress.input)
+		cy.get(the.currentAddress.input)
 			.clear()
 			.type(the.currentAddress.message)
 			.should('exist');
