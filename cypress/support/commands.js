@@ -408,11 +408,12 @@ Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, month, day
 		cy.get(the.dateOfBirth.input).click();			
 		cy.get(the.dateOfBirth.month).select('May');
 
-		const max = 2100;
-		const min = 1900;
-		const dateRandom = randomDate(max, min);
-				
-		cy.get(the.dateOfBirth.year).select(parseInt(dateRandom));
+		const maxY = 199;
+		const year = Math.floor((Math.random() * maxY))
+		cy.get(the.dateOfBirth.year).select(year);
+		const maxM = 12;
+		const month = Math.floor((Math.random() * maxM))
+		cy.get(the.dateOfBirth.month).select(month);
 
 		month && day && cy.get(`[aria-label*='${month} ${day}th']`).click();			
 		subjects && cy.get(the.subjects.input).type(subjects);		
@@ -425,10 +426,6 @@ Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, month, day
 		cy.contains(the.output);
 	});
 });
-
-function randomDate(start, end) {		
-	return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-};
 
 //FIN Commands para el componente Interactions|Selectable
 
