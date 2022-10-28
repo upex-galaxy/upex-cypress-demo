@@ -34,7 +34,9 @@
 		"input": "form > div > div > div > div > input",
 		"month": "select.react-datepicker__month-select",
 		"year": "select.react-datepicker__year-select",
-		"valid": "14 May,2000"
+		"valid": "14 May,2000",
+		"validMonth": "May",
+		"validDay": "14"
 	},
 	"subjects": {
 		"input": "input#subjectsInput",

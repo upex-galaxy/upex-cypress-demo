@@ -396,6 +396,40 @@ Cypress.Commands.add('deseleccionarTabGrid', () => {
 	})
 })
 
+Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, month, day, subjects, currentAddress, state, city) => {
+	
+	cy.fixture('DOM/toolsqa/Form/Form.page').then((the) => {
+
+		firstName && cy.get(the.firstName.input).clear().type(firstName);			
+		lastName && cy.get(the.lastName.input).clear().type(lastName);			
+		email && cy.get(the.email.input).clear().type(email);			
+		cy.get(the.gender.input).click();			
+		mobile && cy.get(the.mobile.input).clear().type(mobile);			
+		cy.get(the.dateOfBirth.input).click();			
+		cy.get(the.dateOfBirth.month).select('May');
+
+		const max = 2100;
+		const min = 1900;
+		const dateRandom = randomDate(max, min);
+				
+		cy.get(the.dateOfBirth.year).select(parseInt(dateRandom));
+
+		month && day && cy.get(`[aria-label*='${month} ${day}th']`).click();			
+		subjects && cy.get(the.subjects.input).type(subjects);		
+		cy.get(the.hobbies.input).first().click({force: true});			
+		cy.get(the.picture.input).attachFile('images/upexlogo');			
+		currentAddress && cy.get(the.currentAddress.input).clear().type(currentAddress);			
+		state && cy.get(the.state.input).eq(1).type(state);			
+		city && cy.get(the.city.input).eq(2).type(city);
+		cy.get(the.submit).click({force: true});			
+		cy.contains(the.output);
+	});
+});
+
+function randomDate(start, end) {		
+	return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+};
+
 //FIN Commands para el componente Interactions|Selectable
 
 //Cypress.Commands.add('',
