@@ -418,12 +418,20 @@ Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, subjects, 
 		// month Dropdown is automated as random:
 		const month = Math.floor((Math.random() * 12))
 		cy.get(the.dateOfBirth.month).select(month);
-		// *Choose Day is Automated as random:
+		// Choose Day is Automated as random:
 		cy.get(the.dateOfBirth.month).children().eq(month).then(($currentMonth)=>{
-			$Month = $currentMonth.text()
+			const $Month = $currentMonth.text()
 			cy.get(`[aria-label*='${$Month}']`).then((max)=>{
-				const day = Math.floor((Math.random() * max.length))
-				cy.get(`[aria-label*='${$Month} ${day}']`).click();
+				let day;
+				function randomDay(){
+					day = Math.floor((Math.random() * max.length))
+				}
+				randomDay()
+				if(day == 0){
+					return randomDay()
+				}else{
+					return cy.get(`[aria-label*='${$Month} ${day}']`).click()
+				}
 			})
 		});		
 		// *subjects:	

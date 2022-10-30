@@ -27,12 +27,13 @@ describe('ToolsQA | Forms | Practice Form', () => {
 		// 'fillForm', (firstName, lastName, email, mobile, subjects, currentAddress, state, city)
 		cy.fillForm(the.firstName.valid, // firstName
 					the.lastName.valid, // lastName
-					// the.email.valid, // email
+					the.email.valid, // email
 					the.mobile.valid, // mobile
-					the.subjects.valid1, // subjects
+					the.subjects.valid, // subjects
 					the.currentAddress.message, // currentAddress
 					the.state.select, // state
 					the.city.select);// city
+		cy.contains(the.output).should("be.visible")
     });
 });
 

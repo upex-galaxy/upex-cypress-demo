@@ -28,7 +28,8 @@
 		"invalidNineDigits": "123456789",
 		"invalidElevenDigits": "12345678901",
 		"invalidLetters": "abcd",
-		"invalidSpecialCharacters": "$%.,"
+		"invalidSpecialCharacters": "$%.,",
+		"null": ""
 	},
 	"dateOfBirth": {
 		"input": "#dateOfBirthInput",
@@ -40,8 +41,7 @@
 	},
 	"subjects": {
 		"input": "input#subjectsInput",
-		"valid1": "Computer Science{enter}",
-		"valid2": "Computer Science"
+		"valid": "Computer Science"
 	},
 	"hobbies": {
 		"input": "input[type='checkbox']",
