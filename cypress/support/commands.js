@@ -396,34 +396,50 @@ Cypress.Commands.add('deseleccionarTabGrid', () => {
 	})
 })
 
-Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, month, day, subjects, currentAddress, state, city) => {
+Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, subjects, currentAddress, state, city) => {
 	
 	cy.fixture('DOM/toolsqa/Form/Form.page').then((the) => {
 
-		firstName && cy.get(the.firstName.input).clear().type(firstName);			
-		lastName && cy.get(the.lastName.input).clear().type(lastName);			
-		email && cy.get(the.email.input).clear().type(email);			
-		cy.get(the.gender.input).click();			
-		mobile && cy.get(the.mobile.input).clear().type(mobile);			
-		cy.get(the.dateOfBirth.input).click();			
-		cy.get(the.dateOfBirth.month).select('May');
-
-		const maxY = 199;
-		const year = Math.floor((Math.random() * maxY))
+		// *firstName:
+		firstName && cy.get(the.firstName.input).clear().type(firstName);	
+		// *lastName:
+		lastName && cy.get(the.lastName.input).clear().type(lastName);	
+		// *email:
+		email && cy.get(the.email.input).clear().type(email);		
+		// Gender is automated:
+		cy.get(the.gender.input).click();	
+		// *mobile:		
+		mobile && cy.get(the.mobile.input).clear().type(mobile);	
+		// To Open Date-Picker Selector:
+		cy.get(the.dateOfBirth.input).click();	
+		// year Dropdown is automated as random:		
+		const year = Math.floor((Math.random() * 199))
 		cy.get(the.dateOfBirth.year).select(year);
-		const maxM = 12;
-		const month = Math.floor((Math.random() * maxM))
+		// month Dropdown is automated as random:
+		const month = Math.floor((Math.random() * 12))
 		cy.get(the.dateOfBirth.month).select(month);
-
-		month && day && cy.get(`[aria-label*='${month} ${day}th']`).click();			
-		subjects && cy.get(the.subjects.input).type(subjects);		
-		cy.get(the.hobbies.input).first().click({force: true});			
-		cy.get(the.picture.input).attachFile('images/upexlogo');			
-		currentAddress && cy.get(the.currentAddress.input).clear().type(currentAddress);			
-		state && cy.get(the.state.input).eq(1).type(state);			
+		// *Choose Day is Automated as random:
+		cy.get(the.dateOfBirth.month).children().eq(month).then(($currentMonth)=>{
+			$Month = $currentMonth.text()
+			cy.get(`[aria-label*='${$Month}']`).then((max)=>{
+				const day = Math.floor((Math.random() * max.length))
+				cy.get(`[aria-label*='${$Month} ${day}']`).click();
+			})
+		});		
+		// *subjects:	
+		subjects && cy.get(the.subjects.input).type(subjects);	
+		// Hobbies is automated:	
+		cy.get(the.hobbies.input).first().click({force: true});		
+		// attachFile is automated:	
+		cy.get(the.picture.input).attachFile('images/upexlogo');
+		// *currentAddress:			
+		currentAddress && cy.get(the.currentAddress.input).type(currentAddress);	
+		// *state:		
+		state && cy.get(the.state.input).eq(1).type(state);	
+		// *city:		
 		city && cy.get(the.city.input).eq(2).type(city);
+		// Click on the Submit Button...
 		cy.get(the.submit).click({force: true});			
-		cy.contains(the.output);
 	});
 });
 

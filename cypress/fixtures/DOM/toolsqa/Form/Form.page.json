@@ -31,7 +31,7 @@
 		"invalidSpecialCharacters": "$%.,"
 	},
 	"dateOfBirth": {
-		"input": "form > div > div > div > div > input",
+		"input": "#dateOfBirthInput",
 		"month": "select.react-datepicker__month-select",
 		"year": "select.react-datepicker__year-select",
 		"valid": "14 May,2000",

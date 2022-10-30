@@ -23,16 +23,16 @@ describe('ToolsQA | Forms | Practice Form', () => {
 	});
 
     it(`US-GX-${id} | TC1: Validar poder registrarse correctamente cuando todos los campos son válidos`, () => {
-        cy.fillForm(the.firstName.valid, 
-					the.lastName.valid, 
-					the.email.valid, 
-					the.mobile.valid, 
-					the.dateOfBirth.validMonth, 
-					the.dateOfBirth.validDay, 
-					the.subjects.valid1, 
-					the.currentAddress.message, 
-					the.state.select, 
-					the.city.select);
+        
+		// 'fillForm', (firstName, lastName, email, mobile, subjects, currentAddress, state, city)
+		cy.fillForm(the.firstName.valid, // firstName
+					the.lastName.valid, // lastName
+					// the.email.valid, // email
+					the.mobile.valid, // mobile
+					the.subjects.valid1, // subjects
+					the.currentAddress.message, // currentAddress
+					the.state.select, // state
+					the.city.select);// city
     });
 });
 
