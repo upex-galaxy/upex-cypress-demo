@@ -401,55 +401,106 @@ Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, subjects, 
 	cy.fixture('DOM/toolsqa/Form/Form.page').then((the) => {
 
 		// *firstName:
-		firstName && cy.get(the.firstName.input).clear().type(firstName);	
+		firstName && cy.get(the.firstName.input).clear().type(firstName)	
+		
 		// *lastName:
-		lastName && cy.get(the.lastName.input).clear().type(lastName);	
+		lastName && cy.get(the.lastName.input).clear().type(lastName)
+		
 		// *email:
-		email && cy.get(the.email.input).clear().type(email);		
+		email && cy.get(the.email.input).clear().type(email)		
+		
 		// Gender is automated:
-		cy.get(the.gender.input).click();	
+		cy.get(the.gender.input).click()	
+		
 		// *mobile:		
-		mobile && cy.get(the.mobile.input).clear().type(mobile);	
+		mobile && cy.get(the.mobile.input).clear().type(mobile)	
+		
 		// To Open Date-Picker Selector:
-		cy.get(the.dateOfBirth.input).click();	
+		cy.get(the.dateOfBirth.input).click()	
+		
 		// year Dropdown is automated as random:		
-		const year = Math.floor((Math.random() * 199))
-		cy.get(the.dateOfBirth.year).select(year);
-		// month Dropdown is automated as random:
-		const month = Math.floor((Math.random() * 12))
-		cy.get(the.dateOfBirth.month).select(month);
+		const year = Math.floor(Math.random() * 199)		
+		let $Year
+		
+		cy.get(the.dateOfBirth.year).select(year)
+
+		// Busca el elemento year
+		cy.get(the.dateOfBirth.year).children().eq(year).then((yearName) => {			
+			
+			$Year = yearName.text()
+		})
+
+		// month Dropdown is automated as random:		
+		const month = Math.floor(Math.random() * 12)
+		cy.get(the.dateOfBirth.month).select(month)
+		
 		// Choose Day is Automated as random:
-		cy.get(the.dateOfBirth.month).children().eq(month).then(($currentMonth)=>{
+		cy.get(the.dateOfBirth.month).children().eq(month).then(($currentMonth) => {
+			
 			const $Month = $currentMonth.text()
-			cy.get(`[aria-label*='${$Month}']`).then((max)=>{
-				let day;
-				function randomDay(){
-					day = Math.floor((Math.random() * max.length))
+
+			cy.get(`[aria-label*='${$Month}']`).then((max) => {
+							
+				// Fórmula para calcular un día random.
+				const day = Math.floor((Math.random() * (max.length - 1)) + 1)	
+
+				let d
+
+				switch (day) {
+					
+					case 1:
+						d = day + "st"
+						break
+					
+					case 2:
+						d = day + "nd"
+						break
+					
+					case 3:
+						d = day + "rd"
+						break	
+					
+					default:
+						d = day + "th"
+						break
 				}
-				randomDay()
-				if(day == 0){
-					return randomDay()
-				}else{
-					return cy.get(`[aria-label*='${$Month} ${day}']`).click()
-				}
+
+				// El * busca todas las palabras que contengan
+				cy.get(`[aria-label*='${$Month} ${d}']`).click({force: true})				
+
+				const $Day = day
+
+				// Sirve para generar un archivo fixture
+				cy.writeFile("cypress/fixtures/DOM/toolsqa/Form/Data.json", {
+					month: $Month,
+					year: $Year,
+					day: $Day.toString()
+				})
 			})
-		});		
+		})
+
 		// *subjects:	
-		subjects && cy.get(the.subjects.input).type(subjects);	
+		subjects && cy.get(the.subjects.input).type(`${subjects}{enter}`, {force: true})	
+		
 		// Hobbies is automated:	
-		cy.get(the.hobbies.input).first().click({force: true});		
+		cy.get(the.hobbies.input).first().click({force: true})		
+		
 		// attachFile is automated:	
-		cy.get(the.picture.input).attachFile('images/upexlogo');
+		cy.get(the.picture.input).attachFile('images/upexlogo')
+		
 		// *currentAddress:			
-		currentAddress && cy.get(the.currentAddress.input).type(currentAddress);	
+		currentAddress && cy.get(the.currentAddress.input).type(currentAddress)	
+		
 		// *state:		
-		state && cy.get(the.state.input).eq(1).type(state);	
+		state && cy.get(the.state.input).eq(1).type(state)
+		
 		// *city:		
-		city && cy.get(the.city.input).eq(2).type(city);
+		city && cy.get(the.city.input).eq(2).type(city)
+		
 		// Click on the Submit Button...
-		cy.get(the.submit).click({force: true});			
-	});
-});
+		cy.get(the.submit).click({force: true})			
+	})
+})
 
 //FIN Commands para el componente Interactions|Selectable
 
