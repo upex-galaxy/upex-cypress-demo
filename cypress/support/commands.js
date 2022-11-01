@@ -444,29 +444,8 @@ Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, subjects, 
 				// Fórmula para calcular un día random.
 				const day = Math.floor((Math.random() * (max.length - 1)) + 1)	
 
-				let d
-
-				switch (day) {
-					
-					case 1:
-						d = day + "st"
-						break
-					
-					case 2:
-						d = day + "nd"
-						break
-					
-					case 3:
-						d = day + "rd"
-						break	
-					
-					default:
-						d = day + "th"
-						break
-				}
-
 				// El * busca todas las palabras que contengan
-				cy.get(`[aria-label*='${$Month} ${d}']`).click({force: true})				
+				cy.get(`[aria-label*='${$Month}']`).eq(day).click({force: true})				
 
 				const $Day = day
 
