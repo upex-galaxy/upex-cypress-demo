@@ -33,6 +33,25 @@ describe('ToolsQA | Forms | Practice Form', () => {
 					the.city.select) // city
 		
 		cy.contains(the.output).should('be.visible')
+		
+		// Validate all pop-up			
+		cy.fixture('DOM/toolsqa/Form/Data').then((data) => {
+			const Birth = `${data.day} ${data.month},${data.year}`
+
+		// "CheckForm",(Name,Email,Gender,Mobile,DateofBirth,Subjects,Hobbies,Picture,Address,StateAndCity)
+			cy.VerifyForm(
+				the.firstName.valid+' '+the.lastName.valid, // Name
+				the.email.valid, // Email
+				"Male", // Gender
+				the.mobile.valid, // Mobile
+				Birth, // DateofBirth
+				the.subjects.valid, // Subjects
+				"Sports", // Hobbies
+				"upexlogo", // Picture
+				the.currentAddress.message, // Address
+				"Rajasthan Jaipur" // StateAndCity
+			)
+		})	
     })
 
 	it(`US-GX-${id} | TC2: Validar poder registrarse correctamente cuando los campos "First Name", "Last Name", "Gender", "Mobile" y "Date of Birth" son válidos`, () => {
@@ -123,37 +142,6 @@ describe('ToolsQA | Forms | Practice Form', () => {
 					the.city.select) // city
 		
 		cy.contains(the.output).should('not.exist')
-	})
-
-	it(`US-GX-${id} | TC8: Validar mensaje de Pop-Up contenga la data correspondiente después de enviar el form con todos los campos válidos`, () => {
-
-		// 'fillForm', (firstName, lastName, email, mobile, subjects, currentAddress, state, city)
-		cy.fillForm(the.firstName.valid, // firstName
-					the.lastName.valid, // lastName
-					the.email.valid, // email
-					the.mobile.valid, // mobile
-					the.subjects.valid, // subjects
-					the.currentAddress.message, // currentAddress
-					the.state.select, // state
-					the.city.select) // city
-		
-		cy.contains(the.output).should('be.visible')
-		
-		// Validate all pop-up
-		cy.contains(the.firstName.valid + ' ' + the.lastName.valid).should('be.visible')				
-		cy.contains(the.email.valid).should('be.visible')	
-		cy.contains(the.gender.valid).should('be.visible')					
-		cy.contains(the.mobile.valid).should('be.visible')	
-		
-		cy.fixture('DOM/toolsqa/Form/Data').then((data) => {
-			cy.contains(`${data.day} ${data.month},${data.year}`).should('be.visible')
-		})	
-			
-		cy.contains(the.subjects.valid).should('be.visible')					
-		cy.contains(the.hobbies.valid).should('be.visible')		
-		cy.contains(the.picture.valid).should('be.visible')			
-		cy.contains(the.currentAddress.message).should('be.visible')				
-		cy.contains(the.state.valid + ' ' + the.city.valid).should('be.visible')				
 	})
 
 	it(`US-GX-${id} | TC9: Validar NO poder registrase correctamente cuando el campo "Mobile" contiene sólo letras`, () => {

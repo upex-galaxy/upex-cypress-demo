@@ -447,13 +447,13 @@ Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, subjects, 
 				// El * busca todas las palabras que contengan
 				cy.get(`[aria-label*='${$Month}']`).eq(day).click({force: true})				
 
-				const $Day = day
+				const $Day = (day+1).toString()
 
 				// Sirve para generar un archivo fixture
 				cy.writeFile("cypress/fixtures/DOM/toolsqa/Form/Data.json", {
 					month: $Month,
 					year: $Year,
-					day: $Day.toString()
+					day: $Day
 				})
 			})
 		})
@@ -478,6 +478,20 @@ Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, subjects, 
 		
 		// Click on the Submit Button...
 		cy.get(the.submit).click({force: true})			
+	})
+})
+Cypress.Commands.add("VerifyForm",(Name,Email,Gender,Mobile,DateofBirth,Subjects,Hobbies,Picture,Address,StateAndCity)=>{
+	cy.get(".modal-body").within(($popup)=>{
+		cy.contains("Student Name").next().should("have.text",Name)
+		cy.contains("Student Email").next().should("have.text",Email)
+		cy.contains("Gender").next().should("have.text",Gender)
+		cy.contains("Mobile").next().should("have.text",Mobile)
+		cy.contains("Date of Birth").next().should("contain.text",DateofBirth)
+		cy.contains("Subjects").next().should("have.text",Subjects)
+		cy.contains("Hobbies").next().should("have.text",Hobbies)
+		cy.contains("Picture").next().should("have.text",Picture)
+		cy.contains("Address").next().should("have.text",Address)
+		cy.contains("State and City").next().should("have.text",StateAndCity)
 	})
 })
 
