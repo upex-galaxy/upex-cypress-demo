@@ -14,4 +14,4 @@ jobs: # Groups together all the jobs that run in the "Galaxy CI" workflow.
 
       - run: npm install cypress # The run keyword tells the job to execute a command on the runner. In this case, you are using npm to install the bats software testing package.
 
-      - run: cypress -v # Finally, In this case, you'll run the cypress version command that outputs the software version.
+      - run: cypress --version # Finally, In this case, you'll run the cypress version command that outputs the software version.
