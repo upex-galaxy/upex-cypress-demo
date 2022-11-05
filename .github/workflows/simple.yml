@@ -1,4 +1,4 @@
-name: CI🔀US-GX-007 | Test Simple CI Run File
+name: 🔀CI Run US-GX-007 | Test Simple CI Run File
 run-name: 🧪In-Sprint Testing Execution by {{github.actor}}
 
 on: [push]
@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - uses: actions/checkout@4
+      - uses: actions/checkout@v3
 
       - name: Cypress.io✅
         uses: cypress-io/github-action@v4.2.0
