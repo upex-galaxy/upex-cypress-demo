@@ -16,5 +16,5 @@ jobs:
           browser: chrome
           spec: |
             */**/sintaxis.cy.js
-            */**/GherkinExample.feature
+            cypress/e2e/cucumber-test/How-to/GherkinTutorial.feature
 
