@@ -1,11 +1,11 @@
 name: 🔀CI Run US-GX-007 | Test Simple CI Run File
-run-name: 🧪In-Sprint Testing Execution by {{github.actor}}
+run-name: 🧪In-Sprint Testing Execution by ${{github.actor}}
 
 on: [push]
 
 jobs:
   QA-Cypress-TestSuite-Execution:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
 
       - uses: actions/checkout@v3
