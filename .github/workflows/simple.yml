@@ -10,11 +10,11 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: Cypress.io✅
+      - name: Cypress.io🧪
         uses: cypress-io/github-action@v4.2.0
         with: 
           browser: chrome
           spec: |
-            "*/**/sintaxis.cy.js"
-            "*/**/GherkinExample.feature"
+            */**/sintaxis.cy.js
+            */**/GherkinExample.feature
 
