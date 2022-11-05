@@ -1,12 +1,24 @@
-# name: Nombre
-# run-name: Run
+name: CI🔀US-GX-007 | Test Simple CI Run File
+run-name: 🧪In-Sprint Testing Execution by {{github.actor}}
 
-# on: [push]
+on: [push]
 
-# jobs:
-#   JobName:
-#     runs-on: ubuntu-latest
+jobs:
+  QA-Cypress-TestSuite-Execution:
+    runs-on: ubuntu-latest
+    steps:
 
-#     steps:
-#       - uses: actions/checkout@v3
-#       - uses: 
+      - uses: actions/checkout@4
+
+      - name: Cypress.io✅
+        uses: cypress-io/github-action@v4.2.0
+        with: 
+          browser: chrome
+          spec: "*/**/sintaxis.cy.js"
+
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+
