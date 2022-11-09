@@ -413,3 +413,26 @@ Cypress.Commands.add('deseleccionarTabGrid', () => {
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+
+//Bookstore Login
+Cypress.Commands.add("gotoLogin", ()=>
+{
+	cy.visit('https://demoqa.com/login')
+	cy.get('#userName-label').should('be.visible')
+	cy.clearCookies()
+	cy.clearLocalStorage()
+})
+
+Cypress.Commands.add("signin", (username, password) =>
+{
+    {
+		cy.get("#userName")
+			.type(username)
+		cy.get("#password")	
+			.type(password)
+		cy.get("#login")
+			.click()
+}
+})
+
