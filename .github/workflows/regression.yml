@@ -1,7 +1,12 @@
 name: 🔀CI Run US-GX-007 | Simple CI Run
 run-name: 🧪Regression Testing Execution by ${{github.actor}}
 
-on: [push]
+on:
+  push:
+    paths-ignore:
+      - '.cypress-cucumber-preprocessorrc.json'
+      - 'cucumber-html-report.js'
+      - 'cucumber-json-formatter.exe' 
 
 jobs:
   QA-Cypress-RegressionTest:
