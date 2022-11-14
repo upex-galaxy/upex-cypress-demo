@@ -1,0 +1,30 @@
+name: 🔀CI Run US-GX-007 | Simple CI Run
+run-name: 🧪Regression Testing Execution by ${{github.actor}}
+
+on: [push]
+
+jobs:
+  QA-Cypress-RegressionTest:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v3
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+
+      - name: Cypress.io🧪
+        uses: cypress-io/github-action@v4
+        with: 
+          browser: chrome
+          command: |
+            npm run file */**/Suites/*.cy.js
+
