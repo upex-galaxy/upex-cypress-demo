@@ -26,5 +26,5 @@ jobs:
         with: 
           browser: chrome
           command: |
-            npm run file */**/Suites/*.cy.js
+            npm run file */**/sintaxis.cy.js
 
