@@ -1,0 +1,21 @@
+{
+    "url": "https://demoqa.com/selectable",
+    "contain": "selectable",
+    "list": {
+        "tab": "#demo-tab-list",
+        "text": ["Cras justo odio","Dapibus ac facilisis in","Morbi leo risus","Porta ac consectetur ac"],
+        "contenedor": ["#verticalListContainer > :nth-child(1)", "#verticalListContainer > :nth-child(2)",
+            "#verticalListContainer > :nth-child(3)", "#verticalListContainer > :nth-child(4)" ]
+    },
+    "grid": {
+        "tab": "#demo-tab-grid",
+        "misfilas": [{
+            "#row1":["One", "Two", "Three"],
+            "#row2":["Four", "Five", "Six"],
+            "#row3":["Seven", "Eight", "Nine"] 
+        }],
+        "child":  [" > :nth-child(1)", " > :nth-child(2)", " > :nth-child(3)"]
+        
+
+    }
+}  
