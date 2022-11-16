@@ -1,0 +1,73 @@
+{
+	"firstName": {
+		"input": "input#firstName",
+		"valid": "John",
+		"null": ""
+	},
+	"lastName": {
+		"input": "#lastName",
+		"valid": "Doo",
+		"null": ""
+	},
+	"email": {
+		"input": "input[placeholder='name@example.com']",
+		"valid": "john@gmail.com",
+		"noExistDomain": "john@.com",
+		"noExistAt": "johngmail.com",
+		"noName": "@gmail.com",
+		"noExistExtension": "john@gmail.",
+		"null": ""
+	},
+	"gender": {
+		"input": "label[for='gender-radio-1']",
+		"valid": "Male",
+		"null": ""
+	},
+	"mobile": {
+		"input": "input[placeholder='Mobile Number']",
+		"valid": "1234567890",
+		"invalidLetters": "abcd",
+		"invalidSpecialCharacters": "$%.,",
+		"null": ""
+	},
+	"dateOfBirth": {
+		"input": "#dateOfBirthInput",
+		"month": "select.react-datepicker__month-select",
+		"year": "select.react-datepicker__year-select",
+		"null": ""
+	},
+	"subjects": {
+		"input": "input#subjectsInput",
+		"valid": "Computer Science",
+		"null": ""
+	},
+	"hobbies": {
+		"input": "input[type='checkbox']",
+		"valid": "Sports",
+		"null": ""
+	},
+	"picture": {
+		"input": "#uploadPicture",
+		"valid": "upexlogo",
+		"null": ""
+	},
+	"currentAddress": {
+		"input": "#currentAddress",
+		"message": "Saint Andrews 777",
+		"null": ""
+	},
+	"state": {
+		"input": ".css-1hwfws3",
+		"select": "Rajasthan{enter}",
+		"valid": "Rajasthan",
+		"null": ""
+	},
+	"city": {
+		"input": ".css-1hwfws3",
+		"select": "Jaipur{enter}",
+		"valid": "Jaipur",
+		"null": ""
+	},
+	"submit": "button[type='submit']",
+	"output": "Thanks for submitting the form"
+}

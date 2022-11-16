@@ -34,12 +34,16 @@ Cypress.Commands.add('btnClick', () => {
 	})
 })
 
-Cypress.Commands.add('getUrl', (url, contain) => {
-	cy.visit(url)
-	cy.url().should('contain', contain)
-	cy.clearCookies()
+Cypress.Commands.add('getUrl', (url, contain, title, protocol, hostname) => 
+{
+	cy.visit(url);
+	contain && cy.url().should('contain', contain);
+	title && cy.title().should('eq', title);
+	protocol && cy.location('protocol').should('contains', protocol);
+	hostname && cy.location('hostname').should('eq', hostname);
+	cy.clearCookies();
 	cy.clearLocalStorage()
-})
+});
 
 Cypress.Commands.add('buttonClickDownload', (file) => {
 	cy.fixture('DOM/toolsqa/Elements/UploadAndDownload.Page').then((the) => {
@@ -389,6 +393,105 @@ Cypress.Commands.add('deseleccionarTabGrid', () => {
 				})
 			}
 		}
+	})
+})
+
+Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, subjects, currentAddress, state, city) => {
+	
+	cy.fixture('DOM/toolsqa/Form/Form.page').then((the) => {
+
+		// *firstName:
+		firstName && cy.get(the.firstName.input).clear().type(firstName)	
+		
+		// *lastName:
+		lastName && cy.get(the.lastName.input).clear().type(lastName)
+		
+		// *email:
+		email && cy.get(the.email.input).clear().type(email)		
+		
+		// Gender is automated:
+		cy.get(the.gender.input).click()	
+		
+		// *mobile:		
+		mobile && cy.get(the.mobile.input).clear().type(mobile)	
+		
+		// To Open Date-Picker Selector:
+		cy.get(the.dateOfBirth.input).click()	
+		
+		// year Dropdown is automated as random:		
+		const year = Math.floor(Math.random() * 199)		
+		let $Year
+		
+		cy.get(the.dateOfBirth.year).select(year)
+
+		// Busca el elemento year
+		cy.get(the.dateOfBirth.year).children().eq(year).then((yearName) => {			
+			
+			$Year = yearName.text()
+		})
+
+		// month Dropdown is automated as random:		
+		const month = Math.floor(Math.random() * 12)
+		cy.get(the.dateOfBirth.month).select(month)
+		
+		// Choose Day is Automated as random:
+		cy.get(the.dateOfBirth.month).children().eq(month).then(($currentMonth) => {
+			
+			const $Month = $currentMonth.text()
+
+			cy.get(`[aria-label*='${$Month}']`).then((max) => {
+							
+				// Fórmula para calcular un día random.
+				const day = Math.floor((Math.random() * (max.length - 1)) + 1)	
+
+				// El * busca todas las palabras que contengan
+				cy.get(`[aria-label*='${$Month}']`).eq(day).click({force: true})				
+
+				const $Day = (day+1).toString()
+
+				// Sirve para generar un archivo fixture
+				cy.writeFile("cypress/fixtures/DOM/toolsqa/Form/Data.json", {
+					month: $Month,
+					year: $Year,
+					day: $Day
+				})
+			})
+		})
+
+		// *subjects:	
+		subjects && cy.get(the.subjects.input).type(`${subjects}{enter}`, {force: true})	
+		
+		// Hobbies is automated:	
+		cy.get(the.hobbies.input).first().click({force: true})		
+		
+		// attachFile is automated:	
+		cy.get(the.picture.input).attachFile('images/upexlogo')
+		
+		// *currentAddress:			
+		currentAddress && cy.get(the.currentAddress.input).type(currentAddress)	
+		
+		// *state:		
+		state && cy.get(the.state.input).eq(1).type(state)
+		
+		// *city:		
+		city && cy.get(the.city.input).eq(2).type(city)
+		
+		// Click on the Submit Button...
+		cy.get(the.submit).click({force: true})			
+	})
+})
+Cypress.Commands.add("VerifyForm",(Name,Email,Gender,Mobile,DateofBirth,Subjects,Hobbies,Picture,Address,StateAndCity)=>{
+	cy.get(".modal-body").within(($popup)=>{
+		cy.contains("Student Name").next().should("have.text",Name)
+		cy.contains("Student Email").next().should("have.text",Email)
+		cy.contains("Gender").next().should("have.text",Gender)
+		cy.contains("Mobile").next().should("have.text",Mobile)
+		cy.contains("Date of Birth").next().should("contain.text",DateofBirth)
+		cy.contains("Subjects").next().should("have.text",Subjects)
+		cy.contains("Hobbies").next().should("have.text",Hobbies)
+		cy.contains("Picture").next().should("have.text",Picture)
+		cy.contains("Address").next().should("have.text",Address)
+		cy.contains("State and City").next().should("have.text",StateAndCity)
 	})
 })
 
