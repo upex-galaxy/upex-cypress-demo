@@ -111,5 +111,8 @@
 		"ParseHAR": false,
 		"mockAutocomplete": false
 	},
-	"cSpell.autoFormatConfigFile": true
+	"cSpell.autoFormatConfigFile": true,
+	"githubPullRequests.ignoredPullRequestBranches": [
+		"cypex"
+	]
 }
