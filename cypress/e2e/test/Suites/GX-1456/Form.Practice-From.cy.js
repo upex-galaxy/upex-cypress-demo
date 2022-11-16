@@ -20,7 +20,7 @@ describe('ToolsQA | Forms | Practice Form', () => {
 		cy.viewport(600, 800)
 	})
 
-    it(`US-GX-${id} | TC1: Validar poder registrarse correctamente cuando todos los campos son válidos`, () => {        
+    it.skip(`US-GX-${id} | TC1: Validar poder registrarse correctamente cuando todos los campos son válidos`, () => {        
 		
 		// 'fillForm', (firstName, lastName, email, mobile, subjects, currentAddress, state, city)
 		cy.fillForm(the.firstName.valid, // firstName
@@ -42,14 +42,47 @@ describe('ToolsQA | Forms | Practice Form', () => {
 			cy.VerifyForm(
 				the.firstName.valid+' '+the.lastName.valid, // Name
 				the.email.valid, // Email
-				"Male", // Gender
+				data.gender, // Gender Generated
 				the.mobile.valid, // Mobile
-				Birth, // DateofBirth
+				Birth, // Date of Birth
 				the.subjects.valid, // Subjects
-				"Sports", // Hobbies
+				data.hobbies, // Hobbies
 				"upexlogo", // Picture
 				the.currentAddress.message, // Address
 				"Rajasthan Jaipur" // StateAndCity
+			)
+		})	
+    })
+	it(`US-GX-${id} | TC1.2: Validar poder registrarse correctamente cuando solo se llenan campos requeridos`, () => {        
+		
+		// 'fillForm', (firstName, lastName, email, mobile, subjects, currentAddress, state, city)
+		cy.fillFormRequire(the.firstName.valid, // firstName
+					the.lastName.valid, // lastName
+					the.email.valid, // email
+					the.mobile.valid) // mobile
+		
+		cy.contains(the.output).should('be.visible')
+		
+		// Validate all pop-up			
+		cy.fixture('DOM/toolsqa/Form/Data').then((data) => {
+			let gender = data.gender
+			// Cuando no se pickea una fecha, por predeterminado, la fecha es Hoy:		
+			const date = new Date();
+			let day = date.getDate();
+			let month = date.toLocaleString('default', { month: 'long' });
+			let year = date.getFullYear();
+			// "CheckForm",(Name,Email,Gender,Mobile,DateofBirth,Subjects,Hobbies,Picture,Address,StateAndCity)
+			cy.VerifyForm(
+				the.firstName.valid+' '+the.lastName.valid, // Name
+				the.email.valid, // Email
+				gender, // Gender Generated
+				the.mobile.valid, // Mobile
+				`${day} ${month},${year}`, // No Birth Required
+				"", // Subjects
+				"", // Hobbies
+				"", // Picture
+				"", // Address
+				"" // StateAndCity
 			)
 		})	
     })

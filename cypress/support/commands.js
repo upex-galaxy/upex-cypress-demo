@@ -410,7 +410,30 @@ Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, subjects, 
 		email && cy.get(the.email.input).clear().type(email)		
 		
 		// Gender is automated:
-		cy.get(the.gender.input).click()	
+		let $Gender
+		cy.get(the.gender.input).then((genders)=>{
+			const $genButton = Math.floor(Math.random() * (genders.length - 1)) // 0 es Male, 1 es Female, Other es 2.
+			cy.wrap(genders).eq($genButton).then((radioBtn)=>{
+				cy.wrap(radioBtn).next().then((radioName)=>{
+					$Gender = radioName.text() // Radio Button Name
+					cy.log($Gender)
+				})
+				cy.wrap(radioBtn).click({force:true}) // Selecciona un Gender random (0, 1, o 2)
+			})
+		})	// Automated Done.
+
+		// Hobbies is automated:	
+		let $Hobbies
+		cy.get(the.hobbies.input).then((hobbies)=>{
+			const $hobButton = Math.floor(Math.random() * (hobbies.length - 1)) // 0 es Sports, 1 es Reading, Music es 2.
+			cy.wrap(hobbies).eq($hobButton).then((checkBox)=>{
+				cy.wrap(checkBox).next().then((checkName)=>{ // Check Box Button
+					$Hobbies = checkName.text() // Name of the Button
+					cy.log($Hobbies)
+				})
+				cy.wrap(checkBox).check({force:true}) // Selecciona un Hobby random (0, 1, o 2)
+			})
+		})	// Automated Done.	
 		
 		// *mobile:		
 		mobile && cy.get(the.mobile.input).clear().type(mobile)	
@@ -453,7 +476,9 @@ Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, subjects, 
 				cy.writeFile("cypress/fixtures/DOM/toolsqa/Form/Data.json", {
 					month: $Month,
 					year: $Year,
-					day: $Day
+					day: $Day,
+					gender: $Gender,
+					hobbies: $Hobbies
 				})
 			})
 		})
@@ -461,11 +486,57 @@ Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, subjects, 
 		// *subjects:	
 		subjects && cy.get(the.subjects.input).type(`${subjects}{enter}`, {force: true})	
 		
-		// Hobbies is automated:	
-		cy.get(the.hobbies.input).first().click({force: true})		
-		
 		// attachFile is automated:	
 		cy.get(the.picture.input).attachFile('images/upexlogo')
+		
+		// *currentAddress:			
+		currentAddress && cy.get(the.currentAddress.input).type(currentAddress)	
+		
+		// *state:		
+		state && cy.get(the.state.input).eq(1).type(state)
+		
+		// *city:		
+		city && cy.get(the.city.input).eq(2).type(city)
+		
+		// Click on the Submit Button...
+		cy.get(the.submit).click({force: true})			
+	})
+})
+Cypress.Commands.add('fillFormRequire', (firstName, lastName, email, mobile, subjects, currentAddress, state, city) => {
+	
+	cy.fixture('DOM/toolsqa/Form/Form.page').then((the) => {
+
+		// *firstName:
+		firstName && cy.get(the.firstName.input).clear().type(firstName)	
+		
+		// *lastName:
+		lastName && cy.get(the.lastName.input).clear().type(lastName)
+		
+		// *email:
+		email && cy.get(the.email.input).clear().type(email)		
+		
+		// Gender is automated:
+		let $Gender
+		cy.get(the.gender.input).then((genders)=>{
+			const $genButton = Math.floor(Math.random() * (genders.length - 1)) // 0 es Male, 1 es Female, Other es 2.
+			cy.wrap(genders).eq($genButton).then((radioBtn)=>{
+				cy.wrap(radioBtn).next().then((radioName)=>{
+					$Gender = radioName.text() // Radio Button Name
+					cy.log($Gender)
+					cy.writeFile("cypress/fixtures/DOM/toolsqa/Form/Data.json", {
+						gender: $Gender
+					})
+				})
+				cy.wrap(radioBtn).click({force:true}) // Selecciona un Gender random (0, 1, o 2)
+			})
+		})	
+		// Automated Done.
+		
+		// *mobile:		
+		mobile && cy.get(the.mobile.input).clear().type(mobile)	
+
+		// *subjects:	
+		subjects && cy.get(the.subjects.input).type(`${subjects}{enter}`, {force: true})	
 		
 		// *currentAddress:			
 		currentAddress && cy.get(the.currentAddress.input).type(currentAddress)	

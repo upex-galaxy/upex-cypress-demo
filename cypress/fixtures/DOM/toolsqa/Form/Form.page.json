@@ -19,9 +19,7 @@
 		"null": ""
 	},
 	"gender": {
-		"input": "label[for='gender-radio-1']",
-		"valid": "Male",
-		"null": ""
+		"input": "[name='gender']"
 	},
 	"mobile": {
 		"input": "input[placeholder='Mobile Number']",
@@ -42,9 +40,7 @@
 		"null": ""
 	},
 	"hobbies": {
-		"input": "input[type='checkbox']",
-		"valid": "Sports",
-		"null": ""
+		"input": "input[type='checkbox']"
 	},
 	"picture": {
 		"input": "#uploadPicture",
