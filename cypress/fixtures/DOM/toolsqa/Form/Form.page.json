@@ -1,17 +1,14 @@
 {
 	"firstName": {
 		"input": "input#firstName",
-		"valid": "John",
 		"null": ""
 	},
 	"lastName": {
 		"input": "#lastName",
-		"valid": "Doo",
 		"null": ""
 	},
 	"email": {
 		"input": "input[placeholder='name@example.com']",
-		"valid": "john@gmail.com",
 		"noExistDomain": "john@.com",
 		"noExistAt": "johngmail.com",
 		"noName": "@gmail.com",
@@ -23,7 +20,6 @@
 	},
 	"mobile": {
 		"input": "input[placeholder='Mobile Number']",
-		"valid": "1234567890",
 		"invalidLetters": "abcd",
 		"invalidSpecialCharacters": "$%.,",
 		"null": ""

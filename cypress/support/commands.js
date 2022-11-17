@@ -401,170 +401,198 @@ Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, subjects, 
 	cy.fixture('DOM/toolsqa/Form/Form.page').then((the) => {
 
 		// *firstName:
-		firstName && cy.get(the.firstName.input).clear().type(firstName)	
+		firstName && cy.get(the.firstName.input).type(firstName);	
 		
 		// *lastName:
-		lastName && cy.get(the.lastName.input).clear().type(lastName)
+		lastName && cy.get(the.lastName.input).type(lastName);
 		
 		// *email:
-		email && cy.get(the.email.input).clear().type(email)		
+		email && cy.get(the.email.input).type(email);		
 		
 		// Gender is automated:
-		let $Gender
-		cy.get(the.gender.input).then((genders)=>{
-			const $genButton = Math.floor(Math.random() * (genders.length - 1)) // 0 es Male, 1 es Female, Other es 2.
-			cy.wrap(genders).eq($genButton).then((radioBtn)=>{
-				cy.wrap(radioBtn).next().then((radioName)=>{
-					$Gender = radioName.text() // Radio Button Name
-					cy.log($Gender)
-				})
-				cy.wrap(radioBtn).click({force:true}) // Selecciona un Gender random (0, 1, o 2)
-			})
-		})	// Automated Done.
+		let $Gender;
+
+		cy.get(the.gender.input).then((genders) => {
+			
+			// 0 es Male, 1 es Female, Other es 2.
+			const $genButton = Math.floor(Math.random() * (genders.length - 1)); 
+			
+			cy.wrap(genders).eq($genButton).then((radioBtn) => {
+			
+				cy.wrap(radioBtn).next().then((radioName) => {
+			
+					$Gender = radioName.text(); // Radio Button Name
+				});
+			
+				// Selecciona un Gender random (0, 1, o 2)
+				cy.wrap(radioBtn).click({force:true}) 
+			});
+
+		});	// Automated Done.
 
 		// Hobbies is automated:	
-		let $Hobbies
-		cy.get(the.hobbies.input).then((hobbies)=>{
-			const $hobButton = Math.floor(Math.random() * (hobbies.length - 1)) // 0 es Sports, 1 es Reading, Music es 2.
-			cy.wrap(hobbies).eq($hobButton).then((checkBox)=>{
-				cy.wrap(checkBox).next().then((checkName)=>{ // Check Box Button
-					$Hobbies = checkName.text() // Name of the Button
-					cy.log($Hobbies)
-				})
-				cy.wrap(checkBox).check({force:true}) // Selecciona un Hobby random (0, 1, o 2)
-			})
-		})	// Automated Done.	
+		let $Hobbies;
+		
+		cy.get(the.hobbies.input).then((hobbies) => {
+			
+			// 0 es Sports, 1 es Reading, Music es 2.
+			const $hobButton = Math.floor(Math.random() * (hobbies.length - 1)); 
+			
+			cy.wrap(hobbies).eq($hobButton).then((checkBox) => {
+			
+				cy.wrap(checkBox).next().then((checkName) => { // Check Box Button
+				
+					$Hobbies = checkName.text(); // Name of the Button
+				});
+
+				// Selecciona un Hobby random (0, 1, o 2)
+				cy.wrap(checkBox).check({force:true}); 
+			});
+
+		});	// Automated Done.	
 		
 		// *mobile:		
-		mobile && cy.get(the.mobile.input).clear().type(mobile)	
+		mobile && cy.get(the.mobile.input).type(mobile);	
 		
 		// To Open Date-Picker Selector:
-		cy.get(the.dateOfBirth.input).click()	
+		cy.get(the.dateOfBirth.input).click();	
 		
 		// year Dropdown is automated as random:		
-		const year = Math.floor(Math.random() * 199)		
-		let $Year
+		const year = Math.floor(Math.random() * 199);		
+		let $Year;
 		
-		cy.get(the.dateOfBirth.year).select(year)
+		cy.get(the.dateOfBirth.year).select(year);
 
 		// Busca el elemento year
 		cy.get(the.dateOfBirth.year).children().eq(year).then((yearName) => {			
 			
-			$Year = yearName.text()
-		})
+			$Year = yearName.text();
+		});
 
 		// month Dropdown is automated as random:		
-		const month = Math.floor(Math.random() * 12)
-		cy.get(the.dateOfBirth.month).select(month)
+		const month = Math.floor(Math.random() * 12);
+
+		cy.get(the.dateOfBirth.month).select(month);
 		
 		// Choose Day is Automated as random:
 		cy.get(the.dateOfBirth.month).children().eq(month).then(($currentMonth) => {
 			
-			const $Month = $currentMonth.text()
+			const $Month = $currentMonth.text();
 
 			cy.get(`[aria-label*='${$Month}']`).then((max) => {
 							
 				// Fórmula para calcular un día random.
-				const day = Math.floor((Math.random() * (max.length - 1)) + 1)	
+				const day = Math.floor((Math.random() * (max.length - 1)) + 1);	
 
 				// El * busca todas las palabras que contengan
-				cy.get(`[aria-label*='${$Month}']`).eq(day).click({force: true})				
+				cy.get(`[aria-label*='${$Month}']`).eq(day).click({force: true});				
 
-				const $Day = (day+1).toString()
+				const $Day = (day+1).toString();
 
 				// Sirve para generar un archivo fixture
-				cy.writeFile("cypress/fixtures/DOM/toolsqa/Form/Data.json", {
+				cy.writeFile('cypress/fixtures/DOM/toolsqa/Form/Data.json', {
 					month: $Month,
 					year: $Year,
 					day: $Day,
 					gender: $Gender,
 					hobbies: $Hobbies
-				})
-			})
-		})
+				});
+			});
+		});
 
 		// *subjects:	
-		subjects && cy.get(the.subjects.input).type(`${subjects}{enter}`, {force: true})	
+		subjects && cy.get(the.subjects.input).type(`${subjects}{enter}`, {force: true});	
 		
 		// attachFile is automated:	
-		cy.get(the.picture.input).attachFile('images/upexlogo')
+		cy.get(the.picture.input).attachFile('images/upexlogo');
 		
 		// *currentAddress:			
-		currentAddress && cy.get(the.currentAddress.input).type(currentAddress)	
+		currentAddress && cy.get(the.currentAddress.input).type(currentAddress);	
 		
 		// *state:		
-		state && cy.get(the.state.input).eq(1).type(state)
+		state && cy.get(the.state.input).eq(1).type(state);
 		
 		// *city:		
-		city && cy.get(the.city.input).eq(2).type(city)
+		city && cy.get(the.city.input).eq(2).type(city);
 		
-		// Click on the Submit Button...
-		cy.get(the.submit).click({force: true})			
-	})
-})
+		// Click on the Submit Button.
+		cy.get(the.submit).click({force: true});			
+	});
+});
+
 Cypress.Commands.add('fillFormRequire', (firstName, lastName, email, mobile, subjects, currentAddress, state, city) => {
 	
 	cy.fixture('DOM/toolsqa/Form/Form.page').then((the) => {
 
 		// *firstName:
-		firstName && cy.get(the.firstName.input).clear().type(firstName)	
+		firstName && cy.get(the.firstName.input).type(firstName);	
 		
 		// *lastName:
-		lastName && cy.get(the.lastName.input).clear().type(lastName)
+		lastName && cy.get(the.lastName.input).type(lastName);
 		
 		// *email:
-		email && cy.get(the.email.input).clear().type(email)		
+		email && cy.get(the.email.input).type(email);		
 		
 		// Gender is automated:
-		let $Gender
-		cy.get(the.gender.input).then((genders)=>{
-			const $genButton = Math.floor(Math.random() * (genders.length - 1)) // 0 es Male, 1 es Female, Other es 2.
-			cy.wrap(genders).eq($genButton).then((radioBtn)=>{
-				cy.wrap(radioBtn).next().then((radioName)=>{
-					$Gender = radioName.text() // Radio Button Name
-					cy.log($Gender)
-					cy.writeFile("cypress/fixtures/DOM/toolsqa/Form/Data.json", {
+		let $Gender;
+		
+		cy.get(the.gender.input).then((genders) => {
+		
+			// 0 es Male, 1 es Female, Other es 2.
+			const $genButton = Math.floor(Math.random() * (genders.length - 1));
+		
+			cy.wrap(genders).eq($genButton).then((radioBtn) => {
+		
+				cy.wrap(radioBtn).next().then((radioName) => {
+		
+					$Gender = radioName.text(); // Radio Button Name
+		
+					cy.writeFile('cypress/fixtures/DOM/toolsqa/Form/Data.json', {
 						gender: $Gender
-					})
-				})
-				cy.wrap(radioBtn).click({force:true}) // Selecciona un Gender random (0, 1, o 2)
-			})
-		})	
-		// Automated Done.
+					});
+				});
+		
+				// Selecciona un Gender random (0, 1, o 2)
+				cy.wrap(radioBtn).click({force:true}); 
+			});
+		}); // Automated Done.
 		
 		// *mobile:		
-		mobile && cy.get(the.mobile.input).clear().type(mobile)	
+		mobile && cy.get(the.mobile.input).type(mobile);	
 
 		// *subjects:	
-		subjects && cy.get(the.subjects.input).type(`${subjects}{enter}`, {force: true})	
+		subjects && cy.get(the.subjects.input).type(`${subjects}{enter}`, {force: true});	
 		
 		// *currentAddress:			
-		currentAddress && cy.get(the.currentAddress.input).type(currentAddress)	
+		currentAddress && cy.get(the.currentAddress.input).type(currentAddress);	
 		
 		// *state:		
-		state && cy.get(the.state.input).eq(1).type(state)
+		state && cy.get(the.state.input).eq(1).type(state);
 		
 		// *city:		
-		city && cy.get(the.city.input).eq(2).type(city)
+		city && cy.get(the.city.input).eq(2).type(city);
 		
-		// Click on the Submit Button...
-		cy.get(the.submit).click({force: true})			
-	})
-})
-Cypress.Commands.add("VerifyForm",(Name,Email,Gender,Mobile,DateofBirth,Subjects,Hobbies,Picture,Address,StateAndCity)=>{
-	cy.get(".modal-body").within(($popup)=>{
-		cy.contains("Student Name").next().should("have.text",Name)
-		cy.contains("Student Email").next().should("have.text",Email)
-		cy.contains("Gender").next().should("have.text",Gender)
-		cy.contains("Mobile").next().should("have.text",Mobile)
-		cy.contains("Date of Birth").next().should("contain.text",DateofBirth)
-		cy.contains("Subjects").next().should("have.text",Subjects)
-		cy.contains("Hobbies").next().should("have.text",Hobbies)
-		cy.contains("Picture").next().should("have.text",Picture)
-		cy.contains("Address").next().should("have.text",Address)
-		cy.contains("State and City").next().should("have.text",StateAndCity)
-	})
-})
+		// Click on the Submit Button.
+		cy.get(the.submit).click({force: true});			
+	});
+});
+
+Cypress.Commands.add('verifyForm', (name, email, gender, mobile, dateOfBirth, subjects, hobbies, picture, address,stateAndCity) => {
+	
+	cy.get('.modal-body').within(($popup) => {
+
+		cy.contains('Student Name').next().should('have.text', name);
+		cy.contains('Student Email').next().should('have.text', email);
+		cy.contains('Gender').next().should('have.text', gender);
+		cy.contains('Mobile').next().should('have.text', mobile);
+		cy.contains('Date of Birth').next().should('contain.text', dateOfBirth);
+		cy.contains('Subjects').next().should('have.text', subjects);
+		cy.contains('Hobbies').next().should('have.text', hobbies);
+		cy.contains('Picture').next().should('have.text', picture);
+		cy.contains('Address').next().should('have.text', address);
+		cy.contains('State and City').next().should('have.text', stateAndCity);
+	});
+});
 
 //FIN Commands para el componente Interactions|Selectable
 
