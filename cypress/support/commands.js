@@ -435,4 +435,23 @@ Cypress.Commands.add("signin", (username, password) =>
 			.click()
 }
 })
-
+//Upload-Download File
+Cypress.Commands.add("gotoUploadDownload", ()=>
+{
+	cy.visit("https://demoqa.com/upload-download")
+	cy.url().should("contain", "upload-download")
+	cy.clearCookies()
+	cy.clearLocalStorage()
+})
+Cypress.Commands.add("validateDownload", ()=>
+{
+	cy.get('#downloadButton').click();
+	cy.verifyDownload('sampleFile.jpeg');
+})
+Cypress.Commands.add("validateSelectFile",()=>
+{
+	const fixtureFile = 'sampleFile.jpeg';
+    cy.get('#uploadFile').click();
+    cy.get('input[type=file]').selectFile('sampleFile.jpeg');
+    cy.get('#uploadedFilePath').should('contain.text','sampleFile.jpeg');
+})
