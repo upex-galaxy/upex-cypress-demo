@@ -1,0 +1,37 @@
+name: 🤖CI run (BUILD) Test Suite Execution⚡
+run-name: ${{github.actor}}👨🏻‍🔬 - ${{github.ref}} 
+
+on: [push]
+
+jobs: 
+  Build-Cypress-TestSuite-AfterPush:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 💻Build
+        uses: actions/checkout@v3
+
+      - name: 🧪Cypress Run - US Test Coverage in Chrome
+        uses: cypress-io/github-action@v4
+        with:
+          browser: chrome
+          command: npm run file */**/GX-203/*.cy.js
+          record: true
+        env:
+          # pass the Dashboard record key as an environment variable
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPEX_DEMO_RECORD_KEY }}
+          # pass GitHub token to allow accurately detecting a build vs a re-run build
+          GITHUB_TOKEN: ${{ secrets.UPEX_GITHUB_TOKEN }}
+
+      - name: 📊Upload Artifacts
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      # Test run video was always captured, so this action uses "always()" condition
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
