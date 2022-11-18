@@ -1,6 +1,6 @@
 [![CYPEX L1 DEMO](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/2pw67q&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/2pw67q/runs)
 
-# 🧪Testing Automation: Cypress 11.1.0 + Cucumber
+# 🧪Testing Automation: Cypress 10.9.0 + Cucumber
 
 ![UPEX's Banners (linkedin) (1)](https://user-images.githubusercontent.com/91127281/189470339-acea5782-16f1-4f06-9ce0-df54fd3ead9d.png)
 
