@@ -8,8 +8,9 @@ const year = Math.floor(Math.random() * (200) + 1);
 
 describe('GX-2404 ✅ToolsQA | Widgets | Date Picker', () => {
 
-    before(() => {
+    beforeEach(() => {
         cy.fixture('DOM/toolsqa/Widgets/datePicker.Page').then(DPdate => { datePicker = DPdate });
+        cy.viewport(1920, 1080)
         cy.visit('/date-picker');
     })
 
@@ -19,43 +20,57 @@ describe('GX-2404 ✅ToolsQA | Widgets | Date Picker', () => {
         cy.get(datePicker.selectDateYear)
             .select(year)
             .should('have.length', 1);
-        cy.get(datePicker.month).children().then(($Months) => {
+        cy.get(datePicker.month).then(($Months) => {
             cy.log($Months)
-            const list = $Months.length - 1
+            const list = $Months.children().length - 1
             const monthRandom = Math.floor(Math.random() * list)
             cy.log(monthRandom)
-            cy.wrap($Months).should('have.length', 12).then(($Month) => {
-                cy.log($Month)
-                const month = $Month.text()
-                cy.wrap($Months).should('have.length', 12).eq(monthRandom).invoke("show").click({ force: true })
-                cy.get(`[aria-label*="${month}"]`).then(($daysMonth) => {
-                    const list = $daysMonth.length - 1
-                    const daysRandom = Math.floor(Math.random() * list)
-                    cy.wrap($daysMonth).should('have.length', list).eq(daysRandom).then(($Day) => {
-                        const day = $Day.text()
-                        cy.log(day)
-                        cy.wrap($Day).click()
+            cy.wrap($Months).should('have.length', 1).then(($Month) => {
+                // cy.log($Month)
+                // const month = $Month.text().split(',')
+                cy.wrap($Months).should('have.length', 1).select(4)
+                    // .invoke("show").click({ force: true })
+                    .then((miau) => {
+                        cy.log(miau.children())
+                        const miaus = miau.children().text()
+                        cy.wrap(miau).should('have.text', miaus)
+                        cy.get(`[aria-label*="May"]`).then(($daysMonth) => {
+                            const list = $daysMonth.length - 1
+                            const daysRandom = Math.floor(Math.random() * list)
+                            cy.wrap($daysMonth).should('have.length', list + 1).eq(daysRandom).then(($Day) => {
+                                const day = $Day.text()
+                                cy.log(day)
+                                cy.wrap($Day).should('have.text', day).click()
+                            })
+                        })
                     })
-                })
+
             })
         })
 
     })
-    // xit('2405 | TC2:  Validar la selección del día, mes, año y hora en el sección “Date And Time”', () => {
-    //     cy.get(datePicker.dateAndTimeInput).click();
-    //     cy.get(datePicker.selectDateYear)
-    //         .select(year)
-    //         .should('have.length', 1);
-    //     cy.get(datePicker.month)
-    //         .select(month)
+    it('2405 | TC2:  Validar la selección del día, mes, año y hora en el sección “Date And Time”', () => {
+        cy.get(datePicker.dateAndTimeInput).click();
+        cy.get(datePicker.downArrowDT).click();
+        cy.get(datePicker.dropdownDT).children().should('have.length', 13).eq(10).click();
+        cy.get(datePicker.downArrowDTmoth).click();
+        cy.get(datePicker.dropdownDTmonth).children().should('have.length', 12).eq(4).click().then(($month) => {
+            const mes = $month.text()
+            cy.log(mes)
+            cy.get(`[aria-label*="${mes}"]`).then(($daysMonth) => {
+                const list = $daysMonth.length - 1
+                const daysRandom = Math.floor(Math.random() * list)
+                cy.wrap($daysMonth).should('have.length', list + 1).eq(daysRandom).then(($Day) => {
+                    const day = $Day.text()
+                    cy.log(day)
+                    cy.wrap($Day).should('have.text', day).click()
+                })
+            })
+        })
+        const timeRandom = Math.floor(Math.random() * 96)
+        cy.get('.react-datepicker__time-list').children().should('have.length', 96).eq(timeRandom)
 
-    //     cy.get('.react-datepicker__month').eq(0)
-    //         .within((asd) => {
-    //             cy.log(asd)
-    //         })
-
-
-    // })
+    })
 })
 
 Cypress.on('uncaught:exception', (err, runnable) => {
