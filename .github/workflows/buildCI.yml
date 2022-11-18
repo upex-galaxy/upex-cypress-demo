@@ -36,3 +36,19 @@ jobs:
               with:
                   name: cypress-videos
                   path: cypress/videos
+
+            - name: ✅Import Test Results to Xray
+              uses: mikepenz/xray-action@v2
+              with:
+                  username: ${{secrets.XRAY_CLIENT_ID}}
+                  password: ${{secrets.XRAY_CLIENT_SECRET}}
+                  testFormat: 'junit'
+                  testPaths: 'reports/test-results.xml'
+                  testExecKey: 'GX-223'
+                  projectKey: 'GX'
+            - name: 🔔Slack Notification of Done
+              uses: rtCamp/action-slack-notify@v2.2.0
+              env:
+                SLACK_WEBHOOK: https://hooks.slack.com/services/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
+                SLACK_MESSAGE: ':test_tube: Test Execution successfully Imported to Jira-Xray :rocket:'
+
