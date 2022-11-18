@@ -24,14 +24,12 @@ jobs:
                   # pass GitHub token to allow accurately detecting a build vs a re-run build
                   GITHUB_TOKEN: ${{ secrets.UPEX_GITHUB_TOKEN }}
 
-            - name: 📊Upload Artifacts
+            - name: 📊Upload Artifact
               uses: actions/upload-artifact@v3
               if: failure()
               with:
                   name: cypress-screenshots
                   path: cypress/screenshots
-            # Test run video was always captured, so this action uses "always()" condition
-            - uses: actions/upload-artifact@v3
               if: always()
               with:
                   name: cypress-videos
@@ -50,5 +48,8 @@ jobs:
               uses: rtCamp/action-slack-notify@v2.2.0
               env:
                 SLACK_WEBHOOK: https://hooks.slack.com/services/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
-                SLACK_MESSAGE: ':test_tube: Test Execution successfully Imported to Jira-Xray :rocket:'
+                SLACK_USERNAME: Ari✨
+                SLACK_MESSAGE: ':test_tube: Test Execution successfully imported to Jira-Xray :rocket:'
+                SLACK_COLOR: ${{ job.status }}
+                SLACK_ICON: https://i.imgur.com/peg9swL.png
 
