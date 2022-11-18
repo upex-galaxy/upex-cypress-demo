@@ -4,20 +4,43 @@ describe("GX-2992 | ToolsQA | Elements | Check Box", () => {
 		cy.visit("https://demoqa.com/checkbox")
         cy.url().should("contain","checkbox") 
 	})
-    it("TC 1 | I want to test the checkboxe | Expand All |",()=>{
+    it("TC1 | I want to test the checkboxe | Expand All |",()=>{
 
-        cy.get("[title='Expand all']").click()
-        cy.get('#tree-node > :nth-child(2) > :nth-child(1) > :nth-child(1) > label > .rct-checkbox > .rct-icon > path').check()
-    })
-    it("TC 2 | I want to test the checkboxe | Collapse All |",()=>{
-        cy.get("[title='Expand all']").click()
-        cy.get("[title='Collapse all']").click()
-    
-    })
-    it("TC 3 | I want to test the checkboxe | Each toggle |",()=>{
+        cy.contains("Home").should("be.visible")
+        cy.get("[aria-label='Expand all']").click()
+        cy.get(".rct-icon.rct-icon-expand-open").should("be.visible")
+        cy.get(".rct-icon.rct-icon-expand-close").should("be.not.exist")
 
     })
-    it("TC 4 | I want to test the checkboxe | Each checkbox |",()=>{
+    it("TC2 | I want to test the checkboxe | Collapse All |",()=>{
+
+        cy.contains("Home").should("be.visible")
+        cy.get("[aria-label='Expand all']").click()
+        cy.get("[aria-label='Collapse all']").click()
+        cy.get(".rct-icon.rct-icon-expand-close").should("be.exist")
+        cy.get(".rct-icon.rct-icon-expand-open").should("be.not.exist")
 
     })
-}) 
+    it("TC3 | I want to test the checkboxe | Select CheckBox All | Select UnCheckBox All",()=>{
+
+        cy.contains("Home").should("have.text", "Home")
+        cy.get("[aria-label='Expand all']").click()
+        cy.get(".rct-icon.rct-icon-expand-open").should("be.visible")
+        cy.get(".rct-icon.rct-icon-uncheck").eq(0).click()
+        cy.get(".rct-icon.rct-icon-check").eq(0).click()
+        cy.get(".rct-icon.rct-icon-check").should("be.not.exist")
+        cy.get(".rct-icon.rct-icon-uncheck").should("be.exist")
+        
+    })
+    /* it("TC4 | I want to test the checkboxe | Each toggle |",()=>{
+
+        cy.get("[type='checkbox']").click(0)
+        cy.get("[type='checkbox']").click(1)
+        cy.get("[for='tree-node-note']").click()
+        cy.get(".rct-icon.rct-icon-check").click()
+        cy.get("#result").should("contain.text","note")
+    })
+    it("TC5 | I want to test the checkboxe | Each checkbox |",()=>{
+
+    }) */
+})
