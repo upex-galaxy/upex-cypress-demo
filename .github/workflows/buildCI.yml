@@ -8,14 +8,16 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: 💻Build
+            - name: 💻Checkout
               uses: actions/checkout@v3
 
-            - name: 🧪Cypress Run - US Test Coverage in Chrome
+            - name: 🧪Cypress Build and Run US Test Coverage in Chrome
               uses: cypress-io/github-action@v4
               with:
                   browser: chrome
-                  command: npm run file */**/GX-203/*.cy.js
+                  command: |
+                    npm i -f
+                    npm run file */**/GX-203/*.cy.js
                   record: true
               env:
                   # pass the Dashboard record key as an environment variable
