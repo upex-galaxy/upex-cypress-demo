@@ -1,6 +1,6 @@
 [![CYPEX L1 DEMO](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/2pw67q&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/2pw67q/runs)
 
-# Testing Automation - Cypress 10.9.0 + Cucumber
+# 🧪Testing Automation: Cypress 11.1.0 + Cucumber
 
 ![UPEX's Banners (linkedin) (1)](https://user-images.githubusercontent.com/91127281/189470339-acea5782-16f1-4f06-9ce0-df54fd3ead9d.png)
 
@@ -17,7 +17,7 @@ Cypress es un Framework de Automatización de Next Generation construido para we
 5. AHORA CON **CYPRESS DASHBOARD**, puedes ver todas las ejecuciones y resultados de prueba del proyecto!
 Visita: [CYPRESS DASHBOARD](https://dashboard.cypress.io/projects/2pw67q/analytics/runs-over-time)
 
-# Las Guías de UPEX para saber cómo trabajar en un Workspace Real están Confluence: [CYPRESS AL GRANO](https://upexgalaxy1.atlassian.net/wiki/spaces/UG/pages/852822)
+# APRENDE Y EXPERIMENTA EN GALAXY CON ESTE CURSO DE AUTOMATION EN CONFLUENCE: [CYPRESS AL GRANO](https://upexgalaxy3.atlassian.net/wiki/spaces/UG/pages/1410643)
 
 # Algunos Artículos de Cypress que puede interesarte:
 
