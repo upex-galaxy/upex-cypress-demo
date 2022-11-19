@@ -424,6 +424,12 @@ Cypress.Commands.add("gotoLogin", ()=>
 	cy.clearLocalStorage()
 })
 
+Cypress.Commands.add("gotoSelectMenuPage", ()=>
+{
+	cy.visit('https://demoqa.com/select-menu')
+	cy.url().should('contain', 'select-menu')
+	
+})
 Cypress.Commands.add("signin", (username, password) =>
 {
     {
