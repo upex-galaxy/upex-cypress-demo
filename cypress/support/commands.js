@@ -454,10 +454,10 @@ Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, subjects, 
 		// *mobile:		
 		mobile && cy.get(the.mobile.input).type(mobile);	
 		
-		// To Open Date-Picker Selector:
+		// Abrir el selector date-picker:
 		cy.get(the.dateOfBirth.input).click();	
 		
-		// year Dropdown is automated as random:		
+		// Fórmula para calcular un año random.	
 		const year = Math.floor(Math.random() * 199);		
 		let $Year;
 		
@@ -469,8 +469,8 @@ Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, subjects, 
 			$Year = yearName.text();
 		});
 
-		// month Dropdown is automated as random:		
-		const month = Math.floor(Math.random() * 12);
+		// Fórmula para calcular un mes random.
+		const month = Math.floor(Math.random() * 11);
 
 		cy.get(the.dateOfBirth.month).select(month);
 		
@@ -547,7 +547,7 @@ Cypress.Commands.add('fillFormRequire', (firstName, lastName, email, mobile, sub
 		
 					$Gender = radioName.text(); // Radio Button Name
 		
-					cy.writeFile('cypress/fixtures/DOM/toolsqa/Form/Data.json', {
+					cy.writeFile('cypress/fixtures/DOM/toolsqa/Form/DataRequire.json', {
 						gender: $Gender
 					});
 				});

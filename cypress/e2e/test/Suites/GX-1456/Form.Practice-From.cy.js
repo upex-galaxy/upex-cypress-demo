@@ -3,6 +3,7 @@ import { faker } from '@faker-js/faker';
 describe('ToolsQA | Forms | Practice Form', () => {
 
 	let the;
+
 	const name  = faker.name;
 	const email = faker.internet;
 	const phone = faker.phone;
@@ -71,15 +72,16 @@ describe('ToolsQA | Forms | Practice Form', () => {
 		cy.contains(the.output).should('be.visible');
 		
 		// Validate all pop-up.			
-		cy.fixture('DOM/toolsqa/Form/Data').then((data) => {
+		cy.fixture('DOM/toolsqa/Form/DataRequire').then((data) => {
 			
 			let gender = data.gender;
-			
+
 			// Cuando no se pickea una fecha, por predeterminado, la fecha es hoy:		
-			const date = new Date()
-			let day    = date.getDate();
-			let month  = date.toLocaleString('default', { month: 'long' });
-			let year   = date.getFullYear();
+			const date = new Date();
+			
+			let day   = date.getDate();
+			let month = date.toLocaleString('default', { month: 'long' });
+			let year  = date.getFullYear();
 			
 			// verifyForm(name, email, gender, mobile, dateOfBirth, subjects, hobbies, picture, address,stateAndCity)
 			cy.verifyForm(firstNameRandom + ' ' + lastNameRandom, // names with faker
