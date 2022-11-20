@@ -22,7 +22,7 @@ describe("GX-2992 | ToolsQA | Elements | Checkbox", () => {
         cy.get(".rct-icon.rct-icon-expand-open").should("be.not.exist")
 
     })
-    it("GX-2992 | TC03 | I want to test the checkboxe | Select CheckBox All | Select uncheckbox all",()=>{
+    it("GX-2992 | TC03 | I want to test the checkboxe | Select CheckBox All | Uncheckbox all",()=>{
 
         cy.contains("Home").should("have.text", "Home")
         cy.get("[aria-label='Expand all']").click()
@@ -62,6 +62,11 @@ describe("GX-2992 | ToolsQA | Elements | Checkbox", () => {
 
     it("GX-2992 | TC06 | I want to test the checkboxe | Each checkbox |",()=>{
 
+        cy.contains("Home").should("have.text", "Home")
+        cy.get("[aria-label='Expand all']").click()
+        cy.get(".rct-icon.rct-icon-expand-open").should("be.visible")
+        cy.get(".rct-icon.rct-icon-uncheck").eq(0).click()
+    
     })
 
 
