@@ -1,10 +1,14 @@
 {
-	"selectDate": "#datePickerMonthYearInput",
-	"selectDateYear": ".react-datepicker__year-select",
-	"month": ".react-datepicker__month-select",
-	"dateAndTimeInput": "#dateAndTimePickerInput",
-    "downArrowDT":".react-datepicker__year-read-view--down-arrow",
-    "dropdownDT":".react-datepicker__year-dropdown",
-	"downArrowDTmoth":".react-datepicker__month-read-view--down-arrow",
-	"dropdownDTmonth":".react-datepicker__month-dropdown"
+	"selectDate": {
+		"input": "#datePickerMonthYearInput",
+		"year": ".react-datepicker__year-select",
+		"month": ".react-datepicker__month-select"
+	},
+	"dateAndTime": {
+		"input": "#dateAndTimePickerInput",
+		"downArrowDT": ".react-datepicker__year-read-view--down-arrow",
+		"dropdownDT": ".react-datepicker__year-dropdown",
+		"downArrowDTmoth": ".react-datepicker__month-read-view--down-arrow",
+		"dropdownDTmonth": ".react-datepicker__month-dropdown"
+	}
 }
