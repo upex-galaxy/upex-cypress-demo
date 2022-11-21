@@ -439,7 +439,7 @@ Cypress.Commands.add("signin", (username, password) =>
 Cypress.Commands.add('dragAndDrop', (searchElement, x, y) => {
 	cy.get(searchElement)
 		.move({deltaX: x, deltaY: y, force: true})
-		//.should('have.attr', 'style', `position: relative; left: ${x}px; top: ${y}px;`);
+		.should('be.visible')
 });
 
 Cypress.Commands.add('dragAndDropX', (searchElement, x, y) => {	
