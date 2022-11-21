@@ -1,77 +1,85 @@
 let datePicker;
-
-// const day = Math.floor(Math.random() * (30 - 0 + 1) + 0);
-// const month = Math.floor(Math.random() * (11) + 1);
-const year = Math.floor(Math.random() * (200) + 1);
-
-
+const year = Math.floor(Math.random() * 201);
 
 describe('GX-2404 ✅ToolsQA | Widgets | Date Picker', () => {
 
     beforeEach(() => {
         cy.fixture('DOM/toolsqa/Widgets/datePicker.Page').then(DPdate => { datePicker = DPdate });
-        cy.viewport(1920, 1080)
+        cy.viewport(1920, 1080);
         cy.visit('/date-picker');
-    })
+        cy.url().should('contain', 'date-picker');
+    });
 
     it('2405 | TC1:  Validar la selección del día, mes y año en el sección “Select Date”', () => {
 
-        cy.get(datePicker.selectDate).click();
-        cy.get(datePicker.selectDateYear)
-            .select(year)
-            .should('have.length', 1);
-        cy.get(datePicker.month).then(($Months) => {
+        cy.get(datePicker.selectDate.input).click();
+        // Selección de Año aleatorio
+        cy.log('Select Year');
+        cy.get(datePicker.selectDate.year).children().should('have.length', 201).then(($year) => {
+            const listYear = $year.length - 1;
+            const yearRandom = Math.floor(Math.random() * listYear);
+            cy.get(datePicker.selectDate.year).select(yearRandom).should('have.length', 1);
+        })
+        // Selección de Mes aleatorio
+        cy.log('Select Month');
+
+        cy.get(datePicker.selectDate.month).then(($Months) => {
             cy.log($Months)
             const list = $Months.children().length - 1
             const monthRandom = Math.floor(Math.random() * list)
             cy.log(monthRandom)
-            cy.wrap($Months).should('have.length', 1).then(($Month) => {
-                // cy.log($Month)
-                // const month = $Month.text().split(',')
-                cy.wrap($Months).should('have.length', 1).select(4)
-                    // .invoke("show").click({ force: true })
-                    .then((miau) => {
-                        cy.log(miau.children())
-                        const miaus = miau.children().text()
-                        cy.wrap(miau).should('have.text', miaus)
-                        cy.get(`[aria-label*="May"]`).then(($daysMonth) => {
-                            const list = $daysMonth.length - 1
-                            const daysRandom = Math.floor(Math.random() * list)
-                            cy.wrap($daysMonth).should('have.length', list + 1).eq(daysRandom).then(($Day) => {
-                                const day = $Day.text()
-                                cy.log(day)
-                                cy.wrap($Day).should('have.text', day).click()
-                            })
-                        })
-                    })
+            cy.wrap($Months).should('have.length', 1).select(4).then(($Month) => {
+                cy.log($Month)
+                const monthName = $Month.text()
+                cy.log(monthName)
 
-            })
-        })
+                // Selección de Día aleatorio
+                cy.log('Select Day');
+                cy.get(`[aria-label*="May"]`).then(($daysMonth) => {
+                    const list = $daysMonth.length - 1;
+                    const daysRandom = Math.floor(Math.random() * list);
+                    cy.wrap($daysMonth).should('have.length', list + 1).eq(daysRandom).then(($Day) => {
+                        const day = $Day.text();
+                        cy.log(day);
+                        cy.wrap($Day).should('have.text', day).click();
 
-    })
+                    });
+                });
+            });
+        });
+    });
+
+
+
     it('2405 | TC2:  Validar la selección del día, mes, año y hora en el sección “Date And Time”', () => {
-        cy.get(datePicker.dateAndTimeInput).click();
-        cy.get(datePicker.downArrowDT).click();
-        cy.get(datePicker.dropdownDT).children().should('have.length', 13).eq(10).click();
-        cy.get(datePicker.downArrowDTmoth).click();
-        cy.get(datePicker.dropdownDTmonth).children().should('have.length', 12).eq(4).click().then(($month) => {
-            const mes = $month.text()
-            cy.log(mes)
+        cy.get(datePicker.dateAndTime.input).click().should('be.visible');
+        // Selección de Año aleatorio
+        cy.log('Select Year');
+        cy.get(datePicker.dateAndTime.downArrowDT).click();
+        cy.get(datePicker.dateAndTime.dropdownDT).children().should('have.length', 13).eq(10).click();
+        // Selección de Mes aleatorio
+        cy.log('Select Month');
+        cy.get(datePicker.dateAndTime.downArrowDTmoth).click();
+        cy.get(datePicker.dateAndTime.dropdownDTmonth).children().should('have.length', 12).eq(4).click().then(($month) => {
+            const mes = $month.text();
+            // Selección de Día aleatorio
+            cy.log('Select Day');
             cy.get(`[aria-label*="${mes}"]`).then(($daysMonth) => {
-                const list = $daysMonth.length - 1
-                const daysRandom = Math.floor(Math.random() * list)
+                const list = $daysMonth.length - 1;
+                const daysRandom = Math.floor(Math.random() * list);
                 cy.wrap($daysMonth).should('have.length', list + 1).eq(daysRandom).then(($Day) => {
-                    const day = $Day.text()
-                    cy.log(day)
-                    cy.wrap($Day).should('have.text', day).click()
-                })
-            })
-        })
-        const timeRandom = Math.floor(Math.random() * 96)
-        cy.get('.react-datepicker__time-list').children().should('have.length', 96).eq(timeRandom)
+                    const day = $Day.text();
+                    cy.wrap($Day).should('have.text', day).click();
+                });
+            });
+        });
+        // Selección de Hora aleatorio
+        cy.log('Select Hour');
+        const timeRandom = Math.floor(Math.random() * 96);
+        cy.get('.react-datepicker__time-list').children().should('have.length', 96).eq(timeRandom);
 
-    })
-})
+    });
+});
 
 Cypress.on('uncaught:exception', (err, runnable) => {
     // returning false here prevents Cypress from
