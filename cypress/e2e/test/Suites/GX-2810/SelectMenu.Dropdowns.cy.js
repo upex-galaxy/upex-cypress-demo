@@ -5,7 +5,7 @@ describe('GX-2810 ToolsQA | Widgets | Dropdown - Select Menu', () => {
         
 	})
 
-	it('2810 | TC01: Validar elemento; Select value', () => {
+	it('2810 | TC1: Validar elemento; Select value', () => {
 		cy.get('#react-select-2-input').click({force: true}).type('A root option').type('{enter}')
 		cy.get('#withOptGroup').contains('A root option')
 	})
@@ -14,7 +14,7 @@ describe('GX-2810 ToolsQA | Widgets | Dropdown - Select Menu', () => {
 		cy.get('#selectOne').click({force: true}).type('Dr.').type('{enter}').click({force: true}).type('{enter}').contains('Dr.')
 	})
 
-	it('2810 | TC03: Validar elemento; Old Style Select Menu', () => {
+	it('2810 | TC3: Validar elemento; Old Style Select Menu', () => {
 		cy.get('#oldSelectMenu').select('Indigo')
 		cy.get('#oldSelectMenu option:selected').invoke('text').should('eq', 'Indigo')
 	})
