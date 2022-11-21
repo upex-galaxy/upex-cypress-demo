@@ -5,21 +5,21 @@ describe('GX-2810 ToolsQA | Widgets | Dropdown - Select Menu', () => {
         
 	})
 
-	it('2810 | TC1: Validar elemento; Select value', () => {
+	it('2811 | TC1: Validar elemento; Select value', () => {
 		cy.get('#react-select-2-input').click({force: true}).type('A root option').type('{enter}')
 		cy.get('#withOptGroup').contains('A root option')
 	})
 
-	it('2810 | TC2: Validar elemento; Select One', () => {
+	it('2811 | TC2: Validar elemento; Select One', () => {
 		cy.get('#selectOne').click({force: true}).type('Dr.').type('{enter}').click({force: true}).type('{enter}').contains('Dr.')
 	})
 
-	it('2810 | TC3: Validar elemento; Old Style Select Menu', () => {
+	it('2811 | TC3: Validar elemento; Old Style Select Menu', () => {
 		cy.get('#oldSelectMenu').select('Indigo')
 		cy.get('#oldSelectMenu option:selected').invoke('text').should('eq', 'Indigo')
 	})
 
-	it('2810 | TC4: Validar elemento; Multiselect drop down', () => {
+	it('2811 | TC4: Validar elemento; Multiselect drop down', () => {
 
         cy.get('#react-select-4-input')
 			.click({force: true})
@@ -43,7 +43,7 @@ describe('GX-2810 ToolsQA | Widgets | Dropdown - Select Menu', () => {
 			.should('deep.equal', ['Blue', 'Green', 'Black', 'Red'])
 	})
 
-	it('2810 | TC5: Validar elemento; Standard multi select', () => {
+	it('2811 | TC5: Validar elemento; Standard multi select', () => {
 		cy.get('#cars').select('Opel')
         cy.get('#cars option:selected').invoke('text').should('eq', 'Opel')
 	})
