@@ -1,6 +1,4 @@
 let datePicker;
-const year = Math.floor(Math.random() * 201);
-
 describe('GX-2404 ✅ToolsQA | Widgets | Date Picker', () => {
 
     beforeEach(() => {
@@ -15,43 +13,42 @@ describe('GX-2404 ✅ToolsQA | Widgets | Date Picker', () => {
         cy.get(datePicker.selectDate.input).click();
         // Selección de Año aleatorio
         cy.log('Select Year');
-        cy.get(datePicker.selectDate.year).children().should('have.length', 201).then(($year) => {
-            const listYear = $year.length - 1;
-            const yearRandom = Math.floor(Math.random() * listYear);
-            cy.get(datePicker.selectDate.year).select(yearRandom).should('have.length', 1);
-        })
-        // Selección de Mes aleatorio
-        cy.log('Select Month');
+        const yearRandom = Math.floor(Math.random() * 201);
+        cy.get(datePicker.selectDate.year).select(yearRandom)
 
-        cy.get(datePicker.selectDate.month).then(($Months) => {
-            cy.log($Months)
-            const list = $Months.children().length - 1
-            const monthRandom = Math.floor(Math.random() * list)
-            cy.log(monthRandom)
-            cy.wrap($Months).should('have.length', 1).select(4).then(($Month) => {
-                cy.log($Month)
-                const monthName = $Month.text()
-                cy.log(monthName)
+        // Seleccionar el Dropdown de Mes:
+        let MonthSelected;
+        // cy.get(datePicker.selectDate.input).click();
+        cy.get(datePicker.selectDate.month).children().then((months)=>{
+            const randomMonth = Math.floor(Math.random() * 11)
+            // Utilizar el Agarrable: 
+            cy.wrap(months).eq(randomMonth).then(($Month)=>{
+                MonthSelected = $Month.text()
+                cy.log(MonthSelected)
+                // Utilizar el Accionable:
+                cy.get(datePicker.selectDate.month).select(randomMonth)
+                
+                cy.get("[class*='hasMonthDropdown']").should("contain.text", MonthSelected)
 
-                // Selección de Día aleatorio
+                 // Selección de Día aleatorio
                 cy.log('Select Day');
-                cy.get(`[aria-label*="May"]`).then(($daysMonth) => {
+                cy.get(`[aria-label*='${MonthSelected}']`).then(($daysMonth) => {
                     const list = $daysMonth.length - 1;
                     const daysRandom = Math.floor(Math.random() * list);
                     cy.wrap($daysMonth).should('have.length', list + 1).eq(daysRandom).then(($Day) => {
                         const day = $Day.text();
                         cy.log(day);
                         cy.wrap($Day).should('have.text', day).click();
-
                     });
                 });
-            });
-        });
+
+            })
+        })
     });
 
 
 
-    it('2405 | TC2:  Validar la selección del día, mes, año y hora en el sección “Date And Time”', () => {
+    it.skip('2405 | TC2:  Validar la selección del día, mes, año y hora en el sección “Date And Time”', () => {
         cy.get(datePicker.dateAndTime.input).click().should('be.visible');
         // Selección de Año aleatorio
         cy.log('Select Year');
