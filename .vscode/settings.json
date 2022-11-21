@@ -80,7 +80,7 @@
 		"BDD Stories": "rules",
 		"feature-example": "rules",
 		"us-example": "Storybook",
-		"suite-example": "test",
+		"Step-Definitions": "test",
 		"suites": "test",
 		"cucumber-json": "Resolver",
 		"DOM": "class",
@@ -111,5 +111,8 @@
 		"ParseHAR": false,
 		"mockAutocomplete": false
 	},
-	"cSpell.autoFormatConfigFile": true
+	"cSpell.autoFormatConfigFile": true,
+	"githubPullRequests.ignoredPullRequestBranches": [
+		"cypex"
+	]
 }

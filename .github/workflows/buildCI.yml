@@ -1,0 +1,59 @@
+# 🧙🏻‍♂️BIENVENIDO A LOS PIPELINES DE CONTINUOUS INTEGRATION DE "ARI - Hija de Aurora"!
+# 🤖Este Pipeline de CI se activa al PUSHEAR, y consiste en ejecutar los tests de una US e importar los resultados a Jira!🚀
+# 👩🏻‍🔬Para utilizar este Pipeline de Ari, sigue los siguientes pasos:
+#     1ro: debes modificar el script: "npm run file" + tu archivo de Prueba Ejecutable (ver ejemplo en este archivo) 
+#     2do: debes modificar la propiedad: "testExecKey:" + tu ID del TX de Jira para importar automáticamente el resultado.
+#     3ro: guarda los cambios en el repositorio local (git add + git commit) y envíalos al Repo Remoto (git push)
+#     Expected Result: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí. 
+
+name: 🤖CI run (BUILD) Test Suite Execution⚡
+run-name: ${{github.actor}}👨🏻‍🔬 - ${{github.ref_name}}
+
+on: [push]
+
+jobs:
+    Build-Cypress-TestSuite-AfterPush:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 💻Checkout
+              uses: actions/checkout@v3
+
+            - name: 🧪Cypress Build and Run US Test Coverage in Chrome
+              uses: cypress-io/github-action@v4
+              with:
+                  browser: chrome
+                  command: |
+                    npm run file */**/GX-203/*.cy.js
+                  record: true
+              env:
+                  # pass the Dashboard record key as an environment variable
+                  CYPRESS_RECORD_KEY: ${{ secrets.CYPEX_DEMO_RECORD_KEY }}
+                  # pass GitHub token to allow accurately detecting a build vs a re-run build
+                  GITHUB_TOKEN: ${{ secrets.UPEX_GITHUB_TOKEN }}
+
+            - name: 📊Upload Artifact by Fail
+              uses: actions/upload-artifact@v3
+              if: failure()
+              with:
+                  name: cypress-screenshots
+                  path: cypress/screenshots
+
+            - name: ✅Import Test Results to Xray
+              uses: mikepenz/xray-action@v2
+              with:
+                  username: ${{secrets.XRAY_CLIENT_ID}}
+                  password: ${{secrets.XRAY_CLIENT_SECRET}}
+                  testFormat: 'junit'
+                  testPaths: 'reports/test-results.xml'
+                  testExecKey: 'GX-223'
+                  projectKey: 'GX'
+            - name: 🔔Slack Notification of Done
+              uses: rtCamp/action-slack-notify@v2.2.0
+              env:
+                SLACK_WEBHOOK: https://hooks.slack.com/services/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
+                SLACK_USERNAME: Ari✨
+                SLACK_MESSAGE: ':test_tube: Test Execution successfully imported to Jira-Xray :rocket:'
+                SLACK_COLOR: ${{ job.status }}
+                SLACK_ICON: https://i.imgur.com/peg9swL.png
+

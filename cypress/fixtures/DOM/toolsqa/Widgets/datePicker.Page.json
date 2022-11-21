@@ -1,8 +1,8 @@
 {
 	"selectDate": {
 		"input": "#datePickerMonthYearInput",
-		"year": ".react-datepicker__year-select",
-		"month": ".react-datepicker__month-select"
+		"year": "[class*='year-select']",
+		"month": "[class*='month-select']"
 	},
 	"dateAndTime": {
 		"input": "#dateAndTimePickerInput",
