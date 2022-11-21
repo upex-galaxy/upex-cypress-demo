@@ -291,6 +291,36 @@ Cypress.Commands.add('getItemSelected', () => {
 })
 //Fin Commands para el componente Element|TextBox
 
+//This command is only for verify if the user is register (if is not registeer then it's procceded ) 
+Cypress.Commands.add('userIsRegister', () => {
+	cy.fixture("DOM/toolsqa/BookStoreApplications/createBook.Page").then((the) => {
+		cy.request({
+			method: 'POST',
+			failOnStatusCode: false,
+			url: 'https://demoqa.com/Account/v1/User',
+			body: { "userName": the.user.name.data,"password": the.user.password.data },
+		}).then((res)=>{
+		if(res.status==201){
+			//if we need to store de userId in the json
+			the.user.id = res.body.userID
+			cy.writeFile('cypress/fixtures/DOM/toolsqa/BookStoreApplications/createBook.Page.json', the)//write userId in the json
+		}})
+		cy.request({
+			method: 'POST',
+			url: 'https://demoqa.com/Account/v1/GenerateToken',
+			body: { "userName": the.user.name.data,"password": the.user.password.data },
+		}).then((res)=>{
+			the.user.token = res.body.token
+			cy.writeFile('cypress/fixtures/DOM/toolsqa/BookStoreApplications/createBook.Page.json', the)//write userId in the json
+		})
+		cy.request({
+			method: 'POST',
+			url: 'https://demoqa.com/Account/v1/Authorized',
+			body: { "userName": the.user.name.data,"password": the.user.password.data },
+		})
+	})
+})
+
 //Cypress.Commands.add('',
 // 👾🚩🚩🚩☝🏻☝🏻☝🏻COMIENZA A ESCRIBIR TU NUEVO COMMAND AQUÍ! A PARTIR DE ESTA LÍNEA DISPONIBLE☝🏻☝🏻☝🏻✅
 

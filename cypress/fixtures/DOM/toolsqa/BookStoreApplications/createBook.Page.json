@@ -1,0 +1,24 @@
+{
+  "user": {
+    "name": {
+      "data": "LauraMontaño",
+      "input": "#userName"
+    },
+    "password": {
+      "data": "L@ur@1998",
+      "input": "#password"
+    },
+    "id": "0e2e36e2-721d-4292-b493-103ac8786887",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkxhdXJhTW9udGHDsW8iLCJwYXNzd29yZCI6IkxAdXJAMTk5OCIsImlhdCI6MTY2OTA2Njc4OX0.1UdhI89Gasguc4tL2z3PbIE04ij_UUZTrvsxNen_uJE"
+  },
+  "LoginBtn": "#login",
+  "msj": {
+    "bookExist": "Book already present in the your collection!",
+    "bookAdded": "Book added to your collection."
+  },
+  "url": {
+    "base": "https://demoqa.com",
+    "bookStore": "https://demoqa.com/books",
+    "profile": "https://demoqa.com/profile"
+  }
+}
