@@ -1,4 +1,4 @@
-import {SelectablePage} from "../../../../support/Pages/GX-3041/SelectablePage"
+import {SelectablePage} from "../../../../support/Pages/GX-3040/SelectablePage"
 
 describe('ToolsQA | Interactions | Sortable', () => {
 	const selectablepage = new SelectablePage();
@@ -8,7 +8,7 @@ describe('ToolsQA | Interactions | Sortable', () => {
 		cy.url().should('contain', 'sortable')
 	})
 	
-	it('GX-3040|TC1:Validar que se visualice correctamente las pestañas “Lista” y “Grid”',()=> {
+	xit('3040|TC1:Validar que se visualice correctamente las pestañas “Lista” y “Grid”',()=> {
         //visualizar las pestañas losa y grid
 		selectablepage.validarContenidoLista().contains("List")
 		selectablepage.validarContenidoGrid().contains("Grid")
@@ -26,17 +26,23 @@ describe('ToolsQA | Interactions | Sortable', () => {
 		selectablepage.validarContenidoGrid().should('not.have.class', 'active')
 	}) 
 
-    it('GX-3040|TC2:Validar el comportamiento al arrastar un elemento en la lista de items', ()=> {
+    it('3040|TC2:Validar el comportamiento al arrastar un elemento en la lista de items', ()=> {
     
 	//Validar la pestaña “lista“ muestre por default  los items del 1 al 9.
-	cy.get("[.list-group-item]").should('have.text', 'One')
+	selectablepage.validarItemsLista().contains("One")
+	cy.get(".vertical-list-container>.list-group-item").should('have.length',6)
+	
+	cy.get(".vertical-list-container>.list-group-item").contains("Three")
+	cy.get(".vertical-list-container>.list-group-item").contains("Four")
+	cy.get(".vertical-list-container>.list-group-item").contains("Five")
+	cy.get(".vertical-list-container>.list-group-item").contains("Six")
 	//Validar la pestaña “lista “ cuando se arraste un elemento entre otros elementos de la lista debe permanecer en el orden seleccionado y debe permitir colocar el elemento en cualquier orden.
 
 
 })
   
 
-    xit('GX-3040|TC3:Validar el comportamiento al arrastar un elemento en el grid de items',()=> {
+    xit('3040|TC3:Validar el comportamiento al arrastar un elemento en el grid de items',()=> {
    
 	//GX-3040|TC6:Validar la pestaña “grid“ muestre por default  los items del 1 al 9 ordenado de arriba hacia abajo.
 
