@@ -54,7 +54,7 @@ describe('ToolsQA | Interactions | Sortable', () => {
 			.trigger("mousemove", 50, -50	, { force: true })
 			cy.get(".vertical-list-container>.list-group-item").contains("Three").next().click()
 			.trigger("mouseup", { force: true });
-
+		  
 	  
 })
 })
