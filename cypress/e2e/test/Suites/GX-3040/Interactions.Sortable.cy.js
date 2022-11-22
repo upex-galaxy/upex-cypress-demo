@@ -27,18 +27,36 @@ describe('ToolsQA | Interactions | Sortable', () => {
 	}) 
 
     it('3040|TC2:Validar el comportamiento al arrastar un elemento en la lista de items', ()=> {
-    
+	//	const dataTransfer = new DataTransfer();
 	//Validar la pestaña “lista“ muestre por default  los items del 1 al 9.
-	selectablepage.validarItemsLista().contains("One")
-	cy.get(".vertical-list-container>.list-group-item").should('have.length',6)
 	
-	cy.get(".vertical-list-container>.list-group-item").contains("Three")
-	cy.get(".vertical-list-container>.list-group-item").contains("Four")
-	cy.get(".vertical-list-container>.list-group-item").contains("Five")
-	cy.get(".vertical-list-container>.list-group-item").contains("Six")
+	//validar la cantidad de elementos 
+	cy.get(".vertical-list-container>.list-group-item").should('have.length',6)
+	//validar la lista de 6 valores
+	selectablepage.validarItemsLista().contains("One")	
+	selectablepage.validarItemsLista().contains("Two")
+	selectablepage.validarItemsLista().contains("Three")
+	selectablepage.validarItemsLista().contains("Four")
+	selectablepage.validarItemsLista().contains("Five")
+	selectablepage.validarItemsLista().contains("Six")
 	//Validar la pestaña “lista “ cuando se arraste un elemento entre otros elementos de la lista debe permanecer en el orden seleccionado y debe permitir colocar el elemento en cualquier orden.
+	
+		
+	cy.get('.vertical-list-container>.list-group-item').first()
+	.trigger('mousedown',  { button: 0 }, { force: true })
+		.trigger("mousemove", 50, -50	, { force: true })
+		cy.get(".vertical-list-container>.list-group-item").first().next().click()
+		.trigger("mouseup", { force: true });
+	  
 
+		cy.get('.vertical-list-container>.list-group-item').contains("Three")
+		.trigger('mousedown',  { button: 0 }, { force: true })
+			.trigger("mousemove", 50, -50	, { force: true })
+			cy.get(".vertical-list-container>.list-group-item").contains("Three").next().click()
+			.trigger("mouseup", { force: true });
 
+	  
+})
 })
   
 
@@ -52,7 +70,7 @@ describe('ToolsQA | Interactions | Sortable', () => {
 	})      
       
 
-})
+//})
 
 
 
