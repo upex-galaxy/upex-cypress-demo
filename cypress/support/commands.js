@@ -430,6 +430,14 @@ Cypress.Commands.add("gotoSelectMenuPage", ()=>
 	cy.url().should('contain', 'select-menu')
 	
 })
+
+Cypress.Commands.add("gotoButtonsPage", ()=>
+{
+	cy.visit('https://demoqa.com/buttons')
+	cy.url().should('contain', 'buttons')
+	
+})
+
 Cypress.Commands.add("signin", (username, password) =>
 {
     {
