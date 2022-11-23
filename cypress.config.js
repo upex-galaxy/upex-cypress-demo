@@ -27,7 +27,7 @@ module.exports = defineConfig({
 	// E2E Testing runner
 	e2e: {
 		// Enables cross-origin and improved session support, including the cy.origin and cy.session commands:
-		experimentalSessionAndOrigin: true,
+		experimentalSessionAndOrigin: false,
 		// Use Cypress plugins:
 		setupNodeEvents(on, config) {
 			on('task', {downloadFile})
