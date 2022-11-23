@@ -156,18 +156,18 @@ Cypress.Commands.add('ErrorCard', () => {
 		cy.get(the.error).should('be.visible').and('contain.text', 'Epic sadface: Username and password do not match any user in this service')
 	})
 })
-Cypress.Commands.add('DragDrop', (obj, X, Y) => {
-	cy.get(obj).move({deltaX: X, deltaY: Y})
-	cy.get(obj).should('have.attr', 'style', `position: relative; left: ${X}px; top: ${Y}px;`)
-})
-Cypress.Commands.add('DragDropX', (obj, X, Y) => {
-	cy.get(obj).move({deltaX: X, deltaY: Y})
-	cy.get(obj).should('have.attr', 'style', `position: relative; left: ${X}px; top: 0px;`)
-})
-Cypress.Commands.add('DragDropY', (obj, X, Y) => {
-	cy.get(obj).move({deltaX: X, deltaY: Y})
-	cy.get(obj).should('have.attr', 'style', `position: relative; left: 0px; top: ${Y}px;`)
-})
+// For GX-2348-✅-tools-qa-interactions-dragabble
+Cypress.Commands.add('dragAndDrop', (searchElement, x, y) => {
+	cy.get(searchElement).move({deltaX: x, deltaY: y, force: true}).should('be.visible')
+});
+Cypress.Commands.add('dragAndDropX', (searchElement, x, y) => {	
+	cy.get(searchElement).move({deltaX: x, deltaY: y})
+		.should('have.attr', 'style', `position: relative; left: ${x}px; top: 0px;`);
+});
+Cypress.Commands.add('dragAndDropY', (searchElement, x, y) => {	
+	cy.get(searchElement).move({deltaX: x, deltaY: y})
+		.should('have.attr', 'style', `position: relative; left: 0px; top: ${y}px;`);
+}); 
 
 Cypress.Commands.add('LoginAdmin', () => {
 	cy.fixture('DOM/orange/Login.Page').then((the) => {
