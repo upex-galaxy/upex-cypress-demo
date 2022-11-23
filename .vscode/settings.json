@@ -68,11 +68,16 @@
 		"*.Page.js": "3d",
 		"*.js": "Cypress",
 		"commands.js": "webpack",
+		"*.yml": "todo",
 		"*.json": "Cypress",
+		"main.js": "console",
 		".cypress-cucumber-preprocessorrc.json": "cucumber",
 		"cucumber-report.json": "cucumber",
 		"jsconfig.json": "Javascript-map",
-		"settings.json": "Vscode"
+		"settings.json": "Vscode",
+		"launch.json": "http",
+		"package-lock.json": "npm",
+		"package.json": "npm"
 	},
 	"material-icon-theme.folders.associations": {
 		"api-testing": "api",
@@ -80,7 +85,6 @@
 		"ui-testing": "app",
 		"BDD Stories": "rules",
 		"feature-example": "rules",
-		"us-example": "Storybook",
 		"Step-Definitions": "test",
 		"suites": "test",
 		"cucumber-json": "Resolver",
