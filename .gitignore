@@ -6,3 +6,4 @@ cypress/screenshots
 mochawesome-report/
 reports/
 .vscode/settings.json
+.DS_Store

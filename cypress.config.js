@@ -6,8 +6,8 @@ module.exports = defineConfig({
 	// @Ely: AHORA TENEMOS NUESTRO PROPIO CYPRESS DASHBOARD PARA VER NUESTRAS EJECUCIONES EN LA WEB:
 	projectId: '2pw67q',
 	// 1280×720 is considered to be the most suitable screen resolution for the desktop website version:
-	viewportWidth: 1280,
-	viewportHeight: 720,
+	viewportWidth: 1000,
+	viewportHeight: 660,
 	// Whether Cypress will watch and restart tests on test file changes:
 	watchForFileChanges: false,
 	// En Caso de hacer testing en SUT con seguridad web:
