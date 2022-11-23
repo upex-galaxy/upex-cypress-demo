@@ -70,7 +70,7 @@
 		"commands.js": "webpack",
 		"*.yml": "todo",
 		"*.json": "Cypress",
-		"main.js": "console",
+		"scripts.js": "console",
 		".cypress-cucumber-preprocessorrc.json": "cucumber",
 		"cucumber-report.json": "cucumber",
 		"jsconfig.json": "Javascript-map",
