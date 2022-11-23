@@ -1,0 +1,14 @@
+{
+    "tabSimple": "#draggableExample-tab-simple",
+    "tabAxisRestricted": "#draggableExample-tab-axisRestriction",
+    "tabContainerRestricted": "#draggableExample-tab-containerRestriction",
+    "tabCursorStyle": "#draggableExample-tab-cursorStyle",
+    "dragBox": "#dragBox",
+    "restrictedX": "#restrictedX",
+    "restrictedY": "#restrictedY",
+    "containerWrapper": "#containmentWrapper",
+    "draggable": ".draggable",
+    "cursorCenter": "#cursorCenter",
+    "cursorTopLeft": "#cursorTopLeft",
+    "cursorBottom": "#cursorBottom"
+}
