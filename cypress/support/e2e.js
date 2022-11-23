@@ -17,7 +17,8 @@
 import './commands'
 import 'cypress-react-selector';
 import "cypress-real-events/support";
+import 'cypress-wait-until';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
-require('cypress-plugin-api')
+require('cy-verify-downloads').addCustomCommand();

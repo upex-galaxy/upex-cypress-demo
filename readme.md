@@ -41,7 +41,8 @@ Cypress es un Framework de Automatización de Next Generation construido para we
 5. AHORA CON **CYPRESS DASHBOARD**, puedes ver todas las ejecuciones y resultados de prueba del proyecto!
 Visita: [CYPRESS DASHBOARD](https://dashboard.cypress.io/projects/2pw67q/analytics/runs-over-time)
 
-# APRENDE Y EXPERIMENTA EN GALAXY CON ESTE CURSO DE AUTOMATION EN CONFLUENCE: [CYPRESS AL GRANO](https://upexgalaxy3.atlassian.net/wiki/spaces/UG/pages/1410643)
+## APRENDE Y GANA EXPERIENCIA TRABAJANDO COMO QA AUTOMATION EN GALAXY: 
+# LEE ESTA GUÍA: [CYPRESS AL GRANO](https://upexgalaxy3.atlassian.net/wiki/spaces/UG/pages/1410643)
 
 # Algunos Artículos de Cypress que puede interesarte:
 

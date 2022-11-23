@@ -7,7 +7,7 @@
 #     Expected Result: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí. 
 
 name: 🤖CI run (BUILD) Test Suite Execution⚡
-run-name: ${{github.actor}}👨🏻‍🔬 - ${{github.ref_name}}
+run-name: ${{github.actor}}👨🏻‍🔬 run Tests in ${{github.ref_name}}
 
 on: [push]
 
