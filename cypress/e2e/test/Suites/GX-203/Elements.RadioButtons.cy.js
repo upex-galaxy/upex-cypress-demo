@@ -1,6 +1,6 @@
 describe('ToolsQA | Elements | Radio Buttons', () => {
     
-    const US = 'US 203';
+    const US = '209';
     
     beforeEach('Precondición: Estar situado en elements/radiobuttons', () => {
         cy.visit('https://demoqa.com/radio-button');
