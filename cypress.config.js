@@ -1,6 +1,6 @@
 const {defineConfig} = require('cypress')
 const {downloadFile} = require('cypress-downloadfile/lib/addPlugin')
-const {isFileExist, findFiles} = require('cy-verify-downloads')
+const { verifyDownloadTasks } = require('cy-verify-downloads');
 
 module.exports = defineConfig({
 	// @Ely: AHORA TENEMOS NUESTRO PROPIO CYPRESS DASHBOARD PARA VER NUESTRAS EJECUCIONES EN LA WEB:
@@ -31,7 +31,7 @@ module.exports = defineConfig({
 		// Use Cypress plugins:
 		setupNodeEvents(on, config) {
 			on('task', {downloadFile})
-			on('task', {isFileExist, findFiles})
+			on('task', verifyDownloadTasks);
 			return require('./cypress/plugins/index.js')(on, config)
 		},
 		// Glob pattern to determine what test files to load:

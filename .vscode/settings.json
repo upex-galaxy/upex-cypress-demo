@@ -20,7 +20,7 @@
 	"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
 	"cucumberautocomplete.stepRegExSymbol": "'",
 	"window.zoomLevel": 1,
-	"workbench.colorTheme": "SynthWave '84",
+	"workbench.colorTheme": "Shades of Purple",
 	"cSpell.language": "en,es",
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -28,7 +28,7 @@
 		"editor.defaultFormatter": "vscode.html-language-features"
 	},
 	"[javascript]": {
-		"editor.defaultFormatter": "vscode.typescript-language-features"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[Typescript]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -65,6 +65,7 @@
 		"*.tx.js": "Test-jsx",
 		"*.cy.js": "Test-js",
 		"*.Page.json": "3d",
+		"*.Page.js": "3d",
 		"*.js": "Cypress",
 		"commands.js": "webpack",
 		"*.json": "Cypress",
@@ -84,7 +85,8 @@
 		"suites": "test",
 		"cucumber-json": "Resolver",
 		"DOM": "class",
-		"DesignPatterns": "context",
+		"POM": "context",
+		"Pages": "context",
 		"How-to": "content",
 		"US": "Storybook",
 		"test-plan": "meta",
