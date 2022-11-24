@@ -5,6 +5,3 @@ cypress/downloads
 cypress/screenshots
 mochawesome-report/
 reports/
-.vscode/settings.json
-.DS_Store
-.vscode/debug/scripts.js
