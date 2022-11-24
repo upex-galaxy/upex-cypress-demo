@@ -1,3 +1,4 @@
+.DS_Store
 node_modules/
 cypress/videos
 cypress/downloads
@@ -5,3 +6,4 @@ cypress/screenshots
 mochawesome-report/
 reports/
 .vscode/settings.json
+.DS_Store
