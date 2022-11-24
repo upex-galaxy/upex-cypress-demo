@@ -13,7 +13,7 @@ describe('GX-3503 ToolsQA | Elements | Buttons', () => {
 		cy.get('#rightClickMessage').invoke('text').should('eq', 'You have done a right click')
 	})
 
-	it.only('3504 | TC3: Dynamic-Click', () => {
+	it('3504 | TC3: Dynamic-Click', () => {
 		//uso plugin cypress-xpath
 		cy.xpath('//button[text()="Click Me"]').click()
 		cy.get('#dynamicClickMessage').invoke('text').should('eq', 'You have done a dynamic click')
