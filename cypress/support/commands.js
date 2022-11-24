@@ -7,7 +7,7 @@ import 'cypress-file-upload'
 import 'cypress-wait-until'
 require('@4tw/cypress-drag-drop')
 require('cypress-downloadfile/lib/downloadFileCommand')
-require('cy-verify-downloads').addCustomCommand()
+//require
 //require
 //require
 
@@ -34,12 +34,16 @@ Cypress.Commands.add('btnClick', () => {
 	})
 })
 
-Cypress.Commands.add('getUrl', (url, contain) => {
-	cy.visit(url)
-	cy.url().should('contain', contain)
-	cy.clearCookies()
+Cypress.Commands.add('getUrl', (url, contain, title, protocol, hostname) => 
+{
+	cy.visit(url);
+	contain && cy.url().should('contain', contain);
+	title && cy.title().should('eq', title);
+	protocol && cy.location('protocol').should('contains', protocol);
+	hostname && cy.location('hostname').should('eq', hostname);
+	cy.clearCookies();
 	cy.clearLocalStorage()
-})
+});
 
 Cypress.Commands.add('buttonClickDownload', (file) => {
 	cy.fixture('DOM/toolsqa/Elements/UploadAndDownload.Page').then((the) => {
@@ -156,18 +160,18 @@ Cypress.Commands.add('ErrorCard', () => {
 		cy.get(the.error).should('be.visible').and('contain.text', 'Epic sadface: Username and password do not match any user in this service')
 	})
 })
-Cypress.Commands.add('DragDrop', (obj, X, Y) => {
-	cy.get(obj).move({deltaX: X, deltaY: Y})
-	cy.get(obj).should('have.attr', 'style', `position: relative; left: ${X}px; top: ${Y}px;`)
-})
-Cypress.Commands.add('DragDropX', (obj, X, Y) => {
-	cy.get(obj).move({deltaX: X, deltaY: Y})
-	cy.get(obj).should('have.attr', 'style', `position: relative; left: ${X}px; top: 0px;`)
-})
-Cypress.Commands.add('DragDropY', (obj, X, Y) => {
-	cy.get(obj).move({deltaX: X, deltaY: Y})
-	cy.get(obj).should('have.attr', 'style', `position: relative; left: 0px; top: ${Y}px;`)
-})
+// For GX-2348-✅-tools-qa-interactions-dragabble
+Cypress.Commands.add('dragAndDrop', (searchElement, x, y) => {
+	cy.get(searchElement).move({deltaX: x, deltaY: y, force: true}).should('be.visible')
+});
+Cypress.Commands.add('dragAndDropX', (searchElement, x, y) => {	
+	cy.get(searchElement).move({deltaX: x, deltaY: y})
+		.should('have.attr', 'style', `position: relative; left: ${x}px; top: 0px;`);
+});
+Cypress.Commands.add('dragAndDropY', (searchElement, x, y) => {	
+	cy.get(searchElement).move({deltaX: x, deltaY: y})
+		.should('have.attr', 'style', `position: relative; left: 0px; top: ${y}px;`);
+}); 
 
 Cypress.Commands.add('LoginAdmin', () => {
 	cy.fixture('DOM/orange/Login.Page').then((the) => {
@@ -392,6 +396,204 @@ Cypress.Commands.add('deseleccionarTabGrid', () => {
 	})
 })
 
+Cypress.Commands.add('fillForm', (firstName, lastName, email, mobile, subjects, currentAddress, state, city) => {
+	
+	cy.fixture('DOM/toolsqa/Form/Form.page').then((the) => {
+
+		// *firstName:
+		firstName && cy.get(the.firstName.input).type(firstName);	
+		
+		// *lastName:
+		lastName && cy.get(the.lastName.input).type(lastName);
+		
+		// *email:
+		email && cy.get(the.email.input).type(email);		
+		
+		// Gender is automated:
+		let $Gender;
+
+		cy.get(the.gender.input).then((genders) => {
+			
+			// 0 es Male, 1 es Female, Other es 2.
+			const $genButton = Math.floor(Math.random() * (genders.length - 1)); 
+			
+			cy.wrap(genders).eq($genButton).then((radioBtn) => {
+			
+				cy.wrap(radioBtn).next().then((radioName) => {
+			
+					$Gender = radioName.text(); // Radio Button Name
+				});
+			
+				// Selecciona un Gender random (0, 1, o 2)
+				cy.wrap(radioBtn).click({force:true}) 
+			});
+
+		});	// Automated Done.
+
+		// Hobbies is automated:	
+		let $Hobbies;
+		
+		cy.get(the.hobbies.input).then((hobbies) => {
+			
+			// 0 es Sports, 1 es Reading, Music es 2.
+			const $hobButton = Math.floor(Math.random() * (hobbies.length - 1)); 
+			
+			cy.wrap(hobbies).eq($hobButton).then((checkBox) => {
+			
+				cy.wrap(checkBox).next().then((checkName) => { // Check Box Button
+				
+					$Hobbies = checkName.text(); // Name of the Button
+				});
+
+				// Selecciona un Hobby random (0, 1, o 2)
+				cy.wrap(checkBox).check({force:true}); 
+			});
+
+		});	// Automated Done.	
+		
+		// *mobile:		
+		mobile && cy.get(the.mobile.input).type(mobile);	
+		
+		// Abrir el selector date-picker:
+		cy.get(the.dateOfBirth.input).click();	
+		
+		// Fórmula para calcular un año random.	
+		const year = Math.floor(Math.random() * 199);		
+		let $Year;
+		
+		cy.get(the.dateOfBirth.year).select(year);
+
+		// Busca el elemento year
+		cy.get(the.dateOfBirth.year).children().eq(year).then((yearName) => {			
+			
+			$Year = yearName.text();
+		});
+
+		// Fórmula para calcular un mes random.
+		const month = Math.floor(Math.random() * 11);
+
+		cy.get(the.dateOfBirth.month).select(month);
+		
+		// Choose Day is Automated as random:
+		cy.get(the.dateOfBirth.month).children().eq(month).then(($currentMonth) => {
+			
+			const $Month = $currentMonth.text();
+
+			cy.get(`[aria-label*='${$Month}']`).then((max) => {
+							
+				// Fórmula para calcular un día random.
+				const day = Math.floor((Math.random() * (max.length - 1)) + 1);	
+
+				// El * busca todas las palabras que contengan
+				cy.get(`[aria-label*='${$Month}']`).eq(day).click({force: true});				
+
+				const $Day = (day+1).toString();
+
+				// Sirve para generar un archivo fixture
+				cy.writeFile('cypress/fixtures/DOM/toolsqa/Form/Data.json', {
+					month: $Month,
+					year: $Year,
+					day: $Day,
+					gender: $Gender,
+					hobbies: $Hobbies
+				});
+			});
+		});
+
+		// *subjects:	
+		subjects && cy.get(the.subjects.input).type(`${subjects}{enter}`, {force: true});	
+		
+		// attachFile is automated:	
+		cy.get(the.picture.input).attachFile('images/upexlogo');
+		
+		// *currentAddress:			
+		currentAddress && cy.get(the.currentAddress.input).type(currentAddress);	
+		
+		// *state:		
+		state && cy.get(the.state.input).eq(1).type(state);
+		
+		// *city:		
+		city && cy.get(the.city.input).eq(2).type(city);
+		
+		// Click on the Submit Button.
+		cy.get(the.submit).click({force: true});			
+	});
+});
+
+Cypress.Commands.add('fillFormRequire', (firstName, lastName, email, mobile, subjects, currentAddress, state, city) => {
+	
+	cy.fixture('DOM/toolsqa/Form/Form.page').then((the) => {
+
+		// *firstName:
+		firstName && cy.get(the.firstName.input).type(firstName);	
+		
+		// *lastName:
+		lastName && cy.get(the.lastName.input).type(lastName);
+		
+		// *email:
+		email && cy.get(the.email.input).type(email);		
+		
+		// Gender is automated:
+		let $Gender;
+		
+		cy.get(the.gender.input).then((genders) => {
+		
+			// 0 es Male, 1 es Female, Other es 2.
+			const $genButton = Math.floor(Math.random() * (genders.length - 1));
+		
+			cy.wrap(genders).eq($genButton).then((radioBtn) => {
+		
+				cy.wrap(radioBtn).next().then((radioName) => {
+		
+					$Gender = radioName.text(); // Radio Button Name
+		
+					cy.writeFile('cypress/fixtures/DOM/toolsqa/Form/DataRequire.json', {
+						gender: $Gender
+					});
+				});
+		
+				// Selecciona un Gender random (0, 1, o 2)
+				cy.wrap(radioBtn).click({force:true}); 
+			});
+		}); // Automated Done.
+		
+		// *mobile:		
+		mobile && cy.get(the.mobile.input).type(mobile);	
+
+		// *subjects:	
+		subjects && cy.get(the.subjects.input).type(`${subjects}{enter}`, {force: true});	
+		
+		// *currentAddress:			
+		currentAddress && cy.get(the.currentAddress.input).type(currentAddress);	
+		
+		// *state:		
+		state && cy.get(the.state.input).eq(1).type(state);
+		
+		// *city:		
+		city && cy.get(the.city.input).eq(2).type(city);
+		
+		// Click on the Submit Button.
+		cy.get(the.submit).click({force: true});			
+	});
+});
+
+Cypress.Commands.add('verifyForm', (name, email, gender, mobile, dateOfBirth, subjects, hobbies, picture, address,stateAndCity) => {
+	
+	cy.get('.modal-body').within(($popup) => {
+
+		cy.contains('Student Name').next().should('have.text', name);
+		cy.contains('Student Email').next().should('have.text', email);
+		cy.contains('Gender').next().should('have.text', gender);
+		cy.contains('Mobile').next().should('have.text', mobile);
+		cy.contains('Date of Birth').next().should('contain.text', dateOfBirth);
+		cy.contains('Subjects').next().should('have.text', subjects);
+		cy.contains('Hobbies').next().should('have.text', hobbies);
+		cy.contains('Picture').next().should('have.text', picture);
+		cy.contains('Address').next().should('have.text', address);
+		cy.contains('State and City').next().should('have.text', stateAndCity);
+	});
+});
+
 //FIN Commands para el componente Interactions|Selectable
 
 //Cypress.Commands.add('',
@@ -424,6 +626,20 @@ Cypress.Commands.add("gotoLogin", ()=>
 	cy.clearLocalStorage()
 })
 
+Cypress.Commands.add("gotoSelectMenuPage", ()=>
+{
+	cy.visit('https://demoqa.com/select-menu')
+	cy.url().should('contain', 'select-menu')
+	
+})
+
+Cypress.Commands.add("gotoButtonsPage", ()=>
+{
+	cy.visit('https://demoqa.com/buttons')
+	cy.url().should('contain', 'buttons')
+	
+})
+
 Cypress.Commands.add("signin", (username, password) =>
 {
     {
@@ -435,6 +651,7 @@ Cypress.Commands.add("signin", (username, password) =>
 			.click()
 }
 })
+<<<<<<< HEAD
 
 Cypress.Commands.add('dragAndDrop', (searchElement, x, y) => {
 	cy.get(searchElement)
@@ -517,3 +734,25 @@ Cypress.Commands.add('alertPromptButtonCancel', (element) => {
 		cy.stub($win, 'prompt').callsFake(() => null)
 	});
 });
+=======
+//Upload-Download File
+Cypress.Commands.add("gotoUploadDownload", ()=>
+{
+	cy.visit("https://demoqa.com/upload-download")
+	cy.url().should("contain", "upload-download")
+	cy.clearCookies()
+	cy.clearLocalStorage()
+})
+Cypress.Commands.add("validateDownload", ()=>
+{
+	cy.get('#downloadButton').click();
+	cy.verifyDownload('sampleFile.jpeg');
+})
+Cypress.Commands.add("validateSelectFile",()=>
+{
+	const fixtureFile = 'sampleFile.jpeg';
+    cy.get('#uploadFile').click();
+    cy.get('input[type=file]').selectFile('sampleFile.jpeg');
+    cy.get('#uploadedFilePath').should('contain.text','sampleFile.jpeg');
+})
+>>>>>>> origin/QA
