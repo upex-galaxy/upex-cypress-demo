@@ -16,7 +16,7 @@ describe("GX-2996 | ToolsQA | Elements | Radio Buttons",() => {
 			.should("be.checked")
 		cy.get(".mt-3").should("have.text", "You have selected Impressive")
     })
-	it("2996 | TC:1 Validar poder selccionar RB yes | Validar que fue selccionado |",()=>{
+	it("2996 | TC:1 Validar no poder selccionar RB No | Validar que no fue selccionado |",()=>{
 
 		cy.get("[type='radio']").eq(2).click({force:true})
 			.should("be.disabled")
