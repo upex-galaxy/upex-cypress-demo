@@ -12,7 +12,7 @@ Cypress es un Framework de Automatización de Next Generation construido para we
 
 1. **Clona el Proyecto**: 
     ```
-    git clone https://github.com/upex-galaxy/L1-cypex-spacebeyond.git
+    git clone https://github.com/upex-galaxy/L1-cypex-demo.git
     ````
 
 2. **Instala todas las dependencias**: 
