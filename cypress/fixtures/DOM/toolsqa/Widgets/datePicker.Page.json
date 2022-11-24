@@ -1,0 +1,14 @@
+{
+	"selectDate": {
+		"input": "#datePickerMonthYearInput",
+		"year": "[class*='year-select']",
+		"month": "[class*='month-select']"
+	},
+	"dateAndTime": {
+		"input": "#dateAndTimePickerInput",
+		"downArrowDT": ".react-datepicker__year-read-view--down-arrow",
+		"dropdownDT": ".react-datepicker__year-dropdown",
+		"downArrowDTmoth": ".react-datepicker__month-read-view--down-arrow",
+		"dropdownDTmonth": ".react-datepicker__month-dropdown"
+	}
+}
