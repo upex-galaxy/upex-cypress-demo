@@ -2,7 +2,7 @@ export class SortablePage {
     constructor(){
         this.list="#demo-tab-list"
         this.grid="#demo-tab-grid"
-        this.gridList=".create-grid"
+      //  this.gridList=".create-grid"
         this.itemList1=".vertical-list-container > :nth-child(1)"
         this.itemList2=".vertical-list-container > :nth-child(2)"
         this.itemList3=".vertical-list-container > :nth-child(3)"
