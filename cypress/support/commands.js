@@ -453,3 +453,67 @@ Cypress.Commands.add('dragAndDropY', (searchElement, x, y) => {
 		.move({deltaX: x, deltaY: y})
 		.should('have.attr', 'style', `position: relative; left: 0px; top: ${y}px;`);
 });
+
+Cypress.Commands.add('alertButton', (element, message) => {
+	
+	// Hacer click en el botón "Click me".
+    cy.get(element).click();
+        
+    // Método on usando el evento window:alert
+    cy.on('window:alert', (str) => {
+        expect(str).to.contains(message);
+    });
+});
+
+Cypress.Commands.add('alertConfirmButtonOk', (element1, element2, message1, message2) => {
+	
+	// Hacer click en el botón "Click me".
+    cy.get(element1).click();
+        
+    // Método on usando el evento window:confirm
+    cy.on('window:confirm', (str) => {
+        expect(str).to.contains(message1);           
+    });
+
+    cy.get(element2).should('have.text', message2);
+});
+
+Cypress.Commands.add('alertConfirmButtonCancel', (element1, element2, message1, message2) => {
+		
+	// Hacer click en el botón "Click me".
+	cy.get(element1).click();
+        
+	// Método on usando el evento window:confirm
+	cy.on('window:confirm', (str) => {
+		expect(str).to.contains(message1);
+		// Retorn false porque es como si presiono cancel. Por default es true.  
+		return false;          
+	});
+
+	cy.get(element2).should('have.text', message2);
+});
+
+Cypress.Commands.add('alertPromptButtonOk', (element1, element2, message1, message2) => {
+		
+	// Hacer click en el botón "Click me".
+	cy.get(element1).click();
+        
+	// Método window.
+	cy.window().then($win => {   
+		// Método stub para abrir el prompt.
+		cy.stub($win, 'prompt').returns(message1);
+		cy.get(element2).contains(message2);
+	});
+});
+
+Cypress.Commands.add('alertPromptButtonCancel', (element) => {
+		
+	// Hacer click en el botón "Click me".
+	cy.get(element).click();
+        
+	// Método window.
+	cy.window().then($win => {   
+		// Método stub llamando a callsFake para cerrar el prompt.
+		cy.stub($win, 'prompt').callsFake(() => null)
+	});
+});
