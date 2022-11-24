@@ -9,6 +9,7 @@ describe("GX-2992 | ToolsQA | Elements | Checkbox", () => {
 
         cy.contains("Home").should("be.visible")
         cy.get("[aria-label='Expand all']").click()
+        cy.get(".rct-icon.rct-icon-expand-open").as("BotonMas")
         cy.get(".rct-icon.rct-icon-expand-open").should("be.visible")
         cy.get(".rct-icon.rct-icon-expand-close").should("be.not.exist")
 
@@ -66,24 +67,17 @@ describe("GX-2992 | ToolsQA | Elements | Checkbox", () => {
         cy.get("[aria-label='Expand all']").click()
         cy.get(".rct-icon.rct-icon-expand-open").should("be.visible")
         cy.get(".rct-icon.rct-icon-uncheck").eq(0).click()
-    
     })
-    it.only("2993 | TC7: I want to test the checkboxe | Validar poder seleccionar todos los documentos |",()=>{
+    it("2993 | TC7: I want to test the checkboxe | Check all file | Uncheck all file",()=>{
 
         cy.get("[aria-label='Expand all']").click()
         cy.get(".rct-icon.rct-icon-expand-open").should("be.visible")
         cy.get("[class*='node-leaf'] input").each((checkbox)=>{
-            cy.wrap(checkbox).check({force: true})
-            cy.get("[class*='node-leaf'] .rct-title").then((title)=>{
-                /* const file = title.text()
-                cy.get(".text-success").then((result)=>{
-                    expect(result.text()).equal(file)
-                }) */
-
-            })   
-            
+            cy.wrap(checkbox).check({force: true})   
         })
-
+        cy.get("[class*='node-leaf'] input").each((checkbox)=>{
+            cy.wrap(checkbox).uncheck({force: true})
+        })
     })
 
 })
@@ -104,3 +98,12 @@ describe("GX-2992 | ToolsQA | Elements | Checkbox", () => {
     }
 
     // ** COPIA Y PEGA EN CADA SUITE QUE SE REALICE CON UN SUT DE MUCHO FETCH Y XHR O PROBLEMAS DE EXCEPCIÓN 
+
+    //RESULTADO DE DOCUMENTOS SELECCIONADOS:
+
+    /* cy.get("[class*='node-leaf'] .rct-title").then((title)=>{
+        const file = title.text()
+        cy.get(".text-success").then((result)=>{
+            expect(result.text()).equal(file)
+        })
+    })  */
