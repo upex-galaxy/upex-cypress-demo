@@ -44,7 +44,7 @@ describe("GX-2992 | ToolsQA | Elements | Checkbox", () => {
         cy.get("#result").should("contain","private")
 
     })
-    it("T2993 | TC5: I want to test the checkboxe | Each toggle |",()=>{
+    it("2993 | TC5: I want to test the checkboxe | Each toggle |",()=>{
 
         cy.contains("Home").should("be.visible")
         cy.get("[aria-label='Expand all']").click()
