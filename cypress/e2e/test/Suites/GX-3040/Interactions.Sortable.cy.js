@@ -12,7 +12,8 @@ describe('ToolsQA | Interactions | Sortable', () => {
         //visualizar las pestañas losa y grid
 		selectablepage.validarContenidoLista().contains("List")
 		selectablepage.validarContenidoGrid().contains("Grid")
-					//verificar que la pestaña Lista esta por defecto 
+		
+		//verificar que la pestaña Lista esta por defecto 
 		selectablepage.validarContenidoLista().should('have.class', 'active')
 		selectablepage.validarContenidoGrid().should('not.have.class', 'active')
 		
@@ -28,35 +29,36 @@ describe('ToolsQA | Interactions | Sortable', () => {
 
     it('3040|TC2:Validar el comportamiento al arrastar un elemento en la lista de items', ()=> {
 	//	const dataTransfer = new DataTransfer();
-	//Validar la pestaña “lista“ muestre por default  los items del 1 al 9.
-	
-	//validar la cantidad de elementos 
+
+		//validar la cantidad de elementos 
 	cy.get(".vertical-list-container>.list-group-item").should('have.length',6)
-	//validar la lista de 6 valores
-	selectablepage.validarItemsLista().contains("One")	
+	//Validar la pestaña “lista“ muestre por default  los items del 1 al 9.	selectablepage.
+	selectablepage.validarItemsLista().contains("One")
 	selectablepage.validarItemsLista().contains("Two")
 	selectablepage.validarItemsLista().contains("Three")
 	selectablepage.validarItemsLista().contains("Four")
 	selectablepage.validarItemsLista().contains("Five")
 	selectablepage.validarItemsLista().contains("Six")
-	//Validar la pestaña “lista “ cuando se arraste un elemento entre otros elementos de la lista debe permanecer en el orden seleccionado y debe permitir colocar el elemento en cualquier orden.
-	
+	//Validar la pestaña “lista “ cuando se arraste un elemento entre otros elementos de la lista debe permanecer en el orden seleccionado y debe permitir colocar el elemento en cualquier orden
 		
 	cy.get('.vertical-list-container>.list-group-item').first()
-	.trigger('mousedown',  { button: 0 }, { force: true })
-		.trigger("mousemove", 50, -50	, { force: true })
-		cy.get(".vertical-list-container>.list-group-item").first().next().click()
-		.trigger("mouseup", { force: true });
-	  
+	   .trigger('mousedown',  { button: 0 }, { force: true })
+	cy.get(".vertical-list-container>.list-group-item").first().next().click()
+	   .trigger("mouseup", { force: true });
 
 		cy.get('.vertical-list-container>.list-group-item').contains("Three")
 		.trigger('mousedown',  { button: 0 }, { force: true })
-			.trigger("mousemove", 50, -50	, { force: true })
-			cy.get(".vertical-list-container>.list-group-item").contains("Three").next().click()
-			.trigger("mouseup", { force: true });
-		  
-	  
-})
+		cy.get(".vertical-list-container>.list-group-item").contains("Three").next().click()
+		.trigger("mouseup", { force: true });  
+
+	//	Validar el orden
+	selectablepage.validarItemsLista().contains("Two")
+	selectablepage.validarItemsLista().contains("One")
+	selectablepage.validarItemsLista().contains("Four")
+	selectablepage.validarItemsLista().contains("Three")
+	selectablepage.validarItemsLista().contains("Six")
+	selectablepage.validarItemsLista().contains("Five")
+	})
 })
   
 
@@ -66,7 +68,6 @@ describe('ToolsQA | Interactions | Sortable', () => {
 
 	//Validar la pestaña “grid“ muestre por defaul una cuadricula del 1 al 9 ordenado de izquierda a derecha.
 	
-	//Validar la pestaña “grid“ muestre por defaul una cuadricula del 1 al 9 ordenado de izquierda a derecha
 	})      
       
 
