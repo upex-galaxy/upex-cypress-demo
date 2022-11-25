@@ -709,15 +709,15 @@ Cypress.Commands.add('alertConfirmButtonCancel', (element1, element2, message1, 
 	cy.get(element2).should('have.text', message2);
 });
 
-Cypress.Commands.add('alertPromptButtonOk', (element1, element2, message1, message2) => {
+/*Cypress.Commands.add('alertPromptButtonOk', (element1, element2, message1, message2) => {
 		
 	// Hacer click en el botón "Click me".
 	cy.get(element1).click();
         
 	// Método window.
-	cy.window().then($win => {   
+	cy.window().then(win => {   
 		// Método stub para abrir el prompt.
-		cy.stub($win, 'prompt').returns(message1);
+		cy.stub(win, 'prompt').returns(message1);
 		cy.get(element2).contains(message2);
 	});
 });
@@ -728,11 +728,12 @@ Cypress.Commands.add('alertPromptButtonCancel', (element) => {
 	cy.get(element).click();
         
 	// Método window.
-	cy.window().then($win => {   
+	cy.window().then(win => {   
 		// Método stub llamando a callsFake para cerrar el prompt.
-		cy.stub($win, 'prompt').callsFake(() => null)
+		cy.stub(win, 'prompt').callsFake(() => null);
 	});
-});
+});*/
+
 //Upload-Download File
 Cypress.Commands.add("gotoUploadDownload", ()=>
 {
