@@ -17,7 +17,6 @@ describe('GX-3503 ToolsQA | Elements | Buttons', () => {
 		cy.get("div>button:not([id*='Click'])").click()
 		cy.get('#dynamicClickMessage').invoke('text').should('eq', 'You have done a dynamic click')
 	})
-
 	//________________________________________________________________________
 	// Comando predeterminado para que no ocurran errores de excepciones:
 	Cypress.on('uncaught:exception', (err, runnable) => {
