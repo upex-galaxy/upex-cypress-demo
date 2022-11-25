@@ -651,7 +651,6 @@ Cypress.Commands.add("signin", (username, password) =>
 			.click()
 }
 })
-<<<<<<< HEAD
 
 Cypress.Commands.add('dragAndDrop', (searchElement, x, y) => {
 	cy.get(searchElement)
@@ -734,7 +733,6 @@ Cypress.Commands.add('alertPromptButtonCancel', (element) => {
 		cy.stub($win, 'prompt').callsFake(() => null)
 	});
 });
-=======
 //Upload-Download File
 Cypress.Commands.add("gotoUploadDownload", ()=>
 {
@@ -755,4 +753,3 @@ Cypress.Commands.add("validateSelectFile",()=>
     cy.get('input[type=file]').selectFile('sampleFile.jpeg');
     cy.get('#uploadedFilePath').should('contain.text','sampleFile.jpeg');
 })
->>>>>>> origin/QA
