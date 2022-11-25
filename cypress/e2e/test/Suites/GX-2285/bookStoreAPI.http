@@ -3,6 +3,28 @@ curl -X 'POST' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-  "userName": "kaneharu",
-  "password": "3KM1o2yZ"
+  "userName": "kanehaaaru",
+  "password": "3K$M1o2yZ"
 }'
+
+POSThttps://demoqa.com/Account/v1/GenerateToken200 (OK)
+Request body:
+{
+  "userName": "kaneharu97",
+  "password": "3K$M1o2yZ"
+}
+Response body:
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImthbmVoYXJ1OTciLCJwYXNzd29yZCI6IjNLJE0xbzJ5WiIsImlhdCI6MTY2OTMyMTY0OX0.5yBsh5ptgrfx3KAtQeLv_WiW5-m3uXrYkZTy4pXqNU0",
+  "expires": "2022-12-01T20:27:29.708Z",
+  "status": "Success",
+  "result": "User authorized successfully."
+}
+POSThttps://demoqa.com/Account/v1/Authorized200 (OK)
+Request body:
+{
+  "userName": "kaneharu97",
+  "password": "3K$M1o2yZ"
+}
+Response body:
+true
