@@ -3,13 +3,13 @@
 	"cucumberautocomplete.strictGherkinValidation": false,
 	"cucumberautocomplete.customParameters": [
 		{
-			"parameter":"{ab}",
-			"value":"(a|b)"
+			"parameter": "{ab}",
+			"value": "(a|b)"
 		}
 	],
 	"cucumberautocomplete.skipDocStringsFormat": true,
 	"cucumberautocomplete.formatConfOverride": {
-		"But": "relative",
+		"But": "relative"
 	},
 	"cucumberautocomplete.onTypeFormat": true,
 	"editor.quickSuggestions": {
@@ -19,7 +19,6 @@
 	},
 	"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
 	"cucumberautocomplete.stepRegExSymbol": "'",
-	"window.zoomLevel": 1,
 	"workbench.colorTheme": "Shades of Purple",
 	"cSpell.language": "en,es",
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
@@ -39,9 +38,6 @@
 	"[feature]": {
 		"editor.defaultFormatter": "alexkrechik.cucumberautocomplete"
 	},
-	"[cucumber]": {
-		"editor.defaultFormatter": "CucumberOpen.cucumber-official"
-	},
 	"editor.formatOnType": false,
 	"editor.formatOnPaste": false,
 	"editor.formatOnSave": false,
@@ -52,43 +48,37 @@
 	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
 	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
 	"html.format.wrapLineLength": 150,
-	"prettier.singleQuote": false,
+	"prettier.singleQuote": true,
 	"prettier.semi": false,
 	"prettier.useTabs": true,
 	"prettier.arrowParens": "avoid",
 	"workbench.settings.editor": "json",
-	"cSpell.userWords": [
-		"appium",
-		"appiumby",
-		"Automator",
-		"badeball",
-		"chromedriver",
-		"demoqa",
-		"Elyer",
-		"Uper"
-	],
 	"git.enableSmartCommit": true,
 	"editor.tabCompletion": "on",
 	"editor.lineHeight": 20,
 	"editor.cursorBlinking": "expand",
-	"cSpell.enableFiletypes": [
-		"cucumber"
-	],
+	"cSpell.enableFiletypes": ["cucumber"],
 	"workbench.iconTheme": "material-icon-theme",
 	"material-icon-theme.folders.color": "#7cb342",
 	"material-icon-theme.files.associations": {
 		"*.tx.js": "Test-jsx",
 		"*.cy.js": "Test-js",
 		"*.Page.json": "3d",
+		"*.Page.js": "3d",
 		"*.js": "Cypress",
 		"commands.js": "webpack",
+		"*.yml": "todo",
 		"*.json": "Cypress",
+		"scripts.js": "console",
 		".cypress-cucumber-preprocessorrc.json": "cucumber",
-		"cucumber-html-report.js": "cucumber",
-		"cucumber-json-formatter.exe": "cucumber",
 		"cucumber-report.json": "cucumber",
+		"cucumber-json-formatter.exe": "cucumber",
+		"cucumber-html-report.js": "cucumber",
 		"jsconfig.json": "Javascript-map",
-		"settings.json": "Vscode"
+		"settings.json": "Vscode",
+		"launch.json": "http",
+		"package-lock.json": "npm",
+		"package.json": "npm"
 	},
 	"material-icon-theme.folders.associations": {
 		"api-testing": "api",
@@ -96,14 +86,12 @@
 		"ui-testing": "app",
 		"BDD Stories": "rules",
 		"feature-example": "rules",
-		"us-example": "Storybook",
-		"suite-example": "test",
+		"Step-Definitions": "test",
 		"suites": "test",
 		"cucumber-json": "Resolver",
-		"cucumber-report.html": "Resolver",
-		"Features": "Resolver",
 		"DOM": "class",
-		"DesignPatterns": "context",
+		"POM": "context",
+		"Pages": "context",
 		"How-to": "content",
 		"US": "Storybook",
 		"test-plan": "meta",
@@ -130,25 +118,8 @@
 		"ParseHAR": false,
 		"mockAutocomplete": false
 	},
-	"cucumber.features": [
-
-		"src/test/**/*.feature",
-		"cypress/2e2/cucumber-test/**/*.feature",
-		"tests/**/*.feature",
-		"*specs*/**/.feature"
-	],
-	"cucumber.glue": [
-		"src/test/**/*.java",
-		"features/**/*.ts",
-		"features/**/*.tsx",
-		"features/**/*.php",
-		"features/**/*.py",
-		"tests/**/*.py",
-		"tests/**/*.rs",
-		"features/**/*.rs",
-		"features/**/*.rb",
-		"*specs*/**/.cs",
-		"cypress/2e2/cucumber-test/**/*.js"
+	"cSpell.autoFormatConfigFile": true,
+	"githubPullRequests.ignoredPullRequestBranches": [
+		"cypex"
 	]
-	
 }

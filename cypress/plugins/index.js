@@ -19,30 +19,24 @@
 // Record Videos only on failed tests.
 module.exports = (on, config) => {
 	on('after:spec', (spec, results) => {
-				if (results && results.video) {
-					// Do we have failures for any retry attempts?
-					const failures = _.some(results.tests, (test) => {
-						return _.some(test.attempts, {state: 'failed'})
-					})
-					if (!failures) {
-						// delete the video if the spec passed and no tests retried
-						return del(results.video)
-					}
-				}
+		if (results && results.video) {
+			// Do we have failures for any retry attempts?
+			const failures = _.some(results.tests, (test) => {
+				return _.some(test.attempts, {state: 'failed'})
 			})
+			if (!failures) {
+				// delete the video if the spec passed and no tests retried
+				return del(results.video)
+			}
+		}
+	})
 }
-
-//For Cypress New Commands by Dependency:
-const { downloadFile } = require('cypress-downloadfile/lib/addPlugin')
-const { verifyDownloadTasks } = require('cy-verify-downloads');
 
 //For connecting to SQL Server
 //Removed
 
 // Modules
 module.exports = (on, config) => {
-	on('task', { downloadFile }) //Cypress file Download
-	on('task', { verifyDownloadTasks })
 	on('file:preprocessor', selectTestsWithGrep(config)) //Adding Tags to Tests
 	on('task', {
 		queryDb: (query) => {

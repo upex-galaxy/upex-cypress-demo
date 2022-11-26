@@ -46,6 +46,7 @@ context('Feature: Login', () => {
 })
 
 
+// Este código abajo es para que NO APAREZCA los XHR o Fetch en el Test Runner de Cypress, para que se vea limpio.
 Cypress.on('uncaught:exception', (err, runnable) => {
 	// returning false here prevents Cypress from
 	// failing the test

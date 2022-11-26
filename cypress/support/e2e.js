@@ -21,5 +21,6 @@ import 'cypress-wait-until';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
-require('cypress-plugin-api')
 require('cy-verify-downloads').addCustomCommand();
+require('cypress-plugin-api')
+require('cypress-xpath');
