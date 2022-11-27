@@ -1,10 +1,7 @@
 # 🧙🏻‍♂️BIENVENIDO A LOS PIPELINES DE CONTINUOUS INTEGRATION DE "ARI - Hija de Aurora"!
-# 🤖Este Pipeline de CI se activa al PUSHEAR, y consiste en ejecutar los tests de una US e importar los resultados a Jira!🚀
-# 👩🏻‍🔬Para utilizar este Pipeline de Ari, sigue los siguientes pasos:
-#     1ro: debes modificar el script: "npm run file" + tu archivo de Prueba Ejecutable (ver ejemplo en este archivo) 
-#     2do: debes modificar la propiedad: "testExecKey:" + tu ID del TX de Jira para importar automáticamente el resultado.
-#     3ro: guarda los cambios en el repositorio local (git add + git commit) y envíalos al Repo Remoto (git push)
-#     Expected Result: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí. 
+# 🤖Este Pipeline de CI se activa al hacer MERGE a la rama "QA" o "CYPEX",
+# 🧪Consiste en ejecutar TODOS los tests del Repo e importar los resultados a Jira!🚀
+# 👩🏻‍🔬Este Pipeline de CI NO DEBE EDITARSE sin permiso del QA Lead.
 
 name: 🤖CI run (INTEGRATION) Regression Testing Execution⚡
 run-name: ${{github.actor}}👨🏻‍🔬 run Regression in ${{github.ref_name}}
