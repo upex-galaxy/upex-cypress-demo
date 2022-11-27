@@ -7,13 +7,13 @@
 #     Expected Result: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí. 
 
 name: 🤖CI run (BUILD) Test Suite Execution⚡
-run-name: ${{github.actor}}👨🏻‍🔬 run Tests in ${{github.ref_name}}
+run-name: ${{github.actor}}👨🏻‍🔬 run Test Suite in ${{github.ref_name}}
 
 on: # This Run is a template. The correct "Run On" should be: Any except QA and Main (cypex)
   push:
     branches-ignore:
-      - 'cypex'
-      - 'QA'
+      - cypex
+      - QA
 
 jobs:
     Build-Cypress-TestSuite-AfterPush:
@@ -27,28 +27,21 @@ jobs:
               uses: cypress-io/github-action@v4
               with:
                   browser: chrome
-                  command: |
+                  command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
                     npm run file */**/GX-1/*.cy.js
-                  record: true
+                  record: false #HABILITAR A TRUE* cuando se use un Proyecto.
               env:
                   # pass the Dashboard record key as an environment variable
                   CYPRESS_RECORD_KEY: ${{ secrets.CYPEX_DEMO_RECORD_KEY }}
                   # pass GitHub token to allow accurately detecting a build vs a re-run build
                   GITHUB_TOKEN: ${{ secrets.UPEX_GITHUB_TOKEN }}
 
-            - name: 📊Upload Artifact for Screenshots by fail
-              uses: actions/upload-artifact@v3
-              if: failure()
-              with:
-                  name: cypress-screenshots
-                  path: cypress/screenshots
-
-            - name: 📊Upload Artifact for Video by Run
+            - name: 📊Upload Artifact HTML Report
               uses: actions/upload-artifact@v3
               if: always()
               with:
-                  name: cypress-videos
-                  path: cypress/videos
+                  name: cypress-execution-report
+                  path: mochawesome-report/mochawesome.html
 
             - name: ✅Import Test Results to Xray
               uses: mikepenz/xray-action@v2

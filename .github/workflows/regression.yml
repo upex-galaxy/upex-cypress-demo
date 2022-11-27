@@ -27,9 +27,9 @@ jobs:
               uses: cypress-io/github-action@v4
               with:
                   browser: chrome
-                  command: |
+                  command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
                     npm run regression
-                  record: true
+                  record: false #HABILITAR A TRUE* cuando se use un Proyecto.
               env:
                   # pass the Dashboard record key as an environment variable
                   CYPRESS_RECORD_KEY: ${{ secrets.CYPEX_DEMO_RECORD_KEY }}
@@ -52,7 +52,7 @@ jobs:
 
             - name: ✅Import Test Results to Xray
               uses: mikepenz/xray-action@v2
-              with:
+              with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
                   username: ${{secrets.XRAY_CLIENT_ID}}
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit'

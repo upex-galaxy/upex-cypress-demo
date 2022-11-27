@@ -12,18 +12,15 @@ module.exports = defineConfig({
 	watchForFileChanges: false,
 	// En Caso de hacer testing en SUT con seguridad web:
 	chromeWebSecurity: false,
-	// reporter: 'mochawesome',
-	reporter: 'mocha-junit-reporter',
+	// multi-reporters: one report.xml + mochawesome.json per file.
+	reporter: 'cypress-multi-reporters',
 	reporterOptions: {
-		mochaFile: 'reports/test-results.xml',
-		toConsole: true,
-		outputs: true,
-        testCaseSwitchClassnameAndName: true
+		configFile: 'jsconfig.json'
 	},
 	// Number of times to retry a failed test. If a number is set, tests will retry in both runMode and openMode:
 	retries: 0,
 	// Whether Cypress will record a video of the test run when running on headless:
-	video: true,
+	video: false,
 	// E2E Testing runner
 	e2e: {
 		// Enables cross-origin and improved session support, including the cy.origin and cy.session commands:

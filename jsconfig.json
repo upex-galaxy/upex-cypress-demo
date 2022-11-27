@@ -5,7 +5,10 @@
 	},
 	"reporterEnabled": "mocha-junit-reporter, mochawesome",
 	"mochaJunitReporterReporterOptions": {
-		"mochaFile": "reports/test-results.xml"
+		"mochaFile": "reports/test-results.xml",
+		"toConsole": false,
+		"outputs": true,
+        "testCaseSwitchClassnameAndName": true
 	},
 	"mochawesomeReporterReporterOptions": {
 		"mochaFile": "mochawesome.json"
