@@ -12,8 +12,8 @@ run-name: ${{github.actor}}👨🏻‍🔬 run Tests in ${{github.ref_name}}
 on: # This Run is a template. The correct "Run On" should be: Any except QA and Main (cypex)
   push:
     branches-ignore:
-      - cypex
-      - QA
+      - 'cypex'
+      - 'QA'
 
 jobs:
     Build-Cypress-TestSuite-AfterPush:
