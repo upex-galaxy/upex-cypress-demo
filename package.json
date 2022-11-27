@@ -6,8 +6,7 @@
 	"scripts": {
 		"test": "cypress open",
 		"file": "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --spec",
-		"regression": "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --spec */**/Suites/**/*.cy.js",
-		"bdd": "node ./cucumber-html-report.js"
+		"regression": "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json"
 	},
 	"keywords": [
 		"cypress",
