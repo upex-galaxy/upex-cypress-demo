@@ -11,7 +11,7 @@ context("ToolsQA | Alert-Frame-Window | Modal Dialogs", ()=>
     })
 
 	// @TC_GX-3360 @TS_GX-3222
-	describe(" 3222 | TC1:  Validate being able to click on the Small Modal button.",()=>
+	describe("3222 | TC1:  Validate being able to click on the Small Modal button.",()=>
     {
         When("the user presses the Small modal button", ()=>
         {
@@ -26,11 +26,10 @@ context("ToolsQA | Alert-Frame-Window | Modal Dialogs", ()=>
                 .within( ()=> 
             {
                     cy.get("[class='modal-title h4']")
-                        .should('have.text', 'Small Modal')
-                        .click()    
+                        .should('have.text', 'Small Modal')  
             })
         })        
-        And("press the 'X' button to close the modal",()=>
+        And("press the X button to close the modal",()=>
         {
             cy.get ("@cabecera-modal")
                 .within(()=>
@@ -42,9 +41,9 @@ context("ToolsQA | Alert-Frame-Window | Modal Dialogs", ()=>
         })
     })
         // @TC_GX-3361 @TS_GX-3222
-	describe("3222 | TC2:  Validate being able to click on the “Large Modal” button.",()=>
+	describe("3222 | TC2:  Validate being able to click on the Large Modal button.",()=>
     {
-        When("the user presses the 'Large modal' button", ()=>
+        When("the user presses the Large modal button", ()=>
         {
             cy.get('#showLargeModal')
                 .click()
@@ -56,10 +55,9 @@ context("ToolsQA | Alert-Frame-Window | Modal Dialogs", ()=>
                 {
                     cy.get("[class='modal-title h4']")
                         .should('have.text', 'Large Modal')
-                        .click()
                 })
         })        
-        And("press the 'Close' button to close the modal", ()=>
+        And("press the Close button to close the modal", ()=>
         {
             cy.get ("#closeLargeModal")
                 .should('have.text', 'Close')
