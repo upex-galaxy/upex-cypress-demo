@@ -6,12 +6,12 @@
 #     3ro: guarda los cambios en el repositorio local (git add + git commit) y envíalos al Repo Remoto (git push)
 #     Expected Result: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí. 
 
-name: 🤖CI run (INTEGRATION) Regression Testing Execution⚡
-run-name: ${{github.actor}}👨🏻‍🔬 run Regression in ${{github.ref_name}}
+name: 🤖CI run (BUILD) Test Suite Execution⚡
+run-name: ${{github.actor}}👨🏻‍🔬 run Tests in ${{github.ref_name}}
 
 on: # This Run is a template. The correct "Run On" should be: Any except QA and Main (cypex)
   push:
-    branches:
+    branches-ignore:
       - cypex
       - QA
 
@@ -23,12 +23,12 @@ jobs:
             - name: 💻Checkout
               uses: actions/checkout@v3
 
-            - name: 🧪Cypress E2E Regression Test in Chrome
+            - name: 🧪Cypress Build and Run US Test Coverage in Chrome
               uses: cypress-io/github-action@v4
               with:
                   browser: chrome
                   command: |
-                    npm run regression
+                    npm run file */**/GX-1/*.cy.js
                   record: true
               env:
                   # pass the Dashboard record key as an environment variable

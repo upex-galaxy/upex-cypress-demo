@@ -1,11 +1,12 @@
 {
 	"name": "upex-cypress",
-	"version": "1.0.0",
+	"version": "10.9.0",
 	"description": "Cypress Automation",
 	"main": "index.js",
 	"scripts": {
 		"test": "cypress open",
 		"file": "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --spec",
+		"regression": "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --spec */**/Suites/**/*.cy.js",
 		"bdd": "node ./cucumber-html-report.js"
 	},
 	"keywords": [
