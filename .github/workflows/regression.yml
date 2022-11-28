@@ -33,8 +33,27 @@ jobs:
                   CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
                   # pass GitHub token to allow accurately detecting a build vs a re-run build
                   GITHUB_TOKEN: ${{ secrets.UPEX_GITHUB_TOKEN }}
+
+            - name: ✅Import Test Results to Xray
+              uses: mikepenz/xray-action@v2
+              with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
+                  username: ${{secrets.XRAY_CLIENT_ID}}
+                  password: ${{secrets.XRAY_CLIENT_SECRET}}
+                  testFormat: 'junit'
+                  testPaths: 'reports/regression-report.xml'
+                  testExecKey: 'GX-3663'
+                  projectKey: 'GX'
+
+            - name: 🔔Slack Notification of Done
+              uses: rtCamp/action-slack-notify@v2.2.0
+              env:
+                SLACK_WEBHOOK: https://hooks.slack.com/services/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
+                SLACK_USERNAME: Ari✨
+                SLACK_MESSAGE: ':test_tube: Test Execution successfully imported to Jira-Xray :rocket:'
+                SLACK_COLOR: ${{ job.status }}
+                SLACK_ICON: https://i.imgur.com/peg9swL.png
     
-    Cypress-ExecutionReport:
+    Cypress-Artifact-Report:
         runs-on: ubuntu-latest
 
         steps:
@@ -56,23 +75,4 @@ jobs:
               with:
                   name: regression-test-report
                   path: mochawesome-report/mochawesome.html
-
-            - name: ✅Import Test Results to Xray
-              uses: mikepenz/xray-action@v2
-              with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
-                  username: ${{secrets.XRAY_CLIENT_ID}}
-                  password: ${{secrets.XRAY_CLIENT_SECRET}}
-                  testFormat: 'junit'
-                  testPaths: 'reports/regression-report.xml'
-                  testExecKey: 'GX-3663'
-                  projectKey: 'GX'
-
-            - name: 🔔Slack Notification of Done
-              uses: rtCamp/action-slack-notify@v2.2.0
-              env:
-                SLACK_WEBHOOK: https://hooks.slack.com/services/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
-                SLACK_USERNAME: Ari✨
-                SLACK_MESSAGE: ':test_tube: Test Execution successfully imported to Jira-Xray :rocket:'
-                SLACK_COLOR: ${{ job.status }}
-                SLACK_ICON: https://i.imgur.com/peg9swL.png
 
