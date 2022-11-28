@@ -100,5 +100,5 @@ jobs:
               if: always()
               with:
                   name: regression-test-report
-                  path: mochawesome-report/mochawesome.html
+                  path: mochawesome-report
 
