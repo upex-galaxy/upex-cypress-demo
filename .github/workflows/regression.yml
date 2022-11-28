@@ -25,8 +25,8 @@ jobs:
               with:
                   browser: chrome
                   command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
-                    cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsregression.json
-                    cypress run --browser chrome --reporter mochawesome --reporter-options reportDir=mochawesome-report,overwrite=false,html=false,json=true
+                    npx cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsregression.json
+                    npx cypress run --browser chrome --reporter mochawesome --reporter-options reportDir=mochawesome-report,overwrite=false,html=false,json=true
                     jrm reports/regression-report.xml \"reports/*.xml\"
                     npx mochawesome-merge cypress/results/*.json > mochawesome-report/regression.json
                     npx marge regression.json
