@@ -25,7 +25,7 @@ jobs:
               with:
                   browser: chrome
                   command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
-                    npm run regression
+                    npm run "regression"
                     npm run regression:report
                     npm run report:xml
                     npm run report:json
