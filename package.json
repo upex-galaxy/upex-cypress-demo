@@ -10,7 +10,7 @@
 		"regression": "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsregression.json",
 		"regression:report": "cypress run --browser chrome --reporter mochawesome --reporter-options reportDir=mochawesome-report,overwrite=false,html=false,json=true",
 		"report:xml": "jrm reports/regression-report.xml \"reports/*.xml\"",
-		"report:json": "mochawesome-merge cypress/results/*.json > mochawesome-report/regression.json",
+		"report:json": "mochawesome-merge cypress/mochawesome-report/*.json > mochawesome-report/regression.json",
 		"report:html": "marge regression.json"
 	},
 	"keywords": [
