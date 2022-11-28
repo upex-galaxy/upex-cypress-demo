@@ -1,0 +1,104 @@
+# 🧙🏻‍♂️BIENVENIDO A LOS PIPELINES DE CONTINUOUS INTEGRATION DE "ARI - Hija de Aurora"!
+# 🤖Este Pipeline de CI se activa al hacer MERGE a la rama "QA" o "CYPEX",
+# 🧪Consiste en ejecutar TODOS los tests del Repo e importar los resultados a Jira!🚀
+# 👩🏻‍🔬Este Pipeline de CI NO DEBE EDITARSE sin permiso del QA Lead.
+
+name: 🤖CI run (INTEGRATION) Regression Testing Execution⚡
+run-name: ${{github.actor}}👨🏻‍🔬 run Regression in ${{github.ref_name}}
+
+on:
+  push:
+    branches:
+      - cypex
+      - QA
+
+jobs:
+    Cypress-RegressionTest-AfterMerge:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 💻Checkout
+              uses: actions/checkout@v3
+
+            - name: 💿Install Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - name: 🧬Install All Dependencies
+              run: |
+                npm install
+                npm list 
+
+            - name: 🧪Cypress E2E Regression Test in Chrome
+              uses: cypress-io/github-action@v4
+              with:
+                  browser: chrome
+                  command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
+                    npm run regression
+                  record: false #HABILITAR A TRUE* cuando se use un Proyecto.
+              env:
+                  # pass the Dashboard record key as an environment variable
+                  CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+                  # pass GitHub token to allow accurately detecting a build vs a re-run build
+                  GITHUB_TOKEN: ${{ secrets.UPEX_GITHUB_TOKEN }}
+
+            - name: 📬Generate XML Regression Report
+              run: |
+                npm run report:xml
+
+            - name: ✅Import Test Results to Xray
+              uses: mikepenz/xray-action@v2
+              with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
+                  username: ${{secrets.XRAY_CLIENT_ID}}
+                  password: ${{secrets.XRAY_CLIENT_SECRET}}
+                  testFormat: 'junit'
+                  testPaths: 'reports/regression-report.xml'
+                  testExecKey: 'GX-3704'
+                  projectKey: 'GX'
+
+            - name: 🔔Slack Notification of Done
+              uses: rtCamp/action-slack-notify@v2.2.0
+              env:
+                SLACK_WEBHOOK: https://hooks.slack.com/services/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
+                SLACK_USERNAME: Ari✨
+                SLACK_MESSAGE: ':test_tube: Test Execution successfully imported to Jira-Xray :rocket:'
+                SLACK_COLOR: ${{ job.status }}
+                SLACK_ICON: https://i.imgur.com/peg9swL.png
+    
+    Cypress-Artifact-Report:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 💻Checkout
+              uses: actions/checkout@v3
+
+            - name: 💿Install Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - name: 🧬Install All Dependencies
+              run: |
+                npm install 
+                npm list 
+
+            - name: 🧪VERIFICATION Cypress E2E Regression Test in Chrome
+              uses: cypress-io/github-action@v4
+              with:
+                  browser: chrome
+                  command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
+                    npm run regression:report
+
+            - name: 📬Generate HTML Regression Report
+              run: |
+                npm run report:json
+                npm run report:html
+
+            - name: 📊Upload Artifact HTML Report
+              uses: actions/upload-artifact@v3
+              if: always()
+              with:
+                  name: regression-test-report
+                  path: mochawesome-report
+
