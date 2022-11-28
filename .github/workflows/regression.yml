@@ -20,12 +20,20 @@ jobs:
             - name: 💻Checkout
               uses: actions/checkout@v3
 
+            - name: 💿Install Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - name: 🧬Install All Dependencies
+              run: npm install 
+
             - name: 🧪Cypress E2E Regression Test in Chrome
               uses: cypress-io/github-action@v4
               with:
                   browser: chrome
                   command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
-                    npx cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsregression.json
+                    npm run regression
                   record: false #HABILITAR A TRUE* cuando se use un Proyecto.
               env:
                   # pass the Dashboard record key as an environment variable
@@ -35,7 +43,7 @@ jobs:
 
             - name: 📬Generate XML Regression Report
               run: |
-                jrm reports/regression-report.xml \"reports/*.xml\"
+                npm run report:xml
 
             - name: ✅Import Test Results to Xray
               uses: mikepenz/xray-action@v2
@@ -63,17 +71,25 @@ jobs:
             - name: 💻Checkout
               uses: actions/checkout@v3
 
+            - name: 💿Install Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - name: 🧬Install All Dependencies
+              run: npm install 
+
             - name: 🧪VERIFICATION Cypress E2E Regression Test in Chrome
               uses: cypress-io/github-action@v4
               with:
                   browser: chrome
                   command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
-                    npx cypress run --browser chrome --reporter mochawesome --reporter-options reportDir=mochawesome-report,overwrite=false,html=false,json=true
+                    npm run regression:report
 
             - name: 📬Generate HTML Regression Report
               run: |
-                npx mochawesome-merge cypress/results/*.json > mochawesome-report/regression.json
-                npx marge regression.json
+                npm run report:json
+                npm run report:html
 
             - name: 📊Upload Artifact HTML Report
               uses: actions/upload-artifact@v3
