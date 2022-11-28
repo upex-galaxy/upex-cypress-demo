@@ -32,7 +32,7 @@ jobs:
                   record: false #HABILITAR A TRUE* cuando se use un Proyecto.
               env:
                   # pass the Dashboard record key as an environment variable
-                  CYPRESS_RECORD_KEY: ${{ secrets.CYPEX_DEMO_RECORD_KEY }}
+                  CYPRESS_RECORD_KEY: ${{ secrets. }}
                   # pass GitHub token to allow accurately detecting a build vs a re-run build
                   GITHUB_TOKEN: ${{ secrets.UPEX_GITHUB_TOKEN }}
 
@@ -40,12 +40,12 @@ jobs:
               uses: actions/upload-artifact@v3
               if: always()
               with:
-                  name: cypress-execution-report
+                  name: test-report
                   path: mochawesome-report/mochawesome.html
 
             - name: ✅Import Test Results to Xray
               uses: mikepenz/xray-action@v2
-              with:
+              with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
                   username: ${{secrets.XRAY_CLIENT_ID}}
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit'

@@ -74,11 +74,12 @@
 		"cucumber-report.json": "cucumber",
 		"cucumber-json-formatter.exe": "cucumber",
 		"cucumber-html-report.js": "cucumber",
-		"jsconfig.json": "Javascript-map",
 		"settings.json": "Vscode",
 		"launch.json": "http",
 		"package-lock.json": "npm",
-		"package.json": "npm"
+		"package.json": "npm",
+		"jsconfig.json": "conduct",
+		"jsregression.json": "conduct"
 	},
 	"material-icon-theme.folders.associations": {
 		"api-testing": "api",

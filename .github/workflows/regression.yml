@@ -6,14 +6,14 @@
 name: 🤖CI run (INTEGRATION) Regression Testing Execution⚡
 run-name: ${{github.actor}}👨🏻‍🔬 run Regression in ${{github.ref_name}}
 
-on: # This Run is a template. The correct "Run On" should be: Any except QA and Main (cypex)
+on:
   push:
     branches:
       - cypex
       - QA
 
 jobs:
-    Build-Cypress-TestSuite-AfterPush:
+    Cypress-Integration-Regression-AfterMerge:
         runs-on: ubuntu-latest
 
         steps:
@@ -26,26 +26,23 @@ jobs:
                   browser: chrome
                   command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
                     npm run regression
+                    npm run regression:report
+                    npm run report:xml
+                    npm run report:json
+                    npm run report:html
                   record: false #HABILITAR A TRUE* cuando se use un Proyecto.
               env:
                   # pass the Dashboard record key as an environment variable
-                  CYPRESS_RECORD_KEY: ${{ secrets.CYPEX_DEMO_RECORD_KEY }}
+                  CYPRESS_RECORD_KEY: ${{ secrets. }}
                   # pass GitHub token to allow accurately detecting a build vs a re-run build
                   GITHUB_TOKEN: ${{ secrets.UPEX_GITHUB_TOKEN }}
 
-            - name: 📊Upload Artifact for Screenshots by fail
-              uses: actions/upload-artifact@v3
-              if: failure()
-              with:
-                  name: cypress-screenshots
-                  path: cypress/screenshots
-
-            - name: 📊Upload Artifact for Video by Run
+            - name: 📊Upload Artifact HTML Report
               uses: actions/upload-artifact@v3
               if: always()
               with:
-                  name: cypress-videos
-                  path: cypress/videos
+                  name: regression-test-report
+                  path: mochawesome-report/regression.html
 
             - name: ✅Import Test Results to Xray
               uses: mikepenz/xray-action@v2
@@ -53,8 +50,8 @@ jobs:
                   username: ${{secrets.XRAY_CLIENT_ID}}
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit'
-                  testPaths: 'reports/test-results.xml'
-                  testExecKey: 'GX-5'
+                  testPaths: 'reports/regression-report.xml'
+                  testExecKey: 'GX-3663'
                   projectKey: 'GX'
 
             - name: 🔔Slack Notification of Done
