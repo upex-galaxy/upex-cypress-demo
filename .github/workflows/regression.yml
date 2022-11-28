@@ -13,7 +13,7 @@ on:
       - QA
 
 jobs:
-    Cypress-Integration-Regression-AfterMerge:
+    Cypress-RegressionTest-AfterMerge:
         runs-on: ubuntu-latest
 
         steps:
@@ -26,23 +26,36 @@ jobs:
                   browser: chrome
                   command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
                     npx cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsregression.json
-                    npx cypress run --browser chrome --reporter mochawesome --reporter-options reportDir=mochawesome-report,overwrite=false,html=false,json=true
                     jrm reports/regression-report.xml \"reports/*.xml\"
-                    npx mochawesome-merge cypress/results/*.json > mochawesome-report/regression.json
-                    npx marge regression.json
                   record: false #HABILITAR A TRUE* cuando se use un Proyecto.
               env:
                   # pass the Dashboard record key as an environment variable
                   CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
                   # pass GitHub token to allow accurately detecting a build vs a re-run build
                   GITHUB_TOKEN: ${{ secrets.UPEX_GITHUB_TOKEN }}
+    
+    Cypress-ExecutionReport:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 💻Checkout
+              uses: actions/checkout@v3
+
+            - name: 🧪VERIFICATION Cypress E2E Regression Test in Chrome
+              uses: cypress-io/github-action@v4
+              with:
+                  browser: chrome
+                  command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
+                    npx cypress run --browser chrome --reporter mochawesome --reporter-options reportDir=mochawesome-report,overwrite=false,html=false,json=true
+                    npx mochawesome-merge cypress/results/*.json > mochawesome-report/regression.json
+                    npx marge regression.json
 
             - name: 📊Upload Artifact HTML Report
               uses: actions/upload-artifact@v3
               if: always()
               with:
                   name: regression-test-report
-                  path: mochawesome-report/regression.html
+                  path: mochawesome-report/mochawesome.html
 
             - name: ✅Import Test Results to Xray
               uses: mikepenz/xray-action@v2
