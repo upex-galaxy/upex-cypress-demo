@@ -5,3 +5,4 @@ cypress/downloads
 cypress/screenshots
 mochawesome-report/
 reports/
+mochawesome.json
