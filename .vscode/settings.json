@@ -72,11 +72,12 @@
 		"scripts.js": "console",
 		".cypress-cucumber-preprocessorrc.json": "cucumber",
 		"cucumber-report.json": "cucumber",
-		"jsconfig.json": "Javascript-map",
 		"settings.json": "Vscode",
 		"launch.json": "http",
 		"package-lock.json": "npm",
-		"package.json": "npm"
+		"package.json": "npm",
+		"jsconfig.json": "conduct",
+		"jsregression.json": "conduct"
 	},
 	"material-icon-theme.folders.associations": {
 		"api-testing": "api",
