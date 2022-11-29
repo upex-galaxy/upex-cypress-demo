@@ -13,12 +13,9 @@ module.exports = defineConfig({
 	// En Caso de hacer testing en SUT con seguridad web:
 	chromeWebSecurity: false,
 	// reporter: 'mochawesome',
-	reporter: 'mocha-junit-reporter',
+	reporter: 'cypress-multi-reporters',
 	reporterOptions: {
-		mochaFile: 'reports/test-results.xml',
-		toConsole: true,
-		outputs: true,
-		testCaseSwitchClassnameAndName: true,
+		configFile: 'jsconfig.json'
 	},
 	// Number of times to retry a failed test. If a number is set, tests will retry in both runMode and openMode:
 	retries: 0,

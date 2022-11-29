@@ -7,9 +7,13 @@
 #     Expected Result: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí. 
 
 name: 🤖CI run (BUILD) Test Suite Execution⚡
-run-name: ${{github.actor}}👨🏻‍🔬 run Tests in ${{github.ref_name}}
+run-name: ${{github.actor}}👨🏻‍🔬 run Test Suite in ${{github.ref_name}}
 
-on: [push]
+on: # This Run is a template. The correct "Run On" should be: Any except QA and Main (cypex)
+  push:
+    branches-ignore:
+      - cypex
+      - QA
 
 jobs:
     Build-Cypress-TestSuite-AfterPush:
@@ -19,36 +23,49 @@ jobs:
             - name: 💻Checkout
               uses: actions/checkout@v3
 
+            - name: 💿Install Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - name: 🧬Install All Dependencies
+              run: |
+                npm install
+                npm list 
+
             - name: 🧪Cypress Build and Run US Test Coverage in Chrome
               uses: cypress-io/github-action@v4
               with:
                   browser: chrome
-                  command: |
+                  command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
                     npm run file */**/GX-203/*.cy.js
-                  record: true
+                  record: false #HABILITAR A TRUE* cuando se use un Proyecto.
               env:
                   # pass the Dashboard record key as an environment variable
                   CYPRESS_RECORD_KEY: ${{ secrets.CYPEX_DEMO_RECORD_KEY }}
                   # pass GitHub token to allow accurately detecting a build vs a re-run build
                   GITHUB_TOKEN: ${{ secrets.UPEX_GITHUB_TOKEN }}
 
-            - name: 📊Upload Artifact by Fail
+            - name: 📊Upload Artifact HTML Report
+              if: always()
               uses: actions/upload-artifact@v3
-              if: failure()
               with:
-                  name: cypress-screenshots
-                  path: cypress/screenshots
+                  name: test-report
+                  path: mochawesome-report
 
             - name: ✅Import Test Results to Xray
+              if: always()
               uses: mikepenz/xray-action@v2
-              with:
+              with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
                   username: ${{secrets.XRAY_CLIENT_ID}}
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit'
                   testPaths: 'reports/test-results.xml'
                   testExecKey: 'GX-5'
                   projectKey: 'GX'
+
             - name: 🔔Slack Notification of Done
+              if: always()
               uses: rtCamp/action-slack-notify@v2.2.0
               env:
                 SLACK_WEBHOOK: https://hooks.slack.com/services/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

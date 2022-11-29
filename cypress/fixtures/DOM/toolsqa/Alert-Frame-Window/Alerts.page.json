@@ -1,0 +1,19 @@
+{
+    "clickMeButton": {
+        "alertButton": "[id^='alert']",
+        "timerAlertbutton": "[id^='timer']",
+        "confirmButton": "[id^='confirm']",
+        "confirmResult": "[id='confirmResult']",
+        "promptButton": "[id^='promt']",
+        "promptResult": "[id='promptResult']"
+    },
+    "messages": {
+        "messageAlertButton": "You clicked a button",
+        "messageTimerAlertButton": "This alert appeared after 5 seconds",
+        "messageConfirm": "Do you confirm action?",
+        "messageOK": "You selected Ok",
+        "messageCancel": "You selected Cancel",
+        "inputEnterNamePrompt": "John",
+        "messageEntered": "You entered John"
+    }
+}

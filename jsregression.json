@@ -1,0 +1,9 @@
+{
+	"reporterEnabled": "spec, mocha-junit-reporter",
+	"mochaJunitReporterReporterOptions": {
+		"mochaFile": "reports/suite-[hash].xml",
+		"toConsole": false,
+		"outputs": true,
+        "testCaseSwitchClassnameAndName": true
+	}
+}
