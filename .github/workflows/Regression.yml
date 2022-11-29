@@ -44,10 +44,12 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.UPEX_GITHUB_TOKEN }}
 
             - name: 📬Generate XML Regression Report
+              if: always()
               run: |
                 npm run report:xml
 
             - name: ✅Import Test Results to Xray
+              if: always()
               uses: mikepenz/xray-action@v2
               with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
                   username: ${{secrets.XRAY_CLIENT_ID}}
@@ -58,6 +60,7 @@ jobs:
                   projectKey: 'GX'
 
             - name: 🔔Slack Notification of Done
+              if: always()
               uses: rtCamp/action-slack-notify@v2.2.0
               env:
                 SLACK_WEBHOOK: https://hooks.slack.com/services/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
@@ -91,6 +94,7 @@ jobs:
                     npm run regression:report
 
             - name: 📬Generate HTML Regression Report
+              if: always()
               run: |
                 npm run report:json
                 npm run report:html
