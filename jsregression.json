@@ -1,5 +1,5 @@
 {
-	"reporterEnabled": "spec, mocha-junit-reporter, mochawesome",
+	"reporterEnabled": "spec, mocha-junit-reporter",
 	"mochaJunitReporterReporterOptions": {
 		"mochaFile": "reports/suite-[hash].xml",
 		"toConsole": false,
