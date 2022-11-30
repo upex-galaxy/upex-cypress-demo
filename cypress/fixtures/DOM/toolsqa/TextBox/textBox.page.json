@@ -1,0 +1,41 @@
+{
+    "fullName": {
+        "input": "#userName",
+        "data": {
+        "valid": "Luis Diaz",
+        "invalid": ""
+        }
+    },
+    "email": {
+        "input": "#userEmail",
+        "data": {
+        "valid": "LuisDiaz@gmail.com",
+        "invalid": ""
+        }
+    },
+    "dirActual": {
+        "input": "#currentAddress",
+        "data": {
+        "valid": "Carupano 1234",
+        "invalid": ""
+        }
+    },
+    "dirPermanente": {
+        "input": "#permanentAddress",
+        "data": {
+        "valid": "Sucre 5678",
+        "invalid": ""
+        }
+    },
+    "submitButton": "#submit",
+    "textField":"#output",
+    "submit":{
+        "Fail" : ".field-error",
+        "sucess":{
+            "fullName":"#name",
+            "email":"#email",
+            "DirActual":"#currentAddress",
+            "dirPermanente":"#permanentAddress"
+        }
+    }
+}
