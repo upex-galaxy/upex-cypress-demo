@@ -1,0 +1,19 @@
+{
+	"element": {
+		"willEnable": "#enableAfter",
+		"colorChange": "#colorChange",
+		"visibleAfter": "#visibleAfter"
+	},
+	"Test": {
+		"US": "GX-4218 ✅ToolsQA | Elements | Dynamic Properties",
+		"TC1": "4219 | TC1:  Validate enabled element after 5 seconds",
+		"TC2": "4219 | TC2:  Validate element that changes color after 5 seconds",
+		"TC3": "4219 | TC3:  Validate visible element after 5 seconds"
+	},
+	"Assertion": {
+		"willEnable": "not.have.a.property",
+		"colorChange": "have.css",
+		"visibleAfter": "be.visible"
+	},
+	"url": "/dynamic-properties"
+}
