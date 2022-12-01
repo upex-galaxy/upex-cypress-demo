@@ -1,6 +1,6 @@
-[![CYPEX](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/f9y7eu/cypex&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/f9y7eu/runs)
+[![CYPEX L1 DEMO](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/2pw67q&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/2pw67q/runs)
 
-# Testing Automation - Cypress 10.9.0 + Cucumber
+# 🧪Testing Automation: Cypress 10.9.0 + Cucumber
 
 ![UPEX's Banners (linkedin) (1)](https://user-images.githubusercontent.com/91127281/189470339-acea5782-16f1-4f06-9ce0-df54fd3ead9d.png)
 
@@ -10,12 +10,42 @@ Cypress es un Framework de Automatización de Next Generation construido para we
 
 # CÓMO EMPEZAR:
 
-1. Clona el Proyecto: `git clone <URLdelRepositorioGitHub>`
-2. Instala todas las dependencias: `npm i` (i de install) o puedes usar `npm i -f` (-f de force) por si estás teniendo conflictos al instalar.
-3. Corre el comando: `npx cypress open` o `npm test` (ya que en Package.json tenemos la variable "test" como el "cypress open") para abrir Cypress!
-4. Para correr pruebas en la terminal, corre: `npm run file */**/<filename>` (la variable "file" es "cypress run --reporter mochawesome --browser chrome --spec" lo cual es un atajo para que podamos correr las pruebas de un directorio que especifiquemos, usando el navegador de Chrome, y generando un excelente reporte html), esto nos ayudará a generar los archivos de Reportes XML para importarlos a Jira!
+1. **Clona el Proyecto**: 
+    ```
+    git clone https://github.com/upex-galaxy/L1-cypex-demo.git
+    ````
+___
+2. **Instala todas las dependencias**: 
+    ```
+    npm i
+    ``` 
+    * (la letra `i` es de `install`)
+    o puedes usar:
+        ```
+        npm i -f
+        ``` 
+        * (usa el parámetro `-f` de force) por si estás teniendo conflictos al instalar.
+___
+3. **Para abrir la App de Cypress, corre el comando**: 
+    ```
+    npm test
+    ``` 
+    * también puede usar `npx cypress open` (ya que en Package.json tenemos la variable "test" como el "cypress open") para abrir Cypress!
+___
+4. **Para correr pruebas y generar Reportes XML y HTML, ejecuta**: 
+    ```
+    npm run file */**/<filename>
+    ```
+    * donde la variable "file" es:
+     `cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --record --key {key} --spec`, 
+     cuyo atajo es para que podamos correr las pruebas de un directorio que especifiquemos, usando el navegador de Chrome, generando 1 Reporte XML para importar a Jira y otro para generar un hermoso html, y adicionalmente actualizar el Cypress Dashboard del Proyecto.
+___
+5. **AHORA CON CYPRESS DASHBOARD**, puedes ver todas las ejecuciones y resultados de prueba del proyecto!
+Visita: [CYPRESS DASHBOARD](https://dashboard.cypress.io/projects/2pw67q/analytics/runs-over-time)
+___
 
-# Las Guías de UPEX para saber cómo trabajar en un Workspace Real están Confluence: [CYPRESS AL GRANO](https://upexgalaxy1.atlassian.net/wiki/spaces/UG/pages/852822)
+## APRENDE Y GANA EXPERIENCIA TRABAJANDO COMO QA AUTOMATION EN GALAXY: 
+# LEE ESTA GUÍA: [CYPRESS AL GRANO](https://upexgalaxy3.atlassian.net/wiki/spaces/UG/pages/1410643)
 
 # Algunos Artículos de Cypress que puede interesarte:
 
