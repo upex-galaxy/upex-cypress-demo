@@ -8,7 +8,7 @@ describe(the.Test.US, () => {
 		cy.get(the.element.willEnable, {timeout: 5000}).should(the.Assertion.willEnable, 'disable')
 	})
 	it(the.Test.TC2, () => {
-		cy.get(the.element.colorChange, {timeout: 6000}).should(the.Assertion.colorChange, 'color', 'rgb(220, 53, 69)')
+		cy.get(the.element.colorChange, {timeout: 5000}).should(the.Assertion.colorChange, 'color', 'rgb(220, 53, 69)')
 	})
 	it(the.Test.TC3, () => {
 		cy.get(the.element.visibleAfter, {timeout: 5000}).should(the.Assertion.visibleAfter)
