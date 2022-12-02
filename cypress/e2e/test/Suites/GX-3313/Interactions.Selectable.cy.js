@@ -1,22 +1,32 @@
 describe('ToolsQA | Interactions | Selectable', () => {
-    beforeEach('Debe estar situado en selectable', () => {
-        cy.visit('https://demoqa.com/selectable')
-        cy.url().should('include', 'selectable')
-    })
+	beforeEach('Debe estar situado en selectable', () => {
+		cy.visit('https://demoqa.com/selectable')
+		cy.url().should('include', 'selectable')
+	})
 
 	it('3314 | TC1: Validate that the Selectable list is displaying and working as expected', () => {
 		cy.get('#demo-tab-list').should('have.text', 'List').and('have.attr', 'aria-selected', 'true').and('have.class', 'active')
+
 		cy.get('#demo-tab-grid').should('have.text', 'Grid').and('have.attr', 'aria-selected', 'false').and('not.have.class', 'active')
-        
-		cy.get('#demo-tabpane-list')
-        .children()
-        .children()
-        .should('be.visible')
-        .and('have.length', '4')
-        
-        cy.get('li[class*="list-group-item"]').eq(0).click()
-        .should('have.class', 'active')
-        .and('have.css', 'background-color', 'rgb(0, 123, 255)')
+
+		cy.get('#demo-tabpane-list').children().children().should('be.visible').and('have.length', '4')
+
+		cy.get('li[class*="list-group-item"]').eq(0).click().should('have.class', 'active').and('have.css', 'background-color', 'rgb(0, 123, 255)')
+	})
+
+	it.only('3314 | TC2: Validate that the Selectable grid is displaying and working as expected', () => {
+		cy.get('#demo-tab-grid').click()
+		cy.get('#demo-tab-grid').should('have.text', 'Grid').and('have.attr', 'aria-selected', 'true').and('have.class', 'active')
+
+		cy.get('#demo-tab-list').should('have.text', 'List').and('have.attr', 'aria-selected', 'false').and('not.have.class', 'active')
+
+		const arr1 = ['One', 'Two', 'Three']
+		const arr2 = ['Four', 'Five', 'Six']
+		const arr3 = ['Seven', 'Eight', 'Nine']
+
+		cy.validateTextGrid('#row1', arr1)
+		cy.validateTextGrid('#row2', arr2)
+		cy.validateTextGrid('#row3', arr3)
 	})
 })
 
