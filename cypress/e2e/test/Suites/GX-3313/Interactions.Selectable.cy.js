@@ -15,10 +15,38 @@ describe('ToolsQA | Interactions | Selectable', () => {
 	})
 
 	it.only('3314 | TC2: Validate that the Selectable grid is displaying and working as expected', () => {
-		cy.get('#demo-tab-grid').click()
-		cy.get('#demo-tab-grid').should('have.text', 'Grid').and('have.attr', 'aria-selected', 'true').and('have.class', 'active')
+		cy.get('#demo-tab-grid')
+			.click()
 
-		cy.get('#demo-tab-list').should('have.text', 'List').and('have.attr', 'aria-selected', 'false').and('not.have.class', 'active')
+		cy.get('#demo-tab-grid')
+			.should('have.text', 'Grid')
+			.and('have.attr', 'aria-selected', 'true')
+			.and('have.class', 'active')
+			
+		cy.get('#demo-tab-list')
+			.should('have.text', 'List')
+			.and('have.attr', 'aria-selected', 'false')
+			.and('not.have.class', 'active')
+
+		// cy.get('[id="gridContainer"] [class*="group-item-action"]').then((li) => {
+		// cy.log(li)
+		// const randomNumber = Math.floor(Math.random() * li.length - 1)
+		// cy.log(randomNumber)
+		// cy.get('[id="gridContainer"] [class*="group-item-action"]').eq(randomNumber).click()
+		// .should('have.class', 'active')
+		// .and('have.css', 'background-color', 'rgb(0, 123, 255)')
+		// }
+
+		cy.get('[id="gridContainer"] [class*="group-item-action"]')
+			.should('have.length.greaterThan', 0)
+			.its('length')
+			.then((n) => 
+			Cypress._.random(0, n - 1))
+			.then((k)=> {
+				cy.get('[id="gridContainer"] [class*="group-item-action"]').eq(k).click()
+			.should('have.class', 'active')
+			.and('have.css', 'background-color', 'rgb(0, 123, 255)')
+		})
 
 		const arr1 = ['One', 'Two', 'Three']
 		const arr2 = ['Four', 'Five', 'Six']
