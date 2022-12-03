@@ -1,0 +1,22 @@
+{
+    "Test":{
+        "US":"✅BookStore | Grid | Actualizar y Eliminar Libros de la Tienda (PUT-DELETE)",
+        "TC1":"2294 | TC1:  Validar por backend la eliminación de un libro aleatorio de la tienda",
+        "TC2":"2294 | TC2:  Validar por backend la modificación de un libro aleatorio de la tienda"
+    },
+    "Account": {
+        "createUser": "https://demoqa.com/Account/v1/User",
+        "generateToken": "https://demoqa.com/Account/v1/GenerateToken",
+        "verifyAuth": "https://demoqa.com/Account/v1/Authorized",
+        "DeleteUser": "https://demoqa.com/Account/v1/User/"
+    },
+    "Store": {
+        "AllBooks": "https://demoqa.com/BookStore/v1/Books",
+        "TakeBook": "https://demoqa.com/BookStore/v1/Books",
+        "SwitchBook": "https://demoqa.com/BookStore/v1/Books/",
+        "DeleteBook":"https://demoqa.com/BookStore/v1/Books?UserId="
+    },
+    "Profile": {
+        "GetCollection": "https://demoqa.com/Account/v1/User/"
+    }
+}
