@@ -40,7 +40,18 @@ ___
      `cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --record --key {key} --spec`, 
      cuyo atajo es para que podamos correr las pruebas de un directorio que especifiquemos, usando el navegador de Chrome, generando 1 Reporte XML para importar a Jira y otro para generar un hermoso html, y adicionalmente actualizar el Cypress Dashboard del Proyecto.
 ___
-5. **AHORA CON CYPRESS DASHBOARD**, puedes ver todas las ejecuciones y resultados de prueba del proyecto!
+5. **Para correr una REGRESIÓN y generar un solo Reporte HTML global, ejecuta**: 
+    ```
+    npm run regression:report
+    ```
+    Luego ejecuta este comando, y luego el otro:
+    ````
+    npm run report:json
+    npm run report:html
+    ````
+    * Gracias a esto se va a generar un único Reporte mochawesome HTML para evaluar TODOS los Resultados de Prueba de la Regresión.
+___
+6. **AHORA CON CYPRESS DASHBOARD**, puedes ver todas las ejecuciones y resultados de prueba del proyecto!
 Visita: [CYPRESS DASHBOARD](https://dashboard.cypress.io/projects/2pw67q/analytics/runs-over-time)
 ___
 ## APRENDE Y GANA EXPERIENCIA TRABAJANDO COMO QA AUTOMATION EN GALAXY: 

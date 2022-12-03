@@ -20,4 +20,4 @@ class LoginPage{
     }
 };
 
-export const If = new LoginPage;
+export const User = new LoginPage;
