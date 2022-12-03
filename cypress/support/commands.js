@@ -728,10 +728,26 @@ Cypress.Commands.add('validateSelectFile', () => {
 	cy.get('#uploadedFilePath').should('contain.text', 'sampleFile.jpeg')
 })
 
-Cypress.Commands.add('validateTextGrid', (row, arr) => {
-	cy.get(row)
-		.children()
+Cypress.Commands.add('validateText', (list, arr) => {
+	cy.get(list)
 		.each(($el, index) => {
 			expect($el.text()).to.equal(arr[index])
 		})
 })
+
+Cypress.Commands.add('clickElementRandom', (elemento) => {
+	cy.get(elemento)
+			.should('have.length.greaterThan', 0)
+			.its('length')
+			.then((n) => Cypress._.random(0, n - 1))
+			.then((k) => {
+				cy.get(elemento).eq(k).click()
+				.should('have.class', 'active')
+				.and('have.css', 'background-color', 'rgb(0, 123, 255)')
+				cy.get(elemento).eq(k).click()
+				.should('not.have.class', 'active')
+				.and('not.have.css', 'background-color', 'rgb(0, 123, 255)')
+			})
+})
+
+

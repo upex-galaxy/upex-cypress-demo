@@ -5,58 +5,63 @@ describe('ToolsQA | Interactions | Selectable', () => {
 	})
 
 	it('3314 | TC1: Validate that the Selectable list is displaying and working as expected', () => {
-		cy.get('#demo-tab-list').should('have.text', 'List').and('have.attr', 'aria-selected', 'true').and('have.class', 'active')
+		//valida acciones al abrir pagina
+		cy.get('#demo-tab-list')
+		.should('have.text', 'List')
+		.and('have.attr', 'aria-selected', 'true')
+		.and('have.class', 'active')
 
-		cy.get('#demo-tab-grid').should('have.text', 'Grid').and('have.attr', 'aria-selected', 'false').and('not.have.class', 'active')
+		cy.get('#demo-tab-grid')
+		.should('have.text', 'Grid')
+		.and('have.attr', 'aria-selected', 'false')
+		.and('not.have.class', 'active')
 
-		cy.get('#demo-tabpane-list').children().children().should('be.visible').and('have.length', '4')
+		//valida el length de la lista
+		cy.get('[id="verticalListContainer"] [class*="group-item-action"]')
+		.should('be.visible')
+		.and('have.length', '4')
+		
+		//valida que cada list-item contenga su correspondiente texto
+		const arr = ['Cras justo odio', 'Dapibus ac facilisis in', 'Morbi leo risus', 'Porta ac consectetur ac']
+		cy.validateText('[id="verticalListContainer"] [class*="group-item-action"]', arr)
 
-		cy.get('li[class*="list-group-item"]').eq(0).click().should('have.class', 'active').and('have.css', 'background-color', 'rgb(0, 123, 255)')
+		//valida que cuando se selecciona un elemento de la list, cambie a blue background y cuando se unselect no tenga blue background
+		cy.clickElementRandom('[id="verticalListContainer"] [class*="group-item-action"]')
 	})
 
-	it.only('3314 | TC2: Validate that the Selectable grid is displaying and working as expected', () => {
+	it('3314 | TC2: Validate that the Selectable grid is displaying and working as expected', () => {
+		//valida acciones al clickear la seccion Grid
+		cy.get('#demo-tab-grid').click()
 		cy.get('#demo-tab-grid')
-			.click()
+		.should('have.text', 'Grid')
+		.and('have.attr', 'aria-selected', 'true')
+		.and('have.class', 'active')
 
-		cy.get('#demo-tab-grid')
-			.should('have.text', 'Grid')
-			.and('have.attr', 'aria-selected', 'true')
-			.and('have.class', 'active')
-			
 		cy.get('#demo-tab-list')
-			.should('have.text', 'List')
-			.and('have.attr', 'aria-selected', 'false')
-			.and('not.have.class', 'active')
+		.should('have.text', 'List')
+		.and('have.attr', 'aria-selected', 'false')
+		.and('not.have.class', 'active')
 
-		// cy.get('[id="gridContainer"] [class*="group-item-action"]').then((li) => {
-		// cy.log(li)
-		// const randomNumber = Math.floor(Math.random() * li.length - 1)
-		// cy.log(randomNumber)
-		// cy.get('[id="gridContainer"] [class*="group-item-action"]').eq(randomNumber).click()
-		// .should('have.class', 'active')
-		// .and('have.css', 'background-color', 'rgb(0, 123, 255)')
-		// }
-
-		cy.get('[id="gridContainer"] [class*="group-item-action"]')
-			.should('have.length.greaterThan', 0)
-			.its('length')
-			.then((n) => 
-			Cypress._.random(0, n - 1))
-			.then((k)=> {
-				cy.get('[id="gridContainer"] [class*="group-item-action"]').eq(k).click()
-			.should('have.class', 'active')
-			.and('have.css', 'background-color', 'rgb(0, 123, 255)')
+		//valida que la grid sea 3X3
+		cy.get('#gridContainer').children().should('have.length', '3')
+		cy.get('#gridContainer').children().each(($el) => {
+			expect($el.children('li')).to.have.lengthOf(3)
 		})
 
-		const arr1 = ['One', 'Two', 'Three']
-		const arr2 = ['Four', 'Five', 'Six']
-		const arr3 = ['Seven', 'Eight', 'Nine']
+		//valida que cada grid contenga su correspondiente texto
+		const arr = ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine']
+		cy.validateText('[id="gridContainer"] [class*="group-item-action"]', arr)
 
-		cy.validateTextGrid('#row1', arr1)
-		cy.validateTextGrid('#row2', arr2)
-		cy.validateTextGrid('#row3', arr3)
+		//valida que no haya ningun elemento seleccionado
+		cy.get('[id="gridContainer"] [class*="group-item-action"]')
+		.should('not.have.class', 'active')
+		
+		//valida que cuando se selecciona un elemento de la grid, cambie a blue background y cuando se unselect no tenga blue background
+		cy.clickElementRandom('[id="gridContainer"] [class*="group-item-action"]')
 	})
 })
+
+
 
 //________________________________________________________________________
 // Comando predeterminado para que no ocurran errores de excepciones:
