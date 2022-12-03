@@ -55,7 +55,7 @@ ___
 Visita: [CYPRESS DASHBOARD](https://dashboard.cypress.io/projects/2pw67q/analytics/runs-over-time)
 ___
 ## APRENDE Y GANA EXPERIENCIA TRABAJANDO COMO QA AUTOMATION EN GALAXY: 
-# LEE ESTA GUÍA: [CYPRESS AL GRANO](https://upexgalaxy3.atlassian.net/wiki/spaces/UG/pages/1410643)
+# LEE ESTA GUÍA: [CYPRESS AL GRANO](https://upexgalaxy6.atlassian.net/wiki/spaces/UG/pages/918130)
 
 # Algunos Artículos de Cypress que puede interesarte:
 - [How to Install Cypress](https://testersdock.com/how-to-install-cypress/)
