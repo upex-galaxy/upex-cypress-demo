@@ -671,3 +671,15 @@ Cypress.Commands.add("validateSelectFile",()=>
     cy.get('input[type=file]').selectFile('sampleFile.jpeg');
     cy.get('#uploadedFilePath').should('contain.text','sampleFile.jpeg');
 })
+// Login of SwagLabs.
+Cypress.Commands.add("loginStandardUser", () => {
+	beforeEach("Visit Saucedemo| Login success in SwagLabsSite", () => {
+		cy.visit("https://www.saucedemo.com/")
+        cy.url().should("contain","saucedemo")
+        cy.fixture("DOM/SwagLabs/removeProductSC.page").then((the) => {
+            cy.get(the.input.username).type(the.data.user)
+            cy.get(the.input.password).type(the.data.password)
+            cy.get(the.loginButton).click()
+	    })
+    })
+})
