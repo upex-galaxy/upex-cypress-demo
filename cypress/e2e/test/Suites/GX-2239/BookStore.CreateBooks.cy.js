@@ -59,34 +59,41 @@ describe('US GX-2269 | TS: ✅BookStore | Grid | Crear y Obtener Libros de la Ti
 				//We need to verify if the user is alredy register 
 				cy.userIsRegister()
 				//This request get the list of books in the Book Store then we store this list on books variable
-				cy.request({
-					method: 'GET',
+				cy.api({
 					url: 'https://demoqa.com/BookStore/V1/Books',
 				}).then(({body})=>{
 					//Precondicion We suppose the user list of books is empty
 					const index = Math.floor(Math.random() * body.books.length)+1
-					cy.request({
+					const book = body.books[index].isbn 
+					cy.api({
 						method: 'DELETE',
 						failOnStatusCode: false,
+						auth: {
+                                bearer: the.user.token
+                        },
 						url: 'https://demoqa.com/Account/v1/Books',
 						body: { "userId": the.user.id }
 					})
-					cy.log(body.books[index])
+					//cy.log(body.books[index].isbn)
 					//This request create a book in the user list of books
-					cy.request({
-					method: 'POST',
-					url: 'https://demoqa.com/Account/v1/Books',
-					body: {
-						"userId": the.user.id,
-						"collectionOfIsbns": [
-							{
-								"isbn": body.books[index].isbn
-							}
-						]
-					}}).then(({body})=>{
-						const book = books.filter(el=>el.isbn=body.isbn)
+					cy.api({
+						method: 'POST',
+						url: 'https://demoqa.com/Account/v1/Books',
+						auth:{
+                            bearer: the.user.token
+                        },
+						body: {
+							userId: the.user.id,
+							collectionOfIsbns: [
+								{
+									isbn: book
+								}
+							]
+					}
+					}).then(({body})=>{
+						const userBook = body.books.filter(el=>el.isbn==book.isbn)
 						cy.visit(the.url.profile)
-						cy.contains(book.title).should('be.visible')
+						cy.contains(userBook.title).should('be.visible')
 					})
 				})
 				
@@ -97,7 +104,11 @@ describe('US GX-2269 | TS: ✅BookStore | Grid | Crear y Obtener Libros de la Ti
 			cy.fixture("DOM/toolsqa/BookStoreApplications/createBook.Page").then((the)=>{
 				cy.request({
 					method: 'POST',
-					failOnStatusCode: false,
+					auth: {
+                            bearer: the.user.token,
+                            userName: the.user.name.data,
+                            password: the.user.password.data,
+                    },
 					url: `https://demoqa.com/Account/v1/User/${the.user.id}`,
 					body: {"userId": the.user.id},
 				}).then(({body})=>{
