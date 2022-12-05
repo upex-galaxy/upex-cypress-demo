@@ -20,7 +20,7 @@
 	"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
 	"cucumberautocomplete.stepRegExSymbol": "'",
 	"window.zoomLevel": 1,
-	"workbench.colorTheme": "Shades of Purple",
+	"workbench.colorTheme": "Xcode Default Dark Customized Version",
 	"cSpell.language": "en,es",
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
