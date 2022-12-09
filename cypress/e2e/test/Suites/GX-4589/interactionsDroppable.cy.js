@@ -3,6 +3,7 @@ const { Given } = require("@badeball/cypress-cucumber-preprocessor");
 describe('GX-4589 | ToolsQA | Interactions | Droppable',()=>{
 
     beforeEach('User must be in Droppable page',()=>{
+        cy.viewport(1440,900)
         cy.visit('/droppable');
         cy.url().should('contain','droppable');
     });
