@@ -70,8 +70,12 @@ Suites/GX-1022/Elements.DynamicProperties.cy.js ✖
 
 Suites/GX-277/Elemets.BrokenLinks.cy.js
     *Error en modo headless
-    *Intentado FIX: Se agregó tiempo de carga en la URL por posible fallo ({pageLoadTimeout:90000})
+    *Intentado FIX: Se agregó tiempo de carga en la URL por posible fallo ({pageLoadTimeout:1200000})
 
 Suites/GX-3016/Menu.BurgerMenu.cy.js
+    *Error en modo headless
+    *Intentado FIX: Se agregó tiempo de carga en la URL por posible fallo ({pageLoadTimeout:90000})
+
+Suites/GX-2968/widgets.Tool-Tips.cy.js
     *Error en modo headless
     *Intentado FIX: Se agregó tiempo de carga en la URL por posible fallo ({pageLoadTimeout:90000})

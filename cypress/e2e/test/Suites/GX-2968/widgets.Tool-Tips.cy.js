@@ -1,6 +1,6 @@
 describe("ToolsQA | Widgets | Tool-Tips", () => {
     beforeEach("El Usuario debe estar situado en endpoint de Tool Tips", () => {
-        cy.visit("https://demoqa.com/tool-tips")
+        cy.visit("https://demoqa.com/tool-tips", {pageLoadTimeout:90000})
         cy.url().should("contain", "tool-tips")
     })
     it("US-2968 | TS 2969 | TC1:  Validar cuando se pasa el cursor sobre el Button 'hover me to see'  se muestre un tooltip de 'You hovered over the Button'", () => {
