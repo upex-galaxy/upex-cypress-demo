@@ -2,7 +2,7 @@ describe("ToolsQA | Alert-Frame-Window | Alerts", () => {
     
     beforeEach("Precondition: User debe estar situado en la web site", () => {
         
-        cy.visit("https://demoqa.com/alerts")
+        cy.visit("https://demoqa.com/alerts", {pageLoadTimeout:90000})
         cy.location("protocol").should("contains", "https")
         cy.url().should("contains", "alerts")
         cy.url().should("eq", "https://demoqa.com/alerts")
