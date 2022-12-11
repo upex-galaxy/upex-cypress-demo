@@ -2,7 +2,7 @@ describe("US GX-3016 | TS:3017 | SwagLabs | Menu | Hacer varias Acciones desde u
 {
     beforeEach("El usuario debe estar logeado y situado en el website",()=>
     {
-        cy.visit("https://www.saucedemo.com/")
+        cy.visit("https://www.saucedemo.com/", {pageLoadTimeout:90000})
         cy.get("[name='user-name']")
             .type("standard_user")
         cy.get("[name='password']")

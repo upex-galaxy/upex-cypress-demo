@@ -67,3 +67,11 @@ Suites/GX-1022/Elements.DynamicProperties.cy.js ✖
     *AssertionError: TC2, TC3 y TC4 cuentan con errores en las aserciones
     *Aserciones corregidas.
     *Result: All test passed ✔ 
+
+Suites/GX-277/Elemets.BrokenLinks.cy.js
+    *Error en modo headless
+    *Intentado FIX: Se agregó tiempo de carga en la URL por posible fallo ({pageLoadTimeout:90000})
+
+Suites/GX-3016/Menu.BurgerMenu.cy.js
+    *Error en modo headless
+    *Intentado FIX: Se agregó tiempo de carga en la URL por posible fallo ({pageLoadTimeout:90000})
