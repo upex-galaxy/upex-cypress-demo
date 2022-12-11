@@ -1,6 +1,7 @@
 describe('GX277 | ToolsQA | Elements | Broken Links Images', () => {
     beforeEach("Ingreso a elementos ", () => {
         cy.fixture("DOM/toolsqa/Elements/BrokenLinks.Page").then((the) => { 
+            cy.viewport(1900,1080)
             cy.visit(the.url.Base)
             cy.url()
                 .should('include', '/broken')
