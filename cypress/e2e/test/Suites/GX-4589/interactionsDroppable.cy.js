@@ -32,6 +32,7 @@ describe('GX-4589 | ToolsQA | Interactions | Droppable',()=>{
         cy.get("[class*=nav-item]").eq(2).click().should("have.focus")
         cy.get("#notGreedyDropBox").as("dropBox1")
         cy.get("#dragBox").drag("@dropBox1",{
+            source:{position:'topRight'},
             target:{position:'topRight'},
             force:true})
         cy.get("@dropBox1").should("have.text","Dropped!Inner droppable (not greedy)")
@@ -52,7 +53,8 @@ describe('GX-4589 | ToolsQA | Interactions | Droppable',()=>{
         cy.get("[class*=nav-item]").eq(2).click().should("have.focus")
         cy.get("#greedyDropBox").as("dropBox2")
         cy.get("#dragBox").drag("@dropBox2",{
-            target:{position:'topRight'},
+            source:{position:'top'},
+            target:{position:'top'},
             force:true})
         cy.get("@dropBox2").should("have.text","Dropped!Inner droppable (greedy)")
     })
