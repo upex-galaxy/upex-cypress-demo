@@ -17,7 +17,7 @@ Cypress es un Framework de Automatización de Next Generation construido para we
 ___
 2. **Instala todas las dependencias**: 
     ```
-    npm i --legacy-peer-deps
+    npm i
     ``` 
     * (la letra `i` es de `install` y `--legacy-peer-deps` es para instalar diferentes dependencias necesarias)
 ___
