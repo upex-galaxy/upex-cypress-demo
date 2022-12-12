@@ -1,6 +1,25 @@
 const {defineConfig} = require('cypress')
+const createBundler = require('@bahmutov/cypress-esbuild-preprocessor')
+const preprocessor = require('@badeball/cypress-cucumber-preprocessor')
+const createEsbuildPlugin = require('@badeball/cypress-cucumber-preprocessor/esbuild')
 const {downloadFile} = require('cypress-downloadfile/lib/addPlugin')
-const { verifyDownloadTasks } = require('cy-verify-downloads');
+
+async function setupNodeEvents(on, config) {
+	// This is required for the preprocessor to be able to generate JSON reports after each run, and more,
+	await preprocessor.addCucumberPreprocessorPlugin(on, config)
+
+	on('task', {downloadFile})
+
+	on(
+		'file:preprocessor',
+		createBundler({
+			plugins: [createEsbuildPlugin.default(config)],
+		})
+	)
+
+	// Make sure to return the config object as it might have been modified by the plugin.
+	return config
+}
 
 module.exports = defineConfig({
 	// @Ely: CYPRESS DASHBOARD PARA VER NUESTRAS EJECUCIONES EN LA WEB:
@@ -15,7 +34,7 @@ module.exports = defineConfig({
 	// multi-reporters: one report.xml + mochawesome.json per file.
 	reporter: 'cypress-multi-reporters',
 	reporterOptions: {
-		configFile: 'jsconfig.json'
+		configFile: 'jsconfig.json',
 	},
 	// Number of times to retry a failed test. If a number is set, tests will retry in both runMode and openMode:
 	retries: 0,
@@ -23,18 +42,9 @@ module.exports = defineConfig({
 	video: false,
 	// E2E Testing runner
 	e2e: {
-		// Enables cross-origin and improved session support, including the cy.origin and cy.session commands:
-		experimentalSessionAndOrigin: true, // Para poder ver el Test Run de pruebas API, ésto debe estar en FALSE.
-		// Use Cypress plugins:
-		setupNodeEvents(on, config) {
-			on('task', {downloadFile})
-			on('task', verifyDownloadTasks);
-			return require('./cypress/plugins/index.js')(on, config)			
-		},		
 		// Glob pattern to determine what test files to load:
 		specPattern: ['**/*.feature', 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
-		// Url used as prefix for cy.visit() or cy.request() command's url 
-		// (NO USAR BASEURL SI SE EJECUTA UN INDEX.HTML):
-		// baseUrl: 'https://'
-	}
+		// Use Cypress plugins:
+    	setupNodeEvents,
+	},
 })
