@@ -27,7 +27,7 @@ jobs:
 
             - name: 🧬Install All Dependencies
               run: |
-                npm install
+                npm install --legacy-peer-deps
                 npm list 
 
             - name: 🧪Cypress E2E Regression Test in Chrome
@@ -83,7 +83,7 @@ jobs:
 
             - name: 🧬Install All Dependencies
               run: |
-                npm install 
+                npm install --legacy-peer-deps
                 npm list 
 
             - name: 🧪VERIFICATION Cypress E2E Regression Test in Chrome

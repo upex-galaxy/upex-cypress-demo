@@ -30,7 +30,7 @@ jobs:
 
             - name: 🧬Install All Dependencies
               run: |
-                npm install
+                npm install --legacy-peer-deps
                 npm list 
 
             - name: 🧪Cypress Build and Run US Test Coverage in Chrome
