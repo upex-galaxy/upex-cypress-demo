@@ -11,6 +11,8 @@ import 'cypress-file-upload'
 import 'cypress-wait-until'
 require('@4tw/cypress-drag-drop')
 require('cypress-downloadfile/lib/downloadFileCommand')
+const {login} = require('../support/POM/Login.Page')
+const {authLogin, dashboardIndex} = Cypress.env('endpoint')
 
 
 
@@ -28,3 +30,16 @@ require('cypress-downloadfile/lib/downloadFileCommand')
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('Login',(username,password)=>{
+    cy.session('login',()=>{
+        cy.visit("/")
+        cy.url().should("contain", authLogin)
+        username && login.enterUsername(username)
+        password && login.enterPassword(password)
+        login.submitLogin()
+
+        cy.url().should("contain", dashboardIndex)
+        
+    })
+})

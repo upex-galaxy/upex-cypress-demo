@@ -46,5 +46,18 @@ module.exports = defineConfig({
 		specPattern: ['**/*.feature', 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
 		// Use Cypress plugins:
     	setupNodeEvents,
+		baseUrl: "https://opensource-demo.orangehrmlive.com/web/index.php"
 	},
+	env:{
+
+		AdminUser:{
+
+			username: "Admin",
+			password: "admin123"
+		},
+		endpoint:{
+			authLogin: "/auth/login",
+			dashboardIndex: "/dashboard/index"
+		}
+	}
 })
