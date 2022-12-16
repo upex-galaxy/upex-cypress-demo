@@ -23,7 +23,7 @@ describe('GX-4607 ToolsQA | Inteactions | Sortable', () => {
 		}
 	});
 
-	it('4607 | TC4: Default order of LIST items', () => {
+	it.only('4607 | TC4: Default order of LIST items', () => {
 
 		cy.get('#demo-tabpane-list > div > div:nth-child(1)')
 		.invoke('text').should('eq','One')
@@ -35,7 +35,7 @@ describe('GX-4607 ToolsQA | Inteactions | Sortable', () => {
 
 	});	
 
-	it.only('4607 | TC5: Drag an element of the LIST and verify new location', () => {
+	xit('4607 | TC5: Drag an element of the LIST and verify new location', () => {
 	//	cy.get('#demo-tabpane-list > div > div:nth-child(1)')
 /*	let listItem = cy.get('#demo-tabpane-list').within(()=>{ cy.get('div[class="list-group-item list-group-item-action"]').invoke('text')})
 		console.log("ITEM----->" + listItem[0])
