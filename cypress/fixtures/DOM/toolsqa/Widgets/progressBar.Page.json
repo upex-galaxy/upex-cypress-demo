@@ -1,0 +1,5 @@
+{
+    "progressBar":"#progressBar",
+    "startStopButton": "#startStopButton",
+    "resetButton": "#resetButton"
+}
