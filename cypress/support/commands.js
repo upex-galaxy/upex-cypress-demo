@@ -33,7 +33,7 @@ const {authLogin, dashboardIndex} = Cypress.env('endpoint')
 
 Cypress.Commands.add('Login',(username,password)=>{
     cy.session('login',()=>{
-        cy.visit("/")
+        cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php")
         cy.url().should("contain", authLogin)
         username && login.enterUsername(username)
         password && login.enterPassword(password)

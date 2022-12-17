@@ -46,7 +46,7 @@ module.exports = defineConfig({
 		specPattern: ['**/*.feature', 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
 		// Use Cypress plugins:
     	setupNodeEvents,
-		baseUrl: "https://opensource-demo.orangehrmlive.com/web/index.php"
+		// baseUrl: ""
 	},
 	env:{
 
