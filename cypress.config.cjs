@@ -2,7 +2,8 @@ const {defineConfig} = require('cypress')
 const createBundler = require('@bahmutov/cypress-esbuild-preprocessor')
 const preprocessor = require('@badeball/cypress-cucumber-preprocessor')
 const createEsbuildPlugin = require('@badeball/cypress-cucumber-preprocessor/esbuild')
-const {downloadFile} = require('cypress-downloadfile/lib/addPlugin')
+const {downloadFile} = require('cypress-downloadfile/lib/addPlugin');
+const { verifyDownloadTasks } = require('cy-verify-downloads');
 
 async function setupNodeEvents(on, config) {
 	// This is required for the preprocessor to be able to generate JSON reports after each run, and more,
@@ -46,6 +47,9 @@ module.exports = defineConfig({
 		specPattern: ['**/*.feature', 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
 		// Use Cypress plugins:
     	setupNodeEvents,
+		setupNodeEvents(on, config) {
+			on('task', verifyDownloadTasks);
+		},
 		// baseUrl: ""
 	},
 	env:{

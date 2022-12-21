@@ -16,6 +16,7 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 import 'cypress-wait-until';
+require('cy-verify-downloads').addCustomCommand();
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
