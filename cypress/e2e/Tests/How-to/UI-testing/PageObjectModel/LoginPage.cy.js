@@ -1,4 +1,4 @@
-const { User } = require('../../../../../support/POM/example.Page')
+const { User } = require('@pages/example.Page')
 
 describe('US Example | Test Page Object Model', () => {
     beforeEach(() => {

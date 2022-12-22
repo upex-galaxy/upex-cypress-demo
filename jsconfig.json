@@ -1,7 +1,12 @@
 {
 	"include": ["./node_modules/cypress", "cypress/**/*.js"],
 	"compilerOptions": {
-		"types": ["cypress", "cypress-file-upload","cypress-xpath"]
+		"types": ["cypress", "cypress-file-upload","cypress-xpath"],
+		"paths": {
+			"@pages/*": [
+				"./cypress/support/POM/*"
+			]
+		}
 	},
 	"reporterEnabled": "spec, mocha-junit-reporter, mochawesome",
 	"mochaJunitReporterReporterOptions": {
