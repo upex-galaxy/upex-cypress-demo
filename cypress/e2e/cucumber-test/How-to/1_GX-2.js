@@ -21,7 +21,7 @@ describe("US 2 | TS 3 | TC1: Check the Login correctly to Orange CRM Website", (
     // (Then = Extensión) Entonces: el usuario inicia sesión exitosamente en la Website.
     Then('User is able to successfully login to the Website', () =>
     {
-        cy.url().should('include',"viewEmployeeList")
+        cy.url().should('include',"dashboard")
     })
 })
 
