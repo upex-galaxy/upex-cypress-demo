@@ -15,13 +15,8 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
-import 'cypress-react-selector';
-import "cypress-real-events/support";
 import 'cypress-wait-until';
-
-
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
-require('cy-verify-downloads').addCustomCommand();
 require('cypress-plugin-api')
 require('cypress-xpath');
