@@ -36,12 +36,6 @@ jobs:
                   browser: chrome
                   command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
                     npm run regression
-                  record: true #HABILITAR A TRUE* cuando se use un Proyecto.
-              env:
-                  # pass the Dashboard record key as an environment variable
-                  CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-                  # pass GitHub token to allow accurately detecting a build vs a re-run build
-                  GITHUB_TOKEN: ${{ secrets.UPEX_GITHUB_TOKEN }}
 
             - name: 📬Generate XML Regression Report
               if: always()

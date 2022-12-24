@@ -61,7 +61,7 @@ jobs:
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit'
                   testPaths: 'reports/test-results.xml'
-                  testExecKey: '**'
+                  testExecKey: 'GX-5'
                   projectKey: 'GX'
 
             - name: 🔔Slack Notification of Done
