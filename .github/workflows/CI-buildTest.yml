@@ -38,8 +38,8 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                    npm run file */**/GX-1/*.cy.js
-                  record: false #HABILITAR A TRUE* cuando se use un Proyecto.
+                    npm run file cypress/e2e/Tests/How-to/UI-testing/PageObjectModel/LoginPage.cy.js
+                  record: true #HABILITAR A TRUE* cuando se use un Proyecto.
               env:
                   # pass the Dashboard record key as an environment variable
                   CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
@@ -61,7 +61,7 @@ jobs:
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit'
                   testPaths: 'reports/test-results.xml'
-                  testExecKey: 'GX-5'
+                  testExecKey: 'GX-5538'
                   projectKey: 'GX'
 
             - name: 🔔Slack Notification of Done
