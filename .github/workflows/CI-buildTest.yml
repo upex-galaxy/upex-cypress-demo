@@ -38,7 +38,7 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                    npm run file */**/GX-1/*.cy.js
+                    npm run file */**/**/*.cy.js
                   record: true #HABILITAR A TRUE* cuando se use un Proyecto.
               env:
                   # pass the Dashboard record key as an environment variable

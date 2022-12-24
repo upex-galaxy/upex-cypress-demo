@@ -13,7 +13,7 @@ describe("ToolsQA | Widgets | Tool-Tips", () =>
 
     beforeEach("Precondition: Estar situado en la pagina", () =>
     {   
-        cy.getUrl(the.url, "/tool-tips") 
+        cy.getUrl(the.url, "/tool-tips", {pageLoadTimeout:90000}) 
     })
     
         it("US-GX-781|TC1: Validate tooltip textfield is displayed “You hovered over the Button” when you hover over the buttón “hover me to see” ", () =>

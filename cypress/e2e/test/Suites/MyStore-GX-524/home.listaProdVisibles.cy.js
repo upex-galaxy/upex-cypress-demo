@@ -21,7 +21,7 @@ describe("MyStore: Home-ListaProductosVisibles", () => {
     })
 
     //caso 1
-    it('TC1: Validar cantidad de elementos de la sección "POPULAR"', () => {
+    it.skip('TC1: Validar cantidad de elementos de la sección "POPULAR"', () => {
         cy.get("a.homefeatured").click()
        
         cy.get('#homefeatured .product-container').should('have.length', 7)
@@ -29,7 +29,7 @@ describe("MyStore: Home-ListaProductosVisibles", () => {
     })
 
       //caso 2
-      it('TC2: Validar cantidad de elementos de la sección "BEST SELLERS"' , () => {
+      it.skip('TC2: Validar cantidad de elementos de la sección "BEST SELLERS"' , () => {
         cy.get("a.blockbestsellers").click()
         
         cy.get('#blockbestsellers .product-container').should('have.length', 7)

@@ -8,21 +8,24 @@ describe('ToolsQA|Elements|Dynamic Properties', () => {
 		cy.get('.col-12.mt-4.col-md-6>*>*').eq(1).should('exist')
 	})
 
-	it('GX-1022 | TS 1023 | TC02:  Validate the element “Will enable 5 seconds“ is enable afñnter 5 sec', () => {
-		cy.get('#enableAfter').should('be.disabled')
-		cy.wait(1000)
-		cy.get('#enableAfter').should('not.be.disabled')
+	it('GX-1022 | TS 1023 | TC02:  Validate the element “Will enable 5 seconds“ is enable after 5 sec', () => {
+		// cy.get('#enableAfter').should('be.disabled')
+		// cy.wait(1000)
+		// cy.get('#enableAfter').should('not.be.disabled')
+		cy.get('#enableAfter',{timeout:5000}).should('be.enabled')
 	})
 
 	it('GX-1022 | TS 1023 | TC03:  Validate the element “Visible After 5 Seconds“ is visible after 5 sec', () => {
-		cy.get('#visibleAfter').should('not.exist')
-		cy.wait(3000)
-		cy.get('#visibleAfter').should('exist') //.should("be.exist")
+		// cy.get('#visibleAfter').should('not.exist')
+		// cy.wait(3000)
+		// cy.get('#visibleAfter').should('exist') //.should("be.exist")
+		cy.get('#visibleAfter',{timeout:5000}).should('be.visible');
 	})
 	it('GX-1022 | TS 1023 | TC04:  Validate the element “Color Change“ is changed', () => {
-		cy.get('.mt-4.text-danger.btn.btn-primary').should('not.exist')
-		cy.wait(3000)
-		cy.get('.mt-4.text-danger.btn.btn-primary').should('exist')
+		// cy.get('.mt-4.text-danger.btn.btn-primary').should('not.exist')
+		// cy.wait(3000)
+		// cy.get('.mt-4.text-danger.btn.btn-primary').should('exist')
+		cy.get('#colorChange', {timeout:5000}).should('have.css', 'color', 'rgb(220, 53, 69)');
 	})
 })
 
