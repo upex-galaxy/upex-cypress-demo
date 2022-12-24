@@ -1,5 +1,6 @@
 **Se realizará corrección del smoke de ToolsQA realizado por @saiotest**
 
+
 **Test results:** <br>
  ```
  ✖  12 of 60 failed (18%)
