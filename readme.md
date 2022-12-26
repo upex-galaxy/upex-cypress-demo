@@ -35,12 +35,20 @@ ___
      `cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --record --key {key} --spec`, 
      cuyo atajo es para que podamos correr las pruebas de un directorio que especifiquemos, usando el navegador de Chrome, generando 1 Reporte XML para importar a Jira y otro para generar un hermoso html, y adicionalmente actualizar el Cypress Dashboard del Proyecto.
 ___
-5. **Para generar el archivo Test Report de Cucumber en HTML, Ejecuta**: 
+5. **Para generar el archivo JSON Cucumber y Reporte HTML,**
+    - *Primero Descarga el Formatter según tu OS:*
+        - [Json-Formatter for Windows](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-windows-amd64)
+        - [Json-Formatter for Linux](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-linux-amd64)
+        - [Json-Formatter for MacOs](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-darwin-amd64)
+    - *y Sigue estas instrucciones de instalación:* [github.com/cucumber/json-formatter](https://github.com/cucumber/json-formatter)
+    - *Dentro del archivo .json en el Root del Repo con el nombre de*: `.cypress-cucumber-preprocessorrc.json`
+    - *Dentro de ese mismo archivo json, copia y pega estas opciones*
+    - *Luego, de correr pruebas cucumber, Ejecuta:*
     ```
     npm run report:cucumber
     ```
     * donde la variable "report:cucumber" es igual a:
-    `node ./cucumber-html-report.js` cuyo atajo es para generar el Reporte Cucumber index.html en la carpeta `reports/cucumber-html-report` para evaluar TODOS el Resultado de Prueba.
+    `node ./cucumber-html-report.js` cuyo atajo es para generar el Reporte Cucumber index.html en la carpeta `reports/cucumber-html-report` para evaluar TODOS el Resultado de Prueba Cucumber.
 ___
 6. **Para correr una REGRESIÓN y generar un solo Reporte HTML global, ejecuta**: 
     ```

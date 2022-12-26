@@ -12,17 +12,9 @@
 		"report:xml": "jrm reports/regression-report.xml \"reports/*.xml\"",
 		"report:json": "mochawesome-merge mochawesome-report/*.json>mochawesome.json",
 		"report:html": "marge mochawesome.json",
-		"report:cucumber": "node ./cucumber-html-report.js"
+		"report:cucumber": "node cucumber-formatter/cucumber-html-report.js"
 	},
-	"cypress-cucumber-preprocessor": {
-		"nonGlobalStepDefinitions": true,
-		"stepDefinitions": "cypress/e2e/cucumber-test/stepDefinitions/*.{js,ts}"
-	},
-	"keywords": [
-		"cypress",
-		"automation",
-		"testing"
-	],
+	"keywords": ["upex"],
 	"author": "Uper",
 	"license": "ISC",
 	"type": "module",
