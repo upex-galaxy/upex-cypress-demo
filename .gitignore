@@ -7,3 +7,5 @@ cypress/screenshots
 mochawesome-report/
 reports/
 mochawesome.json
+cucumber-json-formatter
+cucumber-json-formatter.exe
