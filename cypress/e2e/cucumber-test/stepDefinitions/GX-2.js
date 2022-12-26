@@ -1,4 +1,4 @@
-const { Given,When,Then } = require("@badeball/cypress-cucumber-preprocessor");
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 context('Test Cucumber', () => {
     describe("tester clones the UPEX's project",()=>{

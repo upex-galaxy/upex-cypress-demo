@@ -13,6 +13,10 @@
 		"report:json": "mochawesome-merge mochawesome-report/*.json>mochawesome.json",
 		"report:html": "marge mochawesome.json"
 	},
+	"cypress-cucumber-preprocessor": {
+		"nonGlobalStepDefinitions": true,
+		"stepDefinitions": "cypress/e2e/cucumber-test/stepDefinitions/*.{js,ts}"
+	},
 	"keywords": [
 		"cypress",
 		"automation",
