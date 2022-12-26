@@ -38,7 +38,7 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                    npm run file cypress/e2e/Tests/How-to/UI-testing/PageObjectModel/LoginPage.cy.js
+                    npm run file cypress/e2e/cucumber-test/Gherkin/GherkinTutorial.feature
                   record: true #HABILITAR A TRUE* cuando se use un Proyecto.
               env:
                   # pass the Dashboard record key as an environment variable
