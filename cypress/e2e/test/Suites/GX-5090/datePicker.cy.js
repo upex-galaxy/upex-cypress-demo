@@ -11,6 +11,7 @@ describe('GX-5090 | ToolsQA | Widgets | Date Picker',()=>{
         cy.viewport(1440,900)
         cy.visit('/date-picker')
         cy.url().should('contain','date-picker')
+        
     })
 
     it('TC1 | Validate default date and following format (month)(day)(year)',()=>{
