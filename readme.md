@@ -8,6 +8,17 @@ Aunque no es el único E2E en el mercado, y tampoco es el más usado como sí lo
 
 Cypress es un Framework de Automatización de Next Generation construido para web modernas. Esto es im simple proyecto el cual puedes usarlo para comenzar tu viaje por la Galaxia de la Automatización!
 
+## NUEVA ESTRUCTURA DE PROYECTO
+Ahora el Directorio de UPEX Galaxy, será mucho más simple. 
+- Para la carpeta `Tests`:
+    - Cada Suite de US, deberá ser guardado en una carpeta del Componente correspondiente del SUT (ej: ShoppingCart), 
+    - y la nomenclatura de archivos cambia a ser más directa: `GX-<ID>-<NombreCortoDeLaStory>` como ejemplo: "GX-5-AgregarItemAlCart.cy.js". 
+- En cuanto a la carpeta `cucumber-tests`:
+    - Tendrán una mejor distribución de arhcivos; por carpetas separadas: Todos los archivos `.feature` dentro de la carpeta "Gherkin" y los archivos `.js` dentro de "stepDefinitions" como tiene que ser. 
+    - La Nomenclatura de éste tipo de prueba se mantiene igual al normal (la misma nomenclatura mencionada arriba).
+![image](https://user-images.githubusercontent.com/91127281/209617125-ec3b7ed9-0495-4860-adba-547ed2d3a243.png)
+
+
 # CÓMO EMPEZAR:
 
 1. **Clona el Proyecto**: 
@@ -40,6 +51,7 @@ ___
         - [Json-Formatter for Windows](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-windows-amd64)
         - [Json-Formatter for Linux](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-linux-amd64)
         - [Json-Formatter for MacOs](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-darwin-amd64)
+    - *Luego mueve el archivo descargado a la carpeta `cucumber-formatter` de este proyecto en tu repositorio local*
     - *y Sigue estas instrucciones de instalación:* [github.com/cucumber/json-formatter](https://github.com/cucumber/json-formatter)
     - *Modifica el archivo: `.cypress-cucumber-preprocessorrc.json`, para cambiar el nombre del formatter:*
         - Renombra: `cucumber-json-formatter.exe` por `cucumber-json-formatter` si usas Linux o MacOs.
