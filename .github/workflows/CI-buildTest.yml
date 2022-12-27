@@ -44,7 +44,6 @@ jobs:
               run: |
                 mv cucumber-formatter/cucumber-json-formatter-linux-amd64 cucumber-formatter/cucumber-json-formatter
                 chmod +x cucumber-formatter/cucumber-json-formatter
-                cucumber-json-formatter --help
 
             - name: 🔌Cucumber Preprocessor JSON Setup
               uses: DamianReeves/write-file-action@master
