@@ -65,12 +65,25 @@ describe('GX-4607 ToolsQA | Inteactions | Sortable', () => {
 		})
 	})
 
-	it('4607 | TC7: Drag and drop a random element to another location', () => {
+	it('prueba', () => {
+		cy.get('a[id="demo-tab-grid"]').click()
+
+		let text = cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[5]`).invoke('text')
+
+		cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[5]`).then(function (obj) {
+			text = obj.text()
+		})
+
+		cy.log(text)
+	})
+
+	it.only('4607 | TC7: Drag and drop a random element to another location', () => {
 		let sourcePosition = Math.floor(Math.random() * 9 + 1)
 		let targetPosition = Math.floor(Math.random() * 9 + 1)
-		let TextSourcePosition, TextTargetPosition
+		let textSourcePosition, textTargetPosition
 		let slidesCounter = targetPosition - sourcePosition // to be used to count the number of slides
 		let attemptCounter = 1
+		let textTargetPositionLeft, textTargetPositionRight, textSourcePositionLeft, textSourcePositionRight,  right, left, textTargetPositionFinal
 
 		// make sure sourcePosition <> targetPosition so positions to move are different
 		while (sourcePosition == targetPosition) {
@@ -84,20 +97,55 @@ describe('GX-4607 ToolsQA | Inteactions | Sortable', () => {
 		cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[${sourcePosition}]`)
 			.then(function (objSource) {
 				// Get text of Source Position
-				TextSourcePosition = objSource.text()
+				textSourcePosition = objSource.text()
 			})
 			.then(() => {
 				// Get text of Target Position
 				cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[${targetPosition}]`).then(function (objTarget) {
-					TextTargetPosition = objTarget.text()
+					textTargetPosition = objTarget.text()
 				})
 			})
 			.then(() => {
-				cy.log(`**THE TEXT OF THE SOURCE ELEMENT IS:  ${TextSourcePosition} ----------**`)
-				cy.log(`**THE TEXT OF THE SOURCE ELEMENT IS:  ${TextTargetPosition} ----------**`)
-				cy.log(`**SOURCE: SPOT# ${sourcePosition} ------- TARGET: SPOT# ${targetPosition}**`)
+				cy.log(`TEXT OF SOURCE ELEMENT---->${textSourcePosition} 
+				TEXT OF TARGET ELEMENT---->${textTargetPosition}**`)
 			})
-		
+			.then(() => {
+				//Assertion: Text of the Element S-1 -> Text of S
+				//Assertion: Text of the Element T -> Text of T+1
+				if (sourcePosition > targetPosition) {
+					cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[${sourcePosition - 1}]`)
+						.then(function (left) {
+							textSourcePositionLeft = left.text()
+						})
+						.then(() => {
+							cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[${targetPosition + 1}]`).then(function (right) {
+								textTargetPositionRight = right.text()
+							})
+						})
+						.then(() => {
+							//cy.log(`LEFT ${TextTargetPositionLeft}  ---- RIGHT ${TextTargetPositionRight}`)
+						})
+				} else {
+					// sourcePosition < targetPosition
+					//Assertion: Text of the Element S+1 -> Text of S --- capturo texto de sourcePosition+1
+					//Assertion: Text of the Element T -> Text of T-1 --- capturo texto de tagetposition-1  
+					cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[${sourcePosition + 1}]`)
+						.then(function (right) {
+							textSourcePositionRight = right.text()
+						})
+						.then(() => {
+							cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[${targetPosition - 1}]`).then(function (left) {
+								textTargetPositionLeft = left.text()
+							})
+						})
+						.then(() => {
+							//cy.log(`LEFT ${TextTargetPositionLeft}  ---- RIGHT ${TextTargetPositionRight}`)
+						})
+
+
+
+				}
+			})
 		// This function will conduct the drag and drop
 		const dragAndDropAttempt = () => {
 			//dragging from sourcePosition to targetPosition
@@ -111,37 +159,48 @@ describe('GX-4607 ToolsQA | Inteactions | Sortable', () => {
 					// Get text of Target Position
 					cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[${targetPosition}]`)
 						.then(function (objTarget) {
-							TextTargetPosition = objTarget.text()
+							textTargetPositionFinal = objTarget.text()
 						})
 						.then(() => {
-							// Check if text of target position is the text of the source position
-							if (TextSourcePosition == TextTargetPosition) {
+							// Check if text of target position has the text of the source position
+							if (textSourcePosition == textTargetPositionFinal) {
 								cy.log(`DRAG AND DROP COMPLETED SUCCESSFULLY:
 											SPOT # ${sourcePosition} HAS BEEN MOVED TO SPOT # ${targetPosition}
 											`)
 								cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[${targetPosition}]`)
 									.invoke('text')
-									.should('eq', TextSourcePosition)
+									.should('eq', textSourcePosition)
 									.then(() => {
 										if (sourcePosition > targetPosition) {
+											// ejm (ejm de 9 a 1)
 											//Assertion: Text of the Element S-1 -> Text of S
-											//Assertion: Text of the Element T -> Text of T+1 
-										}
-										else {  // sourcePosition < targetPosition
-											//Assertion: Text of the Element T -> Text of T-1 
+											//Assertion: Text of the Element T -> Text of T+1
+											cy.log(`The value ${textTargetPosition} has been moved to position ${targetPosition + 1}`)
+											cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[${targetPosition + 1}]`)
+												.invoke('text')
+												.should('eq', textTargetPosition)
+										} else {
+											// sourcePosition < targetPosition (ejm de 1 a 9)
+											//Assertion: Text of the Element T -> Text of T-1
 											//Assertion: Text of the Element S+1 -> Text of S
+											cy.log(`The value ${textSourcePositionLeft} has been moved to position ${sourcePosition}`)
+											cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[${sourcePosition}]`)
+												.invoke('text')
+												.should('eq', textSourcePositionLeft)
+
 										}
 									})
-									
+
 								return
 							} else {
-								// if not, reload the page, click on Grad tab, try the drag-and-drop again calling dragAndDropAttempt() 
+								// if not, reload the page, click on Grad tab, try the drag-and-drop again calling dragAndDropAttempt()
 								cy.reload()
 									.then(() => {
-										cy.get('a[id="demo-tab-grid"]').click().then(() => {
-											cy.log(`NUMBER OF ATTEMPS: ${attemptCounter++}`)										
-										})
-										
+										cy.get('a[id="demo-tab-grid"]')
+											.click()
+											.then(() => {
+												cy.log(`NUMBER OF ATTEMPS: ${attemptCounter++}`)
+											})
 									})
 									.then(() => {
 										dragAndDropAttempt()
