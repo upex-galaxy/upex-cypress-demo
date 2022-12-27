@@ -47,7 +47,7 @@ jobs:
                 cucumber-json-formatter --help
 
             - name: 🔌Cucumber Preprocessor JSON Setup
-              uses: DamianReeves/write-file-action@v1.2
+              uses: DamianReeves/write-file-action@master
               with:
                 write-mode: overwrite
                 path: .cypress-cucumber-preprocessorrc.json
@@ -81,7 +81,7 @@ jobs:
 
             - name: 🔖Set Xray Test Execution JSON
               if: always()
-              uses: DamianReeves/write-file-action@v1
+              uses: DamianReeves/write-file-action@master
               with:
                 write-mode: append
                 path: testExecution.json
