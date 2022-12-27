@@ -6,6 +6,9 @@ describe('GX-5090 | ToolsQA | Widgets | Date Picker',()=>{
         return Math.floor(Math.random() * (max - min) + min)};
 
     beforeEach('QA must visit datePicker page',()=>{
+        cy.clearCookies()
+        cy.clearLocalStorage()
+        cy.viewport(1440,900)
         cy.visit('/date-picker')
         cy.url().should('contain','date-picker')
     })
@@ -24,27 +27,38 @@ describe('GX-5090 | ToolsQA | Widgets | Date Picker',()=>{
     })
 
     it('TC2 | Validate being able to select a year',()=>{
-
-        cy.get('#datePickerMonthYearInput').click();
-        cy.get('[class*=month-container]').within(()=>{
-            cy.get('[class*=year-select]').select(getRandomInt(0,200))
-        })
         
+        const year = getRandomInt(0,99)
+        cy.get('#datePickerMonthYearInput').click()
+        cy.get('[class*="year-select"]').select(year)
+        cy.get('[class*="hasMonthDropdown"]').should('contain',year)
     })
     
     it('TC3 | Validate being able to select a month',()=>{
 
+        let monthSelected
+        const month = getRandomInt(0,11)
+        cy.log(month)
+
         cy.get('#datePickerMonthYearInput').click();
         cy.get('[class*=month-container]').within(()=>{
-            cy.get('[class*=month-select]').select(getRandomInt(0,11))
+            cy.get('[class*=react-datepicker__month-select]').select(month).then(($month)=>{
+                monthSelected = $month.text()
+                cy.wrap($month).should('have.value',month)
+            })
         })
     })
 
     it('TC4 | Validate being able to select a day',()=>{
 
+        let daySelected
+        const day = getRandomInt(0,6)
+        
         cy.get('#datePickerMonthYearInput').click();
-        cy.get('[class=react-datepicker__month]').within(()=>{
-            cy.get('[class*=_week]').eq(getRandomInt(0,6)).children().eq(getRandomInt(0,7)).click()
+        cy.get('[class=react-datepicker__month]')
+            cy.get('[class*=_week]').eq(day).children().eq(day).then(($day)=>{
+                daySelected = $day.text()
+                cy.wrap($day).should('contain',daySelected).click()
         })
     })
 
@@ -55,17 +69,24 @@ describe('GX-5090 | ToolsQA | Widgets | Date Picker',()=>{
         cy.get('[class*="navigation--next"]').click().should('have.attr','aria-label','Next Month');
     })
 
-    it.only('TC6 | Validate being able to select a specific date (month)(day)(year)',()=>{
+    it('TC6 | Validate being able to select a specific date (month)(day)(year)',()=>{
 
         let yearSelected
         let monthSelected
         let daySelected
         
-        cy.get('#datePickerMonthYearInput').click();
+        const date = new Date();
+
+        let currentDay = date.getDate();
+        let currentMonth = date.getMonth() + 1;
+        let currentYear = date.getFullYear();
+        let currentDate = `${currentMonth}/${currentDay}/${currentYear}`
+
+        cy.get('#datePickerMonthYearInput').should('have.value',currentDate).click();
         cy.get('[class*=month-container]')
             const year = getRandomInt(0,200)
             cy.log(year)
-            const month = getRandomInt(1,12)
+            const month = getRandomInt(0,11)+1
             cy.log(month)
             const day = getRandomInt(0,6)
             cy.log(day)
@@ -86,12 +107,35 @@ describe('GX-5090 | ToolsQA | Widgets | Date Picker',()=>{
                 cy.log(daySelected)
                 cy.log(monthSelected)
                 cy.log(yearSelected)
-
-                let dateSelected = `${month+01}/${daySelected}/${yearSelected}`;
-                cy.get('#datePickerMonthYearInput').should('contain.value',dateSelected)
+                
+                cy.get('#datePickerMonthYearInput').should('not.have.value',currentDate)
             })
     })
-})
+
+    it('TC7 | Validate being be able to select a specific date and time',()=>{
+        
+        const year = getRandomInt(0,13)
+        const month = getRandomInt(0,11)
+        const day = getRandomInt(0,6)
+        const time = getRandomInt(0,96)
+
+        const currentDate = new Date();
+
+        cy.get('#dateAndTimePickerInput').click()
+            cy.get('[class*="react-datepicker__month-container"]')
+            cy.get('[class*="react-datepicker__year-read-view--selected-year"]').click()
+            cy.get('[class*="react-datepicker__year-option"]').eq(year).click()
+
+        cy.get('[class*="react-datepicker__month-read-view--selected-month"]').click()
+            cy.get('[class*="react-datepicker__month-option"]').eq(month).click()
+        
+        cy.get('[class*="react-datepicker__week"]').children().eq(day).click()
+
+        cy.get('[class*="react-datepicker__time-list"]').children().eq(time).click()
+        cy.get('#dateAndTimePickerInput').should('not.have.value',currentDate)
+
+        })
+    })
 
 Cypress.on('uncaught:exception', (err, runnable) => {
 	// returning false here prevents Cypress from
