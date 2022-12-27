@@ -33,7 +33,40 @@ jobs:
                 npm install
                 npm list 
 
-            - name: 🧪Cypress Build and Run US Test Coverage in Chrome
+            - name: 💾Download Cucumber-Formatter
+              uses: suisei-cn/actions-download-file@v1.3.0
+              with:
+                url: "[Linux-cucumber-formatter](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-linux-amd64)"
+                target: cucumber-formatter/
+                auto-match: true
+             
+            - name: 🔧Install Cucumber-Formatter 
+              run: |
+                mv cucumber-formatter/cucumber-json-formatter-linux-amd64 cucumber-formatter/cucumber-json-formatter
+                chmod +x cucumber-json-formatter
+                cucumber-json-formatter --help
+
+            - name: 🔌Cucumber Preprocessor JSON Setup
+              uses: DamianReeves/write-file-action@v1
+              with:
+                write-mode: overwrite
+                path: .cypress-cucumber-preprocessorrc.json
+                contents: |
+                  {
+                    "nonGlobalStepDefinitions": true,
+                    "stepDefinitions": "cypress/e2e/cucumber-test/stepDefinitions/*.{js,ts}",
+                    "json": {
+                      "enabled": true,
+                      "formatter": "./cucumber-formatter/cucumber-json-formatter",
+                      "output": "./reports/cucumber-report.json"
+                    },
+                    "messages": {
+                      "enabled": true,
+                      "output": "./reports/cucumber-messages.ndjson"
+                    }
+                  }
+
+            - name: 🧪Cypress Run Test Coverage in Chrome
               uses: cypress-io/github-action@v4
               with:
                   browser: chrome
@@ -46,23 +79,50 @@ jobs:
                   # pass GitHub token to allow accurately detecting a build vs a re-run build
                   GITHUB_TOKEN: ${{ secrets.UPEX_GITHUB_TOKEN }}
 
-            - name: 📊Upload Artifact HTML Report
+            - name: 🔖Set Xray Test Execution JSON
               if: always()
-              uses: actions/upload-artifact@v3
+              uses: DamianReeves/write-file-action@v1
               with:
-                  name: test-report
-                  path: mochawesome-report
+                write-mode: append
+                path: testExecution.json
+                contents: |
+                  {
+                      "fields": {
+                          "issuetype": { "id": "GX-5605" }
+                      }
+                  }
 
             - name: ✅Import Test Results to Xray
               if: always()
               uses: mikepenz/xray-action@v2
-              with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
+              with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
                   username: ${{secrets.XRAY_CLIENT_ID}}
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
-                  testFormat: 'junit'
-                  testPaths: 'reports/test-results.xml'
-                  testExecKey: 'GX-5'
-                  projectKey: 'GX'
+                  testFormat: 'cucumber' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
+                  testPaths: 'reports/cucumber-report.json' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
+                  testExecKey: 'GX-5605' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+                  projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
+                  testEnvironments: 'Chrome' #ELEGIR EL AMBIENTE DE PRUEBAS (Igual al TX).
+                  testExecutionJson: 'testExecution.json' #NO EDITAR - ARCHIVO DEL TX (paso anterior)
+                  
+            - name: 🔧Generate Cucumber HTML Report
+              if: always()
+              run: |
+                npm run report:cucumber
+
+            - name: 📊Upload Artifact 🍵Cucumber HTML Report
+              if: always()
+              uses: actions/upload-artifact@v3
+              with:
+                  name: cucumberTest-report
+                  path: reports/cucumber-html-report
+
+            - name: 📊Upload Artifact ☕Mochawesome HTML Report
+              if: always()
+              uses: actions/upload-artifact@v3
+              with:
+                  name: mochaTest-report
+                  path: mochawesome-report
 
             - name: 🔔Slack Notification of Done
               if: always()

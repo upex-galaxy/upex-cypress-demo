@@ -41,14 +41,15 @@ ___
         - [Json-Formatter for Linux](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-linux-amd64)
         - [Json-Formatter for MacOs](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-darwin-amd64)
     - *y Sigue estas instrucciones de instalación:* [github.com/cucumber/json-formatter](https://github.com/cucumber/json-formatter)
-    - *Dentro del archivo .json en el Root del Repo con el nombre de*: `.cypress-cucumber-preprocessorrc.json`
-    - *Dentro de ese mismo archivo json, copia y pega estas opciones*
-    - *Luego, de correr pruebas cucumber, Ejecuta:*
-    ```
-    npm run report:cucumber
-    ```
-    * donde la variable "report:cucumber" es igual a:
-    `node ./cucumber-html-report.js` cuyo atajo es para generar el Reporte Cucumber index.html en la carpeta `reports/cucumber-html-report` para evaluar TODOS el Resultado de Prueba Cucumber.
+    - *Modifica el archivo: `.cypress-cucumber-preprocessorrc.json`, para cambiar el nombre del formatter:*
+        - Renombra: `cucumber-json-formatter.exe` por `cucumber-json-formatter` si usas Linux o MacOs.
+    - *Luego podrás generar archivo JSON de Cucumber para Importar las Pruebas a Jira.*
+    - *Para poder generar archivos HTML de Cucumber luego de correr las pruebas, Ejecuta:*
+        ```
+        npm run report:cucumber
+        ```
+        * donde la variable "report:cucumber" es igual a:
+        `node ./cucumber-html-report.js` cuyo atajo es para generar el Reporte Cucumber index.html en la carpeta `reports/cucumber-html-report` para evaluar TODOS el Resultado de Prueba Cucumber.
 ___
 6. **Para correr una REGRESIÓN y generar un solo Reporte HTML global, ejecuta**: 
     ```

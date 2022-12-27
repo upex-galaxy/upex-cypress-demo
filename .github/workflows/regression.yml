@@ -13,7 +13,7 @@ on:
       - QA
 
 jobs:
-    Cypress-RegressionTest-AfterMerge:
+    RegressionTest-AfterMerge:
         runs-on: ubuntu-latest
 
         steps:
@@ -30,18 +30,32 @@ jobs:
                 npm install
                 npm list 
 
+            - name: 🔌Cucumber Preprocessor JSON Setup
+              uses: DamianReeves/write-file-action@v1
+              with:
+                write-mode: overwrite
+                path: .cypress-cucumber-preprocessorrc.json
+                contents: |
+                  {
+                    "nonGlobalStepDefinitions": true,
+                    "stepDefinitions": "cypress/e2e/cucumber-test/stepDefinitions/*.{js,ts}",
+                    "json": {
+                      "enabled": false,
+                      "formatter": "./cucumber-formatter/cucumber-json-formatter",
+                      "output": "./reports/cucumber-report.json"
+                    },
+                    "messages": {
+                      "enabled": false,
+                      "output": "./reports/cucumber-messages.ndjson"
+                    }
+                  }
+
             - name: 🧪Cypress E2E Regression Test in Chrome
               uses: cypress-io/github-action@v4
               with:
                   browser: chrome
                   command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
                     npm run regression
-                  record: false #HABILITAR A TRUE* cuando se use un Proyecto.
-              env:
-                  # pass the Dashboard record key as an environment variable
-                  CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-                  # pass GitHub token to allow accurately detecting a build vs a re-run build
-                  GITHUB_TOKEN: ${{ secrets.UPEX_GITHUB_TOKEN }}
 
             - name: 📬Generate XML Regression Report
               if: always()
@@ -69,7 +83,7 @@ jobs:
                 SLACK_COLOR: ${{ job.status }}
                 SLACK_ICON: https://i.imgur.com/peg9swL.png
     
-    Cypress-Artifact-Report:
+    Artifact-Report-forRegression:
         runs-on: ubuntu-latest
 
         steps:
