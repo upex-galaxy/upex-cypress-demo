@@ -17,7 +17,7 @@ describe("ToolsQA | Elements | Upload and Download", () =>
     it("US-1019 | TS-1026 | TC1: Validate the download of a file in the PC download folder, when we select the 'download' button", () =>
     {
         cy.get(the.downloadButton).click({ force: true })
-            cy.verifyDownload(the.nameFile)    
+            cy.readFile(the.nameUploadfile)    
     })
     it("US-1019 | TS-1026 | TC2: Validate loading a file in the pc explorer when the 'choose file' button is selected", () => 
     {
