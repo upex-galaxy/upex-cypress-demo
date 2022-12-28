@@ -4,6 +4,7 @@ describe('GX-4607 ToolsQA | Inteactions | Sortable', () => {
 	let values = ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine']
 
 	beforeEach(() => {
+		cy.viewport(1536,796)
 		cy.gotoSortablePage()
 	})
 
@@ -63,24 +64,11 @@ describe('GX-4607 ToolsQA | Inteactions | Sortable', () => {
 		})
 	})
 
-	it('prueba', () => {
-		cy.get('a[id="demo-tab-grid"]').click()
-
-		let text = cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[5]`).invoke('text')
-
-		cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[5]`).then(function (obj) {
-			text = obj.text()
-		})
-
-		cy.log(text)
-	})
-
-	it.only('4607 | TC7: Drag and drop a random element to another location', () => {
+	it('4607 | TC7: Drag and drop a random element to another location', () => {
 		let sourcePosition = Math.floor(Math.random() * 9 + 1)
-		let targetPosition = Math.floor(Math.random() * 9 + 1)
+		let targetPosition =  Math.floor(Math.random() * 9 + 1)
 		let textSourcePosition, textTargetPosition
-		let slidesCounter = targetPosition - sourcePosition // to be used to count the number of slides
-		let attemptCounter = 1
+		let attemptCounter = 0
 		let textTargetPositionLeft, textTargetPositionRight, textSourcePositionLeft, textSourcePositionRight, right, left, textTargetPositionFinal
 
 		// make sure sourcePosition <> targetPosition so positions to move are different
@@ -168,7 +156,6 @@ describe('GX-4607 ToolsQA | Inteactions | Sortable', () => {
 									.then(() => {
 										if (sourcePosition > targetPosition) {
 											// ejm (ejm de 9 a 1)
-											//Assertion: Text of the Element S-1 -> Text of S
 											//Assertion: Text of the Element T -> Text of T+1
 											cy.log(`The value ${textTargetPosition} has been moved to position ${targetPosition + 1}`)
 											cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[${targetPosition + 1}]`)
@@ -178,10 +165,10 @@ describe('GX-4607 ToolsQA | Inteactions | Sortable', () => {
 											// sourcePosition < targetPosition (ejm de 1 a 9)
 											//Assertion: Text of the Element T -> Text of T-1
 											//Assertion: Text of the Element S+1 -> Text of S
-											cy.log(`The value ${textSourcePositionLeft} has been moved to position ${sourcePosition}`)
+											cy.log(`The value ${textSourcePositionRight} has been moved to position ${sourcePosition}`)
 											cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[${sourcePosition}]`)
 												.invoke('text')
-												.should('eq', textSourcePositionLeft)
+												.should('eq', textSourcePositionRight)
 										}
 									})
 
@@ -193,6 +180,7 @@ describe('GX-4607 ToolsQA | Inteactions | Sortable', () => {
 										cy.get('a[id="demo-tab-grid"]')
 											.click()
 											.then(() => {
+												attemptCounter = attemptCounter+1
 												cy.log(`NUMBER OF ATTEMPS: ${attemptCounter++}`)
 											})
 									})
@@ -205,7 +193,7 @@ describe('GX-4607 ToolsQA | Inteactions | Sortable', () => {
 		}
 
 		dragAndDropAttempt()
-		//cy.log(`NUMBER OF ATTEMPS: ${attemptCounter}`) // attemptCounter IS NOT WORKING
+		cy.log(`NUMBER OF ATTEMPS: ${attemptCounter}`) // attemptCounter IS NOT WORKING
 		// Assertions
 	})
 
