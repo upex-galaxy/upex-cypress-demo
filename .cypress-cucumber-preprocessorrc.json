@@ -1,0 +1,14 @@
+{
+	"json": {
+		"enabled": false,
+		"output": "reports/cucumber-report.json",
+        "formatter": "cucumber-json-formatter.exe"
+	},
+    "messages": {
+        "enabled": false,
+        "output": "reports/cucumber-messages.ndjson"
+    },
+    "cypress-cucumber-preprocessor": {
+		"stepDefinitions": "cypress/e2e/cucumber-test/**/*.{js,ts}"
+	}
+}

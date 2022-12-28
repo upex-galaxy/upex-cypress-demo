@@ -47,7 +47,7 @@ Cypress.Commands.add('getUrl', (url, contain, title, protocol, hostname) => {
 Cypress.Commands.add('buttonClickDownload', (file) => {
 	cy.fixture('DOM/toolsqa/Elements/UploadAndDownload.Page').then((the) => {
 		cy.get(the.downloadButton).click()
-		cy.verifyDownload(file)
+		cy.readFile(`cypress/downloads/${file}`)
 	})
 })
 
@@ -726,12 +726,12 @@ Cypress.Commands.add('gotoUploadDownload', () => {
 })
 Cypress.Commands.add('validateDownload', () => {
 	cy.get('#downloadButton').click()
-	cy.verifyDownload('sampleFile.jpeg')
+	cy.readFile('cypress/downloads/sampleFile.jpeg')
 })
 Cypress.Commands.add('validateSelectFile', () => {
 	const fixtureFile = 'sampleFile.jpeg'
 	cy.get('#uploadFile').click()
-	cy.get('input[type=file]').selectFile('sampleFile.jpeg')
+	cy.get('input[type=file]').selectFile('cypress/downloads/sampleFile.jpeg')
 	cy.get('#uploadedFilePath').should('contain.text', 'sampleFile.jpeg')
 })
 
