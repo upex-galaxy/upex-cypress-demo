@@ -3,7 +3,7 @@
 # 🧪Consiste en ejecutar TODOS los tests del Repo e importar los resultados a Jira!🚀
 # 👩🏻‍🔬Este Pipeline de CI NO DEBE EDITARSE sin permiso del QA Lead.
 
-name: 🤖CI run (INTEGRATION) Regression Testing Execution⚡
+name: 🤖CI run Regression🧪 After Merging⚡
 run-name: ${{github.actor}}👨🏻‍🔬 run Regression in ${{github.ref_name}}
 
 on:
@@ -13,7 +13,8 @@ on:
       - QA
 
 jobs:
-    RegressionTest-AfterMerge:
+    RegressionTest:
+        name: regression
         runs-on: ubuntu-latest
 
         steps:
@@ -83,7 +84,8 @@ jobs:
                 SLACK_COLOR: ${{ job.status }}
                 SLACK_ICON: https://i.imgur.com/peg9swL.png
     
-    Artifact-Report-forRegression:
+    Regression-ArtifactReport:
+        name: report
         runs-on: ubuntu-latest
 
         steps:
@@ -139,4 +141,24 @@ jobs:
               with:
                   name: regression-test-report
                   path: mochawesome-report
+
+    Create-PullRequest:
+      needs: [regression, report]
+      runs-on: ubuntu-latest
+      steps:
+        - name: 🚀Create Pull Request
+          uses: peter-evans/create-pull-request@v4
+          with:
+            token: ${{ github.token }}
+            branch: QA
+            title: '[AUTO-MERGING] UPDATE MAIN BRANCH from QA'
+            body: |
+              Update branch by Automation Pipeline
+              - (CI) Build Test Execution is Done✅
+              - (CI) Integration-Regression Report is Done✅
+              - (TestResults) No Conflicts in Repo Branch QA✅ 
+            labels: automatedPullRequest
+            assignees: saiotest
+            reviewers: saiotest
+
 
