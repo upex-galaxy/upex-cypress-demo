@@ -4,7 +4,7 @@ describe('Cypress Downloadfile Testing', () => {
     //     cy.visit('http://proof.ovh.net/files/')
     //     cy.downloadFile(
     //         'https://proof.ovh.net/files/100Mb.dat',
-    //         'mydownloads',
+    //         'cypress/downloads',
     //         '100Mio.dat',
     //     )
     // })
@@ -12,21 +12,21 @@ describe('Cypress Downloadfile Testing', () => {
         Cypress.config('defaultCommandTimeout', 10000);
         cy.downloadFile(
             'https://proof.ovh.net/files/10Mb.dat',
-            'mydownloads',
+            'cypress/downloads',
             '10Mio.dat'
         )
     })
     it('PDF test', () => {
         cy.downloadFile(
             'http://www.africau.edu/images/default/sample.pdf',
-            'mydownloads',
+            'cypress/downloads',
             'sample.pdf'
         )
     })
     it('Image Size test', () => {
         cy.downloadFile(
             'https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg',
-            'mydownloads',
+            'cypress/downloads',
             'example.jpg'
         )
     })
