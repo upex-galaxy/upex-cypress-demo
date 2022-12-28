@@ -79,7 +79,7 @@ jobs:
               env:
                 SLACK_WEBHOOK: https://hooks.slack.com/services/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
                 SLACK_USERNAME: Ari✨
-                SLACK_MESSAGE: ':test_tube: Nueva Regresión de QA Ejecutada y actualizado en Jira-Xray :rocket:'
+                SLACK_MESSAGE: ':test_tube: Nueva RegressionTest-QA Ejecutada y actualizado en Jira-Xray :rocket:'
                 SLACK_COLOR: ${{ job.status }}
                 SLACK_ICON: https://i.imgur.com/peg9swL.png
     
