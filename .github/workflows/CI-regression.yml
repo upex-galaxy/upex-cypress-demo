@@ -99,25 +99,26 @@ jobs:
               run: |
                 npm install
                 npm list 
-                - name: 🔌Cucumber Preprocessor JSON Setup
-                uses: DamianReeves/write-file-action@master
-                with:
-                  write-mode: overwrite
-                  path: .cypress-cucumber-preprocessorrc.json
-                  contents: |
-                    {
-                      "nonGlobalStepDefinitions": true,
-                      "stepDefinitions": "cypress/e2e/cucumber-test/stepDefinitions/*.{js,ts}",
-                      "json": {
-                        "enabled": false,
-                        "formatter": "./cucumber-formatter/cucumber-json-formatter",
-                        "output": "./reports/cucumber-report.json"
-                      },
-                      "messages": {
-                        "enabled": false,
-                        "output": "./reports/cucumber-messages.ndjson"
-                      }
+                
+            - name: 🔌Cucumber Preprocessor JSON Setup
+              uses: DamianReeves/write-file-action@master
+              with:
+                write-mode: overwrite
+                path: .cypress-cucumber-preprocessorrc.json
+                contents: |
+                  {
+                    "nonGlobalStepDefinitions": true,
+                    "stepDefinitions": "cypress/e2e/cucumber-test/stepDefinitions/*.{js,ts}",
+                    "json": {
+                      "enabled": false,
+                      "formatter": "./cucumber-formatter/cucumber-json-formatter",
+                      "output": "./reports/cucumber-report.json"
+                    },
+                    "messages": {
+                      "enabled": false,
+                      "output": "./reports/cucumber-messages.ndjson"
                     }
+                  }
 
             - name: 🧪VERIFICATION Cypress E2E Regression Test in Chrome
               uses: cypress-io/github-action@v4

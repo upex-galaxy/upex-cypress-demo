@@ -1,0 +1,23 @@
+name: 🚀CI run (MERGING) QA on CheckPass✅
+run-name: ${{github.actor}}👾 merged into MAIN from ${{github.ref_name}}
+
+on: 
+    status: 
+        branches:
+            - QA
+
+jobs:
+    AutoMerge-into-Main:
+        runs-on: ubuntu-latest
+
+        if: >-
+            github.event.state == 'success'
+
+        steps:
+            - name: Merge QA -> MAIN
+              uses: devmasx/merge-branch@master
+              with:
+                  type: now
+                  from_branch: QA
+                  target_branch: cypex #ESTE ES LA RAMA PRINCIPAL DEL REPOSITORIO PRESENTE
+                  github_token: ${{ secrets.UPEX_GITHUB_TOKEN }}
