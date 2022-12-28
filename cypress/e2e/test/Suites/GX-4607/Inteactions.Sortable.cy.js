@@ -2,8 +2,6 @@ const {And} = require('@badeball/cypress-cucumber-preprocessor')
 
 describe('GX-4607 ToolsQA | Inteactions | Sortable', () => {
 	let values = ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine']
-	let textOfInitialSpot
-	let textOfFinalSpot
 
 	beforeEach(() => {
 		cy.gotoSortablePage()
@@ -83,7 +81,7 @@ describe('GX-4607 ToolsQA | Inteactions | Sortable', () => {
 		let textSourcePosition, textTargetPosition
 		let slidesCounter = targetPosition - sourcePosition // to be used to count the number of slides
 		let attemptCounter = 1
-		let textTargetPositionLeft, textTargetPositionRight, textSourcePositionLeft, textSourcePositionRight,  right, left, textTargetPositionFinal
+		let textTargetPositionLeft, textTargetPositionRight, textSourcePositionLeft, textSourcePositionRight, right, left, textTargetPositionFinal
 
 		// make sure sourcePosition <> targetPosition so positions to move are different
 		while (sourcePosition == targetPosition) {
@@ -128,7 +126,7 @@ describe('GX-4607 ToolsQA | Inteactions | Sortable', () => {
 				} else {
 					// sourcePosition < targetPosition
 					//Assertion: Text of the Element S+1 -> Text of S --- capturo texto de sourcePosition+1
-					//Assertion: Text of the Element T -> Text of T-1 --- capturo texto de tagetposition-1  
+					//Assertion: Text of the Element T -> Text of T-1 --- capturo texto de tagetposition-1
 					cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[${sourcePosition + 1}]`)
 						.then(function (right) {
 							textSourcePositionRight = right.text()
@@ -141,9 +139,6 @@ describe('GX-4607 ToolsQA | Inteactions | Sortable', () => {
 						.then(() => {
 							//cy.log(`LEFT ${TextTargetPositionLeft}  ---- RIGHT ${TextTargetPositionRight}`)
 						})
-
-
-
 				}
 			})
 		// This function will conduct the drag and drop
@@ -187,7 +182,6 @@ describe('GX-4607 ToolsQA | Inteactions | Sortable', () => {
 											cy.xpath(`//*[@id="demo-tabpane-grid"]/div/div/div[${sourcePosition}]`)
 												.invoke('text')
 												.should('eq', textSourcePositionLeft)
-
 										}
 									})
 
