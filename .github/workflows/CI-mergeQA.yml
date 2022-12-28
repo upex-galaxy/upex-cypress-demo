@@ -16,7 +16,7 @@ jobs:
             uses: devmasx/merge-branch@master
             with:
              type: now
-             label_name: 'automatedPullRequest'
+             label_name: 'autoPullRequest'
              target_branch: 'cypex' #ESTE ES LA RAMA PRINCIPAL DEL REPOSITORIO PRESENTE
              github_token: ${{ github.token }}
             
