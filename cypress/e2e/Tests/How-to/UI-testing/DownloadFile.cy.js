@@ -1,14 +1,15 @@
 describe('Cypress Downloadfile Testing', () => {
     it('Medium Size file', () => {
+        Cypress.config('defaultCommandTimeout', 10000);
         cy.visit('http://proof.ovh.net/files/')
         cy.downloadFile(
             'https://proof.ovh.net/files/100Mb.dat',
             'mydownloads',
             '100Mio.dat',
-            'MyAgent'
         )
     })
     it('Small Size test', () => {
+        Cypress.config('defaultCommandTimeout', 10000);
         cy.downloadFile(
             'https://proof.ovh.net/files/10Mb.dat',
             'mydownloads',
