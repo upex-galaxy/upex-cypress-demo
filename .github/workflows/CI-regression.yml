@@ -143,7 +143,7 @@ jobs:
                   path: mochawesome-report
 
     Create-PullRequest:
-      needs: [regression, report]
+      needs: [RegressionTest, Regression-ArtifactReport]
       runs-on: ubuntu-latest
       steps:
         - name: 🚀Create Pull Request
