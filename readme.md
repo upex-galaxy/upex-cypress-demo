@@ -8,6 +8,17 @@ Aunque no es el único E2E en el mercado, y tampoco es el más usado como sí lo
 
 Cypress es un Framework de Automatización de Next Generation construido para web modernas. Esto es im simple proyecto el cual puedes usarlo para comenzar tu viaje por la Galaxia de la Automatización!
 
+## NUEVA ESTRUCTURA DE PROYECTO
+Ahora el Directorio de UPEX Galaxy, será mucho más simple. 
+- Para la carpeta `Tests`:
+    - Cada Suite de US, deberá ser guardado en una carpeta del Componente correspondiente del SUT (ej: ShoppingCart), 
+    - y la nomenclatura de archivos cambia a ser más directa: `GX-<ID>-<NombreCortoDeLaStory>` como ejemplo: "GX-5-AgregarItemAlCart.cy.js". 
+- En cuanto a la carpeta `cucumber-tests`:
+    - Tendrán una mejor distribución de arhcivos; por carpetas separadas: Todos los archivos `.feature` dentro de la carpeta "Gherkin" y los archivos `.js` dentro de "stepDefinitions" como tiene que ser. 
+    - La Nomenclatura de éste tipo de prueba se mantiene igual al normal (la misma nomenclatura mencionada arriba).
+![image](https://user-images.githubusercontent.com/91127281/209617125-ec3b7ed9-0495-4860-adba-547ed2d3a243.png)
+
+
 # CÓMO EMPEZAR:
 
 1. **Clona el Proyecto**: 
@@ -35,18 +46,35 @@ ___
      `cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --record --key {key} --spec`, 
      cuyo atajo es para que podamos correr las pruebas de un directorio que especifiquemos, usando el navegador de Chrome, generando 1 Reporte XML para importar a Jira y otro para generar un hermoso html, y adicionalmente actualizar el Cypress Dashboard del Proyecto.
 ___
-5. **Para correr una REGRESIÓN y generar un solo Reporte HTML global, ejecuta**: 
+5. **Para generar el archivo JSON Cucumber y Reporte HTML,**
+    - *Primero Descarga el Formatter según tu OS:*
+        - [Json-Formatter for Windows](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-windows-amd64)
+        - [Json-Formatter for Linux](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-linux-amd64)
+        - [Json-Formatter for MacOs](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-darwin-amd64)
+    - *Luego mueve el archivo descargado a la carpeta `cucumber-formatter` de este proyecto en tu repositorio local*
+    - *y Sigue estas instrucciones de instalación:* [github.com/cucumber/json-formatter](https://github.com/cucumber/json-formatter)
+    - *Modifica el archivo: `.cypress-cucumber-preprocessorrc.json`, para cambiar el nombre del formatter:*
+        - Renombra: `cucumber-json-formatter.exe` por `cucumber-json-formatter` si usas Linux o MacOs.
+    - *Luego podrás generar archivo JSON de Cucumber para Importar las Pruebas a Jira.*
+    - *Para poder generar archivos HTML de Cucumber luego de correr las pruebas, Ejecuta:*
+        ```
+        npm run report:cucumber
+        ```
+        * donde la variable "report:cucumber" es igual a:
+        `node ./cucumber-html-report.js` cuyo atajo es para generar el Reporte Cucumber index.html en la carpeta `reports/cucumber-html-report` para evaluar TODOS el Resultado de Prueba Cucumber.
+___
+6. **Para correr una REGRESIÓN y generar un solo Reporte HTML global, ejecuta**: 
     ```
     npm run regression:report
     ```
-    Luego ejecuta este comando, y luego el otro:
+    Luego ejecuta estos comandos, uno por uno:
     ````
     npm run report:json
     npm run report:html
     ````
     * Gracias a esto se va a generar un único Reporte mochawesome HTML para evaluar TODOS los Resultados de Prueba de la Regresión.
 ___
-6. **AHORA CON CYPRESS DASHBOARD**, puedes ver todas las ejecuciones y resultados de prueba del proyecto!
+7. **AHORA CON CYPRESS DASHBOARD**, puedes ver todas las ejecuciones y resultados de prueba del proyecto!
 Visita: [CYPRESS DASHBOARD](https://dashboard.cypress.io/projects/2pw67q/analytics/runs-over-time)
 ___
 ## APRENDE Y GANA EXPERIENCIA TRABAJANDO COMO QA AUTOMATION EN GALAXY: 

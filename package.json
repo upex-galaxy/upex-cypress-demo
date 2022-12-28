@@ -11,13 +11,10 @@
 		"regression:report": "cypress run --browser chrome --reporter mochawesome --reporter-options reportDir=mochawesome-report,overwrite=false,html=false,json=true",
 		"report:xml": "jrm reports/regression-report.xml \"reports/*.xml\"",
 		"report:json": "mochawesome-merge mochawesome-report/*.json>mochawesome.json",
-		"report:html": "marge mochawesome.json"
+		"report:html": "marge mochawesome.json",
+		"report:cucumber": "node cucumber-formatter/cucumber-html-report.js"
 	},
-	"keywords": [
-		"cypress",
-		"automation",
-		"testing"
-	],
+	"keywords": ["upex"],
 	"author": "Uper",
 	"license": "ISC",
 	"type": "module",
@@ -41,6 +38,7 @@
 		"mocha-junit-reporter": "2.2.0",
 		"mochawesome": "7.1.3",
 		"mochawesome-merge": "4.2.2",
-		"mochawesome-report-generator": "6.2.0"
+		"mochawesome-report-generator": "6.2.0",
+		"multiple-cucumber-html-reporter": "3.0.1"
 	}
 }

@@ -1,4 +1,4 @@
-const { User } = require('@pages/example.Page')
+import { User } from '@pages/example.Page.js';
 
 describe('US Example | Test Page Object Model', () => {
     beforeEach(() => {

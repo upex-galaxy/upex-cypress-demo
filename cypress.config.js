@@ -1,19 +1,20 @@
-const {defineConfig} = require('cypress')
-const createBundler = require('@bahmutov/cypress-esbuild-preprocessor')
-const preprocessor = require('@badeball/cypress-cucumber-preprocessor')
-const createEsbuildPlugin = require('@badeball/cypress-cucumber-preprocessor/esbuild')
-const {downloadFile} = require('cypress-downloadfile/lib/addPlugin');
+import { defineConfig } from 'cypress';
+import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
+import pkg from '@badeball/cypress-cucumber-preprocessor';
+const {addCucumberPreprocessorPlugin} = pkg;
+import {createEsbuildPlugin} from '@badeball/cypress-cucumber-preprocessor/esbuild.js';
+import { downloadFile } from 'cypress-downloadfile/lib/addPlugin.js';
 
 async function setupNodeEvents(on, config) {
 	// This is required for the preprocessor to be able to generate JSON reports after each run, and more,
-	await preprocessor.addCucumberPreprocessorPlugin(on, config)
+	await addCucumberPreprocessorPlugin(on, config)
 
 	on('task', {downloadFile})
 
 	on(
 		'file:preprocessor',
 		createBundler({
-			plugins: [createEsbuildPlugin.default(config)],
+			plugins: [createEsbuildPlugin(config)],
 		})
 	)
 
@@ -21,7 +22,7 @@ async function setupNodeEvents(on, config) {
 	return config
 }
 
-module.exports = defineConfig({
+export default defineConfig({
 	// @Ely: CYPRESS DASHBOARD PARA VER NUESTRAS EJECUCIONES EN LA WEB:
 	projectId: '',
 	// 1280×720 is considered to be the most suitable screen resolution for the desktop website version:
@@ -43,7 +44,7 @@ module.exports = defineConfig({
 	// E2E Testing runner
 	e2e: {
 		// Glob pattern to determine what test files to load:
-		specPattern: ['**/*.feature', 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
+		specPattern: ['cypress/e2e/cucumber-test/Gherkin/*.feature', 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
 		// Use Cypress plugins:
     	setupNodeEvents,
 		// baseUrl: ""

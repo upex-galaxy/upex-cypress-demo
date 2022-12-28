@@ -9,9 +9,9 @@
 // ***********************************************
 import 'cypress-file-upload'
 import 'cypress-wait-until'
-require('@4tw/cypress-drag-drop')
-require('cypress-downloadfile/lib/downloadFileCommand')
-const {login} = require('@pages/Login.Page')
+import '@4tw/cypress-drag-drop'
+import 'cypress-downloadfile/lib/downloadFileCommand'
+import {login} from '@pages/Login.Page'
 const {authLogin, dashboardIndex} = Cypress.env('endpoint')
 
 
