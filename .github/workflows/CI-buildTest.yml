@@ -70,7 +70,7 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                    npm run file cypress/e2e/cucumber-test/Gherkin/GherkinTutorial.feature
+                    npm run file cypress/e2e/Tests/Accounts/GX-101-Something.cy.js
                   record: true #HABILITAR A TRUE* cuando se use un Proyecto.
               env:
                   # pass the Dashboard record key as an environment variable
@@ -78,31 +78,17 @@ jobs:
                   # pass GitHub token to allow accurately detecting a build vs a re-run build
                   GITHUB_TOKEN: ${{ secrets.UPEX_GITHUB_TOKEN }}
 
-            - name: 🔖Set Xray Test Execution JSON
-              if: always()
-              uses: DamianReeves/write-file-action@master
-              with:
-                write-mode: append
-                path: testExecution.json
-                contents: |
-                  {
-                      "fields": {
-                          "issuetype": { "id": "GX-5605" }
-                      }
-                  }
-
             - name: ✅Import Test Results to Xray
               if: always()
               uses: mikepenz/xray-action@v2
               with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
                   username: ${{secrets.XRAY_CLIENT_ID}}
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
-                  testFormat: 'cucumber' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
-                  testPaths: 'reports/cucumber-report.json' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
-                  testExecKey: 'GX-5605' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+                  testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
+                  testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
+                  testExecKey: 'GX-5735' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
                   projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
                   testEnvironments: 'Chrome' #ELEGIR EL AMBIENTE DE PRUEBAS (Igual al TX).
-                  testExecutionJson: 'testExecution.json' #NO EDITAR - ARCHIVO DEL TX (paso anterior)
                   
             - name: 🔧Generate Cucumber HTML Report
               if: always()
@@ -110,7 +96,6 @@ jobs:
                 npm run report:cucumber
 
             - name: 📊Upload Artifact 🍵Cucumber HTML Report
-              if: always()
               uses: actions/upload-artifact@v3
               with:
                   name: cucumberTest-report

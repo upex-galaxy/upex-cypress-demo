@@ -13,7 +13,7 @@ import '@4tw/cypress-drag-drop'
 import 'cypress-downloadfile/lib/downloadFileCommand'
 import {login} from '@pages/Login.Page'
 const {authLogin, dashboardIndex} = Cypress.env('endpoint')
-
+import {signin} from '@pages/SignIn.Page.js'
 
 
 // -- This is a parent command --
@@ -41,5 +41,18 @@ Cypress.Commands.add('Login',(username,password)=>{
 
         cy.url().should("contain", dashboardIndex)
         
+    })
+})
+
+
+Cypress.Commands.add('SignIn', ()=>{
+    const { username, password } = Cypress.env('user')
+    const { signUp } = Cypress.env('endpoint')
+    cy.session('signIn',()=>{
+        cy.visit(signUp)
+        signin.goToLoginTab()
+        signin.enterUsername(username)
+        signin.enterPassword(password)
+        signin.submitLogin()
     })
 })

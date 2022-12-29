@@ -58,7 +58,13 @@ export default defineConfig({
 		},
 		endpoint:{
 			authLogin: "/auth/login",
-			dashboardIndex: "/dashboard/index"
+			dashboardIndex: "/dashboard/index",
+			signUp: "https://coderbyte.com/sl" 
+		},
+		user: {
+			username: "upexTesting",
+			email: "sai@upextesting.com",
+			password: "1234567"
 		}
 	}
 })
