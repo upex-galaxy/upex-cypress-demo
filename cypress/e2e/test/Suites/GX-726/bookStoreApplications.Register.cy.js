@@ -1,5 +1,5 @@
-import registerPage, { capFirst } from "./pages/registerPage"
-import loginPage from "./pages/loginPage"
+import {registerPage} from "./pages/registerPage.js"
+import {loginPage} from "./pages/loginPage.js"
 
 describe("US GX-726 | ToolsQA | Book Store Applications | Register", () => {
     

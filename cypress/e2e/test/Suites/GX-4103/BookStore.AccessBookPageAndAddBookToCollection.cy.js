@@ -102,8 +102,8 @@ describe('GX-4103 BookStore | Grid | Crear y Obtener Libros de la Tienda (POST-G
 				},
 			}).then(() => {
 				// verify by UI that the added book is present in the collection
-				cy.contains('Login').click()
-				cy.get('[id=submit]').click()
+				cy.contains('Login').click({force: true})
+				cy.get('[id=submit]').click({force: true})
 				cy.get('a[href*="profile"').click()
 				cy.get(`a[href*="profile?book=${isbn}"]`).should('be.visible')
 			})

@@ -4,20 +4,20 @@ describe("ToolsQA | Widgets | Tool-Tips", () => {
         cy.url().should("contain", "tool-tips")
     })
     it("US-2968 | TS 2969 | TC1:  Validar cuando se pasa el cursor sobre el Button 'hover me to see'  se muestre un tooltip de 'You hovered over the Button'", () => {
-        cy.get("[class='btn btn-success']").realHover()
+        cy.get("[class='btn btn-success']").trigger('mouseover')
         cy.get(".tooltip-inner").should("be.visible").should("contain", "You hovered over the Button")
 
     })
     it("US-2968 | TS 2969 | TC2:  Validar cuando se pasa el cursor sobre el Input fields  se muestre un tooltip de 'You hovered over the Contrary'", () => {
-        cy.get("#toolTipTextField").realHover()
+        cy.get("#toolTipTextField").trigger('mouseover')
         cy.get(".tooltip-inner").should("be.visible").should("contain", "You hovered over the text field")
     })
     it("US-2968 | TS 2969 | TC3:  Validar cuando se pasa el cursor sobre el Text link “Contrary” se muestre un tooltip de 'You hovered over the Contrary'", () => {
-        cy.get("[href='javascript:void(0)']").eq(0).realHover()
+        cy.get("[href='javascript:void(0)']").eq(0).trigger('mouseover')
         cy.get(".tooltip-inner").should("be.visible").should("contain", "You hovered over the Contrary")
     })
     it("US-2968 | TS 2969 | TC4:  Validar cuando se pasa el cursor sobre el Text link “1.10.32” se muestre un tooltip de 'You hovered over the 1.10.32'", () => {
-        cy.get("[href='javascript:void(0)']").eq(1).realHover()
+        cy.get("[href='javascript:void(0)']").eq(1).trigger('mouseover')
         cy.get(".tooltip-inner").should("be.visible").should("contain", "You hovered over the 1.10.32")
     })
 

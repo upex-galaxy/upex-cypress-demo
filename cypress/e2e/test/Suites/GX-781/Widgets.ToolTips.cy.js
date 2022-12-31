@@ -4,7 +4,7 @@ describe("ToolsQA | Widgets | Tool-Tips", () =>
     let the;
     before("cargar data",() =>
     {
-        cy.fixture("DOM/toolsqa/Widgets/Tool-Tips").then((data) =>
+        cy.fixture("DOM/toolsqa/Widgets/Tool-Tips.Page").then((data) =>
     {
         the = data 
     })
@@ -13,13 +13,13 @@ describe("ToolsQA | Widgets | Tool-Tips", () =>
 
     beforeEach("Precondition: Estar situado en la pagina", () =>
     {   
-        cy.getUrl(the.url, "/tool-tips", {pageLoadTimeout:90000}) 
+        cy.getUrl(the.url, "/tool-tips") 
     })
     
         it("US-GX-781|TC1: Validate tooltip textfield is displayed “You hovered over the Button” when you hover over the buttón “hover me to see” ", () =>
         {
             
-            cy.get("#toolTipButton").realHover()
+            cy.get("#toolTipButton").trigger('mouseover')
                 cy.get(".tooltip-inner").should("be.visible").should("contain", "You hovered over the Button")
             
 
@@ -27,21 +27,21 @@ describe("ToolsQA | Widgets | Tool-Tips", () =>
     
         it("US-GX-781 | TC2 : Validate tooltip textfield is displayed “You hovered over the text field“ when you hover over the  Input field “hover over me to see” ", () =>
         {
-            cy.get("#toolTipTextField").realHover()
+            cy.get("#toolTipTextField").trigger('mouseover')
             cy.get(".tooltip-inner").should("be.visible").should("contain", "You hovered over the text field")
 
         })
     
         it("US-GX-52 | TC3 : Validate tooltip textfield is displayed “You hovered over the Contrary“ when you hover over Text link Contrary",() =>
         {
-            cy.get('#texToolTopContainer > :nth-child(1)').realHover()
+            cy.get('#texToolTopContainer > :nth-child(1)').trigger('mouseover')
             cy.get(".tooltip-inner").should("be.visible").should("contain", "You hovered over the Contrary")
         })
 
         
         it("US-GX-781| TC4 : Validate tooltip textfield is displayed “ You hovered over the 1.10.32“ when you hover over the  Text link “1.10.32“  ", () =>
         {
-            cy.get('#texToolTopContainer a').eq(1).realHover()
+            cy.get('#texToolTopContainer a').eq(1).trigger('mouseover')
             cy.get(".tooltip-inner").should("be.visible").should("contain", "You hovered over the 1.10.32")
 
 

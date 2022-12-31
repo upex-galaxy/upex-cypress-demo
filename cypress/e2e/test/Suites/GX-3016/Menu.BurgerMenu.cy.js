@@ -30,7 +30,7 @@ describe("US GX-3016 | TS:3017 | SwagLabs | Menu | Hacer varias Acciones desde u
         cy.get("[id='react-burger-menu-btn']")
         .click()    
         cy.get("[id='about_sidebar_link']")
-        .click()
+        .click({force:true})
         .url().should("contain","sauce")
     })
     it("US 3016 | TS 3017 | TC3:  Validar que la acción 'Logout' del burger menu haga un Logout", ()=>
@@ -55,4 +55,19 @@ describe("US GX-3016 | TS:3017 | SwagLabs | Menu | Hacer varias Acciones desde u
                 .should("not.contain","[class='shopping_cart_badge']")
 
     })
+
+     // Comando predeterminado para que no ocurran errores de excepciones:
+    Cypress.on('uncaught:exception', (err, runnable) => {
+        //returning false here prevents Cypress from
+        // failing the test
+        return false
+    })
+    // Comando predeterminado para que no aparezcan los Fetch en el log del Test Runner:
+    const origLog = Cypress.log
+    Cypress.log = function (opts, ...other) {
+        if (opts.displayName === 'xhr' || (opts.displayName === 'fetch' && opts.url.startsWith('https://'))) {
+            return
+        }
+        return origLog(opts, ...other)
+    }
 })
