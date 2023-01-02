@@ -126,7 +126,7 @@ describe('GX-5644 ✅BookStore | Account | Crear, Obtener y Eliminar Usuario (PO
                 })
         })
     })
-    it.only('5645 | TC6:  Validate the user logs out',()=>{
+    it('5645 | TC6:  Validate the user logs out',()=>{
         let user6= `Xander${Math.floor(Math.random()*10000)}`;
         cy.request({
             url: '/Account/v1/User',
