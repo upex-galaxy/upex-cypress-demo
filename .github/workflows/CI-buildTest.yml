@@ -68,7 +68,7 @@ jobs:
               if: always()
               uses: rtCamp/action-slack-notify@v2.2.0
               env:
-                SLACK_WEBHOOK: https://hooks.slack.com/services/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
+                SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
                 SLACK_USERNAME: Ari✨
                 SLACK_MESSAGE: ':test_tube: Test Execution successfully imported to Jira-Xray :rocket:'
                 SLACK_COLOR: ${{ job.status }}
