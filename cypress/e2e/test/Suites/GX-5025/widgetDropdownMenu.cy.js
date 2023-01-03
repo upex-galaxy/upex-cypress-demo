@@ -1,5 +1,5 @@
 describe('GX-5025 | ToolsQA | Widgets | Dropdown - Select Menu',()=>{
-
+//Hola Kenny, cómo va?
     beforeEach('User must be in Select-Menu page',()=>{
         cy.viewport(1440,900);
         cy.visit('/select-menu');
