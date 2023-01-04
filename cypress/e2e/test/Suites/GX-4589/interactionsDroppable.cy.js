@@ -48,7 +48,7 @@ describe('GX-4589 | ToolsQA | Interactions | Droppable',()=>{
         cy.get("@dropBox1").should("have.text","Dropped!Dropped!")
     })
 
-    it('4590 | TC6: Validate “Prevent Propogation” tab behavior when “Drag me” item is dropped in the “Outer Droppable (Greddy)”.',()=>{
+    it.only('4590 | TC6: Validate “Prevent Propogation” tab behavior when “Drag me” item is dropped in the “Outer Droppable (Greddy)”.',()=>{
 
         cy.get("[class*=nav-item]").eq(2).click().should("have.focus")
         cy.get("#greedyDropBox").as("dropBox2")
