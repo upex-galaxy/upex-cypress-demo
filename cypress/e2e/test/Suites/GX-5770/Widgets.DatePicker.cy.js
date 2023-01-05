@@ -1,9 +1,8 @@
-/// <reference types="cypress" />
 
-import {DatePickerPage} from '../../../../support/Pages/GX-5770/datePickerPage'
+const { datePickerPage } = require('../../../../support/Pages/GX-5770/datePickerPage')
 
 describe('GX-5770 | ToolsQA | Widgets | Date Picker', () => {
-	const datepickerPage = new DatePickerPage()
+	//const datepickerPage = new DatePickerPage()
 
 	let today = new Date()
 	let currentDay = new Date()
@@ -45,39 +44,37 @@ describe('GX-5770 | ToolsQA | Widgets | Date Picker', () => {
 	it('5772 | TC1: Date Picker 1 and 2 must display the current Date (2 different formats)', () => {
 		cy.log(`Date: ${currentDay} Time: ${currentTime} Month Name: ${monthName} Previous Month: ${previousMonth} Next Month: ${nextMonth}`) //debugging
 
-		datepickerPage.verifyFormatOnDatePicker1()
-		datepickerPage.verifyCurrentDayOnDatePicker1(currentDay)
-		datepickerPage.verifyDatePicker2(monthName, dd2, yyyy, currentTime)
+		datePickerPage.verifyFormatOnDatePicker1()
+		datePickerPage.verifyCurrentDayOnDatePicker1(currentDay)
+		datePickerPage.verifyDatePicker2(monthName, dd2, yyyy, currentTime)
 
 		cy.log(`Previous Month is:  ${previousMonth}`)
 	})
 
 	it('5772 | TC2: Date Picker 1 - Month Selection - Left arrow', () => {
-		//monthName = months[today.getMonth()]
 		cy.log(`Current Month: ${monthName}`)
 		cy.log(`Previous Month: ${previousMonth}`)
-		datepickerPage.clickOnDatePicker1()
-		datepickerPage.clickPreviousMonthOnDatePicker1()
-		datepickerPage.verifyPreviousMonthOnDatePicker1(previousMonth, yyyy)
+		datePickerPage.clickOnDatePicker1()
+		datePickerPage.clickPreviousMonthOnDatePicker1()
+		datePickerPage.verifyPreviousMonthOnDatePicker1(previousMonth, yyyy)
 	})
 
 	it('5772 | TC3: Date Picker 1 - Month Selection - Right arrow', () => {
-		//monthName = months[today.getMonth()]
 		cy.log(`Current Month: ${monthName}`)
 		cy.log(`Previous Month: ${nextMonth}`)
-		datepickerPage.clickOnDatePicker1()
-		datepickerPage.clickNextMonthOnDatePicker1()
-		datepickerPage.verifyNextMonthOnDatePicker1(nextMonth, yyyy)
+		datePickerPage.clickOnDatePicker1()
+		datePickerPage.clickNextMonthOnDatePicker1()
+		datePickerPage.verifyNextMonthOnDatePicker1(nextMonth, yyyy)
 	})
 
 	it('5772 | TC4: Date Picker 1 - Month Selection', () => {
-		datepickerPage.clickOnDatePicker1()
-		datepickerPage.verifyMonthsOnDatePicker1(months)
+		datePickerPage.clickOnDatePicker1()
+		datePickerPage.verifyMonthsOnDatePicker1(months)
 	})
 
-	it.only('5772 | TC5: Date Picker 1 - Year Selection', () => {
-		datepickerPage.clickOnDatePicker1()
-		datepickerPage.verifyYearsOnDatePicker1()
+	it('5772 | TC5: Date Picker 1 - Year Selection', () => {	
+		datePickerPage.clickOnDatePicker1()
+		datePickerPage.verifyYearsOnDatePicker1()
 	})
 
 	//
