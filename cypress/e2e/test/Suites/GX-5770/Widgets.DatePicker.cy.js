@@ -1,9 +1,6 @@
-
 import {datePickerPage} from '@pages/GX-5770/datePickerPage.js'
 
-
 describe('GX-5770 | ToolsQA | Widgets | Date Picker', () => {
-
 	let today = new Date()
 	let currentDay = new Date()
 
@@ -48,7 +45,6 @@ describe('GX-5770 | ToolsQA | Widgets | Date Picker', () => {
 		cy.log(`CURRENT DAY HAS BEEN VERIFIED ON DATE PICKER 1`)
 		datePickerPage.get.datePicker2().invoke('val').should('eq', `${monthName} ${dd2}, ${yyyy} ${currentTime}`) // Aveces falla porque durante la ejecucion cambia de minuto
 		cy.log(`CURRENT DATE AND FORMAT HAVE BEEN VERIFIED ON DATE PICKER 2`)
-
 	})
 
 	it('5772 | TC2: Date Picker 1 - Month Selection - Left arrow', () => {
@@ -101,7 +97,7 @@ describe('GX-5770 | ToolsQA | Widgets | Date Picker', () => {
 
 	it('5772 | TC5: Date Picker 1 - Year Selection', () => {
 		datePickerPage.clickOnDatePicker1()
-		cy.then(() =>{
+		cy.then(() => {
 			for (let index = 1980; index < 2025; index++) {
 				index = index.toString()
 				datePickerPage.get.yearSelectPicker1().select(index).invoke('val').should('eq', index)
@@ -117,7 +113,7 @@ describe('GX-5770 | ToolsQA | Widgets | Date Picker', () => {
 	it('5772 | TC7: Date Picker 2 - Year selection - The selected year is marked with a √', () => {
 		datePickerPage.clickOnDatePicker2()
 		datePickerPage.get.yearArrowPicker2().click()
-		datePickerPage.get.yearSelectedPicker2().invoke('text').should('eq','✓')
+		datePickerPage.get.yearSelectedPicker2().invoke('text').should('eq', '✓')
 	})
 
 	it('5772 | TC8: Date Picker 2 - Month Selection', () => {
@@ -127,7 +123,7 @@ describe('GX-5770 | ToolsQA | Widgets | Date Picker', () => {
 				const nameOfMonth = months[index]
 				datePickerPage.get.monthSelecDownArrow2().click()
 				datePickerPage.get.monthSelect2options().eq(index).click()
-				datePickerPage.get.selectedMonthPicker2().invoke('text').should('eq',`${nameOfMonth} ${yyyy}`)
+				datePickerPage.get.selectedMonthPicker2().invoke('text').should('eq', `${nameOfMonth} ${yyyy}`)
 				cy.log(`The selected month is:  ${nameOfMonth}`)
 			}
 		})
@@ -136,13 +132,73 @@ describe('GX-5770 | ToolsQA | Widgets | Date Picker', () => {
 	it('5772 | TC9: Date Picker 2 - The selected month is marked with a √', () => {
 		datePickerPage.clickOnDatePicker2()
 		cy.then(() => {
-
-				datePickerPage.get.monthSelecDownArrow2().click({ force: true })
-				datePickerPage.get.monthWithCheckMarkPicker2()
-				.children('span').invoke('text').should('eq','✓')
-			
+			datePickerPage.get.monthSelecDownArrow2().click({force: true})
+			datePickerPage.get.monthWithCheckMarkPicker2().children('span').invoke('text').should('eq', '✓')
 		})
 	})
+
+	it('5772 | TC10: Date Picker 2 - Month selection - Right Arrow', () => {
+		datePickerPage.clickOnDatePicker2()
+		cy.then(() => {
+			datePickerPage.get
+				.nextMonthArrowPicker2()
+				.click()
+				.then(() => {
+					if (nextMonth == 'January') {
+						datePickerPage.get
+							.selectedMonthPicker2()
+							.invoke('text')
+							.should('eq', `${nextMonth} ${yyyy + 1}`)
+					} else {
+						datePickerPage.get.selectedMonthPicker2().invoke('text').should('eq', `${nextMonth} ${yyyy}`)
+					}
+				})
+		})
+	})
+
+	it('5772 | TC11: Date Picker 2 - Month selection - Left Arrow', () => {
+		datePickerPage.clickOnDatePicker2()
+		cy.then(() => {
+			datePickerPage.get
+				.previousMonthArrowPicker2()
+				.click()
+				.then(() => {
+					if (previousMonth == 'December') {
+						datePickerPage.get
+							.selectedMonthPicker2()
+							.invoke('text')
+							.should('eq', `${previousMonth} ${yyyy - 1}`)
+					} else {
+						datePickerPage.get.selectedMonthPicker2().invoke('text').should('eq', `${previousMonth} ${yyyy}`)
+					}
+				})
+		})
+	})
+
+	it('5772 | TC12: Date Picker 2 - Current date - The day should have background color is blue', () => {
+		datePickerPage.clickOnDatePicker2()
+		cy.then(() => {
+			datePickerPage.get.daySelectedPicker1().should('have.css', 'background-color', 'rgb(33, 107, 165)')
+		})
+	})
+
+	it('5772 | TC13: Date Picker 2 - The time selected should have background color is blue', () => {
+		datePickerPage.clickOnDatePicker2()
+		datePickerPage.clickTimeItemPicker2()
+		datePickerPage.clickOnDatePicker2()
+		cy.then(() => {
+			datePickerPage.get.timeItemSelectedPicker2().should('have.css', 'background-color', 'rgb(33, 107, 165)')
+		})
+	})
+
+	it('5772 | TC14: Date Picker 2 - Time range of 00:00 to 23:45', () => {
+		datePickerPage.clickOnDatePicker2()
+		// check if there are 96 time items and the first is 00:00 and last is 23:45
+		datePickerPage.get.timeItemPicker2().should('have.length', 96)
+		datePickerPage.get.timeItemPicker2().eq(0).invoke('text').should('eq', '00:00')
+		datePickerPage.get.timeItemPicker2().eq(95).invoke('text').should('eq', '23:45')
+	})
+
 	//
 })
 

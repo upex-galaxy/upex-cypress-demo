@@ -18,7 +18,22 @@ class DatePickerPage {
 		monthSelecDownArrow2: () => cy.get('.react-datepicker__month-read-view--down-arrow'),
 		selectedMonthPicker2: () => cy.get('div[class$="react-datepicker__current-month--hasMonthDropdown"]'),
 		monthSelect2options: () => cy.get('.react-datepicker__month-option'),
-		monthWithCheckMarkPicker2: () => cy.get('div[class$="react-datepicker__month-option--selected_month"]')
+		monthWithCheckMarkPicker2: () => cy.get('div[class$="react-datepicker__month-option--selected_month"]'),
+
+		nextMonthArrowPicker2: () => cy.get('button[class$="react-datepicker__navigation--next--with-time"]'),
+
+		previousMonthArrowPicker2: () => cy.get('button[class$="react-datepicker__navigation--previous"]'),
+		//react-datepicker__navigation--next--with-time
+		daySelectedPicker2: () => cy.get('div[class$="react-datepicker__day--today"]'),
+
+		timeItemPicker2: () => cy.get('.react-datepicker__time-list-item'),
+		//react-datepicker__time-list-item 
+		timeItemSelectedPicker2: () => cy.get('.react-datepicker__time-list-item--selected'),
+		//react-datepicker__time-list-item--selected
+
+		
+		// react-datepicker__time-list-item 
+
 
 	}
 
@@ -36,6 +51,11 @@ class DatePickerPage {
 	clickNextMonthOnDatePicker1() {
 		this.get.nextMonth().click()
 	}
+
+	clickTimeItemPicker2() {
+		this.get.timeItemPicker2().eq(0).click()
+	}
+
 
 	
 }
