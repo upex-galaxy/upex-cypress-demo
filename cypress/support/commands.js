@@ -803,4 +803,12 @@ Cypress.Commands.add('clickElementRandom', (elemento) => {
 			})
 })
 
-
+import { CheckBox, Toggle } from "@pages/GX-5660/checkBox.js"
+Cypress.Commands.add('randomValue',()=>{
+	Toggle.clickToggle()
+	function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min)}
+		CheckBox.clickrandomCheckBox(getRandomInt(0,14))
+})
