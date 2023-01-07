@@ -38,7 +38,7 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                    npm run file */**/GX-5770/*.cy.js
+                    npm run file */**/GX-5660/*.cy.js
                   record: true #HABILITAR A TRUE* cuando se use un Proyecto.
               env:
                   # pass the Dashboard record key as an environment variable
@@ -61,7 +61,7 @@ jobs:
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit'
                   testPaths: 'reports/test-results.xml'
-                  testExecKey: 'GX-5773'
+                  testExecKey: 'GX-5662'
                   projectKey: 'GX'
 
             - name: 🔔Slack Notification of Done
