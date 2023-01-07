@@ -1,4 +1,8 @@
+import{checkBox} from "../../../../support/Pages/GX-5660/checkBox"
+import{Toggle} from "../../../../support/Pages/GX-5660/checkBox"
+
 describe('GX-5660 | ✅ToolsQA | Elements | Check Box',()=>{
+    const checkbox = new checkBox
 
     beforeEach('',()=>{
         cy.viewport(1440,900)
@@ -6,8 +10,13 @@ describe('GX-5660 | ✅ToolsQA | Elements | Check Box',()=>{
         cy.url().should('contain','checkbox')
     })
     it('',()=>{
-
-        cy.get('button').contains('label','Toggle').click()
+        Toggle.clickToggle()
+        //cy.get('[class="rct-text"] button[title=Toggle]').eq(0).click()
+        //cy.get('[class="rct-text"] button[title=Toggle]').eq(1).click()
+        //cy.get('[class="rct-text"] button[title=Toggle]').eq(2).click()
+        //cy.get('[class="rct-text"] button[title=Toggle]').eq(3).click()
+        //cy.get('[class="rct-text"] button[title=Toggle]').eq(4).click()
+        //cy.get('[class="rct-text"] button[title=Toggle]').eq(5).click()
     }) 
 })
 
