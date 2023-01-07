@@ -38,7 +38,7 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                    npm run file */**/GX-1/*.cy.js
+                    npm run file */**/GX-5770/*.cy.js
                   record: true #HABILITAR A TRUE* cuando se use un Proyecto.
               env:
                   # pass the Dashboard record key as an environment variable
@@ -61,14 +61,14 @@ jobs:
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit'
                   testPaths: 'reports/test-results.xml'
-                  testExecKey: 'GX-5'
+                  testExecKey: 'GX-5773'
                   projectKey: 'GX'
 
             - name: 🔔Slack Notification of Done
               if: always()
               uses: rtCamp/action-slack-notify@v2.2.0
               env:
-                SLACK_WEBHOOK: https://hooks.slack.com/services/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
+                SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
                 SLACK_USERNAME: Ari✨
                 SLACK_MESSAGE: ':test_tube: Test Execution successfully imported to Jira-Xray :rocket:'
                 SLACK_COLOR: ${{ job.status }}
