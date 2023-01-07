@@ -8,7 +8,7 @@ describe('GX-5660 | ✅ToolsQA | Elements | Check Box', () => {
         cy.url().should('contain', 'checkbox')
     })
 
-    it('5661 | Validate being to able expand all', () => {
+    it('5661 | TC1: Validate being to able expand all', () => {
         Toggle.clickToggle()
         Toggle.collapse.assertToggle().eq(2).should('be.visible').and('contain','Notes')
         Toggle.collapse.assertToggle().eq(5).should('be.visible').and('contain','WorkSpace')
@@ -17,7 +17,7 @@ describe('GX-5660 | ✅ToolsQA | Elements | Check Box', () => {
         Toggle.collapse.assertToggle().eq(15).should('be.visible').and('contain','Word File.doc')
     })
 
-    it('5661 | Validate being to able collapse all', () => {
+    it('5661 | TC2: Validate being to able collapse all', () => {
         Toggle.clickToggle()
         Toggle.collapse.assertToggle().should('have.length',17)
         Toggle.clickToggle2()
@@ -25,14 +25,14 @@ describe('GX-5660 | ✅ToolsQA | Elements | Check Box', () => {
         
     })
 
-    it('5661 | Validate autocheck behavior', () => {
+    it('5661 | TC3: Validate autocheck behavior', () => {
         Toggle.clickToggle()
         Toggle.collapse.assertToggle().should('have.length',17)
         CheckBox.clickCheckbox()
         CheckBox.CB.assertCB().should('have.length','5').and('contain','private')
     })
 
-    it('5661 | TC4:  Validate random checkbox and the success message',()=>{
+    it('5661 | TC4: Validate random checkbox and the success message',()=>{
         //the assertion is in the POM
         cy.randomValue()
         
