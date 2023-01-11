@@ -1,0 +1,12 @@
+{
+    "email":{
+        "error1": "kenny.navasgmail.com",
+        "error2": "@gmail.com",
+        "error3": "kenny.navas@.com",
+        "error4": "kenny.navas@gmailcom",
+        "validEmail": "kenny.navas@gmail.com"
+    },
+    "fullName": "Kenny Navas",
+    "currentAddress": "Guatire calle 3",
+    "permanentAddress": "Caracas calle 10"
+}
