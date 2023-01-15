@@ -50,7 +50,7 @@ export default defineConfig({
 		// baseUrl: ""
 	},
 	env:{
-
+	
 		AdminUser:{
 
 			username: "Admin",
@@ -65,6 +65,7 @@ export default defineConfig({
 			username: "upexTesting",
 			email: "sai@upextesting.com",
 			password: "1234567"
-		}
+		},
+		baseUrl: "https://demoqa.com/"
 	}
 })
