@@ -74,7 +74,7 @@ jobs:
                   record: true #HABILITAR A TRUE* cuando se use un Proyecto.
               env:
                   # pass the Dashboard record key as an environment variable
-                  CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+                  CYPRESS_RECORD_KEY: ${{ secrets.CYPEX_DEMO_RECORD_KEY }}
                   # pass GitHub token to allow accurately detecting a build vs a re-run build
                   GITHUB_TOKEN: ${{ secrets.UPEX_GITHUB_TOKEN }}
 
@@ -114,7 +114,7 @@ jobs:
               env:
                 SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
                 SLACK_USERNAME: Ari✨
-                SLACK_MESSAGE: ':test_tube: Nueva Ejecución de Prueba actualizado en Jira-Xray :rocket:'
+                SLACK_MESSAGE: ':test_tube: Tests run in ToolsQA: User Story Test Execution is Done and updated in Jira. :rocket:'
                 SLACK_COLOR: ${{ job.status }}
                 SLACK_ICON: https://i.imgur.com/peg9swL.png
 
