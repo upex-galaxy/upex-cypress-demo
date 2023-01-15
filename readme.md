@@ -23,7 +23,7 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 
 1. **Clona el Proyecto**: 
     ```
-    git clone https://github.com/upex-galaxy/cypress-cucumber.git
+    git clone https://github.com/upex-galaxy/L1-cypex-demo.git
     ````
 ___
 2. **Instala todas las dependencias**: 
