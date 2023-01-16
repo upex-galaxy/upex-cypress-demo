@@ -1,4 +1,4 @@
-[![CYPEX](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/f9y7eu/cypex&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/f9y7eu/runs)
+[![CYPEX L1 DEMO](https://img.shields.io/endpoint?url=https://cloud.cypress.io/badge/simple/2pw67q&style=for-the-badge&logo=cypress)](https://cloud.cypress.io/projects/2pw67q/runs)
 
 # 🧪Testing Automation - Cypress 12👨🏻‍🚀 + Cucumber
 ![UPEX's Banners (linkedin) (1)](https://user-images.githubusercontent.com/91127281/189470339-acea5782-16f1-4f06-9ce0-df54fd3ead9d.png)
@@ -77,8 +77,8 @@ ___
 7. **AHORA CON CYPRESS DASHBOARD**, puedes ver todas las ejecuciones y resultados de prueba del proyecto!
 Visita: [CYPRESS DASHBOARD](https://dashboard.cypress.io/projects/2pw67q/analytics/runs-over-time)
 ___
-## APRENDE Y GANA EXPERIENCIA TRABAJANDO COMO QA AUTOMATION EN GALAXY: 
-# LEE ESTA GUÍA: [CYPRESS AL GRANO](https://upexgalaxy6.atlassian.net/wiki/spaces/UG/pages/918130)
+# APRENDE Y GANA EXPERIENCIA COMO QA AUTOMATION EN UPEX! 
+### 🚩ENTRA EN [UPEX DOCUMENTATION](https://linktree.com/upexjira) Y BUSCA LAS GUÍAS DE CYPRESS AL GRANO!
 
 # Algunos Artículos de Cypress que puede interesarte:
 - [How to Install Cypress](https://testersdock.com/how-to-install-cypress/)
