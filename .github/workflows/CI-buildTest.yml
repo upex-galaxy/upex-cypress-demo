@@ -70,7 +70,7 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                    npm run file cypress/e2e/Tests/Accounts/GX-101-Something.cy.js
+                    npm run file cypress/e2e/Tests/BookStore/GX-6309-CrearObtenerLibros.cy.js
                   record: true #HABILITAR A TRUE* cuando se use un Proyecto.
               env:
                   # pass the Dashboard record key as an environment variable
