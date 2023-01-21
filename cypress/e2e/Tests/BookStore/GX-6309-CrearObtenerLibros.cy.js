@@ -1,3 +1,7 @@
+import {faker} from '@faker-js/faker'
+const username = faker.internet.email()
+const password = faker.internet.password() + '@@'
+
 describe('✅BookStore | Grid | Crear y Obtener Libros de la Tienda (POST-GET)', () => {
 	let isbn, userID, token, expires
 
@@ -7,21 +11,21 @@ describe('✅BookStore | Grid | Crear y Obtener Libros de la Tienda (POST-GET)',
 				method: 'POST',
 				url: the.url.createUser,
 				body: {
-					userName: the.username,
-					password: the.password,
+					userName: username,
+					password: password,
 				},
 			}).then((response) => {
 				expect(response.status).to.eq(201)
-				expect(response.body.username).to.be.equal(the.username)
+				expect(response.body.username).to.be.equal(username)
 				userID = response.body.userID
 			})
 
 			cy.visit('https://demoqa.com/login')
-			cy.get('#userName').type(the.username)
-			cy.get('#password').type(the.password)
+			cy.get('#userName').type(username)
+			cy.get('#password').type(password)
 			cy.get('#login').click()
 			cy.url().should('include', 'profile')
-			cy.get('#userName-value').should('have.text', the.username)
+			cy.get('#userName-value').should('have.text', username)
 
 			cy.api({
 				method: 'GET',
@@ -40,8 +44,8 @@ describe('✅BookStore | Grid | Crear y Obtener Libros de la Tienda (POST-GET)',
 				url: the.url.generateToken,
 				failOnStatusCode: false,
 				body: {
-					userName: the.username,
-					password: the.password,
+					userName: username,
+					password: password,
 				},
 			}).then((response) => {
 				expect(response.status).to.eq(200)
@@ -53,20 +57,20 @@ describe('✅BookStore | Grid | Crear y Obtener Libros de la Tienda (POST-GET)',
 					method: 'POST',
 					url: the.url.authorized,
 					body: {
-						userName: the.username,
-						password: the.password,
+						userName: username,
+						password: password,
 					},
 				}).then((response) => {
 					expect(response.status).to.eq(200)
 					expect(response.body).to.be.an('boolean').and.eq(true)
 					cy.setCookie('userID', userID)
-					cy.setCookie('userName', the.username)
+					cy.setCookie('userName', username)
 					cy.setCookie('token', token)
 					cy.setCookie('expires', expires)
 				})
 
 				cy.visit('https://demoqa.com/books')
-				cy.get('[id="userName-value"]').invoke('text').should('eq', the.username)
+				cy.get('[id="userName-value"]').invoke('text').should('eq', username)
 			})
 		})
 	})
