@@ -1,0 +1,11 @@
+{
+    "url": {
+        "createUser": "https://demoqa.com/Account/v1/User",
+        "generateToken": "https://demoqa.com/Account/v1/GenerateToken",
+        "authorized": "https://demoqa.com/Account/v1/Authorized",
+        "getBooks": "https://demoqa.com/BookStore/v1/Books",
+        "getBook": "https://demoqa.com/BookStore/v1/Book",
+        "saveBook": "https://demoqa.com/BookStore/v1/Books"
+    },       
+    "noExistBook": "345"
+}
