@@ -1,4 +1,4 @@
-[![CYPEX L1 DEMO](https://img.shields.io/endpoint?url=https://cloud.cypress.io/badge/simple/2pw67q&style=for-the-badge&logo=cypress)](https://cloud.cypress.io/projects/2pw67q/runs)
+[![🤖CI run Regression in QA🧪 After Merging⚡](https://github.com/upex-galaxy/L1-cypex-demo/actions/workflows/CI-regressionQA.yml/badge.svg)](https://github.com/upex-galaxy/L1-cypex-demo/actions/workflows/CI-regressionQA.yml)
 
 # 🧪Testing Automation - Cypress 12👨🏻‍🚀 + Cucumber
 ![UPEX's Banners (linkedin) (1)](https://user-images.githubusercontent.com/91127281/189470339-acea5782-16f1-4f06-9ce0-df54fd3ead9d.png)
