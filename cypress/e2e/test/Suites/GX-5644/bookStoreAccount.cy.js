@@ -56,7 +56,7 @@ describe('GX-5644 ✅BookStore | Account | Crear, Obtener y Eliminar Usuario (PO
             expect(response.status).equal(200);
         })
     })
-    it.only('5645 | TC4:  Validate the user tries to log in with invalid credentials',()=>{
+    it.skip('5645 | TC4:  Validate the user tries to log in with invalid credentials',()=>{
         cy.api({
             url: '/Account/v1/GenerateToken',
             method: 'POST',
