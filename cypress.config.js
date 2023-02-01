@@ -47,7 +47,7 @@ export default defineConfig({
 		specPattern: ['cypress/e2e/cucumber-test/Gherkin/*.feature', 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
 		// Use Cypress plugins:
 		setupNodeEvents,
-		// baseUrl: ""
+		baseUrl: 'https://demoqa.com/',
 	},
 	env: {
 		baseUrl: 'https://demoqa.com/',
