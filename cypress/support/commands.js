@@ -56,3 +56,7 @@ Cypress.Commands.add('SignIn', ()=>{
         signin.submitLogin()
     })
 })
+
+Cypress.Commands.add('randomNumber', (n)=>{
+    return Cypress._.random(0, n - 1)
+})
