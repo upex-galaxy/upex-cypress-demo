@@ -100,7 +100,7 @@ describe('GX-7255|✅ToolsQA | Widgets | Date Picker',()=>{
                 .then($value=>{
                     cy.wrap($value)
                     .invoke('val')
-                    .then(timedate=>{ cy.wrap($value).should('have.value', dateTimeÑ)})
+                    .then(timedate=>{ cy.wrap($value).should('have.value', dateTime)})
                     })
             } else{
                 cy.log(`**${actualTime}/${expectedDate} There's a small difference between the time on the website and the time in the test**`)
