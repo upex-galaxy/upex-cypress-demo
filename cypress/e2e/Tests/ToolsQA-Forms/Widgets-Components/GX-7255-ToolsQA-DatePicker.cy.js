@@ -89,7 +89,7 @@ describe('GX-7255|✅ToolsQA | Widgets | Date Picker',()=>{
 
                     cy.get('[id="dateAndTimePicker"]')
                     .find('[id="dateAndTimePickerInput"]')
-                    .then('have.value', dateTime)
+                    .should('have.value', dateTime)
                     cy.MonthSelection()
                     cy.YearSelection()
                     cy.ChoosingDate()
@@ -100,7 +100,7 @@ describe('GX-7255|✅ToolsQA | Widgets | Date Picker',()=>{
                 .then($value=>{
                     cy.wrap($value)
                     .invoke('val')
-                    .then(timedate=>{ cy.wrap($value).should('have.value', dateTime)})
+                    .then(timedate=>{ cy.wrap($value).should('have.value', timedate)})
                     })
             } else{
                 cy.log(`**${actualTime}/${expectedDate} There's a small difference between the time on the website and the time in the test**`)
