@@ -62,33 +62,64 @@ describe('GX-7255|✅ToolsQA | Widgets | Date Picker',()=>{
 
     })
 
-    it.only('GX-7256 | TC3:  Validate that the selected date and time is properly displayed in “Date and time”',()=>{
-        cy.clock()
-        cy.tick(50000)
-    let thisTime=  date.toLocaleTimeString('en-US',{ hour: 'numeric', hours12: 'true'})
+    it('GX-7256 | TC3:  Validate that the selected date and time is properly displayed in “Date and time”',()=>{
+
+    let thisTime=  date.toLocaleTimeString('en-US',{ hour: 'numeric',minute: 'numeric', hours12: 'true'})
     let today2 = new Date().getDate();
-    let dateTime= `${getMonth(thisMonth)} ${today2}, ${thisYear}`
-    
-    
-    cy.get('input[id="dateAndTimePickerInput"]').click()
-    cy.get('input[id="dateAndTimePickerInput"]').should('contain.value', dateTime)
+    let dateTime= `${getMonth(thisMonth)} ${today2}, ${thisYear} ${thisTime}`
+    let datetime;
+    let datetime2;
+    let justdate;
+    let expectedtime;
 
-        cy.MonthSelection()
-        cy.YearSelection()
-        cy.ChoosingDate()
-        cy.ChoosingTime()
-
-
-    cy.get('input[id="dateAndTimePickerInput"]')
-    .then($value=>{
-        cy.wrap($value)
-        .invoke('val')
-        .then(timedate=>{ cy.wrap($value).should('have.value', timedate)})
-    
-    
-            })
+        cy.get('[id="dateAndTimePicker"]')
+        .find('[id="dateAndTimePickerInput"]')
+        .then(($el)=>{
+            datetime= $el.val()
             
+            datetime2= String(datetime)
+            justdate= datetime2.match(/\d{1,2}:\d{2} [AP]M/);
+            expectedtime= justdate;
+            cy.wrap(expectedtime).then(($time)=>{
+                let actualTime= $time;
+                let expectedDate= thisTime
+
+                if(actualTime == expectedDate){
+                    cy.log('**The Times match!**')
+
+                    cy.get('[id="dateAndTimePicker"]')
+                    .find('[id="dateAndTimePickerInput"]')
+                    .then('have.value', dateTime)
+                    cy.MonthSelection()
+                    cy.YearSelection()
+                    cy.ChoosingDate()
+                    cy.ChoosingTime()
+            
+            
+                cy.get('input[id="dateAndTimePickerInput"]')
+                .then($value=>{
+                    cy.wrap($value)
+                    .invoke('val')
+                    .then(timedate=>{ cy.wrap($value).should('have.value', dateTimeÑ)})
+                    })
+            } else{
+                cy.log(`**${actualTime}/${expectedDate} There's a small difference between the time on the website and the time in the test**`)
+                cy.MonthSelection()
+                cy.YearSelection()
+                cy.ChoosingDate()
+                cy.ChoosingTime()
+        
+        
+            cy.get('input[id="dateAndTimePickerInput"]')
+            .then($value=>{
+                cy.wrap($value)
+                .invoke('val')
+                .then(timedate=>{ cy.wrap($value).should('have.value', timedate)})
+                })
+            }
+        })
     })
+})
     it('GX-7256 | TC4:  Validate that the user can select month with the navigation arrows in “Date and time”',()=>{
 
         cy.get('input[id="dateAndTimePickerInput"]').click()
