@@ -115,7 +115,7 @@ describe('GX-7255|✅ToolsQA | Widgets | Date Picker',()=>{
                 cy.wrap($value)
                 .invoke('val')
                 .then(timedate=>{ cy.wrap($value).should('have.value', timedate)})
-                })
+            })
             }
         })
     })

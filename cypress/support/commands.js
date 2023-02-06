@@ -144,7 +144,7 @@ let rannumber;
             })
             })           
     
-        Cypress.Commands.add('SelectingYearTC2',()=>{
+    Cypress.Commands.add('SelectingYearTC2',()=>{
 
             cy.get('[class$=year-select]').then((yearscontainer)=>{
                 cy.wrap(yearscontainer).children()
