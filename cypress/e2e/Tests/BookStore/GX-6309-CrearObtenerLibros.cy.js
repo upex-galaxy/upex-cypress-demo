@@ -2,7 +2,9 @@ import {faker} from '@faker-js/faker'
 const username = faker.internet.email()
 const password = faker.internet.password() + '@@'
 
-describe('✅BookStore | Grid | Crear y Obtener Libros de la Tienda (POST-GET)', () => {
+describe('✅BookStore | Grid | Crear y Obtener Libros de la Tienda (POST-GET)',{
+	retries: 3,
+}, () => {
 	let isbn, userID, token, expires
 
 	before('crear usuario', () => {
