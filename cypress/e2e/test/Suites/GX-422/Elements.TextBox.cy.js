@@ -6,7 +6,7 @@ describe('US 422 ToolsQA | Elements | Text Box: Fill form and Submit', () => {
             .should("include","text-box")
         })
     })
-    /* it('TC 1: Submit Form Successfully (HP)', () => {
+     it('TC 1: Submit Form Successfully (HP)', () => {
         cy.fixture("DOM/toolsqa/Elements/TextBox.Page").then((the) => { 
             cy.SubmitTextBoxFormSuccessfull(
                 the.data.name.caracter,
@@ -82,7 +82,7 @@ describe('US 422 ToolsQA | Elements | Text Box: Fill form and Submit', () => {
                 the.data.Adr.caracter,
                 the.data.Adr.caracter)
         })
-    }) */
+    })
     it('TC 9: Submit Form successfully when the field “email“ is null ', () => {
         cy.fixture("DOM/toolsqa/Elements/TextBox.Page").then((the) => { 
             cy.SubmitTextBoxFormSuccessfull(

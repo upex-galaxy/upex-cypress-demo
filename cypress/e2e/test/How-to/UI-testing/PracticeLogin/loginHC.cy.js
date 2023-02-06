@@ -17,7 +17,7 @@ describe("Login", () =>
         cy.get("button") // Login Button
             .click()
         
-        cy.url().should("contain","viewEmployeeList")
+        cy.url().should("contain","dashboard")
     })
     it("US # | TC2: Validar No poder Iniciar sesión cuando Username es inválido", () =>
     {

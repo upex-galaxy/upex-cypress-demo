@@ -38,7 +38,7 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                    npm run file */**/GX-5660/*.cy.js
+                    npm run file cypress/e2e/test/Suites/GX-1/StoryTest.cy.js
                   record: true #HABILITAR A TRUE* cuando se use un Proyecto.
               env:
                   # pass the Dashboard record key as an environment variable
@@ -64,13 +64,13 @@ jobs:
                   testExecKey: 'GX-5662'
                   projectKey: 'GX'
 
-            - name: 🔔Slack Notification of Done
-              if: always()
-              uses: rtCamp/action-slack-notify@v2.2.0
-              env:
-                SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-                SLACK_USERNAME: Ari✨
-                SLACK_MESSAGE: ':test_tube: Test Execution successfully imported to Jira-Xray :rocket:'
-                SLACK_COLOR: ${{ job.status }}
-                SLACK_ICON: https://i.imgur.com/peg9swL.png
+            # - name: 🔔Slack Notification of Done
+            #   if: always()
+            #   uses: rtCamp/action-slack-notify@v2.2.0
+            #   env:
+            #     SLACK_WEBHOOK: https://hooks.slack.com/services/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
+            #     SLACK_USERNAME: Ari✨
+            #     SLACK_MESSAGE: ':test_tube: Test Execution successfully imported to Jira-Xray :rocket:'
+            #     SLACK_COLOR: ${{ job.status }}
+            #     SLACK_ICON: https://i.imgur.com/peg9swL.png
 

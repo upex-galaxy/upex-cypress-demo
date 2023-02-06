@@ -1,4 +1,4 @@
-class loginPage {
+class LoginPage {
 
     elements = { 
 
@@ -9,4 +9,4 @@ class loginPage {
 }
 
 
-module.exports = new loginPage();
+export const loginPage = new LoginPage();

@@ -1,4 +1,4 @@
-class registerPage {
+class RegisterPage {
 
     elements = {
         "registerHeading": () => cy.get(".main-header"),
@@ -44,4 +44,4 @@ class registerPage {
 
 }
 
-module.exports = new registerPage();
+export const registerPage = new RegisterPage();

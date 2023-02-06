@@ -48,7 +48,7 @@ describe('GX-2404 ✅ToolsQA | Widgets | Date Picker', () => {
 
 
 
-    it.skip('2405 | TC2:  Validar la selección del día, mes, año y hora en el sección “Date And Time”', () => {
+    it('2405 | TC2:  Validar la selección del día, mes, año y hora en el sección “Date And Time”', () => {
         cy.get(datePicker.dateAndTime.input).click().should('be.visible');
         // Selección de Año aleatorio
         cy.log('Select Year');

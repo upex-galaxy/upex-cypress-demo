@@ -1,4 +1,4 @@
-class AutoCompletePage {
+export class AutoCompletePage {
 
     elements = {
 
@@ -19,7 +19,7 @@ class AutoCompletePage {
 
     }
 
-    typeMultipleColor(color1,color2) {
+    typeMultipleColor(color1, color2) {
         this.elements.inputs.multipleColorName().type(color1)
     }
 
@@ -29,5 +29,3 @@ class AutoCompletePage {
 
 
 }
-
-module.exports = new AutoCompletePage()

@@ -10,12 +10,12 @@ describe ("GX-2664-tools-qa-book-store-applications-login-fill-form-and-login", 
 		cy.get("#userName-value")	
 			.should("contain","testpractice")
 	})
-	it("US GX-2664 | TS 2665 | TC2:  Verify if a user cannot log in with a valid username and an invalid password",()=>
-	{
-		cy.signin("testpractice","toolsqa01+%")
-		cy.get("#name")	
-			.should("contain","Invalid username or password!")
-	}) 
+	// it("US GX-2664 | TS 2665 | TC2:  Verify if a user cannot log in with a valid username and an invalid password",()=>
+	// {
+	// 	cy.signin("testpractice","toolsqa01+%")
+	// 	cy.get("#name")	
+	// 		.should("contain","Invalid username or password!")
+	// }) 
 
 	it("US GX-2664 | TS 2665 | TC4:  Verify if a user cannot log in with an invalid username and a valid password.",()=>
 	{

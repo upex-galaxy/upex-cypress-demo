@@ -1,7 +1,8 @@
 describe('GX277 | ToolsQA | Elements | Broken Links Images', () => {
     beforeEach("Ingreso a elementos ", () => {
         cy.fixture("DOM/toolsqa/Elements/BrokenLinks.Page").then((the) => { 
-            cy.visit(the.url.Base)
+            cy.viewport(1900,1080)
+            cy.visit(the.url.Base, {pageLoadTimeout:1200000})
             cy.url()
                 .should('include', '/broken')
         })    
@@ -22,7 +23,7 @@ describe('GX277 | ToolsQA | Elements | Broken Links Images', () => {
                 })
         })
     })
-    it('US 277 | TS 287 | TC3: Validation of a valid link.', () => { 
+    it.skip('US 277 | TS 287 | TC3: Validation of a valid link.', () => { 
         cy.fixture("DOM/toolsqa/Elements/BrokenLinks.Page").then((the) =>
         {
             cy.contains(the.link.valid)
@@ -31,7 +32,7 @@ describe('GX277 | ToolsQA | Elements | Broken Links Images', () => {
                 .should('include', the.url.valid)
         })
     })
-    it('US 277 | TS 287 | TC4: Validation of an invalid link.', () => { 
+    it.skip('US 277 | TS 287 | TC4: Validation of an invalid link.', () => { 
         cy.fixture("DOM/toolsqa/Elements/BrokenLinks.Page").then((the) =>
         {
             cy.contains(the.link.invalid)

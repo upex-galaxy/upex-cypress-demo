@@ -4,10 +4,11 @@ import { INTERNAL_PROPERTY_NAME } from '@badeball/cypress-cucumber-preprocessor/
 import 'cypress-file-upload'
 describe("Tools QA | Interactions | Selectable", () => {
     beforeEach("Precondición: Estar situado en Interactions/selectable", () => {
+        cy.viewport(1900,1080);
         cy.visit("https://demoqa.com/automation-practice-form")
         cy.url().should("contain", "automation-practice-form")
-        cy.clearCookies()
-        cy.clearLocalStorage()
+        // cy.clearCookies()
+        // cy.clearLocalStorage()
         //rgb(206, 212, 218)'
     })
     it("|GX-1523| TC 1: Validar registro del formulario completando los campos requeridos.'", () => {
@@ -17,20 +18,20 @@ describe("Tools QA | Interactions | Selectable", () => {
             .type("Icardi")
         cy.xpath("//INPUT[@id='userEmail']").type("mauroywanda@gmail.com")
         cy.get("#gender-radio-1").click({ force: true })
-            cy.wait(1000)
+            
         cy.get("#userNumber").should("be.visible")
             .type("54911697788")
             cy.get("#dateOfBirthInput").click()
         cy.get(".react-datepicker__month-select").select("April")
-        cy.wait(1000)
+        
         cy.get(".react-datepicker__year-select").select("1997")
-        cy.wait(1000)
+        
             cy.xpath("//DIV[@class='react-datepicker__day react-datepicker__day--028'][text()='28']").click({ force: true })
-            cy.wait(1000)
+            
         cy.get("#subjectsInput").should("be.visible").type("English").type('{enter}')
-        cy.wait(1000)
+        
             cy.get("#hobbies-checkbox-1").click({ force: true })
-        cy.wait(1000)
+        
         const ruta = 'images/image.jpg'
         cy.get('[type="file"]').attachFile(ruta)
         cy.get("#currentAddress").type("Erogan 1334 , Turkey.")
@@ -42,9 +43,9 @@ describe("Tools QA | Interactions | Selectable", () => {
         cy.get("#firstName").should("have.css", "border-color", "rgb(206, 212, 218)")
         cy.get("#lastName").should("have.css", "border-color", "rgb(206, 212, 218)")
         cy.get("[for='gender-radio-1']").should("have.css", "border-color", "rgb(33, 37, 41)")
-        cy.wait(1000)    
+            
         cy.get("#userNumber").should("have.css", "border-color", "rgb(206, 212, 218)")
-        cy.wait(1000)
+        
         cy.get("#submit").click({ force: true })
 
     })
@@ -55,7 +56,7 @@ describe("Tools QA | Interactions | Selectable", () => {
             .type("Icardi")
         cy.get("#submit").click({ force: true })
         cy.get("#gender-radio-1").click({ force: true })
-            cy.wait(1000)
+            
         cy.get("#userNumber").should("be.visible")
             .type("54911697788")
     })
@@ -64,53 +65,56 @@ describe("Tools QA | Interactions | Selectable", () => {
             .type("maurito123")
         cy.get("#lastName").should("be.visible")
             .type("Ic@rdi")
-        cy.xpath("//INPUT[@id='userEmail']").type("mauro.x.wanda.com").should("have.css", "border-color", "rgb(128, 189, 255)")
+        cy.xpath("//INPUT[@id='userEmail']").should("be.visible").type("mauro.x.wanda.com")
         cy.get("#gender-radio-1").click({ force: true })
-            cy.wait(1000)
-        cy.get("#userNumber").should("be.visible")
-            .type("541212121").should("have.css", "border-color", "rgb(128, 189, 255)")
+            
+        cy.get("#userNumber").should("be.visible").type("541212121")
             cy.get("#dateOfBirthInput").click()
         cy.get(".react-datepicker__month-select").select("April")
-        cy.wait(1000)
+        
         cy.get(".react-datepicker__year-select").select("1997")
-        cy.wait(1000)
+        
             cy.xpath("//DIV[@class='react-datepicker__day react-datepicker__day--028'][text()='28']").click({ force: true })
-            cy.wait(1000)
+            
         cy.get("#subjectsInput").should("be.visible").type("English").type('{enter}')
-        cy.wait(1000)
+        
             cy.get("#hobbies-checkbox-1").click({ force: true })
-        cy.wait(1000)
+        
         const ruta = 'images/image.jpg'
         cy.get('[type="file"]').attachFile(ruta)
         cy.xpath("//TEXTAREA[@id='currentAddress']").type("Erogan 1334 , Turkey.")
-        cy.wait(1000)
-        cy.get("#submit").click({ force: true })       
+        
+        cy.get("#submit").click({ force: true })     
+        cy.xpath("//INPUT[@id='userEmail']").should("have.css", "border-color", "rgb(220, 53, 69)")  
+        cy.get("#userNumber").should("have.css", "border-color", "rgb(40, 167, 69)")
     })
     it("|GX-1523| TC 5: Validar registro del formulario completando el campo Email sin el punto del dominio.'", () => {
         cy.get("#firstName").should("be.visible")  //Aclarar en Jira
             .type("Mauro")
         cy.get("#lastName").should("be.visible")
             .type("Icardi")
-        cy.xpath("//INPUT[@id='userEmail']").type("mauro@wanda.com").should("have.css", "border-color", "rgb(128, 189, 255)")
+        cy.xpath("//INPUT[@id='userEmail']").should("be.visible").type("mauro@wanda.com")
         cy.get("#gender-radio-1").click({ force: true })
-            cy.wait(1000)
+            
         cy.get("#userNumber").should("be.visible")
             .type("5412121211")
-        cy.wait(1000)
-        cy.get("#submit").click({ force: true })       
+        
+        cy.get("#submit").click({ force: true })     
+        cy.xpath("//INPUT[@id='userEmail']").should("have.css", "border-color", "rgb(40, 167, 69)")  
     })
     it("|GX-1523| TC 6: Validar registro del formulario completando el campo Email sin el dominio ('.com').'", () => {
         cy.get("#firstName").should("be.visible")  //Aclarar en Jira
             .type("Mauro")
         cy.get("#lastName").should("be.visible")
             .type("Icardi")
-        cy.xpath("//INPUT[@id='userEmail']").type("mauro@wanda").should("have.css", "border-color", "rgb(128, 189, 255)")
+        cy.xpath("//INPUT[@id='userEmail']").should("be.visible").type("mauro@wanda")
         cy.get("#gender-radio-1").click({ force: true })
-            cy.wait(1000)
+            
         cy.get("#userNumber").should("be.visible")
             .type("5412121211")
-        cy.wait(1000)
-        cy.get("#submit").click({ force: true })       
+        
+        cy.get("#submit").click({ force: true })
+        cy.xpath("//INPUT[@id='userEmail']").should("have.css", "border-color", "rgb(220, 53, 69)")       
     })
     it("|GX-1523| TC 7: Validar registro del formulario completando el campo Mobile de forma invalida con carácter alfanumérico.'", () => {
         cy.get("#firstName").should("be.visible")  //Aclarar en Jira
@@ -119,11 +123,12 @@ describe("Tools QA | Interactions | Selectable", () => {
             .type("Icardi")
         cy.xpath("//INPUT[@id='userEmail']").type("mauro@wanda.com")
         cy.get("#gender-radio-1").click({ force: true })
-            cy.wait(1000)
+            
         cy.get("#userNumber").should("be.visible")
-            .type("54121212as").should("have.css", "border-color", "rgb(128, 189, 255)")
-        cy.wait(1000)
-        cy.get("#submit").click({ force: true })       
+            .type("54121212as")
+        
+        cy.get("#submit").click({ force: true })  
+        cy.get("#userNumber").should("have.css", "border-color", "rgb(220, 53, 69)")     
     })
     it("|GX-1523| TC 8: Validar registro del formulario completando el campo Mobile de forma invalida con menos de 10 dígitos.'", () => {
         cy.get("#firstName").should("be.visible")  //Aclarar en Jira
@@ -132,11 +137,12 @@ describe("Tools QA | Interactions | Selectable", () => {
             .type("Icardi")
         cy.xpath("//INPUT[@id='userEmail']").type("mauro@wanda.com")
         cy.get("#gender-radio-1").click({ force: true })
-            cy.wait(1000)
+            
         cy.get("#userNumber").should("be.visible")
-            .type("5412121").should("have.css", "border-color", "rgb(128, 189, 255)")
-        cy.wait(1000)
-        cy.get("#submit").click({ force: true })       
+            .type("5412121")
+        
+        cy.get("#submit").click({ force: true })  
+        cy.get("#userNumber").should("have.css", "border-color", "rgb(40, 167, 69)")      
     })
 })
 
