@@ -93,7 +93,7 @@ let rannumber;
         })
         })
     Cypress.Commands.add('SelectingDate',()=>{
-        
+
         daysinMonth= getDays(selectedyear, monthvalue+1)
         randomday= Cypress._.random(1, daysinMonth)
     

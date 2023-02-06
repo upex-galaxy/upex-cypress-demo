@@ -40,7 +40,6 @@ describe('GX-7255|✅ToolsQA | Widgets | Date Picker',()=>{
                 cy.wrap($el).should('have.value', info)
             })
         })
-        
     })
     it('GX-7256 | TC2: Validates that the user can select a month with the navigation arrows and then its correcly displayed in the "Select date" box',()=>{
 
