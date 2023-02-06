@@ -42,7 +42,7 @@ describe('GX-7255|✅ToolsQA | Widgets | Date Picker',()=>{
         })
         
     })
-    it('GX-7256 | TC2:  Validate that the user can select a month with the navigation arrows',()=>{
+    it('GX-7256 | TC2: Validates that the user can select a month with the navigation arrows and then its correcly displayed in the "Select date" box',()=>{
 
         cy.get('input[id="datePickerMonthYearInput"]').click()
         cy.SelectingYearTC2();
@@ -120,7 +120,7 @@ describe('GX-7255|✅ToolsQA | Widgets | Date Picker',()=>{
         })
     })
 })
-    it('GX-7256 | TC4:  Validate that the user can select month with the navigation arrows in “Date and time”',()=>{
+    it('GX-7256 | TC4: Validates that the user can select a month with the navigation arrows and then its correcly displayed in the "Date and time" box',()=>{
 
         cy.get('input[id="dateAndTimePickerInput"]').click()
         cy.SelectingMonthTC4()
