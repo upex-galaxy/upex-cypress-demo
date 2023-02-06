@@ -631,6 +631,13 @@ Cypress.Commands.add('gotoButtonsPage', () => {
 	cy.url().should('contain', 'buttons')
 })
 
+Cypress.Commands.add("gotoSortablePage", ()=>
+{
+	cy.visit('https://demoqa.com/sortable')
+	cy.url().should('contain', 'sortable')
+	
+})
+
 Cypress.Commands.add('signin', (username, password) => {
 	{
 		cy.get('#userName').type(username)
@@ -730,6 +737,52 @@ Cypress.Commands.add('validateSelectFile', () => {
 	cy.get('#uploadedFilePath').should('contain', 'upexlogo.png')
 })
 
+Cypress.Commands.add('moveFromTo', (subject, target) => {
+    Cypress.log({
+        name: 'DRAGNDROP',
+        message: `Dragging element ${subject} to ${target}`,
+        consoleProps: () => {
+            return {
+                subject: subject,
+                target: target
+            };
+        }
+    });
+    const BUTTON_INDEX = 0;
+    const SLOPPY_CLICK_THRESHOLD = 10;
+    cy.get(target)
+        .first()
+        .then($target => {
+            let coordsDrop = $target[0].getBoundingClientRect();
+            cy.get(subject)
+                .first()
+                .then(subject => {
+                    const coordsDrag = subject[0].getBoundingClientRect();
+                    cy.wrap(subject)
+                        .trigger('mousedown', {
+                            button: BUTTON_INDEX,
+                            clientX: coordsDrag.x,
+                            clientY: coordsDrag.y,
+                            force: true
+                        })
+                        .trigger('mousemove', {
+                            button: BUTTON_INDEX,
+                            clientX: coordsDrag.x + SLOPPY_CLICK_THRESHOLD,
+                            clientY: coordsDrag.y,
+                            force: true
+                        });
+                    cy.get('body')
+                        .trigger('mousemove', {
+                            button: BUTTON_INDEX,
+                            clientX: coordsDrop.x,
+                            clientY: coordsDrop.y,
+                            force: true            
+                        })
+                        .trigger('mouseup');
+                });
+        });
+});
+
 Cypress.Commands.add('validateText', (list, arr) => {
 	cy.get(list)
 		.each(($el, index) => {
@@ -752,4 +805,12 @@ Cypress.Commands.add('clickElementRandom', (elemento) => {
 			})
 })
 
-
+import { CheckBox, Toggle } from "@pages/GX-5660/checkBox.js"
+Cypress.Commands.add('randomValue',()=>{
+	Toggle.clickToggle()
+	function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min)}
+		CheckBox.clickrandomCheckBox(getRandomInt(0,14))
+})
