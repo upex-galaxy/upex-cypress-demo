@@ -1,5 +1,4 @@
 .DS_Store
-**/.DS_Store
 node_modules/
 cypress/videos
 cypress/downloads
@@ -9,3 +8,4 @@ reports/
 mochawesome.json
 cucumber-json-formatter
 cucumber-json-formatter.exe
+package-lock.json
