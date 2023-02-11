@@ -1,3 +1,8 @@
+import { simplepage } from "@pages/GX2-624 ToolsQA-Draggable/SimplePage"
+import { axisrestricted } from "@pages/GX2-624 ToolsQA-Draggable/AxisRestricted"
+import { containerrestricted } from "@pages/GX2-624 ToolsQA-Draggable/ContainerRestricted"
+import { cursorstyle } from "@pages/GX2-624 ToolsQA-Draggable/CursorStyle"
+
 describe('US GX2-624 | TS: ✅ToolsQA | Interactions | Dragabble',()=>{
 
     beforeEach('Precondition',()=>{
@@ -5,183 +10,125 @@ describe('US GX2-624 | TS: ✅ToolsQA | Interactions | Dragabble',()=>{
     })
     
     it('GX2-625 | TC1: Validate that the user can dragg the box “drag me” anywhere',()=>{
-        let Xcoord= Cypress._.random(1, 500)
-        let Ycoord= Cypress._.random(1, 340)
+        simplepage.CheckSimpletab()
+        .should('exist')
+        .and('have.text', 'Simple')
         
-        cy.get('[id="draggableExample-tab-simple"]').should('exist')
-        cy.get('[id="dragBox"]').then(($button)=>{
-            let rect= $button[0].getBoundingClientRect();
-
-            cy.wrap($button)
-            .trigger('mousedown',{
-                which: 1,
-                pageX: rect.left,
-                pageY: rect.top,
-                force: true
-            })
-            .trigger('mousemove',{
-                pageX: rect.left + Xcoord,
-                pageY: rect.top + Ycoord,
-                force: true
-            })
-            .trigger('mouseup',{
-                which: 1,
-                force: true
-            })
-        cy.wrap($button).should('have.css', "left", `${Xcoord}px`) 
-        cy.wrap($button).should('have.css', "top", `${Ycoord}px`)
+        cy.SimpleBox()
+    
+        cy.get('@coord').then((SimpleBox)=>{
+            const {xcoord, ycoord}= SimpleBox;
+            simplepage.DragBox()
+            .should('have.css', 'left', `${xcoord}px`)
+            .and('have.css', 'top', `${ycoord}px`)
         })
     })
     it('GX2-625 | TC2:  Validate that the user can drag the box “only X” anywhere in an X coordinate in the “Axis restricted” tab',()=>{
         
-        let Xcoord= Cypress._.random(1, 350)
-
-        cy.get('[id="draggableExample-tab-axisRestriction"]')
+        axisrestricted.ARtab()
         .should('exist')
+        .and('have.text', 'Axis Restricted')
         .click()
-        cy.get('[id="restrictedX"]')
-        .should('have.css', "top", "0px")
+        axisrestricted.Xbox().should('have.css', "top", "0px")
 
-        cy.get('[id="restrictedX"]').then(($button)=>{
-            let rect= $button[0].getBoundingClientRect();
-            cy.wrap($button)
-            .trigger('mousedown',{
-                which: 1,
-                pageX: rect.left,
-                force: true
-            })
-            .trigger('mousemove',{
-                pageX: rect.left + Xcoord,
-                force: true
-            })
-            .trigger('mouseup',{
-                which: 1,
-                force: true
-            })
+        cy.OnlyX();
+
+        cy.get('@coord2').then((OnlyX)=>{
+            const {xcoord}= OnlyX;
+            axisrestricted.Xbox()
+        .should('have.css', "left", `${xcoord}px`)
         })
-        if(Xcoord> 155 && Xcoord < 360){
-            cy.get('[id="restrictedY"]').then(($button)=>{
-                let rect= $button[0].getBoundingClientRect();
-                cy.wrap($button)
-                .trigger('mousedown',{
-                    which: 1,
-                    pageY: rect.top,
-                    force: true
-                })
-                .trigger('mousemove',{
-                    pageY: rect.top + 50,
-                    force: true
-                })
-                .trigger('mouseup',{
-                    which: 1,
-                    force: true
-                })
-            })
-        }
-        cy.get('[id="restrictedX"]')
-        .should('have.css', "left", `${Xcoord}px`)
     })
-    
+
     it('GX2-625 | TC3: Validate that the user can drag the box “only Y” anywhere in an Y coordinate in the “Axis restricted” tab',()=>{
 
-        let Ycoord= Cypress._.random(1, 300)
+        axisrestricted.ARtab().click()
+        axisrestricted.Ybox().should('have.css', "left", "0px")
 
-        cy.get('[id="draggableExample-tab-axisRestriction"]')
-        .should('exist')
-        .click()
-        cy.get('[id="restrictedY"]')
-        .should('have.css', "left", "0px")
+        cy.OnlyY()
 
-        cy.get('[id="restrictedY"]').then(($button)=>{
-            let rect= $button[0].getBoundingClientRect();
-            cy.wrap($button)
-            .trigger('mousedown',{
-                which: 1,
-                pageY: rect.top,
-                force: true
-            })
-            .trigger('mousemove',{
-                pageY: rect.top + Ycoord,
-                force: true
-            })
-            .trigger('mouseup',{
-                which: 1,
-                force: true
-            })
+        cy.get('@coord3').then((OnlyY)=>{
+            const {ycoord}= OnlyY;
+            axisrestricted.Ybox()
+            .should('have.css', "top", `${ycoord}px`)
         })
-        cy.get('[id="restrictedY"]')
-        .should('have.css', "top", `${Ycoord}px`)
     })
 
-    it('GX2-625 | TC4: Validate that the the text “I’m contained within the box” cant be dragged out of the delimited area of action in the “Container restricted tab”',()=>{
-        let Ycoord=Cypress._.random(106, 300) 
+    it('GX2-625 | TC4: Validate that the the text “Im contained within the box” cant be dragged out of the delimited area of action in the “Container restricted tab”',()=>{
 
-    cy.get('[id="draggableExample-tab-containerRestriction"]')
-    .should('exist').click()
+    containerrestricted.CRtab().click()    
+    containerrestricted.CRtab().should('exist').and('have.text', 'Container Restricted')
 
-    cy.get('[class="draggable ui-widget-content ui-draggable ui-draggable-handle"]')
-    .then(($draggable)=>{
-        let rect= $draggable[0].getBoundingClientRect();
-        cy.wrap($draggable)
-        .should('exist')
-        .and('have.text', "I'm contained within the box")
-        .trigger('mousedown',{
-            which: 1,
-            pageY: rect.top,
-            force: true
-        })
-        .trigger('mousemove',{
-            pageY: rect.top + Ycoord,
-            force: true
-        })
-        .trigger('mouseup',{
-            which: 1,
-            force: true
-        })
-        cy.get($draggable)
+    cy.WithinBox()
+
+    cy.get('@coord4').then((WithinBox)=>{
+        const {ycoord}= WithinBox;
+        containerrestricted.BoxWithin()
         .should('have.css', 'top', "106px")
-        .and('not.have.css', "top", `${Ycoord}px`)
+        .and('not.have.css', "top", `${ycoord}px`)
+        })
     })
-})    
+    
     it('GX2-625 | TC5: Validate that the the text “Im contained within the box” cant be dragged out of the delimited area of action in the “Container restricted tab”',()=>{
 
-        let Xcoord= Cypress._.random(13,100)
-        cy.get('[id="draggableExample-tab-containerRestriction"]').click()
-        cy.get('[class="ui-widget-header ui-draggable ui-draggable-handle"]')
-        .then(($draggable)=>{
-                cy.wrap($draggable).should('exist').and('have.text', "I'm contained within my parent")
-
-                let rect= $draggable[0].getBoundingClientRect();
-                cy.wrap($draggable)
-                .trigger('mousedown',{
-                    which: 1,
-                    pageX: rect.left,
-                    force: true
-                })
-                .trigger('mousemove',{
-                    pageX: rect.left + Xcoord,
-                    force: true
-                })
-                .trigger('mouseup',{
-                    which: 1,
-                    force: true
-                })
-            cy.wrap($draggable).should('not.have.css', 'left', `${Xcoord}px`)
-            .and('have.css', 'left', "13px")
+        containerrestricted.CRtab().click()
+        
+        cy.WithinParent();
+        
+        cy.get('@coord5').then((WithinParent)=>{
+            const {xcoord}= WithinParent;
+            containerrestricted.ParentWithin()
+            .should('not.have.css', 'left', `${xcoord}px`)
         })
     })
-    it.only('hover over test 1',()=>{
+    
+    it('GX2-625 | TC6: Validate that the the cursor sticks to the center of the box in the “cursor style” tab.',()=>{
+        
+        cursorstyle.CStab().click()
+        cursorstyle.MiddleBox()
+        .should('have.text', 'I will always stick to the center')
+        .and('have.css', 'cursor', 'move' )
 
-        let Xcoord= Cypress._.random(50,200)
-        cy.get('[id="draggableExample-tab-cursorStyle"]').click()
-        
-        cy.get('[id="cursorCenter"]').then(($box1)=>{
-            let rect= $box1[0].getBoundingClientRect();
-        
+        cy.SticktoCenter()
+
+        cy.get('@variables').then((SticktoCenter)=>{
+            const {initialx, initialy, finalx, finaly}= SticktoCenter;
+            expect(initialx).not.to.equal(finalx)
+            expect(initialy).not.to.equal(finaly)    
+        })
     })
-})
+    it('GX2-625 | TC7: Validate that the the cursor stays in the upper left corner at the “my cursor is at the top left” box.',()=> {
 
-})
+        cursorstyle.CStab().click()
+        cursorstyle.TopleftBox().should('exist').and('have.text', 'My cursor is at top left')
+        
+        cy.StickTopLeft()
+
+        cy.get('@variables2').then((StickTopLeft)=>{
+            const {initialx, initialy, finalx, finaly}= StickTopLeft;
+            expect(initialx).not.to.equal(finalx)
+            expect(initialy).not.to.equal(finaly)
+        })
+    })
+        
+    it('GX2-625 | TC8: Validate that the the cursor stays at the bottom of the “my cursor is at the top left” box.',()=>{
+    
+            
+        cursorstyle.CStab().click()
+        cursorstyle.BottomBox().should('exist').and('have.text', 'My cursor is at bottom')
+    
+        cy.SticktoBottom()
+
+        cy.get('@variables3').then((SticktoBottom)=>{
+            const {initialx, initialy, finalx, finaly}= SticktoBottom;
+            expect(initialx).not.to.equal(finalx)
+            expect(initialy).not.to.equal(finaly)
+            })
+        })
+    })
+    
+
+
 
 Cypress.on('uncaught:exception', (err, runnable) => {
     // returning false here prevents Cypress from
