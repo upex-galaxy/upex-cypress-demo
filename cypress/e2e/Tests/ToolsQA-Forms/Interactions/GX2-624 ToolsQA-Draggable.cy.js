@@ -82,7 +82,7 @@ describe('US GX2-624 | TS: ✅ToolsQA | Interactions | Dragabble',()=>{
         })
     })
     
-    it('GX2-625 | TC6: Validate that the the cursor sticks to the center of the box in the “cursor style” tab.',()=>{
+    it('GX2-625 | TC6: Validate that the the cursor sticks to the center of the box in the “I will always stick to the center” box.',()=>{
         
         cursorstyle.CStab().click()
         cursorstyle.MiddleBox()

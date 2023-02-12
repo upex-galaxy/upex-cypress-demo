@@ -66,5 +66,5 @@ export default defineConfig({
 			email: 'sai@upextesting.com',
 			password: '1234567',
 		},
-	},
+	}
 })

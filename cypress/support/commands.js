@@ -14,7 +14,8 @@ import 'cypress-downloadfile/lib/downloadFileCommand'
 import {login} from '@pages/Login.Page'
 const {authLogin, dashboardIndex} = Cypress.env('endpoint')
 import {signin} from '@pages/SignIn.Page.js'
-let {Xcoord, Ycoord} = Cypress.env('coords')
+let Xcoord;
+let Ycoord;
 
 //TESTCASE1
 let valuemonth= function getMonthNumberFromName(monthName) {
