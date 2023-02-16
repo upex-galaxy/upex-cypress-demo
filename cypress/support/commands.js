@@ -13,11 +13,23 @@ import '@4tw/cypress-drag-drop'
 import 'cypress-downloadfile/lib/downloadFileCommand'
 import {login} from '@pages/Login.Page'
 const {authLogin, dashboardIndex} = Cypress.env('endpoint')
+import { listpage } from '@pages/GX2-736 ToolsQA-Sortable/ListPage'
 import {signin} from '@pages/SignIn.Page.js'
+import {gridpage} from '@pages/GX2-736 ToolsQA-Sortable/GridPage'
 let Xcoord;
 let Ycoord;
-
-//TESTCASE1
+let rntext1;
+let rntext2;
+let rn1, rn2;
+let txtgrid1=''
+let txtgrid2=''
+function getRandomNumber(min, max, excludedNumber) {
+    let randomNumber;
+    do {
+    randomNumber = Cypress._.random(min, max );
+    } while (randomNumber === excludedNumber);
+    return randomNumber;
+    }
 let valuemonth= function getMonthNumberFromName(monthName) {
     return new Date(`${monthName} 1, 2022`).getMonth() ;}
 let date= new Date();
@@ -46,12 +58,11 @@ const nth = function(d) {
         default: return "th";
     }
 }
-    let dayName= function (year, month, day) {
+let dayName= function (year, month, day) {
     const date = new Date(Date.UTC(year, month , day));
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     return daysOfWeek[date.getUTCDay()];
 }
-
 let monthvalue2;
 let ranyear= Cypress._.random(2018, 2028)
 let randay;
@@ -660,4 +671,59 @@ Cypress.Commands.add('SticktoBottom',()=>{
         })
         })
     })    
-})      
+})    
+
+
+Cypress.Commands.add('SortingVertical', ()=>{
+    rn1 = Cypress._.random(0, 5);
+    const rn2 = getRandomNumber(0, 5, rn1);
+    listpage.VerticalNumber().eq(rn1).then($el=>{
+    listpage.VerticalNumber().eq(rn1).trigger('mousedown',{force: true})
+    listpage.VerticalNumber().eq(rn2).trigger('mousemove', {force: true})
+    .trigger('mouseup',{force: true})
+    cy.wrap($el).invoke('text').then(number=>{
+        const info={number: number, rn1:rn1}; cy.wrap(info).as('info')
+    })
+    })
+})
+Cypress.Commands.add('VerticalDragOutside',()=>{
+    rn1 = Cypress._.random(0, 5);
+    listpage.VerticalNumber().eq(rn1).then($el=>{
+        let rect= $el[0].getBoundingClientRect()
+        cy.wrap($el).trigger('mousedown',{which: 1,force: true})
+        .trigger('mousemove',{pageY: rect.top,force: true})
+        .trigger('mouseup',{which: 1,force: true})  
+        cy.wrap($el).invoke('text').then(number=>{ 
+            const values= {number: number, rn1: rn1}; cy.wrap(values).as('text') })    
+        })
+})
+
+Cypress.Commands.add('SortingGrid',()=>{
+rn1= Cypress._.random(0,8);
+const rn2 = getRandomNumber(0, 8, rn1);
+gridpage.Gridnumbers().eq(rn1).invoke('text').then(number1=>{ 
+gridpage.Gridnumbers().eq(rn1).trigger('mousedown',{force: true});
+gridpage.Gridnumbers().eq(rn2).trigger('mousemove',{force: true}).trigger('mouseup',{force:true})
+gridpage.Gridnumbers().eq(rn2).invoke('text').then(text=>{
+const value={text: number1, rn2: rn2}; cy.wrap(value).as('values')})
+})
+})
+Cypress.Commands.add('GridDragOutside',()=>{
+    rn1= Cypress._.random(0,8);
+    gridpage.Gridnumbers().eq(rn1).then($el=>{
+        cy.wrap($el).invoke('text').then(number=>{
+        let rect= $el[0].getBoundingClientRect()
+        cy.wrap($el).trigger('mousedown',{
+            which: 1,
+            force: true
+        }).trigger('mousemove',{
+            pageY: rect.top + 800,
+            force: true
+        }).trigger('mouseup',{
+            which: 1,
+            force: true
+        })
+        const values= {number: number, rn1: rn1}; cy.wrap(values).as('text') })
+    }) 
+})
+
