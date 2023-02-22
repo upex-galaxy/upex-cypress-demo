@@ -1,39 +1,44 @@
 class TextBox {
+	//Elementos de la Page
 	elements = {
 		fullNameInput: () => cy.get('#userName'),
 		emailInput: () => cy.get('#userEmail'),
 		currentAddressInput: () => cy.get('#currentAddress'),
 		permanentAddressInput: () => cy.get('#permanentAddress'),
 		submitBtn: () => cy.get('#submit'),
-		messageRegistered: '',
+		messageFullName: () => cy.get('#name'),
+		messageEmail: () => cy.get('#email'),
+		messageCurrentAddress: () => cy.get('#currentAddress'),
+		messagePermanentAddress: () => cy.get('#permanentAddress'),
 	}
 
-	clearInput(input) {
-		input.clear()
-	}
-
-	clickBtn(Btn) {
-		Btn.click()
-	}
-
+	//Limpia los inputs
 	clearFullNameInput() {
-		clearInput(this.elements.fullNameInput())
+		this.elements.fullNameInput().clear()
 	}
 
 	clearEmailInput() {
-		clearInput(this.elements.emailInput())
+		this.elements.emailInput().clear()
 	}
 
 	clearCurrentAddressInput() {
-		clearInput(this.elements.currentAddressInput())
+		this.elements.currentAddressInput().clear()
 	}
 
 	clearPermanentaddressInput() {
-		clearInput(this.elements.permanentAddressInput())
+		this.elements.permanentAddressInput().clear()
 	}
 
+	clearAllInput() {
+		this.clearFullNameInput()
+		this.clearEmailInput()
+		this.clearCurrentAddressInput()
+		this.clearPermanentaddressInput()
+	}
+
+	//hacer click en el boton submit
 	clickSubmitBtn() {
-		clickBtn(this.elements.submitBtn())
+		this.elements.submitBtn().click()
 	}
 }
 
