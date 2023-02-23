@@ -14,30 +14,27 @@ Feature: ✅ToolsQA | Elements | Text Box: Fill form and Submit
 		When el aprendiz QA ingresa datos en los campos de Name, Current Address, Permanent addresss, Email y envia los datos
 		Then muestra un mensaje con los datos que se ingreso
 
-	@TC_GX-9579 @Elements @Feature @L1 @TextBox @ToolsQA @focus
+	@TC_GX-9579 @Elements @Feature @L1 @TextBox @ToolsQA
 	Scenario: 9553 | TC3: Validar que al no tener “@“ en el campo Email se muestre el borde rojo
-		When el prendiz QA ingrese el email sin el "@" y envia los datos
-		Then de cambiar el borde del input del email al ingresar '<data>' y enviarlo en color rojo
+		When el aprendiz QA ingrese el email sin el "@" y envia los datos
+		Then de cambiar el borde del input del email al ingresar dato1 en color rojo
 
-	@TC_GX-9580 @Elements @Feature @L1 @TextBox @ToolsQA @focus
+	@TC_GX-9580 @Elements @Feature @L1 @TextBox @ToolsQA
 	Scenario: 9553 | TC4: Validar que al no tener 1 caracter alfanumerico antes del “@“ en el campo Email se muestre el borde rojo
-		When el prendiz QA ingrese el email con '<data>' sin 1 caracter alfanumerico antes del '@' y envia los datos
-		Then de cambiar el borde del input del email al enviarlo en color rojo
+		When el aprendiz QA ingrese el email sin 1 caracter alfanumerico antes del "@" y envia los datos
+		Then de cambiar el borde del input del email al ingresar dato2 en color rojo
 
-	@TC_GX-9581 @Elements @Feature @L1 @TextBox @ToolsQA
+	@TC_GX-9581 @Elements @Feature @L1 @TextBox @ToolsQA 
 	Scenario: 9553 | TC5: Validar que al no tener 1 caracter alfanumerico despues del “@“ en el campo Email se muestre el borde rojo
-		When el prendiz Qa ingrese el email sin 1 caracter alfanumerico despues del “@“
-		And hace click en el boton "Submit"
-		Then de cambiar el borde del input de email de color rojo
+		When el aprendiz QA ingrese el email sin 1 caracter alfanumerico despues del "@" y envia los datos
+		Then de cambiar el borde del input del email al ingresar dato3 en color rojo
 
-	@TC_GX-9582 @Elements @Feature @L1 @TextBox @ToolsQA
+	@TC_GX-9582 @Elements @Feature @L1 @TextBox @ToolsQA 
 	Scenario: 9553 | TC6: Validar que al no tener “.“  y 1 caracter alfanumerico despues del “@“ en el campo Email se muestre el borde rojo
-		When el prendiz QA ingrese el email sin “.“ y 1 caracter alfanumerico despues del “@“
-		And hace click en el boton "Submit"
-		Then de cambiar el borde del input de email de color rojo
+		When el aprendiz QA ingrese el email sin “.“ y 1 caracter alfanumerico despues del "@" y envia los datos
+		Then de cambiar el borde del input del email al ingresar dato4 en color rojo
 
 	@TC_GX-9583 @Elements @Feature @L1 @TextBox @ToolsQA
 	Scenario: 9553 | TC7: Validar que al no tener 2 caracteres alfanumericos despues del “.“ en el campo Email se muestre el borde rojo
-		When el prendiz QA ingrese el email sin 2 caracteres alfanumericos despues del “.“
-		And hace click en el boton "Submit"
-		Then de cambiar el borde del input de email de color rojo
+		When el aprendiz QA ingrese el email sin 2 caracteres alfanumericos despues del “.“ y envia los datos
+		Then de cambiar el borde del input del email al ingresar dato5 en color rojo
