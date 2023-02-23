@@ -5,6 +5,9 @@ import { faker } from '@faker-js/faker'
 const textBoxPage = Cypress.env('endpoint').textBox
 const dataNameFaker = faker.internet.userName()
 const dataEmailFaker = faker.internet.email()
+const indexDataEmailFaker = dataEmailFaker.indexOf('@')
+const dataEmailDontAtFaker = dataEmailFaker.replace(/@/g, '')
+const dataEmailDontLetterAftherAtFaker = dataEmailFaker.substring(indexDataEmailFaker)
 const dataCurrentAddressFaker = faker.address.streetAddress()
 const dataPermanentAddressFaker = faker.address.streetAddress()
 
@@ -54,6 +57,16 @@ context('Feature: ✅ToolsQA | Elements | Text Box: Fill form and Submit', () =>
 				.permanentAddressMessage()
 				.invoke('text')
 				.should('equal', 'Permananet Address :' + dataPermanentAddressFaker)
+		})
+	})
+
+	describe('9553 | TC3: Validar que al no tener “@“ en el campo Email se muestre el borde rojo', () => {
+		When('el prendiz QA ingrese el email con {string} sin el "@" y envia los datos', (data) => {
+			data = textBox.typeEmailInput(dataEmailDontAtFaker)
+			textBox.clickSubmitBtn()
+		})
+		Then('de cambiar el borde del input del email al enviarlo en color rojo', () => {
+			textBox.elements.emailInput().should('have.class', 'mr-sm-2 field-error form-control')
 		})
 	})
 })
