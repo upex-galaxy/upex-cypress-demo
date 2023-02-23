@@ -3,11 +3,14 @@ import { textBox } from '@pages/GX-9552-Text-Box/Text-Box'
 import { faker } from '@faker-js/faker'
 
 const textBoxPage = Cypress.env('endpoint').textBox
+
 const dataNameFaker = faker.internet.userName()
+
 const dataEmailFaker = faker.internet.email()
 const indexDataEmailFaker = dataEmailFaker.indexOf('@')
 const dataEmailDontAtFaker = dataEmailFaker.replace(/@/g, '')
 const dataEmailDontLetterAftherAtFaker = dataEmailFaker.substring(indexDataEmailFaker)
+
 const dataCurrentAddressFaker = faker.address.streetAddress()
 const dataPermanentAddressFaker = faker.address.streetAddress()
 
@@ -61,8 +64,18 @@ context('Feature: ✅ToolsQA | Elements | Text Box: Fill form and Submit', () =>
 	})
 
 	describe('9553 | TC3: Validar que al no tener “@“ en el campo Email se muestre el borde rojo', () => {
-		When('el prendiz QA ingrese el email con {string} sin el "@" y envia los datos', (data) => {
-			data = textBox.typeEmailInput(dataEmailDontAtFaker)
+		When('el prendiz QA ingrese el email sin el "@" y envia los datos', () => {
+			textBox.typeEmailInput(dataEmailDontAtFaker)
+			textBox.clickSubmitBtn()
+		})
+		Then('de cambiar el borde del input del email al ingresar {string} y enviarlo en color rojo', (data = dataEmailDontAtFaker) => {
+			textBox.elements.emailInput().should('have.class', 'mr-sm-2 field-error form-control')
+		})
+	})
+
+	describe('9553 | TC4: Validar que al no tener 1 caracter alfanumerico antes del “@“ en el campo Email se muestre el borde rojo', () => {
+		When('el prendiz QA ingrese el email con {string} sin 1 caracter alfanumerico antes del "@" y envia los datos', () => {
+			textBox.typeEmailInput(dataEmailDontLetterAftherAtFaker)
 			textBox.clickSubmitBtn()
 		})
 		Then('de cambiar el borde del input del email al enviarlo en color rojo', () => {
