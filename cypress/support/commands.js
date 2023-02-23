@@ -660,4 +660,6 @@ Cypress.Commands.add('SticktoBottom',()=>{
         })
         })
     })    
-})      
+}) 
+//Para agregar command, download despues de agregar la Dev: npm i --save-dev cypress-downloadfile:
+require('cypress-downloadfile/lib/downloadFileCommand');
