@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker'
 class TextBox {
 	//Elementos de la Page
 	elements = {
@@ -7,10 +6,10 @@ class TextBox {
 		currentAddressInput: () => cy.get('#currentAddress'),
 		permanentAddressInput: () => cy.get('#permanentAddress'),
 		submitBtn: () => cy.get('#submit'),
-		messageFullName: () => cy.get('#name'),
-		messageEmail: () => cy.get('#email'),
-		messageCurrentAddress: () => cy.get('#currentAddress.mb-1'),
-		messagePermanentAddress: () => cy.get('#permanentAddress.mb-1'),
+		fullNameMessage: () => cy.get('#name'),
+		emailMessage: () => cy.get('#email'),
+		currentAddressMessage: () => cy.get('#currentAddress.mb-1'),
+		permanentAddressMessage: () => cy.get('#permanentAddress.mb-1'),
 	}
 
 	//Limpia los inputs
@@ -38,16 +37,27 @@ class TextBox {
 	}
 
 	//hacer click en el boton submit
-	clickSubmitBtn(buttonText) {
+	clickSubmitBtn() {
 		this.elements.submitBtn().click()
-		buttonText = this.elements.submitBtn().invoke('text')
 	}
 
-	//Ingresar datos en los inputs
-	typeFullNameInput() {
-		const dataFakeName = faker.internet.userName()
-		return this.elements.fullNameInput().type(dataFakeName)
+	//Ingresar datos
+	typeFullNameInput(dataNameFaker) {
+		this.elements.fullNameInput().type(dataNameFaker)
 	}
+
+	typeEmailInput(dataEmailFaker) {
+		this.elements.emailInput().type(dataEmailFaker)
+	}
+
+	typeCurrentAddressInput(dataCurrentAddressFaker) {
+		this.elements.currentAddressInput().type(dataCurrentAddressFaker)
+	}
+
+	typePermanentAddressInput(dataPermanentAddressFaker) {
+		this.elements.permanentAddressInput().type(dataPermanentAddressFaker)
+	}
+
 }
 
 export const textBox = new TextBox()
