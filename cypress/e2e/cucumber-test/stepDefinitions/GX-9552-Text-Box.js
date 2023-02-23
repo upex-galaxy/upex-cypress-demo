@@ -10,23 +10,32 @@ context('Feature: ✅ToolsQA | Elements | Text Box: Fill form and Submit', () =>
 			cy.url().should('contain', textBoxPage)
 		})
 	})
-})
 
-describe('9553 | TC1: Validar que al no ingresar datos en Name, Current Address, Permanent Address y Email no se muestre nada', () => {
-	When('el aprendiz QA no ingresa datos en los campos "Name", "Current Address", "Permanent Address" y "Email"', () => {
-		textBox.clearAllInput()
+	describe('9553 | TC1: Validar que al no ingresar datos en Name, Current Address, Permanent Address y Email no sem uestre nada', () => {
+		When('el aprendiz QA no ingresa datos en los campos "Name", "Current Address", "Permanent Address" y "Email"', () => {
+			textBox.clearAllInput()
+		})
+		And('hace click en el boton de {string}', (buttonText) => {
+			textBox.clickSubmitBtn(buttonText)
+		})
+		Then('no aparece ningun mensaje', () => {
+			textBox.elements.messageFullName().should('not.exist')
+			textBox.elements.messageEmail().should('not.exist')
+			textBox.elements.messageCurrentAddress().should('not.exist')
+			textBox.elements.messagePermanentAddress().should('not.exist')
+		})
 	})
-	And('hace click en el boton de "Submit"', () => {
-		textBox.clickSubmitBtn()
-	})
-	Then('no aparecer ningun mensaje', () => {
-		textBox.elements.messageFullName().should('not.exist')
-		textBox.elements.messageEmail().should('not.exist')
-		textBox.elements.messageCurrentAddress().should('not.exist')
-		textBox.elements.messagePermanentAddress().should('not.exist')
+
+	describe('9553 | TC2: Validar que al ingresar datos en Name, Current Address, Permanent Address y Email se muestre los datos', () => {
+		When('el aprendiz QA ingrese datos en los campos de <Name>, <Current Address>, <Permanent addresss> y <Email>', () => {
+		})
+		And('hace click en el boton de {string}', (buttonText) => {
+			textBox.clickSubmitBtn(buttonText)
+		})
+		Then('no aparecer ningun mensaje', () => {
+		})
 	})
 })
-
 //________________________________________________________________________
 // Comando predeterminado para que no ocurran errores de excepciones:
 Cypress.on('uncaught:exception', (err, runnable) => {

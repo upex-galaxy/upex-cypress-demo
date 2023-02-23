@@ -4,19 +4,17 @@ Feature: ✅ToolsQA | Elements | Text Box: Fill form and Submit
 	Background: Estar en la seccion de Text Box de la pagina
 		Given QA aprendiz esta en la seccion Text Box
 
-	@TC_GX-9577 @Elements @Feature @L1 @TextBox @ToolsQA
+	@TC_GX-9577 @Elements @Feature @L1 @TextBox @ToolsQA @focus
 	Scenario: 9553 | TC1: Validar que al no ingresar datos en Name, Current Address, Permanent Address y Email no se muestre nada
 		When el aprendiz QA no ingresa datos en los campos "Name", "Current Address", "Permanent Address" y "Email"
 		And hace click en el boton de "Submit"
-		Then no aparecer ningun mensaje
+		Then no aparece ningun mensaje
 
-	@TC_GX-9578 @Elements @Feature @L1 @TextBox @ToolsQA
+	@TC_GX-9578 @Elements @Feature @L1 @TextBox @ToolsQA @focus
 	Scenario: 9553 | TC2: Validar que al ingresar datos en Name, Current Address, Permanent Address y Email se muestre los datos
-		When el aprendiz QA ingrese datos en los campos de <Name>, <Current Address>, <Permanent addresss> y <Email>
+		When el aprendiz QA ingrese datos en los campos de '<Name>', '<Current Address>', '<Permanent addresss>' y '<Email>'
 		And hace click en el boton de "Submit"
 		Then de mostrar un mensaje con los datos que se ingreso
-		Examples:
-			| Name | Email | Current Address | Permanent Address |
 
 	@TC_GX-9579 @Elements @Feature @L1 @TextBox @ToolsQA
 	Scenario: 9553 | TC3: Validar que al no tener “@“ en el campo Email se muestre el borde rojo
