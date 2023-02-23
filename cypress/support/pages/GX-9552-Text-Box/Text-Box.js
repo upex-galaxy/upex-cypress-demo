@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker'
 class TextBox {
 	//Elementos de la Page
 	elements = {
@@ -8,8 +9,8 @@ class TextBox {
 		submitBtn: () => cy.get('#submit'),
 		messageFullName: () => cy.get('#name'),
 		messageEmail: () => cy.get('#email'),
-		messageCurrentAddress: () => cy.get('#currentAddress'),
-		messagePermanentAddress: () => cy.get('#permanentAddress'),
+		messageCurrentAddress: () => cy.get('#currentAddress.mb-1'),
+		messagePermanentAddress: () => cy.get('#permanentAddress.mb-1'),
 	}
 
 	//Limpia los inputs
@@ -37,8 +38,15 @@ class TextBox {
 	}
 
 	//hacer click en el boton submit
-	clickSubmitBtn() {
+	clickSubmitBtn(buttonText) {
 		this.elements.submitBtn().click()
+		buttonText = this.elements.submitBtn().invoke('text')
+	}
+
+	//Ingresar datos en los inputs
+	typeFullNameInput() {
+		const dataFakeName = faker.internet.userName()
+		return this.elements.fullNameInput().type(dataFakeName)
 	}
 }
 
