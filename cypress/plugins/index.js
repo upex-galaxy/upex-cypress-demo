@@ -16,6 +16,7 @@
 @type {Cypress.PluginConfig}
  */
 
+
 // Record Videos only on failed tests.
 module.exports = (on, config) => {
 	on('after:spec', (spec, results) => {

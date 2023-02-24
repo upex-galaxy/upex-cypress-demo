@@ -1,8 +1,6 @@
 //importar el Page
 import { elements } from '@pages/uploadDownload.Page.js';
 
-const {downloadFile} = require('cypress-downloadfile/lib/addPlugin')
-
 describe("ToolsQA | Elements | Upload and Download", ()=>{
     beforeEach("Precondition: Be located in Upload and Download", ()=>{
         cy.visit('https://demoqa.com/upload-download');
@@ -10,12 +8,13 @@ describe("ToolsQA | Elements | Upload and Download", ()=>{
     })
     it("9629 | TC1: Validar download in tho download PC folder.", ()=>{
         elements.clickDownload();
-        cy.verifyDownload('sampleFile.jpeg');
-        //cy.downloadFile('downloads', 'sampleFile.jpeg');
+        cy.should('have.attr','href');
+        cy.readFile('cypress/downloads/sampleFile.jpeg').should('exist');
 
     })
-    xit("9629 | TC2: Validar uploaded from PC File Explorer.", ()=>{
-
+    it("9629 | TC2: Validar uploaded from PC File Explorer.", ()=>{
+        cy.get('#uploadFile').selectFile('cypress/fixtures/images/upexlogo.png');
+        cy.get('#uploadedFilePath').should("contain", "upexlogo");
     })
 })
 Cypress.on('uncaught:exception', (err, runnable) => {
