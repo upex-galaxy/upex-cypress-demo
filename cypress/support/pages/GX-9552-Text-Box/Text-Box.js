@@ -1,5 +1,5 @@
 class TextBox {
-	//Elementos de la Page
+	//Elementos de la page
 	elements = {
 		fullNameInput: () => cy.get('#userName'),
 		emailInput: () => cy.get('#userEmail'),
@@ -25,7 +25,7 @@ class TextBox {
 		this.elements.currentAddressInput().clear()
 	}
 
-	clearPermanentaddressInput() {
+	clearPermanentAddressInput() {
 		this.elements.permanentAddressInput().clear()
 	}
 
@@ -33,15 +33,15 @@ class TextBox {
 		this.clearFullNameInput()
 		this.clearEmailInput()
 		this.clearCurrentAddressInput()
-		this.clearPermanentaddressInput()
+		this.clearPermanentAddressInput()
 	}
 
-	//hacer click en el boton submit
+	//hacer click en el botón submit
 	clickSubmitBtn() {
 		this.elements.submitBtn().click()
 	}
 
-	//Ingresar datos
+	//Ingresar datos en los input
 	typeFullNameInput(dataNameFaker) {
 		this.elements.fullNameInput().type(dataNameFaker)
 	}

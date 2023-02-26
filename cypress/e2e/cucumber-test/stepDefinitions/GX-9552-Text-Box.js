@@ -5,32 +5,24 @@ import { faker } from '@faker-js/faker'
 const textBoxPage = Cypress.env('endpoint').textBox
 
 const dataNameFaker = faker.internet.userName()
-
 const dataEmailFaker = faker.internet.email()
-const indexAtDataEmailFaker = dataEmailFaker.indexOf('@')
-const dataEmailDontAtFaker = dataEmailFaker.replace(/@/g, '')
-const dataEmailDontLetterBeforeAtFaker = dataEmailFaker.substring(indexAtDataEmailFaker)
-const dataEmailDontLetterAfterAtFaker = dataEmailFaker.replace(/@.*?\./, '@.')
-const dataEmailDontDotAndLetterAfterFaker = dataEmailFaker.replace(/@.*?\./, '@')
-const dataEmailDontLetterAfterDotFaker = dataEmailFaker.replace(/\.[^.]*$/, ".")
-
 const dataCurrentAddressFaker = faker.address.streetAddress()
 const dataPermanentAddressFaker = faker.address.streetAddress()
 
 context('Feature: ✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
-	describe('Estar en la seccion de Text Box de la pagina', () => {
-		Given('QA aprendiz esta en la seccion Text Box', () => {
+	describe('Estar en la sección de Text Box de la pagina', () => {
+		Given('QA aprendiz esta en la sección Text Box', () => {
 			cy.visit(textBoxPage)
 			cy.url().should('contain', textBoxPage)
 		})
 	})
 
-	describe('9553 | TC1: Validar que al no ingresar datos en Name, Current Address, Permanent Address y Email no sem uestre nada', () => {
-		When('el aprendiz QA no ingresa datos en los campos "Name", "Current Address", "Permanent Address", "Email" y envia los datos', () => {
+	describe('9553 | TC1: Validar que al no ingresar datos en Name, Current Address, Permanent Address y Email no se muestre nada', () => {
+		When('el aprendiz QA no ingresa datos en los campos "Name", "Current Address", "Permanent Address", "Email" y envía los datos', () => {
 			textBox.clearAllInput()
-			textBox.clickSubmitBtn
+			textBox.clickSubmitBtn()
 		})
-		Then('no aparece ningun mensaje', () => {
+		Then('no aparece ningún mensaje', () => {
 			textBox.elements.fullNameMessage().should('not.exist')
 			textBox.elements.emailMessage().should('not.exist')
 			textBox.elements.currentAddressMessage().should('not.exist')
@@ -39,7 +31,7 @@ context('Feature: ✅ToolsQA | Elements | Text Box: Fill form and Submit', () =>
 	})
 
 	describe('9553 | TC2: Validar que al ingresar datos en Name, Current Address, Permanent Address y Email se muestre los datos', () => {
-		When('el aprendiz QA ingresa datos en los campos de Name, Current Address, Permanent addresss, Email y envia los datos', () => {
+		When('el aprendiz QA ingresa datos en los campos de Name, Current Address, Permanent Address, Email y envía los datos', () => {
 			textBox.typeFullNameInput(dataNameFaker)
 			textBox.typeEmailInput(dataEmailFaker)
 			textBox.typeCurrentAddressInput(dataCurrentAddressFaker)
@@ -66,56 +58,38 @@ context('Feature: ✅ToolsQA | Elements | Text Box: Fill form and Submit', () =>
 		})
 	})
 
-	describe('9553 | TC3: Validar que al no tener “@“ en el campo Email se muestre el borde rojo', () => {
-		When('el aprendiz QA ingrese el email sin el "@" y envia los datos', () => {
-			textBox.typeEmailInput(dataEmailDontAtFaker)
+	describe('9553 | TC3: Validar que al no ingresar {string} en el Email se muestre el borde en color rojo', () => {
+		When('el aprendiz QA ingresa el email sin {string}', (datos) => {
+			switch (datos) {
+				case '@':
+					const dataEmailDontAtFaker = faker.internet.email().replace(/@/g, '')
+					textBox.typeEmailInput(dataEmailDontAtFaker)
+					break
+				case '1 carácter alfanumérico antes del “@“':
+					const dataEmailDontLetterBeforeAtFaker = "@" + faker.internet.email().split('@')[1]
+					textBox.typeEmailInput(dataEmailDontLetterBeforeAtFaker)
+					break
+				case '1 carácter alfanumérico después del “@“':
+					const dataEmailDontLetterAfterAtFaker = faker.internet.email().replace(/@.*?\./, '@.')
+					textBox.typeEmailInput(dataEmailDontLetterAfterAtFaker)
+					break
+				case '“.“ y 1 carácter alfanumérico después del “@“':
+					const dataEmailDontDotAndLetterAfterFaker = faker.internet.email().replace(/@.*?\./, '@')
+					textBox.typeEmailInput(dataEmailDontDotAndLetterAfterFaker)
+					break
+				case '2 caracteres alfanuméricos después del “.“':
+					const dataEmailDontLetterAfterDotFaker = faker.internet.email().replace(/\.[^.]*$/, '.')
+					textBox.typeEmailInput(dataEmailDontLetterAfterDotFaker)
+					break
+			}
 			textBox.clickSubmitBtn()
 		})
-		Then('de cambiar el borde del input del email al ingresar dato1 en color rojo', () => {
-			textBox.elements.emailInput().should('have.class', 'mr-sm-2 field-error form-control')
-		})
-	})
-
-	describe('9553 | TC4: Validar que al no tener 1 caracter alfanumerico antes del “@“ en el campo Email se muestre el borde rojo', () => {
-		When('el aprendiz QA ingrese el email sin 1 caracter alfanumerico antes del "@" y envia los datos', () => {
-			textBox.typeEmailInput(dataEmailDontLetterBeforeAtFaker)
-			textBox.clickSubmitBtn()
-		})
-		Then('de cambiar el borde del input del email al ingresar dato2 en color rojo', () => {
-			textBox.elements.emailInput().should('have.class', 'mr-sm-2 field-error form-control')
-		})
-	})
-
-	describe('9553 | TC5: Validar que al no tener 1 caracter alfanumerico despues del “@“ en el campo Email se muestre el borde rojo', () => {
-		When('el aprendiz QA ingrese el email sin 1 caracter alfanumerico despues del "@" y envia los datos', () => {
-			textBox.typeEmailInput(dataEmailDontLetterAfterAtFaker)
-			textBox.clickSubmitBtn()
-		})
-		Then('de cambiar el borde del input del email al ingresar dato3 en color rojo', () => {
-			textBox.elements.emailInput().should('have.class', 'mr-sm-2 field-error form-control')
-		})
-	})
-
-	describe('9553 | TC6: Validar que al no tener “.“  y 1 caracter alfanumerico despues del “@“ en el campo Email se muestre el borde rojo', () => {
-		When('el aprendiz QA ingrese el email sin “.“ y 1 caracter alfanumerico despues del "@" y envia los datos', () => {
-			textBox.typeEmailInput(dataEmailDontDotAndLetterAfterFaker)
-			textBox.clickSubmitBtn()
-		})
-		Then('de cambiar el borde del input del email al ingresar dato4 en color rojo', () => {
-			textBox.elements.emailInput().should('have.class', 'mr-sm-2 field-error form-control')
-		})
-	})
-
-	describe('9553 | TC7: Validar que al no tener 2 caracteres alfanumericos despues del “.“ en el campo Email se muestre el borde rojo', () => {
-		When('el aprendiz QA ingrese el email sin 2 caracteres alfanumericos despues del “.“ y envia los datos', () => {
-			textBox.typeEmailInput(dataEmailDontLetterAfterDotFaker)
-			textBox.clickSubmitBtn()
-		})
-		Then('de cambiar el borde del input del email al ingresar dato5 en color rojo', () => {
+		Then('cambia a rojo el borde del campo Email', () => {
 			textBox.elements.emailInput().should('have.class', 'mr-sm-2 field-error form-control')
 		})
 	})
 })
+
 //________________________________________________________________________
 // Comando predeterminado para que no ocurran errores de excepciones:
 Cypress.on('uncaught:exception', (err, runnable) => {
