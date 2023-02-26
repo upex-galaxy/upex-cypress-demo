@@ -70,8 +70,8 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                    npm run file cypress/e2e/Tests/Elements/GX-3591-Button.cy.js
-                  record: false #HABILITAR A TRUE* cuando se use un Proyecto.
+                    npm run file cypress/e2e/Tests/Elements/GX-3591-Buttons.cy.js
+                  record: true #HABILITAR A TRUE* cuando se use un Proyecto.
               env:
                   # pass the Dashboard record key as an environment variable
                   CYPRESS_RECORD_KEY: ${{ secrets.CYPEX_DEMO_RECORD_KEY }}
