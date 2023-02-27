@@ -8,6 +8,6 @@
 	},
 	"messages": {
 		"enabled": true,
-		"output": "./reports/cucumber-messages.json"
+		"output": "./reports/cucumber-messages.ndjson"
 	}
 }
