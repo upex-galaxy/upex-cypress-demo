@@ -12,7 +12,7 @@ const dataPermanentAddressFaker = faker.address.streetAddress()
 context('Feature: ✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	describe('Estar en la sección de Text Box de la pagina', () => {
 		Given('QA aprendiz esta en la sección Text Box', () => {
-			cy.visit(textBoxPage)
+			cy.visit(Cypress.env('baseUrl') + textBoxPage)
 			cy.url().should('contain', textBoxPage)
 		})
 	})

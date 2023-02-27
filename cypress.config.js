@@ -47,9 +47,11 @@ export default defineConfig({
 		specPattern: ['cypress/e2e/cucumber-test/Gherkin/*.feature', 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
 		// Use Cypress plugins:
 		setupNodeEvents,
-		baseUrl: "https://demoqa.com/"
+		//baseUrl: ""
 	},
 	env: {
+		baseUrl: 'https://demoqa.com/',
+
 		AdminUser: {
 			username: 'Admin',
 			password: 'admin123',
@@ -59,7 +61,7 @@ export default defineConfig({
 			dashboardIndex: '/dashboard/index',
 			signUp: 'https://coderbyte.com/sl',
 			radioButton: '/radio-button',
-			textBox: '/text-box'
+			textBox: 'text-box'
 		},
 		user: {
 			username: 'upexTesting',
