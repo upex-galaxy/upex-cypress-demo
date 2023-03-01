@@ -19,7 +19,7 @@
 	},
 	"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
 	"cucumberautocomplete.stepRegExSymbol": "'",
-	"workbench.colorTheme": "Shades of Purple",
+	"workbench.colorTheme": "Cobalt2",
 	"cSpell.language": "en,es",
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -36,7 +36,7 @@
 		"editor.defaultFormatter": "ms-python.python"
 	},
 	"[feature]": {
-		"editor.defaultFormatter": "alexkrechik.cucumberautocomplete"
+		"editor.defaultFormatter": "rmescandon.gherkiner"
 	},
 	"editor.formatOnType": false,
 	"editor.formatOnPaste": false,
@@ -57,7 +57,10 @@
 	"editor.tabCompletion": "on",
 	"editor.lineHeight": 20,
 	"editor.cursorBlinking": "expand",
-	"cSpell.enableFiletypes": ["cucumber"],
+	"cSpell.enableFiletypes": [
+		"cucumber",
+		"feature"
+	],
 	"workbench.iconTheme": "material-icon-theme",
 	"material-icon-theme.folders.color": "#7cb342",
 	"material-icon-theme.files.associations": {
@@ -122,5 +125,13 @@
 	"cSpell.autoFormatConfigFile": true,
 	"githubPullRequests.ignoredPullRequestBranches": [
 		"cypex"
+	],
+	"[cucumber]": {
+		"editor.defaultFormatter": "CucumberOpen.cucumber-official"
+	},
+	"cSpell.words": [
+		"badeball",
+		"Dont",
+		"Permananet"
 	]
 }
