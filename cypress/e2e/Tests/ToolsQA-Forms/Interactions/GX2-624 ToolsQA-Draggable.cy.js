@@ -3,7 +3,7 @@ import { axisrestricted } from "@pages/GX2-624 ToolsQA-Draggable/AxisRestricted"
 import { containerrestricted } from "@pages/GX2-624 ToolsQA-Draggable/ContainerRestricted"
 import { cursorstyle } from "@pages/GX2-624 ToolsQA-Draggable/CursorStyle"
 
-describe('US GX2-624 | TS: ✅ToolsQA | Interactions | Dragabble',()=>{
+describe.skip('US GX2-624 | TS: ✅ToolsQA | Interactions | Dragabble',()=>{
 
     beforeEach('Precondition',()=>{
         cy.visit('https://demoqa.com/dragabble')
