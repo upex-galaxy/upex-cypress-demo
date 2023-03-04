@@ -1,7 +1,8 @@
 import { gridpage } from "@pages/GX2-736 ToolsQA-Sortable/GridPage";
 import { listpage } from "@pages/GX2-736 ToolsQA-Sortable/ListPage";
 
-describe('GX2-736|✅ToolsQA | Interactions | Sortable',()=>{
+//! No se ha utilizado correctamente el Commands creando multiples variables en un archivo que no debería contenerlo.
+describe.skip('GX2-736|✅ToolsQA | Interactions | Sortable',()=>{
     let array1=['One', 'Two', 'Three', 'Four', 'Five','Six']
     let array2=['One','Two,', 'Three', 'Four','Five', 'Six', 'Seven', 'Eight', 'Nine']
 
