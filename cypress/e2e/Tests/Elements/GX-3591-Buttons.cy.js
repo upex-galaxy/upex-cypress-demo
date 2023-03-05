@@ -1,10 +1,8 @@
-const {baseUrl} = Cypress.env();
-
 describe('US # : GX-3591', () =>
 {
     beforeEach('Precondition: a user is currently in home page', () =>
     {
-        cy.visit(`${baseUrl}buttons`)
+        cy.visit('/buttons')
     })
 
     it('US #3591 | 3592 | TC1:  Validate double click is clicked.', () =>
