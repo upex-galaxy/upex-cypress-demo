@@ -1,9 +1,13 @@
-class Elements {
+class LoadPage {
     get = {
         buttonDownload: ()=> cy.get('#downloadButton'),
         buttonUploadedFile: ()=> cy.get('#uploadFile'),
         generatedFilePath: ()=> cy.get('#uploadedFilePath')
     }
+
+	getDownloadFileName(){
+		return this.get.buttonDownload().invoke('attr', 'download')
+	}
     clickDownload(){
         this.get.buttonDownload().click()
     }
@@ -17,5 +21,5 @@ class Elements {
         this.get.buttonUploadedFile().selectFile(pathR);
     }
 }
-export const elements = new Elements();
+export const loadPage = new LoadPage();
 //exportarmos para import

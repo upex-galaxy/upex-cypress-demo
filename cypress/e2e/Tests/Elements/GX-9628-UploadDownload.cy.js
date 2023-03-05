@@ -1,19 +1,28 @@
 //importar el Page
-import { elements } from '@pages/uploadDownload.Page.js'
+import { loadPage } from '@pages/uploadDownload.Page.js'
 
-describe('ToolsQA | Elements | Upload and Download', () => {
+describe('ToolsQA | loadPage | Upload and Download', () => {
 	beforeEach('Precondition: Be located in Upload and Download', () => {
 		cy.visit('https://demoqa.com/upload-download')
 		cy.url().should('contain', 'download')
 	})
-	it('9629 | TC1: Validar download in tho download PC folder.', () => {
-        //Modificado con POM y Feature(Data para los relative Path):
-		cy.fixture('data/downloadUpload').then((the) => {
-			elements.clickDownload()
-			cy.should('have.attr', 'href')
-			//cy.readFile('cypress/downloads/sampleFile.jpeg').should('exist');
-			cy.readFile(the.relativePathDownloadFile).should('exist')
+	it.only('9629 | TC1: Validar download in tho download PC folder.', () => {
+        // Modificado con POM y Feature(Data para los relative Path):
+		// // cy.fixture('data/downloadUpload').then((the) => {
+		// 	// loadPage.clickDownload()
+		// 	// cy.should('have.attr', 'href')
+		// 	// cy.readFile('cypress/downloads/sampleFile.jpeg').should('exist');
+		// 	// cy.readFile(the.relativePathDownloadFile).should('exist')
+		// // })
+		//! Hola Lili! es ELy, puedes hacer una mejor assertion:
+		//* para saber que el archivo guardado es el mismo que el descargado.
+		loadPage.getDownloadFileName().then((fileName)=>{
+			cy.log(fileName)
+			loadPage.clickDownload()
+			cy.readFile(`cypress/downloads/${fileName}`).should('exist')
 		})
+		//* Lo que ves con este código, nos ayuda a evitar que el nombre del archivo cambie en el futuro.
+		//* también aplicarías un principio del testing para evitar hardcodear misma data siempre.
 	})
 	it('9629 | TC2: Validar uploaded from PC File Explorer.', () => {
 		//cy.get('#uploadFile').selectFile('cypress/fixtures/images/upexlogo.png');
@@ -21,20 +30,14 @@ describe('ToolsQA | Elements | Upload and Download', () => {
 
 		//Modificado con POM y Feature(Data para los relative Path):
 		cy.fixture('data/downloadUpload').then((the) => {
-			elements.clickUploaded()
-			elements.selectUploadedFile(the.relativePathUploadFile)
-			elements.get.generatedFilePath().should('contain', 'Business-Analyst')
+			loadPage.clickUploaded()
+			loadPage.selectUploadedFile(the.relativePathUploadFile)
+			loadPage.get.generatedFilePath().should('contain', 'Business-Analyst')
 		})
+		//* Aquí sí está bien! porque el archivo que subimos, es de prueba, y la data que usas puede ser fija,
+		//* Pero si es un archivo que fuese obtenido de una fuente externa, debemos iterar entre diff valores.
 	})
 })
-Cypress.on('uncaught:exception', (err, runnable) => {
-	return false
-})
-// Comando predeterminado para que no aparezcan los Fetch en el log del Test Runner:
-const origLog = Cypress.log
-Cypress.log = function (opts, ...other) {
-	if (opts.displayName === 'xhr' || (opts.displayName === 'fetch' && opts.url.startsWith('https://'))) {
-		return
-	}
-	return origLog(opts, ...other)
-}
+
+import { removeLogs } from '@helper/RemoveLogs'
+removeLogs()
