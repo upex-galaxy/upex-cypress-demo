@@ -1,19 +1,19 @@
 # 🧙🏻‍♂️BIENVENIDO A LOS PIPELINES DE CONTINUOUS INTEGRATION DE "ARI - Hija de Aurora"!
 # 🤖Este Pipeline de CI se activa al PUSHEAR, y consiste en ejecutar los tests de una US e importar los resultados a Jira!🚀
 # 👩🏻‍🔬Para utilizar este Pipeline de Ari, sigue los siguientes pasos:
-#     1ro: debes modificar el script: "npm run file" + tu archivo de Prueba Ejecutable (ver ejemplo en este archivo) 
+#     1ro: debes modificar el script: "npm run file" + tu archivo de Prueba Ejecutable (ver ejemplo en este archivo)
 #     2do: debes modificar la propiedad: "testExecKey:" + tu ID del TX de Jira para importar automáticamente el resultado.
 #     3ro: guarda los cambios en el repositorio local (git add + git commit) y envíalos al Repo Remoto (git push)
-#     Expected Result: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí. 
+#     Expected Result: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí.
 
 name: 🤖CI run (BUILD) Test Suite Execution⚡
 run-name: ${{github.actor}}👨🏻‍🔬 run Test Suite in ${{github.ref_name}}
 
-on: # This Run is a template. The correct "Run On" should be: Any except QA and Main (cypex)
-  push:
-    branches-ignore:
-      - cypex
-      - QA
+on: # This Run is a template. The correct "Run On" should be: Any except QA and Main
+    push:
+        branches-ignore:
+            - main
+            - QA
 
 jobs:
     Build-Cypress-TestSuite-AfterPush:
@@ -30,53 +30,47 @@ jobs:
 
             - name: 🧬Install All Dependencies
               run: |
-                npm install
-                npm list 
+                  npm install
+                  npm list
 
             - name: 💾Download Cucumber-Formatter
               uses: suisei-cn/actions-download-file@v1.3.0
               with:
-                url: "[Linux-cucumber-formatter](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-linux-amd64)"
-                target: cucumber-formatter/
-                auto-match: true
-            
-            - name: 🔧Install Cucumber-Formatter 
+                  url: '[Linux-cucumber-formatter](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-linux-amd64)'
+                  target: cucumber-formatter/
+                  auto-match: true
+
+            - name: 🔧Install Cucumber-Formatter
               run: |
-                mv cucumber-formatter/cucumber-json-formatter-linux-amd64 cucumber-formatter/cucumber-json-formatter
-                chmod +x cucumber-formatter/cucumber-json-formatter
+                  mv cucumber-formatter/cucumber-json-formatter-linux-amd64 cucumber-formatter/cucumber-json-formatter
+                  chmod +x cucumber-formatter/cucumber-json-formatter
 
             - name: 🔌Cucumber Preprocessor JSON Setup
               uses: DamianReeves/write-file-action@master
               with:
-                write-mode: overwrite
-                path: .cypress-cucumber-preprocessorrc.json
-                contents: |
-                  {
-                    "nonGlobalStepDefinitions": true,
-                    "stepDefinitions": "cypress/e2e/cucumber-test/stepDefinitions/*.{js,ts}",
-                    "json": {
-                      "enabled": true,
-                      "formatter": "./cucumber-formatter/cucumber-json-formatter",
-                      "output": "./reports/cucumber-report.json"
-                    },
-                    "messages": {
-                      "enabled": true,
-                      "output": "./reports/cucumber-messages.ndjson"
-                    }
-                  }
+                  write-mode: overwrite
+                  path: .cypress-cucumber-preprocessorrc.json
+                  contents: |
+                      {
+                        "nonGlobalStepDefinitions": true,
+                        "stepDefinitions": "cypress/e2e/cucumber-test/stepDefinitions/*.{js,ts}",
+                        "json": {
+                          "enabled": true,
+                          "formatter": "./cucumber-formatter/cucumber-json-formatter",
+                          "output": "./reports/cucumber-report.json"
+                        },
+                        "messages": {
+                          "enabled": true,
+                          "output": "./reports/cucumber-messages.ndjson"
+                        }
+                      }
 
             - name: 🧪Cypress Run Test Coverage in Chrome
               uses: cypress-io/github-action@v4
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                    npm run file cypress/e2e/Tests/Elements/GX-9628-UploadDownload.cy.js
-                  record: true #HABILITAR A TRUE* cuando se use un Proyecto.
-              env:
-                  # pass the Dashboard record key as an environment variable
-                  CYPRESS_RECORD_KEY: ${{ secrets.CYPEX_DEMO_RECORD_KEY }}
-                  # pass GitHub token to allow accurately detecting a build vs a re-run build
-                  GITHUB_TOKEN: ${{ secrets.UPEX_GITHUB_TOKEN }}
+                      npm run file cypress/e2e/Tests/Elements/GX-9628-UploadDownload.cy.js
 
             - name: ✅Import Test Results to Xray
               if: always()
@@ -89,11 +83,11 @@ jobs:
                   testExecKey: 'GX-9630' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
                   projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
                   testEnvironments: 'Chrome' #ELEGIR EL AMBIENTE DE PRUEBAS (Igual al TX).
-                  
+
             - name: 🔧Generate Cucumber HTML Report
               if: always()
               run: |
-                npm run report:cucumber
+                  npm run report:cucumber
 
             - name: 📊Upload Artifact 🍵Cucumber HTML Report
               uses: actions/upload-artifact@v3
@@ -112,9 +106,8 @@ jobs:
               if: always()
               uses: rtCamp/action-slack-notify@v2.2.0
               env:
-                SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-                SLACK_USERNAME: Ari✨
-                SLACK_MESSAGE: ':test_tube: Tests run in ToolsQA: User Story Test Execution is Done and updated in Jira :rocket:'
-                SLACK_COLOR: ${{ job.status }}
-                SLACK_ICON: https://i.imgur.com/q9kvQCp_d.webp?maxwidth=760&fidelity=grand
-
+                  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+                  SLACK_USERNAME: Ari✨
+                  SLACK_MESSAGE: ':test_tube: Tests run in ToolsQA: User Story Test Execution is Done and updated in Jira :rocket:'
+                  SLACK_COLOR: ${{ job.status }}
+                  SLACK_ICON: https://i.imgur.com/q9kvQCp_d.webp?maxwidth=760&fidelity=grand
