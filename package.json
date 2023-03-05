@@ -15,8 +15,8 @@
 		"report:cucumber": "node cucumber-formatter/cucumber-html-report.js",
 		"prettier:write": "npx prettier --write .",
 		"prettier:check": "npx prettier --check .",
-		"lint:check": "npx eslint apps/**/*.ts",
-		"lint:fix": "npx eslint --fix apps/**/*.ts"
+		"lint:check": "npx eslint cypress",
+		"lint:fix": "npx eslint --fix cypress"
 	},
 	"keywords": [
 		"upex"

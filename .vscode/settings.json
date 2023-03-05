@@ -28,6 +28,11 @@
 	"editor.tabCompletion": "on",
 	"editor.lineHeight": 20,
 	"editor.cursorBlinking": "expand",
+	"eslint.validate": ["typescript", "javascript", "ts", "js"],
+	"eslint.format.enable": true,
+	"eslint.codeAction.showDocumentation": {
+		"enable": true
+	},
 	"cSpell.enableFiletypes": ["cucumber"],
 	"cSpell.autoFormatConfigFile": true,
 	"cypressHelper.menuItems": {

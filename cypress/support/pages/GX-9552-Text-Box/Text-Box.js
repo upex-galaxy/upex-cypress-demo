@@ -10,54 +10,54 @@ class TextBox {
 		emailMessage: () => cy.get('#email'),
 		currentAddressMessage: () => cy.get('#currentAddress.mb-1'),
 		permanentAddressMessage: () => cy.get('#permanentAddress.mb-1'),
-	}
+	};
 
 	//Limpia los inputs
 	clearFullNameInput() {
-		this.elements.fullNameInput().clear()
+		this.elements.fullNameInput().clear();
 	}
 
 	clearEmailInput() {
-		this.elements.emailInput().clear()
+		this.elements.emailInput().clear();
 	}
 
 	clearCurrentAddressInput() {
-		this.elements.currentAddressInput().clear()
+		this.elements.currentAddressInput().clear();
 	}
 
 	clearPermanentAddressInput() {
-		this.elements.permanentAddressInput().clear()
+		this.elements.permanentAddressInput().clear();
 	}
 
 	clearAllInput() {
-		this.clearFullNameInput()
-		this.clearEmailInput()
-		this.clearCurrentAddressInput()
-		this.clearPermanentAddressInput()
+		this.clearFullNameInput();
+		this.clearEmailInput();
+		this.clearCurrentAddressInput();
+		this.clearPermanentAddressInput();
 	}
 
 	//hacer click en el botón submit
 	clickSubmitBtn() {
-		this.elements.submitBtn().click()
+		this.elements.submitBtn().click();
 	}
 
 	//Ingresar datos en los input
 	typeFullNameInput(dataNameFaker) {
-		this.elements.fullNameInput().type(dataNameFaker)
+		this.elements.fullNameInput().type(dataNameFaker);
 	}
 
 	typeEmailInput(dataEmailFaker) {
-		this.elements.emailInput().type(dataEmailFaker)
+		this.elements.emailInput().type(dataEmailFaker);
 	}
 
 	typeCurrentAddressInput(dataCurrentAddressFaker) {
-		this.elements.currentAddressInput().type(dataCurrentAddressFaker)
+		this.elements.currentAddressInput().type(dataCurrentAddressFaker);
 	}
 
 	typePermanentAddressInput(dataPermanentAddressFaker) {
-		this.elements.permanentAddressInput().type(dataPermanentAddressFaker)
+		this.elements.permanentAddressInput().type(dataPermanentAddressFaker);
 	}
 
 }
 
-export const textBox = new TextBox()
+export const textBox = new TextBox();

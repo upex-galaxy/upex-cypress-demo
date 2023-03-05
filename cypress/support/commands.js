@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -7,13 +8,13 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-import 'cypress-file-upload'
-import 'cypress-wait-until'
-import '@4tw/cypress-drag-drop'
-import 'cypress-downloadfile/lib/downloadFileCommand'
-import { login } from '@pages/Login.Page'
-const { authLogin, dashboardIndex } = Cypress.env('endpoint')
-import { signin } from '@pages/SignIn.Page.js'
+import 'cypress-file-upload';
+import 'cypress-wait-until';
+import '@4tw/cypress-drag-drop';
+import 'cypress-downloadfile/lib/downloadFileCommand';
+import { login } from '@pages/Login.Page';
+const { authLogin, dashboardIndex } = Cypress.env('endpoint');
+import { signin } from '@pages/SignIn.Page.js';
 
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
@@ -32,91 +33,91 @@ import { signin } from '@pages/SignIn.Page.js'
 
 Cypress.Commands.add('Login', (username, password) => {
 	cy.session('login', () => {
-		cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php')
-		cy.url().should('contain', authLogin)
-		username && login.enterUsername(username)
-		password && login.enterPassword(password)
-		login.submitLogin()
+		cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php');
+		cy.url().should('contain', authLogin);
+		username && login.enterUsername(username);
+		password && login.enterPassword(password);
+		login.submitLogin();
 
-		cy.url().should('contain', dashboardIndex)
-	})
-})
+		cy.url().should('contain', dashboardIndex);
+	});
+});
 
 Cypress.Commands.add('SignIn', () => {
-	const { username, password } = Cypress.env('user')
-	const { signUp } = Cypress.env('endpoint')
+	const { username, password } = Cypress.env('user');
+	const { signUp } = Cypress.env('endpoint');
 	cy.session('signIn', () => {
-		cy.visit(signUp)
-		signin.goToLoginTab()
-		signin.enterUsername(username)
-		signin.enterPassword(password)
-		signin.submitLogin()
-	})
-})
+		cy.visit(signUp);
+		signin.goToLoginTab();
+		signin.enterUsername(username);
+		signin.enterPassword(password);
+		signin.submitLogin();
+	});
+});
 
 Cypress.Commands.add('randomNumber', (n) => {
-	return Cypress._.random(0, n - 1)
-})
+	return Cypress._.random(0, n - 1);
+});
 
 Cypress.Commands.add('SortingVertical', () => {
-	rn1 = Cypress._.random(0, 5)
-	const rn2 = getRandomNumber(0, 5, rn1)
+	rn1 = Cypress._.random(0, 5);
+	const rn2 = getRandomNumber(0, 5, rn1);
 	listpage
 		.VerticalNumber()
 		.eq(rn1)
 		.then(($el) => {
-			listpage.VerticalNumber().eq(rn1).trigger('mousedown', { force: true })
-			listpage.VerticalNumber().eq(rn2).trigger('mousemove', { force: true }).trigger('mouseup', { force: true })
+			listpage.VerticalNumber().eq(rn1).trigger('mousedown', { force: true });
+			listpage.VerticalNumber().eq(rn2).trigger('mousemove', { force: true }).trigger('mouseup', { force: true });
 			cy.wrap($el)
 				.invoke('text')
 				.then((number) => {
-					const info = { number: number, rn1: rn1 }
-					cy.wrap(info).as('info')
-				})
-		})
-})
+					const info = { number: number, rn1: rn1 };
+					cy.wrap(info).as('info');
+				});
+		});
+});
 Cypress.Commands.add('VerticalDragOutside', () => {
-	rn1 = Cypress._.random(0, 5)
+	rn1 = Cypress._.random(0, 5);
 	listpage
 		.VerticalNumber()
 		.eq(rn1)
 		.then(($el) => {
-			let rect = $el[0].getBoundingClientRect()
+			let rect = $el[0].getBoundingClientRect();
 			cy.wrap($el)
 				.trigger('mousedown', { which: 1, force: true })
 				.trigger('mousemove', { pageY: rect.top, force: true })
-				.trigger('mouseup', { which: 1, force: true })
+				.trigger('mouseup', { which: 1, force: true });
 			cy.wrap($el)
 				.invoke('text')
 				.then((number) => {
-					const values = { number: number, rn1: rn1 }
-					cy.wrap(values).as('text')
-				})
-		})
-})
+					const values = { number: number, rn1: rn1 };
+					cy.wrap(values).as('text');
+				});
+		});
+});
 
 Cypress.Commands.add('SortingGrid', () => {
-	rn1 = Cypress._.random(0, 8)
-	const rn2 = getRandomNumber(0, 8, rn1)
+	rn1 = Cypress._.random(0, 8);
+	const rn2 = getRandomNumber(0, 8, rn1);
 	gridpage
 		.Gridnumbers()
 		.eq(rn1)
 		.invoke('text')
 		.then((number1) => {
-			gridpage.Gridnumbers().eq(rn1).trigger('mousedown', { force: true })
-			gridpage.Gridnumbers().eq(rn2).trigger('mousemove', { force: true }).trigger('mouseup', { force: true })
+			gridpage.Gridnumbers().eq(rn1).trigger('mousedown', { force: true });
+			gridpage.Gridnumbers().eq(rn2).trigger('mousemove', { force: true }).trigger('mouseup', { force: true });
 			gridpage
 				.Gridnumbers()
 				.eq(rn2)
 				.invoke('text')
-				.then((text) => {
-					const value = { text: number1, rn2: rn2 }
-					cy.wrap(value).as('values')
-				})
-		})
-})
+				.then(() => {
+					const value = { text: number1, rn2: rn2 };
+					cy.wrap(value).as('values');
+				});
+		});
+});
 Cypress.Commands.add('GridDragOutside', () => {
-	rn1 = Cypress._.random(0, 8)
+	rn1 = Cypress._.random(0, 8);
 	gridpage
 		.Gridnumbers()
 		.eq(rn1)
@@ -124,7 +125,7 @@ Cypress.Commands.add('GridDragOutside', () => {
 			cy.wrap($el)
 				.invoke('text')
 				.then((number) => {
-					let rect = $el[0].getBoundingClientRect()
+					let rect = $el[0].getBoundingClientRect();
 					cy.wrap($el)
 						.trigger('mousedown', {
 							which: 1,
@@ -137,45 +138,44 @@ Cypress.Commands.add('GridDragOutside', () => {
 						.trigger('mouseup', {
 							which: 1,
 							force: true,
-						})
-					const values = { number: number, rn1: rn1 }
-					cy.wrap(values).as('text')
-				})
-		})
-})
+						});
+					const values = { number: number, rn1: rn1 };
+					cy.wrap(values).as('text');
+				});
+		});
+});
 
-Cypress.Commands.add('SticktoBottom',()=>{
-    let Xcoord= Cypress._.random(1,150)
-    let Ycoord= Cypress._.random(1,50)
-    cy.get('[id="cursorBottom"]')
-            .then($draggable=>{
-            cy.wrap($draggable)
-            .trigger('mousedown', { which: 1 })
-            .then(($box) => {
-        let initialX = $box.offset().left;
-        let initialY = $box.offset().top;
+Cypress.Commands.add('SticktoBottom', () => {
+	let Xcoord = Cypress._.random(1, 150);
+	let Ycoord = Cypress._.random(1, 50);
+	cy.get('[id="cursorBottom"]').then(($draggable) => {
+		cy.wrap($draggable)
+			.trigger('mousedown', { which: 1 })
+			.then(($box) => {
+				let initialX = $box.offset().left;
+				let initialY = $box.offset().top;
 
-        cy.get('body')
-        .trigger('mousemove', { 
-            
-            clientX: initialX + Xcoord, 
-            clientY: initialY + Ycoord 
-        })
-        .trigger('mouseup');
+				cy.get('body')
+					.trigger('mousemove', {
+						clientX: initialX + Xcoord,
+						clientY: initialY + Ycoord,
+					})
+					.trigger('mouseup');
 
-        cy.wrap($draggable)
-        .trigger('mousedown', { which: 1 })
-        .then(($box2) => {
-        let finalX = $box2.offset().left;
-        let finalY = $box2.offset().top;
+				cy.wrap($draggable)
+					.trigger('mousedown', { which: 1 })
+					.then(($box2) => {
+						let finalX = $box2.offset().left;
+						let finalY = $box2.offset().top;
 
-        const variables= { 
-            initialx: initialX + Xcoord,
-            initialy: initialY + Ycoord,
-            finalx: finalX,
-            finaly: finalY}
-        cy.wrap(variables).as('variables3')
-        })
-        })
-    })    
-}) 
+						const variables = {
+							initialx: initialX + Xcoord,
+							initialy: initialY + Ycoord,
+							finalx: finalX,
+							finaly: finalY,
+						};
+						cy.wrap(variables).as('variables3');
+					});
+			});
+	});
+});
