@@ -143,3 +143,39 @@ Cypress.Commands.add('GridDragOutside', () => {
 				})
 		})
 })
+
+Cypress.Commands.add('SticktoBottom',()=>{
+    let Xcoord= Cypress._.random(1,150)
+    let Ycoord= Cypress._.random(1,50)
+    cy.get('[id="cursorBottom"]')
+            .then($draggable=>{
+            cy.wrap($draggable)
+            .trigger('mousedown', { which: 1 })
+            .then(($box) => {
+        let initialX = $box.offset().left;
+        let initialY = $box.offset().top;
+
+        cy.get('body')
+        .trigger('mousemove', { 
+            
+            clientX: initialX + Xcoord, 
+            clientY: initialY + Ycoord 
+        })
+        .trigger('mouseup');
+
+        cy.wrap($draggable)
+        .trigger('mousedown', { which: 1 })
+        .then(($box2) => {
+        let finalX = $box2.offset().left;
+        let finalY = $box2.offset().top;
+
+        const variables= { 
+            initialx: initialX + Xcoord,
+            initialy: initialY + Ycoord,
+            finalx: finalX,
+            finaly: finalY}
+        cy.wrap(variables).as('variables3')
+        })
+        })
+    })    
+}) 
