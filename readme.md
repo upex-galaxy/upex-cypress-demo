@@ -1,4 +1,6 @@
-[![🤖CI run Regression in QA🧪 After Merging⚡](https://github.com/upex-galaxy/L1-cypex-demo/actions/workflows/CI-regressionQA.yml/badge.svg)](https://github.com/upex-galaxy/L1-cypex-demo/actions/workflows/CI-regressionQA.yml)
+[![🤖CI Regression in QA🧪](https://github.com/upex-galaxy/L1-cypex-demo/actions/workflows/CI-regressionQA.yml/badge.svg)](https://github.com/upex-galaxy/L1-cypex-demo/actions/workflows/CI-regressionQA.yml)
+
+[![vscode-logo]][vscode-site] [![cypress-logo]][cypress-site] [![javascript-logo]][javascript-site]
 
 # 🧪Testing Automation - Cypress 12👨🏻‍🚀 + Cucumber
 ![UPEX's Banners (linkedin) (1)](https://user-images.githubusercontent.com/91127281/189470339-acea5782-16f1-4f06-9ce0-df54fd3ead9d.png)
@@ -12,10 +14,32 @@ Cypress es un Framework de Automatización de Next Generation construido para we
 Ahora el Directorio de UPEX Galaxy, será mucho más simple. 
 - Para la carpeta `Tests`:
     - Cada Suite de US, deberá ser guardado en una carpeta del Componente correspondiente del SUT (ej: ShoppingCart), 
-    - y la nomenclatura de archivos cambia a ser más directa: `GX-<ID>-<NombreCortoDeLaStory>` como ejemplo: "GX-5-AgregarItemAlCart.cy.js". 
+    - y la nomenclatura de archivos cambia a ser más directa: 
+	```
+	{GX-ID}-{NombreCortoDeLaStory}
+
+	como ejemplo: "GX-5-AgregarItemAlCart.cy.js". 
+
+	ejemplo de estructura:
+	/Tests
+		├───BookStore
+		│       GX-6309-CrearObtenerLibros.cy.js
+	```
 - En cuanto a la carpeta `cucumber-tests`:
     - Tendrán una mejor distribución de archivos; por carpetas separadas: Todos los archivos `.feature` dentro de la carpeta "Gherkin" y los archivos `.js` dentro de "stepDefinitions" como tiene que ser. 
+	```
+	* ejemplo de Estructura Cucumber:
+
+	/cucumber-test
+		├───Gherkin
+		│       GX-2_StoryTestSuite.feature
+		│
+		└───stepDefinitions
+				GX-2_StoryTestSuite.js
+	```
     - La Nomenclatura de éste tipo de prueba se mantiene igual al normal (la misma nomenclatura mencionada arriba).
+### RESUMEN:
+
 ![image](https://user-images.githubusercontent.com/91127281/209617125-ec3b7ed9-0495-4860-adba-547ed2d3a243.png)
 
 
@@ -28,15 +52,15 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 ___
 2. **Instala todas las dependencias**: 
     ```
-    npm i
+    npm ci
     ``` 
-    * (la letra `i` es de `install` y `--legacy-peer-deps` es para instalar diferentes dependencias necesarias)
+    * (el commando `ci` es para instalar todas las Dependencias Locked del Proyecto)
 ___
 3. **Para abrir la App de Cypress, corre el comando**: 
     ```
     npm test
     ``` 
-    * también puede usar `npx cypress open` (ya que en Package.json tenemos la variable "test" como el "cypress open") para abrir Cypress!
+    * también puede usar `npx cypress open` (ya que en Package.json tenemos la variable "test" como el "cypress open") para abrir Cypress.
 ___
 4. **Para correr pruebas y generar Reportes XML y HTML, ejecuta**: 
     ```
@@ -77,22 +101,28 @@ ___
 7. **AHORA CON CYPRESS DASHBOARD**, puedes ver todas las ejecuciones y resultados de prueba del proyecto!
 Visita: [CYPRESS DASHBOARD](https://dashboard.cypress.io/projects/2pw67q/analytics/runs-over-time)
 ___
-## PLAN DE PRUEBA: ESTRATEGIA Y DISEÑO
+# PLAN DE PRUEBA: ESTRATEGIA Y DISEÑO
 ### 🚩LEVEL ONE (L1):
-1. Perfecta Nomenclatura del nombre de Archivo de prueba: {GX-ID}-{StoryShortName}.{extensionFile} ej: GX-50-AgregarItemsAlCart.cy.js
-2. Archivo de Prueba dentro del directorio correcto; dentro de la carpeta del Componente correspondiente, ejemplo: `cypress/e2e/Tests/ComponentName/GX-1-StoryTestSuite.cy.js`.
+1. Perfecta Nomenclatura del nombre de Archivo de prueba: <br>
+	``{GX-ID}-{StoryShortName}.{extensionFile} ej: GX-50-AgregarItemsAlCart.cy.js``
+2. Archivo de Prueba dentro del directorio del Componente correspondiente, ejemplo: <br>
+	`cypress/e2e/Tests/ComponentName/GX-1-StoryTestSuite.cy.js`.
 3. Buen diseño del Test Suite elaborado (Esto implica que se vean bien el código en general, que al menos funcione).
-4. Tener el Markdown de la US en la carpeta Test-Plan en su correspondiente carpeta Sprint, ejemplo: `cypress/test-plan/in-sprint/sprint-9/userStory.md`. Esto implica que cada vez que se trabaje en un Sprint nuevo, se debería crear la carpeta correspondiente "sprint-" + número del sprint, como se muestra en el ejemplo arriba.
+4. Tener el Markdown de la US en la carpeta Test-Plan en su correspondiente carpeta Sprint, ejemplo: <br>
+	 `cypress/test-plan/in-sprint/sprint-9/userStory.md`<br>
+	 Esto implica que cada vez que se trabaje en un Sprint nuevo, se debería crear la carpeta correspondiente "sprint-" + número del sprint, como se muestra en el ejemplo arriba.
 5. NO usar fixture como PageObjectModel sino como Data-Entry (es decir, no agarrar elementos Web por fixtures, sino usar el Fixture para iterar Data o reutilizar variables).
-- Antes en GX se usaba Fixture como POM, porque era fácil de aprender, pero hoy en día las entrevistas técnicas piden PageObject Model de la manera tradicional, sin usar Commands (Los Commands se usan para hacer generar algoritmos para múltiples suites o para generar precondiciones repetitivas).
-6. En caso de usar Fixtures: Chequear que el archivo ".json" esté dentro de la carpeta correspondiente al componente, ejemplo: `cypress/fixtures/data/example.json`.
-7. En caso de usar PageObjectModel: Chequear que el "Page.js" esté dentro de la carpeta "pages" en la de "support", ejemplo: `cypress/support/pages/example.Page.js`.
+- Previamente en GX, se usaba Fixture como POM, porque era fácil de aprender, pero hoy en día las entrevistas técnicas piden PageObject Model de la manera tradicional, sin usar Commands (Los Commands se usan para hacer generar algoritmos para múltiples suites o para generar precondiciones repetitivas).
+6. En caso de usar Fixtures: Chequear que el archivo ".json" esté dentro de la carpeta correspondiente al componente, ejemplo: <br>
+	`cypress/fixtures/account/example.json`.
+7. En caso de usar PageObjectModel: Chequear que el "Page.js" esté dentro de la carpeta "pages" en la de "support", ejemplo: <br>
+	`cypress/support/pages/example.Page.js`.
 8. En caso de usar Commands: Asegurarse de aplicarlo para crear pasos de Precondiciones o Scripts de Algoritmos complejos (NO USAR como Pasos de Acción, eso sería tarea para el POM).
-9. En caso de usar el CI Pipeline: Usar únicamente el archivo predeterminado del proyecto "CI-buildTest.yml", y asegurarse de modificarlo correctamente (Solo cambiar el Path del Test Suite y el parámetro de Importación TX para Jira) y no borrar o cambiar nada más, que funcione y pase los Checks.
+9. En caso de usar el CI Pipeline: Usar únicamente el archivo predeterminado del proyecto ``CI-Suite.yml``, y asegurarse de modificarlo correctamente (Solo cambiar el Path del Test Suite y el parámetro de Importación TX para Jira) y no borrar o cambiar nada más, que funcione y pase los Checks.
 10. En caso de usar Cucumber: Chequear que el archivo Gherkin (.feature) y los StepDefinitions (.js) estén correctamente diseñados y que la Ejecución en CI funcione y pase los Checks.
 
     ```
-    Challenge L2: Si se realiza una tarea completa con POM, CI y Cucumber correctamente, es motivo para subir a Nivel 2 automáticamente mediante un Challenge (una nueva US asignada).
+    Challenge L2: Si se realiza una tarea completa con POM, CI y Cucumber correctamente, es motivo para subir a Nivel 2 automáticamente mediante un Challenge (se requiere US asignada).
     ```
 ___
 ### 🚩LEVEL TWO (L2):
@@ -106,22 +136,25 @@ ___
     - Commands (por Algoritmos)
     - Fixture (por Data entries)
     - Variables de Entorno (Cypress.env)
-4. En caso especial (dependiendo de la US) se puede intentar aplicar:
-    - Cucumber 
+4. OPCIONAL: usar ``Cucumber`` si la US conviene, pero no es obligatorio para L2:
 - Chequear que todas estas 4 tareas estén bien hechas.
 ___
 ### 🚩LEVEL THREE (L3):
-1. Obligatoriamente, realizar todo lo que está correcto (L1 y L2), sin saltarse ninguna instrucción debida.
-2. El código tiene que ser bueno, refinado, y con buenas prácticas; el Reviewer de los L3 es más estricto.
-3. Elaborar un Plan de Prueba Funcional en caso de que la Historia de Usuario lo necesite. Agregar dicho archivo Markdown en el directorio de Planes de Pruebas. Posibles pruebas:
+**En el L3, se trabaja con un MONO-REPO, por lo que consiste en tener conocimientos básicos de hacer una Build y levantar un Servidor para correr la App bajo prueba.**
+1. Saber cómo armar un repositorio con un framework desde cero.
+2. Utilizar TypeScript en caso de un Proyecto JavaScript.
+3. Obligatoriamente, realizar todo lo que está correcto (L1 y L2), sin saltarse ninguna instrucción debida.
+4. El código tiene que ser bueno, refinado, y con buenas prácticas; el Reviewer de los L3 es más estricto.
+5. Elaborar un Plan de Prueba Funcional en caso de que la Historia de Usuario lo necesite. Agregar dicho archivo Markdown en el directorio de Planes de Pruebas. Posibles pruebas en un Proyecto L3:
+
         - Integration Testing (API)
         - E2E Testing (API + UI)
         - Visual Testing (Applitools, Percy, etc.)
         - Database Testing (SQL)
 
-4. Realizar o Actualizar un Plan de Prueba de Smoke, Sanity o Regression dependiendo de la tarea asignada como L3.
-5. Crear un nuevo Pipeline de CI para ejecutar, importar a Jira y Generar Reporte HTML, para las pruebas de Smoke, Sanity o Regression dependiendo de la tarea asignada como L3
-6. Libertad para aplicar nuevas estrategias o dependencias para la realización del Plan de Pruebas. Esto implica investigación de acuerdo a la realización de nuevas pruebas.
+6. Realizar o Actualizar un Plan de Prueba de Smoke, Sanity o Regression dependiendo de la tarea asignada como L3.
+7. Crear un nuevo Pipeline de CI para ejecutar, importar a Jira y Generar Reporte HTML, para las pruebas de Smoke, Sanity o Regression dependiendo de la tarea asignada como L3.
+8. Libertad para aplicar nuevas estrategias o dependencias para la realización del Plan de Pruebas. Esto implica investigación de acuerdo a la realización de nuevas pruebas.
 ___
 
 ### 🧙🏻‍♂️APRENDE Y GANA EXPERIENCIA COMO QA AUTOMATION EN UPEX GALAXY🚀 
@@ -164,3 +197,15 @@ ___
 - [How to do recursion in Cypress](https://testersdock.com/cypress-recursion/)
 - [How to handle basic auth in Cypress](https://testersdock.com/cypress-basic-auth/)
 - [Cypress 10 Upgrade](https://testersdock.com/cypress-10-upgrade/)
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[vscode-logo]: https://img.shields.io/badge/VSCode-black?logo=visualstudiocode&style=for-the-badge
+[vscode-site]: https://code.visualstudio.com/
+
+[cypress-logo]: https://img.shields.io/badge/Cypress-black?logo=cypress&style=for-the-badge
+[cypress-site]: https://www.cypress.io
+
+[javascript-logo]: https://img.shields.io/badge/JavaScript-black?logo=javascript&style=for-the-badge
+[javascript-site]: https://www.javascript.com/
