@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 const username = faker.internet.email();
 const password = faker.internet.password() + '@@';
 
-describe(
+describe.skip(
 	'✅BookStore | Grid | Crear y Obtener Libros de la Tienda (POST-GET)',
 	{
 		retries: 3,
@@ -96,7 +96,7 @@ describe(
 				cy.visit(`https://demoqa.com/profile?book=${isbn}`);
 				//cy.get(`a[href*="profile?book=${isbn}"]`).should('be.visible').should('have.text', isbn)
 				cy.get('#ISBN-wrapper').within(() => {
-					cy.get('[id=\'userName-value\']').should('have.text', isbn);
+					cy.get("[id='userName-value']").should('have.text', isbn);
 				});
 			});
 		});

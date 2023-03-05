@@ -30,7 +30,7 @@ jobs:
 
             - name: 🧬Install All Dependencies
               run: |
-                  npm install
+                  npm ci
                   npm list
 
             - name: 💾Download Cucumber-Formatter
