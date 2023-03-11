@@ -15,6 +15,5 @@ describe('✅ToolsQA | Elements | Buttons', () => {
 		cy.get('#dynamicClickMessage').should('have.text', 'You have done a dynamic click');
 	});
 });
-
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
