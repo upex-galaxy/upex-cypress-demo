@@ -1,4 +1,5 @@
-import { checkBox } from '@pages/checkBox.Page.js';
+/* eslint-disable @typescript-eslint/no-empty-function */
+//import { checkBox } from '@pages/checkBox.Page.js';
 
 describe('✅ToolsQA | Elements | Check Box', () => {
 	beforeEach('Precondition: Be located in Check Box', () => {
@@ -19,7 +20,7 @@ describe('✅ToolsQA | Elements | Check Box', () => {
 			cy.wrap($el).click();
 		});
 
-		/*Aqui me funciona pero solo entra hasta el 1 pero no hace click 
+		/*Aquí me funciona pero solo entra hasta el 1 pero no hace click 
         cy.get('button[aria-label="Toggle"]').eq(0).click()
         cy.get('button[aria-label="Toggle"]').each(($el, index)=>{
             if (index > 0 ){
@@ -47,7 +48,7 @@ describe('✅ToolsQA | Elements | Check Box', () => {
 			}
 		});
 	});
-	it.skip('991 | TC2: Validar hacer Checked y Expand en el Subcdirectorio.', () => {
+	it.skip('991 | TC2: Validar hacer Checked y Expand en el Subdirectorio.', () => {
 		cy.get('button[aria-label="Toggle"]').click({ force: true });
 		cy.get('input[type="checkbox"]').eq(1).check({ force: true });
 		cy.get('button[aria-label="Toggle"]').eq(1).click({ force: true });
@@ -75,7 +76,7 @@ describe('✅ToolsQA | Elements | Check Box', () => {
 		//cy.get('button>svg[class="rct-icon rct-icon-expand-open"]')
 		cy.get('button[class="rct-option rct-option-collapse-all"]').click({ force: true });
 
-		//Aqui hacer assertions cuando no estan en check, ya que solo estoy verificando los button(+, -)
+		//Aquí hacer assertions cuando no estan en check, ya que solo estoy verificando los button(+, -)
 	});
 	it.skip('991 | TC7: Validar Expand y Collapse All desde Toggle.', () => {
 		cy.get('button[aria-label="Toggle"]').click({ force: true });
@@ -89,14 +90,5 @@ describe('✅ToolsQA | Elements | Check Box', () => {
 		//Aqui hacer assertions cuando no estan en check, ya que solo estoy verificando el Toggle
 	});
 });
-Cypress.on('uncaught:exception', (err, runnable) => {
-	return false;
-});
-// Comando predeterminado para que no aparezcan los Fetch en el log del Test Runner:
-const origLog = Cypress.log;
-Cypress.log = function (opts, ...other) {
-	if (opts.displayName === 'xhr' || (opts.displayName === 'fetch' && opts.url.startsWith('https://'))) {
-		return;
-	}
-	return origLog(opts, ...other);
-};
+import { RemoveLogs } from '@helper/RemoveLogs';
+RemoveLogs();
