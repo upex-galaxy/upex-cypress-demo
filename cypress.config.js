@@ -1,25 +1,25 @@
-import { defineConfig } from 'cypress'
-import createBundler from '@bahmutov/cypress-esbuild-preprocessor'
-import pkg from '@badeball/cypress-cucumber-preprocessor'
-const { addCucumberPreprocessorPlugin } = pkg
-import { createEsbuildPlugin } from '@badeball/cypress-cucumber-preprocessor/esbuild.js'
-import { downloadFile } from 'cypress-downloadfile/lib/addPlugin.js'
+import { defineConfig } from 'cypress';
+import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
+import pkg from '@badeball/cypress-cucumber-preprocessor';
+const { addCucumberPreprocessorPlugin } = pkg;
+import { createEsbuildPlugin } from '@badeball/cypress-cucumber-preprocessor/esbuild.js';
+import { downloadFile } from 'cypress-downloadfile/lib/addPlugin.js';
 
 async function setupNodeEvents(on, config) {
 	// This is required for the preprocessor to be able to generate JSON reports after each run, and more,
-	await addCucumberPreprocessorPlugin(on, config)
+	await addCucumberPreprocessorPlugin(on, config);
 
-	on('task', { downloadFile })
+	on('task', { downloadFile });
 
 	on(
 		'file:preprocessor',
 		createBundler({
 			plugins: [createEsbuildPlugin(config)],
 		})
-	)
+	);
 
 	// Make sure to return the config object as it might have been modified by the plugin.
-	return config
+	return config;
 }
 
 export default defineConfig({
@@ -47,11 +47,9 @@ export default defineConfig({
 		specPattern: ['cypress/e2e/cucumber-test/Gherkin/*.feature', 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
 		// Use Cypress plugins:
 		setupNodeEvents,
-		// baseUrl: ""
+		baseUrl: 'https://demoqa.com/',
 	},
 	env: {
-		baseUrl: 'https://demoqa.com/',
-
 		AdminUser: {
 			username: 'Admin',
 			password: 'admin123',
@@ -60,11 +58,13 @@ export default defineConfig({
 			authLogin: '/auth/login',
 			dashboardIndex: '/dashboard/index',
 			signUp: 'https://coderbyte.com/sl',
+			radioButton: '/radio-button',
+			textBox: 'text-box',
 		},
 		user: {
 			username: 'upexTesting',
 			email: 'sai@upextesting.com',
 			password: '1234567',
 		},
-	}
-})
+	},
+});

@@ -11,7 +11,8 @@
 			"@4tw/cypress-drag-drop"
 		],
 		"paths": {
-			"@pages/*": ["./cypress/support/pages/*"]
+			"@pages/*": ["./cypress/support/pages/*"],
+			"@helper/*": ["./cypress/support/helper/*"]
 		}
 	},
 	"reporterEnabled": "spec, mocha-junit-reporter, mochawesome",

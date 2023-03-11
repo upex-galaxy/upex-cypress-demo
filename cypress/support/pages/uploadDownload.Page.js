@@ -1,21 +1,25 @@
-class Elements {
-    get = {
-        buttonDownload: ()=> cy.get('#downloadButton'),
-        buttonUploadedFile: ()=> cy.get('#uploadFile'),
-        generatedFilePath: ()=> cy.get('#uploadedFilePath')
-    }
-    clickDownload(){
-        this.get.buttonDownload().click()
-    }
+class LoadPage {
+	get = {
+		buttonDownload: ()=> cy.get('#downloadButton'),
+		buttonUploadedFile: ()=> cy.get('#uploadFile'),
+		generatedFilePath: ()=> cy.get('#uploadedFilePath')
+	};
 
-    clickUploaded(){
-        this.get.buttonUploadedFile().click()
-    }
+	getDownloadFileName(){
+		return this.get.buttonDownload().invoke('attr', 'download');
+	}
+	clickDownload(){
+		this.get.buttonDownload().click();
+	}
+
+	clickUploaded(){
+		this.get.buttonUploadedFile().click();
+	}
 
 
-    selectUploadedFile(pathR){
-        this.get.buttonUploadedFile().selectFile(pathR);
-    }
+	selectUploadedFile(pathR){
+		this.get.buttonUploadedFile().selectFile(pathR);
+	}
 }
-export const elements = new Elements();
+export const loadPage = new LoadPage();
 //exportarmos para import
