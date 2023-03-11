@@ -1,6 +1,5 @@
-import { checkbox } from '@pages/Checkbox.Page.js';
+//import { checkbox } from '@pages/Checkbox.Page.js';
 describe('✅ToolsQA | Elements | Check Box', () => {
-	let results = [];
 
 	beforeEach('login', () => {
 		cy.visit('https://demoqa.com/checkbox');
@@ -68,9 +67,9 @@ describe('✅ToolsQA | Elements | Check Box', () => {
 
 		cy.get('[class*="rct-node-expanded"]')
 			.eq(1)
-			.within((item) => {
+			.within(() => {
 				cy.get('span[class*="rct-title"]').each(($el) => {
-					text = $el.text();
+					let text = $el.text();
 					text = text.replace(/.doc| /gi, '');
 					results.push(text);
 					cy.log(results);
@@ -104,16 +103,5 @@ describe('✅ToolsQA | Elements | Check Box', () => {
 	});
 });
 
-Cypress.on('uncaught:exception', (err, runnable) => {
-	// returning false here prevents Cypress from
-	// failing the test
-	return false;
-});
-// Comando predeterminado para que no aparezcan los Fetch en el log del Test Runner:
-const origLog = Cypress.log;
-Cypress.log = function (opts, ...other) {
-	if (opts.displayName === 'xhr' || (opts.displayName === 'fetch' && opts.url.startsWith('https://'))) {
-		return;
-	}
-	return origLog(opts, ...other);
-};
+import { RemoveLogs } from '@helper/RemoveLogs';
+RemoveLogs();
