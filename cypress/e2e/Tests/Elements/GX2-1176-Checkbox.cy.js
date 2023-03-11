@@ -1,10 +1,10 @@
-import { checkbox } from '@pages/Checkbox.Page.js'
+import { checkbox } from '@pages/Checkbox.Page.js';
 describe('✅ToolsQA | Elements | Check Box', () => {
-	let results = []
+	let results = [];
 
 	beforeEach('login', () => {
-		cy.visit('https://demoqa.com/checkbox')
-	})
+		cy.visit('https://demoqa.com/checkbox');
+	});
 	it.only('1177 | TC1: Validar hacer Checked y Expand en el Directorio principal', () => {
 		// checkbox.checkFolder()
 		// checkbox.clickSelectedAll()
@@ -20,10 +20,10 @@ describe('✅ToolsQA | Elements | Check Box', () => {
 		// 	})
 		// })
 
-		cy.get('input[type="checkbox"]').check({ force: true }).should('be.checked')
+		cy.get('input[type="checkbox"]').check({ force: true }).should('be.checked');
         
-		cy.get('button[aria-label="Toggle"]').as("first")
-		cy.get('button[aria-label="Toggle"]').click({ force: true })
+		cy.get('button[aria-label="Toggle"]').as('first');
+		cy.get('button[aria-label="Toggle"]').click({ force: true });
 		cy.get('button[type="button"]').each(($el) => {
 			// if (!@first) {
 			// 	cy.wrap($el).click()
@@ -31,7 +31,7 @@ describe('✅ToolsQA | Elements | Check Box', () => {
 			// if(!$el.parent('ol>li[class$="rct-node-expanded"]')){
 			//     cy.wrap($el).click()
 			// }
-		})
+		});
 
 		// cy.get('label[for*="tree-node"]').each(($el) => {
 		// 	cy.wrap($el).within((item) => {
@@ -58,29 +58,29 @@ describe('✅ToolsQA | Elements | Check Box', () => {
 		// 		$el.on('click')
 		// 	}
 		// })
-	})
+	});
 
 	it('1177 | TC2: Validar hacer Checked y Expand en el Subdirectorio.', () => {
-		let results = []
-		cy.get('button[title="Toggle"]').click()
-		cy.get('#tree-node-desktop').check({ force: true })
-		cy.get('button[title="Toggle"]').eq(1).click()
+		let results = [];
+		cy.get('button[title="Toggle"]').click();
+		cy.get('#tree-node-desktop').check({ force: true });
+		cy.get('button[title="Toggle"]').eq(1).click();
 
 		cy.get('[class*="rct-node-expanded"]')
 			.eq(1)
 			.within((item) => {
 				cy.get('span[class*="rct-title"]').each(($el) => {
-					text = $el.text()
-					text = text.replace(/.doc| /gi, '')
-					results.push(text)
-					cy.log(results)
-				})
+					text = $el.text();
+					text = text.replace(/.doc| /gi, '');
+					results.push(text);
+					cy.log(results);
+				});
 			})
 			.then(() => {
 				results.forEach((text) => {
-					cy.get('.text-success').contains(text, { matchCase: false }).should('exist')
-				})
-			})
+					cy.get('.text-success').contains(text, { matchCase: false }).should('exist');
+				});
+			});
 
 		// let results = []
 		// let text;
@@ -101,19 +101,19 @@ describe('✅ToolsQA | Elements | Check Box', () => {
 		// results.forEach((text) => {
 		// cy.get('.text-success').contains(text, { matchCase: false }).should('exist')
 		// })
-	})
-})
+	});
+});
 
 Cypress.on('uncaught:exception', (err, runnable) => {
 	// returning false here prevents Cypress from
 	// failing the test
-	return false
-})
+	return false;
+});
 // Comando predeterminado para que no aparezcan los Fetch en el log del Test Runner:
-const origLog = Cypress.log
+const origLog = Cypress.log;
 Cypress.log = function (opts, ...other) {
 	if (opts.displayName === 'xhr' || (opts.displayName === 'fetch' && opts.url.startsWith('https://'))) {
-		return
+		return;
 	}
-	return origLog(opts, ...other)
-}
+	return origLog(opts, ...other);
+};
