@@ -70,8 +70,8 @@ jobs:
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit'
                   testPaths: 'reports/regression-report.xml'
-                  testExecKey: 'GX-5539'
-                  projectKey: 'GX'
+                  testExecKey: 'GX-3704' #todo: ToolsQA Regression Test Plan TX
+                  projectKey: 'GX' #todo: UPEX LEVEL 1
 
             - name: 🔔Slack Notification of Done
               if: always()
@@ -98,7 +98,7 @@ jobs:
 
             - name: 🧬Install All Dependencies
               run: |
-                  npm install
+                  npm ci
                   npm list
 
             - name: 🔌Cucumber Preprocessor JSON Setup
