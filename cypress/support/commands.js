@@ -179,15 +179,3 @@ Cypress.Commands.add('SticktoBottom', () => {
 			});
 	});
 });
-        const variables= { 
-            initialx: initialX + Xcoord,
-            initialy: initialY + Ycoord,
-            finalx: finalX,
-            finaly: finalY}
-        cy.wrap(variables).as('variables3')
-        })
-        })
-    })    
-})
-
-require('cypress-downloadfile/lib/downloadFileCommand');
