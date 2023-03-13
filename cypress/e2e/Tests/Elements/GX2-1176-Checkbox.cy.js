@@ -1,107 +1,110 @@
-//import { checkbox } from '@pages/Checkbox.Page.js';
+import { checkbox } from '@pages/Checkbox.Page.js';
 describe('✅ToolsQA | Elements | Check Box', () => {
-
-	beforeEach('login', () => {
+	beforeEach('precondición: estar situado en demoQA checkbox', () => {
 		cy.visit('https://demoqa.com/checkbox');
+		cy.url().should('contain', 'checkbox');
 	});
-	it.only('1177 | TC1: Validar hacer Checked y Expand en el Directorio principal', () => {
-		// checkbox.checkFolder()
-		// checkbox.clickSelectedAll()
+	it('1177 | TC1: Validar hacer Checked y Expand en el Directorio principal.', () => {
+		checkbox.checkFolderHome();
+		checkbox.get.rootCheckbox().should('be.checked');
 
-		// //cy.get('button[title="Toggle"]').click()
-		// cy.get('span[class*="rct-title"]').each(($el) => {
-		// 	let results = []
-		// 	let text = $el.text()
-		// 	text = text.replace(/.doc| /gi, '')
-		// 	results.push(text)
-		// 	results.forEach((text) => {
-		// 		cy.get('.text-success').contains(text, { matchCase: false }).should('exist')
-		// 	})
-		// })
-
-		cy.get('input[type="checkbox"]').check({ force: true }).should('be.checked');
-        
-		cy.get('button[aria-label="Toggle"]').as('first');
-		cy.get('button[aria-label="Toggle"]').click({ force: true });
-		cy.get('button[type="button"]').each(($el) => {
-			// if (!@first) {
-			// 	cy.wrap($el).click()
-			// }
-			// if(!$el.parent('ol>li[class$="rct-node-expanded"]')){
-			//     cy.wrap($el).click()
-			// }
-		});
-
-		// cy.get('label[for*="tree-node"]').each(($el) => {
-		// 	cy.wrap($el).within((item) => {
-		// 		let $item = $el.find('svg[class*="rct-icon"]')
-		// 		if ($item.hasClass('rct-icon-check')) {
-		// 			cy.get('span[class*="rct-title"]')
-		// 				.invoke('text')
-		// 				.then((texto) => {
-		// 					cy.log(texto)
-		// 				})
-		// 		}
-		// 	})
-		// })
-
-		// cy.get('label[for*="tree-node"]').eq(0).within((item)=>{
-		//     cy.wrap($button).click()
-		//     let texto = cy.get('span[class*="rct-title"]').text()
-		//         cy.log(texto)
-		//     })
-		// })
-
-		// .each(($el, index, $list) => {
-		// 	if ($el.text() === 'Red') {
-		// 		$el.on('click')
-		// 	}
-		// })
-	});
-
-	it('1177 | TC2: Validar hacer Checked y Expand en el Subdirectorio.', () => {
+		checkbox.clickExpandToggle();
+		checkbox.clickAllButtonCollapsed();
+		checkbox.clickAllButtonCollapsed();
 		let results = [];
-		cy.get('button[title="Toggle"]').click();
-		cy.get('#tree-node-desktop').check({ force: true });
-		cy.get('button[title="Toggle"]').eq(1).click();
-
-		cy.get('[class*="rct-node-expanded"]')
-			.eq(1)
-			.within(() => {
-				cy.get('span[class*="rct-title"]').each(($el) => {
-					let text = $el.text();
-					text = text.replace(/.doc| /gi, '');
-					results.push(text);
-					cy.log(results);
-				});
+		checkbox.get
+			.labelTitle()
+			.each(($title) => {
+				let text = $title.text();
+				text = text.replace(/.doc| /gi, '');
+				results.push(text);
 			})
 			.then(() => {
 				results.forEach((text) => {
 					cy.get('.text-success').contains(text, { matchCase: false }).should('exist');
 				});
 			});
+		checkbox.get.checkAllButton().should('be.checked');
+	});
 
-		// let results = []
-		// let text;
-		// cy.get('button[title="Toggle"]').click()
-		// cy.get('li[class*="rct-node"]')
-		// 	.eq(1)
-		// 	.within((item) => {
-		// 		cy.get('input').check({ force: true })
-		// 		cy.get('button[title="Toggle"]').click()
-		// 		cy.get('span[class*="rct-title"]').each(($el) => {
-		// 			text = $el.text()
-		// 			text = text.replace(/.doc| /gi, '')
-		// 			results.push(text)
-		//             //cy.log(results)
-		// 		})
-		// 	})
-		// cy.log(results)
-		// results.forEach((text) => {
-		// cy.get('.text-success').contains(text, { matchCase: false }).should('exist')
-		// })
+	it('1177 | TC2: Validar hacer Checked y Expand en el Subdirectorio.', () => {
+		checkbox.clickExpandToggle();
+		checkbox.get
+			.buttonOnlyCollapsed()
+			.its('length')
+			.then((n) => Cypress._.random(0, n - 1))
+			.then((randomN) => {
+				checkbox.get.inputOnlyCollapsed().eq(randomN).check({ force: true });
+				checkbox.get.buttonOnlyCollapsed().eq(randomN).click();
+				let results = [];
+				checkbox.get
+					.liOnlyExpanded()
+					.eq(1)
+					.within(() => {
+						checkbox.get.labelTitle().each(($el) => {
+							let text = $el.text();
+							text = text.replace(/.doc| /gi, '');
+							results.push(text);
+						});
+					})
+					.then(() => {
+						results.forEach((text) => {
+							checkbox.get.textSuccess().contains(text, { matchCase: false }).should('exist');
+						});
+					});
+			});
+	});
+
+	it('1177 | TC3: Validar hacer checked en un archivo', () => {
+		checkbox.clickExpandToggle();
+		checkbox.get
+			.buttonOnlyCollapsed()
+			.its('length')
+			.then((n) => Cypress._.random(0, n - 1))
+			.then((randomN) => {
+				checkbox.get.buttonOnlyCollapsed().eq(randomN).click();
+				let results = [];
+				checkbox.get
+					.liOnlyExpanded()
+					.eq(1)
+					.within(() => {
+						//con este código quería explorar la posibilidad de que se adentre en el folder documents pero no se pudo porque encuentra los elementos pero no les da click
+						// if (checkbox.get.buttonOnlyCollapsed().length > 0) {
+						// 	checkbox.get.buttonOnlyCollapsed().eq(0).click();
+						// }
+						//checkbox.get.liOnlyExpanded().within(() => {
+						cy.get('ol')
+							.find('input')
+							.its('length')
+							.then((n) => Cypress._.random(0, n - 1))
+							.then((randomCheck) => {
+								cy.get('ol').find('input').eq(randomCheck).check({ force: true });
+								cy.get('ol')
+									.find('.rct-title')
+									.eq(randomCheck)
+									.then(($el) => {
+										let text = $el.text();
+										text = text.replace(/.doc| /gi, '');
+										results.push(text);
+									});
+							});
+						//});
+					})
+					.then(() => {
+						results.forEach((text) => {
+							checkbox.get.textSuccess().contains(text, { matchCase: false }).should('exist');
+						});
+					});
+			});
+	});
+
+	it('1177 | TC4: Validar Expand y Collapse All desde el button plus(+) y minus(-).', () => {
+		checkbox.clickExpandAll();
+		checkbox.get.labelAll().should('be.visible');
+		checkbox.clickCollapsedAll();
+		checkbox.get.labelAll().first().should('be.visible');
 	});
 });
 
-import { RemoveLogs } from '@helper/RemoveLogs';
-RemoveLogs();
+import { removeLogs } from '@helper/RemoveLogs';
+removeLogs();
