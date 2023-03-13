@@ -13,8 +13,8 @@
 		"report:json": "mochawesome-merge mochawesome-report/*.json>mochawesome.json",
 		"report:html": "marge mochawesome.json",
 		"report:cucumber": "node cucumber-formatter/cucumber-html-report.js",
-		"prettier:write": "npx prettier --write .",
-		"prettier:check": "npx prettier --check .",
+		"prettier:write": "npx prettier --write cypress",
+		"prettier:check": "npx prettier --check cypress",
 		"lint:check": "npx eslint cypress",
 		"lint:fix": "npx eslint --fix cypress"
 	},
