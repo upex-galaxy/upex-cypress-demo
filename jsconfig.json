@@ -1,13 +1,6 @@
 {
 	"compilerOptions": {
-		"types": [
-			"cypress",
-			"cypress-file-upload",
-			"cypress-xpath",
-			"cypress-downloadfile",
-			"cypress-plugin-api",
-			"cypress-wait-until",
-		],
+		"types": ["cypress", "cypress-file-upload", "cypress-xpath", "cypress-downloadfile", "cypress-plugin-api"],
 		"paths": {
 			"@pages/*": ["./cypress/support/pages/*"],
 			"@helper/*": ["./cypress/support/helper/*"]
