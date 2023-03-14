@@ -1,4 +1,4 @@
-class select {
+class SelectOnGrid {
     get = {
         endPoint: ()=> cy.visit('/selectable'),
         gridPagination: ()=> cy.get('#demo-tab-grid'),
@@ -12,7 +12,9 @@ class select {
         gridPaginationEight: ()=> cy.get('#raw3 > *').eq(1),
         gridPaginationNine: ()=> cy.get('#raw3 > *').eq(2)
     }
-    selectGrid() {
+    SelectGrid() {
         this.get.gridPagination().click()
     }
 }
+
+export const selectgrid = new SelectOnGrid();

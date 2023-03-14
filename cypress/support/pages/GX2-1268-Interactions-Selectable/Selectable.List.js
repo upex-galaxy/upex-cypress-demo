@@ -1,4 +1,4 @@
-class select {
+class SelectOnList {
     get = {
         endPoint: ()=> cy.visit('/selectable'),
         listPagination: () => cy.get('#demo-tab-list'),
@@ -7,8 +7,10 @@ class select {
         listPagination3: ()=> cy.get('.vertical-list-container > *').eq(2),
         listPagination4: ()=> cy.get('.vertical-list-container > *').eq(3),
     }
-    selectList() {
+    SelectList() {
         this.get.listPagination().click()
     }
 
 }
+
+export const seleclist = new SelectOnList();
