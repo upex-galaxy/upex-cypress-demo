@@ -57,7 +57,7 @@ export default defineConfig({
 		endpoint: {
 			authLogin: '/auth/login',
 			dashboardIndex: '/dashboard/index',
-			signUp: 'https://coderbyte.com/sl',
+			signUp: 'https://coderbyte.com/sl', // what does this url here?
 			radioButton: '/radio-button',
 			textBox: 'text-box',
 		},
