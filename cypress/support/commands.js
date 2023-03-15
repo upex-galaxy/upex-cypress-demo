@@ -177,4 +177,3 @@ Cypress.Commands.add('SticktoBottom', () => {
 					});
 			});
 	});
-});
