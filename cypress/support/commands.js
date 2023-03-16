@@ -178,5 +178,3 @@ Cypress.Commands.add('SticktoBottom', () => {
 			});
 	});
 });
-
-require('cypress-downloadfile/lib/downloadFileCommand');
