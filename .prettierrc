@@ -4,7 +4,7 @@
 	"useTabs": true,
 	"tabWidth": 4,
 	"bracketSpacing": true,
-	"arrowParents": "avoid",
+	"arrowParens": "avoid",
 	"trailingComma": "es5",
 	"bracketSameLine": true,
 	"proseWrap": "always",

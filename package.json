@@ -13,8 +13,8 @@
 		"report:json": "mochawesome-merge mochawesome-report/*.json>mochawesome.json",
 		"report:html": "marge mochawesome.json",
 		"report:cucumber": "node cucumber-formatter/cucumber-html-report.js",
-		"prettier:write": "npx prettier --write .",
-		"prettier:check": "npx prettier --check .",
+		"prettier:write": "npx prettier --write cypress",
+		"prettier:check": "npx prettier --check cypress",
 		"lint:check": "npx eslint cypress",
 		"lint:fix": "npx eslint --fix cypress"
 	},
@@ -39,7 +39,6 @@
 		"cypress-multi-reporters": "1.6.2",
 		"cypress-plugin-api": "2.6.1",
 		"cypress-recurse": "1.24.0",
-		"cypress-wait-until": "1.7.2",
 		"cypress-xpath": "2.0.1",
 		"eslint": "8.34.0",
 		"eslint-plugin-only-warn": "1.1.0",
