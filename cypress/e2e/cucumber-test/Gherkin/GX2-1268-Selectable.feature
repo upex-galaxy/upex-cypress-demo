@@ -9,6 +9,7 @@ Feature: US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable
 	Scenario: GX2-1268 | TC1: Verify user can select List pagination
 		When clicks on List pagination
 		Then should be can see the List elements
+
 	@TC_GX2-1459 @SUITE_GX2-1269 @ToolsQA
 	Scenario: GX2-1268 | TC2: Verify user can select elements in List
 		Given user is in Grid Pagination page
