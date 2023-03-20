@@ -1,6 +1,7 @@
 import { Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
-import { SelectOnGrid } from '@pages/GX2-1268-Interactions-Selectable/SelectableGrid.js';
-import { SelectOnList } from '@pages/GX2-1268-Interactions-Selectable/SelectableList.js';
+import { selectongrid } from '@pages/GX2-1268-Interactions-Selectable/SelectableGrid';
+import { selectonlist } from '@pages/GX2-1268-Interactions-Selectable/SelectableList';
+
 
 const selectablePage = Cypress.env('endpoint').selectable;
 
@@ -12,19 +13,15 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
 
     describe('GX2-1268 | TC1: Verify user can select List pagination', () => {
         When('clicks on List pagination', () => {
-            SelectOnGrid.SelectGrid();
-            SelectOnList.SelectList();
+            selectongrid.SelectGrid();
+            selectonlist.SelectList();
         });
 
         Then('should be can see the List elements', () => {
-            SelectOnList.listPaginationPanel().should('have.text', 'Cras justo odio');
+            selectonlist.get.listPaginationPanel().should('contain.text', 'Cras justo odio');
         });
     });
 });
-
-
-
-
 
 
 

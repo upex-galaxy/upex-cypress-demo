@@ -17,4 +17,4 @@ class SelectOnGrid {
     }
 }
 
-export const selectgrid = new SelectOnGrid();
+export const selectongrid = new SelectOnGrid();

@@ -14,4 +14,4 @@ class SelectOnList {
 
 }
 
-export const selectlist = new SelectOnList();
+export const selectonlist = new SelectOnList();
