@@ -12,8 +12,8 @@ Feature: US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable
 
 	@TC_GX2-1459 @SUITE_GX2-1269 @ToolsQA
 	Scenario: GX2-1268 | TC2: Verify user can select elements in List
-		Given user is in Grid Pagination page
-		When clicks on each elements of the Grid
+		Given user is in List Pagination page
+		When clicks on each elements of the List
 		Then should can see all elements selected
 	@TC_GX2-1460 @SUITE_GX2-1269 @ToolsQA
 	Scenario: GX2-1268 | TC3: Verify user can unselect elements in List

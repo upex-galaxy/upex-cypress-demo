@@ -3,6 +3,8 @@ import { selectongrid } from '@pages/GX2-1268-Interactions-Selectable/Selectable
 import { selectonlist } from '@pages/GX2-1268-Interactions-Selectable/SelectableList';
 
 
+
+
 const selectablePage = Cypress.env('endpoint').selectable;
 
 context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
@@ -18,10 +20,29 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
         });
 
         Then('should be can see the List elements', () => {
-            selectonlist.get.listPaginationPanel().should('contain.text', 'Cras justo odio');
+            selectonlist.get.listPaginationPanel().should('contain.text', 'Cras justo odio');          
         });
     });
+    
+    describe('GX2-1268 | TC2: Verify user can select elements in List', () => {
+        Given('user is in List Pagination page', ()=> {
+            selectonlist.get.listPaginationPanel().should('contain.text', 'Cras justo odio');
+        });                       
+        
+        When('clicks on each elements of the List', () => {
+            const arr = Object.keys(selectonlist.list);
+            while(arr != listPagination4) {
+                arr.click()          
+            }    
+
+        Then('should can see all elements selected', () => {
+            selectonlist.get.listPaginationPanel().should('contain.text', 'Cras justo odio Dapibus ac facilisis in Morbi leo risus Porta ac consectetur ac');
+        });
+    });
+
+
 });
+
 
 
 
