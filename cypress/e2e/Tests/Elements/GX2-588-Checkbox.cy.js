@@ -1,34 +1,40 @@
-import { checkbox } from "@pages/GX-588-Checkbox/Checkbox.js";
-import { confirm } from "@pages/GX-588-Checkbox/Checkbox.js";
-import { confirm2 } from "@pages/GX-588-Checkbox/Checkbox.js";
+import { checkbox } from '@pages/GX-588-Checkbox/Checkbox.js';
+import { confirm } from '@pages/GX-588-Checkbox/Checkbox.js';
+import { confirm2 } from '@pages/GX-588-Checkbox/Checkbox.js';
 let Rnumber;
-let index;
-let elements;
-
 
 describe('GX2-1465 | ✅ToolsQA | Elements | Check Box', () => {
-	
 	before('Setting variables', () => {
 		let lengthToggle;
-		cy.visit('/checkbox')
-		cy.get('[aria-label="Toggle"]').eq(0).click()
-		checkbox.Toggle().its('length').then(length1 => {
-			lengthToggle = length1
-			Cypress.env('length1', lengthToggle)
-			Rnumber = Cypress._.random(1, length1 - 1)
-		})
-		checkbox.elements.toggle().eq(0).click()
-	})
-	it.only('GX2- 1466 | TC1: Validate that each checkbox autocheck the inner ones.', () => {
-		checkbox.elements.toggle().eq(0).click()
-		checkbox.selectingFolder(Rnumber)
-		checkbox.checkingFolder(Rnumber)
+		cy.visit('/checkbox');
+		checkbox.clickHometoggle();
+		checkbox
+			.Toggle()
+			.its('length')
+			.then(length1 => {
+				lengthToggle = length1;
+				Cypress.env('length1', lengthToggle);
+				Rnumber = Cypress._.random(1, length1 - 1);
+			});
+		checkbox.elements.toggle().eq(0).click();
+	});
+	it('GX2- 1466 | TC1: Validate that each checkbox autocheck the inner ones.', () => {
+		checkbox.elements.toggle().eq(0).click();
+		checkbox.selectingFolder(Rnumber);
+		checkbox.checkingFolder(Rnumber);
 		cy.wrap(confirm).each((value, index) => {
-		expect(value.toLowerCase().replace(/\s/g, '', ).replace(/\.[^.]*$/, "")).to.equal(confirm2[index].toLowerCase().replace(/\s/g, ''));
-});
-	
+			expect(
+				value
+					.toLowerCase()
+					.replace(/\s/g, '')
+					.replace(/\.[^.]*$/, '')
+			).to.equal(confirm2[index].toLowerCase().replace(/\s/g, ''));
+		});
 
-	})
+		it.only('GX2- 1466 | TC2: Validate that all the folders and files are available', () => {
+			checkbox.clickEspandall();
+		});
+	});
 
 	Cypress.on('uncaught:exception', () => {
 		// returning false here prevents Cypress from
@@ -42,5 +48,5 @@ describe('GX2-1465 | ✅ToolsQA | Elements | Check Box', () => {
 			return;
 		}
 		return origLog(opts, ...other);
-	}
+	};
 });
