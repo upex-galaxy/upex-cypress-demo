@@ -30,10 +30,9 @@ describe('GX2-1465 | ✅ToolsQA | Elements | Check Box', () => {
 					.replace(/\.[^.]*$/, '')
 			).to.equal(confirm2[index].toLowerCase().replace(/\s/g, ''));
 		});
-
-		it.only('GX2- 1466 | TC2: Validate that all the folders and files are available', () => {
-			checkbox.clickEspandall();
-		});
+	});
+	it.only('GX2- 1466 | TC2: Validate that all the folders and files are available', () => {
+		checkbox.clickEspandall();
 	});
 
 	Cypress.on('uncaught:exception', () => {
