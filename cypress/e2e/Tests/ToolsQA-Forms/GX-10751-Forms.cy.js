@@ -49,7 +49,7 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		cy.get('#hobbies-checkbox-3').click({ force: true });
 		cy.get('#submit').click({ force: true });
 	});
-	it.only('10752 | TC4: Validar realizar el registro ingresando caracteres alfabéticos en Mobile Number.', () => {
+	it('10752 | TC4: Validar realizar el registro ingresando caracteres alfabéticos en Mobile Number.', () => {
 		cy.get('#firstName').type('Pereza');
 		cy.get('#firstName').should('have.value', 'Pereza');
 		cy.get('#lastName').type('Pataquiva');
