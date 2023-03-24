@@ -12,9 +12,9 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		cy.get('#userNumber').type('1234567890');
 		// se decide dejar para mas tarde por falta de conocimiento, se requiere mas info.
 		cy.get('#subjectsInput').type('Mi mama me mima');
-		cy.get('[class*=custom-control-inline]').click();
-		cy.get('[class*=custom-control-inline]').click();
-		cy.get('[class*=custom-control-inline]').click();
+		cy.get('#hobbies-checkbox-1').click({ force: true });
+		cy.get('#hobbies-checkbox-2').click({ force: true });
+		cy.get('#hobbies-checkbox-3').click({ force: true });
 		cy.get('#submit').click({ force: true });
 	});
 	//
