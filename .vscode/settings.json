@@ -1,4 +1,56 @@
 {
+	"workbench.settings.editor": "json",
+	"workbench.colorTheme": "Night Owl",
+	"workbench.iconTheme": "vscode-icons",
+	"cSpell.language": "en,es",
+	"terminal.integrated.defaultProfile.windows": "Git Bash",
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[Typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[feature]": {
+		"editor.defaultFormatter": "alexkrechik.cucumberautocomplete"
+	},
+	"files.associations": {
+		"*.feature": "feature"
+	},
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+	"editor.quickSuggestions": {
+		"comments": false,
+		"strings": true,
+		"other": true
+	},
+	"editor.formatOnType": true,
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
+	"editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+	"editor.tabCompletion": "on",
+	"editor.lineHeight": 20,
+	"editor.cursorBlinking": "expand",
+	"eslint.validate": ["typescript", "javascript", "ts", "js"],
+	"eslint.format.enable": true,
+	"eslint.codeAction.showDocumentation": {
+		"enable": true
+	},
+	"cSpell.enableFiletypes": ["cucumber"],
+	"cSpell.autoFormatConfigFile": true,
+	"cucumber.features": ["*/**/.feature"],
+	"cucumber.glue": ["*/**/.ts", "*/**/.js"],
+	"cypressHelper.menuItems": {
+		"OpenCypress": false,
+		"RunCypress": false,
+		"GenerateCustomCommandTypes": true,
+		"GoToCustomCommand": false,
+		"FindCustomCommandReferences": true,
+		"FindStepDefinitionReferences": true,
+		"SchemaGenerator": false,
+		"ParseHAR": false,
+		"mockAutocomplete": false
+	},
 	"cucumberautocomplete.strictGherkinCompletion": true,
 	"cucumberautocomplete.strictGherkinValidation": false,
 	"cucumberautocomplete.customParameters": [
@@ -12,115 +64,8 @@
 		"But": "relative"
 	},
 	"cucumberautocomplete.onTypeFormat": true,
-	"editor.quickSuggestions": {
-		"comments": false,
-		"strings": true,
-		"other": true
-	},
 	"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
 	"cucumberautocomplete.stepRegExSymbol": "'",
-	"workbench.colorTheme": "Shades of Purple",
-	"cSpell.language": "en,es",
-	"terminal.integrated.defaultProfile.windows": "Git Bash",
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"[html]": {
-		"editor.defaultFormatter": "vscode.html-language-features"
-	},
-	"[javascript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[Typescript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[python]": {
-		"editor.defaultFormatter": "ms-python.python"
-	},
-	"[feature]": {
-		"editor.defaultFormatter": "alexkrechik.cucumberautocomplete"
-	},
-	"editor.formatOnType": false,
-	"editor.formatOnPaste": false,
-	"editor.formatOnSave": false,
-	"editor.wordWrap": "on",
-	"editor.accessibilitySupport": "off",
-	"editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-	"python.formatting.provider": "autopep8",
-	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-	"html.format.wrapLineLength": 150,
-	"prettier.singleQuote": true,
-	"prettier.semi": false,
-	"prettier.useTabs": true,
-	"prettier.arrowParens": "avoid",
-	"workbench.settings.editor": "json",
 	"git.enableSmartCommit": true,
-	"editor.tabCompletion": "on",
-	"editor.lineHeight": 20,
-	"editor.cursorBlinking": "expand",
-	"cSpell.enableFiletypes": ["cucumber"],
-	"workbench.iconTheme": "material-icon-theme",
-	"material-icon-theme.folders.color": "#7cb342",
-	"material-icon-theme.files.associations": {
-		"*.tx.js": "Test-jsx",
-		"*.cy.js": "Test-js",
-		"*.Page.json": "3d",
-		"*.Page.js": "3d",
-		"*.js": "Cypress",
-		"commands.js": "webpack",
-		"*.yml": "todo",
-		"*.json": "Cypress",
-		"scripts.js": "console",
-		".cypress-cucumber-preprocessorrc.json": "cucumber",
-		"cucumber-report.json": "cucumber",
-		"cucumber-json-formatter.exe": "cucumber",
-		"cucumber-html-report.js": "cucumber",
-		"settings.json": "Vscode",
-		"launch.json": "http",
-		"package-lock.json": "npm",
-		"package.json": "npm",
-		"jsconfig.json": "conduct",
-		"jsregression.json": "conduct"
-	},
-	"material-icon-theme.folders.associations": {
-		"api-testing": "api",
-		"db-testing": "database",
-		"ui-testing": "app",
-		"gherkin": "meta",
-		"stepDefinitions": "test",
-		"suites": "test",
-		"cucumber-formatter": "environment",
-		"DOM": "class",
-		"POM": "context",
-		"Pages": "context",
-		"How-to": "content",
-		"US": "Storybook",
-		"test-plan": "docs",
-		"mochawesome-report": "log",
-		"smoke": "core",
-		"sanity": "target",
-		"regression": "ci",
-		"in-sprint": "Storybook",
-		"sprint-1": "Storybook",
-		"cucumber-test": "Resolver",
-		"fixtures": "container",
-		"support": "Helper",
-		"cucumber-html-report": "meta",
-		"material-icons": "examples",
-		"workflows": "github"
-	},
-	"cypressHelper.menuItems": {
-		"OpenCypress": false,
-		"RunCypress": false,
-		"GenerateCustomCommandTypes": true,
-		"GoToCustomCommand": false,
-		"FindCustomCommandReferences": true,
-		"FindStepDefinitionReferences": true,
-		"SchemaGenerator": false,
-		"ParseHAR": false,
-		"mockAutocomplete": false
-	},
-	"cSpell.autoFormatConfigFile": true,
-	"githubPullRequests.ignoredPullRequestBranches": [
-		"cypex"
-	]
+	"githubPullRequests.ignoredPullRequestBranches": ["main"]
 }

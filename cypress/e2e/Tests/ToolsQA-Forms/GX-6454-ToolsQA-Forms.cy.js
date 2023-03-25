@@ -5,11 +5,10 @@
 // //import {name} from "cypress\e2e\support\pages\Name.Page.js
 
 // //import {name} from '../cypress/support/pages/Name.Page.js'
-  
+
 // //import {name} from '@pages/Name.Page'
 
 // //import {fixtureRegisterStudent} from '../../../fixtures/images/fixtureRegisterStudent.json'
-
 
 // import {name} from '../../../support/pages/Name.Page'
 // import {male} from '../../../support/pages/Male.Page'
@@ -19,25 +18,20 @@
 // import {submit} from '../../../support/pages/Submit.Page'
 // import { datebirth } from '@pages/DateBirth.Page'
 
-
-
-
-
-
 // describe ('ToolsQA |Forms',() =>{
 
-//     let the 
-    
+//     let the
+
 //     beforeEach('visit web',()=>{
-        
+
 //         cy.visit('https://demoqa.com/automation-practice-form')
 //         cy.fixture("fixtureRegisterStudent").then((Date)=>{
-//             the = Date 
+//             the = Date
 //         })
 //     })
 
 //     it('TC1: Validar registrar estudiante exitosamente con datos full validos',()=>{
-        
+
 //         name.typeFirstName(the.firstname) //lastname
 //         name.typeLastName(the.lastname) //firstname
 
@@ -51,8 +45,6 @@
 //         const day = date.getDate().toString();
 //         const month = date.getMonth();
 //         const year = date.getFullYear();
-
-    
 
 //         const months = {
 // 	    0: "Jan",
@@ -74,12 +66,12 @@
 //         cy.wait(4000)
 //         //cy.get('#dataOfBirthInput').should('have.value', finalDate)
 //         cy.get('#dateOfBirthInput').should('have.attr', 'value', finalDate)
-       
+
 //         //cy.get('[class*="month-dropdown-container"]').contains('May').click({force: true})
 //         //cy.get('[class*="month-dropdown-container"]').eq(3).click()
 //         //cy.get('.react-datepicker__month-select').eq(3).click()
 //         //cy.get('[class*="month-dropdown-container"]').select(4)
-        
+
 //         datebirth.clickDataPicker()
 //         datebirth.selectYear()
 //         datebirth.selectMonth()
@@ -96,25 +88,21 @@
 //         // cy.get('#city').click()
 //         // cy.get('#react-select-4-option-0').click()
 
-  
-
 //         statecity.selectState()  //seleccion de estado
 //         statecity.selectCity() //seleccion de ciudad
 
 //         submit.buttonSumit()
-        
 
-//         //cy.get('#dateOfBirthInput')                     
-    
+//         //cy.get('#dateOfBirthInput')
+
 //     })
 
 //     it ('TC2 Validar no poder registrar estudiante con datos full nulos mobile number con 9 caracteres',()=>{
 //         submit.buttonSumit()
 //     } )
 
-
 //     it ('TC3 Validar no poder registrar estudiande con email que no contenga @', ()=>{
-       
+
 //         name.typeFirstName(the.firstname) //lastname
 //         name.typeLastName(the.lastname) //firstname
 
@@ -126,7 +114,6 @@
 //         datebirth.selectYear()
 //         datebirth.selectMonth()
 //         datebirth.selectDay()
-
 
 //         paahs.typeTelephoneNumber(the.numMobileTC3) // escribir numero de telefono
 //         paahs.typeCurrent(the.Adress)   //Escribir direccion
@@ -154,7 +141,6 @@
 //         datebirth.selectMonth()
 //         datebirth.selectDay()
 
-
 //         paahs.typeTelephoneNumber(the.numMobileTC4) // escribir numero de telefono
 //         paahs.typeCurrent(the.Adress)   //Escribir direccion
 //         paahs.selectHobbies()  //seleccionar hobbi
@@ -181,7 +167,6 @@
 //         datebirth.selectMonth()
 //         datebirth.selectDay()
 
-
 //         paahs.typeTelephoneNumber(the.numMobileTC1) // escribir numero de telefono
 //         paahs.typeCurrent(the.Adress)   //Escribir direccion
 //         paahs.selectHobbies()  //seleccionar hobbi
@@ -195,7 +180,7 @@
 //     })
 
 //     it ('TC6 Validar no poder registrar estudiande con email que no contenga un "." (punto) despues del @',()=>{
-        
+
 //         name.typeFirstName(the.firstname) //lastname
 //         name.typeLastName(the.lastname) //firstname
 
@@ -207,7 +192,6 @@
 //         datebirth.selectYear()
 //         datebirth.selectMonth()
 //         datebirth.selectDay()
-
 
 //         paahs.typeTelephoneNumber(the.numMobileTC1) // escribir numero de telefono
 //         paahs.typeCurrent(the.Adress)   //Escribir direccion
@@ -229,12 +213,11 @@
 //         male.selectMale()  //radio button genero male
 
 //         email.typeEmail(the.EmailTC7)  //email
-        
+
 //         datebirth.clickDataPicker()
 //         datebirth.selectYear()
 //         datebirth.selectMonth()
 //         datebirth.selectDay()
-
 
 //         paahs.typeTelephoneNumber(the.numMobileTC1) // escribir numero de telefono
 //         paahs.typeCurrent(the.Adress)   //Escribir direccion
@@ -249,13 +232,9 @@
 
 //     })
 
-
-
-
 // } )
 
-
-// Cypress.on('uncaught:exception', (err, runnable) => {
+// Cypress.on('uncaught:exception', () => {
 //     // returning false here prevents Cypress from
 //     // failing the test
 //     return false
@@ -268,4 +247,3 @@
 //     }
 //     return origLog(opts, ...other)
 //   }
-  
