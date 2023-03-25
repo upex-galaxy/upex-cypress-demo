@@ -1,6 +1,6 @@
 describe('✅ToolsQA | Elements | Radio Buttons', () => {
 	beforeEach(() => {
-		cy.visit('https://demoqa.com/radio-button');
+		cy.visit('https://demoqa.com/radio-button', { timeout: 15000 });
 	});
 	it('11550 | TC1: Validar que al dar click en el Button Yes, parezca en la leyenda la palabra Yes.', () => {
 		cy.get('[name="like"]').eq(0).click({ force: true });
