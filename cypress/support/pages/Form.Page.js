@@ -1,19 +1,25 @@
-export const form = new Form();
-
 class Form {
-    visit() {
-        cy.visit(`${baseUrl}`)
-    }
+	get = {
+		inputName: () => cy.get('#userName'),
+		inputEmail: () => cy.get('#userEmail'),
+		inputCaddress: () => cy.get('#currentAddress'),
+		inputPaddress: () => cy.get('#permanentAddress'),
+		assertConfirm: () => cy.get('[class*="border"]'),
+	};
 
-    fillForm(userName, userEmail, currentAddress, permanentAddress) {
-        cy.get('#userName').type(userName)
-        cy.get('#userEmail').type(userEmail)
-        cy.get('#currentAddress').type(currentAddress)
-        cy.get('#permanentAddress').type(permanentAddress)
-    }
+	visit() {
+		cy.visit('text-box');
+	}
 
-    submitForm() {
-        cy.contains('Submit').click()
-    }
+	fillForm(userName, userEmail, currentAddress, permanentAddress) {
+		this.get.inputName().type(userName);
+		this.get.inputEmail().type(userEmail);
+		this.get.inputCaddress().type(currentAddress);
+		this.get.inputPaddress().type(permanentAddress);
+	}
+
+	submitForm() {
+		cy.contains('Submit').click();
+	}
 }
-
+export const form = new Form();
