@@ -1,11 +1,11 @@
 import { form } from '@pages/Form.Page';
 
-describe('US # : GX-8748', () => {
+describe('8748 : ✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	beforeEach('Precondition: user is currently in the page form', () => {
 		form.visit();
 	});
 
-	it('US #8748: TS 11663 | TC1 : Should submit the form with all the required fields', () => {
+	it('8749 | TC1 : Should submit the form with all the required fields', () => {
 		const name = 'Florencia';
 		const email = 'florgomez@hotmail.com';
 		const currentaddress = 'Liniers 345';
