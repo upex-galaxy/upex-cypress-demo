@@ -6,7 +6,9 @@ let firstIndex;
 let checked;
 let number;
 let filelength;
-export let text1, text2;
+export let text1;
+export let text2;
+let text22;
 
 class Checkbox {
 	elements = {
@@ -90,31 +92,36 @@ class Checkbox {
 					.then(filexcheckbox => {
 						number = Cypress._.random(0, filexcheckbox - 1);
 						this.elements.filescheckboxes().eq(number).click();
+						cy.log(`Number is: ${number}`);
+						cy.log(`filelength: ${filelength}`);
 
-						cy.get('li.rct-node.rct-node-leaf span.rct-text label')
-							.then(arr => {
-								const newarr = arr.toArray();
-								cy.log(newarr);
-								for (let i = 0; i <= filelength - 1; i++) {
-									if (i === number) {
-										text1 = Cypress.$(newarr[i]).text();
-									}
+						cy.get('li[class*="rct-node-leaf"]').then(arr => {
+							const newarr = arr.toArray();
+							cy.log(newarr);
+							for (let i = 0; i <= filelength - 1; i++) {
+								if (i === number) {
+									cy.wrap(newarr[i])
+										.invoke('text')
+										.then(txt => {
+											text1 = txt;
+											cy.log(`Text1: ${text1}`);
+										});
+									cy.log(i);
 									break;
 								}
-							})
-							.then(() => {
-								cy.wrap(text1).as('text1');
-							});
+							}
+						});
 					});
+
 				cy.get('[class="text-success"]')
-					.eq(0)
+					.first()
 					.invoke('text')
 					.then(tex => {
-						text2 = tex;
-						cy.log(text2);
+						text22 = Cypress.env('textconfirm2', tex);
+						cy.log(`Text 2: ${text22}`);
 					});
+				cy.log(`Text 2: ${text22}`);
 			});
-		cy.log(text1);
 	}
 }
 
