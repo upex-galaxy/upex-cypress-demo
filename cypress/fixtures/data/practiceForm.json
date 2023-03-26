@@ -1,0 +1,11 @@
+{
+    "url": "https://demoqa.com/automation-practice-form",
+	"firstName": "David",
+	"lastName": "Smith",
+	"email": "smith@gmail.com",
+    "numberPhone": "3512448567",
+    "address": "Av. William Guido 345",
+    "subjects": "e",
+    "pathPicture": "cypress/fixtures/images/upexlogo.png",
+    "state": "ha"
+}

@@ -21,6 +21,8 @@ class Form {
 		dropdownSelectCity: () => cy.get('#city input'),
 		dropdownSelectCityChildren: () => cy.get('#city').find('div[class*="menu"]').children().children(),
 		btnSubmit: () => cy.get('#submit'),
+		btnClose: () => cy.get('#close-fixedban'),
+		containerModal: () => cy.get('.modal-content'),
 	};
 }
 
