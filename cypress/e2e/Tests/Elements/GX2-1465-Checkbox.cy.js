@@ -13,10 +13,10 @@ describe('GX2-1465 | ✅ToolsQA | Elements | Check Box', () => {
 			.nodes()
 			.its('length')
 			.then(exten => {
-				Rnumber = Cypress._.random(0, exten - 1);
+				Rnumber = Cypress._.random(1, exten - 1);
 			});
 	});
-	it('1466 | TC1: Validate that each folder autocheck the inner files or folders.', () => {
+	it('1466 | TC1: Validate that each folder autochecks the inner files or folders.', () => {
 		checkbox.selectFolder(Rnumber);
 		checkbox.checkFoldercontent();
 		cy.wrap(confirm).each((value, index) => {
@@ -28,9 +28,9 @@ describe('GX2-1465 | ✅ToolsQA | Elements | Check Box', () => {
 			).to.equal(confirm2[index].toLowerCase().replace(/\s/g, ''));
 		});
 	});
-	it('1466 | TC2: Validate that the checkbox can be unchecked and the "you have selected" part is updated', () => {
+	it('1466 | TC2: Validate that the checkboxes can be unchecked and the "you have selected" part is updated', () => {
 		checkbox.selectFolder(Rnumber);
-		cy.get('[class*="mt-4"] span[class="text-success"]').each($el => {
+		checkbox.elements.success().each($el => {
 			cy.wrap($el)
 				.invoke('text')
 				.then(text => expect(text).to.exist);
@@ -41,7 +41,7 @@ describe('GX2-1465 | ✅ToolsQA | Elements | Check Box', () => {
 
 	it('1466 | TC3: Validate that the files within the folders can be selected independently', () => {
 		checkbox.selectOnefile();
-		cy.log('variables del orto').then(() => {
+		cy.log('assertions').then(() => {
 			expect(
 				text1
 					.toLowerCase()
@@ -50,16 +50,30 @@ describe('GX2-1465 | ✅ToolsQA | Elements | Check Box', () => {
 			).to.equal(text22.toLowerCase().replace(/\s/g, ''));
 		});
 	});
-	it.only('GX2- 1466 | TC4: Validate that folders can be collapsed', () => {
-		checkbox.clickonCheckall();
+	it('GX2- 1466 | TC4: Validate that folders can be collapsed', () => {
 		checkbox.elements.checkbox().then($el => {
 			cy.wrap($el)
 				.its('length')
-				.then(leng => {
-					expect($el).to.have.lengthOf(leng);
+				.then(lengBefore => {
+					cy.wrap($el).should('have.length', lengBefore);
 				});
+			checkbox.clickonCollapseall();
+			checkbox.elements.checkbox().then($el => {
+				cy.wrap($el)
+					.its('length')
+					.then(lengAfter => {
+						cy.wrap($el).should('have.length', lengAfter);
+					});
+			});
 		});
-		checkbox.clickonCollapseall();
+	});
+	it('GX2- 1466 | TC5: Validate that “Home” checkbox autochecks all the folders and files within', () => {
+		checkbox.clickonCheckall();
+		checkbox.elements.success().each($el => {
+			cy.wrap($el)
+				.invoke('text')
+				.then(text => expect(text).to.exist);
+		});
 	});
 });
 

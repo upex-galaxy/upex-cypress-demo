@@ -132,7 +132,7 @@ class Checkbox {
 						cy.wrap(elements[i])
 							.invoke('text')
 							.then(txt => {
-								expect(txt).to.exist;
+								confirm.push(txt);
 							});
 					}
 				});
