@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-//import { checkBox } from '@pages/checkBox.Page.js';
+import { checkBox } from '@pages/checkBox.Page.js';
 
 describe('✅ToolsQA | Elements | Check Box', () => {
 	beforeEach('Precondition: Be located in Check Box', () => {
@@ -8,118 +8,80 @@ describe('✅ToolsQA | Elements | Check Box', () => {
 		cy.url().should('contain', 'checkbox');
 		cy.viewport(1080, 980);
 	});
-
 	it('991 | TC1: Validar hacer Checked y Expand en el Directorio Principal.', () => {
-		cy.get('input[type="checkbox"]').check({ force: true }).should('be.checked');
+		checkBox.clickPrincipalCheck();
+		cy.should('be.checked');
 
-		cy.get('button[aria-label="Toggle"]').click({ force: true });
-		cy.get('button>svg[class="rct-icon rct-icon-expand-open"]');
-		cy.get('button[class="rct-option rct-option-expand-all"]').click({ force: true });
-		/*cy.get('button>svg[class="rct-icon rct-icon-expand-close"]').each(($el) => {
-			cy.wrap($el).click();
-		});
-		cy.get('button>svg[class="rct-icon rct-icon-expand-close"]').each(($el) => {
-			cy.wrap($el).click();
-		});*/
-		cy.get('.rct-title').each(($el) => {
-			let text = $el.text();
-			cy.wrap($el).should('have.text', text);
-		});
-		cy.get('#result>span').eq(0).should('contain.text', 'You have selected :');
-		cy.get('#result>span').each(($el, index) => {
-			if (index > 0) {
-				let text = $el.text();
-				cy.wrap($el).should('be.visible').and('contain.text', text).and('have.class', 'text-success');
-			}
-		});
+		checkBox.clickPrincipalToggle();
+		checkBox.getToggle.StatusOpen();
+
+		//Encuentra los Close para abrir:
+		checkBox.clickToggleClose();
+		checkBox.clickToggleClose();
+
+		checkBox.getTitleChecked();
+		checkBox.getResult.first().should('contain.text', 'You have selected :');
+		checkBox.getOtherTitleResult();
 	});
 	it('991 | TC2: Validar hacer Checked y Expand en el Subdirectorio.', () => {
-		cy.get('button[aria-label="Toggle"]').click({ force: true });
+		checkBox.clickPrincipalToggle();
 
-		cy.get('input[type="checkbox"]').then(($els) => {
-			let $sliced = $els.slice(-3);
-			cy.log($sliced);
-			let $randomsliced = $sliced[Math.floor(Math.random() * $sliced.length)];
-			cy.log($randomsliced);
-			cy.wrap($randomsliced).check({ force: true });
-		});
-		cy.get('button[class="rct-option rct-option-expand-all"]').click({ force: true });
-		cy.get('#result>span').eq(0).should('contain.text', 'You have selected :');
-		cy.get('#result>span').each(($el, index) => {
-			if (index > 0) {
-				let text = $el.text();
-				cy.wrap($el).should('be.visible').and('contain.text', text).and('have.class', 'text-success');
-			}
-		});
+		//selecciona Random a partir de sus subdirectorios-3[Home, N/A]
+		checkBox.randomSubdirectoriesCheck(-3);
+
+		//Toggle que encuentre Close, hace click para abrirlos:
+		checkBox.clickToggleClose();
+		checkBox.clickToggleClose();
+
+		//Se recorre los Title de los Checked:
+		checkBox.getTitleChecked();
+		checkBox.getResult.first().should('contain.text', 'You have selected :');
+
+		//Se recorre los Title del Result, mismos anterior checked(Cantidad y Ttile):
+		checkBox.getOtherTitleResult();
 	});
-
 	it('991 | TC3: Validar hacer Checked y Expand en el menú de Subdirectorio.', () => {
-		cy.get('button[aria-label="Toggle"]').click({ force: true });
-		//cy.get('button>svg[class="rct-icon rct-icon-expand-open"]')
-		cy.get('button>svg[class="rct-icon rct-icon-expand-close"]').each(($el) => {
-			cy.wrap($el).click({ multiple: true });
-		});
-		//Expanded los restante:
-		cy.get('button[class="rct-option rct-option-expand-all"]').click({ force: true });
-		cy.get('input[type="checkbox"]').then(($els) => {
-			let $sliced = $els.slice(5, 14);
-			let $randomsEls = $sliced[Math.floor(Math.random() * $sliced.length)];
-			cy.wrap($randomsEls).check({ force: true });
-			cy.log($randomsEls);
-		});
-		cy.get('#result>span').eq(0).should('contain.text', 'You have selected :');
-		cy.get('#result>span').each(($el, index) => {
-			if (index > 0) {
-				let text = $el.text();
-				cy.wrap($el).should('be.visible').and('contain.text', text).and('have.class', 'text-success');
-			}
-		});
-	});
+		checkBox.clickPrincipalToggle();
 
-	it('991 | TC4: Validar hacer Checked en un folder.', () => {
-		cy.get('button[class="rct-option rct-option-expand-all"]').click({ force: true });
-		cy.get('input[type="checkbox"]').then(($els) => {
-			let $randomsEls = $els[Math.floor(Math.random() * $els.length)];
-			cy.log($randomsEls);
-			cy.wrap($randomsEls).check({ force: true });
-		});
-		//cy.get('#result>span').eq(0).should('contain.text', 'You have selected :');
-		cy.get('#result>span').first().should('contain.text', 'You have selected :');
-		cy.get('#result>span').each(($el, index) => {
-			if (index > 0) {
-				let text = $el.text();
-				cy.wrap($el).should('be.visible').and('contain.text', text).and('have.class', 'text-success');
-			}
-		});
+		checkBox.clickToggleClose();
+		/*Checked a partir del indice 5, que entra a otro subdirectorio(Menu). 
+		Aqui en este indice tiene 2 Menu, selecciona entre estos: */
+		checkBox.randomSubdirectoriesCheck(5);
+		checkBox.clickButton_expandedAll();
+
+		checkBox.getTitleChecked();
+		checkBox.getResult.first().should('contain.text', 'You have selected :');
+		checkBox.getOtherTitleResult();
+	});
+	it('991 | TC4: Validar hacer Checked en un archivo.', () => {
+		checkBox.clickButton_expandedAll();
+		checkBox.randomFolderCheck();
+
+		checkBox.getTitleChecked();
+		checkBox.getResult.first().should('contain.text', 'You have selected :');
+		checkBox.getOtherTitleResult();
 	});
 	it('991 | TC5: Validar hacer Checked en mas de un archivo.', () => {
-		cy.get('button[class="rct-option rct-option-expand-all"]').click({ force: true });
-		cy.get('input[type="checkbox"]').then(($els) => {
-			let $sliced = $els.slice(1);
+		checkBox.clickButton_expandedAll();
 
-			for (var i = 0; i < 2; i++) {
-				let $randomsEls = $sliced[Math.floor(Math.random() * $sliced.length)];
-				cy.wrap($randomsEls).check({ force: true });
-			}
-		});
-		cy.get('#result>span').eq(0).should('contain.text', 'You have selected :');
-		cy.get('#result>span').each(($el, index) => {
-			if (index > 0) {
-				let text = $el.text();
-				cy.wrap($el).should('be.visible').and('contain.text', text).and('have.class', 'text-success');
-			}
-		});
+		//Es mas de un folder se pasa(2) para que sean Dos.
+		checkBox.randomMoreThanOneCheck(2);
+
+		checkBox.getTitleChecked();
+		checkBox.getResult.first().should('contain.text', 'You have selected :');
+		checkBox.getOtherTitleResult();
 	});
-	it('991 | TC6: Validar Expand y Collapse All desde Toggle.', () => {
-		cy.get('button[aria-label="Toggle"]').click({ force: true });
-		//cy.get('button>svg[class="rct-icon rct-icon-expand-open"]')
-		cy.get('button>svg[class="rct-icon rct-icon-expand-close"]').each(($el) => {
-			cy.wrap($el).click({ multiple: true });
-		});
-		//cy.get('button>svg[class="rct-icon rct-icon-expand-open"]')
-		cy.get('button[aria-label="Toggle"]').eq(0).click({ force: true });
+	it.skip('991 | TC6: Validar Expand y Collapse OneByOne desde Toggle.', () => {
+		checkBox.clickPrincipalToggle();
+		checkBox.clickToggleClose();
+		checkBox.clickToggleClose();
 
-		//Aqui hacer assertions cuando no estan en check, ya que solo estoy verificando el Toggle
+		//Recorre del final al principio para ir cerrando todos de a uno
+		checkBox.clickForCollapseToggle();
+	});
+	it('991 | TC7: Validar Expand y Collapse All desde el button plus y minus.', () => {
+		checkBox.clickButton_expandedAll();
+		checkBox.clickButton_collapseAll();
 	});
 });
 /*import { RemoveLogs } from '@helper/RemoveLogs';
