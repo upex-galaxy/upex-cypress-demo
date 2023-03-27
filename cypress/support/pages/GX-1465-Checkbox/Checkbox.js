@@ -7,13 +7,13 @@ let checked;
 let number;
 let filelength;
 export let text1;
-export let text2;
-let text22;
+export let text22;
 
 class Checkbox {
 	elements = {
 		checkbox: () => cy.get('span[class="rct-checkbox"]'),
-		expandall: () => cy.get('[class="rct-icon rct-icon-expand-all"]'),
+		expandall: () => cy.get('[class*="-expand-all"]'),
+		collapseall: () => cy.get('[class*="-collapse-all"]'),
 		nodes: () => cy.get('li.rct-node.rct-node-parent.rct-node-expanded'),
 		success: () => cy.get('[class="text-success"]'),
 		filescheckboxes: () => cy.get('li.rct-node.rct-node-leaf span.rct-text label span.rct-checkbox'),
@@ -77,7 +77,7 @@ class Checkbox {
 	}
 
 	clickEspandall() {
-		this.elements.expandall().click();
+		this.elements.expandall().first().click();
 	}
 	selectOnefile() {
 		checkbox.elements
@@ -104,7 +104,6 @@ class Checkbox {
 										.invoke('text')
 										.then(txt => {
 											text1 = txt;
-											cy.log(`Text1: ${text1}`);
 										});
 									cy.log(i);
 									break;
@@ -117,11 +116,30 @@ class Checkbox {
 					.first()
 					.invoke('text')
 					.then(tex => {
-						text22 = Cypress.env('textconfirm2', tex);
-						cy.log(`Text 2: ${text22}`);
+						text22 = tex;
 					});
-				cy.log(`Text 2: ${text22}`);
 			});
+	}
+	clickonCheckall() {
+		this.elements.checkbox().first().click({ force: true });
+		this.elements
+			.checkbox()
+			.its('length')
+			.then(leng => {
+				filelength = leng;
+				cy.get('span[class*="rct-text"]').then(elements => {
+					for (let i = 0; i <= filelength - 1; i++) {
+						cy.wrap(elements[i])
+							.invoke('text')
+							.then(txt => {
+								expect(txt).to.exist;
+							});
+					}
+				});
+			});
+	}
+	clickonCollapseall() {
+		this.elements.collapseall().first().click();
 	}
 }
 
