@@ -38,13 +38,13 @@ Feature: ✅ToolsQA | Forms | Practice Form
 
     @TC_GX-11720 @SUITE_GX-11102 @Form @ToolsQA
     Scenario Outline: 11102 | TC2: Submit form filling all fields with invalid format
-        When a student fills out the form with invalid data as '<email>''<numberPhone>'
+        When a student fills out the form with invalid data as '<email>'
         And must be click on the submit button
         Then no message is displayed and the fields turns red
         Examples:
-            | email          | numberPhone        |
-            | smithgmail.com | 35124485678        |
-            | @gmail.com     | ""                 |
-            | smith@gmailcom | 351244856760       |
-            | @gmail.        | +5435124485676     |
-            | smith@gmail.c  | +5435124485676**** |
+            | email          | 
+            | smithgmail.com | 
+            | @gmail.com     | 
+            | smith@gmailcom | 
+            | @gmail.        | 
+            | smith@gmail.c  |

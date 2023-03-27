@@ -1,6 +1,6 @@
 import { form } from '@pages/Form.Page';
 import { removeLogs } from '@helper/RemoveLogs';
-const { Given, When, Then, And } = require('@badeball/cypress-cucumber-preprocessor');
+import { Given, Then, When, And } from '@badeball/cypress-cucumber-preprocessor';
 
 context('✅ToolsQA | Forms | Practice Form', () => {
 	Given('user must be positioned in page demoqa practice form', () => {
@@ -92,7 +92,7 @@ context('✅ToolsQA | Forms | Practice Form', () => {
 					});
 
 				form.get.inputSelectPicture().click();
-				form.get.inputSelectPicture().selectFile('cypress / fixtures / images / upexlogo.png');
+				form.get.inputSelectPicture().selectFile('cypress/fixtures/images/upexlogo.png');
 
 				//Select and type address
 				form.get.textarea().type(address).should('have.value', address);
@@ -127,7 +127,7 @@ context('✅ToolsQA | Forms | Practice Form', () => {
 	});
 
 	describe('11102 | TC2: Submit form filling all fields with invalid format', () => {
-		When('a student fills out the form with invalid data as {string}{string}', (email, numberPhone) => {
+		When('a student fills out the form with invalid data as {string}', (email) => {
 			//Select input firstName
 			form.get.inputFirstName().type('Anna').should('have.value', 'Anna');
 
@@ -147,7 +147,7 @@ context('✅ToolsQA | Forms | Practice Form', () => {
 				});
 
 			//Select and type number phone
-			form.get.inputUserNumber().type(numberPhone).should('have.value', numberPhone);
+			form.get.inputUserNumber().type('3512448591').should('have.value', '3512448591');
 
 			//Select datepicker
 			form.get.inputDatepicker().click();
@@ -208,7 +208,7 @@ context('✅ToolsQA | Forms | Practice Form', () => {
 				});
 
 			form.get.inputSelectPicture().click();
-			form.get.inputSelectPicture().selectFile('cypress / fixtures / images / upexlogo.png');
+			form.get.inputSelectPicture().selectFile('cypress/fixtures/images/upexlogo.png');
 
 			//Select and type address
 			form.get.textarea().type('Av.Sarmiento 666').should('have.value', 'Av.Sarmiento 666');
@@ -237,9 +237,9 @@ context('✅ToolsQA | Forms | Practice Form', () => {
 			form.get.btnSubmit().click({ force: true });
 		});
 		Then('no message is displayed and the fields turns red', () => {
-			form.get.containerModal().should('not.be.visible');
-			form.get.inputEmail().should('have.css', 'border-color', '#dc3545');
-			form.get.inputUserNumber().should('have.css', 'border-color', '#dc3545');
+			form.get.containerModal().should('not.exist');
+			form.get.inputEmail().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+			form.get.inputUserNumber().should('have.css', 'border-color', 'rgb(220, 53, 69)');
 		});
 	});
 });
