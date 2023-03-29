@@ -72,17 +72,17 @@ jobs:
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
                       npm run file cypress/e2e/cucumber-test/stepDefinitions/GX-11101-PracticeForm.js
 
-            - name: ✅Import Test Results to Xray
-              if: always()
-              uses: mikepenz/xray-action@v2
-              with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
-                  username: ${{secrets.XRAY_CLIENT_ID}}
-                  password: ${{secrets.XRAY_CLIENT_SECRET}}
-                  testFormat: 'json' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
-                  testPaths: 'cucumber-report.json' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
-                  testExecKey: 'GX-11102' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
-                  projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
-                  testEnvironments: 'Chrome' #ELEGIR EL AMBIENTE DE PRUEBAS (Igual al TX).
+            # - name: ✅Import Test Results to Xray
+            #   if: always()
+            #   uses: mikepenz/xray-action@v2
+            #   with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
+            #       username: ${{secrets.XRAY_CLIENT_ID}}
+            #       password: ${{secrets.XRAY_CLIENT_SECRET}}
+            #       testFormat: 'json' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
+            #       testPaths: 'cucumber-report.json' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
+            #       testExecKey: 'GX-11102' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+            #       projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
+            #       testEnvironments: 'Chrome' #ELEGIR EL AMBIENTE DE PRUEBAS (Igual al TX).
 
             - name: 🔧Generate Cucumber HTML Report
               if: always()
