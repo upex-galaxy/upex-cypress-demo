@@ -1,24 +1,26 @@
 import { removeLogs } from '@helper/RemoveLogs';
-const { textBox } = require('../../../support/pages/GX-9552-Text-Box/Text-Box');
+import { textBox } from '@pages/GX-9552-Text-Box/Text-Box';
+
 const fullName = 'Marcos';
 const currentAddress = 'AV Moreno';
 const permanentAddress = 'Pilar 33';
 const userEmail = 'css@mail.com';
 
-//const baseUrl = Cypress.e2e('baseUrl');
+const textbox = 'text-box';
 
 //const { fullNameInput, emailInput, currentAddressInput, permanentAddressInput, submitBtn } = cypress/support/pages/GX-9552-Text-Box/Text-Box('elements');
 
-describe('US GX-11823 | TS: ToolsQA | Elements | Text Box: Fill form and Submit', () => {
+describe('✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	beforeEach('Precondition: be located in text-box', () => {
 
-		//cy.visit('/');
-		//cy.url().should('contain', baseUrl);
+		cy.visit(textbox);
+		cy.url().should('contain', textbox);
 		//textBox.clearAllInput();
-		cy.visit('https://demoqa.com/text-box');
+		//cy.visit('https://demoqa.com/text-box');
 	});
 
 	it('11823 | TC1: Validate string is displayed below as a paragraph after submitting if Full Name is filled', () => {
+		cy.pause();
 		textBox.clearFullNameInput();
 		textBox.typeFullNameInput(fullName);
 		textBox.clickSubmitBtn();
@@ -32,7 +34,7 @@ describe('US GX-11823 | TS: ToolsQA | Elements | Text Box: Fill form and Submit'
 		//cy.get('#output').should('contain', 'currentAddress.mb-1');
 	});
 
-	it('11823 | TC3: Validate string is displayed below as a paragraph after submitting if Permanet Address is filled', () => {
+	it('11823 | TC3: Validate string is displayed below as a paragraph after submitting if Permanent Address is filled', () => {
 		textBox.clearPermanentAddressInput();
 		textBox.typePermanentAddressInput(permanentAddress);
 		textBox.clickSubmitBtn();
@@ -41,7 +43,7 @@ describe('US GX-11823 | TS: ToolsQA | Elements | Text Box: Fill form and Submit'
 	
 	it('11823 | TC4: Validate no log message is displayed after submitting if Full Name is empty', () => {
 		cy.get('#submit').click();
-		//cy.get('#output').should('not.contain', 'name');
+		cy.get('#output').should('not.be.visible');
 	});
 
 	it('11823 | TC5: Validate no log message is displayed after submitting if Current Address is empty', () => {
