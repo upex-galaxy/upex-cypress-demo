@@ -20,7 +20,7 @@ describe('✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	});
 
 	it('11823 | TC1: Validate string is displayed below as a paragraph after submitting if Full Name is filled', () => {
-		cy.pause();
+		//cy.pause();
 		textBox.clearFullNameInput();
 		textBox.typeFullNameInput(fullName);
 		textBox.clickSubmitBtn();
