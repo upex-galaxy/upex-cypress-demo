@@ -1,7 +1,7 @@
 import { removeLogs } from '@helper/RemoveLogs';
 import { textBox } from '@pages/GX-9552-Text-Box/Text-Box';
 
-const fullName = 'Marcos';
+const fullName = 'Mariano';
 const currentAddress = 'AV Moreno';
 const permanentAddress = 'Pilar 33';
 const userEmail = 'css@mail.com';
