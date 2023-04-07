@@ -69,9 +69,10 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		Formulario.get.mobileZero();
 	});
 
-	it.only('', () => {
-		cy.get('#dateOfBirth').click();
-		cy.get('.react-datepicker__month.react-datepicker__month-select').select(5).click();
-		cy.get('.react-datepicker__year-select').select(14).click();
+	it.only('TC 13 Validar calendario', () => {
+		Formulario.clickCalendario();
+		Formulario.selectRandomYear();
+		Formulario.selectRandomMes();
+		Formulario.selectRandomDay();
 	});
 });
