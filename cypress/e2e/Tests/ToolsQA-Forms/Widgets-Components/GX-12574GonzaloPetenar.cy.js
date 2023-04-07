@@ -69,7 +69,7 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		Formulario.get.mobileZero();
 	});
 
-	it.only('TC 13 Validar calendario', () => {
+	it('TC 13 Validar calendario', () => {
 		Formulario.clickCalendario();
 		Formulario.selectRandomYear();
 		Formulario.selectRandomMes();

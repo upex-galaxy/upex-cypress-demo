@@ -24,7 +24,7 @@ class formulario {
 		this.get.calendario().within(() => {
 			this.get.selectYear().then(year => {
 				const allYearList = year.children().length;
-				const Año = Math.floor(Math.random() * allYearList - 1);
+				const Año = Math.floor(Math.random() * allYearList);
 				cy.log(allYearList);
 				cy.wrap(year).select(Año);
 			});
@@ -35,7 +35,7 @@ class formulario {
 		this.get.calendario().within(() => {
 			this.get.selectMes().then(mes => {
 				const allMesList = mes.children().length;
-				const Mes = Math.floor(Math.random() * allMesList - 1);
+				const Mes = Math.floor(Math.random() * allMesList);
 				cy.log(allMesList);
 				cy.wrap(mes).select(Mes);
 			});
@@ -46,7 +46,7 @@ class formulario {
 		this.get.calendario().within(() => {
 			this.get.selectDay().then(Day => {
 				const allDayList = Day.length;
-				const dia = Math.floor(Math.random() * allDayList - 1);
+				const dia = Math.floor(Math.random() * allDayList);
 				cy.log(allDayList);
 				cy.wrap(Day).eq(dia).click();
 			});
