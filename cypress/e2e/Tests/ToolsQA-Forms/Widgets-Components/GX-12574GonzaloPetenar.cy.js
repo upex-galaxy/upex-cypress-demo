@@ -64,6 +64,7 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		Formulario.typeMobileUno(data.celularUno);
 		Formulario.get.mobileZero().should('have.value', data.celularUno);
 	});
+
 	it('TC 12 Validar campo rojo en "mobile" al estar vació', () => {
 		Formulario.typeMobileDos();
 		Formulario.get.mobileZero();
@@ -74,5 +75,53 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		Formulario.selectRandomYear();
 		Formulario.selectRandomMes();
 		Formulario.selectRandomDay();
+	});
+
+	it('TC 14 Validar Campo "Subject"', () => {
+		Formulario.clickSubject(data.typeZero, data.typeOne);
+		Formulario.get.subjectType().should('be.visible', data.typeZero);
+		Formulario.get.subjectType().should('be.visible', data.typeOne);
+	});
+
+	it('TC 15 Validar remover etiqueta del campo "subject" ', () => {
+		Formulario.clickSubject(data.typeZero, data.typeOne);
+		Formulario.get.subjectType().should('be.visible', data.typeZero);
+		Formulario.get.subjectType().should('be.visible', data.typeOne);
+		Formulario.clickSubjectRemove();
+	});
+
+	it('TC 16 Validar Campo "hobbies" seleccionando "Sports"', () => {
+		Formulario.clickHobbiesSports();
+	});
+
+	it('TC 17 Validar subir un archivo', () => {
+		Formulario.clickHobbiesSports();
+	});
+
+	it('TC 18 Validar campo "current address" con letras', () => {
+		Formulario.clickCurrentAddressZero(data.addressZero);
+		Formulario.get.currentAddress().should('be.visible', data.addressZero);
+	});
+
+	it('TC 19 Validar campo "current address" con numero', () => {
+		Formulario.clickCurrentAddressOne(data.addressOne);
+		Formulario.get.currentAddress().should('be.visible', data.addressOne);
+	});
+
+	it('TC 20 Validar campo "current address" con símbolos', () => {
+		Formulario.clickCurrentAddressTwo(data.addressTwo);
+		Formulario.get.currentAddress().should('be.visible', data.addressTwo);
+	});
+
+	it('TC 21 Validar campo "state and address"', () => {
+		Formulario.clickState();
+		Formulario.get.state();
+		Formulario.clickStateZero();
+		Formulario.get.selectCity();
+	});
+
+	it('TC 22 Validar botón "submit"', () => {
+		Formulario.clickBtnSubmit();
+		Formulario.get.btnSubmit().should('contain', 'Submit');
 	});
 });
