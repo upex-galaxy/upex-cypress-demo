@@ -226,9 +226,9 @@ describe('GX2-1662', () => {
 	});
 	it('TC22: Validate the register list will be sorted alphabetically when click on HeaderCell (Email)', () => {
 		WebTables.addMultiplesUsers({ amountOfusers: 1 });
-		const columnValues = WebTables.getColumnValuesByName('Email');
+		const columnValues = WebTables.getColumvaluesByName('Email');
 		WebTables.clickOnHeaderCell('Email');
-		const newColumnValues = WebTables.getColumnValuesByName('Email');
+		const newColumnValues = WebTables.getColumvaluesByName('Email');
 		cy.get('*').then(() => {
 			const sortedColumn = columnValues.sort();
 			expect(sortedColumn).to.deep.equal(newColumnValues);

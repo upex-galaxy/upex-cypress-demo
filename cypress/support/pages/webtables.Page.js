@@ -36,6 +36,17 @@ class webTables {
 
 		return value;
 	}
+	getColumvaluesByName(nameColumn) {
+		//metodo creado para reducir contenido en el test principal, y convertir email a lowercase porque sort es keysensitive
+		let emailValueToLowercase = [];
+		const emailColumn = this.getColumnValuesByName(nameColumn);
+		cy.get(emailColumn).each(cell => {
+			cy.wrap(cell).then(values => {
+				emailValueToLowercase.push(values.toLowerCase());
+			});
+		});
+		return emailValueToLowercase;
+	}
 
 	getColumnValuesByName(nameColumn) {
 		let columnValues = [];
@@ -48,7 +59,7 @@ class webTables {
 							.cells()
 							.eq(rowIndex)
 							.then(cell => {
-								columnValues.push(cell.text().toLowerCase());
+								columnValues.push(cell.text());
 							});
 					});
 				});
