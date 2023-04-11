@@ -14,6 +14,7 @@ import 'cypress-downloadfile/lib/downloadFileCommand';
 import { login } from '@pages/Login.Page';
 const { authLogin, dashboardIndex } = Cypress.env('endpoint');
 import { signin } from '@pages/SignIn.Page.js';
+import { webtable } from '@pages/GX2-1897-WebTable/WebTable';
 
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
@@ -54,6 +55,7 @@ Cypress.Commands.add('SignIn', () => {
 	});
 });
 
+Cypress.Commands.add('randomNumber', n => {
 Cypress.Commands.add('randomNumber', n => {
 	return Cypress._.random(0, n - 1);
 });
@@ -177,15 +179,4 @@ Cypress.Commands.add('SticktoBottom', () => {
 					});
 			});
 	});
-});
-Cypress.Commands.add('getTableCell', (columnName, rowIndex) => {
-	cy.contains('.rt-th', columnName)
-		.invoke('index')
-		.then(colIndex => {
-			cy.get('.rt-tr')
-				.eq(rowIndex)
-				.within(() => {
-					cy.get('.rt-td').eq(colIndex);
-				});
-		});
 });
