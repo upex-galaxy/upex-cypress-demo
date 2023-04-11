@@ -12,8 +12,20 @@ class SelectOnList {
         listPagination3: ()=> cy.get('.vertical-list-container > *').eq(2),
         listPagination4: ()=> cy.get('.vertical-list-container > *').eq(3),
     }
+    assertions = {
+        bluecolor: ()=> cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)'),
+        nobluecolor: ()=> cy.get('.list-group-item.active').should('not.exist'),
+
+    }
     SelectList() {
         this.get.listPagination().click()
+    }
+
+    ClickOnElementsList() {
+        selectonlist.list.listPagination1().click()
+        selectonlist.list.listPagination2().click()
+        selectonlist.list.listPagination3().click()
+        selectonlist.list.listPagination4().click()
     }
 }
 

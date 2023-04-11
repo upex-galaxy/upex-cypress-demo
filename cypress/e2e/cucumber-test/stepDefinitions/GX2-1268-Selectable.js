@@ -16,7 +16,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
     describe('GX2-1268 | TC1: Verify user can select List pagination', () => {
         When('clicks on List pagination', () => {
             selectongrid.SelectGrid();
-            selectonlist.SelectList();
+            selectonlist.SelectList();            
         });
 
         Then('should be can see the List elements', () => {
@@ -25,25 +25,94 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
     });
     
     describe('GX2-1268 | TC2: Verify user can select elements in List', () => {
-        Given('user is in List Pagination page', ()=> {
+        Given('user is in List Pagination page tc2', ()=> {
             selectonlist.get.listPaginationPanel().should('contain.text', 'Cras justo odio');
         });                       
         
-        When('clicks on each elements of the List', () => {
-            const arr = Object.keys(selectonlist.list);
-            while(arr != listPagination4) {
-                arr.click()          
-            }    
-
-        Then('should can see all elements selected', () => {
-            selectonlist.get.listPaginationPanel().should('contain.text', 'Cras justo odio Dapibus ac facilisis in Morbi leo risus Porta ac consectetur ac');
+        When('clicks on each elements of the List tc2', () => {
+            selectonlist.list.listPagination1().click()             
+            selectonlist.list.listPagination2().click()             
+            selectonlist.list.listPagination3().click()            
+            selectonlist.list.listPagination4().click()                      
+        });
+        Then('should can see all elements selected tc2', () => {
+            selectonlist.assertions.bluecolor()
         });
     });
 
+    describe('GX2-1268 | TC3: Verify user can unselect elements in List', () => {
+        Given('user is in List Pagination page tc3', ()=> {
+            selectonlist.get.listPaginationPanel().should('contain.text', 'Cras justo odio');
+        });                       
+        
+        When('clicks on each elements of the list tc3', () => {
+            selectonlist.list.listPagination1().click()             
+            selectonlist.list.listPagination2().click()             
+            selectonlist.list.listPagination3().click()             
+            selectonlist.list.listPagination4().click() 
+            selectonlist.assertions.bluecolor()
+        });
+        When('clicks again on each elements of the list tc3', () => {                     
+            selectonlist.ClickOnElementsList()
+            
+        });
+        Then('should can see all element unselected tc3', () => {
+            selectonlist.assertions.nobluecolor()    
+        });
+    });
+    
+        describe('GX2-1268 | TC4: Verify user can select Grid pagination', () => {
+        When('clicks on Grid pagination', () => {
+            selectongrid.SelectGrid();                    
+        });
+        Then('should be can see the Grid elements', () => {
+            selectongrid.get.gridPaginationPanel().should('contain.text', 'Five');          
+        });
+        });
+    
+        describe('GX2-1268 | TC5: Verify user can select elements in Grid', () => {
+            Given('user is in Grid Pagination page tc5', () => {
+            selectongrid.SelectGrid();
+            selectongrid.get.gridPaginationPanel().should('contain.text', 'Five'); 
+        });                       
+        
+        When('clicks on each elements of the Grid tc5', () => {
+            selectongrid.ClickOnGridElement()                
+        });
+        Then('should can see all elements selected tc5', () => {
+            selectongrid.assertions.bluecolor()
+        });
+    });
 
-});
+    describe('GX2-1268 | TC6: Verify user can unselect elements in List', () => {
+        Given('user is in Grid Pagination page tc6', () => {
+            selectongrid.SelectGrid();
+            selectongrid.get.gridPaginationPanel().should('contain.text', 'Five');
+        });
+        
+        When('clicks on each elements of the Grid tc6', () => {
+            selectongrid.ClickOnGridElement()
+            selectongrid.assertions.bluecolor()
+        });
+        When('clicks again on each elements of the Grid tc6', () => {
+            
+        cy.wrap(selectongrid.SelectableFunction() )
+    
+        });
+        Then('should can see all element unselected tc6', () => {
+            selectongrid.ClickOnGridElement()
+            selectongrid.assertions.nobluecolor()    
+        });
+    });
+    });
 
-
+// para automatizar la selecion de elementos
+/*export function fixBirdCountLog(birdsPerDay) {
+  for (let day = 0; day < birdsPerDay.length; day += 2) {
+    birdsPerDay[day]++;
+  }
+  return birdsPerDay;
+}*/
 
 
 
