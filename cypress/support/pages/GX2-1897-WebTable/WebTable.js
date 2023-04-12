@@ -9,6 +9,10 @@ class WebTable {
 		salaryInput: () => cy.get('[id="salary"]'),
 		departmentInput: () => cy.get('[id="department"]'),
 		submitbutton: () => cy.get('[id="submit"]'),
+		deletebutton3: () => cy.get('[id="delete-record-3"]'),
+		searchbox: () => cy.get('[id="searchBox"]'),
+		editrecord1: () => cy.get('[id="edit-record-1"]'),
+		nextbutton: () => cy.get('[class="-next"]'),
 	};
 	clickAdd() {
 		this.elements.addbutton().click();
@@ -33,6 +37,18 @@ class WebTable {
 	}
 	clickSubmit() {
 		this.elements.submitbutton().click();
+	}
+	clickonDelete3() {
+		this.elements.deletebutton3().click();
+	}
+	typeFirst2letters(letters) {
+		this.elements.searchbox().type(letters);
+	}
+	clickEdit1() {
+		this.elements.editrecord1().click();
+	}
+	clickNext() {
+		this.elements.nextbutton().click();
 	}
 }
 export const webtable = new WebTable();
