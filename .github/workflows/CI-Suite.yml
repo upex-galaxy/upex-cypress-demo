@@ -70,7 +70,7 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                      npm run file cypress/e2e/Tests/ToolsQA-Forms/Widgets-Components/GX-12574ToolsQA.cy.js
+                      npm run file cypress/e2e/Tests/ToolsQA-Forms/Widgets-Components/GX-12574formulario.cy.js
 
             - name: ✅Import Test Results to Xray
               if: always()
