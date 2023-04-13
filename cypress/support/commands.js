@@ -54,7 +54,7 @@ Cypress.Commands.add('SignIn', () => {
 	});
 });
 
-Cypress.Commands.add('randomNumber', (n) => {
+Cypress.Commands.add('randomNumber', n => {
 	return Cypress._.random(0, n - 1);
 });
 
@@ -64,12 +64,12 @@ Cypress.Commands.add('SortingVertical', () => {
 	listpage
 		.VerticalNumber()
 		.eq(rn1)
-		.then(($el) => {
+		.then($el => {
 			listpage.VerticalNumber().eq(rn1).trigger('mousedown', { force: true });
 			listpage.VerticalNumber().eq(rn2).trigger('mousemove', { force: true }).trigger('mouseup', { force: true });
 			cy.wrap($el)
 				.invoke('text')
-				.then((number) => {
+				.then(number => {
 					const info = { number: number, rn1: rn1 };
 					cy.wrap(info).as('info');
 				});
@@ -80,7 +80,7 @@ Cypress.Commands.add('VerticalDragOutside', () => {
 	listpage
 		.VerticalNumber()
 		.eq(rn1)
-		.then(($el) => {
+		.then($el => {
 			let rect = $el[0].getBoundingClientRect();
 			cy.wrap($el)
 				.trigger('mousedown', { which: 1, force: true })
@@ -88,7 +88,7 @@ Cypress.Commands.add('VerticalDragOutside', () => {
 				.trigger('mouseup', { which: 1, force: true });
 			cy.wrap($el)
 				.invoke('text')
-				.then((number) => {
+				.then(number => {
 					const values = { number: number, rn1: rn1 };
 					cy.wrap(values).as('text');
 				});
@@ -102,7 +102,7 @@ Cypress.Commands.add('SortingGrid', () => {
 		.Gridnumbers()
 		.eq(rn1)
 		.invoke('text')
-		.then((number1) => {
+		.then(number1 => {
 			gridpage.Gridnumbers().eq(rn1).trigger('mousedown', { force: true });
 			gridpage.Gridnumbers().eq(rn2).trigger('mousemove', { force: true }).trigger('mouseup', { force: true });
 			gridpage
@@ -120,10 +120,10 @@ Cypress.Commands.add('GridDragOutside', () => {
 	gridpage
 		.Gridnumbers()
 		.eq(rn1)
-		.then(($el) => {
+		.then($el => {
 			cy.wrap($el)
 				.invoke('text')
-				.then((number) => {
+				.then(number => {
 					let rect = $el[0].getBoundingClientRect();
 					cy.wrap($el)
 						.trigger('mousedown', {
@@ -147,10 +147,10 @@ Cypress.Commands.add('GridDragOutside', () => {
 Cypress.Commands.add('SticktoBottom', () => {
 	let Xcoord = Cypress._.random(1, 150);
 	let Ycoord = Cypress._.random(1, 50);
-	cy.get('[id="cursorBottom"]').then(($draggable) => {
+	cy.get('[id="cursorBottom"]').then($draggable => {
 		cy.wrap($draggable)
 			.trigger('mousedown', { which: 1 })
-			.then(($box) => {
+			.then($box => {
 				let initialX = $box.offset().left;
 				let initialY = $box.offset().top;
 
@@ -163,7 +163,7 @@ Cypress.Commands.add('SticktoBottom', () => {
 
 				cy.wrap($draggable)
 					.trigger('mousedown', { which: 1 })
-					.then(($box2) => {
+					.then($box2 => {
 						let finalX = $box2.offset().left;
 						let finalY = $box2.offset().top;
 
@@ -177,4 +177,15 @@ Cypress.Commands.add('SticktoBottom', () => {
 					});
 			});
 	});
+});
+Cypress.Commands.add('getTableCell', (columnName, rowIndex) => {
+	cy.contains('.rt-th', columnName)
+		.invoke('index')
+		.then(colIndex => {
+			cy.get('.rt-tr')
+				.eq(rowIndex)
+				.within(() => {
+					cy.get('.rt-td').eq(colIndex);
+				});
+		});
 });
