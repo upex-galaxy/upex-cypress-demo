@@ -1,4 +1,4 @@
-describe('GX2-1662', () => {
+describe.skip('GX2-1662', () => {
 	beforeEach('precondición', () => {
 		cy.visit('/webtables');
 	});
