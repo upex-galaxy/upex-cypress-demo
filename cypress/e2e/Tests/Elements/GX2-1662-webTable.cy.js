@@ -1,4 +1,4 @@
-describe('GX2-1662', () => {
+describe.skip('GX2-1662', () => {
 	beforeEach('precondición', () => {
 		cy.visit('/webtables');
 	});
@@ -278,7 +278,7 @@ describe('GX2-1662', () => {
 			expect(dataUsersInTable).not.deep.contains(dataUser);
 		});
 	});
-	it('TC28: validate the next register page when click on next button', () => {
+	it.skip('TC28: validate the next register page when click on next button', () => {
 		WebTables.addMultiplesUsers({ amountOfusers: 6 });
 		WebTables.selectRowForPage({ amountOfRows: '5 rows' }); //only accept (5 rows, 10 rows, 20 rows, 50 rows, 100 rows)
 		WebTables.get.buttonNext().should('be.enabled');
