@@ -1,5 +1,5 @@
 import { Formulario } from '@pages/practiceForm.Page';
-import data from '../../../../fixtures/DOM/GX-12574practiceForm.json';
+import data from '../../../../fixtures/DOM/formulario.json';
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
 describe('✅ToolsQA | Forms | Practice Form', () => {
