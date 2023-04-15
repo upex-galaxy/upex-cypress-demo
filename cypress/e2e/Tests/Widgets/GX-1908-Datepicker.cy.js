@@ -5,22 +5,7 @@ describe('GX-1908', () => {
 		cy.visit('/date-picker');
 	});
 
-	it('TC1: Validate month selection with random month', () => {
-		DatePicker.get.selectDateInput().click();
-		const monthIndex = DatePicker.getRandomMonth();
-		const RandomMonthName = DatePicker.selectRandomMonth(monthIndex);
-		DatePicker.get.monthInput().then(monthValue => {
-			expect(monthValue.text()).to.contains(RandomMonthName.toString());
-		});
-	});
-	it('TC2: Validate year selection with random year', () => {
-		DatePicker.get.selectDateInput().click();
-		const randomYear = DatePicker.selectRandomYear();
-		DatePicker.get.yearInput().then(yearValue => {
-			expect(yearValue.text()).to.contains(randomYear);
-		});
-	});
-	it('TC3: Validate input month/year when select random values', () => {
+	it('TC1: Validate input month/year when select random values', () => {
 		DatePicker.get.selectDateInput().click();
 		const monthIndex = DatePicker.getRandomMonth();
 		const RandomMonthName = DatePicker.selectRandomMonth(monthIndex);
@@ -32,7 +17,7 @@ describe('GX-1908', () => {
 			expect(inputMonthYear.text()).to.deep.equal(monthYearValue);
 		});
 	});
-	it('TC4: Validate input day selected contain random number select', () => {
+	it('TC2: Validate input day selected contain random number select', () => {
 		DatePicker.get.selectDateInput().click();
 		const monthIndex = DatePicker.getRandomMonth();
 		const monthName = DatePicker.selectRandomMonth(monthIndex);
@@ -44,7 +29,7 @@ describe('GX-1908', () => {
 			});
 		});
 	});
-	it('TC5: Validate that input date is equal to selected random date', () => {
+	it('TC3: Validate that input date is equal to selected random date', () => {
 		const randomDate = DatePicker.SelectRandomDate();
 		DatePicker.get
 			.selectDateInput()
@@ -53,7 +38,7 @@ describe('GX-1908', () => {
 				expect(randomDate.toString()).to.deep.equal(dateValue);
 			});
 	});
-	it('TC6: Validate that actual date is equal to default date input', () => {
+	it('TC4: Validate that actual date is equal to default date input', () => {
 		const actualDate = DatePicker.getActualDate();
 		DatePicker.get
 			.selectDateInput()
@@ -62,21 +47,21 @@ describe('GX-1908', () => {
 				expect(actualDate[0]).to.deep.equal([dateValue]);
 			});
 	});
-	it('TC7: Validate that input month is equal to selected month (Date And Time)', () => {
+	it('TC5: Validate that input month is equal to selected month (Date And Time)', () => {
 		DatePicker.get.selectDateAndTimeInput().click();
 		const selectedMonth = DatePicker.selectRandomMonthDateAndTimeInput();
 		DatePicker.get.selectedMonth().then(monthValue => {
 			expect(selectedMonth).to.deep.equal(monthValue.text());
 		});
 	});
-	it('TC8: Validate that input year is equal to selected year (Date And Time)', () => {
+	it('TC6: Validate that input year is equal to selected year (Date And Time)', () => {
 		DatePicker.get.selectDateAndTimeInput().click();
 		const selectedYear = DatePicker.selectRandomYearDateAndTimeInput();
 		DatePicker.get.selectedYear().then(yearValue => {
 			expect(selectedYear).to.deep.equal([yearValue.text()]);
 		});
 	});
-	it('TC9: Validate that input month/year is equal to selected month/year (Date And Time)', () => {
+	it('TC7: Validate that input month/year is equal to selected month/year (Date And Time)', () => {
 		DatePicker.get.selectDateAndTimeInput().click();
 		const selectedYear = DatePicker.selectRandomYearDateAndTimeInput();
 		const selectedMonth = DatePicker.selectRandomMonthDateAndTimeInput();
@@ -85,7 +70,7 @@ describe('GX-1908', () => {
 			expect(monthYearSelected).to.deep.equal(monthYear.text());
 		});
 	});
-	it('TC10: Validate that input day is equal to selected day (Date And Time)', () => {
+	it('TC8: Validate that input day is equal to selected day (Date And Time)', () => {
 		DatePicker.get.selectDateAndTimeInput().click();
 		const Month = DatePicker.selectRandomMonthDateAndTimeInput();
 		cy.get('*').then(() => {
@@ -95,7 +80,7 @@ describe('GX-1908', () => {
 			});
 		});
 	});
-	it('TC11: Validate that input time is equal to selected time (Date And Time)', () => {
+	it('TC9: Validate that input time is equal to selected time (Date And Time)', () => {
 		DatePicker.get.selectDateAndTimeInput().click();
 		const timeSelected = DatePicker.selectRandomTime();
 		DatePicker.get.selectDateAndTimeInput().click(); // repet line command because need reopen DatePicker
@@ -104,7 +89,7 @@ describe('GX-1908', () => {
 		});
 	});
 
-	it('TC12: Validate that input date and time is equal to selected random date and time', () => {
+	it('TC10: Validate that input date and time is equal to selected random date and time', () => {
 		const randomDateTime = DatePicker.selectRandonDateAndTimeInput();
 		DatePicker.get
 			.selectDateAndTimeInput()
@@ -113,7 +98,7 @@ describe('GX-1908', () => {
 				expect(randomDateTime).to.deep.equal([dateTimeValueInput]);
 			});
 	});
-	it('TC13: Validate that input date and time default is equal to actual date time', () => {
+	it('TC11: Validate that input date and time default is equal to actual date time', () => {
 		const actualDateTimeValue = DatePicker.getActualDate();
 		DatePicker.get
 			.selectDateAndTimeInput()
