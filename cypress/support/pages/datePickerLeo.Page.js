@@ -120,16 +120,6 @@ class datePicker {
 		});
 		return randomDate;
 	}
-	getDateInInput() {
-		let DateValue = [];
-		this.get
-			.selectDateInput()
-			.invoke('val')
-			.then(dateValue => {
-				DateValue.push(dateValue);
-			});
-		return DateValue;
-	}
 	getActualDate() {
 		let date = new Date();
 		let day = date.getDate();
@@ -144,7 +134,7 @@ class datePicker {
 			hour = Math.abs(hour - 12);
 			time = 'PM';
 		}
-		if (hour == 0) {
+		if (hour === 0) {
 			hour = Math.abs(hour + 12);
 			time = 'AM';
 		}
@@ -244,51 +234,6 @@ class datePicker {
 			});
 		});
 		return randomDateTime;
-	}
-	getDateAndTimeInput() {
-		let ValueDateAndTime = [];
-		this.get
-			.selectDateAndTimeInput()
-			.invoke('val')
-			.then(valueDateAndTime => {
-				ValueDateAndTime.push(valueDateAndTime);
-			});
-		return ValueDateAndTime;
-	}
-	getMonthInputValue() {
-		let monthValue = [];
-		this.get.selectedMonth().then(selectedMonthValue => {
-			monthValue.push(selectedMonthValue.text());
-		});
-		return monthValue;
-	}
-	getYearInputValue() {
-		let yearValue = [];
-		this.get.selectedYear().then(selectedYearValue => {
-			yearValue.push(selectedYearValue.text());
-		});
-		return yearValue;
-	}
-	getMonthYearInputValue() {
-		let monthYearValue = [];
-		this.get.inputMonthYear().then(inputValue => {
-			monthYearValue.push(inputValue.text());
-		});
-		return monthYearValue;
-	}
-	getDaySelectedInput() {
-		let dayValue = [];
-		this.get.daySelected().then(day => {
-			dayValue.push(day.text());
-		});
-		return dayValue;
-	}
-	getTimeSelectedInput() {
-		let timeValue = [];
-		this.get.inputSelectedTime().then(time => {
-			timeValue.push(time.text());
-		});
-		return timeValue;
 	}
 }
 
