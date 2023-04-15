@@ -2,7 +2,6 @@ import { Formulario } from '@pages/practiceForm.Page';
 import data from '../../../../fixtures/DOM/GX-12574practiceForm.json';
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
-
 describe('✅ToolsQA | Forms | Practice Form', () => {
 	beforeEach('Precondición: El usuario se debe encontrase en la pagina', () => {
 		cy.visit('https://demoqa.com/automation-practice-form');
