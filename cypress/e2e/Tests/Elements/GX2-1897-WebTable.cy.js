@@ -43,7 +43,6 @@ describe('GX2-1897-✅-tools-qa-elements-web-table', () => {
 					});
 			});
 	});
-
 	it('GX2-1898 | TC3: Validate that a user can be deleted with the “trash” icon', () => {
 		cy.get('div.rt-tr.-odd')
 			.eq(1)
