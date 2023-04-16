@@ -3,7 +3,7 @@ class WebTable {
 		addbutton: () => cy.get('[id="addNewRecordButton"]'),
 		modal: () => cy.get('[class="modal-content"]'),
 		nameInput: () => cy.get('[id="firstName"]'),
-		lasnameInput: () => cy.get('[id="lastName"]'),
+		lastnameInput: () => cy.get('[id="lastName"]'),
 		mailInput: () => cy.get('[id="userEmail"]'),
 		ageInput: () => cy.get('[id="age"]'),
 		salaryInput: () => cy.get('[id="salary"]'),
@@ -13,6 +13,8 @@ class WebTable {
 		searchbox: () => cy.get('[id="searchBox"]'),
 		editrecord1: () => cy.get('[id="edit-record-1"]'),
 		nextbutton: () => cy.get('[class="-next"]'),
+		previousbutton: () => cy.get('[class="-previous"]'),
+		headerbuttons: () => cy.get('div.rt-resizable-header-content'),
 	};
 	clickAdd() {
 		this.elements.addbutton().click();
@@ -41,8 +43,8 @@ class WebTable {
 	clickonDelete3() {
 		this.elements.deletebutton3().click();
 	}
-	typeFirst2letters(letters) {
-		this.elements.searchbox().type(letters);
+	searchForname(name) {
+		this.elements.searchbox().type(name);
 	}
 	clickEdit1() {
 		this.elements.editrecord1().click();
@@ -50,5 +52,23 @@ class WebTable {
 	clickNext() {
 		this.elements.nextbutton().click();
 	}
+	clickPrevious() {
+		this.elements.previousbutton().click();
+	}
+	clickOnfirstName() {
+		this.elements.headerbuttons().first().click();
+	}
+	visit() {
+		cy.visit('https://demoqa.com/webtables');
+	}
+	addUsertoTable(name, surname, mail, age, salary, department) {
+		this.elements.nameInput().type(name);
+		this.elements.lastnameInput().type(surname);
+		this.elements.mailInput().type(mail);
+		this.elements.ageInput().type(age);
+		this.elements.salaryInput().type(salary);
+		this.elements.departmentInput().type(department);
+	}
 }
 export const webtable = new WebTable();
+export const form = new WebTable();
