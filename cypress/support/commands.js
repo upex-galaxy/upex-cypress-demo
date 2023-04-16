@@ -179,12 +179,3 @@ Cypress.Commands.add('SticktoBottom', () => {
 			});
 	});
 });
-
-Cypress.Commands.add('UserSignIn', (name, surname, mail, age, salary, department) => {
-	webtable.typeName(name);
-	webtable.typeLastname(surname);
-	webtable.typeMail(mail);
-	webtable.typeAge(age);
-	webtable.typeSalary(salary);
-	webtable.typeDepartment(department);
-});
