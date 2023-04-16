@@ -130,6 +130,7 @@ describe('GX2-1897-✅-tools-qa-elements-web-table', () => {
 			.then(totalpages => {
 				expect(totalpages).to.exist;
 			});
+
 		for (let i = 0; i <= 7; i++) {
 			webtable.clickAdd();
 			webtable.addUsertoTable();
