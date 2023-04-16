@@ -1,9 +1,9 @@
-import { webtable } from '@pages/GX2-1897-WebTable/WebTable';
+import { webtable, form } from '@pages/GX2-1897-WebTable/WebTable';
 import { faker } from '@faker-js/faker';
 const users = [];
 describe('GX2-1897-✅-tools-qa-elements-web-table', () => {
 	beforeEach('Precondition', () => {
-		cy.visit('https://demoqa.com/webtables');
+		form.visit();
 	});
 	it('1898 | TC1: Validate that the registration form pops up when the button “Add” is clicked on', () => {
 		webtable.elements.addbutton().should('exist').and('have.text', 'Add');
