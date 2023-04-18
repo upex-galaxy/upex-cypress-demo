@@ -16,11 +16,12 @@ class SelectOnGrid {
         gridPaginationEight: () => cy.get('#row3 > *').eq(1),
         gridPaginationNine: () => cy.get('#row3 > *').eq(2)
     }
+    /* Assertions are not recommended to be in the page class.
     assertions = {
         bluecolor: () => cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)'),
         nobluecolor: () => cy.get('.list-group-item.active').should('not.exist'),
 
-    }
+    }*/
     SelectGrid() {
         this.get.gridPagination().click()
     }
@@ -36,7 +37,7 @@ class SelectOnGrid {
         selectongrid.grid.gridPaginationEight().click()
     }
 
-    SelectableFunction() { //i could not get it to work
+    SelectableFunction() { //i could not get it to work !!!!!!!
         let val = Object.keys(selectongrid.grid) // get keys's element
         for (let i = 0; i < val.lenght; i++) {
             console.log(val[ i ])
