@@ -27,14 +27,17 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
     
     describe('GX2-1268 | TC2: Verify user can select elements in List', () => {
         Given('user is in List Pagination page tc2', ()=> {
-            cy.get('#verticalListContainer').should('be.visible')  
+            cy.get('#verticalListContainer').should('be.visible') 
+            
         });                       
         
         When('clicks on each elements of the List tc2', () => {
             selectonlist.list.listPagination1().click()             
             selectonlist.list.listPagination2().click()             
             selectonlist.list.listPagination3().click()            
-            selectonlist.list.listPagination4().click()                      
+            selectonlist.list.listPagination4().click()
+            cy.get(".mt-2.list-group-item.list-group-item-action").should('have.length', 4)  // assertion poderosa!!
+            
         });
         Then('should see all elements selected tc2', () => {
             cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)')
