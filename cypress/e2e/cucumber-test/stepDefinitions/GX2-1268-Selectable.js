@@ -20,13 +20,14 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
         });
 
         Then('should see the List elements', () => {
-            selectonlist.get.listPaginationPanel().should('contain.text', 'Cras justo odio');          
+            cy.get('#verticalListContainer').should('be.visible');  
+            cy.get('#demo-tabpane-grid').should('be.not.visible');
         });
     });
     
     describe('GX2-1268 | TC2: Verify user can select elements in List', () => {
         Given('user is in List Pagination page tc2', ()=> {
-            selectonlist.get.listPaginationPanel().should('contain.text', 'Cras justo odio');
+            cy.get('#verticalListContainer').should('be.visible')  
         });                       
         
         When('clicks on each elements of the List tc2', () => {
@@ -42,7 +43,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
 
     describe('GX2-1268 | TC3: Verify user can unselect elements in List', () => {
         Given('user is in List Pagination page tc3', ()=> {
-            selectonlist.get.listPaginationPanel().should('contain.text', 'Cras justo odio');
+            cy.get('#verticalListContainer').should('be.visible');  
         });                       
         
         When('clicks on each elements of the list tc3', () => {
@@ -66,14 +67,15 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
             selectongrid.SelectGrid();                    
         });
         Then('should see the Grid elements', () => {
-            selectongrid.get.gridPaginationPanel().should('contain.text', 'Five');          
+            cy.get('#verticalListContainer').should('be.not.visible');  
+            cy.get('#demo-tabpane-grid').should('be.visible');        
         });
         });
     
         describe('GX2-1268 | TC5: Verify user can select elements in Grid', () => {
             Given('user is in Grid Pagination page tc5', () => {
             selectongrid.SelectGrid();
-            selectongrid.get.gridPaginationPanel().should('contain.text', 'Five'); 
+            cy.get('#demo-tabpane-grid').should('be.visible');
         });                       
         
         When('clicks on each elements of the Grid tc5', () => {
@@ -87,7 +89,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
     describe('GX2-1268 | TC6: Verify user can unselect elements in List', () => {
         Given('user is in Grid Pagination page tc6', () => {
             selectongrid.SelectGrid();
-            selectongrid.get.gridPaginationPanel().should('contain.text', 'Five');
+            cy.get('#demo-tabpane-grid').should('be.visible');
         });
         
         When('clicks on each elements of the Grid tc6', () => {
