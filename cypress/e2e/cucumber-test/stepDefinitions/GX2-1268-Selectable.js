@@ -36,7 +36,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
             selectonlist.list.listPagination4().click()                      
         });
         Then('should can see all elements selected tc2', () => {
-            selectonlist.assertions.bluecolor()
+            cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)')
         });
     });
 
@@ -57,7 +57,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
             
         });
         Then('should can see all element unselected tc3', () => {
-            selectonlist.assertions.nobluecolor()    
+            cy.get('.list-group-item.active').should('not.exist')    
         });
     });
     
@@ -80,7 +80,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
             selectongrid.ClickOnGridElement()                
         });
         Then('should can see all elements selected tc5', () => {
-            selectongrid.assertions.bluecolor()
+            cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)')
         });
     });
 
@@ -101,7 +101,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
         });
         Then('should can see all element unselected tc6', () => {
             selectongrid.ClickOnGridElement()
-            selectongrid.assertions.nobluecolor()    
+            cy.get('.list-group-item.active').should('not.exist')    
         });
     });
     });
