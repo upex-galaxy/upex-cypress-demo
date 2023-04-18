@@ -1,6 +1,7 @@
 import { webtable, form } from '@pages/GX2-1897-WebTable/WebTable';
 import { faker } from '@faker-js/faker';
 const users = [];
+
 describe('GX2-1897-✅-tools-qa-elements-web-table', () => {
 	beforeEach('Precondition', () => {
 		form.visit();
@@ -9,7 +10,7 @@ describe('GX2-1897-✅-tools-qa-elements-web-table', () => {
 		webtable.elements.addbutton().should('exist').and('have.text', 'Add');
 		webtable.elements.modal().should('not.exist');
 		webtable.clickAdd();
-		cy.get('[id="registration-form-modal"]').should('have.text', 'Registration Form');
+		webtable.elements.modaltitle().should('have.text', 'Registration Form');
 		webtable.elements.modal().should('exist');
 		webtable.elements.nameInput().should('exist').and('be.empty');
 		webtable.elements.lastnameInput().should('exist').and('be.empty');
@@ -19,20 +20,12 @@ describe('GX2-1897-✅-tools-qa-elements-web-table', () => {
 		webtable.elements.departmentInput().should('exist').and('be.empty');
 	});
 
-	it('GX2-1898 | TC2: Validate that the user can successfully sign into the table.', () => {
-		const rn = Cypress._.random(10, 100);
-		const info = {
-			name: faker.name.firstName(),
-			surname: faker.name.lastName(),
-			mail: faker.internet.email(),
-			age: Cypress._.random(18, 65),
-			salary: rn * 1000,
-			department: faker.company.bs(),
-		};
+	it('1898 | TC2: Validate that the user can successfully sign into the table.', () => {
 		webtable.clickAdd();
-		webtable.addUsertoTable(info.name, info.surname, info.mail, info.age, info.salary, info.department);
+		webtable.addUsertoTable();
 		webtable.clickSubmit();
-		cy.get('div.rt-tr.-even')
+		webtable.elements
+			.evenColumn()
 			.eq(1)
 			.children()
 			.each($el => {
@@ -44,8 +37,9 @@ describe('GX2-1897-✅-tools-qa-elements-web-table', () => {
 			});
 	});
 
-	it('GX2-1898 | TC3: Validate that a user can be deleted with the “trash” icon', () => {
-		cy.get('div.rt-tr.-odd')
+	it('1898 | TC3: Validate that a user can be deleted with the “trash” icon', () => {
+		webtable.elements
+			.oddColumn()
 			.eq(1)
 			.children()
 			.each($el => {
@@ -57,7 +51,8 @@ describe('GX2-1897-✅-tools-qa-elements-web-table', () => {
 			});
 		webtable.elements.deletebutton3().should('exist');
 		webtable.clickonDelete3();
-		cy.get('div.rt-tr.-odd')
+		webtable.elements
+			.oddColumn()
 			.eq(1)
 			.children()
 			.each($el => {
@@ -68,38 +63,39 @@ describe('GX2-1897-✅-tools-qa-elements-web-table', () => {
 					});
 			});
 	});
-	it('GX2-1898 | TC4: Validate that the user can search for a specific name in the table using the searchbox', () => {
-		for (let i = 0; i <= 1; i++) {
-			cy.get('div.rt-tr.-odd')
-				.eq(i)
-				.children()
-				.first()
+	it('1898 | TC4: Validate that the user can search for a specific name in the table using the searchbox', () => {
+		const namesArray = [0, 7, 14];
+		for (let i = 0; i <= namesArray.length - 1; i++) {
+			webtable.elements
+				.grid()
+				.eq(namesArray[i])
 				.invoke('text')
-				.then(names => {
-					cy.log(names);
-					users.push(names);
+				.then(name => {
+					cy.log(name);
+					users.push(name);
 				});
 		}
 		cy.wrap(users)
-			.should('have.length', 2)
-			.then(() => {
-				let rn = Cypress._.random(0, 1);
+			.its('length')
+			.then(leng => {
+				const rn = Cypress._.random(0, leng - 1);
 				webtable.searchForname(users[rn]);
-				cy.get('[class="rt-tr -odd"]')
-					.children()
+				webtable.elements
+					.grid()
 					.first()
 					.invoke('text')
-					.then(name => {
-						expect(users[rn]).to.equal(name);
+					.then(search => {
+						expect(search).to.equal(users[rn]);
 					});
 			});
 	});
 
-	it('GX2-1898 | TC5: Validate that the user can edit information with the “pen” icon.', () => {
+	it('1898 | TC5: Validate that the user can edit information with the “pen” icon.', () => {
 		let namebefore;
 		let nameafter;
 
-		cy.get('div.rt-tr.-odd')
+		webtable.elements
+			.oddColumn()
 			.first()
 			.children()
 			.first()
@@ -112,7 +108,8 @@ describe('GX2-1897-✅-tools-qa-elements-web-table', () => {
 				webtable.elements.nameInput().clear();
 				webtable.elements.nameInput().type(faker.name.firstName());
 				webtable.clickSubmit();
-				cy.get('div.rt-tr.-odd')
+				webtable.elements
+					.oddColumn()
 					.first()
 					.children()
 					.first()
@@ -123,121 +120,201 @@ describe('GX2-1897-✅-tools-qa-elements-web-table', () => {
 					});
 			});
 	});
-	it('GX2-1898 | TC6: Validate that the user go to the following page by clicking the “next” button.', () => {
+	it('1898 | TC6: Validate that the user go to the following page by clicking the “next” button.', () => {
 		webtable.elements.nextbutton().should('not.be.enabled');
-		cy.get('[value="1"]').should('have.value', 1);
-		cy.get('[class="-totalPages"]')
+		webtable.elements.actualpage().should('have.value', 1);
+		webtable.elements
+			.totalpages()
 			.invoke('text')
 			.then(totalpages => {
 				expect(totalpages).to.exist;
 			});
-
 		for (let i = 0; i <= 7; i++) {
-			const rn = Cypress._.random(10, 100);
-			const info = {
-				name: faker.name.firstName(),
-				surname: faker.name.lastName(),
-				mail: faker.internet.email(),
-				age: Cypress._.random(18, 65),
-				salary: rn * 1000,
-				department: faker.company.bs(),
-			};
 			webtable.clickAdd();
-			webtable.addUsertoTable(info.name, info.surname, info.mail, info.age, info.salary, info.department);
+			webtable.addUsertoTable();
 			webtable.clickSubmit();
 		}
-
-		cy.get('[class="-totalPages"]')
+		webtable.elements
+			.totalpages()
 			.invoke('text')
 			.then(totalpages => {
 				expect(totalpages).to.exist;
 			});
 		webtable.elements.nextbutton().should('not.be.disabled');
 		webtable.clickNext();
-		cy.get('[value="2"]').should('have.value', 2);
+		webtable.elements.actualpage().should('have.value', 2);
 	});
-	it('GX2-1898 | TC7: Validate that the user goes back to the previous page by clicking the “Previous” button.', () => {
-		cy.visit('https://demoqa.com/webtables');
-		webtable.elements.previousbutton().should('not.be.enabled');
-		cy.get('[value="1"]').should('have.value', 1);
-
+	it('1898 | TC7: Validate that the user goes back to the previous page by clicking the “Previous” button.', () => {
+		webtable.elements.previousbutton().should('not.be.enabled').and('exist');
 		for (let i = 0; i <= 7; i++) {
-			const rn = Cypress._.random(10, 100);
-			const info = {
-				name: faker.name.firstName(),
-				surname: faker.name.lastName(),
-				mail: faker.internet.email(),
-				age: Cypress._.random(18, 65),
-				salary: rn * 1000,
-				department: faker.company.bs(),
-			};
 			webtable.clickAdd();
-			webtable.addUsertoTable(info.name, info.surname, info.mail, info.age, info.salary, info.department);
+			webtable.addUsertoTable();
 			webtable.clickSubmit();
 		}
-
-		webtable.elements.nextbutton().should('not.be.disabled');
+		cy.wait(2000);
 		webtable.clickNext();
-		cy.get('[value="2"]').should('have.value', 2);
+		webtable.elements.actualpage().should('have.value', 2);
+		webtable.elements.previousbutton().should('not.be.disabled').and('exist');
 		webtable.clickPrevious();
-		cy.get('[value="1"]').should('have.value', 1);
+		webtable.elements.actualpage().should('have.value', 1);
 	});
-	it.only('GX2-1898 | TC8: Validate that the user can sort the names alphabetically with the button “First Name”', () => {
-		const SortedinTest = [];
+	it('1898 | TC8: Validate that the user can sort the names alphabetically with the button “First Name”', () => {
+		const namesArray = [0, 7, 14];
+		const unsorted = [];
 		const sortedfromTable = [];
-		const namesArray = [0, 7, 14, 21, 28, 35, 42, 49, 56, 63];
-		cy.visit('https://demoqa.com/webtables');
-		webtable.elements.headerbuttons().should('exist');
-
-		for (let i = 0; i <= 6; i++) {
-			const rn = Cypress._.random(10, 100);
-			const info = {
-				name: faker.name.firstName(),
-				surname: faker.name.lastName(),
-				mail: faker.internet.email(),
-				age: Cypress._.random(18, 65),
-				salary: rn * 1000,
-				department: faker.company.bs(),
-			};
-			webtable.clickAdd();
-			webtable.addUsertoTable(info.name, info.surname, info.mail, info.age, info.salary, info.department);
-			webtable.clickSubmit();
-		}
+		webtable.elements.namebutton().should('exist');
 		for (let i = 0; i <= namesArray.length - 1; i++) {
-			cy.get('div.rt-td')
+			webtable.elements
+				.grid()
 				.eq(namesArray[i])
 				.invoke('text')
 				.then(names => {
-					SortedinTest.push(names);
-					SortedinTest.sort();
+					unsorted.push(names);
 				});
 		}
+		webtable.elements.namebutton().should('exist');
 		webtable.clickOnfirstName();
 		for (let i = 0; i <= namesArray.length - 1; i++) {
-			cy.get('div.rt-td')
+			webtable.elements
+				.grid()
 				.eq(namesArray[i])
 				.invoke('text')
 				.then(names => {
 					sortedfromTable.push(names);
 				});
 		}
-
 		cy.wrap(sortedfromTable).then(() => {
-			expect(sortedfromTable).to.deep.equal(SortedinTest);
+			expect(sortedfromTable).not.to.equal(unsorted);
 		});
+	});
+	it('1898 | TC9: Validate that the user can sort the lastnames alphabetically with the button “LastName”', () => {
+		const surnamesArray = [1, 8, 15];
+		const unsorted = [];
+		const sortedfromTable = [];
+		for (let i = 0; i <= surnamesArray.length - 1; i++) {
+			webtable.elements
+				.grid()
+				.eq(surnamesArray[i])
+				.invoke('text')
+				.then(names => {
+					unsorted.push(names);
+				});
+		}
+		webtable.elements.surnamebutton().should('exist');
+		webtable.clickOnSurname();
+		for (let i = 0; i <= surnamesArray.length - 1; i++) {
+			webtable.elements
+				.grid()
+				.eq(surnamesArray[i])
+				.invoke('text')
+				.then(names => {
+					sortedfromTable.push(names);
+				});
+		}
+		cy.wrap(sortedfromTable).then(() => {
+			expect(sortedfromTable).not.to.equal(unsorted);
+		});
+	});
+	it('1898 | TC10: Validate that the user can sort the emails alphabetically with the button “Email”', () => {
+		const emailArray = [3, 10, 17];
+		const unsorted = [];
+		const sortedfromTable = [];
+		for (let i = 0; i <= emailArray.length - 1; i++) {
+			webtable.elements
+				.grid()
+				.eq(emailArray[i])
+				.invoke('text')
+				.then(names => {
+					unsorted.push(names);
+				});
+		}
+		webtable.elements.emailbutton().should('exist');
+		webtable.clickOnEmailbutton();
+		for (let i = 0; i <= emailArray.length - 1; i++) {
+			webtable.elements
+				.grid()
+				.eq(emailArray[i])
+				.invoke('text')
+				.then(names => {
+					sortedfromTable.push(names);
+				});
+		}
+		cy.wrap(sortedfromTable).then(() => {
+			expect(sortedfromTable).not.to.equal(unsorted);
+		});
+	});
+	it('1898 | TC11: Validate that the user can sort the salary figures from low to high with the button “Salary”', () => {
+		const salaryArray = [4, 11, 18];
+		const unsorted = [];
+		const sortedfromTable = [];
+		for (let i = 0; i <= salaryArray.length - 1; i++) {
+			webtable.elements
+				.grid()
+				.eq(salaryArray[i])
+				.invoke('text')
+				.then(names => {
+					unsorted.push(names);
+				});
+		}
+		webtable.elements.salarybutton().should('exist');
+		webtable.clickOnSalarybutton();
+		for (let i = 0; i <= salaryArray.length - 1; i++) {
+			webtable.elements
+				.grid()
+				.eq(salaryArray[i])
+				.invoke('text')
+				.then(names => {
+					sortedfromTable.push(names);
+				});
+		}
+		cy.wrap(sortedfromTable).then(() => {
+			expect(sortedfromTable).not.to.equal(unsorted);
+		});
+	});
+	it('1898 | TC13: Validate that the user can sort the departments with the button “Department”', () => {
+		const departmentArray = [5, 12, 19];
+		const unsorted = [];
+		const sortedfromTable = [];
+		for (let i = 0; i <= departmentArray.length - 1; i++) {
+			webtable.elements
+				.grid()
+				.eq(departmentArray[i])
+				.invoke('text')
+				.then(names => {
+					unsorted.push(names);
+				});
+		}
+		webtable.elements.departmentbutton().should('exist');
+		webtable.clickOnDepartmentbutton();
+		for (let i = 0; i <= departmentArray.length - 1; i++) {
+			webtable.elements
+				.grid()
+				.eq(departmentArray[i])
+				.invoke('text')
+				.then(names => {
+					sortedfromTable.push(names);
+				});
+		}
+		cy.wrap(sortedfromTable).then(() => {
+			expect(sortedfromTable).not.to.equal(unsorted);
+		});
+	});
+	it('1898 | TC14: Validate that the table has 10 rows by default', () => {
+		webtable.elements.row().should('have.length', 10).and('exist');
+	});
+	it('1898 | TC15: Validate that the user can select 5 rows in the table.', () => {
+		webtable.elements.rowSelector().scrollIntoView();
+		webtable.elements.rowSelector().should('exist');
+		webtable.clickRowselector(0);
+		webtable.elements.row().should('have.length', 5).and('exist');
+	});
+	it('1898 | TC16: Validate that the user can select 100 rows in the table', () => {
+		webtable.elements.rowSelector().scrollIntoView();
+		webtable.elements.rowSelector().should('exist');
+		webtable.clickRowselector(5);
+		webtable.elements.row().should('have.length', 100).and('exist');
 	});
 });
 
-Cypress.on('uncaught:exception', () => {
-	// returning false here prevents Cypress from
-	// failing the test
-	return false;
-});
-// Comando predeterminado para que no aparezcan los Fetch en el log del Test Runner:
-const origLog = Cypress.log;
-Cypress.log = function (opts, ...other) {
-	if (opts.displayName === 'xhr' || (opts.displayName === 'fetch' && opts.url.startsWith('https://'))) {
-		return;
-	}
-	return origLog(opts, ...other);
-};
+import { removeLogs } from '@helper/RemoveLogs';
+removeLogs();

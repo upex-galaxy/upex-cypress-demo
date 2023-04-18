@@ -1,7 +1,9 @@
+import { faker } from '@faker-js/faker';
 class WebTable {
 	elements = {
 		addbutton: () => cy.get('[id="addNewRecordButton"]'),
 		modal: () => cy.get('[class="modal-content"]'),
+		modaltitle: () => cy.get('[id="registration-form-modal"]'),
 		nameInput: () => cy.get('[id="firstName"]'),
 		lastnameInput: () => cy.get('[id="lastName"]'),
 		mailInput: () => cy.get('[id="userEmail"]'),
@@ -9,12 +11,23 @@ class WebTable {
 		salaryInput: () => cy.get('[id="salary"]'),
 		departmentInput: () => cy.get('[id="department"]'),
 		submitbutton: () => cy.get('[id="submit"]'),
+		oddColumn: () => cy.get('div.rt-tr.-odd'),
+		evenColumn: () => cy.get('div.rt-tr.-even'),
 		deletebutton3: () => cy.get('[id="delete-record-3"]'),
 		searchbox: () => cy.get('[id="searchBox"]'),
 		editrecord1: () => cy.get('[id="edit-record-1"]'),
 		nextbutton: () => cy.get('[class="-next"]'),
 		previousbutton: () => cy.get('[class="-previous"]'),
-		headerbuttons: () => cy.get('div.rt-resizable-header-content'),
+		namebutton: () => cy.get('div.rt-resizable-header-content').first(),
+		surnamebutton: () => cy.get('div.rt-resizable-header-content').eq(1),
+		emailbutton: () => cy.get('div.rt-resizable-header-content').eq(3),
+		salarybutton: () => cy.get('div.rt-resizable-header-content').eq(4),
+		departmentbutton: () => cy.get('div.rt-resizable-header-content').eq(5),
+		grid: () => cy.get('div.rt-td'),
+		actualpage: () => cy.get('[type="number"]'),
+		totalpages: () => cy.get('[class="-totalPages"]'),
+		rowSelector: () => cy.get('[aria-label="rows per page"]'),
+		row: () => cy.get('[class="rt-tr-group"]'),
 	};
 	clickAdd() {
 		this.elements.addbutton().click();
@@ -56,18 +69,43 @@ class WebTable {
 		this.elements.previousbutton().click();
 	}
 	clickOnfirstName() {
-		this.elements.headerbuttons().first().click();
+		this.elements.namebutton().first().click();
+	}
+	clickOnSurname() {
+		this.elements.surnamebutton().click();
+	}
+	clickOnEmailbutton() {
+		this.elements.emailbutton().click();
+	}
+	clickOnSalarybutton() {
+		this.elements.salarybutton().click();
+	}
+	clickOnDepartmentbutton() {
+		this.elements.departmentbutton().click();
 	}
 	visit() {
 		cy.visit('https://demoqa.com/webtables');
 	}
-	addUsertoTable(name, surname, mail, age, salary, department) {
-		this.elements.nameInput().type(name);
-		this.elements.lastnameInput().type(surname);
-		this.elements.mailInput().type(mail);
-		this.elements.ageInput().type(age);
-		this.elements.salaryInput().type(salary);
-		this.elements.departmentInput().type(department);
+	clickRowselector(option) {
+		this.elements.rowSelector().select(option);
+	}
+	addUsertoTable() {
+		const rn = Cypress._.random(10, 100);
+		const info = {
+			name: faker.name.firstName(),
+			surname: faker.name.lastName(),
+			mail: faker.internet.email(),
+			age: Cypress._.random(18, 65),
+			salary: rn * 1000,
+			department: faker.company.bs(),
+		};
+
+		this.elements.nameInput().type(info.name);
+		this.elements.lastnameInput().type(info.surname);
+		this.elements.mailInput().type(info.mail);
+		this.elements.ageInput().type(info.age);
+		this.elements.salaryInput().type(info.salary);
+		this.elements.departmentInput().type(info.department);
 	}
 }
 export const webtable = new WebTable();
