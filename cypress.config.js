@@ -60,6 +60,7 @@ export default defineConfig({
 			signUp: 'https://coderbyte.com/sl', // what does this url here?
 			radioButton: '/radio-button',
 			textBox: 'text-box',
+			selectable: '/selectable',
 		},
 		user: {
 			username: 'upexTesting',
