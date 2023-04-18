@@ -19,7 +19,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
             selectonlist.SelectList();            
         });
 
-        Then('should be can see the List elements', () => {
+        Then('should see the List elements', () => {
             selectonlist.get.listPaginationPanel().should('contain.text', 'Cras justo odio');          
         });
     });
@@ -35,7 +35,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
             selectonlist.list.listPagination3().click()            
             selectonlist.list.listPagination4().click()                      
         });
-        Then('should can see all elements selected tc2', () => {
+        Then('should see all elements selected tc2', () => {
             cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)')
         });
     });
@@ -50,13 +50,13 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
             selectonlist.list.listPagination2().click()             
             selectonlist.list.listPagination3().click()             
             selectonlist.list.listPagination4().click() 
-            selectonlist.assertions.bluecolor()
+            cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)')
         });
         When('clicks again on each elements of the list tc3', () => {                     
             selectonlist.ClickOnElementsList()
             
         });
-        Then('should can see all element unselected tc3', () => {
+        Then('should see all element unselected tc3', () => {
             cy.get('.list-group-item.active').should('not.exist')    
         });
     });
@@ -65,7 +65,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
         When('clicks on Grid pagination', () => {
             selectongrid.SelectGrid();                    
         });
-        Then('should be can see the Grid elements', () => {
+        Then('should see the Grid elements', () => {
             selectongrid.get.gridPaginationPanel().should('contain.text', 'Five');          
         });
         });
@@ -79,7 +79,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
         When('clicks on each elements of the Grid tc5', () => {
             selectongrid.ClickOnGridElement()                
         });
-        Then('should can see all elements selected tc5', () => {
+        Then('should see all elements selected tc5', () => {
             cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)')
         });
     });
@@ -92,14 +92,14 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
         
         When('clicks on each elements of the Grid tc6', () => {
             selectongrid.ClickOnGridElement()
-            selectongrid.assertions.bluecolor()
+            cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)')
         });
         When('clicks again on each elements of the Grid tc6', () => {
             
         cy.wrap(selectongrid.SelectableFunction() )
     
         });
-        Then('should can see all element unselected tc6', () => {
+        Then('should see all element unselected tc6', () => {
             selectongrid.ClickOnGridElement()
             cy.get('.list-group-item.active').should('not.exist')    
         });
