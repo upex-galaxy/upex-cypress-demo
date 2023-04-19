@@ -13,10 +13,12 @@ class ToolsForms {
 
 		phoneNumberInput: () => cy.get('#userNumber'),
 		dataPicker: () => cy.get('#dateOfBirthInput'),
+		calendar: () => cy.get('div[ class= "react-datepicker__month-container" ]'),
 		yearPicker: () => cy.get('.react-datepicker__year-select'),
 		monthPicker: () => cy.get('.react-datepicker__month-select'),
 		dayPicker: () => cy.get('.react-datepicker__day-name'),
-		subjectsInput: () => cy.get('#subjectsContainer'),
+		//subjectsInput: () => cy.get('#subjectsContainer'),
+		subjectsInput: () => cy.get('#subjectsInput'),
 		
 		hobbiesCheck1: () => cy.get('#hobbies-checkbox-1'),
 		hobbiesCheck2: () => cy.get('#hobbies-checkbox-2'),
@@ -33,43 +35,28 @@ class ToolsForms {
 		const firstName = faker.name.firstName();
 		const lastName = faker.name.lastName();
 		const email = faker.internet.email();
-		//const gender = faker.helpers.arrayGender([ radioButton1, radioButton2, radioButton3 ]);
 		const phoneNumber = faker.phone.number().replace(/\D/g, '');
-		
-		//const dateOfBirth = faker.date.between('1950-01-01', '2002-12-31').toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-
-		const subjects = faker.lorem.paragraph();
-		// const hobbiesCheck = faker.helpers.arrayHobbies([ hobbiesCheck1, hobbiesCheck2, hobbiesCheck3 ]);
+		//const subjects = faker.helpers.arrayElement(['a', 'b', 'c']);
 		const addressInput = faker.address.city();
-
-		
+	
 		this.elements.firstNameInput().type(firstName);
 		this.elements.lastNameInput().type(lastName);
 		this.elements.emailInput().type(email);
-		
-		// if (gender === radioButton1) {
-		// 	this.elements.radioButton1().check();
-		// } else if (gender === radioButton2) {
-		// 	this.elements.radioButton2().check();
-		// } else {
-		// 	this.elements.radioButton3().check();
-		// }
-		
 		this.elements.phoneNumberInput().type(phoneNumber);
-
-		//this.elements.dataPicker().type(dateOfBirth); //funciona a medias,escribe la fecha pero despues de la que tiene por defecto
-		//this.elements.dataPicker().clear().type(dateOfBirth);
-		// const datePicker = this.elements.datePicker();
-		// datePicker.clear();
-		// datePicker.as('datePickerInput');
-		// cy.get('@datePickerInput').type(dateOfBirth);
-
-
-		//this.elements.dataPicker().clear().type(dateOfBirth);
-		this.elements.subjectsInput().type(subjects);
+		this.elements.subjectsInput().type('a');
+		cy.get('.subjects-auto-complete__menu-list').contains('Arts').click();
 		this.elements.addressInput().type(addressInput);
+		
 	}
+	selectBirth() {
+		this.elements.dataPicker().click();
+		this.elements.calendar().within(() => {
+			this.elements.yearPicker().then($year => {
+				cy.wrap($year).select(123);
+			});
+		});
 
+	}
 	selectGender() {
 		this.elements.radioButton1().check({ force: true });
 	}
