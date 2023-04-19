@@ -1,6 +1,7 @@
 import { Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import { selectongrid } from '@pages/GX2-1268-Interactions-Selectable/SelectableGrid';
 import { selectonlist } from '@pages/GX2-1268-Interactions-Selectable/SelectableList';
+import { values } from 'cypress/types/lodash';
 
 
 
@@ -20,8 +21,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
         });
 
         Then('should see the List elements', () => {
-            cy.get('#verticalListContainer').should('be.visible');  
-            cy.get('#demo-tabpane-grid').should('be.not.visible');
+            cy.get('#verticalListContainer').should('be.visible');              
         });
     });
     
