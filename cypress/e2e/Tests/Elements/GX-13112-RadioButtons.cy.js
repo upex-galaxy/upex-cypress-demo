@@ -11,15 +11,17 @@ describe('TC Fixture - RadioButtons', () => {
 
 	it('US 13113  | TC#1: Validar seleccionar radio button "Yes"', () => {
 		cy.fixture('DOM/radioButtons.Page').then(the => {
-			cy.get(the.radioButtons.yesButton).check({ force: true }).should('be.checked');
+			cy.get(the.radioButtons.yesButton).check({ force: true });
+			cy.get(the.radioButtons.yesButton).should('be.checked');
 			cy.get(the.flag).contains(the.flagMessage);
-			cy.get(the.flagText).contains(the.flagMessageOption.yes);
+			cy.get(the.flagText).should('have.text', the.flagMessageOption.yes);
 		});
 	});
 
 	it('US 13112  | TC#2: Validar seleccionar radio button "Impressive"', () => {
 		cy.fixture('DOM/radioButtons.Page').then(the => {
-			cy.get(the.radioButtons.impressiveButton).check({ force: true }).should('be.checked');
+			cy.get(the.radioButtons.impressiveButton).check({ force: true });
+			cy.get(the.radioButtons.impressiveButton).should('be.checked');
 			cy.get(the.flag).contains(the.flagMessage);
 			cy.get(the.flagText).should('have.text', the.flagMessageOption.impressive);
 		});
