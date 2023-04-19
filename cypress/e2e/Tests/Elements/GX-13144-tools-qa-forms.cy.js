@@ -18,7 +18,7 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		//toolsForms.elements.dataPicker.should('exist');
 		// toolsForms.elements.subjectsInput().should('contain', 'not.be.empty');
 
-		
+		toolsForms.selectBirth();
 
 		toolsForms.selectHobbie();
 		//toolsForms.elements.hobbiesCheck2().should('contain', 'Reading');
@@ -44,34 +44,15 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		
 	});
 
-	// it('13145 | TC2: Validate no message is displayed after submitting and the field turns red if First name field is empty', () => {
-	// 	toolsForms.fillStudentForm();
-	// });
+	// it('13145 | TC2:Validate no message is displayed after submitting and the field turns red if at least one required field is empty', () =>{
+	
+	//}
 
-	// it('13145 | TC3: Validate no message is displayed after submitting and the field turns red if Last name field is empty', () => {
-	// 	toolsForms.fillStudentForm();	
-	// });
 
-	// it('13145 | TC4: Validate no message is displayed after submitting and the field turns red if Email field is invalid', () => {
+	// it('13145 | TC3: Validate no message is displayed after submitting and the field turns red if Email o Mobile number fields are invalid', () => {
 	// 	toolsForms.fillStudentForm();	
 	// });
 
-	// it('13145 | TC5: Validate no message is displayed after submitting if Email field is empty', () => {
-	// 	toolsForms.fillStudentForm();	
-	// });
-
-	// it('13145 | TC6: Validate no message is displayed after submitting and the field turns red if Mobile number field is invalid', () => {
-	// 	toolsForms.fillStudentForm();	
-	// });
-	// it('13145 | TC7: Validate a popup appears with the information when  a user makes clicks on the date and chosen the date of birth', () => {
-	// 	toolsForms.fillStudentForm();	
-	// });
-	// it('13145 | TC8: Validate no message is displayed after submitting if Subjects field is empty', () => {
-	// 	toolsForms.fillStudentForm();	
-	// });
-	// it('13145 | TC9: Validate no message is displayed after submitting and the field turns red if Current address field is empty', () => {
-	// 	toolsForms.fillStudentForm();	
-	// });
 
 });
 
