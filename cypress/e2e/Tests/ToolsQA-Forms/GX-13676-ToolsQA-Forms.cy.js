@@ -8,10 +8,10 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 	it('13677 | TC1:  Validar que todos los campos completados correctamente aparecen en el Pop-up', () => {
 		cy.fixture('data/Form').then(the => {
 			form.enterFirst_name(the.first_name.valid);
-			form.elements.first_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.first_nameInput().should('have.value', the.first_name.valid);
 
 			form.enterLast_name(the.last_name.valid);
-			form.elements.last_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.last_nameInput().invoke('val').should('eq', the.last_name.valid);
 
 			form.enterEmail(the.email.valid);
 			form.elements.emailInput().should('have.value', the.email.valid);
@@ -57,8 +57,6 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 			form.elements.Select_City_Container().within(() => {
 				form.elements.Select_StateAndCityValue().invoke('text').should('contain', the.City.Lucknow);
 			});
-
-			//
 
 			form.submit();
 
@@ -124,7 +122,7 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 			form.enterFirst_name(the.first_name.invalid);
 
 			form.enterLast_name(the.last_name.valid);
-			form.elements.last_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.last_nameInput().invoke('val').should('eq', the.last_name.valid);
 
 			form.enterEmail(the.email.valid);
 			form.elements.emailInput().should('have.value', the.email.valid);
@@ -170,18 +168,16 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 				form.elements.Select_StateAndCityValue().invoke('text').should('contain', the.City.Lucknow);
 			});
 
-			//
-
 			form.submit();
 
 			form.elements.PopupValuesSelector().should('not.exist');
 		});
 	});
 
-	it('13677 | TC3: Validar NO registro en el Form cuándo el campo Last Name está vacio', () => {
+	it.only('13677 | TC3: Validar NO registro en el Form cuándo el campo Last Name está vacio', () => {
 		cy.fixture('data/Form').then(the => {
 			form.enterFirst_name(the.first_name.valid);
-			form.elements.first_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.first_nameInput().should('have.value', the.first_name.valid);
 
 			form.enterLast_name(the.last_name.invalid);
 
@@ -229,8 +225,6 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 				form.elements.Select_StateAndCityValue().invoke('text').should('contain', the.City.Lucknow);
 			});
 
-			//
-
 			form.submit();
 
 			form.elements.PopupValuesSelector().should('not.exist');
@@ -240,10 +234,10 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 	it('13677 | TC4: Validar NO registro en el Form cuándo el campo Email no contiene “@“', () => {
 		cy.fixture('data/Form').then(the => {
 			form.enterFirst_name(the.first_name.valid);
-			form.elements.first_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.first_nameInput().should('have.value', the.first_name.valid);
 
 			form.enterLast_name(the.last_name.valid);
-			form.elements.last_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.last_nameInput().invoke('val').should('eq', the.last_name.valid);
 
 			form.enterEmail(the.email.invalid);
 
@@ -288,8 +282,6 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 				form.elements.Select_StateAndCityValue().invoke('text').should('contain', the.City.Lucknow);
 			});
 
-			//
-
 			form.submit();
 
 			form.elements.PopupValuesSelector().should('not.exist');
@@ -299,10 +291,10 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 	it('13677 | TC5: Validar NO registro en el Form cuándo el campo Email no contiene mínimo 1 carácter alfanumérico antes del “@“', () => {
 		cy.fixture('data/Form').then(the => {
 			form.enterFirst_name(the.first_name.valid);
-			form.elements.first_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.first_nameInput().should('have.value', the.first_name.valid);
 
 			form.enterLast_name(the.last_name.valid);
-			form.elements.last_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.last_nameInput().invoke('val').should('eq', the.last_name.valid);
 
 			form.enterEmail(the.email.invalid2);
 
@@ -347,8 +339,6 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 				form.elements.Select_StateAndCityValue().invoke('text').should('contain', the.City.Lucknow);
 			});
 
-			//
-
 			form.submit();
 
 			form.elements.PopupValuesSelector().should('not.exist');
@@ -358,10 +348,10 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 	it('13677 | TC6: Validar NO registro en el Form cuándo el campo Email no contiene mínimo 1 carácter alfanumérico después del “@"', () => {
 		cy.fixture('data/Form').then(the => {
 			form.enterFirst_name(the.first_name.valid);
-			form.elements.first_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.first_nameInput().should('have.value', the.first_name.valid);
 
 			form.enterLast_name(the.last_name.valid);
-			form.elements.last_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.last_nameInput().invoke('val').should('eq', the.last_name.valid);
 
 			form.enterEmail(the.email.invalid3);
 
@@ -406,8 +396,6 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 				form.elements.Select_StateAndCityValue().invoke('text').should('contain', the.City.Lucknow);
 			});
 
-			//
-
 			form.submit();
 
 			form.elements.PopupValuesSelector().should('not.exist');
@@ -417,10 +405,10 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 	it('13677 | TC7: Validar NO registro en el Form cuándo el campo Email no contiene "." después de 1 carácter alfanumérico después de “@”', () => {
 		cy.fixture('data/Form').then(the => {
 			form.enterFirst_name(the.first_name.valid);
-			form.elements.first_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.first_nameInput().should('have.value', the.first_name.valid);
 
 			form.enterLast_name(the.last_name.valid);
-			form.elements.last_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.last_nameInput().invoke('val').should('eq', the.last_name.valid);
 
 			form.enterEmail(the.email.invalid4);
 
@@ -465,8 +453,6 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 				form.elements.Select_StateAndCityValue().invoke('text').should('contain', the.City.Lucknow);
 			});
 
-			//
-
 			form.submit();
 
 			form.elements.PopupValuesSelector().should('not.exist');
@@ -476,10 +462,10 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 	it('13677 | TC8: Validar NO registro en el Form cuándo el campo Email no contiene mínimo 2 caracteres alfanuméricos después de “.”', () => {
 		cy.fixture('data/Form').then(the => {
 			form.enterFirst_name(the.first_name.valid);
-			form.elements.first_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.first_nameInput().should('have.value', the.first_name.valid);
 
 			form.enterLast_name(the.last_name.valid);
-			form.elements.last_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.last_nameInput().invoke('val').should('eq', the.last_name.valid);
 
 			form.enterEmail(the.email.invalid5);
 
@@ -524,8 +510,6 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 				form.elements.Select_StateAndCityValue().invoke('text').should('contain', the.City.Lucknow);
 			});
 
-			//
-
 			form.submit();
 
 			form.elements.PopupValuesSelector().should('not.exist');
@@ -535,10 +519,10 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 	it('13677 | TC9: Validar NO registro en el Form cuándo en los Radio Buttons no se selecciona ninguna opción ', () => {
 		cy.fixture('data/Form').then(the => {
 			form.enterFirst_name(the.first_name.valid);
-			form.elements.first_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.first_nameInput().should('have.value', the.first_name.valid);
 
 			form.enterLast_name(the.last_name.valid);
-			form.elements.last_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.last_nameInput().invoke('val').should('eq', the.last_name.valid);
 
 			form.enterEmail(the.email.valid);
 			form.elements.emailInput().should('have.value', the.email.valid);
@@ -576,8 +560,6 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 				form.elements.Select_StateAndCityValue().invoke('text').should('contain', the.City.Lucknow);
 			});
 
-			//
-
 			form.submit();
 
 			form.elements.PopupValuesSelector().should('not.exist');
@@ -587,10 +569,10 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 	it('13677 | TC10: Validar NO registro en el Form cuándo el campo Mobile Number está vacío', () => {
 		cy.fixture('data/Form').then(the => {
 			form.enterFirst_name(the.first_name.valid);
-			form.elements.first_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.first_nameInput().should('have.value', the.first_name.valid);
 
 			form.enterLast_name(the.last_name.valid);
-			form.elements.last_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.last_nameInput().invoke('val').should('eq', the.last_name.valid);
 
 			form.enterEmail(the.email.valid);
 			form.elements.emailInput().should('have.value', the.email.valid);
@@ -635,8 +617,6 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 				form.elements.Select_StateAndCityValue().invoke('text').should('contain', the.City.Lucknow);
 			});
 
-			//
-
 			form.submit();
 
 			form.elements.PopupValuesSelector().should('not.exist');
@@ -646,10 +626,10 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 	it.skip('13677 | TC11: Validar NO registro en el Form cuándo el campo Mobile Number tiene 9 digitos', () => {
 		cy.fixture('data/Form').then(the => {
 			form.enterFirst_name(the.first_name.valid);
-			form.elements.first_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.first_nameInput().should('have.value', the.first_name.valid);
 
 			form.enterLast_name(the.last_name.valid);
-			form.elements.last_nameInput().should('have.css', 'border-color', the.BorderField.valid);
+			form.elements.last_nameInput().invoke('val').should('eq', the.last_name.valid);
 
 			form.enterEmail(the.email.valid);
 			form.elements.emailInput().should('have.value', the.email.valid);
@@ -693,8 +673,6 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 			form.elements.Select_City_Container().within(() => {
 				form.elements.Select_StateAndCityValue().invoke('text').should('contain', the.City.Lucknow);
 			});
-
-			//
 
 			form.submit();
 

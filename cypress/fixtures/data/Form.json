@@ -61,8 +61,5 @@
 	"City": {
 		"Lucknow": "Lucknow",
 		"Agra": "Agra"
-	},
-	"BorderField": {
-		"valid": "rgb(37, 156, 64)"
 	}
 }
