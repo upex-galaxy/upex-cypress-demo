@@ -16,7 +16,7 @@ class WebTable {
 		deletebutton3: () => cy.get('[id="delete-record-3"]'),
 		searchbox: () => cy.get('[id="searchBox"]'),
 		editrecord1: () => cy.get('[id="edit-record-1"]'),
-		nextbutton: () => cy.get('[class="-next"]'),
+		nextbutton: () => cy.get('[class="-next"] button'),
 		previousbutton: () => cy.get('[class="-previous"]'),
 		namebutton: () => cy.get('div.rt-resizable-header-content').first(),
 		surnamebutton: () => cy.get('div.rt-resizable-header-content').eq(1),
