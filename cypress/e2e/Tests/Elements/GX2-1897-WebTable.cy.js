@@ -19,7 +19,6 @@ describe('GX2-1897-✅-tools-qa-elements-web-table', () => {
 		webtable.elements.salaryInput().should('exist').and('be.empty');
 		webtable.elements.departmentInput().should('exist').and('be.empty');
 	});
-
 	it('1898 | TC2: Validate that the user can successfully sign into the table.', () => {
 		webtable.clickAdd();
 		webtable.addUsertoTable();
