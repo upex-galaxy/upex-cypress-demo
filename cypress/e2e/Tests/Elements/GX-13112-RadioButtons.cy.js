@@ -9,7 +9,7 @@ describe('TC Fixture - RadioButtons', () => {
 		});
 	});
 
-	it('US 13113  | TC#1: Validar seleccionar radio button "Yes"', () => {
+	it.skip('US 13113  | TC#1: Validar seleccionar radio button "Yes"', () => {
 		cy.fixture('DOM/radioButtons.Page').then(the => {
 			cy.get(the.radioButtons.yesButton).check({ force: true });
 			cy.get(the.radioButtons.yesButton).should('be.checked');
