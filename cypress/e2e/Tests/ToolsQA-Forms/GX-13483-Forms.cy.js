@@ -19,8 +19,8 @@ describe('✅ US GX-13483 | ToolsQA | Forms | Practice Form', () => {
 		TC.n02();
 	});
 		
-	it.skip('13483 | TC3: Validar registrarse con email inválido y un mobile number inválido.', () => {
+	/*it.skip('13483 | TC3: Validar registrarse con email inválido y un mobile number inválido.', () => {
 		//Se skipea por bug en mobile number porque no cumple con la funcionalidad(se exigen 10 digitos y la prueba pasa correctamente poniendo menos)
 		TC.n03(firstName, lastName, invalidEmail, invalidNum, subjects);
-	});
+	});*/
 });
