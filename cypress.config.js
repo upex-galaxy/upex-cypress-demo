@@ -66,5 +66,18 @@ export default defineConfig({
 			email: 'sai@upextesting.com',
 			password: '1234567',
 		},
+		
+			
+		
+		data : {
+			URL : 'https://demoqa.com/automation-practice-form',
+			firstName : 'Bernabé', 
+			lastName : 'Galati' ,
+			email : 'bernabe@gmail.com',
+			userNumber: '1122334455',
+			subjects : 'hola',
+			invalidEmail : 'a@a',
+			invalidNum : '11'
+		}
 	},
 });
