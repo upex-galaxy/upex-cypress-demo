@@ -120,8 +120,9 @@ describe('GX2-1897-✅-tools-qa-elements-web-table', () => {
 					});
 			});
 	});
-	it('1898 | TC6: Validate that the user go to the following page by clicking the “next” button.', () => {
+	it('1898 | TC6:   Validate that the user go to the following page by clicking the “next” button.', () => {
 		webtable.elements.nextbutton().should('not.be.enabled');
+		cy.wait(2000);
 		webtable.elements.actualpage().should('have.value', 1);
 		webtable.elements
 			.totalpages()
@@ -142,6 +143,7 @@ describe('GX2-1897-✅-tools-qa-elements-web-table', () => {
 			});
 		webtable.elements.nextbutton().should('not.be.disabled');
 		webtable.clickNext();
+		cy.wait(2000);
 		webtable.elements.actualpage().should('have.value', 2);
 	});
 	it('1898 | TC7: Validate that the user goes back to the previous page by clicking the “Previous” button.', () => {
