@@ -55,7 +55,6 @@ Cypress.Commands.add('SignIn', () => {
 });
 
 Cypress.Commands.add('randomNumber', n => {
-Cypress.Commands.add('randomNumber', n => {
 	return Cypress._.random(0, n - 1);
 });
 
@@ -178,4 +177,15 @@ Cypress.Commands.add('SticktoBottom', () => {
 					});
 			});
 	});
+});
+Cypress.Commands.add('getTableCell', (columnName, rowIndex) => {
+	cy.contains('.rt-th', columnName)
+		.invoke('index')
+		.then(colIndex => {
+			cy.get('.rt-tr')
+				.eq(rowIndex)
+				.within(() => {
+					cy.get('.rt-td').eq(colIndex);
+				});
+		});
 });
