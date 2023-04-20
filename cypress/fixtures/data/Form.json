@@ -1,0 +1,68 @@
+{
+	"first_name": {
+		"valid": "SAINT",
+		"invalid": ""
+	},
+	"last_name": {
+		"valid": "LEZHER",
+		"invalid": ""
+	},
+	"email": {
+		"valid": "SaintLzh10@gmail.com",
+		"invalid": "SaintLzh10gmail.com",
+		"invalid2": "@.com",
+		"invalid3": "SaintLzh10@",
+		"invalid4": "SaintLzh10@gmailcom",
+		"invalid5": "SaintLzh10@gmail."
+	},
+	"Mobile_number": {
+		"valid": "1234567899",
+		"invalid": "",
+		"invalid2": "123456789"
+	},
+	"Gender": {
+		"Male": "0",
+		"Female": "1",
+		"Other": "2",
+		"Male1": "Male",
+		"Female1": "Female"
+	},
+	"Year": {
+		"valid": "1977",
+		"valid2": "2005"
+	},
+	"Month": {
+		"valid": "August",
+		"AugustIndex": "7"
+	},
+	"Day": {
+		"valid_Index": "25",
+		"DayValue21": "21"
+	},
+	"Subjects": {
+		"valid": "Arts"
+	},
+	"Hobbies": {
+		"Sport": "Sports",
+		"Reading": "Reading",
+		"Music": "Music"
+	},
+	"Image": {
+		"PathUpexLogo": "images/upexlogo.png",
+		"UpexLogoValue": "upexlogo.png"
+	},
+	"CurrentAddress": {
+		"Groove": "Groove Street"
+	},
+	"State": {
+		"NCR": "NCR",
+		"Uttar": "Uttar Pradesh"
+	},
+	"City": {
+		"Lucknow": "Lucknow",
+		"Agra": "Agra"
+	},
+	"BorderField": {
+		"valid": "rgb(37, 156, 64)"
+	}
+}
