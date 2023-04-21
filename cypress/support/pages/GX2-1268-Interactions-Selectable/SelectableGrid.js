@@ -20,7 +20,7 @@ class SelectOnGrid {
     assertions = {
         bluecolor: () => cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)'),
         nobluecolor: () => cy.get('.list-group-item.active').should('not.exist'),
-
+                ;-)
     }*/
     SelectGrid() {
         this.get.gridPagination().click()
