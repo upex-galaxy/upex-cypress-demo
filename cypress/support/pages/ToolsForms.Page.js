@@ -1,25 +1,28 @@
 import { faker } from '@faker-js/faker';
 
 
+
 class ToolsForms {
 	elements = {
 		firstNameInput: () => cy.get('#firstName'),
 		lastNameInput: () => cy.get('#lastName'),
 		emailInput: () => cy.get('#userEmail'),
-		
 		radioButton1: () => cy.get('#gender-radio-1'),
 		radioButton2: () => cy.get('#gender-radio-2'),
 		radioButton3: () => cy.get('#gender-radio-3'),
-
 		phoneNumberInput: () => cy.get('#userNumber'),
+
 		datePicker: () => cy.get('#dateOfBirthInput'),
 		calendar: () => cy.get('div[ class= "react-datepicker__month-container" ]'),
 		yearPicker: () => cy.get('.react-datepicker__year-select'),
 		monthPicker: () => cy.get('.react-datepicker__month-select'),
-		dayPicker: () => cy.get('.react-datepicker__day-name'),
-		//subjectsInput: () => cy.get('#subjectsContainer'),
+		dayPicker: () => cy.get('.react-datepicker__day'),
+		monthOutside: () => cy.get('.react-datepicker__day--outside-month'),
+		selectYear: () => cy.get('select[class*="year-select"]'),
+		selectMonth: () => cy.get('select[class*="month-select"]'),
+
 		subjectsInput: () => cy.get('#subjectsInput'),
-		
+		subjectList: () => cy.get('.subjects-auto-complete__menu-list'),
 		hobbiesCheck1: () => cy.get('#hobbies-checkbox-1'),
 		hobbiesCheck2: () => cy.get('#hobbies-checkbox-2'),
 		hobbiesCheck3: () => cy.get('#hobbies-checkbox-3'),
@@ -36,7 +39,6 @@ class ToolsForms {
 		const lastName = faker.name.lastName();
 		const email = faker.internet.email();
 		const phoneNumber = faker.phone.number().replace(/\D/g, '');
-		//const subjects = faker.helpers.arrayElement(['a', 'b', 'c']);
 		const addressInput = faker.address.city();
 	
 		this.elements.firstNameInput().type(firstName);
@@ -44,28 +46,48 @@ class ToolsForms {
 		this.elements.emailInput().type(email);
 		this.elements.phoneNumberInput().type(phoneNumber);
 		this.elements.subjectsInput().type('a');
-		cy.get('.subjects-auto-complete__menu-list').contains('Arts').click();
+		this.elements.subjectList().contains('Arts').click();
 		this.elements.addressInput().type(addressInput);
 		
 	}
 	selectBirth() {
+		//Option 1: use faker
 		this.elements.datePicker().click();
 		this.elements.calendar().within(() => {
-			const year = faker.random.number({ min: 1950, max: 2002 });
-			const month = faker.date.monthName().substring(0, 3);
-			const day = faker.random.number({ min: 1, max: 28 });
-			// selecciono los elementos
-			this.elements.yearPicker().then($year => {
-				cy.wrap(year).select(`${year}`);
-			});
-			this.elements.monthPicker().then($month => {
-				cy.wrap(month).select(`${month}`);
-			});
-			this.elements.dayPicker().then($day => {
-				cy.wrap(day).type(`${day}`);
-			});
-
+			// Generate random 
+			const year = faker.datatype.number({ min: 1900, max: 2022 });
+			const month = faker.date.month();
+			const day = faker.datatype.number({ min: 1, max: 28 });
+			// Select year month and day
+			this.elements.yearPicker().select(year.toString());
+			this.elements.monthPicker().select(month);
+			cy.get(`div.react-datepicker__day:not(.react-datepicker__day--disabled)[aria-label*="${day}"]:not(.react-datepicker__day--outside-month)`)
+				.first()
+				.wait(2000)
+				.click();
 		});
+		//Option 2: use cypress random
+		// this.elements.datePicker().click();
+		// this.elements.selectYear().children().its('length')
+		// 	.then(years => Cypress._.random(0, years - 1))
+		// 	.then(randomYear => {
+		// 		this.elements.selectYear().select(randomYear);
+		// 	});
+		// this.elements.selectMonth().then($month => {
+		// 	const months = $month.children().its('length');
+		// 	const randomMonth = Cypress._.random(0, months - 1);
+		// 	cy.wrap($month).select(randomMonth);
+
+		// 	this.elements.calendar().within(() => {
+		// 		const day = Cypress._.random(1, 28);
+		// 		cy.get(`div.react-datepicker__day:not(.react-datepicker__day--disabled)[aria-label*="${day}"]:not(.react-datepicker__day--outside-month)`)
+		// 			.first()
+		// 			.should('be.visible')
+		// 			.wait(2000)
+		// 			.click({ force: true });
+		// 	});
+		// });
+
 	}
 
 	selectGender() {
