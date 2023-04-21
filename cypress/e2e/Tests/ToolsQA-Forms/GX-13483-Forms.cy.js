@@ -1,10 +1,8 @@
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
 
-import { TC } from '@functions/Functions.js';
-
-const { URL, firstName, lastName, email, userNumber, subjects,  invalidEmail, invalidNum } = Cypress.env('data');
-
+import { TC } from '@pages/Form.Page.js';
+import { URL, firstName, lastName, email, userNumber, subjects,  invalidEmail, invalidNum } from '../../../fixtures/data/data.json';
 
 
 describe('✅ US GX-13483 | ToolsQA | Forms | Practice Form', () => {
