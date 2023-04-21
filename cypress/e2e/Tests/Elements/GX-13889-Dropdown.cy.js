@@ -11,7 +11,7 @@ describe("GX-13889 | Dropdown - Select Menu", () => {
         dropdown.enterSelectMenu()
         cy.url().should("contain", selectMenuPage);
     });
-/*
+
     it("TC1: Validate one option of Group 1 is selected in the “Select Value” dropdown", () => {
         
         dropdown.clickValueMenu()
@@ -39,10 +39,10 @@ describe("GX-13889 | Dropdown - Select Menu", () => {
         dropdown.clickProf()
         cy.get("#selectOne").should("contain", "Prof.")
     })
-*/
+
     
     it("TC5: Validate one option is selected in the “Old style select menu” dropdown ", () => {
-        
+
         cy.get("#oldSelectMenu").select(5)
             .should("have.value", "5")
     })
