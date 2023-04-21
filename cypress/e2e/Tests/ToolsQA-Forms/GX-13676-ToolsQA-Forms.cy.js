@@ -1,4 +1,4 @@
-import { form } from '@pages/GX-13676-Forms/Form.Page';
+import { form } from '@pages/Form.Page';
 
 describe('✅ToolsQA | Forms | Practice Form', () => {
 	beforeEach('Usuario debe estar situado en la pagina de Form', () => {
@@ -174,7 +174,7 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		});
 	});
 
-	it.only('13677 | TC3: Validar NO registro en el Form cuándo el campo Last Name está vacio', () => {
+	it('13677 | TC3: Validar NO registro en el Form cuándo el campo Last Name está vacio', () => {
 		cy.fixture('data/Form').then(the => {
 			form.enterFirst_name(the.first_name.valid);
 			form.elements.first_nameInput().should('have.value', the.first_name.valid);
