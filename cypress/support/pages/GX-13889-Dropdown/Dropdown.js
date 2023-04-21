@@ -4,7 +4,8 @@ class Dropdown {
         valueMenu: () => cy.get("#withOptGroup"),
         reactMenu: () => cy.get("#selectOne"),
         oldMenu: () => cy.get("#oldSelectMenu"),
-        multiselectMenu: () => cy.get(".css-yk16xz-control").eq(2),
+        multiselectMenu: () => cy.get(".css-1wa3eu0-placeholder").eq(2),
+        multiselectMenuColors: () => cy.get(".css-1hwfws3").eq(2),
         standardMenu: ()=> cy.get("#cars"), 
         removeAllMultiselect: () => cy.get(".css-19bqh2r").eq(6),
         removeOneMultiselect: () => cy.get(".css-xb97g8").eq(0),     
@@ -45,27 +46,19 @@ class Dropdown {
         this.elements.optionReact2().click({ force: true })
     }
     
-    selectOldMenu() {
-        this.elements.oldMenu()
+    selectOldMenu(array) {
+        this.elements.oldMenu().select(array)
     }
  
 
     clickMultiselectMenu() {
-        this.elements.multiselectMenu().eq(2).click()
+        this.elements.multiselectMenuColors().click()
     }
 
-    selectGreen() {
-        this.elements.multiselectMenu().eq(2).click().type("Green{enter}")
+    selectColors() {
+        this.elements.multiselectMenu().click().type("Green{enter}Blue{enter}Black{enter}Red{enter}")
     }
-     selectBlue() {
-        this.elements.multiselectMenu().eq(2).click().type("Blue{enter}")
-    }
-     selectBlack() {
-        this.elements.multiselectMenu().eq(2).click().type("Black{enter}")
-    }
-    selectRed() {
-        this.elements.multiselectMenu().eq(2).click().type("Red{enter}")
-    }
+    
     removeAll() {
         this.elements.removeAllMultiselect().click()
     }
@@ -85,4 +78,5 @@ class Dropdown {
     
 }
 
-export const dropdown = new Dropdown;
+export const dropdown = new Dropdown();
+export const ag = new Dropdown();
