@@ -12,7 +12,7 @@ class ToolsForms {
 		radioButton3: () => cy.get('#gender-radio-3'),
 
 		phoneNumberInput: () => cy.get('#userNumber'),
-		dataPicker: () => cy.get('#dateOfBirthInput'),
+		datePicker: () => cy.get('#dateOfBirthInput'),
 		calendar: () => cy.get('div[ class= "react-datepicker__month-container" ]'),
 		yearPicker: () => cy.get('.react-datepicker__year-select'),
 		monthPicker: () => cy.get('.react-datepicker__month-select'),
@@ -49,14 +49,25 @@ class ToolsForms {
 		
 	}
 	selectBirth() {
-		this.elements.dataPicker().click();
+		this.elements.datePicker().click();
 		this.elements.calendar().within(() => {
+			const year = faker.random.number({ min: 1950, max: 2002 });
+			const month = faker.date.monthName().substring(0, 3);
+			const day = faker.random.number({ min: 1, max: 28 });
+			// selecciono los elementos
 			this.elements.yearPicker().then($year => {
-				cy.wrap($year).select(123);
+				cy.wrap(year).select(`${year}`);
 			});
-		});
+			this.elements.monthPicker().then($month => {
+				cy.wrap(month).select(`${month}`);
+			});
+			this.elements.dayPicker().then($day => {
+				cy.wrap(day).type(`${day}`);
+			});
 
+		});
 	}
+
 	selectGender() {
 		this.elements.radioButton1().check({ force: true });
 	}
