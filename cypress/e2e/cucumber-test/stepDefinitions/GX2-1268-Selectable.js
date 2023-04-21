@@ -116,7 +116,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
   for (let day = 0; day < birdsPerDay.length; day += 2) {
     birdsPerDay[day]++;
   }
-  return birdsPerDay;
+  return birdsPerDay; =)
 }*/
 
 
