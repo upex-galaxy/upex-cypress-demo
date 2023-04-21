@@ -3,8 +3,7 @@
 		"types": ["cypress", "cypress-file-upload", "cypress-xpath", "cypress-downloadfile", "cypress-plugin-api"],
 		"paths": {
 			"@pages/*": ["./cypress/support/pages/*"],
-			"@helper/*": ["./cypress/support/helper/*"],
-			"@functions/*" : ["./cypress/support/functions/*"]
+			"@helper/*": ["./cypress/support/helper/*"]
 		}
 	},
 	"exclude": ["node_modules"],
