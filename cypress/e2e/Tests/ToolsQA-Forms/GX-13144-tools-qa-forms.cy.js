@@ -39,11 +39,9 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 
 	it('13145 | TC2:Validate no message is displayed after submitting and the field turns red if at least one required field is empty', () => {
 		toolsForms.submitCreate();
-		toolsForms.elements.firstNameInput().should('have.css', 'border-color');
-		toolsForms.elements.lastNameInput().should('have.css', 'border-color');
-		toolsForms.elements.radioButton1().should('have.css', 'border-color');
-		toolsForms.elements.radioButton2().should('have.css', 'border-color');
-		toolsForms.elements.radioButton3().should('have.css', 'border-color');
+		toolsForms.elements.firstNameInput().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+		toolsForms.elements.lastNameInput().invoke('css', 'border-color').should('eq', 'rgb(220, 53, 69)');
+		toolsForms.elements.phoneNumberInput().should('have.css', 'border-color', 'rgb(220, 53, 69)');
 	});
 
 });
