@@ -1,4 +1,4 @@
-import { form } from '@pages/Form.Page';
+import { form } from '@pages/Form.Page2';
 
 describe('✅ToolsQA | Forms | Practice Form', () => {
 	beforeEach('Usuario debe estar situado en la pagina de Form', () => {

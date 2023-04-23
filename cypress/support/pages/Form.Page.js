@@ -1,104 +1,85 @@
+//vars
+const fN = '#firstName';
+const lN = '#lastName';
+const uE = '#userEmail';
+const uN = '#userNumber';
+const uS = '#subjectsInput';
+
+//radioButtons
+const radio1 = '#gender-radio-1';
+const radio2 = '#gender-radio-2';
+const radio3 = '#gender-radio-3';
+//checkboxs
+const check1 = '#hobbies-checkbox-1';
+const check2 = '#hobbies-checkbox-2';
+const check3 = '#hobbies-checkbox-3';
+//submitButton
+const submit = '#submit';
+
+//buttonConditions
+const forced = { force: true };
+
 class Form {
-	elements = {
-		first_nameInput: () => cy.get("[type='text']").eq(0),
-		last_nameInput: () => cy.get("[type='text']").eq(1),
-		emailInput: () => cy.get("[type='text']").eq(2),
-		numberPhoneInput: () => cy.get("[type='text']").eq(3),
-		radioButton: () => cy.get("[type='radio']"),
-		dataPickButton: () => cy.get('#dateOfBirthInput'),
-		yearSelectDropdown: () => cy.get('.react-datepicker__year-select'),
-		monthSelectDropdown: () => cy.get('.react-datepicker__month-select'),
-		DaySelectDropdown: () => cy.get('.react-datepicker__month div'),
-		SubjectsInput: () => cy.get("input[tabindex='0']").eq(0),
-		SubjectValue: () => cy.get('.css-12jo7m5.subjects-auto-complete__multi-value__label').eq(0),
-		sportHobbieLabelElement: () => cy.get("label[for='hobbies-checkbox-1']"),
-		readingHobbieLabelElement: () => cy.get("label[for='hobbies-checkbox-2']"),
-		musicHobbieLabelElement: () => cy.get("label[for='hobbies-checkbox-3']"),
-		chosseFileInput: () => cy.get('input[type="file"]'),
-		currentAddressInput: () => cy.get('#currentAddress'),
-		dropdownSelect_State: () => cy.get('input#react-select-3-input'),
-		Select_StateAndCityValue: () => cy.get('.css-1uccc91-singleValue'),
-		dropdownSelect_City: () => cy.get('input[autocorrect="off"]').eq(2),
-		Select_City_Container: () => cy.get('#city'),
-		submitButton: () => cy.get('#submit'),
-		PopupValuesSelector: () => cy.get('.table.table-dark.table-striped.table-bordered.table-hover tbody tr td'),
+	get = {
+		firstName: () => cy.get(fN),
+		lastName: () => cy.get(lN),
+		userEmail: () => cy.get(uE),
+		userNumber: () => cy.get(uN),
+		userSubjects: () => cy.get(uS),
+		radio1: () => cy.get(radio1),
+		radio2: () => cy.get(radio2),
+		radio3: () => cy.get(radio3),
+		check1: () => cy.get(check1),
+		check2: () => cy.get(check2),
+		check3: () => cy.get(check3),
+		submit: () => cy.get(submit),
 	};
 
-	enterFirst_name(data) {
-		data && this.elements.first_nameInput().type(data).type('{enter}', { force: true });
+	contactData(data1, data2, data3, data4, data5) {
+		this.get.firstName().type(data1);
+		this.get.lastName().type(data2);
+		this.get.userEmail().type(data3);
+		this.get.userNumber().type(data4);
+		this.get.userSubjects().type(data5);
 	}
 
-	enterLast_name(data) {
-		data && this.elements.last_nameInput().type(data).type('{enter}', { force: true });
+	radioButtons() {
+		this.get.radio1().click(forced);
+		this.get.radio2().click(forced);
+		this.get.radio3().click(forced);
 	}
 
-	enterEmail(data) {
-		this.elements.emailInput().type(data).type('{enter}', { force: true });
+	checkBoxs() {
+		this.get.check1().click(forced);
+		this.get.check2().click(forced);
+		this.get.check3().click(forced);
 	}
 
-	enterNumbrePhone(data) {
-		data && this.elements.numberPhoneInput().type(data);
-	}
-
-	RadiobttnSelect(data) {
-		this.elements.radioButton().eq(data).click({ force: true }); //Index 0, 1, 2
-	}
-
-	dataPickButton() {
-		this.elements.dataPickButton().click({ force: true });
-	}
-
-	yearSelect(data) {
-		this.elements.yearSelectDropdown().select(data);
-	}
-
-	monthSelect(data) {
-		this.elements.monthSelectDropdown().select(data);
-	}
-
-	DaySelect(index) {
-		this.elements.DaySelectDropdown().eq(index).click();
-	}
-
-	EnterSubjects(data) {
-		this.elements.SubjectsInput().type(data, { force: true }).type('{enter}');
-	}
-
-	sportHobbieLabel() {
-		this.elements.sportHobbieLabelElement().click();
-	}
-
-	readingHobbieLabel() {
-		this.elements.readingHobbieLabelElement().click();
-	}
-
-	musicHobbieLabel() {
-		this.elements.musicHobbieLabelElement().click();
-	}
-
-	chosseFile(file) {
-		this.elements.chosseFileInput().click().attachFile(file);
-	}
-
-	CurrentAddress(data) {
-		this.elements.currentAddressInput().type(data);
-	}
-
-	Select_City(data) {
-		this.elements.dropdownSelect_City().click({ force: true }).type(data).type('{enter}');
-	}
-
-	Select_State(data) {
-		this.elements.dropdownSelect_State().click({ force: true }).type(data).type('{enter}');
-	}
-
-	submit() {
-		this.elements.submitButton().click({ force: true });
-	}
-
-	PopupValues(index) {
-		return this.elements.PopupValuesSelector().eq(index);
+	submitButton() {
+		this.get.submit().click(forced);
 	}
 }
 
 export const form = new Form();
+
+class Functions {
+	n01(firstName, lastName, email, userNumber, subjects) {
+		form.contactData(firstName, lastName, email, userNumber, subjects);
+		form.radioButtons();
+		form.checkBoxs();
+		form.submitButton();
+	}
+
+	n02() {
+		form.submitButton();
+	}
+
+	n03(firstName, lastName, invalidEmail, invalidNum, subjects) {
+		form.contactData(firstName, lastName, invalidEmail, invalidNum, subjects);
+		form.radioButtons();
+		form.checkBoxs();
+		form.submitButton();
+	}
+}
+
+export const TC = new Functions();
