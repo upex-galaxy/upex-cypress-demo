@@ -1,5 +1,5 @@
 //const { dropdown } = require("../../../support/pages/GX-13889-Dropdown/Dropdown")
-import { dropdown, ag } from "@pages/GX-13889-Dropdown/Dropdown";
+import { dropdown, ag } from "@pages/Dropdown";
 
 const selectMenuPage = Cypress.env('endpoint').selectMenu
 
@@ -11,6 +11,8 @@ describe("GX-13889 | Dropdown - Select Menu", () => {
         dropdown.enterSelectMenu()
         cy.url().should("contain", selectMenuPage);
     });
+
+    
 
     it("TC1: Validate one option of Group 1 is selected in the “Select Value” dropdown", () => {        
         dropdown.clickValueMenu()
@@ -108,6 +110,7 @@ describe("GX-13889 | Dropdown - Select Menu", () => {
             .should("contain", "Audi")
             .should("not.contain", "Opel")
     })
+    
 });
 
 import { removeLogs } from '@helper/RemoveLogs';
