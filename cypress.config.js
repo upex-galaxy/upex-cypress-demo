@@ -60,7 +60,7 @@ export default defineConfig({
 			signUp: 'https://coderbyte.com/sl', // what does this url here?
 			radioButton: '/radio-button',
 			textBox: 'text-box',
-      selectMenu: '/select-menu',
+                        selectMenu: '/select-menu',
 			selectable: '/selectable',
 		},
 		user: {
