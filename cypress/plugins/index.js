@@ -23,7 +23,7 @@ module.exports = (on, config) => {
 	on('after:spec', (spec, results) => {
 		if (results && results.video) {
 			// Do we have failures for any retry attempts?
-			const failures = _.some(results.tests, (test) => {
+			const failures = _.some(results.tests, test => {
 				return _.some(test.attempts, { state: 'failed' });
 			});
 			if (!failures) {
@@ -38,8 +38,13 @@ module.exports = (on, config) => {
 // Modules
 module.exports = (on, config) => {
 	on('task', {
-		queryDb: (query) => {
+		queryDb: query => {
 			return queryTestDb(query, config);
 		},
 	}); //For running sql query
+};
+
+const { downloadFile } = require('cypress-downloadfile/lib/addPlugin');
+module.exports = (on, config) => {
+	on('task', { downloadFile });
 };

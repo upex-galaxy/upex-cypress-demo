@@ -14,6 +14,7 @@ import 'cypress-downloadfile/lib/downloadFileCommand';
 import { login } from '@pages/Login.Page';
 const { authLogin, dashboardIndex } = Cypress.env('endpoint');
 import { signin } from '@pages/SignIn.Page.js';
+require('cypress-downloadfile/lib/downloadFileCommand');
 
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
