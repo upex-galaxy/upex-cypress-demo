@@ -8,7 +8,6 @@ const disabled = 'be.disabled';
 const enabled = 'be.enabled';
 const visible = 'be.visible';
 const text = 'Color Change';
-const timeValue = 5000;
 
 class Elements {
 	get = {
@@ -44,8 +43,8 @@ class Elements {
 		this.get.visibleAfter().should(visible);
 	}
 
-	wait() {
-		this.get.wait();
+	wait(tv) {
+		this.get.wait(tv);
 	}
 }
 
