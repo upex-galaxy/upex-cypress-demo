@@ -35,8 +35,15 @@ describe('✅ US GX-14236 | TS: ✅ToolsQA | Elements | Dynamic Properties', () 
 		cy.get(oldStyle); //.should(oldStyleOptions).click();
 	});
 
-	it('14245 | TC02: Validar seleccionar todas las opciones correctamente al hacerles click en el dropdown de Multiselect drop down', () => {
+	it.only('14245 | TC02: Validar seleccionar todas las opciones correctamente al hacerles click en el dropdown de Multiselect drop down', () => {
 		cy.log();
+		cy.get('div[class*="indicatorContainer"] [class]').last().click();
+		cy.get('[class$="menu"]').within(() => {
+			cy.get('[id*="react-select-4"]').each($el => {
+				cy.wrap($el).click();
+			});
+		});
+
 		//cy.get(multiSelect).should(have, '2');
 	});
 
