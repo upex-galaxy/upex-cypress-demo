@@ -1,11 +1,10 @@
 import { dragabble, assert } from "@pages/Dragabble";
-//const dragabblePage = Cypress.env('endpoint').dragabble;
 
+//fixture asi??
 describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
     let the
     beforeEach("PRC User must be in the /dragabble page", () => {
-        cy.visit("/dragabble")
-        
+        cy.visit("/dragabble")        
         cy.fixture("/DOM/fixtureDragabble").then((fixt) => {
             the = fixt
         })
@@ -33,7 +32,7 @@ describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
 
     it("TC2: Validate only one tab is displayed at the same time", () => {
         //selects the cursor style tab
-        dragabble.clickCursor()
+        dragabble.clickTabCursor()
         dragabble.get.tabCursor()
             .invoke("attr", "aria-selected")
             .should("eq", "true");
@@ -60,7 +59,6 @@ describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
         //calculates actual position
         dragabble.get.dragBox().then(($el) => {
             positionInit = $el.position(); 
-            cy.log(positionInit)
         });
         //drags
         dragabble.clickTabSimple();
@@ -68,13 +66,11 @@ describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
         //calculates final position and compares to init position
         dragabble.get.dragBox().then(($el) => {
             positionFinal = $el.position();
-            cy.log(positionFinal)
         expect(positionInit).not.equal(positionFinal);
         });
     })
 
-    it.only("TC4: Validate “Only X” area only can be dragged on the X axis “Axis Restricted” tab", () => {
-        
+    it("TC4: Validate “Only X” area only can be dragged on the X axis “Axis Restricted” tab", () => {
         // calculates init position
         let positionInitX
         let positionInitY
@@ -100,7 +96,6 @@ describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
     })
 
     it("TC5: Validate “Only Y” area only can be dragged on the Y axis in the “Axis Restricted” tab", () => {
-            
         // calculates init position
         let positionInitX
         let positionInitY
@@ -126,24 +121,23 @@ describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
             cy.log(positionFinalY)
             expect(positionFinalY, the.assertTC5a).not.deep.equal(positionInitY)
             expect(positionFinalX, the.assertTC5b).be.equal(positionInitX)
-        })  //fixture
+        })  
     })
 
     it("TC6: Validate 'I'm contained within the box' box can't be dragged out of the delimited area of action in the 'Container Restricted' tab", () => {
         dragabble.clickTabContainer();
         dragabble.dragContainedBoxText();
         dragabble.get.containmentBox().should("have.class", the.boxText)
-    }) //poner en fixture
+    }) 
 
     it("TC7: Validate “I'm contained within my parent” text can't be dragged out of the delimited area of action “Container Restricted” tab.", () => {  
         dragabble.clickTabContainer();
         dragabble.dragContainedParentText();
     })
 
-    it("TC8: Validate a cursor icon appears on boxes when hovering over in the “Cursor Style” tab. ", () => {
+    it("TC8: Validate moving “I will always stick to the center” box in any direction. ", () => {
         randomX = Cypress._.random(0, 900)
         randomY = Cypress._.random(0, 900)
-
         //get init position - 
         dragabble.clickTabCursor()
         dragabble.get.cursorCenter()
@@ -159,10 +153,62 @@ describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
                 expect(topInit).not.equal(topFin)
                 expect(leftInit).not.equal(leftFin)
             })
+            .trigger('mouseup');   
+    })
+
+    //CONSULTA 1: COMO HAGO CON LAS VARIABLES SI LLEVO EL DRAGABBLE.GET.CURSOR.. AL POM
+    //PORQUE DESPUES EN EL EXPECT NO ESTAN
+    //CONSULTA 2: SE PUEDE PASAR LA PRIMERA PARTE DEL EXPECT AL POM? QUE PASA CON LAS {}
+    it("TC9: Validate moving “I will always stick to the center” box in any direction", () => {
+        // calculate initial position
+        let topInit
+        let leftInit
+        dragabble.clickTabCursor()
+        dragabble.get.cursorTopLeft()
+            .trigger('mousedown', { which: 1 }).then(($pos) => {
+                topInit = $pos.offset().top
+                leftInit = $pos.offset().left
+            })
             .trigger('mouseup');
         
+        // move box
+        dragabble.get.cursorTopLeft()
+        dragabble.dragCursorTopLeft()
+
+        // get final position and compare
+        dragabble.get.cursorTopLeft().then(($pos) => {
+            topFinal = $pos.offset().top
+            leftFinal = $pos.offset().left
+
+            expect(topInit).not.equal(topFinal)
+            expect(leftInit).not.equal(leftFinal)
+        })
+    })
+
+    it("TC10: Validate moving 'My cursor is at bottom' box in any direction", () => {
+        // calculate initial position
+        let topInit
+        let leftInit
+        dragabble.clickTabCursor()
+        dragabble.get.cursorBottom()
+            .trigger('mousedown', { which: 1 }).then(($pos) => {
+                topInit = $pos.offset().top
+                leftInit = $pos.offset().left
+            })
+            .trigger('mouseup');
         
-            
+        // move box
+        dragabble.get.cursorBottom()
+        dragabble.dragCursorBottom()
+
+        // get final position 
+        dragabble.get.cursorBottom().then(($pos) => {
+            topFinal = $pos.offset().top
+            leftFinal = $pos.offset().left
+        //compare positions
+            expect(topInit).not.equal(topFinal)
+            expect(leftInit).not.equal(leftFinal)
+        })
     })
 });
 

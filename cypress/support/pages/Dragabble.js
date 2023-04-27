@@ -65,10 +65,31 @@ class Dragabble {
          this.get.containedParentText().move({ deltaX: randomX, deltaY: randomY })
     }  
 
-    dragCursorCenter() {
-        
+    dragCursorTopLeft() {
+        let randomX = Cypress._.random(0, 200)
+        let randomY = Cypress._.random(0, 200)
+        this.get.cursorTopLeft().move({ deltaX: randomX, deltaY: randomY })        
     }
 
+    dragCursorBottom() {
+        let randomX = Cypress._.random(0, 200)
+        let randomY = Cypress._.random(0, 200)
+        this.get.cursorBottom().move({ deltaX: randomX, deltaY: randomY })        
+    }
+
+    initPosCursorTopLeft() {
+    let topInit
+    let leftInit
+        this.get.tabCursor().click()
+        this.get.cursorTopLeft()
+            .trigger('mousedown', { which: 1 }).then(($pos) => {
+                topInit = $pos.offset().top
+                cy.wrap(topInit)as('topInit')
+                leftInit = $pos.offset().left
+                cy.wrap(leftInit)as('leftInit')
+        })
+            .trigger('mouseup');
+    }
     
 
 }
