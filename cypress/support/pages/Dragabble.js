@@ -31,9 +31,7 @@ class Dragabble {
     clickTabContainer() {
         this.get.tabContainter().click()
     }
-    clickCursor() {
-        this.get.tabCursor().click()
-    }
+    
     dragSimple() {
         let randomX = Cypress._.random(400, -800)
         let randomY = Cypress._.random(300, -700)
@@ -66,6 +64,10 @@ class Dragabble {
         let randomY = Cypress._.random(500, -500)
          this.get.containedParentText().move({ deltaX: randomX, deltaY: randomY })
     }  
+
+    dragCursorCenter() {
+        
+    }
 
     
 

@@ -2,9 +2,13 @@ import { dragabble, assert } from "@pages/Dragabble";
 //const dragabblePage = Cypress.env('endpoint').dragabble;
 
 describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
-
+    let the
     beforeEach("PRC User must be in the /dragabble page", () => {
         cy.visit("/dragabble")
+        
+        cy.fixture("/DOM/fixtureDragabble").then((fixt) => {
+            the = fixt
+        })
     });
 
     it("TC1: Validate four tabs are shown but only the “Simple” is displayed when open the URL", () => {
@@ -69,7 +73,7 @@ describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
         });
     })
 
-    it("TC4: Validate “Only X” area only can be dragged on the X axis “Axis Restricted” tab", () => {
+    it.only("TC4: Validate “Only X” area only can be dragged on the X axis “Axis Restricted” tab", () => {
         
         // calculates init position
         let positionInitX
@@ -82,25 +86,16 @@ describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
             positionInitX = Math.round($x.position().left);
             positionInitY = Math.round($x.position().top);
             cy.log(positionInitX, positionInitY)
-        })
-        
-        /*dragabble.clickTabAxis()
-        dragabble.get.restrictedX()
-        .invoke("attr", "style").then((style) => {
-            cy.log(style)
-        })*/ 
-        
+        })        
         //drag onlyX
-        dragabble.clickTabRestricted();
+        dragabble.clickTabAxis();
         dragabble.dragOnlyX();
         // calculates final position and compares with init
         dragabble.get.restrictedX().then(($x) => {
             positionFinalX = Math.round($x.position().left);
             positionFinalY = Math.round($x.position().top);
-            cy.log(positionFinalX)
-            cy.log(positionFinalY)
-            expect(positionFinalX, "La posicion final del eje X es distinta a la inicial").not.deep.equal(positionInitX)
-            expect(positionFinalY, "La posición final del eje Y es igual a la inicial").be.equal(positionInitY)
+            expect(positionFinalX, the.assertTC4a).not.deep.equal(positionInitX)
+            expect(positionFinalY, the.assertTC4b).be.equal(positionInitY)
         })      
     })
 
@@ -119,15 +114,8 @@ describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
             cy.log(positionInitX, positionInitY)
         })
         
-/*
-        dragabble.clickTabAxis()
-        dragabble.get.restrictedY()
-        .invoke("attr", "style").then((style) => {
-            cy.log(style)
-        }) */
-        
         //drag onlyY
-        dragabble.clickTabRestricted();
+        dragabble.clickTabAxis();
         dragabble.dragOnlyY();
         
         // calculates final position and compares with init
@@ -136,23 +124,23 @@ describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
             positionFinalY = Math.round($y.position().top);
             cy.log(positionFinalX)
             cy.log(positionFinalY)
-            expect(positionFinalY, "La posicion final del eje X es distinta a la inicial").not.deep.equal(positionInitY)
-            expect(positionFinalX, "La posición final del eje Y es igual a la inicial").be.equal(positionInitX)
-        })  
+            expect(positionFinalY, the.assertTC5a).not.deep.equal(positionInitY)
+            expect(positionFinalX, the.assertTC5b).be.equal(positionInitX)
+        })  //fixture
     })
 
     it("TC6: Validate 'I'm contained within the box' box can't be dragged out of the delimited area of action in the 'Container Restricted' tab", () => {
         dragabble.clickTabContainer();
         dragabble.dragContainedBoxText();
-        dragabble.get.containmentBox().should("have.class","draggable ui-widget-content ui-draggable ui-draggable-handle")
-    })
+        dragabble.get.containmentBox().should("have.class", the.boxText)
+    }) //poner en fixture
 
     it("TC7: Validate “I'm contained within my parent” text can't be dragged out of the delimited area of action “Container Restricted” tab.", () => {  
         dragabble.clickTabContainer();
         dragabble.dragContainedParentText();
     })
 
-    it.only("TC8: Validate a cursor icon appears on boxes when hovering over in the “Cursor Style” tab. ", () => {
+    it("TC8: Validate a cursor icon appears on boxes when hovering over in the “Cursor Style” tab. ", () => {
         randomX = Cypress._.random(0, 900)
         randomY = Cypress._.random(0, 900)
 
@@ -165,9 +153,7 @@ describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
             })
             //drag
             .trigger('mousemove', { which: 1, pageX: randomX, pageY: randomY })
-            /*.trigger('mouseup')
-            //get final position
-            .trigger('mousedown', { which: 1 })*/.then(($pos) => {
+            .then(($pos) => {
                 topFin = $pos.offset().top
                 leftFin = $pos.offset().left
                 expect(topInit).not.equal(topFin)
