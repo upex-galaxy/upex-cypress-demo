@@ -7,6 +7,8 @@ class bookStore {
 		registerButton: () => cy.get('#register'),
 		loginButton: () => cy.get('#login'),
 		logoutButton: () => cy.get('[class*="btn-primary"]').contains('Log out'),
+		deleteButton: () => cy.get('[class*="btn-primary"]').contains('Delete Account'),
+		approveDeleteButton: () => cy.get('[class*="btn-primary"]').contains('OK'),
 		errorMsgLogin: () => cy.get('#name'),
 		userNameValueAfterLogin: () => cy.get('#userName-value'),
 		foundRowsInUserPage: () => cy.get('[class=rt-noData]'),
@@ -56,12 +58,14 @@ class bookStore {
 			},
 		}).then(Response => {
 			const status = Response.status;
-			const Message = Response.body.userId;
+			const idUser = Response.body.userId;
 			const Books = Response.body.books;
+			const Message = Response.body.message;
 
 			response.push(status);
-			response.push(Message);
+			response.push(idUser);
 			response.push(Books);
+			response.push(Message);
 		});
 		return response;
 	}

@@ -3,6 +3,7 @@ describe('GX2-2227 | BookStore | Account | Crear, Obtener y Eliminar Usuario (PO
 
 	beforeEach('Create User, authorized and Token', () => {
 		validUserName = faker.internet.userName();
+		//user register By API request
 		const registerUserResponse = BookStore.registerUserByAPI({ username: validUserName, Password: 'Bad*12345' });
 		cy.get('*').then(() => {
 			statusResponseRegisterUser = registerUserResponse[0];
@@ -22,12 +23,12 @@ describe('GX2-2227 | BookStore | Account | Crear, Obtener y Eliminar Usuario (PO
 	});
 	it('2228 | TC1: Validate successfully register user By API request', () => {
 		//validate response of request create new user API
-		//se realiza validacion en backend porque el registro en frontend necesita resolver reCaptcha
+		//backend validation is performed because the frontend registration needs to resolve reCaptcha
 		expect(statusResponseRegisterUser.toString()).to.equal('201');
 		expect(userNameResponse.toString()).to.equal(validUserName);
 	});
 	it('2228 | TC2: Validate login in Frontend and backend user create by API request', () => {
-		// generate token, because need login, validate login backend!!
+		// generate token, because this API validate login in backend!!
 		const TokenUser = BookStore.GenerateTokenByAPI({ username: validUserName });
 		cy.get('*').then(() => {
 			Token = TokenUser[1];
@@ -62,7 +63,7 @@ describe('GX2-2227 | BookStore | Account | Crear, Obtener y Eliminar Usuario (PO
 	});
 
 	it('2228 | TC4: Validate delete account in frontend by API request', () => {
-		//delete user in backend by request API
+		//delete user in backend by API request
 		const responseDeleteUser = BookStore.DeleteUserByAPI({ userID: IdUser, token: Token });
 		cy.get('*').then(() => {
 			expect(responseDeleteUser.toString()).to.equal('204');
@@ -72,9 +73,26 @@ describe('GX2-2227 | BookStore | Account | Crear, Obtener y Eliminar Usuario (PO
 		BookStore.userLoginFrontEnd({ username: validUserName });
 		BookStore.get.errorMsgLogin().should('contain', 'Invalid username or password!');
 	});
+	it('2228 | TC5: Validate delete account in backend by delete in frontend', () => {
+		//Delete account by frontend
+		cy.visit('https://demoqa.com/login');
+		BookStore.userLoginFrontEnd({ username: validUserName });
+		BookStore.get.deleteButton().click();
+		BookStore.get.approveDeleteButton().click();
+		//validate delete account in frontend By API request
+		// get user
+		const responseGetUser = BookStore.getUserByAPI({ userID: IdUser, token: Token });
+		cy.get('*').then(() => {
+			//validate status response of getUser
+			const statusGetUser = responseGetUser[0];
+			expect(statusGetUser).to.equal(401);
+			const messageResponse = responseGetUser[3];
+			expect(messageResponse).to.equal('User not found!');
+		});
+	});
 });
 context('GX2-2227 | BookStore | Account | Crear, Obtener y Eliminar Usuario (POST-GET-DELETE)', () => {
-	it('2228 | TC5: Validate no register by API request (Invalid Date)', () => {
+	it('2228 | TC6: Validate no register by API request (Invalid Date)', () => {
 		const responseGetUser = BookStore.registerUserByAPI({ username: '!@#$!@!@', Password: 'B1234' });
 		cy.get('*').then(() => {
 			const statusResponse = responseGetUser[0];
@@ -83,7 +101,7 @@ context('GX2-2227 | BookStore | Account | Crear, Obtener y Eliminar Usuario (POS
 			expect(messageResponse).to.contain('Passwords must have at least one non alphanumeric character');
 		});
 	});
-	it('2228 | TC6: no login by API request (invalid credentials) ', () => {
+	it('2228 | TC7: no login by API request (invalid credentials) ', () => {
 		//this API need valid credentials
 		const responseGenerateToken = BookStore.GenerateTokenByAPI({ username: 'InvalidUserName' });
 		cy.get('*').then(() => {
