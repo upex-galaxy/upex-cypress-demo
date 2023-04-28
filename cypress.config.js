@@ -61,6 +61,7 @@ export default defineConfig({
 			radioButton: '/radio-button',
 			textBox: 'text-box',
 			selectMenu: '/select-menu',
+			buttons: '/buttons',
 		},
 		user: {
 			username: 'upexTesting',
