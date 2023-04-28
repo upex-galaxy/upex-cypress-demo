@@ -20,7 +20,7 @@ describe('GX-14862 | ToolsQA | Elements | Buttons', () => {
 		cy.get('#rightClickMessage').should('include.text', 'right'); //obtain the element where the message is displayed and assert
 	});
 
-	it.only('14863 | TC3: Validate message “You have done a Dynamic click“ should be displayed when click in the Click Me button', () => {
+	it('14863 | TC3: Validate message “You have done a Dynamic click“ should be displayed when click in the Click Me button', () => {
 		Clicking.SoloClick();
 		cy.get('#dynamicClickMessage').should('exist').and('contain', 'You have done a dynamic click'); //obtain the element where the message is displayed and assert
 	});
