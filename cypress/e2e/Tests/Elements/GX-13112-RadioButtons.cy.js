@@ -33,3 +33,5 @@ describe('TC Fixture - RadioButtons', () => {
 		});
 	});
 });
+import { removeLogs } from '@helper/RemoveLogs';
+removeLogs();
