@@ -1,4 +1,4 @@
-import { dragabble, assert } from "@pages/Dragabble";
+import { dragabble } from "@pages/Dragabble";
 
 //fixture asi??
 describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
