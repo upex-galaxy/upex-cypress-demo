@@ -60,7 +60,7 @@ describe('GX2-1764 |ToolsQA | Interactions | Dragabble', () => {
 		draggabble.get.containerText().should('have.css', 'top', `${deltaY}px`);
 	});
 
-	it.only('1765| TC05 Access to Cursor Style tab and validate cursor when you move box "I will always stick to the center"', () => {
+	it('1765| TC05 Access to Cursor Style tab and validate cursor when you move box "I will always stick to the center"', () => {
 		draggabble.goToCursorStyle();
 		draggabble.get.cursorStyleTab().should('exist').and('contain.text', 'Cursor Style');
 		draggabble.get.center().should('contain.text', 'I will always stick to the center');
