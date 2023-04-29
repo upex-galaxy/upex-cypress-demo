@@ -33,8 +33,8 @@ class Dragabble {
     }
     
     dragSimple() {
-        let randomX = Cypress._.random(400, -800)
-        let randomY = Cypress._.random(300, -700)
+        let randomX = Cypress._.random(50, -50)
+        let randomY = Cypress._.random(50, -50)
         this.get.dragBox().drag("#dragBox", {
         source: { x: randomX, y: randomY }, 
         force: true,
@@ -42,26 +42,26 @@ class Dragabble {
     }
  
     dragOnlyX() {
-        let randomX = Cypress._.random(150, -450)
-        let randomY = Cypress._.random(500, -700)
+        let randomX = Cypress._.random(50, -50)
+        let randomY = Cypress._.random(50, -50)
         this.get.restrictedX().move({ deltaX: randomX, deltaY: randomY })
     }
 
     dragOnlyY() {
-        let randomX = Cypress._.random(150, -450)
-        let randomY = Cypress._.random(700, -300)
+        let randomX = Cypress._.random(50, -50)
+        let randomY = Cypress._.random(50, -50)
         this.get.restrictedY().move({ deltaX: randomX, deltaY: randomY })
     }
 
     dragContainedBoxText() {
-        let randomX = Cypress._.random(500, -500)
-        let randomY = Cypress._.random(500, -500)
+        let randomX = Cypress._.random(50, -50)
+        let randomY = Cypress._.random(50, -50)
          this.get.containedBoxText().move({ deltaX: randomX, deltaY: randomY })
     }
 
     dragContainedParentText() {
-        let randomX = Cypress._.random(500, -500)
-        let randomY = Cypress._.random(500, -500)
+        let randomX = Cypress._.random(50, -50)
+        let randomY = Cypress._.random(50, -50)
          this.get.containedParentText().move({ deltaX: randomX, deltaY: randomY })
     }  
 
