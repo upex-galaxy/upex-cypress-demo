@@ -1,0 +1,26 @@
+{
+	"inputs": {
+		"fullName": "#userName",
+		"currentAddress": "#currentAddress",
+		"permanentAddress": "#permanentAddress",
+		"Email": "#userEmail"
+	},
+	"dataInputs": {
+		"dataFullName": "Luis Hernandez",
+		"dataCurrentAddress": "El Salvador, La Libertad",
+		"dataPermanentAddress": "El Salvador, El Salvador"
+	},
+
+	"dataEmail": {
+		"dataEmailValida": "upex@upex.com",
+		"dataEmailInvalida": {
+			"Missing@": "upexupex.com",
+			"noAlphaAfter@": "upex@.com",
+			"noAlphaBefore@": "@upex.com",
+			"noDotAfter@": "upex@upexcom",
+			"no2AlphaAfterDot": "upex@Upex.c",
+			"moreThan3AfterDot": "upex@upex.comsv"
+		}
+	},
+	"displayRedInputError": "[class='mr-sm-2 field-error form-control']"
+}
