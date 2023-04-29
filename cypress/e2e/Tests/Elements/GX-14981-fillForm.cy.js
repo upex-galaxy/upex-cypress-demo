@@ -3,13 +3,12 @@ describe('✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		cy.visit('https://demoqa.com/text-box');
 		cy.contains('Text Box').should('be.visible');
 		cy.url().should('contain', 'text-box');
-    });
-    
+	});
+
 	it('14982 | TC1: Validate submit the form with ALL fields with valid information', () => {
-        cy.fixture('data/TextBoxForm').then((the) =>
-        {
-            cy.get(the.)
-        })
+		cy.fixture('data/TextBoxForm').then(the => {
+			cy.get(the.inputs.fullName).type(the.dataInputs.dataFullName);
+		});
 	});
 });
 
@@ -20,3 +19,6 @@ it('14982 | TC5: Validate do not submit the form when the Email field does not c
 it('14982 | TC6: Validate do not submit the form when the Email field does not contain 2 Alphanumeric characters as a minimum after the “.”', () => {});
 it('14982 | TC7: Validate do not submit the form when the Email field contains more than 3 Alphanumeric characters after the “.”', () => {});
 it('14982 | TC8: Validate do not submit the form when all fields are Empty', () => {});
+
+import { removeLogs } from '@helper/RemoveLogs';
+removeLogs();
