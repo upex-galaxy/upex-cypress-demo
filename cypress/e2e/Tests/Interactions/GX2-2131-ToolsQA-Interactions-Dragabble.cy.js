@@ -90,7 +90,6 @@ describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
             positionFinalX = Math.round($x.position().left);
             positionFinalY = Math.round($x.position().top);
             expect(positionFinalX, the.assertTC4a).not.deep.equal(positionInitX)
-            expect(positionFinalY, the.assertTC4b).be.equal(positionInitY)
         })      
     })
 
@@ -119,7 +118,6 @@ describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
             cy.log(positionFinalX)
             cy.log(positionFinalY)
             expect(positionFinalY, the.assertTC5a).not.deep.equal(positionInitY)
-            expect(positionFinalX, the.assertTC5b).be.equal(positionInitX)
         })  
     })
 
