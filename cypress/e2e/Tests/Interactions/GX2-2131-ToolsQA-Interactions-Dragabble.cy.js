@@ -1,10 +1,9 @@
 import { dragabble } from "@pages/Dragabble";
 
-//fixture asi??
 describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
     let the
     beforeEach("PRC User must be in the /dragabble page", () => {
-        cy.visit("/dragabble")        
+        cy.visit("/dragabble")     
         cy.fixture("/DOM/fixtureDragabble").then((fixt) => {
             the = fixt
         })
@@ -156,9 +155,6 @@ describe("GX2-2131-ToolsQA-Interactions-Dragabble", () => {
             .trigger('mouseup');   
     })
 
-    //CONSULTA 1: COMO HAGO CON LAS VARIABLES SI LLEVO EL DRAGABBLE.GET.CURSOR.. AL POM
-    //PORQUE DESPUES EN EL EXPECT NO ESTAN
-    //CONSULTA 2: SE PUEDE PASAR LA PRIMERA PARTE DEL EXPECT AL POM? QUE PASA CON LAS {}
     it("TC9: Validate moving “I will always stick to the center” box in any direction", () => {
         // calculate initial position
         let topInit
