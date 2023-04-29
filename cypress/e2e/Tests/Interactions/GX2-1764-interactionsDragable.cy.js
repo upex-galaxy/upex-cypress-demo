@@ -77,7 +77,7 @@ describe('GX2-1764 |ToolsQA | Interactions | Dragabble', () => {
 		draggabble.moveLeftBox();
 	});
 	it('1765| TC07 Access to Cursor Style tab and validate cursor when you move box "My cursor is at bottom"', () => {
-		draggabble.SelectCursorStyle();
+		draggabble.goToCursorStyle();
 		draggabble.get.cursorStyleTab().should('exist').and('contain.text', 'Cursor Style');
 		draggabble.get.bottom().should('exist').and('contain.text', 'My cursor is at bottom');
 		draggabble.moveBottomBox();
