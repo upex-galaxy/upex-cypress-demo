@@ -1,7 +1,7 @@
 import { Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import { selectongrid } from '@pages/GX2-1268-Interactions-Selectable/SelectableGrid';
 import { selectonlist } from '@pages/GX2-1268-Interactions-Selectable/SelectableList';
-
+import { removeLogs } from '@helper/RemoveLogs';
 
 
 
@@ -21,26 +21,27 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
         });
 
         Then('should see the List elements', () => {
-            cy.get('#verticalListContainer').should('be.visible');              
+            cy.get('#verticalListContainer').should('be.visible');  
+            cy.get('#demo-tabpane-list').should('have.attr', 'aria-hidden', 'false')
+            cy.get('#demo-tabpane-grid').should('have.attr', 'aria-hidden', 'true')
         });
     });
     
     describe('GX2-1268 | TC2: Verify user can select elements in List', () => {
         Given('user is in List Pagination page tc2', ()=> {
             cy.get('#verticalListContainer').should('be.visible') 
+            cy.get('#demo-tabpane-list').should('have.attr', 'aria-hidden', 'false')            
             
         });                       
         
         When('clicks on each elements of the List tc2', () => {
-            selectonlist.list.listPagination1().click()             
-            selectonlist.list.listPagination2().click()             
-            selectonlist.list.listPagination3().click()            
-            selectonlist.list.listPagination4().click()
+            selectonlist.ListClick();
             cy.get(".mt-2.list-group-item.list-group-item-action").should('have.length', 4)  // assertion poderosa!!
             
         });
         Then('should see all elements selected tc2', () => {
             cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)')
+            cy.get('.list-group-item.active').should('have.length', 4)
         });
     });
 
@@ -101,11 +102,11 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
         });
         When('clicks again on each elements of the Grid tc6', () => {
             
-        cy.wrap(selectongrid.SelectableFunction() )
+        selectongrid.ClickOnGridElement() 
     
         });
         Then('should see all element unselected tc6', () => {
-            selectongrid.ClickOnGridElement()
+            
             cy.get('.list-group-item.active').should('not.exist')    
         });
     });
@@ -123,11 +124,12 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
 
 
 
-
+removeLogs()
 
 
 //________________________________________________________________________
-// Comando predeterminado para que no ocurran errores de excepciones:
+
+/* Comando predeterminado para que no ocurran errores de excepciones:
 Cypress.on('uncaught:exception', () => {
 	// returning false here prevents Cypress from
 	// failing the test
@@ -140,4 +142,4 @@ Cypress.log = function (opts, ...other) {
 		return;
 	}
 	return origLog(opts, ...other);
-};
+};*/

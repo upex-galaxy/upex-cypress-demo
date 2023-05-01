@@ -37,12 +37,12 @@ class SelectOnGrid {
         selectongrid.grid.gridPaginationEight().click()
     }
 
-    SelectableFunction() { //i could not get it to work !!!!!!!
-        let val = Object.keys(selectongrid.grid) // get keys's element
-        for (let i = 0; i < val.lenght; i++) {
-            console.log(val[ i ])
-            val[ i ].click()
+   /* SelectableFunction() { //i could not get it to work !!!!!!!
+        debugger;  let val = Object.values(selectongrid.grid) // get keys's element
+        for (let i = 1; i < val.length; i++) {
+            debugger;  return val[1]  
+           
         }
-    }
+    }*/
 }
 export const selectongrid = new SelectOnGrid();
