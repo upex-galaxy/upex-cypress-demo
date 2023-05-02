@@ -113,34 +113,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
     });
     });
 
-// para automatizar la selecion de elementos
-/*export function fixBirdCountLog(birdsPerDay) {
-  for (let day = 0; day < birdsPerDay.length; day += 2) {
-    birdsPerDay[day]++;
-  }
-  return birdsPerDay;
-}*/
-
-
-
-
-
 removeLogs()
 
 
-//________________________________________________________________________
 
-/* Comando predeterminado para que no ocurran errores de excepciones:
-Cypress.on('uncaught:exception', () => {
-	// returning false here prevents Cypress from
-	// failing the test
-	return false;
-});
-// Comando predeterminado para que no aparezcan los Fetch en el log del Test Runner:
-const origLog = Cypress.log;
-Cypress.log = function (opts, ...other) {
-	if (opts.displayName === 'xhr' || (opts.displayName === 'fetch' && opts.url.startsWith('https://'))) {
-		return;
-	}
-	return origLog(opts, ...other);
-};*/
