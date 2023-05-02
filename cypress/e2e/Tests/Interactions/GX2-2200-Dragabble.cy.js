@@ -10,7 +10,9 @@ describe('✅ToolsQA | Interactions | Dragabble', () => {
 	});
 
 	it('2201 | TC1: Validate box area  can be dragged as desired in any direction on the Simple tab', () => {
+		dragabble.elements.draggableBoxSelect().should('exist');
 		dragabble.dragBoxInRandomDirection();
+
 	});
 	
 	it('2201 | TC2: Validate boxes area move only on the axi X on the Axis Restricted tab', () => {
@@ -37,7 +39,6 @@ describe('✅ToolsQA | Interactions | Dragabble', () => {
 		dragabble.selectContainerRestrictedTab();
 		dragabble.elements.containmentWrapper()
 			.should('exist')
-			//.and('have.text', "I'm contained within the box") // check if the box with the text is displayed
 			.and('have.css', 'border', '1.6px solid rgb(204, 204, 204)');
 		dragabble.elements.moveContainedBox()
 			.should('exist')
@@ -46,13 +47,18 @@ describe('✅ToolsQA | Interactions | Dragabble', () => {
 
 	});
 	
-	// it('2201 | TC5: Validate text of box can not be dragged out of the delimited area of action on the Container Restricted tab', () => {
+	it.only('2201 | TC5: Validate text of box can not be dragged out of the delimited area of action on the Container Restricted tab', () => {
+		dragabble.selectContainerRestrictedTab();
+		dragabble.elements.moveContainedText()
+			.should('exist')
+			.and('have.css', 'border', '0px none rgb(51, 51, 51)');
+		dragabble.containerTextRestricted();
+	});
 
-	// });
-
-	// it('2201 | TC6: Validate cursor must stick to the center of the box if “I will always stick to the center” box is dragged on the Cursor Style tab', () => {
-
-	// });
+	it('2201 | TC6: Validate cursor must stick to the center of the box if “I will always stick to the center” box is dragged on the Cursor Style tab', () => {
+		dragabble.elements.cursorStyleTabClick().click();
+		dragabble.centerCursorStyle();
+	});
 
 	// it('2201 | TC7: Validate the cursor will stick to the top left outside of the box and the cursor icon changes to a "+" if dashed box "My cursor is at top left" is displayed on the "Cursor Style" tab', () => {
 

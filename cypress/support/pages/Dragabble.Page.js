@@ -10,8 +10,9 @@ class Dragabble {
 		restrictedYBox: () => cy.get('#restrictedY'),
 		containmentWrapper: () => cy.get('#containmentWrapper'),
 		moveContainedBox: () => cy.get('#containmentWrapper .draggable'),
-
-		containedTextSelect: () => cy.get('.draggableExample-tabpane-containerRestriction'),
+		ContainerText: () => cy.get('#draggableExample-tabpane-containerRestriction .draggable'),
+		moveContainedText: () => cy.get('.ui-widget-header.ui-draggable.ui-draggable-handle'),
+		
 		cursorTopLeftSelect: () => cy.get('#cursorTopLeft'),
 		cursorCenterSelect: () => cy.get('#cursorTopLeft'),
 		cursorBottomSelect: () => cy.get ('#cursorBottom'),
@@ -30,6 +31,7 @@ class Dragabble {
 
 	selectAxisRestrictedTab() {
 		this.elements.axisRestrictedTabClick().click();
+		this.elements.containerRestrictedTabClick().click();
 	}
   
 	draggableBoxRestrictedToXAxi() {
@@ -58,22 +60,46 @@ class Dragabble {
 		this.elements.containerRestrictedTabClick().click();
 	}
 	containerBoxRestricted() {
-		const wrapper = this.elements.containmentWrapper();
-		this.elements.moveContainedBox().then(($box) => {
-			const initialCoords = $box[0].getBoundingClientRect();
-			const containerCoords = wrapper[0].getBoundingClientRect();
+		this.elements.containmentWrapper().then(($wrapper) => {
+			const containerCoords = $wrapper[0].getBoundingClientRect();
+			const minX = containerCoords.left;
+			const maxX = containerCoords.width;
+			const minY = containerCoords.top;
+			const maxY = containerCoords.height;
 
-			const minX = containerCoords.left - initialCoords.left;
-			const maxX = containerCoords.width - initialCoords.width + minX;
-			const minY = containerCoords.top - initialCoords.top;
-			const maxY = containerCoords.height - initialCoords.height + minY;
+			for (let i = 0; i < 3; i++) {
+				const randomX = Cypress._.random(minX, maxX);
+				const randomY = Cypress._.random(minY, maxY);
 
-			const randomX = Cypress._.random(minX, maxX);
-			const randomY = Cypress._.random(minY, maxY);
-
-			this.elements.moveContainedBox().move({ x: randomX, y: randomY });
-
+				this.elements.moveContainedBox().move({ deltaX: randomX, deltaY: randomY });
+			}
 		});
+	}
+
+	containerTextRestricted() {
+		this.elements.ContainerText().then(($wrapper) => {
+			const containerCoords = $wrapper[0].getBoundingClientRect();
+			const minX = containerCoords.left;
+			const maxX = containerCoords.width;
+			const minY = containerCoords.top;
+			const maxY = containerCoords.height;
+
+			for (let i = 0; i < 3; i++) {
+				const randomX = Cypress._.random(minX, maxX);
+				const randomY = Cypress._.random(minY, maxY);
+
+				this.elements.moveContainedText().move({ deltaX: randomX, deltaY: randomY });
+			}
+		});
+	}
+
+	centerCursorStyle() {
+		this.elements.ContainerText().then(($wrapper) => {
+			const containerCoords = $wrapper[0].getBoundingClientRect();
+		
+		const randomX = Cypress._.random(this.MIN, this.MAX);
+		const randomY = Cypress._.random(this.MIN,this.MAX);
+		this.elements.cursorTopLeftSelect().move({ deltaX: randomX, deltaY: randomY });
 	}
 }
 export const dragabble = new Dragabble();
