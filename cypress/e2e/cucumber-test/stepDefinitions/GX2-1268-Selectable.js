@@ -48,17 +48,17 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
     describe('GX2-1268 | TC3: Verify user can unselect elements in List', () => {
         Given('user is in List Pagination page tc3', ()=> {
             cy.get('#verticalListContainer').should('be.visible');  
+            cy.get('#demo-tabpane-list').should('have.attr', 'aria-hidden', 'false')   
         });                       
         
         When('clicks on each elements of the list tc3', () => {
-            selectonlist.list.listPagination1().click()             
-            selectonlist.list.listPagination2().click()             
-            selectonlist.list.listPagination3().click()             
-            selectonlist.list.listPagination4().click() 
+            selectonlist.ListClick();
             cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)')
         });
         When('clicks again on each elements of the list tc3', () => {                     
-            selectonlist.ClickOnElementsList()
+            selectonlist.ListClick();
+            cy.get(".mt-2.list-group-item.list-group-item-action").should('have.length', 4)
+
             
         });
         Then('should see all element unselected tc3', () => {
@@ -72,41 +72,42 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
         });
         Then('should see the Grid elements', () => {
             cy.get('#verticalListContainer').should('be.not.visible');  
-            cy.get('#demo-tabpane-grid').should('be.visible');        
+            cy.get('#demo-tabpane-grid').should('have.attr', 'aria-hidden', 'false')  
         });
         });
     
         describe('GX2-1268 | TC5: Verify user can select elements in Grid', () => {
             Given('user is in Grid Pagination page tc5', () => {
             selectongrid.SelectGrid();
-            cy.get('#demo-tabpane-grid').should('be.visible');
+            cy.get('#demo-tabpane-grid').should('have.attr', 'aria-hidden', 'false') 
         });                       
         
         When('clicks on each elements of the Grid tc5', () => {
-            selectongrid.ClickOnGridElement()                
+            selectongrid.GridClick();              
         });
         Then('should see all elements selected tc5', () => {
             cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)')
+            cy.get('.list-group-item.active.list-group-item-action').should('have.length', 9)
         });
     });
 
     describe('GX2-1268 | TC6: Verify user can unselect elements in List', () => {
         Given('user is in Grid Pagination page tc6', () => {
             selectongrid.SelectGrid();
-            cy.get('#demo-tabpane-grid').should('be.visible');
+            cy.get('#demo-tabpane-grid').should('have.attr', 'aria-hidden', 'false') 
         });
         
         When('clicks on each elements of the Grid tc6', () => {
-            selectongrid.ClickOnGridElement()
+            selectongrid.GridClick(); 
             cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)')
         });
         When('clicks again on each elements of the Grid tc6', () => {
             
-        selectongrid.ClickOnGridElement() 
+        selectongrid.GridClick();  
     
         });
         Then('should see all element unselected tc6', () => {
-            
+            cy.get('.list-group-item.active.list-group-item-action').should('have.length', 0)
             cy.get('.list-group-item.active').should('not.exist')    
         });
     });

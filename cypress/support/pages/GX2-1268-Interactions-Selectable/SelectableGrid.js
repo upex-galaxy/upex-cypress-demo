@@ -37,12 +37,17 @@ class SelectOnGrid {
         selectongrid.grid.gridPaginationEight().click()
     }
 
-   /* SelectableFunction() { //i could not get it to work !!!!!!!
-        debugger;  let val = Object.values(selectongrid.grid) // get keys's element
-        for (let i = 1; i < val.length; i++) {
-            debugger;  return val[1]  
-           
+    li={
+        GridLi:()=>cy.get('#demo-tabpane-grid li'),
+
+    }
+
+    GridClick() {
+        let i = 8
+        while (i != -1) {
+            this.li.GridLi().eq(i).click({ forece: true })
+        i--
         }
-    }*/
+    }
 }
 export const selectongrid = new SelectOnGrid();
