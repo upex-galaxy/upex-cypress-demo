@@ -13,8 +13,5 @@ describe('GX-13556 | ToolsQA | Elements | Radio Buttons', () => {
 		cy.get('#impressiveRadio').click({ force: true }).should('have.attr', 'type', 'radio');
 		cy.contains('You have selected ').children().should('have.text', 'Impressive');
 	});
-	//it('13557 | Validar impressive button', () => {
-	// Write your test case two here
-	//});
 });
 removeLogs();
