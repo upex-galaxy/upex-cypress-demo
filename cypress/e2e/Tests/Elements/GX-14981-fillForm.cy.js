@@ -82,9 +82,14 @@ describe('✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get(the.displayRedInputError).should('exist').and('be.visible');
 		});
 	});
-});
+	it('14982 | TC8: Validate do not submit the form when all fields are Empty', () => {
+		cy.fixture('data/TextBoxForm').then(the => {
+			cy.get(the.SubmitBtn).click();
 
-// it('14982 | TC8: Validate do not submit the form when all fields are Empty', () => {});
+			cy.get(the.displayMessage).should('have.class', 'mt-4 row');
+		});
+	});
+});
 
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
