@@ -70,7 +70,7 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                      npm run file cypress\e2e\cucumber-test\Gherkin\GX2-1268-Selectable.feature
+                      npm run file cypress/e2e/cucumber-test/Gherkin/GX2-1268-Selectable.feature
 
             - name: ✅Import Test Results to Xray
               if: always()
