@@ -19,21 +19,19 @@ describe('US GX-14854 | ToolsQA | Elements | Dynamic Properties', () => {
 		});
 	});
 	it('14855|TC4: Validar que el button "Will enable 5 seconds" esta habilitado para realizarle clic y es invisible luego de 5 segundos', () => {
-		cy.wait(2000);
+		
 		cy.fixture('DOM/elements').then(the => {
-			cy.get(the.firstButton).should('be.enabled').should('be.visible').click();
+			cy.get(the.firstButton,{timeout:5000}).should('be.enabled').should('be.visible').click();
 		});
 	});
 	it('14855|TC5: Validar que las letras del button "Color Change" es de color rojo luego de 5 segundos', () => {
-		cy.wait(2000);
 		cy.fixture('DOM/elements').then(the => {
-			cy.get(the.secondButton).should('have.css', 'color').and('eq', 'rgb(220, 53, 69)');
+			cy.get(the.secondButton,{timeout:5000}).should('have.css', 'color').and('eq', 'rgb(220, 53, 69)');
 		});
 	});
 	it('148555|TC6: Validar que el button "Visible After 5 Seconds" este visible luego de 5 segundos', () => {
-		cy.wait(2000);
 		cy.fixture('DOM/elements').then(the => {
-			cy.get(the.thirdButton).should('be.visible');
+			cy.get(the.thirdButton,{timeout:5000}).should('be.visible').click();
 		});
 	});
 });
