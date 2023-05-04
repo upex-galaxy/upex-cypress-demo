@@ -7,10 +7,12 @@ describe('GX-13556 | ToolsQA | Elements | Radio Buttons', () => {
 	});
 	it('13557 | Validar Yes Button', () => {
 		cy.get('#yesRadio').click({ force: true }).should('have.attr', 'type', 'radio');
+		cy.get('#yesRadio').should('be.checked');
 		cy.contains('You have selected ').children().should('have.text', 'Yes');
 	});
 	it('13557 | Validar Impressive Button', () => {
 		cy.get('#impressiveRadio').click({ force: true }).should('have.attr', 'type', 'radio');
+		cy.get('#impressiveRadio').should('be.checked');
 		cy.contains('You have selected ').children().should('have.text', 'Impressive');
 	});
 });
