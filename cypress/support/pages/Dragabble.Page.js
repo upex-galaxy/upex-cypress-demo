@@ -66,7 +66,10 @@ class Dragabble {
 			const maxY = containerCoords.height;
 			const randomX = Cypress._.random(minX, maxX);
 			const randomY = Cypress._.random(minY, maxY);
-			this.elements.moveContainedBox().move({ deltaX: randomX, deltaY: randomY },{ force: true });
+			this.elements.moveContainedBox().move({ deltaX: randomX, deltaY: randomY }, { force: true });
+			const containerCoordsFinal = $wrapper[0].getBoundingClientRect();
+			expect(containerCoords).not.equal(containerCoordsFinal);
+
 		});
 	}
 

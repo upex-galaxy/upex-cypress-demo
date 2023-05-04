@@ -32,11 +32,12 @@ describe('✅ToolsQA | Interactions | Dragabble', () => {
 		dragabble.selectContainerRestrictedTab();
 		dragabble.elements.containmentWrapper()
 			.should('exist')
-			.and('have.css', 'border', '1.6px solid rgb(204, 204, 204)');
+			.and('contain', 'contained within the box');
 		dragabble.elements.moveContainedBox()
 			.should('exist')
 			.should('be.visible');
 		dragabble.containerBoxRestricted();
+			
 	});
 	
 	it('2201 | TC5: Validate text of box can not be dragged out of the delimited area of action on the Container Restricted tab', () => {
