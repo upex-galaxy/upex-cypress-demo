@@ -1,36 +1,38 @@
 import { Given, When, And, Then } from '@badeball/cypress-cucumber-preprocessor';
-import { form } from '@pages/Form.Page';
+import { form } from '@pages/gabeForm2.page';
+import { enter } from '@pages/gabeForm2.page';
+const url = 'https://demoqa.com/automation-practice-form';
 
 context('Feature: ✅ToolsQA | Forms | Practice Form', () => {
 	describe('Estar situado en el apartado de Practice Form', () => {
 		Given('ingresar al apartado de practice form de la page de DemoQA', () => {
-			expect(1).to.equal(1);
+			cy.visit(url);
 		});
 	});
 	describe('14847 | TC1: Validar enviar el Form con datos validos corectamente', () => {
 		When('El usuario ingrese un dato valido en campo First Name', () => {
-			expect(1).to.equal(1);
+			enter.enterFN();
 		});
 		And('El usuario ingrese un dato valido en el campo Last Name', () => {
-			expect(1).to.equal(1);
+			enter.enterLN();
 		});
 		And('El usuario ingrese un dato valido en el campo Email', () => {
-			expect(1).to.equal(1);
+			enter.enterUE();
 		});
 		And('El usuario seleccione un radio-button de Genero', () => {
-			expect(1).to.equal(1);
+			enter.selectRB();
 		});
 		And('El usuario seleccione una Fecha De Nacimiento', () => {
 			expect(1).to.equal(1);
 		});
 		And('El usuario seleccione un Checkbox de Hobbies', () => {
-			expect(1).to.equal(1);
+			enter.selectCB();
 		});
 		And('El usuario seleccione una imagen para subir', () => {
-			expect(1).to.equal(1);
+			enter.selectPic();
 		});
 		And('El usuario ingrese un dato valido en domicilio', () => {
-			expect(1).to.equal(1);
+			enter.enterUA();
 		});
 		And('El usuario seleccione un Estado', () => {
 			expect(1).to.equal(1);
@@ -39,10 +41,10 @@ context('Feature: ✅ToolsQA | Forms | Practice Form', () => {
 			expect(1).to.equal(1);
 		});
 		And('El usuario envie el Form completado', () => {
-			expect(1).to.equal(1);
+			enter.enterSB();
 		});
 		Then('Aparecera un Pop-up con la informacion que el usuario completo', () => {
-			expect(1).to.equal(1);
+			enter.popupvisible();
 		});
 	});
 	describe('14847 | TC2: Validar NO completar el registro', () => {
