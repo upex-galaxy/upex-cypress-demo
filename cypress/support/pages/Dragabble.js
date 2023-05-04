@@ -66,15 +66,15 @@ class Dragabble {
     }  
 
     dragCursorTopLeft() {
-        let randomX = Cypress._.random(0, 100)
-        let randomY = Cypress._.random(0, 100)
+        let randomX = Cypress._.random(0, 50)
+        let randomY = Cypress._.random(0, 50)
         this.get.cursorTopLeft().move({ deltaX: randomX, deltaY: randomY })  
         cy.log(randomX, randomY)
     }
 
     dragCursorBottom() {
-        let randomX = Cypress._.random(0, 100)
-        let randomY = Cypress._.random(0, 100)
+        let randomX = Cypress._.random(0, 50)
+        let randomY = Cypress._.random(0, 50)
         this.get.cursorBottom().move({ deltaX: randomX, deltaY: randomY })        
     }
 
