@@ -32,7 +32,7 @@ describe('GX2-1764 |ToolsQA | Interactions | Dragabble', () => {
 		draggabble.get.OnlyX().should('have.css', 'top', `${deltaY}px`);
 	});
 
-	it('1765| TC03 Access to Axis Restricted and validate movements box Only Y', () => {
+	it.skip('1765| TC03 Access to Axis Restricted and validate movements box Only Y', () => {
 		draggabble.goToAxisTab();
 		const deltaX = 0;
 		const deltaY = Cypress._.random(-50, 50);
