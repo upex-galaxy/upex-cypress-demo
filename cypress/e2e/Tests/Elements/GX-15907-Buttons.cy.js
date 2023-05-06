@@ -1,7 +1,7 @@
 describe('GX-15907 | ToolsQA | Elements | Buttons', () => {
 	beforeEach('Visitar pagina demo QA', () => {
 		cy.visit('https://demoqa.com/buttons');
-		cy.url().should('contain', page);
+		
 	});
 
 	it('15908 | TC1 Validar doble click en btn "Double Click Me"', () => {
