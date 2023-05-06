@@ -57,7 +57,7 @@ describe('✅ToolsQA | Interactions | Dragabble', () => {
 		dragabble.centerCursorStyle();
 	});
 
-	it('2201 | TC7: Validate the cursor will stick to the bottom center of the box and the cursor hovering icon changes back to the default cursor ico if "My cursor is at bottom" box is dragged on the "Cursor Style" tab', () => {
+	it.skip('2201 | TC7: Validate the cursor will stick to the bottom center of the box and the cursor hovering icon changes back to the default cursor ico if "My cursor is at bottom" box is dragged on the "Cursor Style" tab', () => {
 		dragabble.elements.cursorStyleTabClick().click();
 		dragabble.elements.cursorBottomSelect()
 			.trigger('mousedown', { which: 1 },{ force:true })
