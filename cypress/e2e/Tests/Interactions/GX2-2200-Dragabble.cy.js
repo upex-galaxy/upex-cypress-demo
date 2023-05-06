@@ -60,12 +60,13 @@ describe('✅ToolsQA | Interactions | Dragabble', () => {
 	it('2201 | TC7: Validate the cursor will stick to the bottom center of the box and the cursor hovering icon changes back to the default cursor ico if "My cursor is at bottom" box is dragged on the "Cursor Style" tab', () => {
 		dragabble.elements.cursorStyleTabClick().click();
 		dragabble.elements.cursorBottomSelect()
-			.trigger('mousedown', { which: 1 })
-			.trigger('mousemove');
+			.trigger('mousedown', { which: 1 },{ force:true })
+			.trigger('mousemove',{ force:true });
 		cy.get('body').invoke('css', 'cursor').should('equal', 'auto');
 		dragabble.bottomCursorStyle();
 	});	
-
+	//! Salteamos el test ya que Daniel pidió esto, no se puede hacer la aserción del puntero del mouse.
+	
 	// it.only('2201 | TC8: Validate the cursor will stick to the top left outside of the box and the cursor icon changes to a "+" if dashed box "My cursor is at top left" is displayed on the "Cursor Style" tab', () => {
 	// 	dragabble.elements.cursorStyleTabClick().click();
 	// 	dragabble.topLeftCursorStyle();
