@@ -2,7 +2,8 @@ class SelectOnGrid {
     get = {
         endPoint: () => cy.visit('/selectable'),
         gridPagination: () => cy.get('#demo-tab-grid'),
-        gridPaginationPanel: () => cy.get('.tab-content'),
+        gridPaginationPanel: () => cy.get('#demo-tabpane-grid'),
+        buttonNoActivatedGrid: ()=> cy.get('.list-group-item.active.list-group-item-action'),
     }
     
     SelectGrid() {

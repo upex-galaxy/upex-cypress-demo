@@ -21,48 +21,48 @@ context('1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
         });
 
         Then('should see the List elements', () => {
-            cy.get('#verticalListContainer').should('be.visible');  
-            cy.get('#demo-tabpane-list').should('have.attr', 'aria-hidden', 'false')
-            cy.get('#demo-tabpane-grid').should('have.attr', 'aria-hidden', 'true')
+            selectonlist.get.verticalList().should('be.visible');  
+            selectonlist.get.listPaginationPanel().should('have.attr', 'aria-hidden', 'false'),            
+            selectongrid.get.gridPaginationPanel().should('have.attr', 'aria-hidden', 'true')
         });
     });
     
     describe('1268 | TC2: Verify user can select elements in List', () => {
         Given('user is in List Pagination page tc2', ()=> {
-            cy.get('#verticalListContainer').should('be.visible')
-            cy.get('#demo-tabpane-list').should('have.attr', 'aria-hidden', 'false')            
+            selectonlist.get.verticalList().should('be.visible')
+            selectonlist.get.listPaginationPanel().should('have.attr', 'aria-hidden', 'false')            
             
         });                       
         
         When('clicks on each elements of the List tc2', () => {
             selectonlist.ListClick();
-            cy.get(".mt-2.list-group-item.list-group-item-action").should('have.length', 4)  // assertion poderosa!!
+            selectonlist.get.buttonNoActivatedList().should('have.length', 4)  // assertion poderosa!!
             
         });
         Then('should see all elements selected tc2', () => {
-            cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)')
-            cy.get('.list-group-item.active').should('have.length', 4)
+            selectonlist.get.buttonActivated().should('have.css', 'background-color', 'rgb(0, 123, 255)')
+            selectonlist.get.buttonActivated().should('have.length', 4)
         });
     });
 
     describe('1268 | TC3: Verify user can unselect elements in List', () => {
         Given('user is in List Pagination page tc3', ()=> {
-            cy.get('#verticalListContainer').should('be.visible');  
-            cy.get('#demo-tabpane-list').should('have.attr', 'aria-hidden', 'false')   
+            selectonlist.get.verticalList().should('be.visible');  
+            selectonlist.get.listPaginationPanel().should('have.attr', 'aria-hidden', 'false')   
         });                       
         
         When('clicks on each elements of the list tc3', () => {
             selectonlist.ListClick();
-            cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)')
+            selectonlist.get.buttonActivated().should('have.css', 'background-color', 'rgb(0, 123, 255)')
         });
         When('clicks again on each elements of the list tc3', () => {                     
             selectonlist.ListClick();
-            cy.get(".mt-2.list-group-item.list-group-item-action").should('have.length', 4)
+            selectonlist.get.buttonNoActivatedList().should('have.length', 4)
 
             
         });
         Then('should see all element unselected tc3', () => {
-            cy.get('.list-group-item.active').should('not.exist')    
+            selectonlist.get.buttonActivated().should('not.exist')    
         });
     });
     
@@ -71,35 +71,35 @@ context('1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
             selectongrid.SelectGrid();                    
         });
         Then('should see the Grid elements', () => {
-            cy.get('#verticalListContainer').should('be.not.visible');  
-            cy.get('#demo-tabpane-grid').should('have.attr', 'aria-hidden', 'false')  
+            selectonlist.get.verticalList().should('be.not.visible');  
+            selectongrid.get.gridPaginationPanel().should('have.attr', 'aria-hidden', 'false')  
         });
         });
     
         describe('1268 | TC5: Verify user can select elements in Grid', () => {
             Given('user is in Grid Pagination page tc5', () => {
             selectongrid.SelectGrid();
-            cy.get('#demo-tabpane-grid').should('have.attr', 'aria-hidden', 'false') 
+            selectongrid.get.gridPaginationPanel().should('have.attr', 'aria-hidden', 'false') 
         });                       
         
         When('clicks on each elements of the Grid tc5', () => {
             selectongrid.GridClick();              
         });
         Then('should see all elements selected tc5', () => {
-            cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)')
-            cy.get('.list-group-item.active.list-group-item-action').should('have.length', 9)
+            selectonlist.get.buttonActivated().should('have.css', 'background-color', 'rgb(0, 123, 255)')
+            selectongrid.get.buttonNoActivatedGrid().should('have.length', 9)
         });
     });
 
     describe('1268 | TC6: Verify user can unselect elements in List', () => {
         Given('user is in Grid Pagination page tc6', () => {
             selectongrid.SelectGrid();
-            cy.get('#demo-tabpane-grid').should('have.attr', 'aria-hidden', 'false') 
+            selectongrid.get.gridPaginationPanel().should('have.attr', 'aria-hidden', 'false') 
         });
         
         When('clicks on each elements of the Grid tc6', () => {
             selectongrid.GridClick(); 
-            cy.get('.list-group-item.active').should('have.css', 'background-color', 'rgb(0, 123, 255)')
+            selectonlist.get.buttonActivated().should('have.css', 'background-color', 'rgb(0, 123, 255)')
         });
         When('clicks again on each elements of the Grid tc6', () => {
             
@@ -107,8 +107,8 @@ context('1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
     
         });
         Then('should see all element unselected tc6', () => {
-            cy.get('.list-group-item.active.list-group-item-action').should('have.length', 0)
-            cy.get('.list-group-item.active').should('not.exist')    
+            selectongrid.get.buttonNoActivatedGrid().should('have.length', 0)
+            selectonlist.get.buttonActivated().should('not.exist')    
         });
     });
     });

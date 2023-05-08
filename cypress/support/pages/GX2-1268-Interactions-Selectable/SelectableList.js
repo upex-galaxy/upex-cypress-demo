@@ -3,6 +3,9 @@ class SelectOnList {
         endPoint: ()=> cy.visit('/selectable'),
         listPagination: () => cy.get('#demo-tab-list'),
         listPaginationPanel: () => cy.get('#demo-tabpane-list'),
+        verticalList: ()=> cy.get('#verticalListContainer'),
+        buttonActivated: ()=> cy.get('.list-group-item.active'),
+        buttonNoActivatedList: ()=> cy.get('.mt-2.list-group-item.list-group-item-action'),
 
     }
 
