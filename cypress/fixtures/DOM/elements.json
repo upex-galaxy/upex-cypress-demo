@@ -1,0 +1,5 @@
+{
+	"firstButton": "#enableAfter",
+	"secondButton": "#colorChange",
+	"thirdButton": "#visibleAfter"
+}
