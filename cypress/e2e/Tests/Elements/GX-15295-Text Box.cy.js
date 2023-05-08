@@ -1,11 +1,18 @@
 describe('GX-15295|✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	beforeEach(() => {
 		cy.visit('https://demoqa.com/text-box');
-		cy.url('contain', 'text box');
+		cy.url().should('contain', 'text-box');
+		cy.fixture('cypress / fixtures / data / form2.json').then(credentials => {
+			this.credentials = credentials;
+		});
 	});
 
 	it('15296 | TC1: Validate press buttom submit with empty fields.', () => {
-		// Write your test case one here
+		cy.get("[type='text']").type(this.credentials.usernamevacio);
+		cy.get("[type='email']").type(this.credentials.emailvacio);
+		cy.get('[placeholder="Current Address"]').type(this.credentials.currentaddressvacio);
+		cy.get('[textarea="permanentAddress"]').type(this.credentials.permanentaddressvacia);
+		cy.get('#submit').click();
 	});
 	it('15296 | TC2: Validate press buttom submit with  filled fields.', () => {
 		// Write your test case two here
