@@ -8,13 +8,13 @@ import { removeLogs } from '@helper/RemoveLogs';
 
 const selectablePage = Cypress.env('endpoint').selectable;
 
-context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
+context('1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
     Given('user is in the website', () => {
         cy.visit(selectablePage);
         cy.url().should('contain', selectablePage);
         });
 
-    describe('GX2-1268 | TC1: Verify user can select List pagination', () => {
+    describe('1268 | TC1: Verify user can select List pagination', () => {
         When('clicks on List pagination', () => {
             selectongrid.SelectGrid();
             selectonlist.SelectList();            
@@ -27,9 +27,9 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
         });
     });
     
-    describe('GX2-1268 | TC2: Verify user can select elements in List', () => {
+    describe('1268 | TC2: Verify user can select elements in List', () => {
         Given('user is in List Pagination page tc2', ()=> {
-            cy.get('#verticalListContainer').should('be.visible') 
+            cy.get('#verticalListContainer').should('be.visible')
             cy.get('#demo-tabpane-list').should('have.attr', 'aria-hidden', 'false')            
             
         });                       
@@ -45,7 +45,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
         });
     });
 
-    describe('GX2-1268 | TC3: Verify user can unselect elements in List', () => {
+    describe('1268 | TC3: Verify user can unselect elements in List', () => {
         Given('user is in List Pagination page tc3', ()=> {
             cy.get('#verticalListContainer').should('be.visible');  
             cy.get('#demo-tabpane-list').should('have.attr', 'aria-hidden', 'false')   
@@ -66,7 +66,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
         });
     });
     
-        describe('GX2-1268 | TC4: Verify user can select Grid pagination', () => {
+        describe('1268 | TC4: Verify user can select Grid pagination', () => {
         When('clicks on Grid pagination', () => {
             selectongrid.SelectGrid();                    
         });
@@ -76,7 +76,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
         });
         });
     
-        describe('GX2-1268 | TC5: Verify user can select elements in Grid', () => {
+        describe('1268 | TC5: Verify user can select elements in Grid', () => {
             Given('user is in Grid Pagination page tc5', () => {
             selectongrid.SelectGrid();
             cy.get('#demo-tabpane-grid').should('have.attr', 'aria-hidden', 'false') 
@@ -91,7 +91,7 @@ context('US GX2-1268 | TX: ✅ToolsQA | Interactions | Selectable', () => {
         });
     });
 
-    describe('GX2-1268 | TC6: Verify user can unselect elements in List', () => {
+    describe('1268 | TC6: Verify user can unselect elements in List', () => {
         Given('user is in Grid Pagination page tc6', () => {
             selectongrid.SelectGrid();
             cy.get('#demo-tabpane-grid').should('have.attr', 'aria-hidden', 'false') 
