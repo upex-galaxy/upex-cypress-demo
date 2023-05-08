@@ -61,15 +61,34 @@ class containerRestricted {
 		this.get.containerTab().click();
 	}
 	moveOnlyWithinTheBox() {
-		let left = Cypress._.random(1, 382); //Coord was taken from Content Box only
-		let top = Cypress._.random(1, 107); //Coord was taken from Content Box only
-		cy.log(left, top);
+		// this.get.containmentWrapper().then($el => {
+		// 	const x1 = $el[0].getBoundingClientRect().left;
+		// 	const x2 = $el[0].getBoundingClientRect().width;
+		// 	const xc = x1 + x2 / 2;
 
-		this.get
-			.withinTheBox()
-			.trigger('mousedown', { which: 1, PageX: left, pageY: top })
-			.trigger('mousemove', { which: 1, clientX: left, clientY: top })
-			.trigger('mouseup', { force: true });
+		const randomX = Cypress._.random(-1.015625, 389.75);
+		const randomY = Cypress._.random(-0.261719, 107.738);
+		cy.log(randomX);
+		cy.log(randomY);
+
+		// 	const y1 = $el[0].getBoundingClientRect().top;
+		// 	const y2 = $el[0].getBoundingClientRect().height;
+		// 	const yc = y1 + y2 / 2;
+
+		this.get.withinTheBox().move({ deltaX: randomX, deltaY: randomY });
+		// .trigger('mousedown', { which: 1, pageX: 75, pageY: 50 })
+		// .trigger('mousemove', { which: 1, clientX: 75, clientY: 50 })
+		// .trigger('mouseup', { force: true });
+		// });
+		// this.get
+		// 	.withinTheBox()
+		// 	.trigger('mousedown', { which: 1, PageX: randomX, pageY: randomY })
+		// 	.trigger('mousemove', { which: 1, clientX: randomX, clientY: randomY })
+		// 	.trigger('mouseup', { force: true });
+
+		// let left = Cypress._.random(1, 382); //Coord was taken from Content Box only
+		// let top = Cypress._.random(1, 107); //Coord was taken from Content Box only
+		// cy.log(left, top);
 
 		// this.get.containmentWrapper().then($wrapper => {
 		// 	const containerCoords = $wrapper[0].getBoundingClientRect();
