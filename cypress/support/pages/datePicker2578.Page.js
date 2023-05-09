@@ -1,6 +1,7 @@
 class DatePicker {
 	get = {
 		firstDateInput: () => cy.get("[id = 'datePickerMonthYearInput']"),
+		secondDateInput: () => cy.get("[id = 'dateAndTimePickerInput']"),
 		yearFirst: () => cy.get('.react-datepicker__year-select'),
 		monthFirst: () => cy.get('.react-datepicker__month-select'),
 		monthFirstSelected: () => cy.get('.react-datepicker__month-select option:selected'),
@@ -10,6 +11,9 @@ class DatePicker {
 			cy.get(
 				'.react-datepicker__current-month.react-datepicker__current-month--hasYearDropdown.react-datepicker__current-month--hasMonthDropdown'
 			),
+		daySelectedFirst: () => cy.get('div[class*="selected"]'),
+		timeOptions: () => cy.get('.react-datepicker__time-list li'),
+		timeSelect: () => cy.get('.react-datepicker__time-list'),
 	};
 
 	firstInputDate() {
@@ -19,6 +23,19 @@ class DatePicker {
 			.then(today => {
 				cy.writeFile('../../fixtures/data/datePicker.json', { varToday: today });
 			});
+	}
+
+	secondInputDate() {
+		this.get
+			.secondDateInput()
+			.invoke('attr', 'value')
+			.then(today => {
+				cy.writeFile('../../fixtures/data/datePicker.json', { varToday: today });
+			});
+	}
+
+	enterSecondInput() {
+		this.get.secondDateInput().click();
 	}
 
 	clickYearFirst() {
@@ -39,6 +56,10 @@ class DatePicker {
 	clickNextMonth() {
 		this.get.firstDateInput().click();
 		this.get.nextMonth().click();
+	}
+
+	selectTime() {
+		this.get.timeOptions();
 	}
 }
 

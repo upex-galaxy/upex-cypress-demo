@@ -76,7 +76,7 @@ describe('', () => {
 			});
 	});
 
-	it.only('TC6: Validate right arrow of the month pagination goes to the next month in the select date component', () => {
+	it('TC6: Validate right arrow of the month pagination goes to the next month in the select date component', () => {
 		let monthFinal;
 		let monthInit;
 		//get actual month
@@ -103,6 +103,49 @@ describe('', () => {
 					expect(monthFinal).to.equal(monthInit + 1);
 				}
 			});
+	});
+
+	it('TC7: Validate background color of day changes to blue when it is selected in the select date component', () => {
+		datePicker.get.firstDateInput().click();
+		datePicker.get.daySelectedFirst().should('have.css', 'background-color', 'rgb(33, 107, 165)');
+	});
+
+	it('TC8: Validate format of input date is ${Month} ${Day} , ${Year} ${Time} ${acronym for time} in the date and time component', () => {
+		datePicker.secondInputDate();
+
+		//let dayjs = require('dayjs');
+		//let actualDate = dayjs().format('MMMM DD, YYYY hh:mm A');
+
+		cy.readFile('../../fixtures/data/datePicker.json').then(the => {
+			expect(the.varToday).to.match(
+				/(January|February|March|April|May|June|July|August|September|October|November|December) \d{1,2}, \d{4} \d{1,2}:\d{2} (AM|PM)/
+			);
+		});
+	});
+
+	it.only('TC9: Validate acronym for time is AM for morning and PM for the rest of the day in the date and time component', () => {
+		//seleccionar el elemento horas
+		datePicker.enterSecondInput();
+		let timeArray = [];
+		datePicker.get.timeOptions().then($time => {
+			$time.each((index, $time) => {
+				timeArray.push($time);
+			});
+			let arrayLength = timeArray.length;
+
+			let random = Cypress._.random(0, arrayLength - 1);
+
+			let randomTime = timeArray[random];
+
+			datePicker.enterSecondInput();
+			datePicker.get.timeOptions().eq(random).click();
+
+			if (random < 48) {
+				datePicker.get.secondDateInput().invoke('val').should('contain', 'AM');
+			} else {
+				datePicker.get.secondDateInput().invoke('val').should('contain', 'PM');
+			}
+		});
 	});
 });
 
