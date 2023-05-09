@@ -7,35 +7,51 @@ describe('GX-15295|✅ToolsQA | Elements | Text Box: Fill form and Submit', () =
 	});
 
 	it('15296 | TC1: Validate press buttom submit with empty fields.', () => {
-		/* cy.get("[type='text']").type(credentials.usernamevacio);
-		cy.get("[type='email']").type(credentials.emailvacio);
-		cy.get('[placeholder="Current Address"]').type(credentials.currentaddressvacio);
-		cy.get('[textarea="permanentAddress"]').type(credentials.permanentaddressvacia); */
 		cy.get('#submit').click();
 	});
 	it('15296 | TC2: Validate press buttom submit with  filled fields.', () => {
-		// Write your test case two here
+		cy.get("[type='text']").type(credentials.username);
+		cy.get("[type='email']").type(credentials.emailcorrecto);
+		cy.get('[placeholder="Current Address"]').type(credentials.currentaddress);
+		cy.get('#permanentAddress').type(credentials.permanentaddress);
+		cy.get('#submit').click();
 	});
 	it('15296 | TC3: Validate press buttom submit with and email without @', () => {
-		// Write your test case two here
+		cy.get("[type='text']").type(credentials.username);
+		cy.get("[type='email']").type(credentials.emailsinarroba);
+		cy.get('[placeholder="Current Address"]').type(credentials.currentaddress);
+		cy.get('#permanentAddress').type(credentials.permanentaddress);
+		cy.get('#submit').click();
+		cy.get('.mr-sm-2 field-error form-control');
 	});
 	it('15296 | TC4: Validate press buttom submit with and email that not conteins  (minimum) 1 alphanumeric character before “@”', () => {
-		// Write your test case two here
+		cy.get("[type='text']").type(credentials.username);
+		cy.get("[type='email']").type(credentials.emailsincaracterbefore);
+		cy.get('[placeholder="Current Address"]').type(credentials.currentaddress);
+		cy.get('#permanentAddress').type(credentials.permanentaddress);
+		cy.get('#submit').click();
 	});
-	it('15296 | TC5: Validate press buttom submit with and email that not conteins  (minimum) 1 alphanumeric character after @', () => {
-		// Write your test case two here
+	it('15296 | TC5: Validate press buttom submit with and email that not conteins (minimum) 1 alphanumeric character after @', () => {
+		cy.get("[type='text']").type(credentials.username);
+		cy.get("[type='email']").type(credentials.emailsincaracterafter);
+		cy.get('[placeholder="Current Address"]').type(credentials.currentaddress);
+		cy.get('#permanentAddress').type(credentials.permanentaddress);
+		cy.get('#submit').click();
 	});
 	it('15296 | TC6: Validate press buttom submit with and email that not contain “.” after: 1 alphanumeric character after @.', () => {
-		// Write your test case two here
+		cy.get("[type='text']").type(credentials.username);
+		cy.get("[type='email']").type(credentials.emailcaracterafterpunto);
+		cy.get('[placeholder="Current Address"]').type(credentials.currentaddress);
+		cy.get('#permanentAddress').type(credentials.permanentaddress);
+		cy.get('#submit').click();
 	});
-	it('15296 | TC7: Validate press buttom submit with and email that not contain “.” after: 1 alphanumeric character after @.', () => {
-		// Write your test case two here
-	});
-	it('15296 | TC8: Validate press buttom submit with and email that not contain (minimum) 2 alphanumeric characters after “.”', () => {
-		// Write your test case two here
-	});
-	it('15296 | TC9: Validate press buttom submit if field is invalid is displayed as a red border.', () => {
-		// Write your test case two here
+
+	it('15296 | TC7: Validate press buttom submit with and email that not contain (minimum) 2 alphanumeric characters after “.”', () => {
+		cy.get("[type='text']").type(credentials.username);
+		cy.get("[type='email']").type(credentials.emailsincaracafterpunto);
+		cy.get('[placeholder="Current Address"]').type(credentials.currentaddress);
+		cy.get('#permanentAddress').type(credentials.permanentaddress);
+		cy.get('#submit').click();
 	});
 });
 removeLogs();
