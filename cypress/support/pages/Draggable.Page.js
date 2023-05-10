@@ -10,15 +10,12 @@ class simple {
 	}
 
 	simpleDrag() {
-		let left = Cypress._.random(1, 100); //Coord was taken from Content Box only
-		let top = Cypress._.random(1, 40); //Coord was taken from Content Box only
+		let left = Cypress._.random(-300, 600); //Coord was taken from Content Box only
+		let top = Cypress._.random(-300, 300); //Coord was taken from Content Box only
 		cy.log(left, top);
 
-		this.get
-			.dragMe() // obtener el elemento a arrastrar
-			.trigger('mousedown', 'center', { which: 1, pageX: left, pageY: top }) //hace click en el elemento
-			.trigger('mousemove', { which: 1, clientX: left, clientY: top }) //Mueve el elemento a las coordenadas asignadas
-			.trigger('mouseup', { force: true }); //suelta el click después de arrastrar el elemento a las coordenadas
+		this.get.dragMe(); // obtener el elemento a arrastrar
+		this.get.dragMe().move({ deltaX: left, deltaY: top });
 	}
 }
 
@@ -92,37 +89,43 @@ class containerRestricted {
 		cy.log(randomY);
 		this.get.withinTheParent().move({ deltaX: randomX, deltaY: randomY });
 	}
+}
 
-	// this.get.containmentWrapper().then($el => {
-	// 	const x1 = $el[0].getBoundingClientRect().left;
-	// 	const x2 = $el[0].getBoundingClientRect().width;
-	// 	const xc = x1 + x2 / 2;
+class cursorStyle {
+	get = {
+		cursorStyleTab: () => cy.get('#draggableExample-tab-cursorStyle'),
+		cursorCenter: () => cy.get('#cursorCenter'),
+		cursorTopLeft: () => cy.get('#cursorTopLeft'),
+		cursorBottom: () => cy.get('#cursorBottom'),
+		moveArea: () => cy.get('cursor-style-container.mt-4'),
+	};
+	getCursorStyleTab() {
+		this.get.cursorStyleTab().click();
+	}
+	CenterStyle() {
+		let left = Cypress._.random(-45, 682); //Coord was taken from Content Box only
+		let top = Cypress._.random(-243, 0); //Coord was taken from Content Box only
+		cy.log(left, top);
 
-	// 	const y1 = $el[0].getBoundingClientRect().top;
-	// 	const y2 = $el[0].getBoundingClientRect().height;
-	// 	const yc = y1 + y2 / 2;
+		this.get.cursorCenter().move({ deltaX: left, deltaY: top });
+	}
+	LeftStyle() {
+		let left = Cypress._.random(-45, 682); //Coord was taken from Content Box only
+		let top = Cypress._.random(-243, 0); //Coord was taken from Content Box only
+		cy.log(left, top);
 
-	// .trigger('mousedown', { which: 1, pageX: 75, pageY: 50 })
-	// .trigger('mousemove', { which: 1, clientX: 75, clientY: 50 })
-	// .trigger('mouseup', { force: true });
-	// });
-	// this.get
-	// 	.withinTheBox()
-	// 	.trigger('mousedown', { which: 1, PageX: randomX, pageY: randomY })
-	// 	.trigger('mousemove', { which: 1, clientX: randomX, clientY: randomY })
-	// 	.trigger('mouseup', { force: true });
+		this.get.cursorTopLeft().move({ deltaX: left, deltaY: top });
+	}
+	BottomStyle() {
+		let left = Cypress._.random(-45, 682); //Coord was taken from Content Box only
+		let top = Cypress._.random(-243, 0); //Coord was taken from Content Box only
+		cy.log(left, top);
 
-	// let left = Cypress._.random(1, 382); //Coord was taken from Content Box only
-	// let top = Cypress._.random(1, 107); //Coord was taken from Content Box only
-	// cy.log(left, top);
-
-	// this.get.containmentWrapper().then($wrapper => {
-	// 	const containerCoords = $wrapper[0].getBoundingClientRect();
-	// 	const containerCoordsFinal = $wrapper[0].getBoundingClientRect();
-	// 	expect(containerCoords).not.equal(containerCoordsFinal);
-	// });
+		this.get.cursorBottom().move({ deltaX: left, deltaY: top });
+	}
 }
 
 export const dragMeSimple = new simple();
 export const dragAxisRestricted = new AxisRestricted();
 export const dragContainerRestricted = new containerRestricted();
+export const dragCursorStyle = new cursorStyle();

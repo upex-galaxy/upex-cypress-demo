@@ -1,4 +1,4 @@
-import { dragContainerRestricted, dragMeSimple } from '@pages/Draggable.Page';
+import { dragContainerRestricted, dragMeSimple, dragCursorStyle } from '@pages/Draggable.Page';
 import { dragAxisRestricted } from '@pages/Draggable.Page';
 
 describe('ToolsQA | Interactions | Dragabble', () => {
@@ -8,10 +8,10 @@ describe('ToolsQA | Interactions | Dragabble', () => {
 		cy.url().should('contain', 'dragabble');
 	});
 
-	it.only('2375 | TC1: Validate drag the Drag Me box at any direction for the Simple Tab', () => {
+	it('2375 | TC1: Validate drag the Drag Me box at any direction for the Simple Tab', () => {
 		dragMeSimple.simpleDrag();
 
-		cy.should('have.text', 'Drag me');
+		cy.should('have.css', 'cursor', 'move');
 	});
 	it('2375 | TC2: Validate drag the Only X box with random range for X axis only for the Axis Restricted Tab', () => {
 		dragAxisRestricted.GetAxisTab();
@@ -55,6 +55,27 @@ describe('ToolsQA | Interactions | Dragabble', () => {
 
 		dragContainerRestricted.moveOutsideTheParent();
 		cy.should('have.css', 'top', '-1.48828px');
+	});
+	it("2375 | TC8: Validate the cursor must stick to the center of the box when the 'I will always stick to the center box' is dragged for the Cursor Style Tab", () => {
+		dragCursorStyle.getCursorStyleTab();
+		cy.should('have.attr', 'aria-selected', 'true');
+
+		dragCursorStyle.CenterStyle();
+		cy.should('have.css', 'cursor', 'move');
+	});
+	it("2375 | TC9: Validate the cursor must stick to the outside top left of the box when the 'My cursor is at top lef' box is dragged for the Cursor Style Tab", () => {
+		dragCursorStyle.getCursorStyleTab();
+		cy.should('have.attr', 'aria-selected', 'true');
+
+		dragCursorStyle.LeftStyle();
+		cy.should('have.css', 'cursor', 'move');
+	});
+	it("2375 | TC10: Validate the cursor must stick to the bottom center of the box when the 'My cursor is at the bottom' box is dragged for the Cursor Style Tab", () => {
+		dragCursorStyle.getCursorStyleTab();
+		cy.should('have.attr', 'aria-selected', 'true');
+
+		dragCursorStyle.BottomStyle();
+		cy.should('have.css', 'cursor', 'move');
 	});
 });
 
