@@ -22,7 +22,7 @@ describe('GX-16374 | ✅ToolsQA | Forms', () => {
 		practiceForm.getPopUpMessage().should('exist');
 		practiceForm.getCloseBtn();
 	});
-	it.only('16735 | TC2: Validate no message is displayed after submitting and the field turns red', () => {
+	it('16735 | TC2: Validate no message is displayed after submitting and the field turns red', () => {
 		practiceForm.getSubmitBtn();
 		practiceForm.get.firstNameInput().should('have.css', 'border-color', 'rgb(220, 53, 69)');
 		practiceForm.get.lastNameInput().should('have.css', 'border-color', 'rgb(220, 53, 69)');

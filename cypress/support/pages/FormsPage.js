@@ -99,7 +99,7 @@ class PracticeForm {
 		this.get.closeBtn().click();
 	}
 	getPopUpMessage() {
-		this.get.modalContent()
+		return this.get.modalContent()
 	}
 }
 
