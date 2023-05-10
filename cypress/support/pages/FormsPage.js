@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 
 const firstName = faker.name.firstName();
 const lastName = faker.name.lastName();
-const phoneNum = faker.phone.number();
+const phoneNum = faker.phone.number('##########');
 const email = faker.helpers.unique(faker.internet.email, [firstName, lastName]);
 const address = faker.address.streetAddress();
 
@@ -11,7 +11,7 @@ class PracticeForm {
 		firstNameInput: () => cy.get('#firstName'),
 		lastNameInput: () => cy.get('#lastName'),
 		emailInput: () => cy.get('#userEmail'),
-		genderCheckbox: () => cy.get('[name="gender"]'),
+		genderCheckbox: () => cy.get('[class*="custom-radio"]'),
 		gender1: () => cy.get('#gender-radio-1'),
 		gender2: () => cy.get('#gender-radio-2'),
 		gender3: () => cy.get('#gender-radio-3'),
@@ -28,12 +28,13 @@ class PracticeForm {
 		hobbiesCheckbox1: () => cy.get('#hobbies-checkbox-1'),
 		hobbiesCheckbox2: () => cy.get('#hobbies-checkbox-2'),
 		hobbiesCheckbox3: () => cy.get('#hobbies-checkbox-3'),
-		uploadPicture: () => cy.get('input[id="uploadPicture"]'),
+		uploadPicture: () => cy.get('input[type="file"]'),
 		currentAddress: () => cy.get('#currentAddress'),
 		stateSelect: () => cy.get('#state'),
 		citySelect: () => cy.get('#city'),
 		submitBtn: () => cy.get('#submit'),
-		
+		modalContent:()=> cy.get('div[class="modal-content"]'),
+		closeBtn: () => cy.get('#closeLargeModal'),
 	};
 	getFirstNameRandom() {
 		return this.get.firstNameInput().type(firstName);
@@ -45,31 +46,27 @@ class PracticeForm {
 		return this.get.emailInput().type(email);
 	}
 	getGenderRandom() {
-		return this.get
-			.genderCheckbox()
-			.its(length)
-			.then(randomGender => {
-				let random = Cypress._.random(randomGender - 1);
-				cy.get('input[id^="gender"]').eq(random).check({ force: true });
-			});
+		return this.get.genderCheckbox().then(() => {
+			let random = Math.floor(Math.random() * 3);
+
+			cy.get('[type="radio"]').eq(random).click({ force: true });
+		});
 	}
 	getPhoneNumRandom() {
 		return this.get.phoneNumberInput().type(phoneNum);
 	}
-
 	getBirthDay() {
 		const month = faker.date.month();
-		const year = faker.datatype.number({ min: 1900, max: 2022 });
+		let max = 2100;
+		let min = 1900;
+		const randomYear = Math.floor(Math.random() * (max - min)) + min;
 
 		cy.get('#dateOfBirthInput').click();
 		cy.get('.react-datepicker__month-container');
 		cy.get('[class^="react-datepicker__header"]');
-		cy.get('[class^="react-datepicker__year-dropdown-container"]');
-		cy.get('.react-datepicker__year-select').select('1990');
-
+		cy.get('.react-datepicker__year-select').contains(randomYear).click({ force: true });
 		cy.get('.react-datepicker__month-select').select(month);
-
-		cy.get('.react-datepicker__day').then(num => {
+		cy.get('.react-datepicker__day').then(() => {
 			let randomDay = faker.datatype.number({ min: 1, max: 30 });
 			cy.get('.react-datepicker__day').eq(randomDay).click();
 		});
@@ -80,23 +77,29 @@ class PracticeForm {
 	checkHobbie() {
 		this.get.hobbiesCheckbox1().check({ force: true });
 	}
-	// getUploadPicture() {
-	// 	const img = faker.image.avatar();
-	// 	this.get.uploadPicture().click();
-	// 	this.get.uploadPicture().selectFile(img, { force: true });
-	// }
+	getUploadPicture(photo) {
+		this.get.uploadPicture().selectFile(photo);
+	}
 	getCurrentAddress() {
 		this.get.currentAddress().type(address);
 	}
-	// getSelectState() {
-	// 	this.get.stateSelect().click();
-	// 	;
-	// }
-	// getSelectCity() {
-	// 	this.get.citySelect().click()
-	// }
+	getSelectState() {
+		this.get.stateSelect().click();
+		cy.get('#react-select-3-option-1').click();
+		// this.get.stateSelect().select('NCR');
+	}
+	getSelectCity() {
+		this.get.citySelect().click();
+		cy.get('#react-select-4-option-0').click();
+	}
 	getSubmitBtn() {
-		this.get.submitBtn().click({force:true});
+		this.get.submitBtn().click({ force: true });
+	}
+	getCloseBtn() {
+		this.get.closeBtn().click();
+	}
+	getPopUpMessage() {
+		this.get.modalContent()
 	}
 }
 
