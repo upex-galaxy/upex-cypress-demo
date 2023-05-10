@@ -114,7 +114,7 @@ class cursorStyle {
 		let top = Cypress._.random(-243, 0); //Coord was taken from Content Box only
 		cy.log(left, top);
 
-		this.get.cursorTopLeft().move({ deltaX: left, deltaY: top });
+		this.get.cursorTopLeft().move({ deltaX: left, deltaY: top }, { force: true });
 	}
 	BottomStyle() {
 		let left = Cypress._.random(-45, 682); //Coord was taken from Content Box only
