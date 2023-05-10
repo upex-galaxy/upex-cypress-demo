@@ -22,7 +22,7 @@ describe('GX-15295|✅ToolsQA | Elements | Text Box: Fill form and Submit', () =
 		cy.get('[placeholder="Current Address"]').type(credentials.currentaddress);
 		cy.get('#permanentAddress').type(credentials.permanentaddress);
 		cy.get('#submit').click();
-		cy.get('.mr-sm-2 field-error form-control');
+		cy.get("[type='email']").type(credentials.emailsinarroba).should('have.class', 'mr-sm-2 field-error form-control');
 	});
 	it('15296 | TC4: Validate press buttom submit with and email that not conteins  (minimum) 1 alphanumeric character before “@”', () => {
 		cy.get("[type='text']").type(credentials.username);
@@ -30,6 +30,7 @@ describe('GX-15295|✅ToolsQA | Elements | Text Box: Fill form and Submit', () =
 		cy.get('[placeholder="Current Address"]').type(credentials.currentaddress);
 		cy.get('#permanentAddress').type(credentials.permanentaddress);
 		cy.get('#submit').click();
+		cy.get("[type='email']").type(credentials.emailsincaracterbefore).should('have.class', 'mr-sm-2 field-error form-control');
 	});
 	it('15296 | TC5: Validate press buttom submit with and email that not conteins (minimum) 1 alphanumeric character after @', () => {
 		cy.get("[type='text']").type(credentials.username);
@@ -37,13 +38,15 @@ describe('GX-15295|✅ToolsQA | Elements | Text Box: Fill form and Submit', () =
 		cy.get('[placeholder="Current Address"]').type(credentials.currentaddress);
 		cy.get('#permanentAddress').type(credentials.permanentaddress);
 		cy.get('#submit').click();
+		cy.get("[type='email']").type(credentials.emailsincaracterafter).should('have.class', 'mr-sm-2 field-error form-control');
 	});
 	it('15296 | TC6: Validate press buttom submit with and email that not contain “.” after: 1 alphanumeric character after @.', () => {
 		cy.get("[type='text']").type(credentials.username);
-		cy.get("[type='email']").type(credentials.emailcaracterafterpunto);
+		cy.get("[type='email']").type(credentials.emailcaracterbeforepunto);
 		cy.get('[placeholder="Current Address"]').type(credentials.currentaddress);
 		cy.get('#permanentAddress').type(credentials.permanentaddress);
 		cy.get('#submit').click();
+		cy.get("[type='email']").type(credentials.emailcaracterbeforepunto).should('have.class', 'mr-sm-2 field-error form-control');
 	});
 
 	it('15296 | TC7: Validate press buttom submit with and email that not contain (minimum) 2 alphanumeric characters after “.”', () => {
@@ -52,6 +55,7 @@ describe('GX-15295|✅ToolsQA | Elements | Text Box: Fill form and Submit', () =
 		cy.get('[placeholder="Current Address"]').type(credentials.currentaddress);
 		cy.get('#permanentAddress').type(credentials.permanentaddress);
 		cy.get('#submit').click();
+		cy.get("[type='email']").type(credentials.emailsincaracafterpunto).should('have.class', 'mr-sm-2 field-error form-control');
 	});
 });
 removeLogs();
