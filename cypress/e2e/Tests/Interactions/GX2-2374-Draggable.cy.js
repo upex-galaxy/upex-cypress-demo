@@ -56,21 +56,21 @@ describe('ToolsQA | Interactions | Dragabble', () => {
 		dragContainerRestricted.moveOutsideTheParent();
 		cy.should('have.css', 'cursor', 'auto');
 	});
-	it("2375 | TC8: Validate the cursor must stick to the center of the box when the 'I will always stick to the center box' is dragged for the Cursor Style Tab", () => {
+	it("2375 | TC8: Validate move the box 'I will always stick to the center' at any direction for the Cursor Style Tab", () => {
 		dragCursorStyle.getCursorStyleTab();
 		cy.should('have.attr', 'aria-selected', 'true');
 
 		dragCursorStyle.CenterStyle();
 		cy.should('have.css', 'cursor', 'move');
 	});
-	it("2375 | TC9: Validate the cursor must stick to the outside top left of the box when the 'My cursor is at top lef' box is dragged for the Cursor Style Tab", () => {
+	it("2375 | TC9: Validate move the box 'My cursor is at top lef' at any direction for the Cursor Style Tab", () => {
 		dragCursorStyle.getCursorStyleTab();
 		cy.should('have.attr', 'aria-selected', 'true');
 
 		dragCursorStyle.LeftStyle();
 		cy.should('have.css', 'cursor', 'move');
 	});
-	it("2375 | TC10: Validate the cursor must stick to the bottom center of the box when the 'My cursor is at the bottom' box is dragged for the Cursor Style Tab", () => {
+	it("2375 | TC10: Validate move the box 'My cursor is at the bottom' at any direction for the Cursor Style Tab", () => {
 		dragCursorStyle.getCursorStyleTab();
 		cy.should('have.attr', 'aria-selected', 'true');
 
