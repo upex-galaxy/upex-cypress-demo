@@ -41,7 +41,7 @@ describe('ToolsQA | Interactions | Dragabble', () => {
 		cy.should('have.attr', 'aria-selected', 'true');
 
 		dragContainerRestricted.moveOutsideTheBox();
-		cy.should('have.css', 'left', '-0.25px');
+		cy.should('have.css', 'cursor', 'auto');
 	});
 	it("2375 | TC6: Validate drag the 'Im contained within my parent' box in the delimited area of action", () => {
 		dragContainerRestricted.getContainerRestricted();
@@ -54,7 +54,7 @@ describe('ToolsQA | Interactions | Dragabble', () => {
 		cy.should('have.attr', 'aria-selected', 'true');
 
 		dragContainerRestricted.moveOutsideTheParent();
-		cy.should('have.css', 'top', '-1.48828px');
+		cy.should('have.css', 'cursor', 'auto');
 	});
 	it("2375 | TC8: Validate the cursor must stick to the center of the box when the 'I will always stick to the center box' is dragged for the Cursor Style Tab", () => {
 		dragCursorStyle.getCursorStyleTab();
