@@ -33,29 +33,29 @@ class PracticeForm {
 		stateSelect: () => cy.get('#state'),
 		citySelect: () => cy.get('#city'),
 		submitBtn: () => cy.get('#submit'),
-		modalContent:()=> cy.get('div[class="modal-content"]'),
+		modalContent: () => cy.get('div[class="modal-content"]'),
 		closeBtn: () => cy.get('#closeLargeModal'),
 	};
-	getFirstNameRandom() {
+	fillFirstNameRandom() {
 		return this.get.firstNameInput().type(firstName);
 	}
-	getLastNameRandom() {
+	fillLastNameRandom() {
 		return this.get.lastNameInput().type(lastName);
 	}
-	getEmailRandom() {
+	fillEmailRandom() {
 		return this.get.emailInput().type(email);
 	}
-	getGenderRandom() {
+	selectGenderRandom() {
 		return this.get.genderCheckbox().then(() => {
 			let random = Math.floor(Math.random() * 3);
 
 			cy.get('[type="radio"]').eq(random).click({ force: true });
 		});
 	}
-	getPhoneNumRandom() {
+	fillPhoneNumRandom() {
 		return this.get.phoneNumberInput().type(phoneNum);
 	}
-	getBirthDay() {
+	selectBirthDay() {
 		const month = faker.date.month();
 		let max = 2100;
 		let min = 1900;
@@ -71,35 +71,34 @@ class PracticeForm {
 			cy.get('.react-datepicker__day').eq(randomDay).click();
 		});
 	}
-	getSubject() {
+	fillSubject() {
 		this.get.subject().type('Math');
 	}
 	checkHobbie() {
 		this.get.hobbiesCheckbox1().check({ force: true });
 	}
-	getUploadPicture(photo) {
-		this.get.uploadPicture().selectFile(photo);
+	uploadPicture(photo) {
+		this.get.uploadPicture().attachFile(photo);
 	}
-	getCurrentAddress() {
+	fillCurrentAddress() {
 		this.get.currentAddress().type(address);
 	}
-	getSelectState() {
+	selectState() {
 		this.get.stateSelect().click();
 		cy.get('#react-select-3-option-1').click();
-		// this.get.stateSelect().select('NCR');
 	}
-	getSelectCity() {
+	selectCity() {
 		this.get.citySelect().click();
 		cy.get('#react-select-4-option-0').click();
 	}
-	getSubmitBtn() {
+	submitBtn() {
 		this.get.submitBtn().click({ force: true });
 	}
-	getCloseBtn() {
+	closeBtn() {
 		this.get.closeBtn().click();
 	}
-	getPopUpMessage() {
-		return this.get.modalContent()
+	popUpMessage() {
+		return this.get.modalContent();
 	}
 }
 
