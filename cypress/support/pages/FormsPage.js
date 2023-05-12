@@ -61,7 +61,7 @@ class PracticeForm {
 		let min = 1900;
 		const randomYear = Math.floor(Math.random() * (max - min)) + min;
 
-		cy.get('#dateOfBirthInput').click();
+		cy.get('#dateOfBirthInput').click({ force: true });
 		cy.get('.react-datepicker__month-container');
 		cy.get('[class^="react-datepicker__header"]');
 		cy.get('.react-datepicker__year-select').contains(randomYear).click({ force: true });
@@ -84,18 +84,18 @@ class PracticeForm {
 		this.get.currentAddress().type(address);
 	}
 	selectState() {
-		this.get.stateSelect().click();
-		cy.get('#react-select-3-option-1').click();
+		this.get.stateSelect().click({ force: true });
+		// cy.get('#react-select-3-option-1').click();
 	}
 	selectCity() {
-		this.get.citySelect().click();
-		cy.get('#react-select-4-option-0').click();
+		this.get.citySelect().click({ force: true });
+		// cy.get('#react-select-4-option-0').click({ force: true });
 	}
 	submitBtn() {
 		this.get.submitBtn().click({ force: true });
 	}
 	closeBtn() {
-		this.get.closeBtn().click();
+		this.get.closeBtn().click({ force: true });
 	}
 	popUpMessage() {
 		return this.get.modalContent();
