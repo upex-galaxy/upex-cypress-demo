@@ -29,7 +29,7 @@
 		"@badeball/cypress-cucumber-preprocessor": "12.2.0",
 		"@bahmutov/cypress-esbuild-preprocessor": "2.1.5",
 		"@esbuild-plugins/node-modules-polyfill": "0.1.4",
-		"@faker-js/faker": "^7.6.0",
+		"@faker-js/faker": "7.6.0",
 		"@typescript-eslint/eslint-plugin": "5.53.0",
 		"@typescript-eslint/parser": "5.53.0",
 		"cypress": "12.7.0",
