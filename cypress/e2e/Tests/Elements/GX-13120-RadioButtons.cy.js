@@ -1,5 +1,7 @@
 import { removeLogs } from '@helper/RemoveLogs';
 
+removeLogs();
+
 describe('GX-13120 ToolsQA | Elements | Radio Buttons', () => {
 	beforeEach('Precondición: Usuario debe estar situado en el endpoint Radio Buttons de Tools QA', () => {
 		cy.visit('https://demoqa.com/radio-button');
