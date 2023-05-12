@@ -57,11 +57,12 @@ export default defineConfig({
 		endpoint: {
 			authLogin: '/auth/login',
 			dashboardIndex: '/dashboard/index',
-			signUp: 'https://coderbyte.com/sl',
+			signUp: 'https://coderbyte.com/sl', 
 			radioButton: '/radio-button',
 			textBox: 'text-box',
 			selectMenu: '/select-menu',
 			buttons: '/buttons',
+			selectable: '/selectable',
 		},
 		user: {
 			username: 'upexTesting',
