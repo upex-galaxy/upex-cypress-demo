@@ -23,13 +23,13 @@ class clickButtons {
 	}
 
 	getMessage2Click() {
-		this.get.Message2Click();
+		return this.get.Message2Click();
 	}
 	getRightClickMsg() {
-		this.get.MessageRightClick();
+		return this.get.MessageRightClick();
 	}
 	getClickMsg() {
-		this.get.Message1Click();
+		return this.get.Message1Click();
 	}
 }
 

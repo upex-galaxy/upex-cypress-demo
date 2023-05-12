@@ -2,7 +2,7 @@
 	"nonGlobalStepDefinitions": true,
 	"stepDefinitions": "cypress/e2e/cucumber-test/stepDefinitions/*.{js,ts}",
 	"json": {
-		"enabled": true,
+		"enabled": false,
 		"formatter": "./cucumber-formatter/cucumber-json-formatter.exe",
 		"output": "./reports/cucumber-report.json"
 	},
