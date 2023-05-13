@@ -1,4 +1,4 @@
-import { form } from '@pages/Form.Page';
+import { form } from '@pages/FormPao.Page';
 import { removeLogs } from '@helper/RemoveLogs';
 import { Given, Then, When, And } from '@badeball/cypress-cucumber-preprocessor';
 
