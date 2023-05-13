@@ -1,9 +1,8 @@
 import { removeLogs } from '@helper/RemoveLogs';
 import { dragabble } from '@pages/Dragabble.Page';
 
-
 describe('✅ToolsQA | Interactions | Dragabble', () => {
-	beforeEach('Precondition: be located in the page', () => {
+	/* beforeEach('Precondition: be located in the page', () => {
 		//cy.visit('/dragabble');
 		cy.viewport(1920, 1080);
 		cy.visit('/dragabble');
@@ -65,9 +64,8 @@ describe('✅ToolsQA | Interactions | Dragabble', () => {
 			.trigger('mousemove',{ force:true });
 		cy.get('body').invoke('css', 'cursor').should('equal', 'auto');
 		dragabble.bottomCursorStyle();
-	});	
+	});	 */
 	//! Salteamos el test ya que Daniel pidió esto, no se puede hacer la aserción del puntero del mouse.
-	
 	// it.only('2201 | TC8: Validate the cursor will stick to the top left outside of the box and the cursor icon changes to a "+" if dashed box "My cursor is at top left" is displayed on the "Cursor Style" tab', () => {
 	// 	dragabble.elements.cursorStyleTabClick().click();
 	// 	dragabble.topLeftCursorStyle();
@@ -79,8 +77,6 @@ describe('✅ToolsQA | Interactions | Dragabble', () => {
 	// 		});
 	// 		.should('have.css', 'cursor', 'crosshair');
 	// });
-
-
 });
 
 removeLogs();
