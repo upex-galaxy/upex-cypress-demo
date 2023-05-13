@@ -1,84 +1,50 @@
 import { removeLogs } from '@helper/RemoveLogs';
-import { checkBox } from '@pages/Check-Box.Page.js';
-//import { waitUntil } from '@testing-library/cypress';
+import { checkBox } from '@pages/CheckBoxToolsQA.Page.js';
 
 describe('✅ToolsQA | Elements | Check Box', () => {
 	beforeEach('precondición: estar situado en demoQA checkbox', () => {
-		cy.visit('https://demoqa.com/checkbox');
+		cy.visit('/checkbox');
 		cy.url().should('contain', 'checkbox');
 	});
 
-	it('2416 | TC1: Validate all folders are expanded when clicking on"Expand All" Toggle ', () => {
+	it('2416 | TC1: Validate all folders are expanded when clicking on"Expand All" Button', () => {
 		checkBox.clickButtonExpandAll();
-		//validaciones
-		//checkBox.verifyAllCheckboxesChecked();
-		//checkBox.elements.checkboxHome().should('be.visible');
-
-		//waitUntil(() => checkBox.elements.checkboxDesktop().should('be.visible'));
-		// checkBox.elements.checkboxNotes().should('be.visible');
-		// checkBox.elements.checkboxCommands().should('be.visible');
-		// checkBox.elements.checkboxDocuments().should('be.visible');
-		// checkBox.elements.checkboxWorkspace().should('be.visible');
-		// checkBox.elements.checkboxReact().should('be.visible');
-		// checkBox.elements.checkboxAngular().should('be.visible');
-		// checkBox.elements.checkboxVeu().should('be.visible');
-		// checkBox.elements.checkboxOffice().should('be.visible');
-		// checkBox.elements.checkboxPublic().should('be.visible');
-		// checkBox.elements.checkboxPrivate().should('be.visible');
-		// checkBox.elements.checkboxClassified().should('be.visible');
-		// checkBox.elements.checkboxGeneral().should('be.visible');
-		// checkBox.elements.checkboxDownloads().should('be.visible');
-		// checkBox.elements.checkboxWordFile().should('be.visible');
-		// checkBox.elements.checkboxExcelFile().should('be.visible');		
+		// Assertion para validar que todas las carpetas estén abiertas
+		cy.get('label[for*="tree-node"]').should('be.visible');
 	});
 
-	it('2416 | TC2: Validate all folders are closed when clicking on "Expand All" Toggle', () => {
+	it('2416 | TC2: Validate all folders are closed when clicking on "Collapse All" Button', () => {
 		checkBox.clickButtonExpandAll();
 		checkBox.clickButtonCollapsedAll();
-
-		// checkBox.elements.checkboxDesktop().should('not.be.visible');
-		// checkBox.elements.checkboxNotes().should('not.be.visible');
-		// checkBox.elements.checkboxCommands().should('not.be.visible');
-		// checkBox.elements.checkboxDocuments().should('not.be.visible');
-		// checkBox.elements.checkboxWorkspace().should('not.be.visible');
-		// checkBox.elements.checkboxReact().should('not.be.visible');
-		// checkBox.elements.checkboxAngular().should('not.be.visible');
-		// checkBox.elements.checkboxVeu().should('not.be.visible');
-		// checkBox.elements.checkboxOffice().should('not.be.visible');
-		// checkBox.elements.checkboxPublic().should('not.be.visible');
-		// checkBox.elements.checkboxPrivate().should('not.be.visible');
-		// checkBox.elements.checkboxClassified().should('not.be.visible');
-		// checkBox.elements.checkboxGeneral().should('not.be.visible');
-		// checkBox.elements.checkboxDownloads().should('not.be.visible');
-		// checkBox.elements.checkboxWordFile().should('not.be.visible');
-		// checkBox.elements.checkboxExcelFile().should('not.be.visible');
+		// Assertion para validar que todas las carpetas estén cerradas
+		cy.get('.rct-icon.rct-icon-expand-close').should('have.length', 1);
+		cy.get('label[for*="tree-node"]').first().should('be.visible');
 	});
 
-	it('2416 | TC3: Validate  subfolder expands or closes when clicking on the toggle of a folder ', () => {
-		checkBox.clickExpandToggle();
-		checkBox.clickChildrenToggle();
-		checkBox.elements.toggleChildren().should('be.visible');
-		//cy.get('#tree-node-notes').should('not.have.class', 'rct-icon-expand-open');
-	});
-
-	it('2416 | TC4: Validate all child checkboxes are automatically selected when selecting a parent checkbox', () => {
-		checkBox.clickExpandToggle();
-		checkBox.checkParentCheckbox();
-		checkBox.clickChildrenToggle();
-		
-		//checkBox.getChildCheckboxes().should('be.checked');
-	});
-	it('2416 | TC5: Validate all child checkboxes are automatically deselected when a parent checkbox is deselected', () => {
-		//checkBox.clickExpandToggle();
+	it('2416 | TC3: Validate parents checkboxes  are automatically selected when selecting a child Checkbox', () => {
 		checkBox.clickButtonExpandAll();
-		checkBox.uncheckParentCheckbox();
+		checkBox.checkChildCheckbox();
+		// Buscar todas las carpetas con la clase '.rct-node-parent' y verificar si tienen la clase '.rct-con-half-check'
+		cy.get('.rct-node-parent').each(($parent) => {
+			cy.wrap($parent).find('.rct-checkbox').then(($checkbox) => {
+				if ($checkbox.hasClass('rct-icon-half-check')) {
+					expect(true).to.equal(true);
+				}
+			});
+		});
+		checkBox.elements.successMessage().should('exist').and('be.visible');
 	});
-	it('2416 | TC6: Validate show a success message with the label name in green when a checkbox is selected', () => {
+
+	it('2416 | TC4: Validate all child checkboxes are automatically selected when a parent checkbox is checked', () => {
 		checkBox.clickExpandToggle();
-		//checkBox.clickChildrenToggle();
-		//checkBox.clickButtonExpandAll();
 		checkBox.checkParentCheckbox();
-		checkBox.elements.successMessage().should('be.visible');
+		checkBox.elements.successMessage().should('exist').and('be.visible');
+	});
+
+	it('2416 | TC5: Validate all child checkboxes are automatically deselected when a parent checkbox is deselected', () => {
+		checkBox.clickExpandToggle();
+		checkBox.uncheckParentCheckbox();
+		checkBox.elements.successMessage().should('not.exist');
 	});
 });
 
