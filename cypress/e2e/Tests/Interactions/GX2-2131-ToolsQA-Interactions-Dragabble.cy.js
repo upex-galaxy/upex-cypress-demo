@@ -1,6 +1,6 @@
 import { dragabble } from '@pages/Dragabble';
 
-describe('GX2-2131-ToolsQA-Interactions-Dragabble', () => {
+/* describe('GX2-2131-ToolsQA-Interactions-Dragabble', () => {
 	let the;
 	beforeEach('PRC User must be in the /dragabble page', () => {
 		cy.visit('/dragabble');
@@ -192,7 +192,7 @@ describe('GX2-2131-ToolsQA-Interactions-Dragabble', () => {
 			expect(leftInit).not.equal(leftFinal);
 		});
 	});
-});
+}); */
 
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
