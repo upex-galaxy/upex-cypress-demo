@@ -1,8 +1,8 @@
-import { removeLogs } from '@helper/RemoveLogs';
+/* import { removeLogs } from '@helper/RemoveLogs';
 import { dragabble } from '@pages/Dragabble.Page';
 
-describe('✅ToolsQA | Interactions | Dragabble', () => {
-	/* beforeEach('Precondition: be located in the page', () => {
+describe('✅ToolsQA | Interactions | Dragabble', () => { */
+/* beforeEach('Precondition: be located in the page', () => {
 		//cy.visit('/dragabble');
 		cy.viewport(1920, 1080);
 		cy.visit('/dragabble');
@@ -65,18 +65,18 @@ describe('✅ToolsQA | Interactions | Dragabble', () => {
 		cy.get('body').invoke('css', 'cursor').should('equal', 'auto');
 		dragabble.bottomCursorStyle();
 	});	 */
-	//! Salteamos el test ya que Daniel pidió esto, no se puede hacer la aserción del puntero del mouse.
-	// it.only('2201 | TC8: Validate the cursor will stick to the top left outside of the box and the cursor icon changes to a "+" if dashed box "My cursor is at top left" is displayed on the "Cursor Style" tab', () => {
-	// 	dragabble.elements.cursorStyleTabClick().click();
-	// 	dragabble.topLeftCursorStyle();
-	// 	dragabble.elements.cursorTopLeftSelect().trigger('mousemove')
-	// 		.should(($button) => {
-	// 			const rect = $button[0].getBoundingClientRect(); //saco la ubicación del mouse
-	// 			expect(rect.top).to.equal(0);
-	// 			expect(rect.left).to.equal(0);
-	// 		});
-	// 		.should('have.css', 'cursor', 'crosshair');
-	// });
-});
+//! Salteamos el test ya que Daniel pidió esto, no se puede hacer la aserción del puntero del mouse.
+// it.only('2201 | TC8: Validate the cursor will stick to the top left outside of the box and the cursor icon changes to a "+" if dashed box "My cursor is at top left" is displayed on the "Cursor Style" tab', () => {
+// 	dragabble.elements.cursorStyleTabClick().click();
+// 	dragabble.topLeftCursorStyle();
+// 	dragabble.elements.cursorTopLeftSelect().trigger('mousemove')
+// 		.should(($button) => {
+// 			const rect = $button[0].getBoundingClientRect(); //saco la ubicación del mouse
+// 			expect(rect.top).to.equal(0);
+// 			expect(rect.left).to.equal(0);
+// 		});
+// 		.should('have.css', 'cursor', 'crosshair');
+// });
+/* });
 
-removeLogs();
+removeLogs(); */
