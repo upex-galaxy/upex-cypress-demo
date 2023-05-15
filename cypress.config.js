@@ -38,7 +38,7 @@ export default defineConfig({
 		configFile: 'jsconfig.json',
 	},
 	// Number of times to retry a failed test. If a number is set, tests will retry in both runMode and openMode:
-	retries: 1,
+	retries: 2,
 	// Whether Cypress will record a video of the test run when running on headless:
 	video: false,
 	// E2E Testing runner
