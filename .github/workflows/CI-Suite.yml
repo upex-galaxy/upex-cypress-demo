@@ -70,8 +70,8 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                      npm run file cypress/e2e/Tests/Interactions/GX2-2200-Dragabble.cy.js
-                      
+                      npm run file cypress/e2e/Tests/Elements/GX-15295-TextBox.cy.js
+
             - name: ✅Import Test Results to Xray
               if: always()
               uses: mikepenz/xray-action@v2
@@ -80,9 +80,9 @@ jobs:
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
-                  testExecKey: 'GX2-2202' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
-                  projectKey: 'GX2' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
-                  
+                  testExecKey: 'GX-15297' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+                  projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
+
             - name: 🔧Generate Cucumber HTML Report
               if: always()
               run: |
