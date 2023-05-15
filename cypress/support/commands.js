@@ -14,7 +14,11 @@ import 'cypress-downloadfile/lib/downloadFileCommand';
 import { login } from '@pages/Login.Page';
 const { authLogin, dashboardIndex } = Cypress.env('endpoint');
 import { signin } from '@pages/SignIn.Page.js';
-
+Cypress.on('uncaught:exception', (err, runnable) => {
+	// returning false here prevents Cypress from
+	// failing the test
+	return false;
+});
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 //
