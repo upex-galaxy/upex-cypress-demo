@@ -16,3 +16,5 @@ describe('✅ToolsQA | Elements | Buttons', () => {
 		cy.contains('You have done a dynamic click').should('be.visible');
 	});
 });
+import { removeLogs } from '@helper/RemoveLogs';
+removeLogs();
