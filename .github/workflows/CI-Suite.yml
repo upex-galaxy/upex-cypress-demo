@@ -82,7 +82,6 @@ jobs:
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
                   testExecKey: 'GX2-2305' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
                   projectKey: 'GX2' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
-                  testEnvironments: 'Chrome' #ELEGIR EL AMBIENTE DE PRUEBAS (Igual al TX).
 
             - name: 🔧Generate Cucumber HTML Report
               if: always()
