@@ -1,4 +1,4 @@
-# 🧙🏻‍♂️BIENVENIDO A LOS PIPELINES DE CONTINUOUS INTEGRATION DE "ARI - Hija de Aurora"!
+# 🧙🏻‍♂️BIENVENIDO A LOS PIPELINES DE CONTINUOUS INTEGRATION DE "ARI - Hija de Aurora"!tu ID del TX
 # 🤖Este Pipeline de CI se activa al PUSHEAR, y consiste en ejecutar los tests de una US e importar los resultados a Jira!🚀
 # 👩🏻‍🔬Para utilizar este Pipeline de Ari, sigue los siguientes pasos:
 #     1ro: debes modificar el script: "npm run file" + tu archivo de Prueba Ejecutable (ver ejemplo en este archivo)
@@ -81,7 +81,7 @@ jobs:
                   testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
                   testExecKey: 'GX-17051' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
-                  projectKey: 'GX2' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
+                  projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
 
             - name: 🔧Generate Cucumber HTML Report
               if: always()
