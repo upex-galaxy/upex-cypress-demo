@@ -20,12 +20,16 @@ class brokenLinksImages {
 				const imageWidth = this.width;
 				const imageHeight = this.height;
 
+				/*cy.log(imageWidth);
+				cy.log(imageHeight);*/
+
 				resolve({ width: imageWidth, height: imageHeight, message: 'The Tools QA logo is displayed with the correct dimensions' });
 			};
 			image.onerror = function () {
 				reject(new Error('The Tooling QA logo is NOT shown with the correct dimensions'));
 			};
 			image.src = src;
+			//cy.log(src);
 		});
 	}
 }
