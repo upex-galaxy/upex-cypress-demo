@@ -130,7 +130,7 @@ describe('✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get(the.assertions.CurrentAddress).should('be.visible');
 		});
 	});
-	it.only('17245 | TC11 - Validar formulario completo correctamente con diferente assertions', () => {
+	it('17245 | TC11 - Validar formulario completo correctamente con diferente assertions', () => {
 		cy.fixture('data/formtext.data').then(the => {
 			cy.get(the.input.FullName).type(the.data.FullName);
 			cy.get(the.input.FullName).should('have.value', the.data.FullName);
