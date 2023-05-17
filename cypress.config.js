@@ -62,6 +62,7 @@ export default defineConfig({
 			textBox: 'text-box',
 			selectMenu: '/select-menu',
 			buttons: '/buttons',
+			brokenLinkImg: '/broken',
 		},
 		user: {
 			username: 'upexTesting',
