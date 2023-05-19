@@ -2,8 +2,8 @@ import { datepicker } from './DatePicker.Page';
 
 class DatePicker {
 	get = {
-		firstDateInput: () => cy.get("[id = 'datePickerMonthYearInput']"),
-		secondDateInput: () => cy.get("[id = 'dateAndTimePickerInput']"),
+		firstDateInput: () => cy.get('[id = "datePickerMonthYearInput"]'),
+		secondDateInput: () => cy.get('[id = "dateAndTimePickerInput"]'),
 		yearFirst: () => cy.get('.react-datepicker__year-select'),
 		monthFirst: () => cy.get('.react-datepicker__month-select'),
 		monthFirstSelected: () => cy.get('.react-datepicker__month-select option:selected'),
