@@ -6,6 +6,7 @@ class DatePicker {
 		secondDateInput: () => cy.get('[id = "dateAndTimePickerInput"]'),
 		yearFirst: () => cy.get('.react-datepicker__year-select'),
 		monthFirst: () => cy.get('.react-datepicker__month-select'),
+		weekFirst: () => cy.get("[class='react-datepicker__week']"),
 		monthFirstSelected: () => cy.get('.react-datepicker__month-select option:selected'),
 		previousMonth: () => cy.get("[aria-label = 'Previous Month']"),
 		nextMonth: () => cy.get("[aria-label= 'Next Month']"),
@@ -23,6 +24,9 @@ class DatePicker {
 		onlyYears: () => cy.get('[class$=year-dropdown] [class*=year-option]:not(:first-child):not(:last-child)'),
 		monthSelected: () => cy.get("[class$='selected_month']"),
 		yearSelected: () => cy.get("[class$='selected_year']"),
+		monthFirstArray: () => cy.get("[class ='react-datepicker__month-select'] *"),
+		yearFirstArray: () => cy.get('[class = react-datepicker__year-select] *'),
+		weekFirstArray: () => cy.get("[class='react-datepicker__week'] *"),
 	};
 
 	firstInputDate() {
@@ -166,6 +170,64 @@ class DatePicker {
 				// 	datePicker.get.secondDateInput().click();
 				// 	cy.get('@listHours').eq(random).should('have.text', selectedHour);
 				// });
+			});
+	}
+
+	selectRandomCompleteFirst() {
+		this.get.firstDateInput().click();
+		this.get
+			.monthFirstArray()
+			.its('length')
+			.then(n => Cypress._.random(0, n - 1))
+			.then(random => {
+				this.get.monthFirst().select(random);
+			});
+
+		this.get
+			.yearFirstArray()
+			.its('length')
+			.then(n => Cypress._.random(0, n - 1))
+			.then(random => {
+				this.get.yearFirst().select(random);
+			});
+
+		this.get
+			.weekFirstArray()
+			.its(length)
+			.then(n => Cypress._.random(0, n - 1))
+			.then(random => {
+				this.get.weekFirst().eq(random).click();
+			});
+	}
+
+	selectRandomCompleteSecond() {
+		this.get.secondDateInput().click();
+
+		this.get.monthDropdown().click();
+		this.get
+			.onlyMonths()
+			.its('length')
+			.then(n => Cypress._.random(0, n - 1))
+			.then(random => {
+				this.get.onlyMonths().eq(random).click();
+			});
+
+		this.get.selectYear().click();
+		this.get.yearsDropdown();
+		this.get
+			.onlyYears()
+			.its('length')
+			.then(n => Cypress._.random(0, n - 1))
+			.then(random => {
+				this.get.onlyYears().eq(random).click();
+			});
+
+		this.get
+			.timeOptions()
+			.its('length')
+			.then(n => Cypress._.random(0, n - 1))
+			.then(random => {
+				this.get.timeOptions().eq(random).click();
 			});
 	}
 }

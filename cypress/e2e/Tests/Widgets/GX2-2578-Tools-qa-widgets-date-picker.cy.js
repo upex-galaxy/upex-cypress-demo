@@ -163,6 +163,33 @@ describe('', () => {
 			cy.get('.react-datepicker__time-list').find("[class$='selected']").should('contain', a);
 		});
 	});
+
+	it('TC14: Validate select random date in the select date component', () => {
+		datePicker.selectRandomCompleteFirst();
+
+		datePicker.get.firstDateInput().should('be.visible');
+
+		datePicker.get
+			.firstDateInput()
+			.invoke('val')
+			.then(text => {
+				expect(text).to.match(/^\d{2}\/\d{2}\/\d{4}$/);
+			});
+	});
+
+	it('TC15: Validate select random date in the date an time component', () => {
+		datePicker.selectRandomCompleteSecond();
+
+		datePicker.get.secondDateInput().should('be.visible');
+		datePicker.get
+			.secondDateInput()
+			.invoke('val')
+			.then(text => {
+				expect(text).to.match(
+					/(January|February|March|April|May|June|July|August|September|October|November|December) \d{1,2}, \d{4} \d{1,2}:\d{2} (AM|PM)/
+				);
+			});
+	});
 });
 
 import { removeLogs } from '@helper/RemoveLogs';
