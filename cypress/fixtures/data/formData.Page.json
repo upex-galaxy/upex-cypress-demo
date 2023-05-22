@@ -1,0 +1,16 @@
+{
+	"username": "LeonardoLeikis",
+	"usernameinvacio": "",
+	"currentaddress": "9 de Julio",
+	"currentaddressvacia": "",
+	"permanentaddress": "Las Orquideas 34",
+	"permanentaddressvacia": "",
+	"emailvacio": "",
+	"emailcorrecto": "leonardoleikis@gmail.com",
+	"emailcorrecto2": "leonardol@vvv.com",
+	"emailsinarroba": "leonardoleikisgmail.com",
+	"emailsincaracterbefore": "@gmail.com",
+	"emailsincaracterafter": "leonardoleikis@",
+	"emailcaracterbeforepunto": "leonardoleikis@.",
+	"emailsincaracafterpunto": "leonardoleikis@gmail.c"
+}
