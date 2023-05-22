@@ -17,17 +17,23 @@ describe('GX2-2979 | ToolsQA | Widgets | Date Picker', () => {
 	beforeEach('User must be situated in the website', () => {
 		cy.visit('https://demoqa.com/date-picker');
 	});
-	it('2980 | TC1: Validate the default value of the date is the current day ', () => {
+	it('2980 | TC1: Validate the default value of the date is the current day(Select Date) ', () => {
 		datePicker.getDatePickerValue().then(() => {
 			expect(Cypress.env('date')).to.be.equal(actualDay);
 		});
 	});
-	it('2980 | TC2:Validate the input day format is ${Month}/${Day}/${Year}', () => {
+	it('2980 | TC2: Validate the default value of the date and time is the current day (Date and Time) ', () => {
+		datePicker.getDateAndTimePickerValue().then(() => {
+			cy.wait(600);
+			expect(Cypress.env('dateAndTime')).to.be.equal(actualDateAndTime);
+		});
+	});
+	it('2980 | TC3:Validate the input day format is ${Month}/${Day}/${Year}', () => {
 		datePicker.getDatePickerValue().then(() => {
 			expect(Cypress.env('date')).to.match(/^\d{2}\/\d{2}\/\d{4}$/);
 		});
 	});
-	it('2980 | TC3:Validate the list of years (1900-2100)', () => {
+	it('2980 | TC4:Validate the list of years (1900-2100)', () => {
 		let arrayYear = [];
 		datePicker.clickSelectDatePicker();
 		datePicker.clicklistOfYear();
@@ -45,7 +51,7 @@ describe('GX2-2979 | ToolsQA | Widgets | Date Picker', () => {
 			});
 		});
 	});
-	it('2980 | TC4:Validate the list of months in the year (January-December) / (Selected Date)', () => {
+	it('2980 | TC5:Validate the list of months in the year (January-December) / (Selected Date)', () => {
 		datePicker.clickSelectDatePicker();
 		datePicker.get.monthInput().within(() => {
 			cy.get('option').each(($option, index) => {
@@ -57,7 +63,7 @@ describe('GX2-2979 | ToolsQA | Widgets | Date Picker', () => {
 			});
 		});
 	});
-	it('2980 | TC5:Validate the left arrow button goes to the next month (Selected Date)', () => {
+	it('2980 | TC6:Validate the left arrow button goes to the next month (Selected Date)', () => {
 		datePicker.clickSelectDatePicker();
 		datePicker.clickPreviousMonthDate().then(() => {
 			if (actualMonth === 0) {
@@ -67,7 +73,7 @@ describe('GX2-2979 | ToolsQA | Widgets | Date Picker', () => {
 			}
 		});
 	});
-	it('2980 | TC6:Validate the right arrow button goes to the next month (Selected Date)', () => {
+	it('2980 | TC7:Validate the right arrow button goes to the next month (Selected Date)', () => {
 		datePicker.clickSelectDatePicker();
 		datePicker.clickNextMonthDate().then(() => {
 			if (actualMonth === 0) {
@@ -77,16 +83,13 @@ describe('GX2-2979 | ToolsQA | Widgets | Date Picker', () => {
 			}
 		});
 	});
-	it('2980 | TC7: Validate the input day format is ${Month} ${Day} , ${Year} ${Time} ${acronym for time}', () => {
+
+	it('2980 | TC8: Validate the input day format is ${Month} ${Day} , ${Year} ${Time} ${acronym for time}', () => {
 		datePicker.getDateAndTimePickerValue().then(() => {
 			expect(Cypress.env('dateAndTime')).to.match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{1,2}, \d{4} \d{1,2}:\d{2} (AM|PM)/);
 		});
 	});
-	it('2980 | TC8: Validate the default value of the date and time is the current day ', () => {
-		datePicker.getDateAndTimePickerValue().then(() => {
-			expect(Cypress.env('dateAndTime')).to.be.equal(actualDateAndTime);
-		});
-	});
+
 	it('2980 | TC9: Validate the selected year is marked with a √', () => {
 		datePicker.clickDateAndTimePicker();
 		datePicker.clickYearList();
