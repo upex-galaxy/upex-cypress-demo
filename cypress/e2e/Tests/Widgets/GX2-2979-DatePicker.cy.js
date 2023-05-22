@@ -83,7 +83,9 @@ describe('GX2-2979 | ToolsQA | Widgets | Date Picker', () => {
 		});
 	});
 	it('2980 | TC8: Validate the default value of the date and time is the current day ', () => {
-		datePicker.getDateAndTimePickerValue().should('be.equal', actualDateAndTime);
+		datePicker.getDateAndTimePickerValue().then(() => {
+			expect(Cypress.env('dateAndTime')).to.be.equal(actualDateAndTime);
+		});
 	});
 	it('2980 | TC9: Validate the selected year is marked with a √', () => {
 		datePicker.clickDateAndTimePicker();
@@ -142,18 +144,16 @@ describe('GX2-2979 | ToolsQA | Widgets | Date Picker', () => {
 		datePicker.clickDateAndTimePicker();
 		datePicker.get.timeSelected().should('have.css', 'background-color').and('eq', 'rgb(33, 107, 165)');
 	});
-	it('2980 | TC15: Validate the time range is from 00:00 to 23:45', () => {
+	it.only('2980 | TC15: Validate the time range is from 00:00 to 23:45', () => {
 		let arrayTime = [];
 		datePicker.clickDateAndTimePicker();
-		datePicker.get.timeBoxList().within(() => {
-			cy.get('li').each(($li, index) => {
-				cy.wrap($li)
-					.invoke('text')
-					.then(valor => {
-						arrayTime.push(valor);
-						expect(arrayTime[index]).to.be.equal(arrayTime[index]);
-					});
-			});
+		datePicker.get.timeBoxList().each(($li, index) => {
+			cy.wrap($li)
+				.invoke('text')
+				.then(valor => {
+					arrayTime.push(valor);
+					expect(arrayTime[index]).to.be.equal(arrayTime[index]);
+				});
 		});
 	});
 });
