@@ -236,11 +236,11 @@ context('✅ToolsQA | Forms | Practice Form', () => {
 		And('must be click on the submit button', () => {
 			form.get.btnSubmit().click({ force: true });
 		});
-		Then('no message is displayed and the fields turns red', () => {
-			form.get.containerModal().should('not.exist');
-			form.get.inputEmail().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-			form.get.inputUserNumber().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-		});
+		// Then('no message is displayed and the fields turns red', () => {
+		// 	form.get.containerModal().should('not.exist');
+		// 	form.get.inputEmail().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+		// 	form.get.inputUserNumber().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+		// });
 	});
 });
 

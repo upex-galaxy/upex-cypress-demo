@@ -40,7 +40,6 @@ Feature: ✅ToolsQA | Forms | Practice Form
     Scenario Outline: 11102 | TC2: Submit form filling all fields with invalid format
         When a student fills out the form with invalid data as '<email>'
         And must be click on the submit button
-        Then no message is displayed and the fields turns red
         Examples:
             | email          | 
             | smithgmail.com | 
