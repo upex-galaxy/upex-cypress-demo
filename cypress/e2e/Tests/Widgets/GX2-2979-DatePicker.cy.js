@@ -144,7 +144,7 @@ describe('GX2-2979 | ToolsQA | Widgets | Date Picker', () => {
 		datePicker.clickDateAndTimePicker();
 		datePicker.get.timeSelected().should('have.css', 'background-color').and('eq', 'rgb(33, 107, 165)');
 	});
-	it.only('2980 | TC15: Validate the time range is from 00:00 to 23:45', () => {
+	it('2980 | TC15: Validate the time range is from 00:00 to 23:45', () => {
 		let arrayTime = [];
 		datePicker.clickDateAndTimePicker();
 		datePicker.get.timeBoxList().each(($li, index) => {
