@@ -81,7 +81,7 @@ jobs:
                   testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
                   testExecKey: 'GX2-2981' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
-                  projectKey: 'GX2' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
+                  projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
 
             - name: 🔧Generate Cucumber HTML Report
               if: always()
