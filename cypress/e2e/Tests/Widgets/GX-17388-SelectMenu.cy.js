@@ -15,7 +15,7 @@ describe('✅ToolsQA | Widgets | Dropdown - Select Menu', () => {
 		});
 	});
 
-	it.only('17389 | TC02 - Validar seleccionar una opción de “Group 2” de la lista “Select Value“', () => {
+	it('17389 | TC02 - Validar seleccionar una opción de “Group 2” de la lista “Select Value“', () => {
 		cy.fixture('data/SelectMenu.data').then(the => {
 			cy.get(the.input.SelectValue).click();
 			cy.contains(the.selectValue.ValueGroup2).click();
