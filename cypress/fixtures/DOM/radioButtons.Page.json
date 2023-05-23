@@ -1,0 +1,18 @@
+{
+	"radioButtonURL": "radio-button",
+	"elements": "Elements",
+	"radio": "Radio Button",
+	"radioButtons": {
+		"yesButton": "#yesRadio",
+		"impressiveButton": "#impressiveRadio",
+		"noButton": ".custom-control-input.disabled"
+	},
+	"flag": ".mt-3",
+	"flagMessage": "You have selected",
+	"flagText": ".text-success",
+	"flagMessageOption": {
+		"yes": "Yes",
+		"impressive": "Impressive"
+	},
+	"noDisabled": ".custom-control-input.disabled"
+}

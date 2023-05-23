@@ -27,7 +27,6 @@
 		//! Git Controls:
 		"mhutchie.git-graph",
 		"donjayamanne.githistory",
-		"cschleiden.vscode-github-actions",
 		"eamodio.gitlens",
 		//! General Frameworks:
 		"CucumberOpen.cucumber-official",
