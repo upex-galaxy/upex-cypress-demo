@@ -18,17 +18,18 @@ describe('GX2-2979 | ToolsQA | Widgets | Date Picker', () => {
 	beforeEach('User must be situated in the website', () => {
 		cy.visit('https://demoqa.com/date-picker');
 	});
-	it('2980 | TC1: Validate the default value of the date is the current day(Select Date) ', () => {
-		datePicker.getDatePickerValue().then(() => {
-			expect(Cypress.env('date')).to.be.equal(actualDay);
-		});
-	});
 	it('2980 | TC2: Validate the default value of the date and time is the current day (Date and Time) ', () => {
 		datePicker.getDateAndTimePickerValue().then(() => {
 			cy.wait(600);
 			expect(Cypress.env('dateAndTime')).to.be.equal(actualDateAndTime);
 		});
 	});
+	it('2980 | TC1: Validate the default value of the date is the current day(Select Date) ', () => {
+		datePicker.getDatePickerValue().then(() => {
+			expect(Cypress.env('date')).to.be.equal(actualDay);
+		});
+	});
+
 	it('2980 | TC3:Validate the input day format is ${Month}/${Day}/${Year}', () => {
 		datePicker.getDatePickerValue().then(() => {
 			expect(Cypress.env('date')).to.match(/^\d{2}\/\d{2}\/\d{4}$/);
