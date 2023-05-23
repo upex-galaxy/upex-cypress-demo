@@ -1,6 +1,7 @@
 import { removeLogs } from '@helper/RemoveLogs';
 import { datePicker } from '@pages/GX2-2979-DatePicker/datePickerPage';
 import dayjs from 'dayjs';
+
 removeLogs();
 
 describe('GX2-2979 | ToolsQA | Widgets | Date Picker', () => {
@@ -93,25 +94,35 @@ describe('GX2-2979 | ToolsQA | Widgets | Date Picker', () => {
 	it('2980 | TC9: Validate the selected year is marked with a √', () => {
 		datePicker.clickDateAndTimePicker();
 		datePicker.clickYearList();
-		datePicker.get.yearSelected().should('exist').and('contain', '✓');
+		datePicker.randomIndexYear().then(() => {
+			datePicker.clickYearList();
+			datePicker.get.yearSelected().should('exist').and('contain', '✓');
+		});
 	});
 	it('2980 | TC10:Validate list of months in the year (January-December) and the selected month is marked with a √', () => {
+		let randomMonth = Math.floor(Math.random() * data.months.length);
 		datePicker.clickDateAndTimePicker();
-		datePicker.clickMonthDropdown().within(() => {
-			datePicker.get
-				.monthOptions()
-				.each(($option, index) => {
+		datePicker.clickDateAndTimePicker();
+		datePicker
+			.clickMonthDropdown()
+			.within(() => {
+				datePicker.get.monthOptions().each(($option, index) => {
 					cy.wrap($option)
 						.invoke('text')
 						.then(text => {
 							let splitText = text.split(' ')[0].replace(/✓/g, '');
 							expect(splitText).to.be.equal(data.months[index]);
 						});
-				})
-				.then(() => {
+				});
+			})
+			.find('.react-datepicker__month-option')
+			.eq(randomMonth)
+			.click({ force: true })
+			.then(() => {
+				datePicker.clickMonthDropdown().then(() => {
 					datePicker.get.selectedMonth().should('contain', '✓');
 				});
-		});
+			});
 	});
 	it('2980 | TC11:Validate the left arrow button goes to the next month (Date and Time)', () => {
 		datePicker.clickDateAndTimePicker();

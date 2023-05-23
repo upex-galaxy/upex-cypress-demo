@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 class DatePicker {
 	get = {
 		selectDatePicker: () => cy.get('#datePickerMonthYearInput'),
@@ -116,6 +115,17 @@ class DatePicker {
 						Cypress.env('text', $texto);
 					});
 			});
+	}
+	randomIndexYear() {
+		let indexMin = 1;
+		let indexMax = 12;
+		let randomYear = Math.floor(Math.random() * (indexMax - indexMin) + indexMin);
+		return cy
+			.get('[class*="react-datepicker__year-dropdown-container')
+			.get('.react-datepicker__year-dropdown')
+			.find('.react-datepicker__year-option')
+			.eq(randomYear)
+			.click();
 	}
 }
 
