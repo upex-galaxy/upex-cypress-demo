@@ -43,8 +43,8 @@ describe('✅ToolsQA | Widgets | Dropdown - Select Menu', () => {
 
 	it('17389 | TC05 - Validar seleccionar una opción de la lista “Multiselect drop down“', () => {
 		cy.fixture('data/SelectMenu.data').then(the => {
-			cy.get('.css-2b097c-container').eq(2).click();
-			cy.get('.css-2b097c-container').eq(2).type(the.multiselectDropdown.ValueBlack);
+			cy.get(the.input.MultiselectDropdown).eq(2).click();
+			cy.get(the.input.MultiselectDropdown).eq(2).type(the.multiselectDropdown.ValueBlack);
 
 			cy.get(the.assertions.MultiselectDropdown).should('contain', 'Black');
 		});
@@ -52,8 +52,8 @@ describe('✅ToolsQA | Widgets | Dropdown - Select Menu', () => {
 
 	it('17389 | TC06 - Validar seleccionar todas las opciones de la lista “Multiselect drop down“', () => {
 		cy.fixture('data/SelectMenu.data').then(the => {
-			cy.get('.css-2b097c-container').eq(2).click();
-			cy.get('.css-2b097c-container')
+			cy.get(the.input.MultiselectDropdown).eq(2).click();
+			cy.get(the.input.MultiselectDropdown)
 				.eq(2)
 				.type(the.multiselectDropdown.ValueBlack)
 				.type(the.multiselectDropdown.ValueBlue)

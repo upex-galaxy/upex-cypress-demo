@@ -7,7 +7,7 @@
 		"SelectValue": "#withOptGroup",
 		"SelectOne": "#selectOne",
 		"SelectMenu": "#oldSelectMenu",
-		"MultiselectDropdown": "[.css-tlfecz-indicatorContainer][2]",
+		"MultiselectDropdown": ".css-2b097c-container",
 		"MultiselectStandard": "#cars"
 	},
 	"selectValue": {
