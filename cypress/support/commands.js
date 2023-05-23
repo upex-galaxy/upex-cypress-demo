@@ -34,20 +34,6 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Cypress.Commands.add('SelectMenuPage', function() {
-
-	cy.fixture('data/fxt-16717-dropdown').then( fxt => {
-            
-        this.fxt = fxt
-        cy.intercept({ resourceType : /xhr|fetch/ }, { log : false })
-        cy.visit('/' + this.fxt.endpoint);
-            
-	})
-	
-})
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 Cypress.Commands.add('Login', (username, password) => {
 	cy.session('login', () => {
 		cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php');
