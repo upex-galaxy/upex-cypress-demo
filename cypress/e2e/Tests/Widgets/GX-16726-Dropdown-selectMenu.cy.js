@@ -7,7 +7,7 @@ describe('✅ToolsQA | Widgets | Dropdown - Select Menu', () => {
 	});
 
 	// -- Start: Cypress Tests --
-	it.skip('16727 | TC1: Validate User can select an option from either Group 1 or Group 2 in the Select Value Dropdown', () => {
+	it('16727 | TC1: Validate User can select an option from either Group 1 or Group 2 in the Select Value Dropdown', () => {
 		Dropdowns.SelectValue();
 	});
 	it('16727 | TC2: Validate User can select any option from the Select One Dropdown', () => {

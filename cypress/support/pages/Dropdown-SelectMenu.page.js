@@ -5,20 +5,28 @@ class Dropdown {
 		Cars: () => cy.get('#cars'),
 		MultiColor: () => cy.get('.css-1hwfws3').eq(2),
 		$arrayColor: () => cy.get('.css-26l3qy-menu'),
-		$arrayValue: () => cy.get('.css-26l3qy-menu'),
+		$Value: () => cy.get('.css-26l3qy-menu'),
 		Title: () => cy.get('#selectOne'),
 		TitleList: () => cy.get('div [id*="react-select-3-option-0"]'),
 		FirstValue: () => cy.get('#withOptGroup'),
+		ValueGroup1: () => cy.get('#react-select-2-option-0-1'),
+		ValueGroup2: () => cy.get('#react-select-2-option-1-1'),
 	};
 
 	SelectValue() {
 		this.get.FirstValue().click();
-		// this.get.$arrayValue();
+		this.get.$Value();
+		this.get.ValueGroup1().click();
+		this.get.FirstValue().should('contain', 'Group 1, option 2');
+
+		this.get.FirstValue().click();
+		this.get.$Value();
+		this.get.ValueGroup2().click();
+		this.get.FirstValue().should('contain', 'Group 2, option 2');
 	}
 
 	SelectOne() {
 		this.get.Title().click();
-		// this.get.TitleList().select(4);
 
 		this.get.TitleList().then($list => {
 			const Amount = $list.length;
