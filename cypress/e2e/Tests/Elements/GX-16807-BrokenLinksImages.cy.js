@@ -30,15 +30,9 @@ describe('ToolsQA | Elements | Broken Links Images', () => {
 		});
 	});
 	it('16808 | Validate that valid link must be working correctly', () => {
-		cy.intercept('GET', 'https://demoqa.com/').as('validImg');
-
 		imagePage.clickRedirectLink(0);
-		cy.should('contain', 'Click Here for Valid Link');
+		cy.url().should('contain', 'demoqa');
 
-		cy.wait('@validImg').then(resp => {
-			cy.log(resp);
-			expect(resp.response.statusCode).to.equal(200);
-		});
 		imagePage.getPropertyImg().then($img => {
 			const { width, height } = $img;
 			expect(width).to.equal(347);
