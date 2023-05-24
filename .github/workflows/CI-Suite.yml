@@ -83,6 +83,7 @@ jobs:
                   testExecKey: 'GX-17051' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
                   projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
 
+
             - name: 🔧Generate Cucumber HTML Report
               if: always()
               run: |
@@ -110,3 +111,6 @@ jobs:
                   SLACK_MESSAGE: ':test_tube: Tests run in ToolsQA: User Story Test Execution is Done and updated in Jira :rocket:'
                   SLACK_COLOR: ${{ job.status }}
                   SLACK_ICON: https://i.imgur.com/q9kvQCp_d.webp?maxwidth=760&fidelity=grand
+
+
+
