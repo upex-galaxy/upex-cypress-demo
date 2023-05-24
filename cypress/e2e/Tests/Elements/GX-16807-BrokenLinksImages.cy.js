@@ -3,11 +3,15 @@ const brokenLinkImgPage = Cypress.env('endpoint').brokenLinkImg;
 
 describe('ToolsQA | Elements | Broken Links Images', () => {
 	beforeEach('PRC:', () => {
-		cy.visit(brokenLinkImgPage);
-		cy.url().should('contain', brokenLinkImgPage);
+		Cypress.config('Browser', 'electron');
+		/*cy.visit(brokenLinkImgPage);
+		cy.url().should('contain', brokenLinkImgPage);*/
 	});
 	// -- Start: Cypress Tests --
 	it('16808 | Validate that the Tools QA logo must be displayed correctly', () => {
+		cy.visit(brokenLinkImgPage);
+		cy.url().should('contain', brokenLinkImgPage);
+
 		imagePage.getNameImg(0).then(name => {
 			// Make assertions to extract the name of the img
 			expect(name).to.equal('Toolsqa.jpg');
@@ -20,6 +24,9 @@ describe('ToolsQA | Elements | Broken Links Images', () => {
 		});
 	});
 	it('16808 | Validate that a broken image icon should appear', () => {
+		cy.visit(brokenLinkImgPage);
+		cy.url().should('contain', brokenLinkImgPage);
+
 		imagePage.getNameImg(1).then(name => {
 			expect(name).to.equal('Toolsqa_1.jpg');
 		});
@@ -30,6 +37,9 @@ describe('ToolsQA | Elements | Broken Links Images', () => {
 		});
 	});
 	it('16808 | Validate that valid link must be working correctly', () => {
+		cy.visit(brokenLinkImgPage);
+		cy.url().should('contain', brokenLinkImgPage);
+
 		imagePage.clickRedirectLink(0);
 		cy.url().should('contain', 'demoqa');
 
@@ -40,6 +50,9 @@ describe('ToolsQA | Elements | Broken Links Images', () => {
 		});
 	});
 	it('16808 | Validate that invalid link must go to a webpage showing a 500 status code', () => {
+		cy.visit(brokenLinkImgPage);
+		cy.url().should('contain', brokenLinkImgPage);
+
 		cy.intercept('GET', 'http://the-internet.herokuapp.com/status_codes/500').as('invalidImg');
 
 		imagePage.clickRedirectLink(1);
