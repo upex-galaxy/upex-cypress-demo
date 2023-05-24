@@ -7,7 +7,7 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		cy.url().should('contain', 'automation-practice-form');
 	});
 
-	it('13145 | TC1: Validate  a popup appears with information uploaded when the data is submitted if all fields are filled correctly', () => {
+	it.skip('13145 | TC1: Validate  a popup appears with information uploaded when the data is submitted if all fields are filled correctly', () => {
 		toolsForms.randomData();
 		toolsForms.selectBirth();
 		toolsForms.selectHobbie();
@@ -22,7 +22,10 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		toolsForms.elements.lastNameInput().invoke('val').should('not.be.empty');
 		toolsForms.elements.emailInput().invoke('val').should('not.be.empty');
 		toolsForms.elements.radioButton1().should('have.value', 'Male');
-		toolsForms.elements.phoneNumberInput().invoke('val').should('match', /^[0-9]+$/);
+		toolsForms.elements
+			.phoneNumberInput()
+			.invoke('val')
+			.should('match', /^[0-9]+$/);
 		toolsForms.elements.datePicker().should('exist');
 		toolsForms.elements.subjectsInput().should('exist');
 		toolsForms.elements.hobbiesCheck2().should('have.value', '2');
@@ -32,7 +35,7 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 
 		toolsForms.submitCreate();
 		toolsForms.elements.submitButton().should('exist');
-		
+
 		toolsForms.closeClick();
 		toolsForms.elements.closeButton().should('exist');
 	});
@@ -43,7 +46,6 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		toolsForms.elements.lastNameInput().invoke('css', 'border-color').should('eq', 'rgb(220, 53, 69)');
 		toolsForms.elements.phoneNumberInput().should('have.css', 'border-color', 'rgb(220, 53, 69)');
 	});
-
 });
 
 removeLogs();

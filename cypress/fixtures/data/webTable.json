@@ -1,0 +1,41 @@
+{
+    "URL":"https://demoqa.com/webtables",
+
+    "endpoint":"/webtables",
+
+    "First_name":{
+        "invalid":"15",
+        "UserPostDeleted":"Cierra"
+    },
+    "Last_name":{
+        "invalid":"23"
+    },
+    "email": {
+        "invalid1": "",
+        "invalid2": "Myemail10gmail.com",
+        "invalid3": "Myemail10@gmailcom",
+        "NewEmail":"MynuevoEmail7@gmail.com"
+    },
+        
+    "Age":{
+        "invalid":"N"
+    },
+    "Salary":{
+        "invalid":"TresBillon"
+    },
+    "Deparment":{
+        "invalid":"41"
+    },
+    "TypeSeachBar":{
+        "value":"Kie"
+    },
+    "SelectNumber":{
+        "Row5":"5",
+        "Row10":"10",
+        "Row20":"20",
+        "Row25":"25",
+        "Row50":"50",
+        "Row100":"100"
+    }
+
+}
