@@ -3,11 +3,11 @@
 	"stepDefinitions": "cypress/e2e/cucumber-test/stepDefinitions/*.{js,ts}",
 	"json": {
 		"enabled": false,
-		"formatter": "./cucumber-formatter/cucumber-json-formatter.exe",
+		"formatter": "./cucumber-formatter/cucumber-json-formatter",
 		"output": "./reports/cucumber-report.json"
 	},
 	"messages": {
-		"enabled": true,
+		"enabled": false,
 		"output": "./reports/cucumber-messages.ndjson"
 	}
 }
