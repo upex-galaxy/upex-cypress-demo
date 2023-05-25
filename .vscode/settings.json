@@ -68,5 +68,4 @@
 	"cucumberautocomplete.stepRegExSymbol": "'",
 	"git.enableSmartCommit": true,
 	"githubPullRequests.ignoredPullRequestBranches": ["main"],
-	"cSpell.words": ["clicklist"]
-}
+	}
