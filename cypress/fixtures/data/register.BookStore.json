@@ -1,0 +1,29 @@
+{
+	"mainpage": "https://demoqa.com/register",
+
+	"input": {
+		"Firstname": "#firstname",
+		"Lastname": "#lastname",
+		"Username": "#userName",
+		"Password": "#password",
+		"Captcha": ".recaptcha-checkbox-border",
+		"Register": "#register",
+		"BacktoLogin": "#gotologin"
+	},
+
+	"data": {
+		"Firstname": "roman",
+		"Lastname": "fenoy",
+		"Username": "romanfenoy",
+		"Password": "Romanfenoy1234!",
+		"PasswordNoNumbers": "Romanfenoy!",
+		"PasswordNoLetters": "12345678!",
+		"PasswordNoMayus": "romanfenoy123!",
+		"PasswordNoSpecialCharacter": "Romanfenoy1234",
+		"PasswordFewCharacter": "Rf123!"
+	},
+
+	"assertions": {
+		"web": "register"
+	}
+}
