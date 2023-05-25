@@ -15,7 +15,9 @@ describe('GX2-3105 |ToolsQA | Interactions | Droppable', () => {
 		droppable.get.revertableTab().should('exist').and('be.visible');
 	});
 	it('3106 | TC2: Validate Tab “Simple” is displayed by default. and only one tab is displayed at once.', () => {
-		droppable.get.tabList().within(() => {});
+		droppable.get.tabList().within(() => {
+			droppable.get.simpleTab().should('not.be.disabled').and('have.attr', 'aria-selected', 'true').and('have.class', 'active');
+		});
 	});
 
 	it('3106 | TC3: Validate "Drag me" area is dropped on the “Drop here” area, changes the background color to blue and text “Dropped!” is displayed.', () => {
@@ -25,23 +27,20 @@ describe('GX2-3105 |ToolsQA | Interactions | Droppable', () => {
 		droppable.get
 			.simpleContainer()
 			.within(() => {
-				droppable.get.dragArea().drag(droppable.get.dropArea, {
+				droppable.get.dragArea().drag('#droppable', {
 					force: true,
 				});
 			})
 			.then(() => {
-				droppable.get.simpleContainer().within(() => {
-					droppable.get.dropArea().should('have.css', 'background-color', 'rgb(70, 130, 180)').and('have.text', 'Dropped!');
-				});
+				droppable.get.dropArea().should('have.css', 'background-color', 'rgb(70, 130, 180)').and('have.text', 'Dropped!');
 			});
 	});
 	it('3106 | TC4: Validate "accept tab" components', () => {
-		droppable.clickAcceptTab().then(() => {
-			droppable.get.acceptContainer().within(() => {
-				droppable.get.dropArea().should('be.visible');
-				droppable.get.acceptableArea().should('be.visible');
-				droppable.get.notAcceptableArea().should('be.visible');
-			});
+		droppable.clickAcceptTab();
+		droppable.get.acceptContainer().within(() => {
+			droppable.get.dropArea().should('be.visible');
+			droppable.get.acceptableArea().should('be.visible');
+			droppable.get.notAcceptableArea().should('be.visible');
 		});
 	});
 	it('3106 | TC5: Validate “Acceptable” area is dragged and “Drop here” area changes the background color to Green.', () => {
@@ -99,7 +98,7 @@ describe('GX2-3105 |ToolsQA | Interactions | Droppable', () => {
 				});
 			});
 	});
-	it('3106 | TC8: Validate “Drag me” area is dragged to “Inner droppable (greedy)” area and its area changes the background color to Light Green.', () => {
+	it('3106 | TC9: Validate “Drag me” area is dragged to “Inner droppable (greedy)” area and its area changes the background color to Light Green.', () => {
 		droppable.clickPreventTab();
 		droppable
 			.moveDragBoxToGreedyArea()
@@ -110,7 +109,7 @@ describe('GX2-3105 |ToolsQA | Interactions | Droppable', () => {
 				});
 			});
 	});
-	it('3106 | TC8: Validate components within the “Revert Draggable” tab.', () => {
+	it('3106 | TC10: Validate components within the “Revert Draggable” tab.', () => {
 		droppable.clickRevertableTab();
 		droppable.get.revertableContainer().within(() => {
 			droppable.get.revertableArea().should('be.visible');
@@ -118,7 +117,7 @@ describe('GX2-3105 |ToolsQA | Interactions | Droppable', () => {
 			droppable.get.dropArea().should('be.visible');
 		});
 	});
-	it('3106 | TC9: Validate “Will Revert” area or “Not Revert” area is dragged and “Drop here” area changes the background color to Green.', () => {
+	it('3106 | TC11: Validate “Will Revert” area or “Not Revert” area is dragged and “Drop here” area changes the background color to Green.', () => {
 		droppable.clickRevertableTab();
 		droppable
 			.moveRevertableArea()
@@ -137,7 +136,7 @@ describe('GX2-3105 |ToolsQA | Interactions | Droppable', () => {
 				});
 			});
 	});
-	it('3106 | TC10: Validate “Will Revert” area is dropped on the “Drop here” area, goes back to the initial position, “Drop here” area changes the background color to Blue and text “Dropped” is displayed.', () => {
+	it('3106 | TC12: Validate “Will Revert” area is dropped on the “Drop here” area, goes back to the initial position, “Drop here” area changes the background color to Blue and text “Dropped” is displayed.', () => {
 		droppable.clickRevertableTab();
 		droppable.get
 			.revertableContainer()
@@ -155,7 +154,7 @@ describe('GX2-3105 |ToolsQA | Interactions | Droppable', () => {
 				});
 			});
 	});
-	it.only('3106 | TC11: Validate "Not Revert" area is dropped on the “Drop here” area, can not be removed, “Drop here” area changes the background color to Blue and text “Dropped” is displayed', () => {
+	it('3106 | TC13: Validate "Not Revert" area is dropped on the “Drop here” area, can not be removed, “Drop here” area changes the background color to Blue and text “Dropped” is displayed', () => {
 		droppable.clickRevertableTab();
 		droppable.get
 			.revertableContainer()
@@ -163,6 +162,13 @@ describe('GX2-3105 |ToolsQA | Interactions | Droppable', () => {
 				droppable.get.notRevertableArea().drag('#droppable', {
 					force: true,
 				});
+			})
+			.then(() => {
+				droppable.get
+					.notRevertableArea()
+					.move({ deltaX: -5, deltaY: 102 })
+					.should('have.css', 'left', '249px')
+					.and('have.css', 'top', '-17px');
 			})
 			.then(() => {
 				droppable.get.revertableContainer().within(() => {

@@ -58,9 +58,8 @@ class Droppable {
 	moveNotRevertableArea() {
 		return droppable.get
 			.notRevertableArea()
-			.trigger('mousedown', { which: 1, pageX: 50, pageY: 30 })
+			.trigger('mousedown', { which: 1, pageX: 249, pageY: -17 })
 			.trigger('mousemove', { which: 1, pageX: 100, pageY: 30 });
-    }
-    
+	}
 }
 export const droppable = new Droppable();
