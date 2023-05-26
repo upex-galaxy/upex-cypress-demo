@@ -42,7 +42,8 @@ jobs:
 
             - name: 🔧Install Cucumber-Formatter
               run: |
-                  c
+                  mv cucumber-formatter/cucumber-json-formatter-linux-amd64 cucumber-formatter/cucumber-json-formatter
+                  chmod +x cucumber-formatter/cucumber-json-formatter
 
             - name: 🔌Cucumber Preprocessor JSON Setup
               uses: DamianReeves/write-file-action@master
@@ -82,7 +83,6 @@ jobs:
                   testExecKey: 'GX-18632' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
                   projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
 
-
             - name: 🔧Generate Cucumber HTML Report
               if: always()
               run: |
@@ -110,6 +110,3 @@ jobs:
                   SLACK_MESSAGE: ':test_tube: Tests run in ToolsQA: User Story Test Execution is Done and updated in Jira :rocket:'
                   SLACK_COLOR: ${{ job.status }}
                   SLACK_ICON: https://i.imgur.com/q9kvQCp_d.webp?maxwidth=760&fidelity=grand
-
-
-
