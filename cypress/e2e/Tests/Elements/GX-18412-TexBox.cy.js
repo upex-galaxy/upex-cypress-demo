@@ -4,9 +4,13 @@ describe('GX 18412 : ToolsQA | Elements | Text Box: Fill form and Submit', () =>
 	});
 	it('18413 | TC1: Validar completar formulario con todos los campos completos', () => {
 		cy.get('#userName').type('Barby');
+		cy.get('#userName').should('have.value', 'Barby');
 		cy.get('#userEmail').type('bar@gmail.com');
+		cy.get('#userEmail').should('have.value', 'bar@gmail.com');
 		cy.get('#currentAddress').type('Av Congreso');
+		cy.get('#currentAddress').should('have.value', 'Av Congreso');
 		cy.get('#permanentAddress').type('Villa Urquiza 5234');
+		cy.get('#permanentAddress').should('have.value', 'Villa Urquiza 5234');
 		cy.get('#submit').click();
 		//verificaciones
 		cy.get('p#name.mb-1').should('contain', 'Barby');
@@ -76,3 +80,6 @@ describe('GX 18412 : ToolsQA | Elements | Text Box: Fill form and Submit', () =>
 		cy.get('#submit').click();
 	});
 });
+
+import { removeLogs } from '@helper/RemoveLogs';
+removeLogs();
