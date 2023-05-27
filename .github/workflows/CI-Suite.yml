@@ -1,4 +1,4 @@
-# 🧙🏻‍♂️BIENVENIDO A LOS PIPELINES DE CONTINUOUS INTEGRATION DE "ARI - Hija de Aurora"!
+# 🧙🏻‍♂️BIENVENIDO A LOS PIPELINES DE CONTINUOUS INTEGRATION DE "ARI - Hija de Aurora"!tu ID del TX
 # 🤖Este Pipeline de CI se activa al PUSHEAR, y consiste en ejecutar los tests de una US e importar los resultados a Jira!🚀
 # 👩🏻‍🔬Para utilizar este Pipeline de Ari, sigue los siguientes pasos:
 #     1ro: debes modificar el script: "npm run file" + tu archivo de Prueba Ejecutable (ver ejemplo en este archivo)
