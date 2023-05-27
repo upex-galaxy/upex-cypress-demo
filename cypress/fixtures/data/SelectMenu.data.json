@@ -1,0 +1,48 @@
+{
+	"url": {
+		"MainUrl": "https://demoqa.com/select-menu"
+	},
+
+	"input": {
+		"SelectValue": "#withOptGroup",
+		"SelectOne": "#selectOne",
+		"SelectMenu": "#oldSelectMenu",
+		"MultiselectDropdown": ".css-2b097c-container",
+		"MultiselectStandard": "#cars"
+	},
+	"selectValue": {
+		"ValueGroup1": "Group 1, option 2",
+		"ValueGroup2": "Group 2, option 1"
+	},
+	"selectOne": {
+		"Value": "Prof."
+	},
+	"selectMenu": {
+		"ValueBlack": "[value='5']"
+	},
+	"multiselectDropdown": {
+		"ValueGreen": "Green{enter}",
+		"ValueBlue": "Blue{enter}",
+		"ValueBlack": "Black{enter}",
+		"ValueRed": "Red{enter}"
+	},
+	"multiselectStandard": {
+		"ValueVolvo": "volvo",
+		"ValueSaab": "saab",
+		"ValueOpel": "opel",
+		"ValueAudi": "audi"
+	},
+
+	"assertions": {
+		"SelectValue": "#withOptGroup",
+		"SelectOne": "#selectOne",
+		"SelectMenu": "#oldSelectMenu",
+		"MultiselectDropdown": ".css-1hwfws3",
+		"MultiselectStandard": {
+			"ValueVolvo": "Volvo",
+			"ValueSaab": "Saab",
+			"ValueOpel": "Opel",
+			"ValueAudi": "Audi"
+		}
+	}
+}
