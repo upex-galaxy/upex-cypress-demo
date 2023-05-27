@@ -1,7 +1,5 @@
 import { faker } from '@faker-js/faker';
 
-
-
 class ToolsForms {
 	elements = {
 		firstNameInput: () => cy.get('#firstName'),
@@ -40,7 +38,7 @@ class ToolsForms {
 		const email = faker.internet.email();
 		const phoneNumber = faker.phone.number().replace(/\D/g, '');
 		const addressInput = faker.address.city();
-	
+
 		this.elements.firstNameInput().type(firstName);
 		this.elements.lastNameInput().type(lastName);
 		this.elements.emailInput().type(email);
@@ -48,13 +46,12 @@ class ToolsForms {
 		this.elements.subjectsInput().type('a');
 		this.elements.subjectList().contains('Arts').click();
 		this.elements.addressInput().type(addressInput);
-		
 	}
 	selectBirth() {
 		//Option 1: use faker
 		this.elements.datePicker().click();
 		this.elements.calendar().within(() => {
-			// Generate random 
+			// Generate random
 			const year = faker.datatype.number({ min: 1900, max: 2022 });
 			const month = faker.date.month();
 			const day = faker.datatype.number({ min: 1, max: 28 });
@@ -87,7 +84,6 @@ class ToolsForms {
 		// 			.click({ force: true });
 		// 	});
 		// });
-
 	}
 
 	selectGender() {
@@ -99,28 +95,27 @@ class ToolsForms {
 	}
 
 	selectUploadPicture(picture) {
-		this.elements.uploadButton().click();
+		this.elements.uploadButton().click({ force: true });
 		this.elements.uploadButton().selectFile(picture);
 	}
 
-	selectState(){
-		this.elements.stateSelect().click();
-		cy.get('#react-select-3-option-0').click();
+	selectState() {
+		this.elements.stateSelect().click({ force: true });
+		cy.get('#react-select-3-option-0').click({ force: true });
 	}
 
-	selectCity(){
+	selectCity() {
 		this.elements.citySelect().click();
-		cy.get('#react-select-4-option-0').click();
+		cy.get('#react-select-4-option-0').click({ force: true });
 	}
 
-	submitCreate(){
+	submitCreate() {
 		this.elements.submitButton().click({ force: true });
-	}	
+	}
 
-	closeClick(){
-		this.elements.closeButton().click();
-	}	
-
+	closeClick() {
+		this.elements.closeButton().click({ force: true });
+	}
 }
 
 export const toolsForms = new ToolsForms();

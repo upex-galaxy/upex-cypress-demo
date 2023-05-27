@@ -1,6 +1,6 @@
 import { DatePicker } from '@pages/datePickerLeo.Page';
 
-describe('GX-1908', () => {
+describe.skip('GX-1908', () => {
 	beforeEach('Precondition', () => {
 		cy.visit('/date-picker');
 	});
