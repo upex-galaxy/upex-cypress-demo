@@ -44,7 +44,7 @@ jobs:
               run: |
                   mv cucumber-formatter/cucumber-json-formatter-linux-amd64 cucumber-formatter/cucumber-json-formatter
                   chmod +x cucumber-formatter/cucumber-json-formatter
-                  apt-get install upower -y
+
             - name: 🔌Cucumber Preprocessor JSON Setup
               uses: DamianReeves/write-file-action@master
               with:
