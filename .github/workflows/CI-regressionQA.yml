@@ -10,6 +10,7 @@ on:
     push:
         branches:
             - QA
+            - main
 
 jobs:
     RegressionTest:
@@ -25,10 +26,15 @@ jobs:
               with:
                   node-version: 16
 
+            - name: 💿Yarn Setup
+              uses: DerYeger/yarn-setup-action@master
+              with:
+                  node-version: 16
+
             - name: 🧬Install All Dependencies
               run: |
-                  npm ci
-                  npm list
+                  yarn
+                  yarn list
 
             - name: 🔌Cucumber Preprocessor JSON Setup
               uses: DamianReeves/write-file-action@master
@@ -55,12 +61,12 @@ jobs:
               with:
                   browser: chrome
                   command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
-                      npm run regression
+                      yarn regression
 
             - name: 📬Generate XML Regression Report
               if: always()
               run: |
-                  npm run report:xml
+                  yarn report:xml
 
             - name: ✅Import Test Results to Xray
               if: always()
@@ -88,58 +94,17 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: 💻Checkout
-              uses: actions/checkout@v3
-
-            - name: 💿Install Node.js
-              uses: actions/setup-node@v3
-              with:
-                  node-version: 16
-
-            - name: 🧬Install All Dependencies
-              run: |
-                  npm ci
-                  npm list
-
-            - name: 🔌Cucumber Preprocessor JSON Setup
-              uses: DamianReeves/write-file-action@master
-              with:
-                  write-mode: overwrite
-                  path: .cypress-cucumber-preprocessorrc.json
-                  contents: |
-                      {
-                        "nonGlobalStepDefinitions": true,
-                        "stepDefinitions": "cypress/e2e/cucumber-test/stepDefinitions/*.{js,ts}",
-                        "json": {
-                          "enabled": false,
-                          "formatter": "./cucumber-formatter/cucumber-json-formatter",
-                          "output": "./reports/cucumber-report.json"
-                        },
-                        "messages": {
-                          "enabled": false,
-                          "output": "./reports/cucumber-messages.ndjson"
-                        }
-                      }
-
-            - name: 🧪VERIFICATION Cypress E2E Regression Test in Chrome
-              uses: cypress-io/github-action@v4
-              with:
-                  browser: chrome
-                  command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
-                      npm run regression:report
-
-            - name: 📬Generate HTML Regression Report
+            - name: 📬Generate Allure Regression Report
               if: always()
               run: |
-                  npm run report:json
-                  npm run report:html
+                  npm run allure:ci
 
-            - name: 📊Upload Artifact HTML Report
+            - name: 📊Upload Artifact Allure
               if: always()
               uses: actions/upload-artifact@v3
               with:
-                  name: regression-test-report
-                  path: mochawesome-report
+                  name: regression-allure-report
+                  path: reports/allure-report
 
     Create-PullRequest:
         needs: [RegressionTest, Regression-ArtifactReport]

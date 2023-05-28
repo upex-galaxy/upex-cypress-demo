@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
-		"types": ["cypress", "cypress-file-upload", "cypress-xpath", "cypress-downloadfile", "cypress-plugin-api"],
+		"esModuleInterop": true,
+		"types": ["cypress", "cypress-file-upload", "cypress-xpath", "cypress-downloadfile", "cypress-plugin-api", "@shelex/cypress-allure-plugin"],
 		"paths": {
 			"@pages/*": ["./cypress/support/pages/*"],
 			"@helper/*": ["./cypress/support/helper/*"],

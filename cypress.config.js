@@ -4,6 +4,7 @@ import pkg from '@badeball/cypress-cucumber-preprocessor';
 const { addCucumberPreprocessorPlugin } = pkg;
 import { createEsbuildPlugin } from '@badeball/cypress-cucumber-preprocessor/esbuild.js';
 import { downloadFile } from 'cypress-downloadfile/lib/addPlugin.js';
+import allureWriter from '@shelex/cypress-allure-plugin/writer';
 
 async function setupNodeEvents(on, config) {
 	// This is required for the preprocessor to be able to generate JSON reports after each run, and more,
@@ -17,6 +18,7 @@ async function setupNodeEvents(on, config) {
 			plugins: [createEsbuildPlugin(config)],
 		})
 	);
+	allureWriter(on, config);
 
 	// Make sure to return the config object as it might have been modified by the plugin.
 	return config;
@@ -50,25 +52,8 @@ export default defineConfig({
 		baseUrl: 'https://demoqa.com',
 	},
 	env: {
-		AdminUser: {
-			username: 'Admin',
-			password: 'admin123',
-		},
-		endpoint: {
-			authLogin: '/auth/login',
-			dashboardIndex: '/dashboard/index',
-			signUp: 'https://coderbyte.com/sl',
-			radioButton: '/radio-button',
-			textBox: 'text-box',
-			selectMenu: '/select-menu',
-			buttons: '/buttons',
-			brokenLinkImg: '/broken',
-			selectable: '/selectable',
-		},
-		user: {
-			username: 'upexTesting',
-			email: 'sai@upextesting.com',
-			password: '1234567',
-		},
+		allure: true,
+		allureReuseAfterSpec: true,
+		allureResultsPath: 'reports/allure-results',
 	},
 });
