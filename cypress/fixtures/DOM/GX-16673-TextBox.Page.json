@@ -1,0 +1,22 @@
+{
+	"input": {
+		"namebox": "#userName",
+		"emailbox": "#userEmail",
+		"currentbox": "#currentAddress",
+		"permanentbox": "#permanentAddress"
+	},
+
+	"button": {
+		"submitbutton": "#submit"
+	},
+
+	"data": {
+		"validname": "Maria Belen",
+		"validemail": "belleloweryart@gmail.com",
+		"validcurrent": "Dorrego 400",
+		"validpermanent": "Dorrego 400",
+		"invalid": "",
+		"invalidemail": "1",
+		"textbox": ".border.col-md-12.col-sm-12"
+	}
+}
