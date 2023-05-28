@@ -10,7 +10,6 @@ on:
     push:
         branches:
             - QA
-            - main
 
 jobs:
     RegressionTest:
@@ -34,7 +33,6 @@ jobs:
             - name: 🧬Install All Dependencies
               run: |
                   yarn
-                  yarn list
 
             - name: 🔌Cucumber Preprocessor JSON Setup
               uses: DamianReeves/write-file-action@master
@@ -79,6 +77,18 @@ jobs:
                   testExecKey: 'GX-3704' #todo: ToolsQA Regression Test Plan TX
                   projectKey: 'GX' #todo: UPEX LEVEL 1
 
+            - name: 📬Generate Allure Regression Report
+              if: always()
+              run: |
+                  yarn allure:ci
+
+            - name: 📊Upload Artifact Allure
+              if: always()
+              uses: actions/upload-artifact@v3
+              with:
+                  name: regression-allure-report
+                  path: reports/allure-report
+
             - name: 🔔Slack Notification of Done
               if: always()
               uses: rtCamp/action-slack-notify@v2.2.0
@@ -89,25 +99,8 @@ jobs:
                   SLACK_COLOR: ${{ job.status }}
                   SLACK_ICON: https://i.imgur.com/q9kvQCp_d.webp?maxwidth=760&fidelity=grand
 
-    Regression-ArtifactReport:
-        name: report
-        runs-on: ubuntu-latest
-
-        steps:
-            - name: 📬Generate Allure Regression Report
-              if: always()
-              run: |
-                  npm run allure:ci
-
-            - name: 📊Upload Artifact Allure
-              if: always()
-              uses: actions/upload-artifact@v3
-              with:
-                  name: regression-allure-report
-                  path: reports/allure-report
-
     Create-PullRequest:
-        needs: [RegressionTest, Regression-ArtifactReport]
+        needs: [RegressionTest]
         runs-on: ubuntu-latest
         steps:
             - name: Create Pull Request
