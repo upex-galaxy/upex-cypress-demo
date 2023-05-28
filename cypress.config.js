@@ -38,7 +38,7 @@ export default defineConfig({
 		configFile: 'jsconfig.json',
 	},
 	// Number of times to retry a failed test. If a number is set, tests will retry in both runMode and openMode:
-	retries: 2,
+	retries: process.env.CI ? 2 : 0,
 	// Whether Cypress will record a video of the test run when running on headless:
 	video: false,
 	// E2E Testing runner
@@ -47,7 +47,28 @@ export default defineConfig({
 		specPattern: ['cypress/e2e/cucumber-test/Gherkin/*.feature', 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
 		// Use Cypress plugins:
 		setupNodeEvents,
-		baseUrl: 'https://demoqa.com/',
+		baseUrl: 'https://demoqa.com',
 	},
-	env: {},
+	env: {
+		AdminUser: {
+			username: 'Admin',
+			password: 'admin123',
+		},
+		endpoint: {
+			authLogin: '/auth/login',
+			dashboardIndex: '/dashboard/index',
+			signUp: 'https://coderbyte.com/sl',
+			radioButton: '/radio-button',
+			textBox: 'text-box',
+			selectMenu: '/select-menu',
+			buttons: '/buttons',
+			brokenLinkImg: '/broken',
+			selectable: '/selectable',
+		},
+		user: {
+			username: 'upexTesting',
+			email: 'sai@upextesting.com',
+			password: '1234567',
+		},
+	},
 });

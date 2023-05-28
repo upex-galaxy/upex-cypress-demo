@@ -17,6 +17,7 @@ context('Feature: Login', () => {
 			// cy.get('[placeholder="Username"]').type(username);
 			// cy.get('[placeholder="Password"]').type(password);
 			// cy.get('[type="submit"]').click();
+			cy.log(`Username: ${username}. Password: ${password}`);
 			expect(1).eq(1);
 		});
 		// (Then = Resultado Esperado) Entonces: el usuario DEBERÍA poder iniciar sesión en la Website.
@@ -28,6 +29,7 @@ context('Feature: Login', () => {
 		And('should display a friendly message as {string}', msg => {
 			// Ejemplo de assertion usando parámetro del mismo Gherkin:
 			// expect(msg).equal('User has successfully logged in');
+			cy.log(msg);
 			expect(1).eq(1);
 		});
 	});
@@ -37,6 +39,7 @@ context('Feature: Login', () => {
 			// cy.get('[placeholder="Username"]').type(username);
 			// cy.get('[placeholder="Password"]').type(password);
 			// cy.get('[type="submit"]').click();
+			cy.log(`Username: ${username}. Password: ${password}`);
 			expect(1).eq(1);
 		});
 		// (Then = Resultado Esperado) Entonces: el usuario DEBERÍA poder iniciar sesión en la Website.
@@ -48,22 +51,11 @@ context('Feature: Login', () => {
 		And('should display an error message as {string}', msg => {
 			// Ejemplo de assertion usando parámetro del mismo Gherkin:
 			// expect(msg).equal('Please, insert a valid value');
+			cy.log(msg);
 			expect(1).eq(1);
 		});
 	});
 });
 
-// Este código abajo es para que NO APAREZCA los XHR o Fetch en el Test Runner de Cypress, para que se vea limpio.
-Cypress.on('uncaught:exception', () => {
-	// returning false here prevents Cypress from
-	// failing the test
-	return false;
-});
-// Comando predeterminado para que no aparezcan los Fetch en el log del Test Runner:
-const origLog = Cypress.log;
-Cypress.log = function (opts, ...other) {
-	if (opts.displayName === 'xhr' || (opts.displayName === 'fetch' && opts.url.startsWith('https://'))) {
-		return;
-	}
-	return origLog(opts, ...other);
-};
+import { removeLogs } from '@helper/RemoveLogs';
+removeLogs();

@@ -1,7 +1,0 @@
-{
-	"classUnselected": "mt-2 list-group-item list-group-item-action",
-	"classSelected": "mt-2 list-group-item active list-group-item-action",
-	"classGridSelected": "list-group-item active list-group-item-action",
-	"classGridUnselected": "list-group-item list-group-item-action",
-	"tabSelected": "aria-selected"
-}

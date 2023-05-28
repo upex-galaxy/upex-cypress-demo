@@ -1,7 +1,0 @@
-{
-    "boxText": "draggable ui-widget-content ui-draggable ui-draggable-handle",
-    "assertTC4a": "La posicion final del eje X es distinta a la inicial",
-    "assertTC4b": "La posición final del eje Y es igual a la inicial",
-    "assertTC5a": "La posicion final del eje Y es distinta a la inicial",
-    "assertTC5b": "La posición final del eje X es igual a la inicial"
-}
