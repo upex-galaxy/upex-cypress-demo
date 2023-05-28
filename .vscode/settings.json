@@ -67,6 +67,5 @@
 	"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
 	"cucumberautocomplete.stepRegExSymbol": "'",
 	"git.enableSmartCommit": true,
-	"githubPullRequests.ignoredPullRequestBranches": ["main"],
-	"cSpell.words": ["Barby", "Urquiza"]
+	"githubPullRequests.ignoredPullRequestBranches": ["main"]
 }
