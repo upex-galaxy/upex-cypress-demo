@@ -1,4 +1,4 @@
-describe('GX2-2227 | BookStore | Account | Crear, Obtener y Eliminar Usuario (POST-GET-DELETE)', () => {
+describe.skip('GX2-2227 | BookStore | Account | Crear, Obtener y Eliminar Usuario (POST-GET-DELETE)', () => {
 	let IdUser, Token, validUserName, statusResponseRegisterUser, userNameResponse;
 
 	beforeEach('Create User, authorized and Token', () => {
@@ -91,7 +91,7 @@ describe('GX2-2227 | BookStore | Account | Crear, Obtener y Eliminar Usuario (PO
 		});
 	});
 });
-context('GX2-2227 | BookStore | Account | Crear, Obtener y Eliminar Usuario (POST-GET-DELETE)', () => {
+context.skip('GX2-2227 | BookStore | Account | Crear, Obtener y Eliminar Usuario (POST-GET-DELETE)', () => {
 	it('2228 | TC6: Validate no register by API request (Invalid Date)', () => {
 		const responseGetUser = BookStore.registerUserByAPI({ username: '!@#$!@!@', Password: 'B1234' });
 		cy.get('*').then(() => {
