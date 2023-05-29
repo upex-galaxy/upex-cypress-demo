@@ -18,7 +18,7 @@ class DatePicker {
 	};
 
 	clickSelectDatePicker() {
-		return this.get.selectDatePicker().click({ force: true });
+		this.get.selectDatePicker().click({ force: true });
 	}
 	clicklistOfYear() {
 		this.get.yearInput().trigger('click');
@@ -41,7 +41,7 @@ class DatePicker {
 			});
 	}
 	clickDateAndTimePicker() {
-		return this.get.dateAndTimePicker().click({ force: true });
+		this.get.dateAndTimePicker().click({ force: true });
 	}
 	clickYearList() {
 		this.get.yearList().click();

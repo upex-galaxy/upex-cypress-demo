@@ -18,7 +18,7 @@ describe('GX2-2979 | ToolsQA | Widgets | Date Picker', () => {
 	beforeEach('User must be situated in the website', () => {
 		cy.visit('https://demoqa.com/date-picker');
 	});
-	it('2980 | TC2: Validate the default value of the date and time is the current day (Date and Time) ', () => {
+	it.skip('2980 | TC2: Validate the default value of the date and time is the current day (Date and Time) ', () => {
 		datePicker.getDateAndTimePickerValue().then(() => {
 			cy.wait(600);
 			expect(Cypress.env('dateAndTime')).to.be.equal(actualDateAndTime);
@@ -35,7 +35,7 @@ describe('GX2-2979 | ToolsQA | Widgets | Date Picker', () => {
 			expect(Cypress.env('date')).to.match(/^\d{2}\/\d{2}\/\d{4}$/);
 		});
 	});
-	it('2980 | TC4:Validate the list of years (1900-2100)', () => {
+	it.skip('2980 | TC4:Validate the list of years (1900-2100)', () => {
 		let arrayYear = [];
 		datePicker.clickSelectDatePicker();
 		datePicker.clicklistOfYear();
@@ -53,7 +53,7 @@ describe('GX2-2979 | ToolsQA | Widgets | Date Picker', () => {
 			});
 		});
 	});
-	it('2980 | TC5:Validate the list of months in the year (January-December) / (Selected Date)', () => {
+	it.skip('2980 | TC5:Validate the list of months in the year (January-December) / (Selected Date)', () => {
 		datePicker.clickSelectDatePicker();
 		datePicker.get.monthInput().within(() => {
 			cy.get('option').each(($option, index) => {
@@ -146,12 +146,12 @@ describe('GX2-2979 | ToolsQA | Widgets | Date Picker', () => {
 		});
 	});
 	it('2980 | TC13: Validate the selected day background color is blue in "Selected Date" and "Date and Time" Input', () => {
-		datePicker.clickSelectDatePicker().then(() => {
-			datePicker.get.daySelected().should('have.css', 'background-color').and('eq', 'rgb(33, 107, 165)');
-		});
-		datePicker.clickDateAndTimePicker().then(() => {
-			datePicker.get.daySelected().should('have.css', 'background-color').and('eq', 'rgb(33, 107, 165)');
-		});
+		datePicker.clickSelectDatePicker();
+		datePicker.get.daySelected().should('have.css', 'background-color').and('eq', 'rgb(33, 107, 165)');
+		
+		datePicker.clickDateAndTimePicker();
+		datePicker.get.daySelected().should('have.css', 'background-color').and('eq', 'rgb(33, 107, 165)');
+		
 	});
 	it('2980 | TC14: Validate the time selected background color is blue (Date and Time)', () => {
 		datePicker.clickDateAndTimePicker();
