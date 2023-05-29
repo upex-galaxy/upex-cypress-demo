@@ -41,7 +41,7 @@ class DatePicker {
 			});
 	}
 	clickDateAndTimePicker() {
-		return this.get.dateAndTimePicker().click({ force: true });
+		this.get.dateAndTimePicker().click({ force: true });
 	}
 	clickYearList() {
 		this.get.yearList().click();
