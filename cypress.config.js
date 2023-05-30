@@ -55,5 +55,8 @@ export default defineConfig({
 		allure: true,
 		allureReuseAfterSpec: true,
 		allureResultsPath: 'reports/allure-results',
+		endpoint: {
+			practiceForm: '/automation-practice-form',
+		},
 	},
 });
