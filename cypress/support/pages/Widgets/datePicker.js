@@ -2,6 +2,8 @@ export class DatePicker {
 	constructor() {
 		this.dateInput = '#datePickerMonthYearInput';
 		this.yearSelect = '.react-datepicker__year-select';
+		this.myRangeYears = [];
+		this.monthSelect = '.react-datepicker__month-select';
 	}
 
 	currentDate() {
@@ -11,19 +13,24 @@ export class DatePicker {
 	}
 
 	getYearOptions() {
-		return cy
-			.get(this.yearSelect)
-			.find('option')
-			.invoke('text')
-			.then(options => {
-				// Convertir el resultado en un array y guardarlo en la propiedad yearOptions
-				this.yearOptions = Array.from(options);
-			});
+		cy.get(this.dateInput).click();
+		return cy.document().then(doc => {
+			const yearSelectDom = doc.querySelector(this.yearSelect);
+			return cy.wrap(Array.from(yearSelectDom.options).map(option => option.value.toString()));
+		});
 	}
 
 	generateYearRange(fromYear, toYear) {
-		const range = toYear - fromYear + 1;
-		const yearOptions = Array.from({ length: range }, index => (parseInt(fromYear) + index).toString());
-		return { range, yearOptions };
+		this.range = toYear - fromYear + 1;
+		this.myRangeYears = Array.from({ length: this.range }, (_, index) => (parseInt(fromYear) + index).toString());
+	}
+
+	getMonths() {
+		cy.get(this.dateInput).click();
+		return cy.document().then(doc => {
+			const monthsSelectDom = doc.querySelector(this.monthSelect);
+			const months = Array.from(monthsSelectDom.options).map(option => option.textContent);
+			return months;
+		});
 	}
 }
