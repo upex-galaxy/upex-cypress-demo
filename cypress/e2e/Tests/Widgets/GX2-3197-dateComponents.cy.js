@@ -1,76 +1,66 @@
-import { DatePicker } from '@pages/Widgets/datePicker';
-const { baseUrl } = Cypress.env();
+import { datePicker } from '@pages/Widgets/GX2-3197-datePicker';
+import dataPicker from '@data/GX2-3197-datePicker.json';
 
 describe('In Select Date, select a random Date', () => {
-	const datePicker = new DatePicker();
-
 	beforeEach('', () => {
-		cy.intercept({ resourceType: /xhr|fetch/ });
-		cy.visit('https://demoqa.com/date-picker');
+		cy.visit('/date-picker');
 	});
 
-	it('verify before start the default date and his format is correct ${Month}/${Day}/${Year}', () => {
-		cy.get(datePicker.dateInput).invoke('val').should('equal', datePicker.currentDate());
-	});
+	it.only('Select a random Day Month and Year', () => {
+		//Select a random Day
 
-	it('Select a random Day', () => {
-		//Selected date: the day selected  background color is blue
-	});
+		//Select a random Year
+		datePicker.setRandomYearDropdown();
 
-	it('Select a random Year', () => {
+		//Select a random Month
+
+		//------------- Aserciones ----------/
+		//Check if the random year setted was between range expected (1900-2100)
+
 		//Check the range valid of years be expected (1900-2100)
 		const fromYear = '1900';
 		const toYear = '2100';
 		datePicker.generateYearRange(fromYear, toYear);
-		datePicker.getYearOptions().should('have.length', datePicker.range);
-		datePicker.getYearOptions().then(years => {
+		datePicker.getYearArray().should('have.length', datePicker.range);
+		datePicker.getYearArray().then(years => {
 			expect(years).to.deep.equal(datePicker.myRangeYears);
 		});
-
-		//Select a random Year
-	});
-
-	it('Select a random Month', () => {
+		//------------------------
 		//Check the range valid of moths be expected
-		const monthsExpected = [
-			'January',
-			'February',
-			'March',
-			'April',
-			'May',
-			'June',
-			'July',
-			'August',
-			'September',
-			'October',
-			'November',
-			'December',
-		];
 		datePicker.getMonths().then(months => {
-			expect(months).to.have.length(monthsExpected.length);
-			expect(months).to.deep.equal(monthsExpected);
+			expect(months).to.have.length(dataPicker.monthsExpected.length);
+			expect(months).to.deep.equal(dataPicker.monthsExpected);
 		});
 
 		//left arrow button: goes to the previus month
 		//right arrow button: goes to the next month
-		//Select a random Month
+
+		//-----------------------
+		// Default assertions
+
+		// verify before start the default date and his format is correct ${Month}/${Day}/${Year}
+		cy.get(datePicker.dateInput).invoke('val').should('equal', datePicker.currentDate());
+
+		//Selected date: the day selected  background color is blue
 	});
 });
 
 describe('Select Date and Time', () => {
-	it('valid format month, day, year and time', () => {});
-	it('varify current date and time as a default value', () => {});
-	it('have a check in selected year', () => {});
-
-	it('List of months in the year (January-December)', () => {});
-
-	it('The selected month is marked with a check', () => {});
-	it('left arrow button: goes to the previus month', () => {});
-	it('right arrow button: goes to the next month', () => {});
-
-	it('Selected date: the day selected  background color is blue', () => {});
-	it('Selected time: the time selected background color is blue', () => {});
-	it('Time range of 00:00 to 23:45', () => {});
+	it('Select a random Day, Month, Year and Time', () => {
+		//verify current date and time as a default value
+		//valid format month, day, year and time
+		//Selected date: the day selected  background color is blue
+		//valid format month, day, year and time
+		//List of months in the year (January-December)
+		//The selected month is marked with a check
+		//left arrow button: goes to the previus month
+		//right arrow button: goes to the next month
+		//valid format month, day, year and time
+		//have a check in selected year
+		//valid format month, day, year and time
+		//Selected time: the time selected background color is blue
+		// valid Time range of 00:00 to 23:45
+	});
 });
 
 import { removeLogs } from '@helper/RemoveLogs';
