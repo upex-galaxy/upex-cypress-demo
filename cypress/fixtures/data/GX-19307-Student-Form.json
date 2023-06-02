@@ -1,0 +1,20 @@
+{
+	"assertions": {
+		"url": "automation-practice-form",
+		"SubmitTable": ".table-responsive",
+		"Gender": {
+			"Male": "Male",
+			"Female": "Female",
+			"Other": "Other"
+		},
+		"Subjects": "Math",
+		"Hobbies": {
+			"Sports": "Sports",
+			"Reading": "Reading",
+			"Music": "Music"
+		},
+		"Picture": "upexlogo.png",
+		"State": "NCR",
+		"City": "Delhi"
+	}
+}

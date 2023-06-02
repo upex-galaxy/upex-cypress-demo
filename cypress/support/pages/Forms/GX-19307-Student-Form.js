@@ -8,6 +8,8 @@ const Years = [];
 for (let i = 1940; i <= 2023; i++) {
 	Years.push(i.toString());
 }
+const States = ['NCR', 'Uttar Pradesh', 'Haryana', 'Rajasthan'];
+
 class StudentForm {
 	visit = {
 		endpoint: () => cy.visit('https://demoqa.com/automation-practice-form'),
@@ -22,7 +24,7 @@ class StudentForm {
 		GenderOther: () => cy.get('#gender-radio-3'),
 		Mobile: () => cy.get('#userNumber'),
 		DateOfBirth: () => cy.get('#dateOfBirthInput'),
-		Day: () => cy.get('.react-datepicker-popper'),
+		Day: () => cy.get('.react-datepicker__month'),
 		Month: () => cy.get('.react-datepicker__month-select'),
 		Year: () => cy.get('.react-datepicker__year-select'),
 		Subjects: () => cy.get('#subjectsContainer'),
@@ -31,103 +33,123 @@ class StudentForm {
 		HobbyMusic: () => cy.get('#hobbies-checkbox-3'),
 		Picture: () => cy.get('#uploadPicture'),
 		CurrentAddress: () => cy.get('#currentAddress'),
-		State: () => cy.get('.css-19bqh2r').eq(0),
+		State: () => cy.get('#state'),
+		StateOptions: () => cy.get('.css-11unzgr'),
 		StateOpt1: () => cy.get('#react-select-3-option-0'),
-		StateOpt2: () => cy.get('#react-select-3-option-1'),
-		StateOpt3: () => cy.get('#react-select-3-option-2'),
-		StateOpt4: () => cy.get('#react-select-3-option-3'),
-		City: () => cy.get('.css-19bqh2r').eq(1),
+		City: () => cy.get('#city'),
 		CityOpt1: () => cy.get('#react-select-4-option-0'),
 		CityOpt2: () => cy.get('#react-select-4-option-1'),
 		CityOpt3: () => cy.get('#react-select-4-option-2'),
 		Submit: () => cy.get('#submit'),
 	};
+
 	enterPage() {
 		this.visit.endpoint();
 	}
 	typeRandomFirstName() {
-		this.get.FirstName().type(faker.name.firstName());
+		const randomFirstName = faker.name.firstName();
+		this.get.FirstName().type(randomFirstName);
+		return randomFirstName;
 	}
 
 	typeRandomLastName() {
-		this.get.LastName().type(faker.name.lastName());
+		const randomLastName = faker.name.lastName();
+		this.get.LastName().type(randomLastName);
+		return randomLastName;
 	}
 
 	typeRandomEmail() {
-		this.get.Email().type(faker.internet.email());
+		const randomEmail = faker.internet.email();
+		this.get.Email().type(randomEmail);
+		return randomEmail;
 	}
 
 	clickGenderMale() {
-		this.get.GenderMale().click();
+		this.get.GenderMale().click({ force: true });
 	}
 
 	clickGenderFemale() {
-		this.get.GenderFemale().click();
+		this.get.GenderFemale().click({ force: true });
 	}
 
 	clickGenderOther() {
-		this.get.GenderOther().click();
+		this.get.GenderOther().click({ force: true });
 	}
 
 	typeRandomMobile() {
-		this.get.Mobile().type(faker.phone.number());
+		const randomMobile = faker.phone.number('341#######');
+		this.get.Mobile().type(randomMobile);
+		return randomMobile;
 	}
 
 	selectDay() {
-		this.get
-			.DateOfBirth()
-			.click()
-			.then(() => {
-				const indiceAleatorio = Math.floor(Math.random() * Days.length);
-				const dayAleatorio = Days[indiceAleatorio];
-				this.get.Day().contains(dayAleatorio).click({ force: true });
-			});
+		this.get.DateOfBirth().click();
+		const indiceAleatorio = Math.floor(Math.random() * Days.length);
+		const dayAleatorio = Days[indiceAleatorio];
+		this.get.Day().contains(dayAleatorio).click();
+		return dayAleatorio;
 	}
 
 	selectMonth() {
-		this.get
-			.DateOfBirth()
-			.click()
-			.then(() => {
-				const indiceAleatorio = Math.floor(Math.random() * Months.length);
-				const mesAleatorio = Months[indiceAleatorio];
-				this.get.Month().contains(mesAleatorio).click({ force: true });
-			});
+		this.get.DateOfBirth().click();
+		const indiceAleatorio = Math.floor(Math.random() * Months.length);
+		const mesAleatorio = Months[indiceAleatorio];
+		this.get.Month().select(mesAleatorio);
+		return mesAleatorio;
 	}
 
 	selectYear() {
-		this.get
-			.DateOfBirth()
-			.click()
-			.then(() => {
-				const indiceAleatorio = Math.floor(Math.random() * Years.length);
-				const añoAleatorio = Years[indiceAleatorio];
-				this.get.Year().contains(añoAleatorio).click({ force: true });
-			});
+		this.get.DateOfBirth().click();
+		const indiceAleatorio = Math.floor(Math.random() * Years.length);
+		const añoAleatorio = Years[indiceAleatorio];
+		this.get.Year().select(añoAleatorio);
+		return añoAleatorio;
 	}
 
-	typeRandomSubjects() {
-		this.get.Subjects().type(faker.lorem.sentences(2));
+	typeSubjects() {
+		this.get.Subjects().type('Math');
+		cy.get('#react-select-2-option-0').click();
 	}
 
 	clickHobbySport() {
-		this.get.HobbySport().click();
+		this.get.HobbySport().click({ force: true });
 	}
 
 	clickHobbyReading() {
-		this.get.HobbyReading().click();
+		this.get.HobbyReading().click({ force: true });
 	}
 
 	clickHobbyMusic() {
-		this.get.HobbyMusic().click();
+		this.get.HobbyMusic().click({ force: true });
 	}
 
 	selectPicture() {
-		this.get.Picture().click().and.selectFile('cypress/fixtures/images/upexlogo.png');
+		this.get.Picture().click();
+		this.get.Picture().selectFile('cypress/fixtures/images/upexlogo.png');
 	}
 
 	typeRandomCurrentAddress() {
-		this.get.CurrentAddress().type(faker.address.streetAddress());
+		const randomCurrentAddress = faker.address.streetAddress();
+		this.get.CurrentAddress().type(randomCurrentAddress);
+		return randomCurrentAddress;
+	}
+
+	//selectState() {
+	//	this.get.State().click();
+	//	const indiceAleatorio = Math.floor(Math.random() * States.length);
+	//	const stateAleatorio = States[indiceAleatorio];
+	//	this.get.StateOptions().contains(stateAleatorio).click({ force: true });
+	//	return stateAleatorio;
+	//}
+
+	selectState() {
+		this.get.State().click();
+		this.get.StateOpt1().click();
+	}
+
+	selectCity() {
+		this.get.City().click();
+		this.get.CityOpt1().click();
 	}
 
 	submitButton() {
