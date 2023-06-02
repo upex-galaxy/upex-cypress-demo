@@ -6,41 +6,47 @@ describe('In Select Date, select a random Date', () => {
 		cy.visit('/date-picker');
 	});
 
+	// Set a range of years you want to validate
+	const fromYear = '1900';
+	const toYear = '2100';
+
 	it.only('Select a random Day Month and Year', () => {
-		//Select a random Day
+		// verify before start the default date and his format is correct ${Month}/${Day}/${Year}
+		cy.get(datePicker.dateInput).invoke('val').should('equal', datePicker.currentDate());
 
-		//Select a random Year
-		datePicker.setRandomYearDropdown();
-
-		//Select a random Month
+		//----------- Select a random Year -----------//
+		const randomYear = datePicker.setRandomYearDropdown(fromYear, toYear);
 
 		//------------- Aserciones ----------/
 		//Check if the random year setted was between range expected (1900-2100)
+		cy.get(datePicker.textHeaderCalendar).should('contain', randomYear);
 
 		//Check the range valid of years be expected (1900-2100)
-		const fromYear = '1900';
-		const toYear = '2100';
 		datePicker.generateYearRange(fromYear, toYear);
 		datePicker.getYearArray().should('have.length', datePicker.range);
 		datePicker.getYearArray().then(years => {
 			expect(years).to.deep.equal(datePicker.myRangeYears);
 		});
-		//------------------------
+
+		//----------- Select a random Month -----------//
+		const randomMonth = datePicker.setRandomMonthDropdown();
+
+		//------------- Aserciones ----------/
+		//Check if the random Month setted was between range expected (Jen to Dec)
+		cy.get(datePicker.textHeaderCalendar).should('contain', randomMonth);
+
+		//left arrow button: goes to the previus month
+		//right arrow button: goes to the next month
+
 		//Check the range valid of moths be expected
 		datePicker.getMonths().then(months => {
 			expect(months).to.have.length(dataPicker.monthsExpected.length);
 			expect(months).to.deep.equal(dataPicker.monthsExpected);
 		});
 
-		//left arrow button: goes to the previus month
-		//right arrow button: goes to the next month
-
-		//-----------------------
-		// Default assertions
-
-		// verify before start the default date and his format is correct ${Month}/${Day}/${Year}
-		cy.get(datePicker.dateInput).invoke('val').should('equal', datePicker.currentDate());
-
+		//----------- Select a random Day -----------//
+		datePicker.setRandomDay();
+		//------------- Aserciones ----------/
 		//Selected date: the day selected  background color is blue
 	});
 });
