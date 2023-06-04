@@ -11,6 +11,7 @@ class DatePicker {
 		this.monthDataPicker = 'select[class*="month"]';
 		this.daysComponent = 'div[class="react-datepicker__month"]';
 		this.daysOutsideMonth = 'div[class$= "day--outside-month"]';
+		this.daySelected = 'div[class$="__day--selected"]';
 	}
 
 	currentDate() {

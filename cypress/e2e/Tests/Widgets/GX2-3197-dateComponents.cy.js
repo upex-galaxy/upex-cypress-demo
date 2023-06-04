@@ -48,6 +48,8 @@ describe('In Select Date, select a random Date', () => {
 		datePicker.setRandomDay();
 		//------------- Aserciones ----------/
 		//Selected date: the day selected  background color is blue
+		cy.get(datePicker.dateInput).click();
+		cy.get(datePicker.daySelected).should('have.css', 'background-color', 'rgb(33, 107, 165)').wait(1000);
 	});
 });
 
