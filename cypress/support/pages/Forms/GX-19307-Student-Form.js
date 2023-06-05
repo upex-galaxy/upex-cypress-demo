@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 const Days = [];
-for (let i = 1; i <= 31; i++) {
+for (let i = 1; i <= 28; i++) {
 	Days.push(i.toString());
 }
 const Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -8,7 +8,6 @@ const Years = [];
 for (let i = 1940; i <= 2023; i++) {
 	Years.push(i.toString());
 }
-const States = ['NCR', 'Uttar Pradesh', 'Haryana', 'Rajasthan'];
 
 class StudentForm {
 	visit = {
@@ -24,7 +23,7 @@ class StudentForm {
 		GenderOther: () => cy.get('#gender-radio-3'),
 		Mobile: () => cy.get('#userNumber'),
 		DateOfBirth: () => cy.get('#dateOfBirthInput'),
-		Day: () => cy.get('.react-datepicker__month'),
+		Day: () => cy.get('[role="listbox"] [class*="datepicker__day"]:not([class$="outside-month"])'),
 		Month: () => cy.get('.react-datepicker__month-select'),
 		Year: () => cy.get('.react-datepicker__year-select'),
 		Subjects: () => cy.get('#subjectsContainer'),
@@ -133,14 +132,6 @@ class StudentForm {
 		this.get.CurrentAddress().type(randomCurrentAddress);
 		return randomCurrentAddress;
 	}
-
-	//selectState() {
-	//	this.get.State().click();
-	//	const indiceAleatorio = Math.floor(Math.random() * States.length);
-	//	const stateAleatorio = States[indiceAleatorio];
-	//	this.get.StateOptions().contains(stateAleatorio).click({ force: true });
-	//	return stateAleatorio;
-	//}
 
 	selectState() {
 		this.get.State().click();
