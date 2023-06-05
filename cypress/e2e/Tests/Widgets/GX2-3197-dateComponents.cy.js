@@ -79,18 +79,31 @@ describe('Select Date and Time', () => {
 		cy.visit('/date-picker');
 	});
 	it.only('Select a random Day, Month, Year and Time', () => {
+		// Check defaul values. Current date and time and validate format month, day, year and time
+		cy.get(datePicker.dateAndTimeInput).invoke('val').should('equal', datePicker.currentDateAndTime());
+
+		// Select a random Time
 		datePicker.setRandomTime();
-		//verify current date and time as a default value
-		//valid format month, day, year and time
-		//Selected date: the day selected  background color is blue
-		//valid format month, day, year and time
-		//List of months in the year (January-December)
+
+		//Selected time: the time selected background color is blue
+		cy.get(datePicker.dateAndTimeInput).click().wait(1000);
+		cy.get(datePicker.timeItemSelected).should('have.css', 'background-color', 'rgb(33, 107, 165)');
+
+		// Select a random month
+		const randomMonthDateTimePicker = datePicker.setRandomMonthDropdownDateTime();
+
+		//Check if the random Month setted was between range expected (Jen to Dec)
+		cy.get(datePicker.textHeaderCalendar).should('contain', randomMonthDateTimePicker);
+
 		//The selected month is marked with a check
 		//left arrow button: goes to the previus month
 		//right arrow button: goes to the next month
+
+		// Select a random day
+		//Selected date: the day selected  background color is blue
+
+		// Select a random Year
 		//have a check in selected year
-		//Selected time: the time selected background color is blue
-		// valid Time range of 00:00 to 23:45
 	});
 });
 

@@ -17,12 +17,24 @@ class DatePicker {
 
 		this.dateAndTimeInput = '#dateAndTimePickerInput';
 		this.timeList = 'ul[class$="time-list"]';
+		this.timeItemSelected = 'li[class$="item--selected"]';
+		this.monthDateTimeDropDown = 'div[class$="month-read-view"]';
+		this.monthDateTimePicker = 'div[class$="month-dropdown"]';
+		this.monthOptionDateTimePicker = '.react-datepicker__month-option';
 	}
 
 	currentDate() {
 		const hoy = new Date();
 		const opcionesFecha = { month: '2-digit', day: '2-digit', year: 'numeric' };
 		return hoy.toLocaleDateString('en-US', opcionesFecha);
+	}
+	currentDateAndTime() {
+		const hoy = new Date();
+		const opcionesFecha = { month: 'long', day: 'numeric', year: 'numeric' };
+		const opcionesHora = { hour: 'numeric', minute: 'numeric', hour12: true };
+		const fechaActual = hoy.toLocaleDateString('en-US', opcionesFecha);
+		const horaActual = hoy.toLocaleTimeString('en-US', opcionesHora);
+		return `${fechaActual} ${horaActual}`;
 	}
 
 	getNextMonth(month) {
@@ -50,6 +62,19 @@ class DatePicker {
 		cy.log('Random Month:', randomMonth);
 		const randomMonthValue = dataPicker.monthsExpected[randomMonth];
 		cy.get(this.monthDataPicker).select(randomMonthValue);
+		return randomMonthValue;
+	}
+
+	setRandomMonthDropdownDateTime() {
+		cy.get(this.dateAndTimeInput).click();
+		const randomMonth = Cypress._.random(0, 11);
+		cy.log('Random Month:', randomMonth);
+		cy.get(this.monthDateTimeDropDown)
+			.click()
+			.then(() => {
+				cy.get(this.monthOptionDateTimePicker).eq(randomMonth).click();
+			});
+		const randomMonthValue = dataPicker.monthsExpected[randomMonth];
 		return randomMonthValue;
 	}
 
