@@ -22,25 +22,9 @@ describe('GX-19275: ToolsQA | Elements | Dynamic Properties', () => {
 		cy.get('.mt-4.text-danger.btn.btn-primary').contains('Color Change'); // Validar cambio de color del elemento
 	});
 
-	it.only('19276 | TC4: Validar visibilidad del elemento después de 5 segundos ', () => {
+	it('19276 | TC4: Validar visibilidad del elemento después de 5 segundos ', () => {
 		cy.get('#visibleAfter').should('not.be.visible'); // Validar no visibilidad del elemento antes de 5 segundos
 		cy.wait(5000); // Esperar 5 segundos
 		cy.get('#visibleAfter').should('be.visible'); // Validar visibilidad del elemento después de 5 segundos
 	});
 });
-
-//________________________________________________________________________
-// Comando predeterminado para que no ocurran errores de excepciones:
-Cypress.on('uncaught:exception', () => {
-	// returning false here prevents Cypress from
-	// failing the test
-	return false;
-});
-// Comando predeterminado para que no aparezcan los Fetch en el log del Test Runner:
-const origLog = Cypress.log;
-Cypress.log = function (opts, ...other) {
-	if (opts.displayName === 'xhr' || (opts.displayName === 'fetch' && opts.url.startsWith('https://'))) {
-		return;
-	}
-	return origLog(opts, ...other);
-};
