@@ -13,12 +13,10 @@ describe('GX-19275: ToolsQA | Elements | Dynamic Properties', () => {
 			.should('have.attr', 'id'); // Validar que el elemento anterior tiene un atributo "id"
 	});
 
-	it.only('19276 | TC2: Validar habilitación del elemento después de 5 segundos', () => {
-		cy.get('#enableAfter').should('exist');
-		cy.get('#enableAfter').should('be.disabled'); // Verificar que el botón esté inicialmente deshabilitado
-		cy.get('#enableAfter').click(); // Interactuar con el botón
-		cy.get('#enableAfter').should('not.be.enabled', { timeout: 5000 }); // Verificar que el botón esté deshabilitado después de la interacción
-		cy.get('#enableAfter').should('be.enabled'); // Validar elemento activo después de 5 segundos
+	it('19276 | TC2: Validar habilitación del elemento después de 5 segundos', () => {
+		cy.get('button#enableAfter.mt-4.btn.btn-primary').click(); // Interactuar con el botón
+		cy.get('button#enableAfter.mt-4.btn.btn-primary').should('be.disabled', { timeout: 5000 }); // Verificar que el botón esté inicialmente deshabilitado
+		cy.get('button#enableAfter.mt-4.btn.btn-primary').should('be.enabled'); // Verificar que el botón esté habilitado después de 5 segundos
 	});
 
 	it('19276 | TC3: Validar cambio de color del elemento después de 5 segundos', () => {
