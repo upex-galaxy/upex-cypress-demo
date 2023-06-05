@@ -36,6 +36,18 @@ describe('In Select Date, select a random Date', () => {
 		cy.get(datePicker.textHeaderCalendar).should('contain', randomMonth);
 
 		//left arrow button: goes to the previus month
+
+		datePicker.getCurrentYearMonth().then(result => {
+			const { month: initialMonth, year: initialYear } = result;
+			datePicker.navigationBack();
+			datePicker.getCurrentYearMonth().then(result => {
+				const { month, year } = result;
+
+				expect(month).to.equal(datePicker.getPreviousMonth(initialMonth));
+				expect(year).to.equal(initialYear);
+			});
+		});
+
 		//right arrow button: goes to the next month
 
 		//Check the range valid of moths be expected
@@ -48,8 +60,8 @@ describe('In Select Date, select a random Date', () => {
 		datePicker.setRandomDay();
 		//------------- Aserciones ----------/
 		//Selected date: the day selected  background color is blue
-		cy.get(datePicker.dateInput).click();
-		cy.get(datePicker.daySelected).should('have.css', 'background-color', 'rgb(33, 107, 165)').wait(1000);
+		cy.get(datePicker.dateInput).click().wait(1000);
+		cy.get(datePicker.daySelected).should('have.css', 'background-color', 'rgb(33, 107, 165)');
 	});
 });
 

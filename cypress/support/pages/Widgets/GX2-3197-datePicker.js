@@ -12,12 +12,26 @@ class DatePicker {
 		this.daysComponent = 'div[class="react-datepicker__month"]';
 		this.daysOutsideMonth = 'div[class$= "day--outside-month"]';
 		this.daySelected = 'div[class$="__day--selected"]';
+		this.buttonNavigationBack = 'button[aria-label="Previous Month"]';
+		this.buttonNavigationNext = 'button[aria-label="Next Month"]';
 	}
 
 	currentDate() {
 		const hoy = new Date();
 		const opcionesFecha = { month: '2-digit', day: '2-digit', year: 'numeric' };
 		return hoy.toLocaleDateString('en-US', opcionesFecha);
+	}
+
+	getNextMonth(month) {
+		if (month == 'December') return 'January';
+		const months = dataPicker.monthsExpected;
+		return months[months.indexOf(month) + 1];
+	}
+
+	getPreviousMonth(month) {
+		if (month == 'January') return 'December';
+		const months = dataPicker.monthsExpected;
+		return months[months.indexOf(month) - 1];
 	}
 
 	setRandomYearDropdown(fromYear, toYear) {
@@ -36,24 +50,37 @@ class DatePicker {
 		return randomMonthValue;
 	}
 
+	getCurrentYearMonth() {
+		return new Cypress.Promise(resolve => {
+			cy.get(this.dateInput).click();
+			// Obtengo el mes y año seleccionado actualmente
+			cy.get(this.textHeaderCalendar)
+				.invoke('text')
+				.then(text => {
+					const [month, year] = text.trim().split(' ');
+					resolve({ month, year });
+				});
+		});
+	}
+
 	setRandomDay() {
-		cy.get(this.dateInput).click();
-		// Obtengo el mes y año seleccionado actualmente
-		cy.get(this.textHeaderCalendar)
-			.invoke('text')
-			.then(text => {
-				const [month, year] = text.trim().split(' ');
-				// Obtener la cantidad de días del mes
-				const daysInMonth = new Date(year, dataPicker.monthsExpected.indexOf(month) + 1, 0).getDate();
-				cy.log(`El mes de ${month} en el año ${year} tiene ${daysInMonth} días.`);
+		this.getCurrentYearMonth().then(result => {
+			const { month, year } = result;
 
-				// hacer un random que de los dias del mes seleccionado // ej 1 al 30
-				const randomDay = Cypress._.random(1, daysInMonth);
-				cy.log(`El día aleatorio dentro del mes es: ${randomDay}`);
+			const daysInMonth = new Date(year, dataPicker.monthsExpected.indexOf(month) + 1, 0).getDate();
+			cy.log(`El mes de ${month} en el año ${year} tiene ${daysInMonth} días.`);
 
-				// hacer click en el div que tenga el dia random seleccionado, que no tenga la clase outside-month
-				cy.get(this.daysComponent).contains(`div:not(${this.daysOutsideMonth})`, randomDay).click();
-			});
+			// hacer un random que de los dias del mes seleccionado // ej 1 al 30
+			const randomDay = Cypress._.random(1, daysInMonth);
+			cy.log(`El día aleatorio dentro del mes es: ${randomDay}`);
+
+			// hacer click en el div que tenga el dia random seleccionado, que no tenga la clase outside-month
+			cy.get(this.daysComponent).contains(`div:not(${this.daysOutsideMonth})`, randomDay).click();
+		});
+	}
+
+	navigationBack() {
+		cy.get(this.buttonNavigationBack).click();
 	}
 
 	//----- Quizas tenga que borrar este approach :(
