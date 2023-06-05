@@ -14,6 +14,9 @@ class DatePicker {
 		this.daySelected = 'div[class$="__day--selected"]';
 		this.buttonNavigationBack = 'button[aria-label="Previous Month"]';
 		this.buttonNavigationNext = 'button[aria-label="Next Month"]';
+
+		this.dateAndTimeInput = '#dateAndTimePickerInput';
+		this.timeList = 'ul[class$="time-list"]';
 	}
 
 	currentDate() {
@@ -81,6 +84,19 @@ class DatePicker {
 
 	navigationBack() {
 		cy.get(this.buttonNavigationBack).click();
+	}
+
+	navigationNext() {
+		cy.get(this.buttonNavigationNext).click();
+	}
+
+	setRandomTime() {
+		cy.get(this.dateAndTimeInput).click();
+		const horas = Cypress._.random(0, 23);
+		const minutos = [0, 15, 30, 45];
+		const randomMinutos = Cypress._.sample(minutos);
+		const randomTime = `${horas.toString().padStart(2, '0')}:${randomMinutos.toString().padStart(2, '0')}`;
+		cy.get(this.timeList).scrollIntoView().find('li').contains(randomTime).click();
 	}
 
 	//----- Quizas tenga que borrar este approach :(

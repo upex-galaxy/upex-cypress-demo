@@ -10,8 +10,8 @@ describe('In Select Date, select a random Date', () => {
 	const fromYear = '1900';
 	const toYear = '2100';
 
-	it.only('Select a random Day Month and Year', () => {
-		// verify before start the default date and his format is correct ${Month}/${Day}/${Year}
+	it('Select a random Day Month and Year', () => {
+		// verify before start the default date and if his format is correct ${Month}/${Day}/${Year}
 		cy.get(datePicker.dateInput).invoke('val').should('equal', datePicker.currentDate());
 
 		//----------- Select a random Year -----------//
@@ -36,7 +36,6 @@ describe('In Select Date, select a random Date', () => {
 		cy.get(datePicker.textHeaderCalendar).should('contain', randomMonth);
 
 		//left arrow button: goes to the previus month
-
 		datePicker.getCurrentYearMonth().then(result => {
 			const { month: initialMonth, year: initialYear } = result;
 			datePicker.navigationBack();
@@ -49,6 +48,16 @@ describe('In Select Date, select a random Date', () => {
 		});
 
 		//right arrow button: goes to the next month
+		datePicker.getCurrentYearMonth().then(result => {
+			const { month: initialMonth, year: initialYear } = result;
+			datePicker.navigationNext();
+			datePicker.getCurrentYearMonth().then(result => {
+				const { month, year } = result;
+
+				expect(month).to.equal(datePicker.getNextMonth(initialMonth));
+				expect(year).to.equal(initialYear);
+			});
+		});
 
 		//Check the range valid of moths be expected
 		datePicker.getMonths().then(months => {
@@ -66,7 +75,11 @@ describe('In Select Date, select a random Date', () => {
 });
 
 describe('Select Date and Time', () => {
-	it('Select a random Day, Month, Year and Time', () => {
+	beforeEach('', () => {
+		cy.visit('/date-picker');
+	});
+	it.only('Select a random Day, Month, Year and Time', () => {
+		datePicker.setRandomTime();
 		//verify current date and time as a default value
 		//valid format month, day, year and time
 		//Selected date: the day selected  background color is blue
@@ -75,9 +88,7 @@ describe('Select Date and Time', () => {
 		//The selected month is marked with a check
 		//left arrow button: goes to the previus month
 		//right arrow button: goes to the next month
-		//valid format month, day, year and time
 		//have a check in selected year
-		//valid format month, day, year and time
 		//Selected time: the time selected background color is blue
 		// valid Time range of 00:00 to 23:45
 	});
