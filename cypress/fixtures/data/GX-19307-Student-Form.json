@@ -11,10 +11,9 @@
 			"WrongStudentEmail5": "roman@hotmail.c"
 		}
 	},
-
+	"url": "/automation-practice-form",
 	"assertions": {
 		"Url": "automation-practice-form",
-		"SubmitTable": ".table-responsive table tbody tr td",
 		"StudentName": {
 			"TableData": "1"
 		},
@@ -27,11 +26,7 @@
 			"WrongStudentEmail5": ".com"
 		},
 		"Gender": {
-			"Empty": "#genterWrapper",
-			"TableData": "5",
-			"Male": "Male",
-			"Female": "Female",
-			"Other": "Other"
+			"TableData": "5"
 		},
 		"Mobile": {
 			"NoNumbers": "1",
@@ -46,11 +41,7 @@
 			"Subjects": "Maths"
 		},
 		"Hobbies": {
-			"TableData": "13",
-			"Empty": "#hobbiesWrapper",
-			"Sports": "Sports",
-			"Reading": "Reading",
-			"Music": "Music"
+			"TableData": "13"
 		},
 		"Picture": {
 			"TableData": "15",
@@ -64,5 +55,12 @@
 			"State": "NCR",
 			"City": "Delhi"
 		}
+	},
+	"array": {
+		"Months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+		"Hobbies": [3, 4, 5],
+		"Genders": [0, 1, 2],
+		"GendersText": ["Male", "Female", "Other"],
+		"HobbiesText": ["x", "y", "z", "Sports", "Reading", "Music"]
 	}
 }

@@ -1,35 +1,30 @@
 import { faker } from '@faker-js/faker';
+import the from '../../../fixtures/data/GX-19307-Student-Form.json';
 const Days = [];
 for (let i = 1; i <= 28; i++) {
 	Days.push(i.toString());
 }
-const Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const Years = [];
 for (let i = 1940; i <= 2023; i++) {
 	Years.push(i.toString());
 }
 
 class StudentForm {
-	visit = {
-		endpoint: () => cy.visit('https://demoqa.com/automation-practice-form'),
-	};
-
 	get = {
+		SubmitTable: () => cy.get('.table-responsive table tbody tr td'),
 		FirstName: () => cy.get('#firstName'),
 		LastName: () => cy.get('#lastName'),
 		Email: () => cy.get('#userEmail'),
-		GenderMale: () => cy.get('#gender-radio-1'),
-		GenderFemale: () => cy.get('#gender-radio-2'),
-		GenderOther: () => cy.get('#gender-radio-3'),
+		AllGender: () => cy.get('#genterWrapper'),
+		Gender: () => cy.get('div[class^="custom-control"]'),
 		Mobile: () => cy.get('#userNumber'),
 		DateOfBirth: () => cy.get('#dateOfBirthInput'),
 		Day: () => cy.get('[role="listbox"] [class*="datepicker__day"]:not([class$="outside-month"])'),
 		Month: () => cy.get('.react-datepicker__month-select'),
 		Year: () => cy.get('.react-datepicker__year-select'),
 		Subjects: () => cy.get('#subjectsContainer'),
-		HobbySport: () => cy.get('#hobbies-checkbox-1'),
-		HobbyReading: () => cy.get('#hobbies-checkbox-2'),
-		HobbyMusic: () => cy.get('#hobbies-checkbox-3'),
+		AllHobbies: () => cy.get('#hobbiesWrapper'),
+		Hobby: () => cy.get('div[class^="custom-control"]'),
 		Picture: () => cy.get('#uploadPicture'),
 		CurrentAddress: () => cy.get('#currentAddress'),
 		State: () => cy.get('#state'),
@@ -42,9 +37,6 @@ class StudentForm {
 		Submit: () => cy.get('#submit'),
 	};
 
-	enterPage() {
-		this.visit.endpoint();
-	}
 	typeRandomFirstName() {
 		const randomFirstName = faker.name.firstName();
 		this.get.FirstName().type(randomFirstName);
@@ -63,22 +55,22 @@ class StudentForm {
 		return randomEmail;
 	}
 
-	clickGenderMale() {
-		this.get.GenderMale().click({ force: true });
-	}
-
-	clickGenderFemale() {
-		this.get.GenderFemale().click({ force: true });
-	}
-
-	clickGenderOther() {
-		this.get.GenderOther().click({ force: true });
+	clickGender() {
+		const genderElement = this.get.Gender();
+		const indiceAleatorio = Math.floor(Math.random() * the.array.Genders.length);
+		const genderAleatorio = the.array.Genders[indiceAleatorio];
+		genderElement.eq(genderAleatorio).click();
+		return genderAleatorio;
 	}
 
 	typeRandomMobile() {
 		const randomMobile = faker.phone.number('341#######');
 		this.get.Mobile().type(randomMobile);
 		return randomMobile;
+	}
+
+	typeMobileWithLetters() {
+		this.get.Mobile().type(the.data.Mobile.MobileWithLetters);
 	}
 
 	selectDay() {
@@ -91,8 +83,8 @@ class StudentForm {
 
 	selectMonth() {
 		this.get.DateOfBirth().click();
-		const indiceAleatorio = Math.floor(Math.random() * Months.length);
-		const mesAleatorio = Months[indiceAleatorio];
+		const indiceAleatorio = Math.floor(Math.random() * the.array.Months.length);
+		const mesAleatorio = the.array.Months[indiceAleatorio];
 		this.get.Month().select(mesAleatorio);
 		return mesAleatorio;
 	}
@@ -110,16 +102,12 @@ class StudentForm {
 		cy.get('#react-select-2-option-0').click();
 	}
 
-	clickHobbySport() {
-		this.get.HobbySport().click({ force: true });
-	}
-
-	clickHobbyReading() {
-		this.get.HobbyReading().click({ force: true });
-	}
-
-	clickHobbyMusic() {
-		this.get.HobbyMusic().click({ force: true });
+	clickHobby() {
+		const hobbyElement = this.get.Hobby();
+		const indiceAleatorio = Math.floor(Math.random() * the.array.Hobbies.length);
+		const hobbiesAleatorio = the.array.Hobbies[indiceAleatorio];
+		hobbyElement.eq(hobbiesAleatorio).click();
+		return hobbiesAleatorio;
 	}
 
 	selectPicture() {
@@ -145,6 +133,62 @@ class StudentForm {
 
 	submitButton() {
 		this.get.Submit().click();
+	}
+
+	assertionFirstName() {
+		return this.get.SubmitTable().eq(the.assertions.StudentName.TableData);
+	}
+
+	assertionLastName() {
+		return this.get.SubmitTable().eq(the.assertions.StudentName.TableData);
+	}
+
+	assertionEmail() {
+		return this.get.SubmitTable().eq(the.assertions.StudentEmail.TableData);
+	}
+
+	assertionGender() {
+		return this.get.SubmitTable().eq(the.assertions.Gender.TableData);
+	}
+
+	assertionMobile() {
+		return this.get.SubmitTable().eq(the.assertions.Mobile.TableData);
+	}
+
+	assertionMonth() {
+		return this.get.SubmitTable().eq(the.assertions.Date.TableData);
+	}
+
+	assertionYear() {
+		return this.get.SubmitTable().eq(the.assertions.Date.TableData);
+	}
+
+	assertionDay() {
+		return this.get.SubmitTable().eq(the.assertions.Date.TableData);
+	}
+
+	assertionSubjects() {
+		return this.get.SubmitTable().eq(the.assertions.Subjects.TableData);
+	}
+
+	assertionHobbies() {
+		return this.get.SubmitTable().eq(the.assertions.Hobbies.TableData);
+	}
+
+	assertionPicture() {
+		return this.get.SubmitTable().eq(the.assertions.Picture.TableData);
+	}
+
+	assertionAddress() {
+		return this.get.SubmitTable().eq(the.assertions.Address.TableData);
+	}
+
+	assertionState() {
+		return this.get.SubmitTable().eq(the.assertions.StateAndCity.TableData);
+	}
+
+	assertionCity() {
+		return this.get.SubmitTable().eq(the.assertions.StateAndCity.TableData);
 	}
 }
 export const studentForm = new StudentForm();
