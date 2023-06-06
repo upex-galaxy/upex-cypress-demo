@@ -6,7 +6,7 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		cy.visit(the.url);
 		cy.url().should('contain', the.assertions.Url);
 	});
-	it.only('19308 | TC01 - Validar usuario completa formulario correctamente', () => {
+	it('19308 | TC01 - Validar usuario completa formulario correctamente', () => {
 		const randomFirstName = studentForm.typeRandomFirstName();
 		const randomLastName = studentForm.typeRandomLastName();
 		const randomEmail = studentForm.typeRandomEmail();
