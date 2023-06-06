@@ -60,7 +60,8 @@ class StudentForm {
 		const indiceAleatorio = Math.floor(Math.random() * the.array.Genders.length);
 		const genderAleatorio = the.array.Genders[indiceAleatorio];
 		genderElement.eq(genderAleatorio).click();
-		return genderAleatorio;
+		const genderText = the.array.GendersText[genderAleatorio];
+		return genderText;
 	}
 
 	typeRandomMobile() {
@@ -107,7 +108,8 @@ class StudentForm {
 		const indiceAleatorio = Math.floor(Math.random() * the.array.Hobbies.length);
 		const hobbiesAleatorio = the.array.Hobbies[indiceAleatorio];
 		hobbyElement.eq(hobbiesAleatorio).click();
-		return hobbiesAleatorio;
+		const hobbyText = the.array.HobbiesText[hobbiesAleatorio];
+		return hobbyText;
 	}
 
 	selectPicture() {

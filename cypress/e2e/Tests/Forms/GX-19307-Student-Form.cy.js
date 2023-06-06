@@ -10,19 +10,13 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		const randomFirstName = studentForm.typeRandomFirstName();
 		const randomLastName = studentForm.typeRandomLastName();
 		const randomEmail = studentForm.typeRandomEmail();
-
 		const randomGender = studentForm.clickGender();
-		const genderText = the.array.GendersText[randomGender];
-
 		const randomMobile = studentForm.typeRandomMobile();
 		const monthAleatorio = studentForm.selectMonth();
 		const yearAleatorio = studentForm.selectYear();
 		const dayAleatorio = studentForm.selectDay();
 		studentForm.typeSubjects();
-
 		const randomHobby = studentForm.clickHobby();
-		const hobbyText = the.array.HobbiesText[randomHobby];
-
 		studentForm.selectPicture();
 		const randomCurrentAddress = studentForm.typeRandomCurrentAddress();
 		studentForm.selectState();
@@ -32,13 +26,13 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		studentForm.assertionFirstName().should('contain', randomFirstName);
 		studentForm.assertionLastName().should('contain', randomLastName);
 		studentForm.assertionEmail().should('contain', randomEmail);
-		studentForm.assertionGender().should('contain', genderText);
+		studentForm.assertionGender().should('contain', randomGender);
 		studentForm.assertionMobile().should('contain', randomMobile);
 		studentForm.assertionMonth().should('contain', monthAleatorio);
 		studentForm.assertionYear().should('contain', yearAleatorio);
 		studentForm.assertionDay().should('contain', dayAleatorio);
 		studentForm.assertionSubjects().should('contain', the.assertions.Subjects.Subjects);
-		studentForm.assertionHobbies().should('contain', hobbyText);
+		studentForm.assertionHobbies().should('contain', randomHobby);
 		studentForm.assertionPicture().should('contain', the.assertions.Picture.Picture);
 		studentForm.assertionAddress().should('contain', randomCurrentAddress);
 		studentForm.assertionState().should('contain', the.assertions.StateAndCity.State);
