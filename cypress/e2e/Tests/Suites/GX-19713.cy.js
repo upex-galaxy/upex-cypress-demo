@@ -21,8 +21,9 @@ describe('GX-19713 | Happy Path', () => {
 		const randomName = faker.name.findName();
 		const randomLastName = faker.name.findName();
 		const randomEmail = faker.internet.email();
-		const randomNumber = faker.random.number({ min: 1000000000, max: 9999999999 });
-	
+		const randomNumber = faker.phone.phoneNumber('##########');
+		const randomGender = faker.random.number({ min: 0, max: 2 });
+
 		pom.typeName(randomName);
 		pom.get.inputName().should('have.value', randomName);
 
@@ -32,10 +33,10 @@ describe('GX-19713 | Happy Path', () => {
 		pom.typeEmail(randomEmail);
 		pom.get.inputMail().should('have.value', randomEmail);
 
+		pom.clickGenero(randomGender);
+
 		pom.typeNumber(randomNumber);
 		pom.get.inputNumber().should('have.value', randomNumber);
-
-		pom.clickGenero();
 
 	});
 });
