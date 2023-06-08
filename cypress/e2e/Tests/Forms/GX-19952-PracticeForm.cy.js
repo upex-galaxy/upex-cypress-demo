@@ -3,6 +3,7 @@ removeLogs();
 
 describe('GX-19952: ToolsQA ', () => {
 	beforeEach('Precondición: ', () => {
-		cy.visit('');
+		cy.visit('/automation-practice-form');
 	});
+	it('19953 | TC1:', () => {});
 });
