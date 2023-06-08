@@ -23,6 +23,16 @@ class DatePicker {
 		this.monthOptionDateTimePicker = '.react-datepicker__month-option';
 	}
 
+	get = {
+		monthSelected: () => cy.get('div[class$="_month-option--selected_month"]'),
+		dateAndTimeInput: () => cy.get('#dateAndTimePickerInput'),
+		monthOptionDateTimePicker: () => cy.get('.react-datepicker__month-option'),
+		monthDateTimeDropDown: () => cy.get('div[class$="month-read-view"]'),
+		daySelected: () => cy.get('div[class$="__day--selected"]', { timeout: 5000 }),
+		yearDropDown: () => cy.get('div[class*="year-dropdown-container"]'),
+		yearSelected: () => cy.get('div[class*="-selected_year"]'),
+	};
+
 	currentDate() {
 		const hoy = new Date();
 		const opcionesFecha = { month: '2-digit', day: '2-digit', year: 'numeric' };
@@ -80,7 +90,6 @@ class DatePicker {
 
 	getCurrentYearMonth() {
 		return new Cypress.Promise(resolve => {
-			cy.get(this.dateInput).click();
 			// Obtengo el mes y año seleccionado actualmente
 			cy.get(this.textHeaderCalendar)
 				.invoke('text')

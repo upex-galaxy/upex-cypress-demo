@@ -69,8 +69,8 @@ describe('In Select Date, select a random Date', () => {
 		datePicker.setRandomDay();
 		//------------- Aserciones ----------/
 		//Selected date: the day selected  background color is blue
-		cy.get(datePicker.dateInput).click().wait(1000);
-		cy.get(datePicker.daySelected).should('have.css', 'background-color', 'rgb(33, 107, 165)');
+		cy.get(datePicker.dateInput).click();
+		datePicker.get.daySelected().should('have.css', 'background-color', 'rgb(33, 107, 165)');
 	});
 });
 
@@ -78,7 +78,7 @@ describe('Select Date and Time', () => {
 	beforeEach('', () => {
 		cy.visit('/date-picker');
 	});
-	it.only('Select a random Day, Month, Year and Time', () => {
+	it('Select a random Day, Month, Year and Time', () => {
 		// Check defaul values. Current date and time and validate format month, day, year and time
 		cy.get(datePicker.dateAndTimeInput).invoke('val').should('equal', datePicker.currentDateAndTime());
 
@@ -92,18 +92,47 @@ describe('Select Date and Time', () => {
 		// Select a random month
 		const randomMonthDateTimePicker = datePicker.setRandomMonthDropdownDateTime();
 
+		//The selected month is marked with a check
+		datePicker.get.monthDateTimeDropDown().click();
+		datePicker.get.monthSelected().should('contain', '✓');
+
 		//Check if the random Month setted was between range expected (Jen to Dec)
 		cy.get(datePicker.textHeaderCalendar).should('contain', randomMonthDateTimePicker);
 
-		//The selected month is marked with a check
 		//left arrow button: goes to the previus month
+		datePicker.getCurrentYearMonth().then(result => {
+			const { month: initialMonth, year: initialYear } = result;
+			datePicker.navigationBack();
+			datePicker.getCurrentYearMonth().then(result => {
+				const { month, year } = result;
+
+				expect(month).to.equal(datePicker.getPreviousMonth(initialMonth));
+				expect(year).to.equal(initialYear);
+			});
+		});
+
 		//right arrow button: goes to the next month
+		datePicker.getCurrentYearMonth().then(result => {
+			const { month: initialMonth, year: initialYear } = result;
+			datePicker.navigationNext();
+			datePicker.getCurrentYearMonth().then(result => {
+				const { month, year } = result;
+
+				expect(month).to.equal(datePicker.getNextMonth(initialMonth));
+				expect(year).to.equal(initialYear);
+			});
+		});
 
 		// Select a random day
-		//Selected date: the day selected  background color is blue
+		datePicker.setRandomDay();
 
-		// Select a random Year
+		//Selected date: the day selected  background color is blue
+		datePicker.get.dateAndTimeInput().click();
+		datePicker.get.daySelected().should('have.css', 'background-color', 'rgb(33, 107, 165)');
+
 		//have a check in selected year
+		datePicker.get.yearDropDown().click();
+		datePicker.get.yearSelected().should('contain', '✓');
 	});
 });
 
