@@ -12,14 +12,14 @@ describe('In Select Date, select a random Date', () => {
 
 	it('Select a random Day Month and Year', () => {
 		// verify before start the default date and if his format is correct ${Month}/${Day}/${Year}
-		cy.get(datePicker.dateInput).invoke('val').should('equal', datePicker.currentDate());
+		datePicker.get.dateInput().invoke('val').should('equal', datePicker.currentDate());
 
 		//----------- Select a random Year -----------//
 		const randomYear = datePicker.setRandomYearDropdown(fromYear, toYear);
 
 		//------------- Aserciones ----------/
 		//Check if the random year setted was between range expected (1900-2100)
-		cy.get(datePicker.textHeaderCalendar).should('contain', randomYear);
+		datePicker.get.textHeaderCalendar().should('contain', randomYear);
 
 		//Check the range valid of years be expected (1900-2100)
 		datePicker.generateYearRange(fromYear, toYear);
@@ -33,7 +33,7 @@ describe('In Select Date, select a random Date', () => {
 
 		//------------- Aserciones ----------/
 		//Check if the random Month setted was between range expected (Jen to Dec)
-		cy.get(datePicker.textHeaderCalendar).should('contain', randomMonth);
+		datePicker.get.textHeaderCalendar().should('contain', randomMonth);
 
 		//left arrow button: goes to the previus month
 		datePicker.getCurrentYearMonth().then(result => {
@@ -67,9 +67,10 @@ describe('In Select Date, select a random Date', () => {
 
 		//----------- Select a random Day -----------//
 		datePicker.setRandomDay();
+
 		//------------- Aserciones ----------/
 		//Selected date: the day selected  background color is blue
-		cy.get(datePicker.dateInput).click();
+		datePicker.get.dateInput().click();
 		datePicker.get.daySelected().should('have.css', 'background-color', 'rgb(33, 107, 165)');
 	});
 });
@@ -80,14 +81,14 @@ describe('Select Date and Time', () => {
 	});
 	it('Select a random Day, Month, Year and Time', () => {
 		// Check defaul values. Current date and time and validate format month, day, year and time
-		cy.get(datePicker.dateAndTimeInput).invoke('val').should('equal', datePicker.currentDateAndTime());
+		datePicker.get.dateAndTimeInput().invoke('val').should('equal', datePicker.currentDateAndTime());
 
 		// Select a random Time
 		datePicker.setRandomTime();
 
 		//Selected time: the time selected background color is blue
-		cy.get(datePicker.dateAndTimeInput).click().wait(1000);
-		cy.get(datePicker.timeItemSelected).should('have.css', 'background-color', 'rgb(33, 107, 165)');
+		datePicker.get.dateAndTimeInput().click();
+		datePicker.get.timeItemSelected().should('have.css', 'background-color', 'rgb(33, 107, 165)');
 
 		// Select a random month
 		const randomMonthDateTimePicker = datePicker.setRandomMonthDropdownDateTime();
@@ -97,7 +98,7 @@ describe('Select Date and Time', () => {
 		datePicker.get.monthSelected().should('contain', '✓');
 
 		//Check if the random Month setted was between range expected (Jen to Dec)
-		cy.get(datePicker.textHeaderCalendar).should('contain', randomMonthDateTimePicker);
+		datePicker.get.textHeaderCalendar().should('contain', randomMonthDateTimePicker);
 
 		//left arrow button: goes to the previus month
 		datePicker.getCurrentYearMonth().then(result => {

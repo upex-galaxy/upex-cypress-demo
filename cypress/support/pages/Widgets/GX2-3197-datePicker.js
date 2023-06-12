@@ -2,25 +2,10 @@ import dataPicker from '@data/GX2-3197-datePicker.json';
 
 class DatePicker {
 	constructor() {
-		this.dateInput = '#datePickerMonthYearInput';
 		this.yearSelect = '.react-datepicker__year-select';
 		this.myRangeYears = [];
 		this.monthSelect = '.react-datepicker__month-select';
-		this.yearDataPicker = 'select[class*="year"]';
-		this.textHeaderCalendar = 'div[class*="hasYearDropdown"]';
-		this.monthDataPicker = 'select[class*="month"]';
-		this.daysComponent = 'div[class="react-datepicker__month"]';
 		this.daysOutsideMonth = 'div[class$= "day--outside-month"]';
-		this.daySelected = 'div[class$="__day--selected"]';
-		this.buttonNavigationBack = 'button[aria-label="Previous Month"]';
-		this.buttonNavigationNext = 'button[aria-label="Next Month"]';
-
-		this.dateAndTimeInput = '#dateAndTimePickerInput';
-		this.timeList = 'ul[class$="time-list"]';
-		this.timeItemSelected = 'li[class$="item--selected"]';
-		this.monthDateTimeDropDown = 'div[class$="month-read-view"]';
-		this.monthDateTimePicker = 'div[class$="month-dropdown"]';
-		this.monthOptionDateTimePicker = '.react-datepicker__month-option';
 	}
 
 	get = {
@@ -31,6 +16,19 @@ class DatePicker {
 		daySelected: () => cy.get('div[class$="__day--selected"]', { timeout: 5000 }),
 		yearDropDown: () => cy.get('div[class*="year-dropdown-container"]'),
 		yearSelected: () => cy.get('div[class*="-selected_year"]'),
+		dateInput: () => cy.get('#datePickerMonthYearInput'),
+		yearSelect: () => cy.get('.react-datepicker__year-select'),
+		monthSelect: () => cy.get('.react-datepicker__month-select'),
+		yearDataPicker: () => cy.get('select[class*="year"]'),
+		textHeaderCalendar: () => cy.get('div[class*="hasYearDropdown"]'),
+		monthDataPicker: () => cy.get('select[class*="month"]'),
+		daysComponent: () => cy.get('div[class="react-datepicker__month"]'),
+		daysOutsideMonth: () => cy.get('div[class$= "day--outside-month"]'),
+		buttonNavigationBack: () => cy.get('button[aria-label="Previous Month"]'),
+		buttonNavigationNext: () => cy.get('button[aria-label="Next Month"]'),
+		timeList: () => cy.get('ul[class$="time-list"]'),
+		timeItemSelected: () => cy.get('li[class$="item--selected"]', { timeout: 5000 }),
+		monthDateTimePicker: () => cy.get('div[class$="month-dropdown"]'),
 	};
 
 	currentDate() {
@@ -60,29 +58,30 @@ class DatePicker {
 	}
 
 	setRandomYearDropdown(fromYear, toYear) {
-		cy.get(this.dateInput).click();
+		this.get.dateInput().click();
 		const randomValue = Cypress._.random(fromYear, toYear);
-		cy.get(this.yearSelect).select(randomValue.toString());
+		this.get.yearSelect().select(randomValue.toString());
 		return randomValue.toString();
 	}
 
 	setRandomMonthDropdown() {
-		cy.get(this.dateInput).click();
+		this.get.dateInput().click();
 		const randomMonth = Cypress._.random(0, 11);
 		cy.log('Random Month:', randomMonth);
 		const randomMonthValue = dataPicker.monthsExpected[randomMonth];
-		cy.get(this.monthDataPicker).select(randomMonthValue);
+		this.get.monthDataPicker().select(randomMonthValue);
 		return randomMonthValue;
 	}
 
 	setRandomMonthDropdownDateTime() {
-		cy.get(this.dateAndTimeInput).click();
+		this.get.dateAndTimeInput().click();
 		const randomMonth = Cypress._.random(0, 11);
 		cy.log('Random Month:', randomMonth);
-		cy.get(this.monthDateTimeDropDown)
+		this.get
+			.monthDateTimeDropDown()
 			.click()
 			.then(() => {
-				cy.get(this.monthOptionDateTimePicker).eq(randomMonth).click();
+				this.get.monthOptionDateTimePicker().eq(randomMonth).click();
 			});
 		const randomMonthValue = dataPicker.monthsExpected[randomMonth];
 		return randomMonthValue;
@@ -91,7 +90,8 @@ class DatePicker {
 	getCurrentYearMonth() {
 		return new Cypress.Promise(resolve => {
 			// Obtengo el mes y año seleccionado actualmente
-			cy.get(this.textHeaderCalendar)
+			this.get
+				.textHeaderCalendar()
 				.invoke('text')
 				.then(text => {
 					const [month, year] = text.trim().split(' ');
@@ -112,30 +112,30 @@ class DatePicker {
 			cy.log(`El día aleatorio dentro del mes es: ${randomDay}`);
 
 			// hacer click en el div que tenga el dia random seleccionado, que no tenga la clase outside-month
-			cy.get(this.daysComponent).contains(`div:not(${this.daysOutsideMonth})`, randomDay).click();
+			this.get.daysComponent().contains(`div:not(${this.daysOutsideMonth})`, randomDay).click();
 		});
 	}
 
 	navigationBack() {
-		cy.get(this.buttonNavigationBack).click();
+		this.get.buttonNavigationBack().click();
 	}
 
 	navigationNext() {
-		cy.get(this.buttonNavigationNext).click();
+		this.get.buttonNavigationNext().click();
 	}
 
 	setRandomTime() {
-		cy.get(this.dateAndTimeInput).click();
+		this.get.dateAndTimeInput().click();
 		const horas = Cypress._.random(0, 23);
 		const minutos = [0, 15, 30, 45];
 		const randomMinutos = Cypress._.sample(minutos);
 		const randomTime = `${horas.toString().padStart(2, '0')}:${randomMinutos.toString().padStart(2, '0')}`;
-		cy.get(this.timeList).scrollIntoView().find('li').contains(randomTime).click();
+		this.get.timeList().scrollIntoView().find('li').contains(randomTime).click();
 	}
 
 	//----- Quizas tenga que borrar este approach :(
 	getYearArray() {
-		cy.get(this.dateInput).click();
+		this.get.dateInput().click();
 		return cy.document().then(doc => {
 			const yearSelectDom = doc.querySelector(this.yearSelect);
 			return cy.wrap(Array.from(yearSelectDom.options).map(option => option.value.toString()));
@@ -148,7 +148,7 @@ class DatePicker {
 	}
 
 	getMonths() {
-		cy.get(this.dateInput).click();
+		this.get.dateInput().click();
 		return cy.document().then(doc => {
 			const monthsSelectDom = doc.querySelector(this.monthSelect);
 			const months = Array.from(monthsSelectDom.options).map(option => option.textContent);
