@@ -10,14 +10,14 @@ describe('In Select Date, select a random Date', () => {
 	const fromYear = '1900';
 	const toYear = '2100';
 
-	it('Select a random Day Month and Year', () => {
+	it('3849 | TC1: Validar en Select Date: Creación random de Dia, Mes y año', () => {
 		// verify before start the default date and if his format is correct ${Month}/${Day}/${Year}
 		datePicker.get.dateInput().invoke('val').should('equal', datePicker.currentDate());
 
 		//----------- Select a random Year -----------//
 		const randomYear = datePicker.setRandomYearDropdown(fromYear, toYear);
 
-		//------------- Aserciones ----------/
+		//------------- Accersions ----------/
 		//Check if the random year setted was between range expected (1900-2100)
 		datePicker.get.textHeaderCalendar().should('contain', randomYear);
 
@@ -31,7 +31,7 @@ describe('In Select Date, select a random Date', () => {
 		//----------- Select a random Month -----------//
 		const randomMonth = datePicker.setRandomMonthDropdown();
 
-		//------------- Aserciones ----------/
+		//------------- Accersions ----------/
 		//Check if the random Month setted was between range expected (Jen to Dec)
 		datePicker.get.textHeaderCalendar().should('contain', randomMonth);
 
@@ -40,10 +40,11 @@ describe('In Select Date, select a random Date', () => {
 			const { month: initialMonth, year: initialYear } = result;
 			datePicker.navigationBack();
 			datePicker.getCurrentYearMonth().then(result => {
-				const { month, year } = result;
+				const { month: currentMonth, year: currentYear } = result;
 
-				expect(month).to.equal(datePicker.getPreviousMonth(initialMonth));
-				expect(year).to.equal(initialYear);
+				const { month: previousMonth, year: previousYear } = datePicker.getPreviousMonthYear(initialMonth, initialYear);
+				expect(currentYear).to.equal(previousYear);
+				expect(currentMonth).to.equal(previousMonth);
 			});
 		});
 
@@ -52,10 +53,12 @@ describe('In Select Date, select a random Date', () => {
 			const { month: initialMonth, year: initialYear } = result;
 			datePicker.navigationNext();
 			datePicker.getCurrentYearMonth().then(result => {
-				const { month, year } = result;
+				const { month: currentMonth, year: currentYear } = result;
 
-				expect(month).to.equal(datePicker.getNextMonth(initialMonth));
-				expect(year).to.equal(initialYear);
+				// Calculamos el mes y año siguiente
+				const { month: nextMonth, year: nextYear } = datePicker.getNextMonthYear(initialMonth, initialYear);
+				expect(currentMonth).to.equal(nextMonth);
+				expect(currentYear).to.equal(nextYear);
 			});
 		});
 
@@ -68,7 +71,7 @@ describe('In Select Date, select a random Date', () => {
 		//----------- Select a random Day -----------//
 		datePicker.setRandomDay();
 
-		//------------- Aserciones ----------/
+		//------------- Accersions ----------/
 		//Selected date: the day selected  background color is blue
 		datePicker.get.dateInput().click();
 		datePicker.get.daySelected().should('have.css', 'background-color', 'rgb(33, 107, 165)');
@@ -79,18 +82,21 @@ describe('Select Date and Time', () => {
 	beforeEach('', () => {
 		cy.visit('/date-picker');
 	});
-	it('Select a random Day, Month, Year and Time', () => {
+	// Set a range of years you want to validate
+	const fromYear = '1900';
+	const toYear = '2100';
+	it('3850 | TC2: Validar en Select Date and Time: Creación random de Dia, Mes, año y Tiempo', () => {
 		// Check defaul values. Current date and time and validate format month, day, year and time
 		datePicker.get.dateAndTimeInput().invoke('val').should('equal', datePicker.currentDateAndTime());
 
-		// Select a random Time
+		// ------------- Select a random Time
 		datePicker.setRandomTime();
 
 		//Selected time: the time selected background color is blue
 		datePicker.get.dateAndTimeInput().click();
 		datePicker.get.timeItemSelected().should('have.css', 'background-color', 'rgb(33, 107, 165)');
 
-		// Select a random month
+		// ------------- Select a random month
 		const randomMonthDateTimePicker = datePicker.setRandomMonthDropdownDateTime();
 
 		//The selected month is marked with a check
@@ -105,10 +111,11 @@ describe('Select Date and Time', () => {
 			const { month: initialMonth, year: initialYear } = result;
 			datePicker.navigationBack();
 			datePicker.getCurrentYearMonth().then(result => {
-				const { month, year } = result;
+				const { month: currentMonth, year: currentYear } = result;
 
-				expect(month).to.equal(datePicker.getPreviousMonth(initialMonth));
-				expect(year).to.equal(initialYear);
+				const { month: previousMonth, year: previousYear } = datePicker.getPreviousMonthYear(initialMonth, initialYear);
+				expect(currentYear).to.equal(previousYear);
+				expect(currentMonth).to.equal(previousMonth);
 			});
 		});
 
@@ -117,10 +124,12 @@ describe('Select Date and Time', () => {
 			const { month: initialMonth, year: initialYear } = result;
 			datePicker.navigationNext();
 			datePicker.getCurrentYearMonth().then(result => {
-				const { month, year } = result;
+				const { month: currentMonth, year: currentYear } = result;
 
-				expect(month).to.equal(datePicker.getNextMonth(initialMonth));
-				expect(year).to.equal(initialYear);
+				// Calculo el mes y año siguiente
+				const { month: nextMonth, year: nextYear } = datePicker.getNextMonthYear(initialMonth, initialYear);
+				expect(currentMonth).to.equal(nextMonth);
+				expect(currentYear).to.equal(nextYear);
 			});
 		});
 
@@ -131,9 +140,15 @@ describe('Select Date and Time', () => {
 		datePicker.get.dateAndTimeInput().click();
 		datePicker.get.daySelected().should('have.css', 'background-color', 'rgb(33, 107, 165)');
 
-		//have a check in selected year
-		datePicker.get.yearDropDown().click();
-		datePicker.get.yearSelected().should('contain', '✓');
+		// ------------- Select a random year
+		datePicker.setRandomYearDropwonDateAndTime(fromYear, toYear).then(result => {
+			//------------- Accersions ----------/
+			//Check if the random year setted was between range expected (1900-2100)
+			datePicker.get.textHeaderCalendar().should('contain', result);
+			//have a check in selected year
+			datePicker.get.yearDropDown().click();
+			datePicker.get.yearSelected().should('contain', '✓');
+		});
 	});
 });
 

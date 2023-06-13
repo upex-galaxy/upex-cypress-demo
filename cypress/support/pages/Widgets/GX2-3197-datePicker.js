@@ -6,6 +6,8 @@ class DatePicker {
 		this.myRangeYears = [];
 		this.monthSelect = '.react-datepicker__month-select';
 		this.daysOutsideMonth = 'div[class$= "day--outside-month"]';
+		this.yearOption = 'div[class$="_year-option"]';
+		this.yearSelected = 'div[class*="-selected_year"]';
 	}
 
 	get = {
@@ -13,10 +15,10 @@ class DatePicker {
 		dateAndTimeInput: () => cy.get('#dateAndTimePickerInput'),
 		monthOptionDateTimePicker: () => cy.get('.react-datepicker__month-option'),
 		monthDateTimeDropDown: () => cy.get('div[class$="month-read-view"]'),
-		daySelected: () => cy.get('div[class$="__day--selected"]', { timeout: 5000 }),
+		daySelected: () => cy.get('div[class$="__day--selected"]', { timeout: 6000 }),
 		yearDropDown: () => cy.get('div[class*="year-dropdown-container"]'),
 		yearSelected: () => cy.get('div[class*="-selected_year"]'),
-		dateInput: () => cy.get('#datePickerMonthYearInput'),
+		dateInput: () => cy.get('#datePickerMonthYearInput', { timeout: 2000 }),
 		yearSelect: () => cy.get('.react-datepicker__year-select'),
 		monthSelect: () => cy.get('.react-datepicker__month-select'),
 		yearDataPicker: () => cy.get('select[class*="year"]'),
@@ -29,6 +31,12 @@ class DatePicker {
 		timeList: () => cy.get('ul[class$="time-list"]'),
 		timeItemSelected: () => cy.get('li[class$="item--selected"]', { timeout: 5000 }),
 		monthDateTimePicker: () => cy.get('div[class$="month-dropdown"]'),
+		yearDropDownDateAndTimePicker: () => cy.get('div[class$="__year-read-view"]'),
+		yearContainerDateAndTimePicker: () => cy.get('div[class="react-datepicker__year-dropdown"]'),
+		yearOptionsPicker: () => cy.get('.react-datepicker__year-dropdown .react-datepicker__year-option'),
+		yearOption: () => cy.get('div[class$="_year-option"]'),
+		scrollTopYear: () => cy.get('.react-datepicker__navigation--years-upcoming'),
+		scrollBottomYear: () => cy.get('.react-datepicker__navigation--years-previous'),
 	};
 
 	currentDate() {
@@ -45,16 +53,16 @@ class DatePicker {
 		return `${fechaActual} ${horaActual}`;
 	}
 
-	getNextMonth(month) {
-		if (month == 'December') return 'January';
+	getNextMonthYear(month, year) {
+		if (month == 'December') return { month: 'January', year: parseInt(year) + 1 };
 		const months = dataPicker.monthsExpected;
-		return months[months.indexOf(month) + 1];
+		return { month: months[months.indexOf(month) + 1], year: year };
 	}
 
-	getPreviousMonth(month) {
-		if (month == 'January') return 'December';
+	getPreviousMonthYear(month, year) {
+		if (month == 'January') return { month: 'December', year: parseInt(year) - 1 };
 		const months = dataPicker.monthsExpected;
-		return months[months.indexOf(month) - 1];
+		return { month: months[months.indexOf(month) - 1], year: year };
 	}
 
 	setRandomYearDropdown(fromYear, toYear) {
@@ -62,6 +70,57 @@ class DatePicker {
 		const randomValue = Cypress._.random(fromYear, toYear);
 		this.get.yearSelect().select(randomValue.toString());
 		return randomValue.toString();
+	}
+
+	setRandomYearDropwonDateAndTime(fromYear, toYear) {
+		return new Cypress.Promise(resolve => {
+			const randomValue = Cypress._.random(fromYear, toYear);
+			cy.log(`The random year selected is: ${randomValue}`);
+
+			this.get.yearDropDownDateAndTimePicker().click();
+			cy.log(this.get.yearOptionsPicker().first());
+
+			const currentYear = new Date().getFullYear();
+			const gapBetween = 5; // cantidad de años para arriba o para abajo del año seleccionado
+			const firstYearAppear = currentYear + gapBetween; // primer año que aparece en el date picker
+			const lastYearAppear = currentYear - gapBetween; // ultimo año que aparece en el date picker
+
+			// Los años van de mayor a menor
+
+			if (firstYearAppear < randomValue) {
+				// Si el primer numero es mayor al random value significa que hay que hacer scroll para arriba
+				// cuando hacer srollpara arriba? la diferencia entre los dos numeros
+				const quantityScroll = randomValue - firstYearAppear;
+
+				// click sobre el scroll hasta que renderice el elemento randomValue
+				for (let i = 0; i < quantityScroll; i++) {
+					this.get.scrollTopYear().click();
+				}
+			} else if (lastYearAppear > randomValue) {
+				// Si el ultimo numero es menor al random value significa que hay que hacer scroll para abajo
+				// cuando hacer scroll para arriba? la diferencia entre los dos numeros
+				const quantityScroll = lastYearAppear - randomValue;
+
+				// click sobre el scroll hasta que renderice el elemento randomValue
+				for (let i = 0; i < quantityScroll; i++) {
+					this.get.scrollBottomYear().click();
+				}
+			}
+			// busca entre todos los elementos hasta encontrar el random year
+			this.get
+				.yearContainerDateAndTimePicker()
+				.children()
+				.each($element => {
+					const text = $element.text().trim();
+					cy.log($element);
+					cy.log(`Current year: ${text}`);
+					if (text === randomValue.toString()) {
+						cy.log(`Found random year: ${text}`);
+						cy.wrap($element).click();
+						resolve(randomValue);
+					}
+				});
+		});
 	}
 
 	setRandomMonthDropdown() {
@@ -133,7 +192,6 @@ class DatePicker {
 		this.get.timeList().scrollIntoView().find('li').contains(randomTime).click();
 	}
 
-	//----- Quizas tenga que borrar este approach :(
 	getYearArray() {
 		this.get.dateInput().click();
 		return cy.document().then(doc => {
