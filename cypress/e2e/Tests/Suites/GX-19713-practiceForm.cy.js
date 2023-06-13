@@ -1,19 +1,11 @@
 import { faker } from '@faker-js/faker';
-import { pom } from '@pages/Pages2/GX-19713-practiceForm.Page';
+import { form } from '@pages/Pages2/GX-19713-practiceForm.Page';
 import { removeLogs } from '@helper/RemoveLogs';
 
-describe('GX-19713 | Happy Path', () => {
-	before(() => {
-		cy.clearLocalStorage();
-		cy.clearCookies();
-	});
-
-	beforeEach(() => {
+describe('GX-19713 | TS: ✅ToolsQA | Forms | Practice Form', () => {
+	it('19714 | TC1: Validar el funcionamiento del formulario con datos aleatorios correctos.', () => {
 		cy.visit('https://demoqa.com/automation-practice-form');
 		cy.url().should('contain', '/automation-practice-form');
-	});
-
-	it('TC01: Happy Path Test Tools', () => {
 		const randomName = faker.internet.userName();
 		const randomLastName = faker.internet.userName();
 		const randomEmail = faker.internet.email();
@@ -25,36 +17,36 @@ describe('GX-19713 | Happy Path', () => {
 		const state = 'NCR';
 		const city = 'Delhi';
 
-		pom.typeName(randomName);
-		pom.get.inputName().should('have.value', randomName);
+		form.typeName(randomName);
+		form.get.inputName().should('have.value', randomName);
 
-		pom.typeLastName(randomLastName);
-		pom.get.inputLastName().should('have.value', randomLastName);
+		form.typeLastName(randomLastName);
+		form.get.inputLastName().should('have.value', randomLastName);
 
-		pom.typeEmail(randomEmail);
-		pom.get.inputMail().should('have.value', randomEmail);
+		form.typeEmail(randomEmail);
+		form.get.inputMail().should('have.value', randomEmail);
 
-		pom.clickDate();
+		form.clickDate();
 
-		pom.clickGenero(randomGender);
+		form.clickGenero(randomGender);
 
-		pom.typeNumber(randomNumber);
-		pom.get.inputNumber().should('have.value', randomNumber);
+		form.typeNumber(randomNumber);
+		form.get.inputNumber().should('have.value', randomNumber);
 
-		pom.typeSubject(randomSubject);
+		form.typeSubject(randomSubject);
 
-		pom.clickHobbie(randomHobbie);
+		form.clickHobbie(randomHobbie);
 
-		pom.clickUpload();
+		form.clickUpload();
 
-		pom.typeAddress(randomAddress);
-		pom.get.inputAddress().should('have.value', randomAddress);
+		form.typeAddress(randomAddress);
+		form.get.inputAddress().should('have.value', randomAddress);
 
-		pom.typeState(state);
+		form.typeState(state);
 
-		pom.typeCity(city);
+		form.typeCity(city);
 
-		pom.clickSubmit();
+		form.clickSubmit();
 	});
 });
 removeLogs();

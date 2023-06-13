@@ -1,4 +1,4 @@
-class POM {
+class Formulario {
 	get = {
 		inputName: () => cy.get('[id="firstName"]'),
 		inputLastName: () => cy.get('[id="lastName"]'),
@@ -61,4 +61,4 @@ class POM {
 		});
 	}
 }
-export const pom = new POM();
+export const form = new Formulario();
