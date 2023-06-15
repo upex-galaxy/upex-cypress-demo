@@ -10,3 +10,9 @@ describe('GX-6424 | TC1: Validate that button “double click me', () => {
         .should('have.attr', 'type') // ddd
 	})
 })
+
+//Se importa la funcion
+import { removeLogs } from "@helper/RemoveLogs";
+
+//Se ejecuta la funcion para evitar los errores (puedes hacerlo al final de tu codigo)
+removeLogs()
