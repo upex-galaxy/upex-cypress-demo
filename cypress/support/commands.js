@@ -26,3 +26,34 @@ import 'cypress-downloadfile/lib/downloadFileCommand';
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import { faker } from '@faker-js/faker';
+import { form } from '@pages/Forms/PracticeForm.Page';
+Cypress.Commands.add('randomFormData', modo => {
+	const randomData = {
+		firstName: faker.name.firstName(),
+		lastName: faker.name.lastName(),
+	};
+
+	if (modo === 'TC1') {
+		form.typeFirstName(faker.name.firstName());
+		form.typeLastName(faker.name.lastName());
+	} else {
+		form.typeFirstName(faker.name.firstName());
+		form.typeLastName(faker.name.lastName());
+		form.typeNumberPhone(faker.phone.phoneNumber('##########'));
+		form.selectGender(Math.floor(Math.random() * 3));
+		birthSelection();
+	}
+
+	function birthSelection() {
+		const currentYear = new Date().getFullYear();
+		const minYear = currentYear - 100; // Asumiendo que los años válidos están en un rango de 100 años atrás desde el año actual
+		form.clicBirthInput();
+		form.get.datepicker().within(() => {
+			form.yearSelect(faker.datatype.number({ min: minYear, max: currentYear }).toString());
+			form.monthSelect(faker.date.month());
+			form.weekClick(faker.datatype.number({ min: 0, max: 6 }));
+		});
+	}
+});

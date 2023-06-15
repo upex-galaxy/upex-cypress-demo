@@ -4,3 +4,5 @@ class ModalForm {
 		table: () => cy.get('.table]'),
 	};
 }
+
+export const modal = new ModalForm();

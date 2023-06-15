@@ -1,14 +1,15 @@
 class PracticeForm {
-	elements = {
-		first_nameInput: () => cy.get('#firstName'),
-		last_nameInput: () => cy.get('#lastName'),
+	get = {
+		firstNameInput: () => cy.get('#firstName'),
+		lastNameInput: () => cy.get('#lastName'),
 		emailInput: () => cy.get('#userEmail'),
 		numberPhoneInput: () => cy.get('#userNumber'),
 		radioButton: () => cy.get("[type='radio']"),
-		dataPickButton: () => cy.get('#dateOfBirthInput'),
-		yearSelectDropdown: () => cy.get('.react-datepicker__year-select'),
-		monthSelectDropdown: () => cy.get('.react-datepicker__month-select'),
-		DaySelectDropdown: () => cy.get('.react-datepicker__month div'),
+		birthInput: () => cy.get('#dateOfBirthInput'),
+		datepicker: () => cy.get('.react-datepicker__month-container'),
+		yearDropdown: () => cy.get('.react-datepicker__year-select'),
+		monthDropdown: () => cy.get('.react-datepicker__month-select'),
+		weekSelect: () => cy.get('.react-datepicker__week'),
 		SubjectsInput: () => cy.get('#subjectsInput'),
 		//SubjectValue: () => cy.get('.css-12jo7m5.subjects-auto-complete__multi-value__label').eq(0),
 		sportHobbieLabelElement: () => cy.get("label[for='hobbies-checkbox-1']"),
@@ -24,80 +25,80 @@ class PracticeForm {
 		PopupValuesSelector: () => cy.get('.table.table-dark.table-striped.table-bordered.table-hover tbody tr td'),
 	};
 
-	enterFirst_name(data) {
-		data && this.elements.first_nameInput().type(data).type('{enter}', { force: true });
+	typeFirstName(data) {
+		data && this.get.firstNameInput().type(data).type('{enter}', { force: true });
 	}
 
-	enterLast_name(data) {
-		data && this.elements.last_nameInput().type(data).type('{enter}', { force: true });
+	typeLastName(data) {
+		data && this.get.lastNameInput().type(data).type('{enter}', { force: true });
 	}
 
 	enterEmail(data) {
-		this.elements.emailInput().type(data).type('{enter}', { force: true });
+		this.get.emailInput().type(data).type('{enter}', { force: true });
 	}
 
-	enterNumbrePhone(data) {
-		data && this.elements.numberPhoneInput().type(data);
+	typeNumberPhone(data) {
+		data && this.get.numberPhoneInput().type(data);
 	}
 
-	RadiobttnSelect(data) {
-		this.elements.radioButton().eq(data).click({ force: true }); //Index 0, 1, 2
+	selectGender(data) {
+		this.get.radioButton().eq(data).click({ force: true });
 	}
 
-	dataPickButton() {
-		this.elements.dataPickButton().click({ force: true });
+	clicBirthInput() {
+		this.get.birthInput().click({ force: true });
 	}
 
 	yearSelect(data) {
-		this.elements.yearSelectDropdown().select(data);
+		this.get.yearDropdown().select(data);
 	}
 
 	monthSelect(data) {
-		this.elements.monthSelectDropdown().select(data);
+		this.get.monthDropdown().select(data);
 	}
 
-	DaySelect(index) {
-		this.elements.DaySelectDropdown().eq(index).click();
+	weekClick(index) {
+		this.get.weekSelect().eq(index).click();
 	}
 
 	EnterSubjects(data) {
-		this.elements.SubjectsInput().type(data, { force: true }).type('{enter}');
+		this.get.SubjectsInput().type(data, { force: true }).type('{enter}');
 	}
 
 	sportHobbieLabel() {
-		this.elements.sportHobbieLabelElement().click();
+		this.get.sportHobbieLabelElement().click();
 	}
 
 	readingHobbieLabel() {
-		this.elements.readingHobbieLabelElement().click();
+		this.get.readingHobbieLabelElement().click();
 	}
 
 	musicHobbieLabel() {
-		this.elements.musicHobbieLabelElement().click();
+		this.get.musicHobbieLabelElement().click();
 	}
 
 	chooseFile(file) {
-		this.elements.fileInput().click().attachFile(file);
+		this.get.fileInput().click().attachFile(file);
 	}
 
 	CurrentAddress(data) {
-		this.elements.currentAddressInput().type(data);
+		this.get.currentAddressInput().type(data);
 	}
 
 	Select_City(data) {
-		this.elements.dropdownSelect_City().click({ force: true }).type(data).type('{enter}');
+		this.get.dropdownSelect_City().click({ force: true }).type(data).type('{enter}');
 	}
 
 	Select_State(data) {
-		this.elements.dropdownSelect_State().click({ force: true }).type(data).type('{enter}');
+		this.get.dropdownSelect_State().click({ force: true }).type(data).type('{enter}');
 	}
 
-	submit() {
-		this.elements.submitButton().click({ force: true });
+	submitClick() {
+		this.get.submitButton().click({ force: true });
 	}
 
 	PopupValues(index) {
-		return this.elements.PopupValuesSelector().eq(index);
+		return this.get.PopupValuesSelector().eq(index);
 	}
 }
 
