@@ -8,17 +8,15 @@ describe('GX-6424 | TC1: Validate that button “double click me', () => {
 		cy.get('#doubleClickMessage').should('have.text', 'You have done a double click');
 	});
 
-	//it('GX-6424 | TC2: Validate that button “right click me” works correctly.', () => {
-	//cy.get('[href="/commands/querying"]').eq(2).click();
-	//cy.get('#query-btn') // Sintaxis Comando Get de Selector de IDs
-	//	.click(); // Esto es un método de Interacción (Acción)
-	//});
-	//it('GX-6424 | TC3: Validate that button “click me” works correctly.', () => {
-	//	cy.get('[href="/commands/querying"]').eq(2).click();
-	//	cy.get('#query-btn').click();
-	//	cy.get('.query-btn') // Sintaxis Comando Get de Selector de Clases
-	//		.should('contain.text', 'Button'); // Assertion BDD para validar resultado esperado (de muchas formas)
-	//});
+	it('GX-6424 | TC2: Validate that button “right click me” works correctly.', () => {
+		cy.get('#rightClickBtn').rightclick();
+		cy.get('#rightClickMessage').should('have.text', 'You have done a right click');
+	});
+
+	it('GX-6424 | TC3: Validate that button “click me” works correctly.', () => {
+		cy.get('[type="button"]').eq('3').click();
+		cy.get('#dynamicClickMessage').should('contain.text', 'You have done a dynamic click');
+	});
 });
 
 //Se importa la funcion
