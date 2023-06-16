@@ -29,31 +29,81 @@ import 'cypress-downloadfile/lib/downloadFileCommand';
 
 import { faker } from '@faker-js/faker';
 import { form } from '@pages/Forms/PracticeForm.Page';
+
 Cypress.Commands.add('randomFormData', modo => {
-	const randomData = {
+	const currentYear = new Date().getFullYear();
+	const minYear = currentYear - 100; // Valid years are in the range 100 years from the current year.
+
+	let data = {
+		index: Math.floor(Math.random() * 3),
 		firstName: faker.name.firstName(),
 		lastName: faker.name.lastName(),
+		mobile: faker.phone.number('##########'),
+		year: faker.datatype.number({ min: minYear, max: currentYear - 1 }).toString(), //max = current year minus 1 for not being born in the current year
+		month: faker.date.month(),
+		email: faker.internet.email(),
+		Subjects: '',
+		Hobbies: '',
+		Picture: '',
+		Address: '',
+		State: '',
+		City: '',
 	};
 
-	if (modo === 'TC1') {
-		form.typeFirstName(faker.name.firstName());
-		form.typeLastName(faker.name.lastName());
-	} else {
-		form.typeFirstName(faker.name.firstName());
-		form.typeLastName(faker.name.lastName());
-		form.typeNumberPhone(faker.phone.phoneNumber('##########'));
-		form.selectGender(Math.floor(Math.random() * 3));
-		birthSelection();
+	form.typeFirstName(data.firstName);
+	form.typeLastName(data.lastName);
+	form.typeNumberPhone(data.mobile);
+	form.selectGender(data.index);
+
+	form.get
+		.radioButton()
+		.eq(data.index)
+		.then(el => {
+			cy.log(el.val());
+			const valor = el.val();
+
+			data.gender = valor;
+		});
+
+	birthSelection();
+
+	form.get
+		.birthInput()
+		.click()
+		.then(el => {
+			const valor = el.val();
+			data.birthDate = valor;
+		});
+
+	if (modo === 'fullData') {
+		form.typeFirstName(data.firstName);
+		form.typeLastName(data.lastName);
 	}
 
+	Cypress.env('data', data);
+
+	//Date Picker
 	function birthSelection() {
-		const currentYear = new Date().getFullYear();
-		const minYear = currentYear - 100; // Asumiendo que los años válidos están en un rango de 100 años atrás desde el año actual
 		form.clicBirthInput();
 		form.get.datepicker().within(() => {
-			form.yearSelect(faker.datatype.number({ min: minYear, max: currentYear }).toString());
-			form.monthSelect(faker.date.month());
-			form.weekClick(faker.datatype.number({ min: 0, max: 6 }));
+			form.yearSelect(data.year);
+			form.get.yearDropdown().then(el => {
+				const valor = el.val();
+				data.year = valor;
+			});
+			form.monthSelect(data.month);
+
+			form.weekClick(weekSelection(data.month));
 		});
+	}
+
+	function weekSelection(month) {
+		let week;
+		if (month == 'February') {
+			week = faker.datatype.number({ min: 0, max: 5 });
+		} else {
+			week = faker.datatype.number({ min: 0, max: 6 });
+		}
+		return week;
 	}
 });

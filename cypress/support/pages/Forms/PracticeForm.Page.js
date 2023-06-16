@@ -10,6 +10,7 @@ class PracticeForm {
 		yearDropdown: () => cy.get('.react-datepicker__year-select'),
 		monthDropdown: () => cy.get('.react-datepicker__month-select'),
 		weekSelect: () => cy.get('.react-datepicker__week'),
+		daySelect: () => cy.get('.react-datepicker__day.react-datepicker__day--007.react-datepicker__day--selected'),
 		SubjectsInput: () => cy.get('#subjectsInput'),
 		//SubjectValue: () => cy.get('.css-12jo7m5.subjects-auto-complete__multi-value__label').eq(0),
 		sportHobbieLabelElement: () => cy.get("label[for='hobbies-checkbox-1']"),
@@ -23,6 +24,8 @@ class PracticeForm {
 		Select_City_Container: () => cy.get('#city'),
 		submitButton: () => cy.get('#submit'),
 		PopupValuesSelector: () => cy.get('.table.table-dark.table-striped.table-bordered.table-hover tbody tr td'),
+		modal: () => cy.get('.modal-content'),
+		modalTitle: () => cy.get('.modal-title'),
 	};
 
 	typeFirstName(data) {
