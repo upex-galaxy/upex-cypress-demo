@@ -60,12 +60,24 @@ class dragabble {
 			});
 	}
 	//posición actual B
-	getBoxPositionB() {
+	getBoxPositionB(ejeX, ejeY) {
 		return cy.get.elementoCajaB().move({ deltaX: ejeX, deltaY: ejeY, force: true });
 	}
 	//movimiento caja B
 	moveBox2(ejeX, ejeY) {
 		this.get.elementoCajaB().move({ deltaX: ejeX, deltaY: ejeY, force: true });
+	}
+	clickStyle() {
+		this.get.bttnStyle().click();
+	}
+	MoveBoxCenter(deltaX, deltaY) {
+		this.get.boxCenter().move({ deltaX, deltaY, force: true });
+	}
+	moveBoxTop(ejeX, ejeY) {
+		this.get.boxTop().move({ deltaX: ejeX, deltaY: ejeY });
+	}
+	moveBoxCursor(ejeX, ejeY) {
+		this.get.boxCursor().move({ deltaX: ejeX, deltaY: ejeY });
 	}
 }
 export const Dragabble = new dragabble();

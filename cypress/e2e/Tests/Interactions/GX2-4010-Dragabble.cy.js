@@ -66,5 +66,26 @@ describe('✅ToolsQA | Interactions | Dragabble', () => {
 			});
 		});
 	});
+	it.only('Validar mover la caja "i will always stick to the center".', () => {
+		Dragabble.clickStyle();
+		Dragabble.get.bttnStyle().should('have.class', 'active');
+		const deltaX = Cypress._.random(0, 90);
+		cy.log(deltaX);
+		const deltaY = Cypress._.random(0, 90);
+		cy.log(deltaY);
+		Dragabble.MoveBoxCenter(deltaX, deltaY);
+		Dragabble.get.boxCenter().should('have.css', '', `${deltaX}px`);
+		//Dragabble.get.boxCenter().should('have.css', 'top', `${deltaY}px`);
+	});
+	it('Validar mover la caja "My cursor is at top left"', () => {
+		Dragabble.clickStyle();
+		Dragabble.get.boxTop().should('have.attr', 'id', 'cursorTopLeft').and('be.visible');
+		const deltaX = Cypress._.random(0, 600);
+		cy.log(deltaX);
+		const deltaY = 0;
+		cy.log(deltaY);
+		Dragabble.moveBoxTop(deltaX, deltaY);
+		Dragabble.get.boxCursor().should('have.css', 'left', `${deltaX}px`);
+	});
 });
 removeLogs();
