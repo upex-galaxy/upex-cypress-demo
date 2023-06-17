@@ -50,5 +50,21 @@ describe('✅ToolsQA | Interactions | Dragabble', () => {
 			});
 		});
 	});
+	it('4011 | TC5: Validar botón "i am contained within my parent" se mueva en un espacio determinado. ', () => {
+		Dragabble.clickContainer();
+		//objeto
+		Dragabble.moveBox2(1, 1);
+		Dragabble.getObjectPositionB().then(initialPosition => {
+			cy.log(initialPosition);
+			Dragabble.moveBox2(14, 90);
+			Dragabble.getObjectPositionB().then(finalPosition => {
+				cy.log(finalPosition);
+				expect(initialPosition).not.equal(finalPosition);
+				Dragabble.get.cajaBContenedora().within(() => {
+					Dragabble.get.elementoCajaB().should('exist');
+				});
+			});
+		});
+	});
 });
 removeLogs();

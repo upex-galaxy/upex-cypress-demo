@@ -46,6 +46,7 @@ class dragabble {
 			return { x: rect.left, y: rect.top };
 		});
 	}
+	//movimiento objeto A
 	moveBox(ejeX, ejeY) {
 		this.get.boxInsideContainer().move({ deltaX: ejeX, deltaY: ejeY, force: true });
 	}
@@ -62,6 +63,9 @@ class dragabble {
 	getBoxPositionB() {
 		return cy.get.elementoCajaB().move({ deltaX: ejeX, deltaY: ejeY, force: true });
 	}
-	//pestaña cursor Style.
+	//movimiento caja B
+	moveBox2(ejeX, ejeY) {
+		this.get.elementoCajaB().move({ deltaX: ejeX, deltaY: ejeY, force: true });
+	}
 }
 export const Dragabble = new dragabble();
