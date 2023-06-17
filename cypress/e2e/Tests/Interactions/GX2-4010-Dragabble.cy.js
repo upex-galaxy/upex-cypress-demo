@@ -24,7 +24,7 @@ describe('✅ToolsQA | Interactions | Dragabble', () => {
 		Dragabble.moveOnlyX(deltaX, deltaY);
 		Dragabble.get.boxX().should('have.css', 'left', `${deltaX}px`);
 	});
-	it('4011 | TC3; Validar mover el botón "Y" de manera aleatoria.', () => {
+	it('4011 | TC3: Validar mover el botón "Y" de manera aleatoria.', () => {
 		Dragabble.clickAxis();
 		Dragabble.get.boxY().should('have.attr', 'id', 'restrictedY').and('be.visible');
 		const deltaX = 0;
@@ -33,6 +33,22 @@ describe('✅ToolsQA | Interactions | Dragabble', () => {
 		cy.log(deltaY);
 		Dragabble.moveOnlyY(deltaX, deltaY);
 		Dragabble.get.boxY().should('have.css', 'top', `${deltaY}px`);
+	});
+	it('4011 | TC4: Validar botón "i am contained within the box" se mueva en un espacio delimitado.', () => {
+		Dragabble.clickContainer();
+		//objeto
+		Dragabble.moveBox(1, 1);
+		Dragabble.getObjectPosition().then(initialPosition => {
+			cy.log(initialPosition);
+			Dragabble.moveBox(680, 110); // moviendo más allá de la caja!
+			Dragabble.getObjectPosition().then(finalPosition => {
+				cy.log(finalPosition);
+				expect(initialPosition).not.equal(finalPosition);
+				Dragabble.get.boxContainer().within(() => {
+					Dragabble.get.boxInsideContainer().should('exist');
+				});
+			});
+		});
 	});
 });
 removeLogs();
