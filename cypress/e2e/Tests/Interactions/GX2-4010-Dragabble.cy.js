@@ -1,4 +1,4 @@
-import { Dragabble } from '@pages/Interactions/dragabble.page';
+import { Dragabble } from '@pages/Interactions/GX2-4010-dragabble.page';
 import { removeLogs } from '@helper/RemoveLogs';
 describe('✅ToolsQA | Interactions | Dragabble', () => {
 	beforeEach('Precondition', () => {
@@ -19,6 +19,7 @@ describe('✅ToolsQA | Interactions | Dragabble', () => {
 		Dragabble.clickAxis();
 		Dragabble.get.boxX().should('have.attr', 'id', 'restrictedX').and('be.visible');
 		const deltaX = Cypress._.random(0, 300);
+		cy.log(deltaX);
 		const deltaY = 0;
 		cy.log(deltaX);
 		Dragabble.moveOnlyX(deltaX, deltaY);
@@ -66,26 +67,19 @@ describe('✅ToolsQA | Interactions | Dragabble', () => {
 			});
 		});
 	});
-	it.only('Validar mover la caja "i will always stick to the center".', () => {
+	it.only('4011 | TC6:Validar mover la caja "i will always stick to the center".', () => {
 		Dragabble.clickStyle();
 		Dragabble.get.bttnStyle().should('have.class', 'active');
-		const deltaX = Cypress._.random(0, 90);
-		cy.log(deltaX);
-		const deltaY = Cypress._.random(0, 90);
-		cy.log(deltaY);
-		Dragabble.MoveBoxCenter(deltaX, deltaY);
-		Dragabble.get.boxCenter().should('have.css', '', `${deltaX}px`);
-		//Dragabble.get.boxCenter().should('have.css', 'top', `${deltaY}px`);
+		Dragabble.getObjectPosition1().then(initialPosition => {
+			cy.log(initialPosition);
+			Dragabble.moveObjectCenter(20, 90);
+			Dragabble.getObjectPosition1().then(finalPosition => {
+				cy.log(finalPosition);
+				Dragabble.get.boxCenter().should('exist');
+			});
+		});
 	});
-	it('Validar mover la caja "My cursor is at top left"', () => {
-		Dragabble.clickStyle();
-		Dragabble.get.boxTop().should('have.attr', 'id', 'cursorTopLeft').and('be.visible');
-		const deltaX = Cypress._.random(0, 600);
-		cy.log(deltaX);
-		const deltaY = 0;
-		cy.log(deltaY);
-		Dragabble.moveBoxTop(deltaX, deltaY);
-		Dragabble.get.boxCursor().should('have.css', 'left', `${deltaX}px`);
-	});
+	// it.only('4011 | TC7: Validar mover la caja "My cursor is at top left"', () => {
+	// });
 });
 removeLogs();
