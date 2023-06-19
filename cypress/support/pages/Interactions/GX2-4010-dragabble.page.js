@@ -70,8 +70,8 @@ class dragabble {
 	clickStyle() {
 		this.get.bttnStyle().click();
 	}
-	//posición actual del objeto
-	getObjectPosition1() {
+	//posición actual del objeto Center.
+	getObjectCenter() {
 		return this.get
 			.boxCenter()
 			.invoke('attr', 'style')
@@ -79,9 +79,35 @@ class dragabble {
 				return style;
 			});
 	}
-	//movimiento del objeto
-	moveObjectCenter(ejeX, ejeY) {
-		this.get.boxCenter().move({ deltaX: ejeX, deltaY: ejeY, force: true });
+	//movimiento boxCenter
+	moveBoxCenter(ejeX, ejeY) {
+		this.get.boxCenter().move({ deltaX: ejeX, deltaY: ejeY });
+	}
+	//posición actual del objeto left
+	getObjectTop() {
+		return this.get
+			.boxTop()
+			.invoke('attr', 'style')
+			.then(style => {
+				return style;
+			});
+	}
+	//movimiento boxTop
+	moveBoxTop(ejeX, ejeY) {
+		this.get.boxTop().move({ deltaX: ejeX, deltaY: ejeY });
+	}
+	//posición actual del objeto cursor
+	getObjectCursor() {
+		return this.get
+			.boxCursor()
+			.invoke('attr', 'style')
+			.then(style => {
+				return style;
+			});
+	}
+	//movimiento boxCursor
+	moveBoxCursor(ejeX, ejeY) {
+		this.get.boxCursor().move({ deltaX: ejeX, deltaY: ejeY });
 	}
 }
 export const Dragabble = new dragabble();

@@ -67,19 +67,41 @@ describe('✅ToolsQA | Interactions | Dragabble', () => {
 			});
 		});
 	});
-	it.only('4011 | TC6:Validar mover la caja "i will always stick to the center".', () => {
+	it('4011 | TC6:Validar mover la caja "i will always stick to the center".', () => {
 		Dragabble.clickStyle();
 		Dragabble.get.bttnStyle().should('have.class', 'active');
-		Dragabble.getObjectPosition1().then(initialPosition => {
+		Dragabble.getObjectCenter().then(initialPosition => {
 			cy.log(initialPosition);
-			Dragabble.moveObjectCenter(20, 90);
-			Dragabble.getObjectPosition1().then(finalPosition => {
+			Dragabble.moveBoxCenter(0, 300);
+			Dragabble.getObjectCenter().then(finalPosition => {
 				cy.log(finalPosition);
-				Dragabble.get.boxCenter().should('exist');
+				expect(initialPosition).not.equal(finalPosition);
 			});
 		});
 	});
-	// it.only('4011 | TC7: Validar mover la caja "My cursor is at top left"', () => {
-	// });
+	it('4011 | TC7: Validar mover la caja "My cursor is at top left"', () => {
+		Dragabble.clickStyle();
+		Dragabble.get.bttnStyle().should('have.class', 'active');
+		Dragabble.getObjectTop().then(initialPosition => {
+			cy.log(initialPosition);
+			Dragabble.moveBoxTop(0, 300);
+			Dragabble.getObjectTop().then(finalPosition => {
+				cy.log(finalPosition);
+				expect(initialPosition).not.equal(finalPosition);
+			});
+		});
+	});
+	it('4011 | TC8: Validar mover "i will always stick to the center"', () => {
+		Dragabble.clickStyle();
+		Dragabble.get.bttnStyle().should('have.class', 'active');
+		Dragabble.getObjectCursor().then(initialPosition => {
+			cy.log(initialPosition);
+			Dragabble.moveBoxCursor(0, 300);
+			Dragabble.getObjectCursor().then(finalPosition => {
+				cy.log(finalPosition);
+				expect(initialPosition).not.equal(finalPosition);
+			});
+		});
+	});
 });
 removeLogs();
