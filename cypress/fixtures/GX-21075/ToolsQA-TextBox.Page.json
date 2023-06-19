@@ -1,10 +1,33 @@
 {
-    "input": {
-	"FullName": "Upexmagg",
-	"email": "hola@gmail.com",
-    "CurrentAddress": "Caracas, Venezuela",
-    "permanentAddress": "The World"
-},
-
-
-
+    "FullName": {
+        "input": "[type='text']",
+        "data": {
+            "valid": "Upexmagg",
+            "invalid": ""
+        }
+    },    
+    
+    "email": { 
+        "input": "([type='email']",
+        "data": {
+        "valid": "hola@gmail.com"
+        "invalid": "holagmail.com",
+        }
+    },
+"CurrentAddress": {
+        "input": "#CurrentAddress"
+        "data": {
+        "valid": "Caracas, Venezuela"
+        "invalid": "",
+        }
+    },
+"PermanentAddress": {
+        "input": "#PermanentAddress"
+        "data": {
+        "valid": "The World"
+        "invalid": ""
+        }
+    },
+    {
+    "SubmitButton": "#Submit"
+    }
