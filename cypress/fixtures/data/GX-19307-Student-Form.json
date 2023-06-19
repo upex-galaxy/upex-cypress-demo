@@ -9,6 +9,11 @@
 			"WrongStudentEmail3": "roman@.com",
 			"WrongStudentEmail4": "roman@hotmailcom",
 			"WrongStudentEmail5": "roman@hotmail.c"
+		},
+		"Subjects": "Maths",
+		"StateAndCity": {
+			"State": "NCR",
+			"City": "Delhi"
 		}
 	},
 	"url": "/automation-practice-form",
@@ -55,12 +60,5 @@
 			"State": "NCR",
 			"City": "Delhi"
 		}
-	},
-	"array": {
-		"Months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-		"Hobbies": [3, 4, 5],
-		"Genders": [0, 1, 2],
-		"GendersText": ["Male", "Female", "Other"],
-		"HobbiesText": ["x", "y", "z", "Sports", "Reading", "Music"]
 	}
 }
