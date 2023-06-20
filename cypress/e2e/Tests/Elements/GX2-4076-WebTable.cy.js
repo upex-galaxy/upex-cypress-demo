@@ -1,11 +1,12 @@
 import { webtable } from '@pages/Elements/GX2-WebTables';
 import { removeLogs } from '@helper/RemoveLogs';
+import { dataBase } from '@pages/Elements/GX2-WebTables';
 import { userDatabaseArray } from '@pages/Elements/GX2-WebTables';
 describe('GX2-4076 | ✅ToolsQA | Elements | Web Table', () => {
 	beforeEach('Preconditions', () => {
 		cy.visit('/webtables');
 	});
-	it('GX2-4077 | TC1: Validate that the user can add a register', () => {
+	it.only('GX2-4077 | TC1: Validate that the user can add a register', () => {
 		webtable.get.addButton().should('exist').and('be.enabled');
 		webtable.clickAddbutton();
 		webtable.get.registrationModal().should('exist');
@@ -32,19 +33,19 @@ describe('GX2-4076 | ✅ToolsQA | Elements | Web Table', () => {
 		});
 		webtable.get.submitButton().should('be.enabled').and('contain', 'Submit');
 		webtable.clickSubmit();
-		webtable.get
-			.rows()
-			.eq(3)
-			.within(() => {
-				for (let i = 0; i <= 5; i++) {
-					webtable.get
-						.cells()
-						.eq(i)
-						.then(info => {
-							cy.wrap(info.text()).should('equal', userDatabaseArray[i]);
-						});
-				}
-			});
+		webtable.retrieveRowInfo().then(() => {
+			for (let i = 0; i <= 5; i++) {
+				expect(Cypress.env('cellInformation')).to.include(userDatabaseArray[i]);
+			}
+		});
+	});
+	it('GX2-4077 | TC2: Validate that the user can filter a register search by field', () => {
+		webtable.get.searchbox().should('exist');
+		webtable.searchRandomUser();
+		webtable.gettingCelluser();
+		cy.wrap(dataBase).then(() => {
+			expect(dataBase.chosenUser).to.equal(dataBase.userInCell);
+		});
 	});
 });
 
