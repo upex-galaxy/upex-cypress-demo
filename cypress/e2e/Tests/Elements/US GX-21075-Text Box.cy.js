@@ -33,15 +33,15 @@ describe('US GX-21075 | TS: ✅ToolsQA | Elements | Text Box: Fill form and Subm
 			cy.get(the.SubmitButton).click();
 			cy.get('.form-control').eq('1').should('have.class', 'field-error');
 		});
-		//	it('GX-21076 | TC4:  Validate field “email” is submitted with empty data and no log message is displayed.', () => {
-		//		cy.get('[href="/commands/querying"]').eq(2).click();
-		//		cy.get('#query-btn').click();
-		//		cy.get('.query-btn') // Sintaxis Comando Get de Selector de Clases
-		//			.should('contain.text', 'Button');
-		///	}
+	});
+
+	it('GX-21076 | TC4:  Validate field “email” is submitted with empty data and no log message is displayed.', () => {
+		cy.fixture('GX-21075/ToolsQA-TextBox.Page').then(the => {
+			cy.get(the.email.input).should('be.empty');
+			cy.get(the.SubmitButton).click();
+		});
 	});
 });
-
 //Se importa la funcion
 import { removeLogs } from '@helper/RemoveLogs';
 
