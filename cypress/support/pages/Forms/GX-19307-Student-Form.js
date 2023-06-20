@@ -40,14 +40,6 @@ class StudentForm {
 	clickGender(randomGender) {
 		this.get.Gender().eq(randomGender).click();
 	}
-	stringGender(randomGender) {
-		const genderOptions = {
-			0: 'Male',
-			1: 'Female',
-			2: 'Other',
-		};
-		return genderOptions[randomGender];
-	}
 
 	typeRandomMobile(randomMobile) {
 		this.get.Mobile().type(randomMobile);
