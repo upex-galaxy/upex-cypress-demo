@@ -1,33 +1,32 @@
 {
-    "FullName": {
-        "input": "[type='text']",
-        "data": {
-            "valid": "Upexmagg",
-            "invalid": ""
-        }
-    },    
-    
-    "email": { 
-        "input": "([type='email']",
-        "data": {
-        "valid": "hola@gmail.com"
-        "invalid": "holagmail.com",
-        }
-    },
-"CurrentAddress": {
-        "input": "#CurrentAddress"
-        "data": {
-        "valid": "Caracas, Venezuela"
-        "invalid": "",
-        }
-    },
-"PermanentAddress": {
-        "input": "#PermanentAddress"
-        "data": {
-        "valid": "The World"
-        "invalid": ""
-        }
-    },
-    {
-    "SubmitButton": "#Submit"
-    }
+	"FullName": {
+		"input": "#userName",
+		"data": {
+			"valid": "Upexmagg",
+			"invalid": ""
+		}
+	},
+
+	"email": {
+		"input": "#userEmail",
+		"data": {
+			"valid": "hola@gmail.com",
+			"invalid": "holagmail.com"
+		}
+	},
+	"CurrentAddress": {
+		"input": "#currentAddress",
+		"data": {
+			"valid": "Caracas, Venezuela",
+			"invalid": ""
+		}
+	},
+	"PermanentAddress": {
+		"input": "#permanentAddress",
+		"data": {
+			"valid": "The World",
+			"invalid": ""
+		}
+	},
+	"SubmitButton": "#submit"
+}
