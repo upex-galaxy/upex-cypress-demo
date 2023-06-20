@@ -11,7 +11,8 @@
 		"input": "#userEmail",
 		"data": {
 			"valid": "hola@gmail.com",
-			"invalid": "holagmail.com"
+			"invalid": "holagmail.com",
+			"empty": ""
 		}
 	},
 	"CurrentAddress": {
