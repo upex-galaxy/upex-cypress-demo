@@ -59,9 +59,7 @@ Cypress.Commands.add('randomFormData', modo => {
 		.radioButton()
 		.eq(data.index)
 		.then(el => {
-			cy.log(el.val());
 			const valor = el.val();
-
 			data.gender = valor;
 		});
 
@@ -80,9 +78,8 @@ Cypress.Commands.add('randomFormData', modo => {
 		form.typeLastName(data.lastName);
 	}
 
-	Cypress.env('data', data);
+	Cypress.env('dataForm', data);
 
-	//Date Picker
 	function birthSelection() {
 		form.clicBirthInput();
 		form.get.datepicker().within(() => {
@@ -93,17 +90,22 @@ Cypress.Commands.add('randomFormData', modo => {
 			});
 			form.monthSelect(data.month);
 
-			form.weekClick(weekSelection(data.month));
+			form.weekClick(faker.datatype.number({ min: 0, max: 5 }));
 		});
 	}
+});
 
-	function weekSelection(month) {
-		let week;
-		if (month == 'February') {
-			week = faker.datatype.number({ min: 0, max: 5 });
-		} else {
-			week = faker.datatype.number({ min: 0, max: 6 });
-		}
-		return week;
-	}
+import { modal } from '@pages/Forms/ModalForm.Page';
+Cypress.Commands.add('getModalData', () => {
+	/* let data = {};
+	modal.get.rows().then(rows => {
+		rows.each((index, row) => {
+			const columns = Cypress.$(row).find('td');
+			const key = Cypress.$(columns[0]).text().trim();
+			const value = Cypress.$(columns[1]).text().trim();
+			data[key] = value;
+		});
+	});
+
+	Cypress.env('modalData', data); */
 });
