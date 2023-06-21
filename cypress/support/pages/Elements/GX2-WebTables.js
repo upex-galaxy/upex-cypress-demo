@@ -1,6 +1,8 @@
 import { faker } from '@faker-js/faker';
 export let dataBase = {};
 export let userDatabaseArray = [];
+export let unsortedNames = [];
+export let sortedNames = [];
 class WebTable {
 	get = {
 		//RegisterModal
@@ -34,6 +36,8 @@ class WebTable {
 		cells: () => cy.get('[class="rt-td"]'),
 		//Searchbox
 		searchbox: () => cy.get('[id = "searchBox"]'),
+		//sporting buttons
+		nameSortingButton: () => cy.get('[class="rt-resizable-header-content"]').first(),
 	};
 	clickAddbutton() {
 		this.get.addButton().click();
@@ -122,7 +126,7 @@ class WebTable {
 				}
 			})
 			.then(() => {
-				const randomNumber = Cypress._.random(0, userDatabaseArray.length);
+				const randomNumber = Cypress._.random(0, userDatabaseArray.length - 1);
 				randomUser = userDatabaseArray[randomNumber];
 				dataBase.chosenUser = randomUser;
 				this.get.searchbox().type(randomUser);
@@ -141,6 +145,44 @@ class WebTable {
 						dataBase.userInCell = name.text();
 					});
 			});
+	}
+	getNamesUnsorted() {
+		this.get.rows().then($rows => {
+			for (let i = 0; i <= 2; i++) {
+				cy.wrap($rows)
+					.eq(i)
+					.within(() => {
+						this.get
+							.cells()
+							.eq(0)
+							.then(nametext => {
+								unsortedNames.push(nametext.text());
+							});
+					});
+			}
+		});
+	}
+	sortingNames() {
+		return unsortedNames.sort();
+	}
+	clickNameSortingButton() {
+		this.get.nameSortingButton().click();
+	}
+	getSortedNames() {
+		this.get.rows().then($rows => {
+			for (let i = 0; i <= 2; i++) {
+				cy.wrap($rows)
+					.eq(i)
+					.within(() => {
+						this.get
+							.cells()
+							.eq(0)
+							.then(nametext => {
+								sortedNames.push(nametext.text());
+							});
+					});
+			}
+		});
 	}
 }
 export const webtable = new WebTable();
