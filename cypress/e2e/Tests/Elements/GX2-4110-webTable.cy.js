@@ -8,8 +8,10 @@ describe('GX2-4110 | ToolsQA | Elements | Web Table', () => {
 		cy.visit('/webtables');
 	});
 	it('4111 | TC1: Validate user Add a register with: First name, Last name, Email, Age, Salary and Department', () => {
+		web.get.addBtn().should('be.enabled');
 		web.clickAddBtn();
 		web.get.userForm().should('exist');
+		web.getFormComponents().should('exist');
 		web.fillFirstName(faker.name.firstName()).invoke('val').should('be.a', 'string');
 		web.fillLastName(faker.name.lastName()).invoke('val').should('be.a', 'string');
 		web.fillEmail(faker.internet.email())
@@ -17,17 +19,18 @@ describe('GX2-4110 | ToolsQA | Elements | Web Table', () => {
 			.then(val => {
 				expect(val).to.match(/^([a-zA-Z0-9_\-\\.]+)@([a-zA-Z0-9_\-\\.]+)\.([a-zA-Z]{2,5})$/);
 			});
-		web.fillAge(faker.datatype.number({ max: 100 }))
+		web.fillAge(faker.datatype.number({ min: 18, max: 65 }))
 			.invoke('val')
 			.then(val => {
 				expect(parseInt(val)).to.be.a('number');
 			});
-		web.fillSalary(faker.datatype.number({ max: 100000 }))
+		web.fillSalary(faker.datatype.number({ min: 1000, max: 100000 }))
 			.invoke('val')
 			.then(val => {
 				expect(parseInt(val)).to.be.a('number');
 			});
 		web.fillDepartment(faker.name.jobArea()).invoke('val').should('be.a', 'string');
+		web.get.submitBtn().should('be.enabled');
 		web.clickSubmitBtn();
 		web.get
 			.registerList()
@@ -64,6 +67,8 @@ describe('GX2-4110 | ToolsQA | Elements | Web Table', () => {
 	it('4111 | TC3: Validate user can filter a register search by field.', () => {
 		web.get.searchBox().should('have.attr', 'placeholder', 'Type to search');
 		web.get.iconSearch().should('exist');
+		
+		// type in the search bar just 2 letters of a word to validate the list of coincidences .
 		web.get.searchBox().type('al');
 		web.get
 			.registerList()

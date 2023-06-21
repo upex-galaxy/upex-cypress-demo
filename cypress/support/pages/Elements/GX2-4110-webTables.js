@@ -99,6 +99,9 @@ class Web {
 	clickPreviousBtn() {
 		this.get.previousBtn().click();
 	}
+	getFormComponents() {
+		return this.get.firstName(), this.get.lastName(), this.get.email(), this.get.age(), this.get.salary(), this.get.department();
+	}
 	getFirstNameList() {
 		const arrayFirstName = [];
 		return cy
