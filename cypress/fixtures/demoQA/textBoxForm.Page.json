@@ -1,0 +1,22 @@
+{
+	"input": {
+		"fullName": "#userName",
+		"email": "#userEmail",
+		"currentAddress": "#currentAddress",
+		"permanentAddress": "#permanentAddress",
+		"submitButton": "#submit"
+	},
+	"data": {
+		"valid": {
+			"user": "Julian Santamaria",
+			"validEmailAddress": "julian.battaglini@upexgalaxy.com",
+			"firstAddress": "Plaza Sant Pasqual 27",
+			"secondAddress": "Lorenzini 1051"
+		},
+		"invalid": {
+			"invalidEmailAddress": "julian.battaglini@upexgalaxycom",
+			"": ""
+		}
+	},
+	"error": ".field-error"
+}
