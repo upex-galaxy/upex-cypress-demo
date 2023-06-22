@@ -1,41 +1,43 @@
 {
 	"password": {
-		"input": "",
+		"input": "#password",
 		"data": {
-			"valid": "",
-			"invalid": ""
+			"valid": "secret_sauce",
+			"invalid": "secretsauce"
 		}
 	},
 
 	"userone": {
-		"input": "",
+		"input": "#user-name",
 		"data": {
-			"valid": "",
-			"invalid": ""
+			"valid": "standard_user",
+			"invalid": "baduser"
 		}
 	},
 
 	"usertwo": {
-		"input": "",
+		"input": "#user-name",
 		"data": {
-			"valid": "",
+			"valid": "problem_user",
 			"invalid": ""
 		}
 	},
 
 	"userthree": {
-		"input": "",
+		"input": "#user-name",
 		"data": {
-			"valid": "",
+			"valid": "performance_glitch_user",
 			"invalid": ""
 		}
 	},
 
 	"userblocked": {
-		"input": "",
+		"input": "#user-name",
 		"data": {
-			"valid": "",
+			"valid": "locked_out_user",
 			"invalid": ""
 		}
-	}
+	},
+
+	"loginbutton": "#login-button"
 }
