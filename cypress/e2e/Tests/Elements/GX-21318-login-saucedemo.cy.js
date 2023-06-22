@@ -35,6 +35,38 @@ describe('GX-21318-✅-swag-labs-account-iniciar-sesion-y-br-de-accesos', () => 
 			cy.get('.error').eq('2').should('have.text', 'Epic sadface: Sorry, this user has been locked out.');
 		});
 	});
+	it('GX-21319 | TC5: Validate log in with username and password that is not on database.', () => {
+		cy.fixture('GX-21318/ToolsQA-LogIn-saucedemo').then(the => {
+			cy.get(the.userone.input).type(the.userone.data.invalid);
+			cy.get(the.password.input).type(the.password.data.invalid);
+			cy.get(the.loginbutton).click();
+			cy.get('.error').eq('2').should('have.text', 'Epic sadface: Username and password do not match any user in this service');
+		});
+	});
+	it('GX-21319 | TC6: Validate log in with empty field on username and valid password.', () => {
+		cy.fixture('GX-21318/ToolsQA-LogIn-saucedemo').then(the => {
+			cy.get(the.userone.input).should('be.empty');
+			cy.get(the.password.input).type(the.password.data.valid);
+			cy.get(the.loginbutton).click();
+			cy.get('.error').eq('2').should('have.text', 'Epic sadface: Username is required');
+		});
+	});
+	it('GX-21319 | TC7: Validate log in with empty field on password and valid username.', () => {
+		cy.fixture('GX-21318/ToolsQA-LogIn-saucedemo').then(the => {
+			cy.get(the.userone.input).type(the.userone.data.valid);
+			cy.get(the.password.input).should('be.empty');
+			cy.get(the.loginbutton).click();
+			cy.get('.error').eq('2').should('have.text', 'Epic sadface: Password is required');
+		});
+	});
+	it('GX-21319 | TC8: Validate log in with empty field on username and password.', () => {
+		cy.fixture('GX-21318/ToolsQA-LogIn-saucedemo').then(the => {
+			cy.get(the.userone.input).should('be.empty');
+			cy.get(the.password.input).should('be.empty');
+			cy.get(the.loginbutton).click();
+			cy.get('.error').eq('2').should('have.text', 'Epic sadface: Username is required');
+		});
+	});
 });
 //Se importa la funcion
 import { removeLogs } from '@helper/RemoveLogs';
