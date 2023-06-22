@@ -12,7 +12,7 @@ describe('GX2-3452 | ToolsQA | Interactions | Sortable', () => {
 		});
 		cy.visit('https://demoqa.com/sortable ');
 	});
-	
+
 	it('GX2-3453 | TC1: Validate the order and list items.', () => {
 		sortable.get.listTab().should('exist').and('be.visible');
 		sortable
