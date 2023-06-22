@@ -60,7 +60,32 @@ describe('GX2-4076 | ✅ToolsQA | Elements | Web Table', () => {
 			expect(sortedNames).to.deep.equal(sortedInTest);
 		});
 	});
-	it('GX2-4077 | TC4: Validate that the user can edit a register', () => {});
+	it('GX2-4077 | TC4: Validate that the user can edit a register', () => {
+		webtable.get.rowButtons().should('be.visible');
+		webtable.clickRandomEditButton();
+		webtable.editName();
+		webtable.clickSubmit();
+		webtable
+			.waitforAsyncValue()
+			.then(() => {
+				webtable.gettingNewNameInCell();
+			})
+			.then(() => {
+				expect(dataBase.originalName).not.equal(dataBase.changedName);
+			});
+	});
+	it('GX2-4077 | TC5: Validate that the user can remove a register', () => {
+		webtable.get.rowButtons().should('be.visible');
+		webtable.clickRandomDeleteButton();
+		webtable
+			.waitforAsyncValue()
+			.then(() => {
+				webtable.checkingUserDeletion();
+			})
+			.then(() => {
+				webtable.checkingUserDeletion().should('not.contain', dataBase.nameInCell);
+			});
+	});
 });
 
 removeLogs();

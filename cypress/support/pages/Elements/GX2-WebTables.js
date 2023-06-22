@@ -34,6 +34,9 @@ class WebTable {
 		rows: () => cy.get('[class="rt-tr-group"]'),
 		evenrows: () => cy.get('[class="rt-tr -even"]'),
 		cells: () => cy.get('[class="rt-td"]'),
+		rowButtons: () => cy.get('[class="action-buttons"]'),
+		editButton: () => cy.get('[class="mr-2"]'),
+		deleteButton: () => cy.get('[title ="Delete"]'),
 		//Searchbox
 		searchbox: () => cy.get('[id = "searchBox"]'),
 		//sporting buttons
@@ -118,7 +121,7 @@ class WebTable {
 						.within(() => {
 							this.get
 								.cells()
-								.eq(0)
+								.first()
 								.then(nametext => {
 									userDatabaseArray.push(nametext.text());
 								});
@@ -183,6 +186,93 @@ class WebTable {
 					});
 			}
 		});
+	}
+	clickRandomEditButton() {
+		this.get
+			.rowButtons()
+			.then(rowbuttons => {
+				const rowButton = Cypress._.random(0, rowbuttons.length - 1);
+				Cypress.env('rowbutton', rowButton);
+				dataBase.selectedRow = Cypress.env('rowbutton', rowButton);
+			})
+			.then(() => {
+				this.get
+					.rows()
+					.eq(Cypress.env('rowbutton'))
+					.within(() => {
+						this.get
+							.cells()
+							.eq(0)
+							.then(nametext => {
+								dataBase.originalName = nametext.text();
+							});
+					});
+				this.get
+					.rowButtons()
+					.eq(Cypress.env('rowbutton'))
+					.within(() => {
+						this.get.editButton().should('be.visible');
+						this.get.editButton().click();
+					});
+			});
+	}
+	editName() {
+		this.get.nameForm().clear();
+		cy.wait(500);
+		const name = faker.name.firstName();
+		this.get.nameForm().type(name);
+	}
+	waitforAsyncValue() {
+		return cy.wrap(true);
+	}
+	gettingNewNameInCell() {
+		this.get
+			.rows()
+			.eq(Cypress.env('rowbutton'))
+			.within(() => {
+				this.get
+					.cells()
+					.first()
+					.then(name => {
+						dataBase.changedName = name.text();
+					});
+			});
+	}
+	clickRandomDeleteButton() {
+		this.get
+			.rowButtons()
+			.then(rowbuttons => {
+				const rowButton = Cypress._.random(0, rowbuttons.length - 1);
+				Cypress.env('rowbutton', rowButton);
+				dataBase.selectedRow = Cypress.env('rowbutton', rowButton);
+			})
+			.then(() => {
+				this.get
+					.rows()
+					.eq(Cypress.env('rowbutton'))
+					.within(() => {
+						this.get
+							.cells()
+							.eq(0)
+							.then(nametext => {
+								dataBase.nameInCell = nametext.text();
+							});
+					});
+				this.get
+					.rowButtons()
+					.eq(Cypress.env('rowbutton'))
+					.within(() => {
+						this.get.deleteButton().click();
+					});
+			});
+	}
+	checkingUserDeletion() {
+		return this.get
+			.rows()
+			.eq(Cypress.env('rowbutton'))
+			.within(() => {
+				this.get.cells().first();
+			});
 	}
 }
 export const webtable = new WebTable();
