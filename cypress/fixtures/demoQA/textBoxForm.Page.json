@@ -14,8 +14,12 @@
 			"secondAddress": "Lorenzini 1051"
 		},
 		"invalid": {
-			"invalidEmailAddress": "julian.battaglini@upexgalaxycom",
-			"": ""
+			"invalidEmailAddress1": "julian.battagliniupexgalaxycom",
+			"invalidEmailAddress2": "@upexgalaxycom",
+			"invalidEmailAddress3": "julian.battaglini@",
+			"invalidEmailAddress4": "julian.battaglini@upexgalaxycom",
+			"invalidEmailAddress5": "julian.battaglini@upexgalaxy.c",
+			"emptyEmailAddress1": ""
 		}
 	},
 	"error": ".field-error"
