@@ -25,7 +25,7 @@ describe('ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get('.mb-1').should('have.text', 'Email:julian.battaglini@upexgalaxy.com');
 		});
 	});
-	it('206823 | TC3: Validar que el mensaje es mostrado cuando los campos ”Full Name”, “Current Address“ y “Permanent Address“ estén completados al enviar el formulario', () => {
+	it('20683 | TC3: Validar que el mensaje es mostrado cuando los campos ”Full Name”, “Current Address“ y “Permanent Address“ estén completados al enviar el formulario', () => {
 		cy.fixture('demoQA/textBoxForm.Page').then(the => {
 			cy.get(the.input.fullName).click().type(the.data.valid.user);
 			cy.get(the.input.currentAddress).click().type(the.data.valid.firstAddress);
