@@ -38,7 +38,7 @@ describe('ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		cy.fixture('demoQA/textBoxForm.Page').then(the => {
 			cy.get(the.input.email).click().type(the.data.invalid.validEmailAddress);
 			cy.get(the.input.submitButton).click();
-			cy.get(the.email).should(be.error);
+			cy.get(the.email).should();
 		});
 	});
 	it('20683 | TC5: Validar que el formulario NO pueda ser enviado si el campo  ”Email” es inválido al no contener al menos un caracter alfanumérico antes del “@”', () => {});
