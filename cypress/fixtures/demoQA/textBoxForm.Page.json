@@ -18,8 +18,7 @@
 			"invalidEmailAddress2": "@upexgalaxycom",
 			"invalidEmailAddress3": "julian.battaglini@",
 			"invalidEmailAddress4": "julian.battaglini@upexgalaxycom",
-			"invalidEmailAddress5": "julian.battaglini@upexgalaxy.c",
-			"emptyEmailAddress1": ""
+			"invalidEmailAddress5": "julian.battaglini@upexgalaxy.c"
 		}
 	},
 	"error": ".field-error"
