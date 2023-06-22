@@ -1,0 +1,41 @@
+{
+	"password": {
+		"input": "",
+		"data": {
+			"valid": "",
+			"invalid": ""
+		}
+	},
+
+	"userone": {
+		"input": "",
+		"data": {
+			"valid": "",
+			"invalid": ""
+		}
+	},
+
+	"usertwo": {
+		"input": "",
+		"data": {
+			"valid": "",
+			"invalid": ""
+		}
+	},
+
+	"userthree": {
+		"input": "",
+		"data": {
+			"valid": "",
+			"invalid": ""
+		}
+	},
+
+	"userblocked": {
+		"input": "",
+		"data": {
+			"valid": "",
+			"invalid": ""
+		}
+	}
+}
