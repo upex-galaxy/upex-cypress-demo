@@ -33,6 +33,7 @@ import { form } from '@pages/Forms/PracticeForm.Page';
 Cypress.Commands.add('randomFormData', modo => {
 	const currentYear = new Date().getFullYear();
 	const minYear = currentYear - 100; // Valid years are in the range 100 years from the current year.
+	const newModo = modo;
 
 	let data = {
 		index: Math.floor(Math.random() * 3),
@@ -42,12 +43,9 @@ Cypress.Commands.add('randomFormData', modo => {
 		year: faker.datatype.number({ min: minYear, max: currentYear - 1 }).toString(), //max = current year minus 1 for not being born in the current year
 		month: faker.date.month(),
 		email: faker.internet.email(),
-		Subjects: '',
-		Hobbies: '',
-		Picture: '',
-		Address: '',
-		State: '',
-		City: '',
+		subjects: faker.lorem.words(10),
+		picture: Cypress.env('file'),
+		address: faker.address.streetAddress(),
 	};
 
 	form.typeFirstName(data.firstName);
@@ -73,9 +71,29 @@ Cypress.Commands.add('randomFormData', modo => {
 			data.birthDate = valor;
 		});
 
-	if (modo === 'fullData') {
-		form.typeFirstName(data.firstName);
-		form.typeLastName(data.lastName);
+	//only TC1
+	if (newModo === 'fullData') {
+		form.subjectsType(data.subjects);
+		form.typeAddress(data.address);
+		form.typeEmail(data.email);
+		form.selectHobbies(data.index);
+		form.get.isCheckedBox().within(el => {
+			const texto = el.next().text();
+			data.hobbies = texto;
+		});
+		//state and city
+		form.selectState('NCR');
+		form.get.stateContainer().then(el => {
+			const texto = el.text();
+			data.state = texto;
+		});
+		form.selectCity('Delhi');
+		form.get.cityContainer().then(el => {
+			const texto = el.text();
+			data.city = texto;
+		});
+		//file
+		form.addFile(data.picture);
 	}
 
 	Cypress.env('dataForm', data);
@@ -93,19 +111,4 @@ Cypress.Commands.add('randomFormData', modo => {
 			form.weekClick(faker.datatype.number({ min: 0, max: 5 }));
 		});
 	}
-});
-
-import { modal } from '@pages/Forms/ModalForm.Page';
-Cypress.Commands.add('getModalData', () => {
-	/* let data = {};
-	modal.get.rows().then(rows => {
-		rows.each((index, row) => {
-			const columns = Cypress.$(row).find('td');
-			const key = Cypress.$(columns[0]).text().trim();
-			const value = Cypress.$(columns[1]).text().trim();
-			data[key] = value;
-		});
-	});
-
-	Cypress.env('modalData', data); */
 });

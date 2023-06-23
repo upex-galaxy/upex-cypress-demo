@@ -3,7 +3,6 @@ class ModalForm {
 		modal: () => cy.get('.modal-content'),
 		modalTitle: () => cy.get('.modal-title'),
 		closeBtn: () => cy.get('#closeLargeModal'),
-		//rows3: () => cy.get('tbody > tr > :nth-child(2)'),
 		rows: () => cy.get('tbody > tr'),
 		name: () => cy.get('tbody > tr:nth-child(1) > td:nth-child(2)'),
 		email: () => cy.get('tbody > tr:nth-child(2) > td:nth-child(2)'),

@@ -11,21 +11,16 @@ class PracticeForm {
 		monthDropdown: () => cy.get('.react-datepicker__month-select'),
 		weekSelect: () => cy.get('.react-datepicker__week'),
 		daySelect: () => cy.get('.react-datepicker__day.react-datepicker__day--007.react-datepicker__day--selected'),
-		SubjectsInput: () => cy.get('#subjectsInput'),
-		//SubjectValue: () => cy.get('.css-12jo7m5.subjects-auto-complete__multi-value__label').eq(0),
-		sportHobbieLabelElement: () => cy.get("label[for='hobbies-checkbox-1']"),
-		readingHobbieLabelElement: () => cy.get("label[for='hobbies-checkbox-2']"),
-		musicHobbieLabelElement: () => cy.get("label[for='hobbies-checkbox-3']"),
+		subjectsInput: () => cy.get('#subjectsInput'),
+		checkBox: () => cy.get("[type='checkbox']"),
+		isCheckedBox: () => cy.get("[type='checkbox']:checked"),
+		addressInput: () => cy.get('#currentAddress'),
+		stateSelect: () => cy.get('#react-select-3-input'),
+		citySelect: () => cy.get('#react-select-4-input'),
+		stateContainer: () => cy.get('.css-1uccc91-singleValue'),
+		cityContainer: () => cy.get('.css-1pahdxg-control > .css-1hwfws3'),
 		fileInput: () => cy.get('#uploadPicture'),
-		currentAddressInput: () => cy.get('#currentAddress'),
-		dropdownSelect_State: () => cy.get('input#react-select-3-input'),
-		Select_StateAndCityValue: () => cy.get('.css-1uccc91-singleValue'),
-		dropdownSelect_City: () => cy.get('input[autocorrect="off"]').eq(2),
-		Select_City_Container: () => cy.get('#city'),
 		submitButton: () => cy.get('#submit'),
-		PopupValuesSelector: () => cy.get('.table.table-dark.table-striped.table-bordered.table-hover tbody tr td'),
-		modal: () => cy.get('.modal-content'),
-		modalTitle: () => cy.get('.modal-title'),
 	};
 
 	typeFirstName(data) {
@@ -34,10 +29,6 @@ class PracticeForm {
 
 	typeLastName(data) {
 		data && this.get.lastNameInput().type(data).type('{enter}', { force: true });
-	}
-
-	enterEmail(data) {
-		this.get.emailInput().type(data).type('{enter}', { force: true });
 	}
 
 	typeNumberPhone(data) {
@@ -64,44 +55,36 @@ class PracticeForm {
 		this.get.weekSelect().eq(index).click();
 	}
 
-	EnterSubjects(data) {
-		this.get.SubjectsInput().type(data, { force: true }).type('{enter}');
+	typeEmail(data) {
+		this.get.emailInput().type(data);
 	}
 
-	sportHobbieLabel() {
-		this.get.sportHobbieLabelElement().click();
+	subjectsType(data) {
+		this.get.subjectsInput().type(data, { force: true });
 	}
 
-	readingHobbieLabel() {
-		this.get.readingHobbieLabelElement().click();
+	selectHobbies(data) {
+		this.get.checkBox().eq(data).check({ force: true });
 	}
 
-	musicHobbieLabel() {
-		this.get.musicHobbieLabelElement().click();
+	typeAddress(data) {
+		this.get.addressInput().type(data, { force: true });
 	}
 
-	chooseFile(file) {
-		this.get.fileInput().click().attachFile(file);
+	selectState(data) {
+		this.get.stateSelect().click({ force: true }).type(data).type('{enter}');
 	}
 
-	CurrentAddress(data) {
-		this.get.currentAddressInput().type(data);
+	selectCity(data) {
+		this.get.citySelect().click({ force: true }).type(data).type('{enter}');
 	}
 
-	Select_City(data) {
-		this.get.dropdownSelect_City().click({ force: true }).type(data).type('{enter}');
-	}
-
-	Select_State(data) {
-		this.get.dropdownSelect_State().click({ force: true }).type(data).type('{enter}');
+	addFile(file) {
+		this.get.fileInput().click().selectFile(file);
 	}
 
 	submitClick() {
 		this.get.submitButton().click({ force: true });
-	}
-
-	PopupValues(index) {
-		return this.get.PopupValuesSelector().eq(index);
 	}
 }
 
