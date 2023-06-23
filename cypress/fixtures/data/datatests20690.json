@@ -1,0 +1,34 @@
+{
+    "FullName":{
+        "input":"#userName",
+        "validName":"Lucía",
+        "emptyName": ""
+    }   
+}
+{
+    "Email":{
+        "input":"#userEmail",
+        "validEmail":"lucia55@gmail.com",
+        "emptyEmail":"",
+        "invalidEmail1":"lucia55.com",
+        "invalidEmail2":"lucia@gmail.com",
+        "invalidEmail3":"@gmail.com",
+        "invalidEmail4":"lucia@",
+        "invalidEmail5":"lucia@gmailcom",
+        "invalidEmail6":"lucia55@gmail.c"
+    }
+}
+{
+    "currentAdress":{
+        "input":"currentAddress",
+        "validCurrentAdress":"arzobispo y fuero 23",
+        "emptyCurrentAdress":""
+    }
+}
+{
+    "permanentAdress":{
+        "input":"permanentAddress",
+        "validPermanentAdress":"career oslo 51",
+        "emptyPermanentAdress":""
+    }
+}
