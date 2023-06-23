@@ -1,7 +1,7 @@
 import { removeLogs } from '@helper/RemoveLogs';
-import { draggable } from '@pages/Interactions/PageDraggable';
+import { draggable } from '@pages/Interactions/GX2-4027-PageDraggable';
 
-describe('This is your test project title', () => {
+describe('US GX2-4027 | TS: ✅ToolsQA | Interactions | Dragabble', () => {
 	beforeEach(() => {
 		draggable.visit();
 	});
@@ -51,7 +51,7 @@ describe('This is your test project title', () => {
 
 	it('Validar existencia de objeto estático', () => {
 		draggable.draggableRestriction();
-		draggable.contenedorEstatico().should('have.css', 'position', 'relative').should('have.text', "I'm contained within my parent");
+		draggable.contenedorEstático().should('have.css', 'position', 'relative').should('have.text', "I'm contained within my parent");
 	});
 
 	it('Validar mover el objeto cursor Center', () => {
