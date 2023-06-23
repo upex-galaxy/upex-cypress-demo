@@ -30,17 +30,22 @@ describe('GX2-3666| ToolsQA | Interactions | Sortable', () => {
 
 	it.only('GX2-3667|TC02: En tab LIST Arrastre un elemento aleatorio a una posición aleatoria', () => {
 		let arrayListTarget = [];
-		toolsqasortable.getRandomListTarget().then(() => {
-			//toolsqasortable.getRandomListItem().then(() => {
-			if (Cypress.env('randomListTarget') !== Cypress.env('randomList')) {
-				//toolsqasortable.getRandomListItem().trigger('mousedown', { which: 1 });
-				//toolsqasortable.getRandomListTarget().trigger('mousemove').click({ force: true });
-				cy.log(Cypress.env('randomListTarget'));
-				cy.log(Cypress.env('randomList'));
-			} else {
-				cy.log('volver a ingresar a la funcion llemando a getRandomListTarget');
+		cy.then(() => {
+			if (toolsqasortable.getRandomItemL() === toolsqasortable.getRandomTargetL()) {
+				toolsqasortable.getRandomTargetL();
 			}
-			//});
+			toolsqasortable.getRandomListItem().trigger('mousedown', { which: 1 });
+			toolsqasortable.getRandomListTarget().trigger('mousemove').click({ force: true });
+
+			toolsqasortable
+				.getListItems()
+				.each(item => {
+					arrayListTarget.push(item.text());
+				})
+				.then(() => {
+					expect(array1).to.not.deep.equal(arrayListTarget);
+					expect(array1[Cypress.env('randomListItem')]).to.be.equal(arrayListTarget[Cypress.env('randomListTarget')]);
+				});
 		});
 	});
 });
