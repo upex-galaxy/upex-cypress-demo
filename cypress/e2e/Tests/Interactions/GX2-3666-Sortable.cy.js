@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { removeLogs } from '@helper/RemoveLogs';
 import { toolsqasortable } from '@pages/Interactions/GX2-3666-sortablePage';
+removeLogs();
 
 describe('GX2-3666| ToolsQA | Interactions | Sortable', () => {
 	beforeEach('Preconditions', () => {
@@ -29,21 +30,19 @@ describe('GX2-3666| ToolsQA | Interactions | Sortable', () => {
 
 	it.only('GX2-3667|TC02: En tab LIST Arrastre un elemento aleatorio a una posición aleatoria', () => {
 		let arrayListTarget = [];
-		let randomListTarget = Cypress.env('randomListTarget');
-
-		let randomList = Cypress.env('randomList');
-		cy.log(randomList);
-		cy.log(randomListTarget);
-
-		if (randomListTarget === randomList) {
-			toolsqasortable.getRandomListTarget();
-		} else {
-			toolsqasortable.getRandomListItem(randomList).trigger('mousedown', { which: 1 });
-			toolsqasortable.getRandomListTarget(randomListTarget).trigger('mousemove').click({ force: true });
-		}
+		toolsqasortable.getRandomListTarget().then(() => {
+			//toolsqasortable.getRandomListItem().then(() => {
+			if (Cypress.env('randomListTarget') !== Cypress.env('randomList')) {
+				//toolsqasortable.getRandomListItem().trigger('mousedown', { which: 1 });
+				//toolsqasortable.getRandomListTarget().trigger('mousemove').click({ force: true });
+				cy.log(Cypress.env('randomListTarget'));
+				cy.log(Cypress.env('randomList'));
+			} else {
+				cy.log('volver a ingresar a la funcion llemando a getRandomListTarget');
+			}
+			//});
+		});
 	});
 });
 
 it('GX3-3667|TC03: En tab GRID Arrastre un elemento aleatorio a una posición aleatoria', () => {});
-
-removeLogs();
