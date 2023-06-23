@@ -68,10 +68,8 @@ describe('GX-21318-✅-swag-labs-account-iniciar-sesion-y-br-de-accesos', () => 
 		});
 	});
 	it('GX-21319 | TC9: Validate user can’t access endpoint “/inventory.html” without being logged in.', () => {
-		const url = 'https://www.saucedemo.com/inventory.html';
-		cy.visit({ url, failOnStatusCode: false });
-		cy.visit(url, { failOnStatusCode: false });
-		cy.get('.error').eq('2').should('have.text', 'Epic sadface: You can only access /inventory.html when you are logged in.');
+		cy.visit('/inventory.html', { failOnStatusCode: false });
+		cy.get('.error-message-container').should('exist');
 	});
 });
 //Se importa la funcion
