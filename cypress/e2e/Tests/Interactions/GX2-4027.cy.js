@@ -1,8 +1,9 @@
+import { removeLogs } from '@helper/RemoveLogs';
 import { draggable } from '@pages/Interactions/PageDraggable';
 
 describe('This is your test project title', () => {
 	beforeEach(() => {
-		cy.visit('https://demoqa.com/dragabble');
+		draggable.visit();
 	});
 
 	it('Validar mover simple de forma aleatoria verticalmente dentro de los límites', () => {
@@ -10,7 +11,7 @@ describe('This is your test project title', () => {
 		const y = draggable.getRandomNumber(1, 250);
 		draggable.dragBox();
 		draggable.moveElement('#dragBox', x, y);
-		draggable.validatePosition(x, y);
+		draggable.validatePositionDragBox(x, y);
 	});
 
 	it('Validar mover simple de forma aleatoria horizontalmente dentro de los límites', () => {
@@ -18,7 +19,7 @@ describe('This is your test project title', () => {
 		const y = 50;
 		draggable.dragBox();
 		draggable.moveElement('#dragBox', x, y);
-		draggable.validatePosition(x, y);
+		draggable.validatePositionDragBox(x, y);
 	});
 
 	it('Validar mover sólo x', () => {
@@ -27,7 +28,7 @@ describe('This is your test project title', () => {
 		const x = draggable.getRandomNumber(100, 200);
 		draggable.restrictedX();
 		draggable.moveElement('#restrictedX', x, y);
-		draggable.validatePosition(x, y);
+		draggable.validatePositionRestrictedX(x, y);
 	});
 
 	it('Validar mover sólo y', () => {
@@ -36,57 +37,60 @@ describe('This is your test project title', () => {
 		const x = 0;
 		draggable.restrictedY();
 		draggable.moveElement('#restrictedY', x, y);
-		draggable.validatePosition(x, y);
+		draggable.validatePositionRestrictedY(x, y);
 	});
 
 	it('Validar mover el objeto dentro del contenedor', () => {
 		draggable.draggableRestriction();
 		const x = draggable.getRandomNumber(0, 673);
 		const y = draggable.getRandomNumber(0, 106);
-		cy.get('[class = "draggable ui-widget-content ui-draggable ui-draggable-handle"]').Move({ x, y });
-		draggable.validatePosition(x, y);
+		draggable.moverContenedor();
+		draggable.moveElement('[class = "draggable ui-widget-content ui-draggable ui-draggable-handle"]', x, y);
+		draggable.validatePositionContenedor(x, y);
 	});
 
 	it('Validar existencia de objeto estático', () => {
 		draggable.draggableRestriction();
-		cy.get('[class="ui-widget-header ui-draggable ui-draggable-handle"]').should('have.css', 'position', 'relative');
-		//.should('have.text', "I'm contained within my parent");
+		draggable.contenedorEstatico().should('have.css', 'position', 'relative').should('have.text', "I'm contained within my parent");
 	});
 
 	it('Validar mover el objeto cursor Center', () => {
 		draggable.draggableCursorStyle();
-		draggable.PosiciónActual();
-		const x = draggable.getRandomNumber(50, 500);
-		const y = draggable.getRandomNumber(50, 500);
-		draggable.moveElement('#cursorCenter', x, y);
-		draggable.validatePosition();
-		draggable.PosiciónActual('#cursorCenter');
-		draggable.ValorEsperado(x, y);
+		cy.get('#cursorCenter').then($cursorCenter => {
+			const leftValue = $cursorCenter.css('left');
+			const topValue = $cursorCenter.css('top');
+			const x = draggable.getRandomNumber(50, 500);
+			const y = draggable.getRandomNumber(10, 200);
+			draggable.moveElement('#cursorCenter', x, y);
+			expect(topValue).not.to.equal(y);
+			expect(leftValue).not.to.equal(x);
+		});
 	});
 
 	it('Validar mover el objeto cursor Top Left', () => {
 		draggable.draggableCursorStyle();
-		draggable.PosiciónActual();
-		const x = draggable.getRandomNumber(50, 500);
-		const y = draggable.getRandomNumber(50, 500);
-		draggable.moveElement('#cursorTopLeft', x, y);
-		draggable.validatePosition();
-		draggable.PosiciónActual('#cursorTopLeft');
-		draggable.ValorEsperado(x, y);
+		cy.get('#cursorTopLeft').then($cursorTopLeft => {
+			const leftValue = $cursorTopLeft.css('left');
+			const topValue = $cursorTopLeft.css('top');
+			const x = draggable.getRandomNumber(400, 500);
+			const y = draggable.getRandomNumber(100, 500);
+			draggable.moveElement('#cursorTopLeft', x, y);
+			expect(topValue).not.to.equal(y);
+			expect(leftValue).not.to.equal(x);
+		});
 	});
 
 	it('Validar mover el objeto cursor Bottom', () => {
 		draggable.draggableCursorStyle();
-		draggable.PosiciónActual();
-		const x = draggable.getRandomNumber(50, 500);
-		const y = draggable.getRandomNumber(50, 500);
-		draggable.moveElement('#cursorBottom', x, y);
-		draggable.validatePosition();
-		draggable.PosiciónActual('#cursorBottom');
-		draggable.ValorEsperado(x, y);
+		cy.get('#cursorBottom').then($cursorBottom => {
+			const leftValue = $cursorBottom.css('left');
+			const topValue = $cursorBottom.css('top');
+			const x = draggable.getRandomNumber(-35, 400);
+			const y = draggable.getRandomNumber(-257, -35);
+			draggable.moveElement('#cursorBottom', x, y);
+			expect(topValue).not.to.equal(y);
+			expect(leftValue).not.to.equal(x);
+		});
 	});
 });
-
-import { removeLogs } from '@helper/RemoveLogs';
-
 removeLogs();
