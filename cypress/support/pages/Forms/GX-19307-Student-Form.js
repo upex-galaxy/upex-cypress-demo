@@ -2,7 +2,6 @@ import the from '../../../fixtures/data/GX-19307-Student-Form.json';
 
 class StudentForm {
 	get = {
-		SubmitTable: () => cy.get('.table-responsive table tbody tr td'),
 		FirstName: () => cy.get('#firstName'),
 		LastName: () => cy.get('#lastName'),
 		Email: () => cy.get('#userEmail'),
@@ -23,6 +22,17 @@ class StudentForm {
 		City: () => cy.get('#city'),
 		CityOpt1: () => cy.get('#react-select-4-option-0'),
 		Submit: () => cy.get('#submit'),
+		SubmitTable: () => cy.get('.table-responsive table tbody tr td'),
+		TableStudentName: () => this.get.SubmitTable().eq(the.assertions.StudentName.TableData),
+		TableStudentEmail: () => this.get.SubmitTable().eq(the.assertions.StudentEmail.TableData),
+		TableGender: () => this.get.SubmitTable().eq(the.assertions.Gender.TableData),
+		TableMobile: () => this.get.SubmitTable().eq(the.assertions.Mobile.TableData),
+		TableDateOfBirth: () => this.get.SubmitTable().eq(the.assertions.Date.TableData),
+		TableSubjects: () => this.get.SubmitTable().eq(the.assertions.Subjects.TableData),
+		TableHobbies: () => this.get.SubmitTable().eq(the.assertions.Hobbies.TableData),
+		TablePicture: () => this.get.SubmitTable().eq(the.assertions.Picture.TableData),
+		TableAddress: () => this.get.SubmitTable().eq(the.assertions.Address.TableData),
+		TableStateAndCity: () => this.get.SubmitTable().eq(the.assertions.StateAndCity.TableData),
 	};
 
 	typeRandomFirstName(randomFirstName) {
@@ -100,62 +110,6 @@ class StudentForm {
 
 	submitButton() {
 		this.get.Submit().click();
-	}
-
-	assertionFirstName() {
-		return this.get.SubmitTable().eq(the.assertions.StudentName.TableData);
-	}
-
-	assertionLastName() {
-		return this.get.SubmitTable().eq(the.assertions.StudentName.TableData);
-	}
-
-	assertionEmail() {
-		return this.get.SubmitTable().eq(the.assertions.StudentEmail.TableData);
-	}
-
-	assertionGender() {
-		return this.get.SubmitTable().eq(the.assertions.Gender.TableData);
-	}
-
-	assertionMobile() {
-		return this.get.SubmitTable().eq(the.assertions.Mobile.TableData);
-	}
-
-	assertionMonth() {
-		return this.get.SubmitTable().eq(the.assertions.Date.TableData);
-	}
-
-	assertionYear() {
-		return this.get.SubmitTable().eq(the.assertions.Date.TableData);
-	}
-
-	assertionDay() {
-		return this.get.SubmitTable().eq(the.assertions.Date.TableData);
-	}
-
-	assertionSubjects() {
-		return this.get.SubmitTable().eq(the.assertions.Subjects.TableData);
-	}
-
-	assertionHobbies() {
-		return this.get.SubmitTable().eq(the.assertions.Hobbies.TableData);
-	}
-
-	assertionPicture() {
-		return this.get.SubmitTable().eq(the.assertions.Picture.TableData);
-	}
-
-	assertionAddress() {
-		return this.get.SubmitTable().eq(the.assertions.Address.TableData);
-	}
-
-	assertionState() {
-		return this.get.SubmitTable().eq(the.assertions.StateAndCity.TableData);
-	}
-
-	assertionCity() {
-		return this.get.SubmitTable().eq(the.assertions.StateAndCity.TableData);
 	}
 }
 export const studentForm = new StudentForm();

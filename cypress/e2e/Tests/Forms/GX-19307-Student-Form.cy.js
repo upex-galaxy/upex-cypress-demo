@@ -24,6 +24,11 @@ if (randomDay < 10) {
 	formattedDay = String(randomDay);
 }
 const dateAssertion = formattedDay + ' ' + randomMonth + ' ' + stringYear;
+const currentDate = new Date();
+const currentDay = currentDate.getDate();
+const currentMonth = currentDate.toLocaleString('en-US', { month: 'long' });
+const currentYear = currentDate.getFullYear();
+const currentDateAssertion = currentDay + ' ' + currentMonth + ',' + currentYear;
 const randomHobby = faker.datatype.number({ min: 3, max: 5 });
 const hobbiesOptions = {
 	3: 'Sports',
@@ -67,31 +72,25 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		studentForm.get.City().should('contain', the.data.StateAndCity.City);
 		studentForm.submitButton();
 
-		studentForm.assertionFirstName().should('contain', randomFirstName);
-		studentForm.assertionLastName().should('contain', randomLastName);
-		studentForm.assertionEmail().should('contain', randomEmail);
-		studentForm.assertionGender().should('contain', stringGender);
-		studentForm.assertionMobile().should('contain', randomMobile);
-		studentForm.assertionMonth().should('contain', randomMonth);
-		studentForm.assertionYear().should('contain', stringYear);
-		studentForm.assertionDay().should('contain', randomDay);
-		studentForm.assertionSubjects().should('contain', the.assertions.Subjects.Subjects);
-		studentForm.assertionHobbies().should('contain', stringHobby);
-		studentForm.assertionPicture().should('contain', the.assertions.Picture.Picture);
-		studentForm.assertionAddress().should('contain', randomCurrentAddress);
-		studentForm.assertionState().should('contain', the.assertions.StateAndCity.State);
-		studentForm.assertionState().should('contain', the.assertions.StateAndCity.City);
+		studentForm.get.TableStudentName().should('contain', randomFirstName);
+		studentForm.get.TableStudentName().should('contain', randomLastName);
+		studentForm.get.TableStudentEmail().should('contain', randomEmail);
+		studentForm.get.TableGender().should('contain', stringGender);
+		studentForm.get.TableMobile().should('contain', randomMobile);
+		studentForm.get.TableDateOfBirth().should('contain', randomMonth);
+		studentForm.get.TableDateOfBirth().should('contain', stringYear);
+		studentForm.get.TableDateOfBirth().should('contain', randomDay);
+		studentForm.get.TableSubjects().should('contain', the.assertions.Subjects.Subjects);
+		studentForm.get.TableHobbies().should('contain', stringHobby);
+		studentForm.get.TablePicture().should('contain', the.assertions.Picture.Picture);
+		studentForm.get.TableAddress().should('contain', randomCurrentAddress);
+		studentForm.get.TableStateAndCity().should('contain', the.assertions.StateAndCity.State);
+		studentForm.get.TableStateAndCity().should('contain', the.assertions.StateAndCity.City);
 	});
 
-	it('19308 | TC02 - Validar usuario no ingresa “First Name” en el formulario', () => {
-		studentForm.typeRandomLastName(randomLastName);
-		studentForm.get.LastName().should('have.value', randomLastName);
+	it('19308 | TC02 - Validar no poder registrarse ingresando campos FirsName, LastName, Gender y Mobile vacíos', () => {
 		studentForm.typeRandomEmail(randomEmail);
 		studentForm.get.Email().should('have.value', randomEmail);
-		studentForm.clickGender(randomGender);
-		studentForm.get.AllGender().should('be.checked', randomGender);
-		studentForm.typeRandomMobile(randomMobile);
-		studentForm.get.Mobile().should('have.value', randomMobile);
 		studentForm.selectMonth(randomMonth);
 		studentForm.selectYear(stringYear);
 		studentForm.selectDay(randomDay);
@@ -111,103 +110,13 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		studentForm.submitButton();
 
 		studentForm.get.FirstName().should('be.empty');
-		studentForm.get.SubmitTable().should('not.exist');
-	});
-
-	it('19308 | TC03 - Validar usuario no ingresa “Last Name” en el formulario', () => {
-		studentForm.typeRandomFirstName(randomFirstName);
-		studentForm.get.FirstName().should('have.value', randomFirstName);
-		studentForm.typeRandomEmail(randomEmail);
-		studentForm.get.Email().should('have.value', randomEmail);
-		studentForm.clickGender(randomGender);
-		studentForm.get.AllGender().should('be.checked', randomGender);
-		studentForm.typeRandomMobile(randomMobile);
-		studentForm.get.Mobile().should('have.value', randomMobile);
-		studentForm.selectMonth(randomMonth);
-		studentForm.selectYear(stringYear);
-		studentForm.selectDay(randomDay);
-		studentForm.get.DateOfBirth().should('have.value', dateAssertion);
-		studentForm.typeSubjects();
-		studentForm.get.Subjects().should('contain', the.data.Subjects);
-		studentForm.clickHobby(randomHobby);
-		studentForm.get.AllHobbies().should('be.checked', randomHobby);
-		studentForm.selectPicture();
-		studentForm.get.Picture().should('have.prop', 'files');
-		studentForm.typeRandomCurrentAddress(randomCurrentAddress);
-		studentForm.get.CurrentAddress().should('have.value', randomCurrentAddress);
-		studentForm.selectState();
-		studentForm.get.State().should('contain', the.data.StateAndCity.State);
-		studentForm.selectCity();
-		studentForm.get.City().should('contain', the.data.StateAndCity.City);
-		studentForm.submitButton();
-
 		studentForm.get.LastName().should('be.empty');
-		studentForm.get.SubmitTable().should('not.exist');
-	});
-
-	it('19308 | TC04 - Validar usuario no ingresa “Gender” en el formulario', () => {
-		studentForm.typeRandomFirstName(randomFirstName);
-		studentForm.get.FirstName().should('have.value', randomFirstName);
-		studentForm.typeRandomLastName(randomLastName);
-		studentForm.get.LastName().should('have.value', randomLastName);
-		studentForm.typeRandomEmail(randomEmail);
-		studentForm.get.Email().should('have.value', randomEmail);
-		studentForm.typeRandomMobile(randomMobile);
-		studentForm.get.Mobile().should('have.value', randomMobile);
-		studentForm.selectMonth(randomMonth);
-		studentForm.selectYear(stringYear);
-		studentForm.selectDay(randomDay);
-		studentForm.get.DateOfBirth().should('have.value', dateAssertion);
-		studentForm.typeSubjects();
-		studentForm.get.Subjects().should('contain', the.data.Subjects);
-		studentForm.clickHobby(randomHobby);
-		studentForm.get.AllHobbies().should('be.checked', randomHobby);
-		studentForm.selectPicture();
-		studentForm.get.Picture().should('have.prop', 'files');
-		studentForm.typeRandomCurrentAddress(randomCurrentAddress);
-		studentForm.get.CurrentAddress().should('have.value', randomCurrentAddress);
-		studentForm.selectState();
-		studentForm.get.State().should('contain', the.data.StateAndCity.State);
-		studentForm.selectCity();
-		studentForm.get.City().should('contain', the.data.StateAndCity.City);
-		studentForm.submitButton();
-
 		studentForm.get.AllGender().should('not.be.selected');
-		studentForm.get.SubmitTable().should('not.exist');
-	});
-
-	it('19308 | TC05 - Validar usuario no ingresa “Mobile Number” en el formulario', () => {
-		studentForm.typeRandomFirstName(randomFirstName);
-		studentForm.get.FirstName().should('have.value', randomFirstName);
-		studentForm.typeRandomLastName(randomLastName);
-		studentForm.get.LastName().should('have.value', randomLastName);
-		studentForm.typeRandomEmail(randomEmail);
-		studentForm.get.Email().should('have.value', randomEmail);
-		studentForm.clickGender(randomGender);
-		studentForm.get.AllGender().should('be.checked', randomGender);
-		studentForm.selectMonth(randomMonth);
-		studentForm.selectYear(stringYear);
-		studentForm.selectDay(randomDay);
-		studentForm.get.DateOfBirth().should('have.value', dateAssertion);
-		studentForm.typeSubjects();
-		studentForm.get.Subjects().should('contain', the.data.Subjects);
-		studentForm.clickHobby(randomHobby);
-		studentForm.get.AllHobbies().should('be.checked', randomHobby);
-		studentForm.selectPicture();
-		studentForm.get.Picture().should('have.prop', 'files');
-		studentForm.typeRandomCurrentAddress(randomCurrentAddress);
-		studentForm.get.CurrentAddress().should('have.value', randomCurrentAddress);
-		studentForm.selectState();
-		studentForm.get.State().should('contain', the.data.StateAndCity.State);
-		studentForm.selectCity();
-		studentForm.get.City().should('contain', the.data.StateAndCity.City);
-		studentForm.submitButton();
-
 		studentForm.get.Mobile().should('be.empty');
 		studentForm.get.SubmitTable().should('not.exist');
 	});
 
-	it('19308 | TC06 - Validar usuario ingresa “Mobile Number” en el formulario con letras', () => {
+	it('19308 | TC03 - Validar no poder registrarse ingresando “Mobile Number” con letras', () => {
 		studentForm.typeRandomFirstName(randomFirstName);
 		studentForm.get.FirstName().should('have.value', randomFirstName);
 		studentForm.typeRandomLastName(randomLastName);
@@ -239,7 +148,7 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		studentForm.get.SubmitTable().should('not.exist');
 	});
 
-	it('19308 | TC07 - Validar usuario no ingresa “Date of Birth” en el formulario', () => {
+	it('19308 | TC04 - Validar usuario no ingresa “Date of Birth” en el formulario', () => {
 		studentForm.typeRandomFirstName(randomFirstName);
 		studentForm.get.FirstName().should('have.value', randomFirstName);
 		studentForm.typeRandomLastName(randomLastName);
@@ -264,10 +173,10 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		studentForm.get.City().should('contain', the.data.StateAndCity.City);
 		studentForm.submitButton();
 
-		//Se skipea assertion por falta de conocimiento, aca iría la fecha actual
+		studentForm.get.TableDateOfBirth().should('contain', currentDateAssertion);
 	});
 
-	it('19308 | TC08 - Validar usuario no ingresa “Subjects” en el formulario', () => {
+	it('19308 | TC05 - Validar tabla de registro donde Subjects, Hobbies y Picture estén vacíos', () => {
 		studentForm.typeRandomFirstName(randomFirstName);
 		studentForm.get.FirstName().should('have.value', randomFirstName);
 		studentForm.typeRandomLastName(randomLastName);
@@ -282,10 +191,6 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		studentForm.selectYear(stringYear);
 		studentForm.selectDay(randomDay);
 		studentForm.get.DateOfBirth().should('have.value', dateAssertion);
-		studentForm.clickHobby(randomHobby);
-		studentForm.get.AllHobbies().should('be.checked', randomHobby);
-		studentForm.selectPicture();
-		studentForm.get.Picture().should('have.prop', 'files');
 		studentForm.typeRandomCurrentAddress(randomCurrentAddress);
 		studentForm.get.CurrentAddress().should('have.value', randomCurrentAddress);
 		studentForm.selectState();
@@ -294,70 +199,12 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		studentForm.get.City().should('contain', the.data.StateAndCity.City);
 		studentForm.submitButton();
 
-		studentForm.assertionSubjects().should('be.empty');
+		studentForm.get.TableSubjects().should('be.empty');
+		studentForm.get.TableHobbies().should('be.empty');
+		studentForm.get.TablePicture().should('be.empty');
 	});
 
-	it('19308 | TC09 - Validar usuario no ingresa “Hobbies” en el formulario', () => {
-		studentForm.typeRandomFirstName(randomFirstName);
-		studentForm.get.FirstName().should('have.value', randomFirstName);
-		studentForm.typeRandomLastName(randomLastName);
-		studentForm.get.LastName().should('have.value', randomLastName);
-		studentForm.typeRandomEmail(randomEmail);
-		studentForm.get.Email().should('have.value', randomEmail);
-		studentForm.clickGender(randomGender);
-		studentForm.get.AllGender().should('be.checked', randomGender);
-		studentForm.typeRandomMobile(randomMobile);
-		studentForm.get.Mobile().should('have.value', randomMobile);
-		studentForm.selectMonth(randomMonth);
-		studentForm.selectYear(stringYear);
-		studentForm.selectDay(randomDay);
-		studentForm.get.DateOfBirth().should('have.value', dateAssertion);
-		studentForm.typeSubjects();
-		studentForm.get.Subjects().should('contain', the.data.Subjects);
-		studentForm.selectPicture();
-		studentForm.get.Picture().should('have.prop', 'files');
-		studentForm.typeRandomCurrentAddress(randomCurrentAddress);
-		studentForm.get.CurrentAddress().should('have.value', randomCurrentAddress);
-		studentForm.selectState();
-		studentForm.get.State().should('contain', the.data.StateAndCity.State);
-		studentForm.selectCity();
-		studentForm.get.City().should('contain', the.data.StateAndCity.City);
-		studentForm.submitButton();
-
-		studentForm.get.AllHobbies().should('not.be.selected');
-	});
-
-	it('19308 | TC10 - Validar usuario no ingresa “Picture” en el formulario', () => {
-		studentForm.typeRandomFirstName(randomFirstName);
-		studentForm.get.FirstName().should('have.value', randomFirstName);
-		studentForm.typeRandomLastName(randomLastName);
-		studentForm.get.LastName().should('have.value', randomLastName);
-		studentForm.typeRandomEmail(randomEmail);
-		studentForm.get.Email().should('have.value', randomEmail);
-		studentForm.clickGender(randomGender);
-		studentForm.get.AllGender().should('be.checked', randomGender);
-		studentForm.typeRandomMobile(randomMobile);
-		studentForm.get.Mobile().should('have.value', randomMobile);
-		studentForm.selectMonth(randomMonth);
-		studentForm.selectYear(stringYear);
-		studentForm.selectDay(randomDay);
-		studentForm.get.DateOfBirth().should('have.value', dateAssertion);
-		studentForm.typeSubjects();
-		studentForm.get.Subjects().should('contain', the.data.Subjects);
-		studentForm.clickHobby(randomHobby);
-		studentForm.get.AllHobbies().should('be.checked', randomHobby);
-		studentForm.typeRandomCurrentAddress(randomCurrentAddress);
-		studentForm.get.CurrentAddress().should('have.value', randomCurrentAddress);
-		studentForm.selectState();
-		studentForm.get.State().should('contain', the.data.StateAndCity.State);
-		studentForm.selectCity();
-		studentForm.get.City().should('contain', the.data.StateAndCity.City);
-		studentForm.submitButton();
-
-		studentForm.assertionPicture().should('be.empty');
-	});
-
-	it('19308 | TC11 - Validar usuario no ingresa “Current Address” en el formulario', () => {
+	it('19308 | TC06 - Validar tabla de registro donde Address, State y City estén vacíos', () => {
 		studentForm.typeRandomFirstName(randomFirstName);
 		studentForm.get.FirstName().should('have.value', randomFirstName);
 		studentForm.typeRandomLastName(randomLastName);
@@ -378,45 +225,13 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		studentForm.get.AllHobbies().should('be.checked', randomHobby);
 		studentForm.selectPicture();
 		studentForm.get.Picture().should('have.prop', 'files');
-		studentForm.selectState();
-		studentForm.get.State().should('contain', the.data.StateAndCity.State);
-		studentForm.selectCity();
-		studentForm.get.City().should('contain', the.data.StateAndCity.City);
 		studentForm.submitButton();
 
-		studentForm.assertionAddress().should('be.empty');
+		studentForm.get.TableAddress().should('be.empty');
+		studentForm.get.TableStateAndCity().should('be.empty');
 	});
 
-	it('19308 | TC12 - Validar usuario no ingresa “State and City” en el formulario', () => {
-		studentForm.typeRandomFirstName(randomFirstName);
-		studentForm.get.FirstName().should('have.value', randomFirstName);
-		studentForm.typeRandomLastName(randomLastName);
-		studentForm.get.LastName().should('have.value', randomLastName);
-		studentForm.typeRandomEmail(randomEmail);
-		studentForm.get.Email().should('have.value', randomEmail);
-		studentForm.clickGender(randomGender);
-		studentForm.get.AllGender().should('be.checked', randomGender);
-		studentForm.typeRandomMobile(randomMobile);
-		studentForm.get.Mobile().should('have.value', randomMobile);
-		studentForm.selectMonth(randomMonth);
-		studentForm.selectYear(stringYear);
-		studentForm.selectDay(randomDay);
-		studentForm.get.DateOfBirth().should('have.value', dateAssertion);
-		studentForm.typeSubjects();
-		studentForm.get.Subjects().should('contain', the.data.Subjects);
-		studentForm.clickHobby(randomHobby);
-		studentForm.get.AllHobbies().should('be.checked', randomHobby);
-		studentForm.selectPicture();
-		studentForm.get.Picture().should('have.prop', 'files');
-		studentForm.typeRandomCurrentAddress(randomCurrentAddress);
-		studentForm.get.CurrentAddress().should('have.value', randomCurrentAddress);
-		studentForm.submitButton();
-
-		studentForm.assertionState().should('be.empty');
-		studentForm.assertionCity().should('be.empty');
-	});
-
-	it('19308 | TC13 - Validar usuario no ingresa “Email” en el formulario', () => {
+	it('19308 | TC07 - Validar usuario no ingresa “Email” en el formulario', () => {
 		studentForm.typeRandomFirstName(randomFirstName);
 		studentForm.get.FirstName().should('have.value', randomFirstName);
 		studentForm.typeRandomLastName(randomLastName);
@@ -443,10 +258,10 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		studentForm.get.City().should('contain', the.data.StateAndCity.City);
 		studentForm.submitButton();
 
-		studentForm.assertionEmail().should('be.empty');
+		studentForm.get.TableStudentEmail().should('be.empty');
 	});
 
-	it('19308 | TC14 - Validar usuario ingresa “Email” en el formulario sin @', () => {
+	it('19308 | TC08 - Validar no poder registrarse ingresando “Email” sin @', () => {
 		studentForm.typeRandomFirstName(randomFirstName);
 		studentForm.get.FirstName().should('have.value', randomFirstName);
 		studentForm.typeRandomLastName(randomLastName);
@@ -478,7 +293,7 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		studentForm.get.SubmitTable().should('not.exist');
 	});
 
-	it('19308 | TC15 - Validar usuario ingresa “Email” en el formulario sin un carácter alfanumérico antes del @', () => {
+	it('19308 | TC09 - Validar no poder registrarse ingresando “Email” sin un carácter alfanumérico antes del @', () => {
 		studentForm.typeRandomFirstName(randomFirstName);
 		studentForm.get.FirstName().should('have.value', randomFirstName);
 		studentForm.typeRandomLastName(randomLastName);
@@ -510,7 +325,7 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		studentForm.get.SubmitTable().should('not.exist');
 	});
 
-	it('19308 | TC16 - Validar usuario ingresa “Email” en el formulario sin un carácter alfanumérico después del @', () => {
+	it('19308 | TC10 - Validar no poder registrar ingresando “Email” sin un carácter alfanumérico después del @', () => {
 		studentForm.typeRandomFirstName(randomFirstName);
 		studentForm.get.FirstName().should('have.value', randomFirstName);
 		studentForm.typeRandomLastName(randomLastName);
@@ -542,7 +357,7 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		studentForm.get.SubmitTable().should('not.exist');
 	});
 
-	it('19308 | TC17 - Validar usuario ingresa “Email” en el formulario sin contener . después del @', () => {
+	it('19308 | TC11 - Validar no poder registrarse ingresando “Email” sin contener . después del @', () => {
 		studentForm.typeRandomFirstName(randomFirstName);
 		studentForm.get.FirstName().should('have.value', randomFirstName);
 		studentForm.typeRandomLastName(randomLastName);
@@ -574,7 +389,7 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		studentForm.get.SubmitTable().should('not.exist');
 	});
 
-	it('19308 | TC18 - Validar usuario ingresa “Email” en el formulario sin 2 caracteres alfanuméricos después del .', () => {
+	it('19308 | TC12 - Validar no poder registrarse ingresando “Email” sin 2 caracteres alfanuméricos después del .', () => {
 		studentForm.typeRandomFirstName(randomFirstName);
 		studentForm.get.FirstName().should('have.value', randomFirstName);
 		studentForm.typeRandomLastName(randomLastName);
