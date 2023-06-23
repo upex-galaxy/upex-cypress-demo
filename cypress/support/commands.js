@@ -71,7 +71,7 @@ Cypress.Commands.add('randomFormData', modo => {
 			data.birthDate = valor;
 		});
 
-	//only TC1
+	//TC1
 	if (newModo === 'fullData') {
 		form.subjectsType(data.subjects);
 		form.typeAddress(data.address);

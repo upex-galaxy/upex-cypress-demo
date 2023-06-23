@@ -20,5 +20,4 @@ class ModalForm {
 		this.get.closeBtn().click();
 	}
 }
-
 export const modal = new ModalForm();

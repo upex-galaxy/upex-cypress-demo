@@ -5,14 +5,14 @@ removeLogs();
 
 describe('ToolsQA | Forms | Practice Form', () => {
 	beforeEach(() => {
-		cy.visit('/automation-practice-form');
+		cy.visit('/automation-practice-form', { failOnStatusCode: false });
 		cy.url().should('contain', 'automation-practice-form');
-		cy.fixture('data/files').then(el => {
-			Cypress.env('file', el.imagePathUpload);
-		});
 	});
 	//Se omite campo "Subjects" ya que hay defecto detectado: se borra el contenido del campo al hacer clic o enviar el formulario
 	it('20541 | TC1: Validar envío de formulario exitoso con todos los campos completos', () => {
+		cy.fixture('data/files').then(el => {
+			Cypress.env('file', el.imagePathUpload);
+		});
 		cy.randomFormData('fullData').then(el => {
 			form.submitClick();
 			modal.get.modal().should('be.visible');

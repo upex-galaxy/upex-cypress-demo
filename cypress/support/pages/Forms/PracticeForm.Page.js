@@ -26,66 +26,50 @@ class PracticeForm {
 	typeFirstName(data) {
 		data && this.get.firstNameInput().type(data).type('{enter}', { force: true });
 	}
-
 	typeLastName(data) {
 		data && this.get.lastNameInput().type(data).type('{enter}', { force: true });
 	}
-
 	typeNumberPhone(data) {
 		data && this.get.numberPhoneInput().type(data);
 	}
-
 	selectGender(data) {
 		this.get.radioButton().eq(data).click({ force: true });
 	}
-
 	clicBirthInput() {
 		this.get.birthInput().click({ force: true });
 	}
-
 	yearSelect(data) {
 		this.get.yearDropdown().select(data);
 	}
-
 	monthSelect(data) {
 		this.get.monthDropdown().select(data);
 	}
-
 	weekClick(index) {
 		this.get.weekSelect().eq(index).click();
 	}
-
 	typeEmail(data) {
 		this.get.emailInput().type(data);
 	}
-
 	subjectsType(data) {
 		this.get.subjectsInput().type(data, { force: true });
 	}
-
 	selectHobbies(data) {
 		this.get.checkBox().eq(data).check({ force: true });
 	}
-
 	typeAddress(data) {
 		this.get.addressInput().type(data, { force: true });
 	}
-
 	selectState(data) {
 		this.get.stateSelect().click({ force: true }).type(data).type('{enter}');
 	}
-
 	selectCity(data) {
 		this.get.citySelect().click({ force: true }).type(data).type('{enter}');
 	}
-
 	addFile(file) {
 		this.get.fileInput().click().selectFile(file);
 	}
-
 	submitClick() {
 		this.get.submitButton().click({ force: true });
 	}
 }
-
 export const form = new PracticeForm();
