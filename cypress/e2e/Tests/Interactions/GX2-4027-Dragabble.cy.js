@@ -6,7 +6,7 @@ describe('US GX2-4027 | TS: ✅ToolsQA | Interactions | Dragabble', () => {
 		draggable.visit();
 	});
 
-	it('Validar mover simple de forma aleatoria verticalmente dentro de los límites', () => {
+	it('4028 | TC 1 : Validar mover simple de forma aleatoria verticalmente dentro de los límites', () => {
 		const x = 50;
 		const y = draggable.getRandomNumber(1, 250);
 		draggable.dragBox();
@@ -14,7 +14,7 @@ describe('US GX2-4027 | TS: ✅ToolsQA | Interactions | Dragabble', () => {
 		draggable.validatePositionDragBox(x, y);
 	});
 
-	it('Validar mover simple de forma aleatoria horizontalmente dentro de los límites', () => {
+	it('4028 | TC 2 : Validar mover simple de forma aleatoria horizontalmente dentro de los límites', () => {
 		const x = draggable.getRandomNumber(1, 200);
 		const y = 50;
 		draggable.dragBox();
@@ -22,7 +22,7 @@ describe('US GX2-4027 | TS: ✅ToolsQA | Interactions | Dragabble', () => {
 		draggable.validatePositionDragBox(x, y);
 	});
 
-	it('Validar mover sólo x', () => {
+	it('4028 | TC 3 : Validar mover sólo x', () => {
 		draggable.draggableAxisRestriction();
 		const y = 0;
 		const x = draggable.getRandomNumber(100, 200);
@@ -31,7 +31,7 @@ describe('US GX2-4027 | TS: ✅ToolsQA | Interactions | Dragabble', () => {
 		draggable.validatePositionRestrictedX(x, y);
 	});
 
-	it('Validar mover sólo y', () => {
+	it('4028 | TC 4 : Validar mover sólo y', () => {
 		draggable.draggableAxisRestriction();
 		const y = draggable.getRandomNumber(40, 389);
 		const x = 0;
@@ -40,7 +40,7 @@ describe('US GX2-4027 | TS: ✅ToolsQA | Interactions | Dragabble', () => {
 		draggable.validatePositionRestrictedY(x, y);
 	});
 
-	it('Validar mover el objeto dentro del contenedor', () => {
+	it('4028 | TC 5 : Validar mover el objeto dentro del contenedor', () => {
 		draggable.draggableRestriction();
 		const x = draggable.getRandomNumber(0, 673);
 		const y = draggable.getRandomNumber(0, 106);
@@ -49,12 +49,12 @@ describe('US GX2-4027 | TS: ✅ToolsQA | Interactions | Dragabble', () => {
 		draggable.validatePositionContenedor(x, y);
 	});
 
-	it('Validar existencia de objeto estático', () => {
+	it('4028 | TC 6 : Validar existencia de objeto estático', () => {
 		draggable.draggableRestriction();
 		draggable.contenedorEstático().should('have.css', 'position', 'relative').should('have.text', "I'm contained within my parent");
 	});
 
-	it('Validar mover el objeto cursor Center', () => {
+	it('4028 | TC 7 : Validar mover el objeto cursor Center', () => {
 		draggable.draggableCursorStyle();
 		cy.get('#cursorCenter').then($cursorCenter => {
 			const leftValue = $cursorCenter.css('left');
@@ -67,7 +67,7 @@ describe('US GX2-4027 | TS: ✅ToolsQA | Interactions | Dragabble', () => {
 		});
 	});
 
-	it('Validar mover el objeto cursor Top Left', () => {
+	it('4028 | TC 8 :Validar mover el objeto cursor Top Left', () => {
 		draggable.draggableCursorStyle();
 		cy.get('#cursorTopLeft').then($cursorTopLeft => {
 			const leftValue = $cursorTopLeft.css('left');
@@ -80,7 +80,7 @@ describe('US GX2-4027 | TS: ✅ToolsQA | Interactions | Dragabble', () => {
 		});
 	});
 
-	it('Validar mover el objeto cursor Bottom', () => {
+	it('4028 | TC 9 :Validar mover el objeto cursor Bottom', () => {
 		draggable.draggableCursorStyle();
 		cy.get('#cursorBottom').then($cursorBottom => {
 			const leftValue = $cursorBottom.css('left');
