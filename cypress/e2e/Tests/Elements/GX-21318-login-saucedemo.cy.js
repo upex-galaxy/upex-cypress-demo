@@ -67,6 +67,12 @@ describe('GX-21318-✅-swag-labs-account-iniciar-sesion-y-br-de-accesos', () => 
 			cy.get('.error').eq('2').should('have.text', 'Epic sadface: Username is required');
 		});
 	});
+	it('GX-21319 | TC9: Validate user can’t access endpoint “/inventory.html” without being logged in.', () => {
+		const url = 'https://www.saucedemo.com/inventory.html';
+		cy.visit({ url, failOnStatusCode: false });
+		cy.visit(url, { failOnStatusCode: false });
+		cy.get('.error').eq('2').should('have.text', 'Epic sadface: You can only access /inventory.html when you are logged in.');
+	});
 });
 //Se importa la funcion
 import { removeLogs } from '@helper/RemoveLogs';
