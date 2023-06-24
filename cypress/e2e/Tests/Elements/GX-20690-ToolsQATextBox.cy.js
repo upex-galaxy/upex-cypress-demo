@@ -67,7 +67,7 @@ describe('20690 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		});
 	});
 
-	it.only('TC5: Validate that Email field is invalid when does not contains min 1 alphanumeric character after “@“', () => {
+	it('TC5: Validate that Email field is invalid when does not contains min 1 alphanumeric character after “@“', () => {
 		cy.fixture('data/datatests20690').then(the => {
 			cy.get(the.email.input).should('be.empty');
 			cy.get(the.email.input).type(the.email.invalidEmail3);
@@ -76,20 +76,27 @@ describe('20690 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get(the.submitButton).click();
 			cy.get(the.email.input).should('have.css', '255');
 		});
+	});
 
-		it('TC6: Validate that Email field is invalid when does not contains “.“ after 1 alphanumeric character after “@“', () => {
-			cy.fixture('data/datatests20690').then(the => {
-				cy.get(the.email.input).should('be.empty');
-				cy.get(the.email.input).type(the.email.invalidEmail4);
-				cy.get(the.email.input).should('have.value', the.email.invalidEmail4);
+	it('TC6: Validate that Email field is invalid when does not contains “.“ after 1 alphanumeric character after “@“', () => {
+		cy.fixture('data/datatests20690').then(the => {
+			cy.get(the.email.input).should('be.empty');
+			cy.get(the.email.input).type(the.email.invalidEmail4);
+			cy.get(the.email.input).should('have.value', the.email.invalidEmail4);
 
-				cy.get(the.submitButton).click();
-				cy.get(the.email.input).should('have.css', '255');
-			});
+			cy.get(the.submitButton).click();
+			cy.get(the.email.input).should('have.css', '255');
 		});
+	});
 
-		it('TC7: Validate that Email field is invalid when does not contains (minimum) 2 alphanumeric characters after “.”', () => {
-			cy.get;
+	it.only('TC7: Validate that Email field is invalid when does not contains (minimum) 2 alphanumeric characters after “.”', () => {
+		cy.fixture('data/datatests20690').then(the => {
+			cy.get(the.email.input).should('be.empty');
+			cy.get(the.email.input).type(the.email.invalidEmail5);
+			cy.get(the.email.input).should('have.value', the.email.invalidEmail5);
+
+			cy.get(the.submitButton).click();
+			cy.get(the.email.input).should('have.css', '255');
 		});
 	});
 });
