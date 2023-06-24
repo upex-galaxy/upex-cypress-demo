@@ -67,7 +67,7 @@ describe('20690 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		});
 	});
 
-	it('TC5: Validate that Email field is invalid when does not contains min 1 alphanumeric character after “@“', () => {
+	it.only('TC5: Validate that Email field is invalid when does not contains min 1 alphanumeric character after “@“', () => {
 		cy.fixture('data/datatests20690').then(the => {
 			cy.get(the.email.input).should('be.empty');
 			cy.get(the.email.input).type(the.email.invalidEmail3);
@@ -75,21 +75,23 @@ describe('20690 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 
 			cy.get(the.submitButton).click();
 			cy.get(the.email.input).should('have.css', '255');
-	});
+		});
 
-	it('TC6: Validate that Email field is invalid when does not contains “.“ after 1 alphanumeric character after “@“', () => {
-		cy.get;
-	});
+		it('TC6: Validate that Email field is invalid when does not contains “.“ after 1 alphanumeric character after “@“', () => {
+			cy.fixture('data/datatests20690').then(the => {
+				cy.get(the.email.input).should('be.empty');
+				cy.get(the.email.input).type(the.email.invalidEmail3);
+				cy.get(the.email.input).should('have.value', the.email.invalidEmail3);
 
-	it('TC7: Validate that Email field is invalid when does not contains (minimum) 2 alphanumeric characters after “.”', () => {
-		cy.get;
+				cy.get(the.submitButton).click();
+				cy.get(the.email.input).should('have.css', '255');
+			});
+		});
+
+		it('TC7: Validate that Email field is invalid when does not contains (minimum) 2 alphanumeric characters after “.”', () => {
+			cy.get;
+		});
 	});
-	//const resizeObserverLoopErrRe = /^[^(ResizeObserver loop limit exceeded)]/;
-	//Cypress.on('uncaught:exception', err => {
-	/* returning false here prevents Cypress from failing the test */
-	//if (resizeObserverLoopErrRe.test(err.message)) {
-	//	return false;
-	//}
 });
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
