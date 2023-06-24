@@ -45,7 +45,7 @@ describe('20690 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		});
 	});
 
-	it.only('TC3: Validate that Email field is invalid when does not contains “@” character', () => {
+	it('TC3: Validate that Email field is invalid when does not contains “@” character', () => {
 		cy.fixture('data/datatests20690').then(the => {
 			cy.get(the.email.input).should('be.empty');
 			cy.get(the.email.input).type(the.email.invalidEmail1);
@@ -62,12 +62,19 @@ describe('20690 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get(the.email.input).type(the.email.invalidEmail2);
 			cy.get(the.email.input).should('have.value', the.email.invalidEmail2);
 
-			Cypress.get;
+			cy.get(the.submitButton).click();
+			cy.get(the.email.input).should('have.css', '255');
 		});
 	});
 
 	it('TC5: Validate that Email field is invalid when does not contains min 1 alphanumeric character after “@“', () => {
-		cy.get;
+		cy.fixture('data/datatests20690').then(the => {
+			cy.get(the.email.input).should('be.empty');
+			cy.get(the.email.input).type(the.email.invalidEmail3);
+			cy.get(the.email.input).should('have.value', the.email.invalidEmail3);
+
+			cy.get(the.submitButton).click();
+			cy.get(the.email.input).should('have.css', '255');
 	});
 
 	it('TC6: Validate that Email field is invalid when does not contains “.“ after 1 alphanumeric character after “@“', () => {
