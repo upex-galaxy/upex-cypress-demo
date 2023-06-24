@@ -7,8 +7,9 @@ describe('20690 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		cy.url().should('contain', 'text-box');
 	});
 
-	it.only('TC1: Validate that if all fields are filled correctly the submit is succefully', () => {
+	it('TC1: Validate that if all fields are filled correctly the submit is succefully', () => {
 		cy.fixture('data/datatests20690').then(the => {
+			cy.get(the.fullName.input).should('be.empty');
 			cy.get(the.fullName.input).type(the.fullName.validName);
 			cy.get(the.fullName.input).should('have.value', the.fullName.validName);
 			cy.get(the.email.input).should('have.attr', 'placeholder', 'name@example.com');
@@ -29,17 +30,19 @@ describe('20690 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		});
 	});
 
-	it('TC2: Validate that if all fields are empty when user clicks "submit", no message is shown', () => {
-		cy.get("[type='text']").type(the.fullName.validName);
-		cy.get(the.email.input).type(the.email.validEmail);
-		cy.get(the.currentAdress.input).type(the.currentAdress.validCurrentAdress);
-		cy.get(the.permanentAdress.input).type(the.permanentAdress.validPermanentAdress);
+	it.only('TC2: Validate that if all fields are empty when user clicks "submit", no message is shown', () => {
+		cy.fixture('data/datatests20690').then(the => {
+			cy.get(the.fullName.input).should('be.empty');
+			cy.get(the.email.input).should('be.empty');
+			cy.get(the.currentAdress.input).should('be.empty');
+			cy.get(the.permanentAdress.input).should('be.empty');
 
-		cy.get(the.submitButton).click();
-		cy.contains(the.nameText).should('be.visible');
-		cy.contains(the.emailText).should('be.visible');
-		cy.contains(the.currentAdressText).should('be.visible');
-		cy.contains(the.permanentAdressText).should('be.visible');
+			cy.get(the.submitButton).click();
+			cy.get(the.nameText).should('not.exist');
+			cy.get(the.emailText).should('not.exist');
+			cy.get(the.currentAdressText).should('not.exist');
+			cy.get(the.permanentAdressText).should('not.exist');
+		});
 	});
 
 	it('TC3: Validate that Email field is invalid when does not contains “@” character', () => {
