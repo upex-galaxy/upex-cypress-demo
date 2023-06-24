@@ -80,8 +80,8 @@ describe('20690 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		it('TC6: Validate that Email field is invalid when does not contains “.“ after 1 alphanumeric character after “@“', () => {
 			cy.fixture('data/datatests20690').then(the => {
 				cy.get(the.email.input).should('be.empty');
-				cy.get(the.email.input).type(the.email.invalidEmail3);
-				cy.get(the.email.input).should('have.value', the.email.invalidEmail3);
+				cy.get(the.email.input).type(the.email.invalidEmail4);
+				cy.get(the.email.input).should('have.value', the.email.invalidEmail4);
 
 				cy.get(the.submitButton).click();
 				cy.get(the.email.input).should('have.css', '255');
