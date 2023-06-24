@@ -7,7 +7,7 @@ describe('20690 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		cy.url().should('contain', 'text-box');
 	});
 
-	it.only('TC1: Validate that if all fields are filled correctly the submit is succefully', () => {
+	it('TC1: Validate that if all fields are filled correctly the submit is succefully', () => {
 		cy.fixture(cypress / fixtures / data / datatests20690.json).then(the => {
 			cy.get(the.fullName).type(the.fullName.validName);
 			cy.get(the.email.input).type(the.email.validEmail);
@@ -54,9 +54,11 @@ describe('20690 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	it('TC7: Validate that Email field is invalid when does not contains (minimum) 2 alphanumeric characters after “.”', () => {
 		cy.get;
 	});
-	//Cypress.on('uncaught:exception', err => {
-	// returning false here prevents Cypress from
-	// failing the test
-	//console.log('Cypress detected uncaught exception: ', err);
-	//return false;
+	const resizeObserverLoopErrRe = /^[^(ResizeObserver loop limit exceeded)]/;
+	Cypress.on('uncaught:exception', err => {
+		/* returning false here prevents Cypress from failing the test */
+		if (resizeObserverLoopErrRe.test(err.message)) {
+			return false;
+		}
+	});
 });
