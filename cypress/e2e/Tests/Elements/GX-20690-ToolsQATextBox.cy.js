@@ -7,18 +7,25 @@ describe('20690 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		cy.url().should('contain', 'text-box');
 	});
 
-	it('TC1: Validate that if all fields are filled correctly the submit is succefully', () => {
-		cy.fixture(cypress / fixtures / data / datatests20690.json).then(the => {
-			cy.get(the.fullName).type(the.fullName.validName);
+	it.only('TC1: Validate that if all fields are filled correctly the submit is succefully', () => {
+		cy.fixture('data/datatests20690').then(the => {
+			cy.get(the.fullName.input).type(the.fullName.validName);
+			cy.get(the.fullName.input).should('have.value', the.fullName.validName);
+			cy.get(the.email.input).should('have.attr', 'placeholder', 'name@example.com');
 			cy.get(the.email.input).type(the.email.validEmail);
+			cy.get(the.email.input).should('have.value', the.email.validEmail);
+			cy.get(the.currentAdress.input).should('be.empty');
 			cy.get(the.currentAdress.input).type(the.currentAdress.validCurrentAdress);
+			cy.get(the.currentAdress.input).should('have.value', the.currentAdress.validCurrentAdress);
+			cy.get(the.permanentAdress.input).should('be.empty');
 			cy.get(the.permanentAdress.input).type(the.permanentAdress.validPermanentAdress);
+			cy.get(the.permanentAdress.input).should('have.value', the.permanentAdress.validPermanentAdress);
 
 			cy.get(the.submitButton).click();
-			cy.contains(the.nameText).should('be.visible');
-			cy.contains(the.emailText).should('be.visible');
-			cy.contains(the.currentAdressText).should('be.visible');
-			cy.contains(the.permanentAdressText).should('be.visible');
+			cy.get(the.nameText).should('contain', the.fullName.validName);
+			cy.get(the.emailText).should('contain', the.email.validEmail);
+			cy.get(the.currentAdressText).should('contain', the.currentAdress.validCurrentAdress);
+			cy.get(the.permanentAdressText).should('contain', the.permanentAdress.validPermanentAdress);
 		});
 	});
 
@@ -54,11 +61,12 @@ describe('20690 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	it('TC7: Validate that Email field is invalid when does not contains (minimum) 2 alphanumeric characters after “.”', () => {
 		cy.get;
 	});
-	const resizeObserverLoopErrRe = /^[^(ResizeObserver loop limit exceeded)]/;
-	Cypress.on('uncaught:exception', err => {
-		/* returning false here prevents Cypress from failing the test */
-		if (resizeObserverLoopErrRe.test(err.message)) {
-			return false;
-		}
-	});
+	//const resizeObserverLoopErrRe = /^[^(ResizeObserver loop limit exceeded)]/;
+	//Cypress.on('uncaught:exception', err => {
+	/* returning false here prevents Cypress from failing the test */
+	//if (resizeObserverLoopErrRe.test(err.message)) {
+	//	return false;
+	//}
 });
+import { removeLogs } from '@helper/RemoveLogs';
+removeLogs();

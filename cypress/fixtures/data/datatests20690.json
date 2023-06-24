@@ -28,6 +28,6 @@
 	"submitButton": "#submit",
 	"nameText": "#name",
 	"emailText": "#email",
-	"currentAdressText": "#currentAddress",
-	"permanentAdressText": "#permanentAddress"
+	"currentAdressText": "#currentAddress.mb-1",
+	"permanentAdressText": "#permanentAddress.mb-1"
 }
