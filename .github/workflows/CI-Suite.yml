@@ -54,7 +54,11 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
+<<<<<<< HEAD
                       yarn file cypress/e2e/Tests/Interactions/GX2-4027-Dragabble.cy.js
+=======
+                      yarn file cypress/e2e/Tests/Forms/GX-19307-Student-Form.cy.js
+>>>>>>> 5e0feb0f6d187e063eb3f554518a15e862fda597
 
             - name: ✅Import Test Results to Xray
               if: always()
@@ -64,8 +68,13 @@ jobs:
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
+<<<<<<< HEAD
                   testExecKey: 'GX2-4029' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
                   projectKey: 'GX2' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
+=======
+                  testExecKey: 'GX-19309' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+                  projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
+>>>>>>> 5e0feb0f6d187e063eb3f554518a15e862fda597
 
             - name: 🔔Slack Notification of Done
               if: always()
