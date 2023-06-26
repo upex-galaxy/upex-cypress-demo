@@ -10,7 +10,7 @@ class Draggable {
 		cursorCenter: () => cy.get('#cursorCenter'),
 		cursorTopLeft: () => cy.get('#cursorTopLeft'),
 		cursorBottom: () => cy.get('#cursorBottom'),
-		moverContenedor: () => cy.get('[class = "draggable ui-widget-content ui-draggable ui-draggable-handle"]'),
+		moverContenedor: () => cy.get('#containmentWrapper'),
 	};
 
 	visit() {
@@ -33,13 +33,13 @@ class Draggable {
 		return cy.get('#restrictedY');
 	}
 	contenedorEstático() {
-		return cy.get('[class="ui-widget-header ui-draggable ui-draggable-handle"]');
+		return cy.get('#draggableExample-tabpane-containerRestriction> :nth-child(2)> :nth-Child(1)');
 	}
 	restrictedX() {
 		return cy.get('#restrictedX');
 	}
 	moverContenedor() {
-		return cy.get('[class = "draggable ui-widget-content ui-draggable ui-draggable-handle"]');
+		return cy.get('#containmentWrapper > :nth-child(1)');
 	}
 
 	getRandomNumber(min, max) {
@@ -48,31 +48,6 @@ class Draggable {
 
 	moveElement(elementSelector, x, y) {
 		cy.get(elementSelector).move({ deltaX: x, deltaY: y });
-	}
-
-	validatePositionDragBox(x, y) {
-		this.dragBox()
-			.should('have.css', 'position', 'relative')
-			.and('have.css', 'left', x + 'px')
-			.and('have.css', 'top', y + 'px');
-	}
-	validatePositionRestrictedY(x, y) {
-		this.restrictedY()
-			.should('have.css', 'position', 'relative')
-			.and('have.css', 'left', x + 'px')
-			.and('have.css', 'top', y + 'px');
-	}
-	validatePositionRestrictedX(x, y) {
-		this.restrictedX()
-			.should('have.css', 'position', 'relative')
-			.and('have.css', 'left', x + 'px')
-			.and('have.css', 'top', y + 'px');
-	}
-	validatePositionContenedor(x, y) {
-		this.moverContenedor()
-			.should('have.css', 'position', 'relative')
-			.and('have.css', 'left', x + 'px')
-			.and('have.css', 'top', y + 'px');
 	}
 
 	SeleccionarPestaña() {

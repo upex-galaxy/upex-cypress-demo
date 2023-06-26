@@ -9,49 +9,72 @@ describe('US GX2-4027 | TS: ✅ToolsQA | Interactions | Dragabble', () => {
 	it('4028 | TC 1 : Validar mover simple de forma aleatoria verticalmente dentro de los límites', () => {
 		const x = 50;
 		const y = draggable.getRandomNumber(1, 250);
-		draggable.dragBox();
 		draggable.moveElement('#dragBox', x, y);
-		draggable.validatePositionDragBox(x, y);
+		draggable
+			.dragBox()
+			.should('have.css', 'position', 'relative')
+			.and('have.css', 'left', x + 'px')
+			.and('have.css', 'top', y + 'px');
 	});
 
 	it('4028 | TC 2 : Validar mover simple de forma aleatoria horizontalmente dentro de los límites', () => {
 		const x = draggable.getRandomNumber(1, 200);
 		const y = 50;
-		draggable.dragBox();
 		draggable.moveElement('#dragBox', x, y);
-		draggable.validatePositionDragBox(x, y);
+		draggable
+			.dragBox()
+			.should('have.css', 'position', 'relative')
+			.and('have.css', 'left', x + 'px')
+			.and('have.css', 'top', y + 'px');
 	});
 
 	it('4028 | TC 3 : Validar mover sólo x', () => {
 		draggable.draggableAxisRestriction();
 		const y = 0;
 		const x = draggable.getRandomNumber(100, 200);
-		draggable.restrictedX();
 		draggable.moveElement('#restrictedX', x, y);
-		draggable.validatePositionRestrictedX(x, y);
+		draggable
+			.restrictedX()
+			.should('have.css', 'position', 'relative')
+			.and('have.css', 'left', x + 'px')
+			.and('have.css', 'top', y + 'px');
 	});
 
 	it('4028 | TC 4 : Validar mover sólo y', () => {
 		draggable.draggableAxisRestriction();
 		const y = draggable.getRandomNumber(40, 389);
 		const x = 0;
-		draggable.restrictedY();
 		draggable.moveElement('#restrictedY', x, y);
-		draggable.validatePositionRestrictedY(x, y);
+		draggable
+			.restrictedY()
+			.should('have.css', 'position', 'relative')
+			.and('have.css', 'left', x + 'px')
+			.and('have.css', 'top', y + 'px');
 	});
 
 	it('4028 | TC 5 : Validar mover el objeto dentro del contenedor', () => {
 		draggable.draggableRestriction();
 		const x = draggable.getRandomNumber(0, 673);
 		const y = draggable.getRandomNumber(0, 106);
-		draggable.moverContenedor();
-		draggable.moveElement('[class = "draggable ui-widget-content ui-draggable ui-draggable-handle"]', x, y);
-		draggable.validatePositionContenedor(x, y);
+		draggable.moveElement('#containmentWrapper > :nth-child(1)', x, y);
+		draggable
+			.moverContenedor()
+			.should('have.css', 'position', 'relative')
+			.and('have.css', 'left', x + 'px')
+			.and('have.css', 'top', y + 'px');
 	});
 
 	it('4028 | TC 6 : Validar existencia de objeto estático', () => {
 		draggable.draggableRestriction();
-		draggable.contenedorEstático().should('have.css', 'position', 'relative').should('have.text', "I'm contained within my parent");
+		const x = draggable.getRandomNumber(0, 13);
+		const y = draggable.getRandomNumber(0, 86);
+		draggable.contenedorEstático();
+		draggable.moveElement('#draggableExample-tabpane-containerRestriction > :nth-child(2)>:nth-child(1)', x, y);
+		draggable
+			.contenedorEstático()
+			.should('have.css', 'position', 'relative')
+			.and('have.css', 'left', x + 'px')
+			.and('have.css', 'top', y + 'px');
 	});
 
 	it('4028 | TC 7 : Validar mover el objeto cursor Center', () => {
