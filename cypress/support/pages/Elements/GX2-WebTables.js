@@ -1,8 +1,10 @@
 import { faker } from '@faker-js/faker';
 export let dataBase = {};
 export let userDatabaseArray = [];
+export let usersDatabase2 = [];
 export let unsortedNames = [];
 export let sortedNames = [];
+export let pages = {};
 class WebTable {
 	get = {
 		//RegisterModal
@@ -31,6 +33,7 @@ class WebTable {
 		departmentForm: () => cy.get('[id ="department"]'),
 		submitButton: () => cy.get('[id ="submit"]'),
 		//Rows
+		rowsBody: () => cy.get('[class="rt-tbody"]'),
 		rows: () => cy.get('[class="rt-tr-group"]'),
 		evenrows: () => cy.get('[class="rt-tr -even"]'),
 		cells: () => cy.get('[class="rt-td"]'),
@@ -39,8 +42,15 @@ class WebTable {
 		deleteButton: () => cy.get('[title ="Delete"]'),
 		//Searchbox
 		searchbox: () => cy.get('[id = "searchBox"]'),
-		//sporting buttons
+		//buttons
 		nameSortingButton: () => cy.get('[class="rt-resizable-header-content"]').first(),
+		previousNextButtons: () => cy.get('[class="-btn"]'),
+		//rows pagination
+		rowsPerPage: () => cy.get('[aria-label="rows per page"]'),
+		pages: () => cy.get('[class="-pageInfo"]'),
+		numberOfPageInput: () => cy.get('[aria-label="jump to page"]'),
+		pageJump: () => cy.get('[class="-pageJump"]'),
+		totalPages: () => cy.get('span[class="-totalPages"]'),
 	};
 	clickAddbutton() {
 		this.get.addButton().click();
@@ -110,9 +120,8 @@ class WebTable {
 				this.get.evenrows().then(info => Cypress.env('cellInformation', info.text()));
 			});
 	}
-	searchRandomUser() {
-		let randomUser;
-		return this.get
+	gettingUsers() {
+		this.get
 			.rows()
 			.then($rows => {
 				for (let i = 0; i <= 2; i++) {
@@ -123,21 +132,27 @@ class WebTable {
 								.cells()
 								.first()
 								.then(nametext => {
-									userDatabaseArray.push(nametext.text());
+									usersDatabase2.push(nametext.text());
 								});
 						});
 				}
 			})
 			.then(() => {
-				const randomNumber = Cypress._.random(0, userDatabaseArray.length - 1);
-				randomUser = userDatabaseArray[randomNumber];
-				dataBase.chosenUser = randomUser;
-				this.get.searchbox().type(randomUser);
+				cy.log(usersDatabase2);
+				const length = usersDatabase2.length;
+				const userNumber = Cypress._.random(0, length - 1);
+				Cypress.env('randomUser', usersDatabase2[userNumber]);
+				cy.log(Cypress.env('randomUser'));
+				dataBase.searchedUser = Cypress.env('randomUser');
 			});
+	}
+	searchRandomUser() {
+		cy.log(Cypress.env('randomUser'));
+		this.get.searchbox().type(Cypress.env('randomUser'));
 	}
 
 	gettingCelluser() {
-		this.get
+		return this.get
 			.rows()
 			.first()
 			.within(() => {
@@ -145,7 +160,8 @@ class WebTable {
 					.cells()
 					.first()
 					.then(name => {
-						dataBase.userInCell = name.text();
+						dataBase.userInCell = Cypress.env('userInCell', name.text());
+						return Cypress.env('userInCell', name.text());
 					});
 			});
 	}
@@ -273,6 +289,81 @@ class WebTable {
 			.within(() => {
 				this.get.cells().first();
 			});
+	}
+	select5rows() {
+		this.get.rowsPerPage().select('5');
+		cy.get('[value="5"]')
+			.invoke('val')
+			.then(val => {
+				Cypress.env('value5', val);
+				dataBase.fiverowSelected = parseInt(Cypress.env('value5'));
+			});
+	}
+	gettingNumberofRows() {
+		this.get.rowsBody().within(() => {
+			this.get.rows().then(rows => {
+				Cypress.env('numberOfRows', rows.length);
+				dataBase.numberOfRows = Cypress.env('numberOfRows');
+			});
+		});
+	}
+	select25rows() {
+		this.get.rowsPerPage().select('25');
+		cy.get('[value="25"]')
+			.invoke('val')
+			.then(val => {
+				Cypress.env('value25', val);
+				dataBase.twentyFiverowSelected = parseInt(Cypress.env('value25'));
+			});
+	}
+	select100rows() {
+		this.get.rowsPerPage().select('100');
+		cy.get('[value="100"]')
+			.invoke('val')
+			.then(val => {
+				Cypress.env('value100', val);
+				dataBase.oneHundredrowSelected = parseInt(Cypress.env('value100'));
+			});
+	}
+	addNewUser(numberOfUsers) {
+		for (let i = 0; i <= numberOfUsers; i++) {
+			this.clickAddbutton();
+			this.typeName();
+			this.typeSurname();
+			this.typeEmail();
+			this.typeAge();
+			this.typeSalary();
+			this.typeDepartment();
+			this.clickSubmit();
+		}
+	}
+	clickOnNext() {
+		this.get.previousNextButtons().last().click();
+	}
+	gettingPagesInformation() {
+		return webtable.get.pages().within(() => {
+			webtable.get
+				.numberOfPageInput()
+				.invoke('val')
+				.then(val => {
+					pages.currentPage = Cypress.env('val', val);
+					return Cypress.env('val', val);
+				});
+			this.get
+				.totalPages()
+				.invoke('text')
+				.then(number => {
+					expect(number).to.exist;
+					pages.numberOfPages = Cypress.env('numberOfPages', number);
+				});
+		});
+	}
+	clickOnPrevious() {
+		this.get.previousNextButtons().first().click();
+	}
+	inputPageNumber2() {
+		this.get.numberOfPageInput().clear();
+		this.get.numberOfPageInput().type(2);
 	}
 }
 export const webtable = new WebTable();
