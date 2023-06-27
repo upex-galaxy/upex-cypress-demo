@@ -39,27 +39,7 @@ describe('GX2-3452 | ToolsQA | Interactions | Sortable', () => {
 			.then(() => {
 				expect(arrayNewList[Cypress.env('randomListTarget')]).to.be.equal(data.listItems[Cypress.env('randomListItem')]);
 			});
-		// sortable
-		// 	.getListItems()
-		// 	.each(item => {
-		// 		arrayNewList.push(item.text());
-		// 	})
-		// 	.then(() => {
-		// 		// los números corresponden a las coordenadas X e Y de cada item de la lista.
-		// 		if (Cypress.env('randomCoordinateList') > 392 && Cypress.env('randomCoordinateList') < 442) {
-		// 			expect(arrayNewList[0]).to.be.equal(data.listItems[Cypress.env('randomItem')]);
-		// 		} else if (Cypress.env('randomCoordinateList') > 442 && Cypress.env('randomCoordinateList') < 491) {
-		// 			expect(arrayNewList[1]).to.be.equal(data.listItems[Cypress.env('randomItem')]);
-		// 		} else if (Cypress.env('randomCoordinateList') > 491 && Cypress.env('randomCoordinateList') < 540) {
-		// 			expect(arrayNewList[2]).to.be.equal(data.listItems[Cypress.env('randomItem')]);
-		// 		} else if (Cypress.env('randomCoordinateList') > 540 && Cypress.env('randomCoordinateList') < 589) {
-		// 			expect(arrayNewList[3]).to.be.equal(data.listItems[Cypress.env('randomItem')]);
-		// 		} else if (Cypress.env('randomCoordinateList') > 589 && Cypress.env('randomCoordinateList') < 638) {
-		// 			expect(arrayNewList[4]).to.be.equal(data.listItems[Cypress.env('randomItem')]);
-		// 		} else {
-		// 			expect(arrayNewList[5]).to.be.equal(data.listItems[Cypress.env('randomItem')]);
-		// 		}
-		// 	});
+		
 	});
 	it('GX2-3453 | TC3: Validate the grid items and a 3X3 grid is displayed', () => {
 		sortable.get.gridTab().should('exist').and('not.be.selected');
