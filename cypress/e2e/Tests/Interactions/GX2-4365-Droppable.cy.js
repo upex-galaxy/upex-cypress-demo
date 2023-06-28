@@ -1,9 +1,19 @@
-cy.describe('This is your test project title', () => {
+import { droppable } from '@pages/Interactions/GX2-4365-Droppable.page';
+
+describe('This is your test project title', () => {
 	beforeEach(() => {
-		cy.visit('https://demoqa.com/droppable');
+		droppable.visit();
 	});
 
-	it('4366 | Validate Tabs “Simple”, “Accept”, “Prevent Propagation”, “Revert Draggable” must be shown', () => {});
+	it('4366 | Validate Tabs “Simple  must be shown', () => {
+		droppable.SeleccionarSimple();
+	});
+	it('4366 |  Validate tab “Accept”  must be shown', () => {
+		droppable.SeleccionarAccept();
+	});
+
+	it('4366 | Validate Tabs “Prevent Propagation” must be shown', () => {});
+	it('4366 | Validate Tabs “Revert Draggable”  must be shown', () => {});
 
 	it('4366 |  Validate tab "Simple” is displayed by default', () => {});
 	it('4366 |  Validate one tab is displayed at once', () => {});
