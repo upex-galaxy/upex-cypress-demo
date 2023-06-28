@@ -89,7 +89,7 @@ describe('20690 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		});
 	});
 
-	it.only('TC7: Validate that Email field is invalid when does not contains (minimum) 2 alphanumeric characters after “.”', () => {
+	it('TC7: Validate that Email field is invalid when does not contains (minimum) 2 alphanumeric characters after “.”', () => {
 		cy.fixture('data/datatests20690').then(the => {
 			cy.get(the.email.input).should('be.empty');
 			cy.get(the.email.input).type(the.email.invalidEmail5);
