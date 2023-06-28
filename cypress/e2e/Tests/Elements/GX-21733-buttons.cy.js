@@ -11,13 +11,13 @@ describe('✅ToolsQA | Elements | Buttons', () => {
 	});
 
 	it('21734 | TC2: Validar funcionamiento del botón "right click me"', () => {
-		cy.get('#rightClickBtn').rightClick();
-		cy.get('#rightClickMessage').should('contain', 'You have done a double click');
+		cy.get('#rightClickBtn').rightclick();
+		cy.get('#rightClickMessage').should('contain', 'You have done a right click');
 	});
 
 	it('21734 | TC3: Validar funcionamiento del botón “click me”', () => {
 		cy.get('[class$="btn-primary"]').eq(2).click();
-		cy.get('#dynamicClickMessage').should('contain', 'You have done a right click');
+		cy.get('#dynamicClickMessage').should('contain', 'You have done a dynamic click');
 	});
 
 	it('21734 | TC4: Validar que NO aparezca mensaje al hacer sólo un "click" en el botón “double click me”', () => {
@@ -31,7 +31,7 @@ describe('✅ToolsQA | Elements | Buttons', () => {
 	});
 
 	it('21734 | TC6: Validar que NO aparezca mensaje "you have done a dynamic click" al hacer click derecho en "click button"', () => {
-		cy.get('[class$="btn-primary"]').eq(2).rightClick();
+		cy.get('[class$="btn-primary"]').eq(2).rightclick();
 		cy.get('#dynamicClickMessage').should('not.exist');
 	});
 
