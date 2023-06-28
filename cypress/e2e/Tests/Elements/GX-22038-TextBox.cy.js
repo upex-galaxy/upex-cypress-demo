@@ -6,17 +6,12 @@ describe('22038 | TS: ✅ToolsQA | Elements | Text Box: Fill form and Submit', (
     it('22039 | TC1: Validar que al ingresar datos validos en todos los campos se muestren los mensajes esperados.', () => {
         cy.fixture("data/GX-22038-TextBox.json").then((the) =>
         {
-            cy.get(the.fullname.input)
-                .type(the.fullname.data.filled);
-            cy.get(the.email.input)
-                .type(the.email.data.valid);
-            cy.get(the.currentAddress.input)
-                .type(the.currentAddress.data.filled);
-            cy.get(the.permanentAddress.input)
-                .type(the.permanentAddress.data.filled);
-            cy.get(the.submitbutton)
-                .click();
-            cy.get('.mb-1').should('contain.text', (the.fullname.data.filled), (the.email.data.valid), (the.currentAddress.data.filled), (the.permanentAddress.data.filled));
+            textForm.enterName(the.fullname.data.filled);
+            textForm.enterEmail(the.email.data.valid);
+            textForm.enterCurrentAddress(the.currentAddress.data.filled);
+            textForm.enterPermanentAddress(the.permanentAddress.data.filled);
+            textForm.get.submitBtn().click();
+            textForm.get.textBox().should('contain.text', (the.fullname.data.filled), (the.email.data.valid), (the.currentAddress.data.filled), (the.permanentAddress.data.filled));
         });
     });
     it('22039 | TC2: Validar que al enviar campos vacios en “Full name”, “Current Address” and “Permanent Address” ,  no se muestre ningún mensaje.', () => {
@@ -84,5 +79,6 @@ describe('22038 | TS: ✅ToolsQA | Elements | Text Box: Fill form and Submit', (
         });
     });
 })
+import { textForm } from '@pages/Elements/GX-22038-TextBox.Page';
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
