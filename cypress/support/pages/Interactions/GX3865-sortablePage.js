@@ -6,21 +6,63 @@ class SorteablePage {
 		childrenListContainer: () => cy.get('.vertical-list-container').children(),
 	};
 
-	getRandomElement() {
-		// Obtain all lists of the web
-		const arrayItems = [];
-		this.get.childrenListContainer().each(item => {
-			arrayItems.push(item);
+	// Obtain arrayItems of the DOM
+	getArrayItem() {
+		return new Cypress.Promise(resolve => {
+			const arrayItems = [];
+			this.get
+				.childrenListContainer()
+				.each(item => {
+					arrayItems.push(item);
+				})
+				.then(() => {
+					resolve(arrayItems); // Array[6]
+				});
 		});
-		cy.log('Array items:', arrayItems);
+	}
 
-		// create a random of elements of the lists
-		const randomIndex = Cypress._.random(arrayItems - 1);
+	// Create random of the arrayItems
+	async getRandomItem() {
+		const arrayItems = await this.getArrayItem();
+		const randomIndex = Cypress._.random(1, arrayItems.length);
+		cy.log(randomIndex);
+		return randomIndex; // 1,2,3,4,5,6
+	}
 
-		return randomIndex;
+	// Move Random Item
+	async triggerItem() {
+		const arrayItems = await this.getArrayItem();
+		// Indice aleatorio para el valor iniciar correspondiente al array
+		const startRandomValue = await this.getRandomItem();
+		const startTarget = arrayItems[startRandomValue];
+		cy.log('random inicial del array');
+		cy.log(startTarget);
+
+		// Indice aleatorio para el valor final correspondiente al array
+		const endRandomValue = await this.getRandomItem();
+		const endTarget = arrayItems[endRandomValue];
+		cy.log('random fiiiiiiiiiiiiiinal del array');
+		cy.log(endTarget); // se imprime vacio
+
+		// Start position. .offset se obtiene la posicion de un elemento. objeto con top y left. coordenadas x e y
+		const startPosition = startTarget.offset();
+		cy.log('coordenadas x e y del start target');
+		cy.log(startPosition);
+		// Simular arrastre
+		startTarget.trigger('mousedown', { which: 1, pageX: startPosition.left, pageY: startPosition.top }).trigger('dragstart');
+
+		// Posicion final
+		const dropPosition = endTarget.offset();
+		cy.log('coordenadas x e y del droooooooooop target');
+		cy.log(dropPosition);
+
+		// Simular soltar el elemento
+		cy.document().trigger('mousemove', { pageX: dropPosition.x, pageY: dropPosition.y }).trigger('mouseup', { force: true });
 	}
 }
 
 export const sortablePage = new SorteablePage();
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
+
+// glebbbalmutov // gleb bahmutov //

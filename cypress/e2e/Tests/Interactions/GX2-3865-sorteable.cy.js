@@ -31,7 +31,9 @@ describe('This is your test project title', () => {
 			cy.wrap(data.listItems).should('deep.equal', arrayTexts);
 
 			// Move random element to first position
-			sortablePage.getRandomElement();
+			cy.log('drag and drop----------------------------------------');
+			sortablePage.triggerItem();
+			//sortablePage.triggerElement();
 
 			// Move random element to last position
 
