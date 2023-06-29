@@ -13,14 +13,6 @@ class account {
 	getUserName() {
 		return cy.get('[data-test="username"]');
 	}
-	// getTextUserName() {
-	// 	return cy
-	// 		.getUsernameInput()
-	// 		.invoke('attr', 'value')
-	// 		.then(value => {
-	// 			return value;
-	// 		});
-	// }
 	getPassword() {
 		return cy.get('[data-test="password"]');
 	}
