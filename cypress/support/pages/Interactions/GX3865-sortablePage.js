@@ -32,32 +32,41 @@ class SorteablePage {
 	// Move Random Item
 	async triggerItem() {
 		const arrayItems = await this.getArrayItem();
-		// Indice aleatorio para el valor iniciar correspondiente al array
+		cy.log('array itemsss ---------------------------');
+		cy.log(arrayItems);
+		// Indice aleatorio para el valor inicial correspondiente al array
 		const startRandomValue = await this.getRandomItem();
 		const startTarget = arrayItems[startRandomValue];
-		cy.log('random inicial del array');
+		cy.log('random inicial del array-------------');
 		cy.log(startTarget);
+		cy.log(startRandomValue);
 
+		console.log('start target--------------------------------------');
+		console.log(startTarget);
 		// Indice aleatorio para el valor final correspondiente al array
 		const endRandomValue = await this.getRandomItem();
 		const endTarget = arrayItems[endRandomValue];
 		cy.log('random fiiiiiiiiiiiiiinal del array');
-		cy.log(endTarget); // se imprime vacio
+		cy.log(endTarget); // se imprime vacio a veces
 
 		// Start position. .offset se obtiene la posicion de un elemento. objeto con top y left. coordenadas x e y
 		const startPosition = startTarget.offset();
 		cy.log('coordenadas x e y del start target');
 		cy.log(startPosition);
-		// Simular arrastre
-		startTarget.trigger('mousedown', { which: 1, pageX: startPosition.left, pageY: startPosition.top }).trigger('dragstart');
 
 		// Posicion final
 		const dropPosition = endTarget.offset();
 		cy.log('coordenadas x e y del droooooooooop target');
 		cy.log(dropPosition);
 
-		// Simular soltar el elemento
-		cy.document().trigger('mousemove', { pageX: dropPosition.x, pageY: dropPosition.y }).trigger('mouseup', { force: true });
+		// Simular arrastre
+		cy.log('Arrastre------------------------------------------');
+		cy.get(startTarget)
+			.trigger('mousedown', { which: 1, pageX: startPosition.left, pageY: startPosition.top, force: true })
+			.trigger('mousemove', { which: 1, pageX: dropPosition.left, pageY: dropPosition.top, force: true })
+			.trigger('mouseup', { force: true });
+
+		return { startTarget, endTarget };
 	}
 }
 

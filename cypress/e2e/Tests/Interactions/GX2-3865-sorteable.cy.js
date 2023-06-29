@@ -30,16 +30,17 @@ describe('This is your test project title', () => {
 
 			cy.wrap(data.listItems).should('deep.equal', arrayTexts);
 
-			// Move random element to first position
+			// Move random element to ranom position
 			cy.log('drag and drop----------------------------------------');
-			sortablePage.triggerItem();
-			//sortablePage.triggerElement();
+			sortablePage.triggerItem().then(({ startTarget, endTarget }) => {
+				expect(startTarget).to.not.equal(endTarget);
+			});
+
+			// Move random element to first position
 
 			// Move random element to last position
 
 			// Move random element to middle position
-
-			// Move random element to ranom position
 
 			// Move 1 element at a time
 		});
