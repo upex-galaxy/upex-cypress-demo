@@ -1,28 +1,20 @@
 {
-    "submitbutton": "#submit",
     "fullname": {
-        "input": "#userName",
         "data" : {
-            "empty" : "",
             "filled" : "Gustavo"
         }
     },
     "currentAddress": {
-        "input": "#currentAddress",
         "data" : {
-            "empty" : "",
             "filled" : "verdaguer 12"
         }
     },
     "permanentAddress": {
-        "input": "#permanentAddress",
         "data" : {
-            "empty" : "",
             "filled" : "falucho 252"
         }
     },
     "email": {
-        "input": "#userEmail",
         "data" : {
             "valid" : "gualex89@gmail.com",
             "invalid" : {

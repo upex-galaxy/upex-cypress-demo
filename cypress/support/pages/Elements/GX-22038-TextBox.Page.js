@@ -6,7 +6,8 @@ class form {
         currentAddressInput: () => cy.get("#currentAddress"),
         permanentAddressInput: () => cy.get("#permanentAddress"),
         submitBtn: () => cy.get("#submit"),
-        textBox: () => cy.get('.mb-1')
+        textBox: () => cy.get('.mb-1'),
+        redBorder: () => cy.get('.field-error'),
     }
     // Accionables de cypress   
     enterName(value) {

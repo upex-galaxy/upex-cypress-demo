@@ -17,20 +17,17 @@ describe('22038 | TS: ✅ToolsQA | Elements | Text Box: Fill form and Submit', (
     it('22039 | TC2: Validar que al enviar campos vacios en “Full name”, “Current Address” and “Permanent Address” ,  no se muestre ningún mensaje.', () => {
         cy.fixture("data/GX-22038-TextBox.json").then((the) =>
         {
-            cy.get(the.submitbutton)
-                .click();
-            cy.get('.mb-1').should('not.exist');
+            textForm.get.submitBtn().click();
+            textForm.get.textBox().should('not.exist');
         });
     });
     it('22039 | TC3: Validar que al enviar un  email  que no contenga “@” se muestre un borde rojo en "class="mr-sm-2 field-error form-control"', () =>
     {
         cy.fixture("data/GX-22038-TextBox.json").then((the) =>
         {
-            cy.get(the.email.input)
-                .type(the.email.data.invalid.invalidEmail1);
-            cy.get(the.submitbutton)
-                .click();
-            cy.get('.field-error').should('have.css', 'border-color', 'rgb(255, 0, 0)');
+            textForm.enterEmail(the.email.data.invalid.invalidEmail1);
+            textForm.get.submitBtn().click();
+            textForm.get.redBorder().should('have.css', 'border-color', 'rgb(255, 0, 0)');
             
         });
     });
@@ -38,32 +35,27 @@ describe('22038 | TS: ✅ToolsQA | Elements | Text Box: Fill form and Submit', (
     {
         cy.fixture("data/GX-22038-TextBox.json").then((the) =>
         {
-            cy.get(the.email.input)
-                .type(the.email.data.invalid.invalidEmail2);
-            cy.get(the.submitbutton)
-                .click();
-            cy.get('.field-error').should('have.css', 'border-color', 'rgb(255, 0, 0)');
+            textForm.enterEmail(the.email.data.invalid.invalidEmail2);
+            textForm.get.submitBtn().click();
+            textForm.get.redBorder().should('have.css', 'border-color', 'rgb(255, 0, 0)');
         });
     });
     it('22039 | TC5: Validar que al enviar un  email  que no contenga “mínimo un carácter alfanumérico después de @ ” se muestre un borde rojo en "class="mr-sm-2 field-error form-control"', () =>
     {
         cy.fixture("data/GX-22038-TextBox.json").then((the) =>
         {
-            cy.get(the.email.input)
-                .type(the.email.data.invalid.invalidEmail3);
-            cy.get(the.submitbutton)
-                .click();
-            cy.get('.field-error').should('have.css', 'border-color', 'rgb(255, 0, 0)');
+            textForm.enterEmail(the.email.data.invalid.invalidEmail3);
+            textForm.get.submitBtn().click();
+            textForm.get.redBorder().should('have.css', 'border-color', 'rgb(255, 0, 0)');
         });
     });
     it('22039 | TC6: Validar que al enviar un  email  que no contenga “ (.) despues de al menos un caracter alfanumerico despues de @ ” se muestre un borde rojo en "class="mr-sm-2 field-error form-control"', () =>
     {
         cy.fixture("data/GX-22038-TextBox.json").then((the) =>
         {
-            cy.get(the.email.input)
-                .type(the.email.data.invalid.invalidEmail4);
-            cy.get(the.submitbutton)
-                .click();
+            textForm.enterEmail(the.email.data.invalid.invalidEmail4);
+            textForm.get.submitBtn().click();
+            textForm.get.redBorder().should('have.css', 'border-color', 'rgb(255, 0, 0)');
             cy.get('.field-error').should('have.css', 'border-color', 'rgb(255, 0, 0)');
         });
     });
@@ -71,11 +63,9 @@ describe('22038 | TS: ✅ToolsQA | Elements | Text Box: Fill form and Submit', (
     {
          cy.fixture("data/GX-22038-TextBox.json").then((the) =>
         {
-            cy.get(the.email.input)
-                .type(the.email.data.invalid.invalidEmail5);
-            cy.get(the.submitbutton)
-                .click();
-            cy.get('.field-error').should('have.css', 'border-color', 'rgb(255, 0, 0)');
+            textForm.enterEmail(the.email.data.invalid.invalidEmail5);
+            textForm.get.submitBtn().click();
+            textForm.get.redBorder().should('have.css', 'border-color', 'rgb(255, 0, 0)');
         });
     });
 })
