@@ -64,5 +64,33 @@ describe('✅SwagLabs | Account | Iniciar sesión y BR de Accesos', () => {
 			Account.get.dataTex().should('contain.text', "Epic sadface: You can only access '/inventory.html' when you are logged in.");
 		});
 	});
+	it('17442 | TC9: Validar autenticación de acceso ingresando sin registrarse desde el input /cart.html.', () => {
+		cy.url().then(url => {
+			const newUrl = `${url}cart.html`;
+			cy.visit(newUrl, { failOnStatusCode: false });
+			Account.get.dataTex().should('contain.text', "Epic sadface: You can only access '/cart.html' when you are logged in");
+		});
+	});
+	it('17442 | TC10: Validar autenticación de acceso ingresando sin registrarse desde el input /checkout-step-one.html.', () => {
+		cy.url().then(url => {
+			const newUrl = `${url}checkout-step-one.html`;
+			cy.visit(newUrl, { failOnStatusCode: false });
+			Account.get.dataTex().should('contain.text', "Epic sadface: You can only access '/checkout-step-one.html' when you are logged in.");
+		});
+	});
+	it('17442 | TC11: Validar autenticación de acceso ingresando sin registrarse desde el input /checkout-step-two.html.', () => {
+		cy.url().then(url => {
+			const newUrl = `${url}checkout-step-two.html`;
+			cy.visit(newUrl, { failOnStatusCode: false });
+			Account.get.dataTex().should('contain.text', "Epic sadface: You can only access '/checkout-step-two.html' when you are logged in.");
+		});
+	});
+	it('17442 | TC12: Validar autenticación de acceso ingresando sin registrarse desde el input /checkout-complete.html.', () => {
+		cy.url().then(url => {
+			const newUrl = `${url}checkout-complete.html`;
+			cy.visit(newUrl, { failOnStatusCode: false });
+			Account.get.dataTex().should('contain.text', "Epic sadface: You can only access '/checkout-complete.html' when you are logged in.");
+		});
+	});
 });
 removeLogs();
