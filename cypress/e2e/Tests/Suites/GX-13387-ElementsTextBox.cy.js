@@ -4,6 +4,7 @@ removeLogs();
 describe('US GX-13387 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	beforeEach('PRC: Usuario debe ubicarse en la Text Box Page', () => {
 		cy.visit('https://demoqa.com/text-box');
+		cy.url().should('contain', 'text-box');
 	});
 
 	it('13388 | TC01: Validar visualizar strings como párrafo al enviar formulario con todos los campos válidos', () => {
