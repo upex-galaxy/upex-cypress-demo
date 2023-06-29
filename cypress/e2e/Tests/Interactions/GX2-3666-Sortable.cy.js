@@ -1,7 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable indent */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { removeLogs } from '@helper/RemoveLogs';
 import { toolsqasortable } from '@pages/Interactions/GX2-3666-sortablePage';
 removeLogs();
@@ -9,12 +5,12 @@ removeLogs();
 describe('GX2-3666| ToolsQA | Interactions | Sortable', () => {
 	beforeEach('Preconditions', () => {
 		cy.visit('https://demoqa.com/sortable');
-		//cy.url().should('contain', 'sortable');
+		cy.url().should('contain', 'sortable');
 	});
 	let array1 = ['One', 'Two', 'Three', 'Four', 'Five', 'Six'];
 	let array2 = ['One', 'Two,', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
 
-	it('GX1-3667|TC01 Las pestañas "List" y "Gird" deben mostrarse por defecto.', () => {
+	it('GX1-3667|TC01 Validate elements in "List" tab', () => {
 		//cy.log('hola');
 		//cy.get('#demo-tab-list').should('exist').and('be.visible');
 		toolsqasortable.getTabList().should('exist').and('be.visible');
@@ -28,7 +24,7 @@ describe('GX2-3666| ToolsQA | Interactions | Sortable', () => {
 			});
 	});
 
-	it.only('GX2-3667|TC02: En tab LIST Arrastre un elemento aleatorio a una posición aleatoria', () => {
+	it('GX2-3667|TC02: Validate in LIST tab Drag a random element to a random position', () => {
 		let arrayListTarget = [];
 		cy.then(() => {
 			if (toolsqasortable.getRandomItemL() === toolsqasortable.getRandomTargetL()) {
@@ -48,6 +44,27 @@ describe('GX2-3666| ToolsQA | Interactions | Sortable', () => {
 				});
 		});
 	});
-});
 
-it('GX3-3667|TC03: En tab GRID Arrastre un elemento aleatorio a una posición aleatoria', () => {});
+	it.only('GX3-3667|TC03: Validate in Grid tab Drag a random element to a random position', () => {
+		toolsqasortable.selectGritdTab();
+		cy.then(() => {
+			if (toolsqasortable.getRandomItemG() === toolsqasortable.getRandomTargetG()) {
+				toolsqasortable.getRandomItemG();
+			}
+
+			toolsqasortable.getRandomItemGrid().trigger('mousedown', { which: 1 });
+			toolsqasortable.getRandomTargetGrid().trigger('mousemove').click({ force: true });
+
+			let arrayGridTarget = [];
+			toolsqasortable
+				.getGridItems()
+				.each(item => {
+					arrayGridTarget.push(item.text());
+				})
+				.then(() => {
+					expect(array2).to.not.equal(arrayGridTarget);
+					expect(array2[Cypress.env('randomGridItem')]).to.be.equal(arrayGridTarget[Cypress.env('randomGridTarget')]);
+				});
+		});
+	});
+});

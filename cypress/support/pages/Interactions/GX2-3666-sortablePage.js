@@ -11,6 +11,7 @@ class ToolsQASortable {
 		tabGrid: () => cy.get('#demo-tab-grid'),
 		listContainer: () => cy.get('[class^="vertical-list-container"]'),
 		gridContainer: () => cy.get('#demo-tabpane-grid'),
+		grid: () => cy.get('.create-grid'),
 	};
 
 	getTabList() {
@@ -20,38 +21,6 @@ class ToolsQASortable {
 	getListItems() {
 		return this.get.listContainer().children();
 	}
-
-	// getRandomListItem() {
-	// 	return this.get
-	// 		.listContainer()
-	// 		.children()
-	// 		.its('length')
-	// 		.then(n => Cypress._.random(0, n - 1))
-	// 		.then(randomList => {
-	// 			console.log(randomList);
-	// 			this.get.listContainer().children().eq(randomList);
-	// 			return randomList;
-	// 		});
-	// 	 .then(randomList => {
-	// 	 	Cypress.env('randomList', randomList);
-	// 	 });
-	// }
-
-	// getRandomListTarget() {
-	// 	return this.get
-	// 		.listContainer()
-	// 		.children()
-	// 		.its('length')
-	// 		.then(n => Cypress._.random(0, n - 1))
-	// 		.then(randomListTarget => {
-	// 			console.log(randomListTarget);
-	// 			this.get.listContainer().children().eq(randomListTarget);
-	// 			return randomListTarget;
-	// 		});
-	// 	 .then(randomListTarget => {
-	// 	 	Cypress.env('randomListTarget', randomListTarget);
-	// 	 });
-	// }
 
 	//seleciono un numero aleatorio del total de elementos en el tab list y lo guarde en la variable
 	//cypress.env
@@ -77,6 +46,36 @@ class ToolsQASortable {
 	//funcion que llama al numero guardado en cypress.env de la selecion del target
 	getRandomListTarget() {
 		return this.get.listContainer().children().eq(Cypress.env('randomListTarget'));
+	}
+
+	//tab grid
+	selectGritdTab() {
+		return this.get.tabGrid().click();
+	}
+
+	getRandomItemG() {
+		const randomGridItem = Math.floor(Math.random() * 9);
+
+		Cypress.env('randomGridItem', randomGridItem);
+		return randomGridItem;
+	}
+
+	getRandomItemGrid() {
+		return this.get.grid().children().eq(Cypress.env('randomGridItem'));
+	}
+
+	getRandomTargetG() {
+		const randomGridTarget = Math.floor(Math.random() * 9);
+
+		Cypress.env('randomGridTarget', randomGridTarget);
+		return randomGridTarget;
+	}
+	getRandomTargetGrid() {
+		return this.get.grid().children().eq(Cypress.env('randomGridTarget'));
+	}
+
+	getGridItems() {
+		return this.get.grid().children();
 	}
 }
 export const toolsqasortable = new ToolsQASortable();
