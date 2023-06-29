@@ -57,11 +57,11 @@ describe('✅SwagLabs | Account | Iniciar sesión y BR de Accesos', () => {
 		Account.clickSubmitButton();
 		Account.get.dataTex().should('contain.text', 'Username is required');
 	});
-	it.only('17442 | TC8: Validar autenticación de acceso ingresando sin registrarse desde el input /inventory.html.', () => {
+	it('17442 | TC8: Validar autenticación de acceso ingresando sin registrarse desde el input /inventory.html.', () => {
 		cy.url().then(url => {
 			const newUrl = `${url}inventory.html`;
-
 			cy.visit(newUrl, { failOnStatusCode: false });
+			Account.get.dataTex().should('contain.text', "Epic sadface: You can only access '/inventory.html' when you are logged in.");
 		});
 	});
 });
