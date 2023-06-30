@@ -1,0 +1,22 @@
+{
+    "input": {
+    "fullName": "#userName",
+    "email": "#userEmail",
+    "currentAddress":"#permanentAddress",
+    "submitButton": "#submit"
+}
+    "data":{
+    "valid": 
+    "userName": "Elena Valera",
+    "userEmail": "secretodelmar@gmail.com",
+    "currentAddress": "calle mar menor 5",
+    "permanentAddress": "Calle Mar mayor 6"
+    }
+    "invalid":{
+
+    "invalidEmail1": "secretodelmar.com",
+    "invalidEmail2": "secretodelmar@",
+    "invalidEmail3": "secretodelmar@gmailcom",
+    "invalidEmail4": "secretodelmar@gmail."
+    }
+}
