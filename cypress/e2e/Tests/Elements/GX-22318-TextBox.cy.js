@@ -5,8 +5,15 @@ describe('✅ToolsQA Elements Text Box: Fill form and Submit', () => {
 	});
 
 	it('TC1: Validate fill the Fill form successfully with valide data verifying the correct message', () => {
-		cy.expect() // step 1: fill name
-		cy.get('input').type('text').
+		cy.fixture('data/Gx-22318-TextBox.json').then(the => {
+			cy.get(the.fullName.input).type(the.userName.data.valid);
+			cy.get(the.email.input).type(the.userEmail.data.valid);
+			cy.get(the.currentAddress.input).type(the.CurrentAddress.data.valid);
+			cy.get(the.permanentAddress.input).type(the.permanentAddress.data.valid);
+			cy.get(the.submitButton).click();
+		});
+		
+	
 	});
 		// step 2: fill e-mail
 
