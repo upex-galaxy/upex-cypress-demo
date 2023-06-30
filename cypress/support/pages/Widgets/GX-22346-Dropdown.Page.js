@@ -16,16 +16,27 @@ class DropDownSelector {
 
 	SelectValueDropDownOptions() {
 		const option = Math.floor(Math.random() * 6);
-		dropDownSelector.get.SelectValueDropDown().click();
-		dropDownSelector.get.dropdownMenu().should('be.visible');
+		this.get.SelectValueDropDown().click();
+		this.get.dropdownMenu().should('be.visible');
 		return this.get.optionMenu().eq(option).click();
+	}
+
+	SelectOneDropDownInput(type) {
+		this.get.SelectOneDropDown().type(type);
 	}
 
 	SelectOneDropDownOptions() {
 		const option = Math.floor(Math.random() * 6);
-		dropDownSelector.get.SelectOneDropDown().click();
-		dropDownSelector.get.dropdownMenu().should('be.visible');
+		this.get.SelectOneDropDown().click();
+		this.get.dropdownMenu().should('be.visible');
 		return this.get.optionMenu().eq(option).click();
+	}
+
+	OldSelectMenuDropDownOptions() {
+		const option = Math.floor(Math.random() * 10);
+		const color = ['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Black', 'White', 'Voilet', 'Indigo', 'Magenta', 'Aqua'];
+		this.get.OldSelectMenuDropDown().select(option);
+		Cypress.env('colorSelect', color[option]);
 	}
 }
 

@@ -37,4 +37,22 @@ describe('✅ToolsQA | Widgets | Dropdown - Select Menu', () => {
 				dropDownSelector.get.selectOption().should('have.text', values);
 			});
 	});
+	it('22347 | TC05: Validar que al escribir Una parte de la opción valida en el Dropdown Select One se visualice la opción escrita', () => {
+		cy.fixture('data/GX-22346-Dropdown').then(the => {
+			dropDownSelector.SelectOneDropDownInput(the.SelectOne.data.valid);
+			dropDownSelector.get.dropdownMenu().should('contain.text', the.SelectOne.data.valid);
+		});
+	});
+	it('22347 | TC06: Validar que al escribir Una opción NO valida en el Dropdown Select One NO se visualice dicha opción escrita', () => {
+		cy.fixture('data/GX-22346-Dropdown').then(the => {
+			dropDownSelector.SelectOneDropDownInput(the.SelectOne.data.invalid);
+			dropDownSelector.get.dropdownMenu().should('contain.text', the.Incorrect);
+		});
+	});
+	it.only('22347 | TC07: Validar la selección de Una opción Aleatoria del Dropdown Old Style Select Menu', () => {
+		dropDownSelector.OldSelectMenuDropDownOptions();
+		dropDownSelector.get.OldSelectMenuDropDown().then(the => {
+			expect(the.text()).to.contain(Cypress.env('colorSelect'));
+		});
+	});
 });
