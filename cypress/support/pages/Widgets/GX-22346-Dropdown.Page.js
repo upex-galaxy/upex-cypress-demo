@@ -20,6 +20,13 @@ class DropDownSelector {
 		dropDownSelector.get.dropdownMenu().should('be.visible');
 		return this.get.optionMenu().eq(option).click();
 	}
+
+	SelectOneDropDownOptions() {
+		const option = Math.floor(Math.random() * 6);
+		dropDownSelector.get.SelectOneDropDown().click();
+		dropDownSelector.get.dropdownMenu().should('be.visible');
+		return this.get.optionMenu().eq(option).click();
+	}
 }
 
 export const dropDownSelector = new DropDownSelector();
