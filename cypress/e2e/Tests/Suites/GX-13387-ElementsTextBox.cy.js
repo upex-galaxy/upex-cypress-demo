@@ -27,7 +27,7 @@ describe('US GX-13387 | ToolsQA | Elements | Text Box: Fill form and Submit', ()
 		cy.get('#currentAddress').type('Dirección 123');
 		cy.get('#permanentAddress').type('Permanent');
 		cy.get('#submit').click();
-		cy.get('.mr-sm-2.field-error.form-control').should('exist');
+		cy.get('.field-error').should('have.css', 'border', '1px solid rgb(255, 0, 0)');
 		cy.get('.mb-1').should('not.exist');
 	});
 
@@ -37,7 +37,7 @@ describe('US GX-13387 | ToolsQA | Elements | Text Box: Fill form and Submit', ()
 		cy.get('#currentAddress').type('Dirección 123');
 		cy.get('#permanentAddress').type('Permanent');
 		cy.get('#submit').click();
-		cy.get('.mr-sm-2.field-error.form-control').should('exist');
+		cy.get('.field-error').should('have.css', 'border', '1px solid rgb(255, 0, 0)');
 		cy.get('.mb-1').should('not.exist');
 	});
 
@@ -47,7 +47,7 @@ describe('US GX-13387 | ToolsQA | Elements | Text Box: Fill form and Submit', ()
 		cy.get('#currentAddress').type('Dirección 123');
 		cy.get('#permanentAddress').type('Permanent');
 		cy.get('#submit').click();
-		cy.get('.mr-sm-2.field-error.form-control').should('exist');
+		cy.get('.field-error').should('have.css', 'border', '1px solid rgb(255, 0, 0)');
 		cy.get('.mb-1').should('not.exist');
 	});
 
@@ -57,7 +57,7 @@ describe('US GX-13387 | ToolsQA | Elements | Text Box: Fill form and Submit', ()
 		cy.get('#currentAddress').type('Dirección 123');
 		cy.get('#permanentAddress').type('Permanent');
 		cy.get('#submit').click();
-		cy.get('.mr-sm-2.field-error.form-control').should('exist');
+		cy.get('.field-error').should('have.css', 'border', '1px solid rgb(255, 0, 0)');
 		cy.get('.mb-1').should('not.exist');
 	});
 
@@ -67,7 +67,7 @@ describe('US GX-13387 | ToolsQA | Elements | Text Box: Fill form and Submit', ()
 		cy.get('#currentAddress').type('Dirección 123');
 		cy.get('#permanentAddress').type('Permanent');
 		cy.get('#submit').click();
-		cy.get('.mr-sm-2.field-error.form-control').should('exist');
+		cy.get('.field-error').should('have.css', 'border', '1px solid rgb(255, 0, 0)');
 		cy.get('.mb-1').should('not.exist');
 	});
 });
