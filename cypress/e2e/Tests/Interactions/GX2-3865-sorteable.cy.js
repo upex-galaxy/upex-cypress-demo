@@ -1,7 +1,7 @@
 import { sortablePage } from '@pages/Interactions/GX3865-sortablePage';
 import data from '@data/GX2-3865-sorteable.json';
 
-describe('This is your test project title', () => {
+describe('GX2-3865 | ToolsQA | Interactions | Sortable', () => {
 	before(() => {
 		// runs once before all tests
 	});
@@ -14,50 +14,37 @@ describe('This is your test project title', () => {
 	after(() => {
 		// runs once after all tests
 	});
-	context('This is your test suite title', () => {
-		// -- Start: Cypress Tests --
-		it('3866 | TC1: Verify change list order', () => {
-			// Lists elements are in the expected order' one, two, three...
-			const arrayTexts = [];
-
-			sortablePage.get
-				.listContainer()
-				.children()
-				.each(div => {
-					const text = div.text();
-					arrayTexts.push(text);
-				});
-
-			cy.wrap(data.listItems).should('deep.equal', arrayTexts);
-
-			// Move random element to ranom position
-			cy.log('drag and drop----------------------------------------');
-			sortablePage.triggerItem().then(({ startTarget, endTarget }) => {
-				expect(startTarget).to.not.equal(endTarget);
-			});
-
-			// Move random element to first position
-
-			// Move random element to last position
-
-			// Move random element to middle position
-
-			// Move 1 element at a time
+	// -- Start: Cypress Tests --
+	it('3866 | TC1: Verify list order can be changed', () => {
+		// Verify defaul order is expected
+		sortablePage.getTextArrayItem().then(arrayItemsText => {
+			cy.wrap(data.listItems).should('deep.equal', arrayItemsText);
 		});
-		it('3866 | TC2: Verify move Grid elements', () => {
-			// Write your test case two here
+
+		// Move random element to random position
+		sortablePage.triggerItem().then(({ startPosition, dropPosition, startTargetText, endTargetText }) => {
+			expect(startPosition).to.not.equal(dropPosition);
+			expect(startTargetText).to.not.equal(endTargetText);
+		});
+	});
+	it('3866 | TC2: Verify in List Only one tab can be displayed at once. ', () => {
+		sortablePage.getActiveTabs().then(activeTabs => {
+			expect(activeTabs).to.have.lengthOf(1);
+		});
+	});
+
+	it('3866 | TC3: Verify grid order can be changed', () => {
+		cy.log('GRID--------------------------------------------');
+		sortablePage.moveToGrid();
+		sortablePage.getTextArrayGrid().then(arrayTextGrid => {
+			// Verify defaul order is expected
+			cy.wrap(data.gridItems).should('deep.equal', arrayTextGrid);
+		});
+
+		// Move random element to random position
+		sortablePage.triggerGridItem().then(({ startPosition, dropPosition, startTargetText, endTargetText }) => {
+			expect(startPosition).to.not.equal(dropPosition);
+			expect(startTargetText).to.not.equal(endTargetText);
 		});
 	});
 });
-
-// List
-// chequear que este en el orden esperado. one, two, three... son 6 elementos.
-// mover elementos a la primera posicion, otro a la ultima posicion y otro a la del medio
-// mover elemento random a una posicion random
-// no poder mover mas de 1 elemento a la vez
-//
-// Grid
-// existencia de 9(1 a 9) items en el orden esperado(una grid de 3x3)
-// mover elementos a la primera posicion, otro a la ultima posicion y otro a la del medio
-// mover elemento random a una posicion random
-// no poder mover mas de 1 elemento a la vez
