@@ -9,8 +9,7 @@ class Sortable {
 		grid: () => cy.get('.create-grid'),
 	};
 
-	moveRandomListItem() {
-		let arrayListItems = [];
+	getRandomListItem() {
 		const randomItem = Math.floor(Math.random() * 6);
 		let min = 392; // coordenada top listContainer
 		let max = 687; // coordenada bottom listContainer
@@ -20,9 +19,7 @@ class Sortable {
 		return sortable.get
 			.listContainer()
 			.children()
-			.each(item => {
-				arrayListItems.push(item.text());
-			})
+			.eq(randomItem)
 			.then(() => {
 				sortable.get
 					.listContainer()
