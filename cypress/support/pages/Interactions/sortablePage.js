@@ -5,68 +5,85 @@ class Sortable {
 		gridTab: () => cy.get('#demo-tab-grid'),
 		listItems: () => cy.get('#demo-tabpane-list'),
 		listContainer: () => cy.get('[class^="vertical-list-container"]'),
-		gridContainer:()=> cy.get('#demo-tabpane-grid'),
-		grid:()=>cy.get('.create-grid')
+		gridContainer: () => cy.get('#demo-tabpane-grid'),
+		grid: () => cy.get('.create-grid'),
 	};
 
-	moveRandomListItem(){
-		let arrayListItems = [];
+	getRandomListItem() {
 		const randomItem = Math.floor(Math.random() * 6);
-		let min = 392; // coordenada top listContainer
-		let max = 687; // coordenada bottom listContainer
-		const randomCoordinate = Math.floor(Math.random() * (max - min) + min);
-	    Cypress.env('randomCoordinateList', randomCoordinate);
-		
-
-		return 	sortable.get
-			.listContainer()
+		return cy
+			.get('[class^="vertical-list-container mt-4"]')
 			.children()
-			.each(item => {
-				arrayListItems.push(item.text());
-			})
+			.eq(randomItem)
 			.then(() => {
-		
-				sortable.get
-					.listContainer()
-					.children()
-					.eq(randomItem).then(()=>{
-						Cypress.env('randomItem', randomItem)
-					})
-					.trigger('mouseover', { force: true })
-					.trigger('mousedown', { which: 1, force: true })
-					.trigger('mousemove', { which: 1, pageX: 500.265625, pageY: Cypress.env('randomCoordinateList'), force: true })
-					.trigger('mouseup', { force: true });
+				Cypress.env('randomListItem', randomItem);
+			});
+
+		// let min = 392; // coordenada top listContainer
+		// let max = 687; // coordenada bottom listContainer
+		// const randomCoordinate = Math.floor(Math.random() * (max - min) + min);
+		// Cypress.env('randomCoordinateList', randomCoordinate);
+
+		// return sortable.get
+		// 	.listContainer()
+		// 	.children()
+		// 	.each(item => {
+		// 		arrayListItems.push(item.text());
+		// 	})
+		// 	.then(() => {
+		// 		sortable.get
+		// 			.listContainer()
+		// 			.children()
+		// 			.eq(randomItem)
+		// 			.then(() => {
+		// 				Cypress.env('randomItem', randomItem);
+		// 			})
+		// 			.trigger('mouseover', { force: true })
+		// 			.trigger('mousedown', { which: 1, force: true })
+		// 			.trigger('mousemove', { which: 1, pageX: 500.265625, pageY: Cypress.env('randomCoordinateList'), force: true })
+		// 			.trigger('mouseup', { force: true });
+		// 	});
+	}
+	getRandomListTarget() {
+		const randomTarget = Math.floor(Math.random() * 6);
+		return cy
+			.get('[class^="vertical-list-container"]')
+			.children()
+			.eq(randomTarget)
+			.then(() => {
+				Cypress.env('randomListTarget', randomTarget);
 			});
 	}
-	getListItems(){				 
-		return this.get.listContainer().children();		
-	}	
-	clickGridTab(){
-		this.get.gridTab().click()
+	getListItems() {
+		return this.get.listContainer().children();
 	}
-	
-	getGridItems(){
-		return this.get.grid().children()
+	clickGridTab() {
+		this.get.gridTab().click();
 	}
-	getRandomGridItem(){
+
+	getGridItems() {
+		return this.get.grid().children();
+	}
+	getRandomGridItem() {
 		const randomGridItem = Math.floor(Math.random() * 9);
-		return this.get.grid()
+		return this.get
+			.grid()
 			.children()
-			.eq(randomGridItem).then(()=>{
+			.eq(randomGridItem)
+			.then(() => {
 				Cypress.env('randomGridItem', randomGridItem);
 			});
 	}
-	getRandomGridTarget(){
+	getRandomGridTarget() {
 		const randomGridTarget = Math.floor(Math.random() * 9);
-		return this.get.grid()
+		return this.get
+			.grid()
 			.children()
-			.eq(randomGridTarget).then(()=>{
+			.eq(randomGridTarget)
+			.then(() => {
 				Cypress.env('randomGridTarget', randomGridTarget);
 			});
 	}
-		
 }
-	
 
 export const sortable = new Sortable();
-
