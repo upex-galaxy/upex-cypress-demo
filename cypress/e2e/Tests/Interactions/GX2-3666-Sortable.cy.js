@@ -1,26 +1,23 @@
 import { removeLogs } from '@helper/RemoveLogs';
 import { toolsqasortable } from '@pages/Interactions/GX2-3666-sortablePage';
 removeLogs();
+import data from '../../../fixtures/data/GX2-3666-Sortable.json';
 
 describe('GX2-3666| ToolsQA | Interactions | Sortable', () => {
 	beforeEach('Preconditions', () => {
 		cy.visit('https://demoqa.com/sortable');
 		cy.url().should('contain', 'sortable');
 	});
-	let array1 = ['One', 'Two', 'Three', 'Four', 'Five', 'Six'];
-	let array2 = ['One', 'Two,', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
 
 	it('GX1-3667|TC01 Validate elements in "List" tab', () => {
-		//cy.log('hola');
-		//cy.get('#demo-tab-list').should('exist').and('be.visible');
 		toolsqasortable.getTabList().should('exist').and('be.visible');
 		toolsqasortable
 			.getListItems()
 			.should('exist')
 			.and('be.visible')
 			.each((item, index) => {
-				expect(item.text()).to.be.equal(array1[index]);
-				expect(item.text()).to.be.oneOf(array1);
+				expect(item.text()).to.be.equal(data.array1[index]);
+				expect(item.text()).to.be.oneOf(data.array1);
 			});
 	});
 
@@ -39,13 +36,13 @@ describe('GX2-3666| ToolsQA | Interactions | Sortable', () => {
 					arrayListTarget.push(item.text());
 				})
 				.then(() => {
-					expect(array1).to.not.deep.equal(arrayListTarget);
-					expect(array1[Cypress.env('randomListItem')]).to.be.equal(arrayListTarget[Cypress.env('randomListTarget')]);
+					expect(data.array1).to.not.deep.equal(arrayListTarget);
+					expect(data.array1[Cypress.env('randomListItem')]).to.be.equal(arrayListTarget[Cypress.env('randomListTarget')]);
 				});
 		});
 	});
 
-	it.only('GX3-3667|TC03: Validate in Grid tab Drag a random element to a random position', () => {
+	it('GX3-3667|TC03: Validate in Grid tab Drag a random element to a random position', () => {
 		toolsqasortable.selectGritdTab();
 		cy.then(() => {
 			if (toolsqasortable.getRandomItemG() === toolsqasortable.getRandomTargetG()) {
@@ -62,8 +59,8 @@ describe('GX2-3666| ToolsQA | Interactions | Sortable', () => {
 					arrayGridTarget.push(item.text());
 				})
 				.then(() => {
-					expect(array2).to.not.equal(arrayGridTarget);
-					expect(array2[Cypress.env('randomGridItem')]).to.be.equal(arrayGridTarget[Cypress.env('randomGridTarget')]);
+					expect(data.array2).to.not.equal(arrayGridTarget);
+					expect(data.array2[Cypress.env('randomGridItem')]).to.be.equal(arrayGridTarget[Cypress.env('randomGridTarget')]);
 				});
 		});
 	});

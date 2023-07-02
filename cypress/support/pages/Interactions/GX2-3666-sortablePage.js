@@ -1,10 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable semi */
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/no-extra-semi */
-/* eslint-disable indent */
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
 class ToolsQASortable {
 	get = {
 		tabList: () => cy.get('#demo-tab-list'),
