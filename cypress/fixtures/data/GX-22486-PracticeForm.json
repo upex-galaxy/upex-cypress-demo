@@ -1,19 +1,4 @@
 {
-    "fullname": {
-        "data" : {
-            "filled" : "Gustavo"
-        }
-    },
-    "currentAddress": {
-        "data" : {
-            "filled" : "verdaguer 12"
-        }
-    },
-    "permanentAddress": {
-        "data" : {
-            "filled" : "falucho 252"
-        }
-    },
     "email": {
         "data" : {
             "valid" : "gualex89@gmail.com",
