@@ -11,5 +11,10 @@
 
             }
         }
+    },
+    "phoneNumber" : {
+        "data" : {
+            "invalid": "878765"
+        }
     }
 }
