@@ -1,64 +1,82 @@
 class Droppable {
 	elements = {
 		draggable: () => cy.get('#draggable'),
-		droppable: () => cy.get('#droppable'),
-		tabSimple: () => cy.get('#droppableExample-tabpane-simple'),
-		tabAccept: () => cy.get('#droppableExample-tabpane-accept'),
+
+		destino: () => cy.get('#droppable')[0],
+		tabSimple: () => cy.get('#droppableExample-tab-simple'),
+		tabAccept: () => cy.get('#droppableExample-tab-accept'),
 		acceptable: () => cy.get('#acceptable'),
 		notAcceptable: () => cy.get('#notAcceptable'),
 		dragBox: () => cy.get('#dragBox'),
-		tabPropagation: () => cy.get('#droppableExample-tabpane-preventPropogation'),
+		tabPropogation: () => cy.get('#droppableExample-tab-preventPropogation'),
 		notGreedyDropBox: () => cy.get('#notGreedyDropBox'),
 		notGreedyInnerDropBox: () => cy.get('#notGreedyInnerDropBox'),
 		greedyDropBox: () => cy.get('#greedyDropBox'),
 		greedyDropBoxInner: () => cy.get('#greedyDropBoxInner'),
-		tabPaneRevertable: () => cy.get('#droppableExample-tabpane-revertable'),
-		revertable: () => cy.get('#revertable'),
-		notRevertable: () => cy.get('#notRevertable'),
+		tabRevert: () => cy.get('#droppableExample-tab-revertable'),
+		revert: () => cy.get('#revert'),
+		notRevert: () => cy.get('#notRevert'),
+		contenedorDropSimple: () => cy.get('#simpleDropContainer'),
 	};
 
 	visit() {
 		cy.visit('https://demoqa.com/droppable');
 	}
+	drag() {
+		return this.elements.drag().as('Origen');
+	}
+	tabSimple() {
+		return this.elements.tabSimple();
+	}
+	tabAccept() {
+		return this.elements.tabAccept();
+	}
+	tabRevert() {
+		return this.elements.tabRevert();
+	}
+	tabPropogation() {
+		return this.elements.tabPropogation();
+	}
 	draggable() {
-		return cy.get('#draggable');
+		return this.elements.draggable();
 	}
-	droppable() {
-		return cy.get('#droppable');
+	destino() {
+		return this.elements.destino();
 	}
+
 	acceptable() {
-		return cy.get('#acceptable');
+		return this.elements.acceptable();
 	}
 	notAcceptable() {
-		return cy.get('#notAcceptable');
+		return this.elements.notAcceptable();
 	}
 	dragBox() {
-		return cy.get('#dragBox');
+		return this.dragBox();
 	}
+	contenedorDropSimple() {
+		return this.elements.contenedorDropSimple();
+	}
+
 	notGreedyDropBox() {
-		return cy.get('#notGreedyDropBox');
+		return this.elements.notGreedyDropBox();
 	}
 	notGreedyInnerDropBox() {
-		return cy.get('#notGreedyInnerDropBox');
+		return this.elements.notGreedyInnerDropBox();
 	}
 	greedyDropBox() {
-		return cy.get('#greedyDropBox');
+		return this.elements.greedyDropBox();
 	}
 	greedyDropBoxInner() {
-		return cy.get('#greedyDropBoxInner');
+		return this.elements.greedyDropBoxInner();
 	}
-	revertable() {
-		return cy.get('#revertable');
+	revert() {
+		return this.elements.revert();
 	}
-	notRevertable() {
-		return cy.get('#notRevertable');
+	notRevert() {
+		return this.elements.notRevert();
 	}
 	getRandomNumber(min, max) {
 		return Cypress._.random(min, max);
-	}
-
-	moveElement(elementSelector, x, y) {
-		cy.get(elementSelector).move({ deltaX: x, deltaY: y });
 	}
 
 	SeleccionarSimple() {
@@ -67,11 +85,11 @@ class Droppable {
 	SeleccionarAccept() {
 		this.elements.tabAccept().click();
 	}
-	SeleccionarPropagation() {
-		this.elements.tabPropagation().click();
+	SeleccionarPropogation() {
+		this.elements.tabPropogation().click();
 	}
-	SeleccionarRevertable() {
-		this.elements.tabPaneRevertable().click();
+	SeleccionarRevert() {
+		this.elements.tabRevert().click();
 	}
 }
 
