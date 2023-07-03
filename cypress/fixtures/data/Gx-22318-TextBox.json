@@ -2,7 +2,8 @@
 	"ids": {
 		"fullName": "#userName",
 		"email": "#userEmail",
-		"currentAddress": "#permanentAddress",
+		"currentAddress": "#currentAddress",
+		"permanentAddress": "#permanentAddress",
 		"submitButton": "#submit"
 	},
 	"validInput": {
