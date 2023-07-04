@@ -14,10 +14,21 @@ describe('✅ToolsQA Elements Text Box: Fill form and Submit', () => {
 			//act
 			cy.get(the.ids.submitButton).click();
 			//assert
-			cy.contains('Elena Valera').should('be visible');
-			cy.contains('secretodelmar@gmail.com').should('be visible');
-			cy.contains('Calle mar menor 5').should('be visible');
-			cy.contains('Calle mar mayor 6').should('be visible');
+
+			cy.get('#output').within(() => {
+				// this is for searching elements inside the element "output"
+				cy.get('#name').should('exist');
+				cy.get('#name').should('have.text', 'Name:Elena Valera');
+
+				cy.get('#email').should('exist');
+				cy.get('#email').should('have.text', 'Email:secretodelmar@gmail.com');
+
+				cy.get('#currentAddress').should('exist');
+				cy.get('#currentAddress').should('have.text', 'Current Address :Calle mar menor 5 ');
+
+				cy.get('#permanentAddress').should('exist');
+				cy.get('#permanentAddress').should('have.text', 'Permananet Address :Calle mar mayor 6');
+			});
 
 			// AAA
 			// Arrange
