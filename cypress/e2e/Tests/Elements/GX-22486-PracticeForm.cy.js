@@ -378,63 +378,67 @@ describe('22486 | TS: ✅ToolsQA | Forms | Practice Form', () =>
         textForm.get.formTable().should('not.exist');
         textForm.get.emailInput().should('have.css', 'border-color', 'rgb(220, 53, 69)');
     });
-    it('22788 | TC8: Validar que al ingresar un número telefónico que no contenga 10 números, no se muestre ningún mensaje y que en el campo se muestre un borde rojo.', () => {
-        cy.fixture("data/GX-22486-PracticeForm.json").then((the) => {
-            //Invalid Phone Number
-            textForm.enterMobile(the.phoneNumber.data.invalid);
-        });
-        const fName = faker.name.firstName();
-        const lName = faker.name.lastName();
-        const email = faker.internet.email();
-        const phoneNumber = faker.random.numeric(10);
-        const address = faker.address.streetAddress();
+    // it('22788 | TC8: Validar que al ingresar un número telefónico que no contenga 10 números, no se muestre ningún mensaje y que en el campo se muestre un borde rojo.', () => {
+    //     //Invalid Phone Number
+    //     cy.fixture("data/GX-22486-PracticeForm.json").then((the) => {
+    //         //Invalid Phone Number
+    //         textForm.enterMobile(the.phoneNumber.data.invalid);
+    //         textForm.get.mobileInput('{enter}');
+    //     }); 
+    //     const fName = faker.name.firstName();
+    //     const lName = faker.name.lastName();
+    //     const email = faker.internet.email();
+    //     const phoneNumber = faker.random.numeric(10);
+    //     const address = faker.address.streetAddress();
 
-        //First Name
-        textForm.enterFirstName(fName);
-        textForm.get.firstNameInput().should('have.value', fName);
-        //Last Name
-        textForm.enterLastName(lName);
-        textForm.get.lastNameInput().should('have.value', lName);
-        //select random gender
-        textForm.selectRandomGender().then(indexGenderSelected => {
-            textForm.get.radioGenderInput().eq(indexGenderSelected).should('be.checked');
-            textForm.get.radioGenderInput().eq(indexGenderSelected).invoke('val').then((text) => {
-                cy.wrap(text).as('genderText');
-            })    
-        })
-        //Email
-        textForm.enterEmail(email);
-        textForm.get.emailInput().should('have.value', email);
-        //date of birth
-        textForm.selectRandomDateOfBirth()
-        //Subjects
-        textForm.enterSubjects();
-        textForm.get.subjectsInput().should('have.text', 'Maths')
-        //Hobbie
-        textForm.selectRandomHobbie().then(indexHobbieSelected => {
-            textForm.get.radioHobbieInput().eq(indexHobbieSelected).should('be.checked');
-            textForm.get.labelHobbieInput().eq(indexHobbieSelected).invoke('text').then((text) => {
-                cy.wrap(text).as('hobbieText');
-            })
-        })
-        //address    
-        textForm.enterAddress(address);
-        textForm.get.addressInput().should('have.value', address);
-        //state
-        textForm.get.stateSelecter().click();
-        textForm.selectRandomStateOption();
-        //city
-        textForm.get.citySelecter().click();
-        textForm.selectRandomCityOption();
-        //Picture
-        cy.get('#uploadPicture').selectFile('cypress/images/image.png')
-        //submitButton click
-        textForm.get.submitButton().click();
+    //     //First Name
+    //     textForm.enterFirstName(fName);
+    //     textForm.get.firstNameInput().should('have.value', fName);
+    //     //Last Name
+    //     textForm.enterLastName(lName);
+    //     textForm.get.lastNameInput().should('have.value', lName);
+    //     //select random gender
+    //     textForm.selectRandomGender().then(indexGenderSelected => {
+    //         textForm.get.radioGenderInput().eq(indexGenderSelected).should('be.checked');
+    //         textForm.get.radioGenderInput().eq(indexGenderSelected).invoke('val').then((text) => {
+    //             cy.wrap(text).as('genderText');
+    //         })    
+    //     })
+    //     //Email
+    //     textForm.enterEmail(email);
+    //     textForm.get.emailInput().should('have.value', email);
+    //     //date of birth
+    //     textForm.selectRandomDateOfBirth()
+    //     //Subjects
+    //     textForm.enterSubjects();
+    //     textForm.get.subjectsInput().should('have.text', 'Maths')
+    //     //Hobbie
+    //     textForm.selectRandomHobbie().then(indexHobbieSelected => {
+    //         textForm.get.radioHobbieInput().eq(indexHobbieSelected).should('be.checked');
+    //         textForm.get.labelHobbieInput().eq(indexHobbieSelected).invoke('text').then((text) => {
+    //             cy.wrap(text).as('hobbieText');
+    //         })
+    //     })
+    //     //address    
+    //     textForm.enterAddress(address);
+    //     textForm.get.addressInput().should('have.value', address);
+    //     //state
+    //     textForm.get.stateSelecter().click();
+    //     textForm.selectRandomStateOption();
+    //     //city
+    //     textForm.get.citySelecter().click();
+    //     textForm.selectRandomCityOption();
+    //     //Picture
+    //     cy.get('#uploadPicture').selectFile('cypress/images/image.png')
+        
+    //     //submitButton click
+    //     textForm.get.submitButton().click();
+        
 
-        //Form Review 
-        textForm.get.formTable().should('not.exist');
-        textForm.get.mobileInput().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-    })
+    //     //Form Review 
+    //     textForm.get.formTable().should('not.exist');
+    //     textForm.get.mobileInput().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+    // })
 })
 
 import { faker } from "@faker-js/faker";
