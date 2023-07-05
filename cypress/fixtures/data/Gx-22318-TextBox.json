@@ -17,5 +17,18 @@
 		"invalidEmail2": "secretodelmar@",
 		"invalidEmail3": "secretodelmar@gmailcom",
 		"invalidEmail4": "secretodelmar@gmail."
+	},
+	"outputIds": {
+		"userName": "#name",
+		"userEmail": "#email",
+		"currentAddress": "#currentAddress",
+		"permanentAddress": "#permanentAddress"
+	},
+
+	"validOutputs": {
+		"userName": "Name:Elena Valera",
+		"userEmail": "secretodelmar@gmail.com",
+		"currentAddress": "Calle mar menor 5",
+		"permanentAddress": "Calle Mar mayor 6"
 	}
 }
