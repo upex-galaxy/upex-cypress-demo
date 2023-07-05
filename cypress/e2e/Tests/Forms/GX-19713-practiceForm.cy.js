@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { form } from '@pages/Pages2/GX-19713-practiceForm.Page';
+import { form } from '@pages/Forms/GX-19713-practiceForm.Page';
 import { removeLogs } from '@helper/RemoveLogs';
 
 describe('GX-19713 | TS: ✅ToolsQA | Forms | Practice Form', () => {
