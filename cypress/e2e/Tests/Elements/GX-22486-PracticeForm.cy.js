@@ -54,7 +54,7 @@ describe('22486 | TS: ✅ToolsQA | Forms | Practice Form', () =>
         textForm.get.citySelecter().click();
         textForm.selectRandomCityOption();
         //Picture
-        cy.get('#uploadPicture').selectFile('cypress/images/image.png')
+        cy.get('#uploadPicture').selectFile('cypress/fixtures/images/upexlogo.png')
         //submitButton click
         textForm.get.submitButton().click();
 
@@ -138,7 +138,7 @@ describe('22486 | TS: ✅ToolsQA | Forms | Practice Form', () =>
         textForm.get.citySelecter().click();
         textForm.selectRandomCityOption();
         //Picture
-        cy.get('#uploadPicture').selectFile('cypress/images/image.png')
+        cy.get('#uploadPicture').selectFile('cypress/fixtures/images/upexlogo.png')
         //submitButton click
         textForm.get.submitButton().click();
 
@@ -196,7 +196,7 @@ describe('22486 | TS: ✅ToolsQA | Forms | Practice Form', () =>
         textForm.get.citySelecter().click();
         textForm.selectRandomCityOption();
         //Picture
-        cy.get('#uploadPicture').selectFile('cypress/images/image.png')
+        cy.get('#uploadPicture').selectFile('cypress/fixtures/images/upexlogo.png')
         //submitButton click
         textForm.get.submitButton().click();
 
@@ -254,7 +254,7 @@ describe('22486 | TS: ✅ToolsQA | Forms | Practice Form', () =>
         textForm.get.citySelecter().click();
         textForm.selectRandomCityOption();
         //Picture
-        cy.get('#uploadPicture').selectFile('cypress/images/image.png')
+        cy.get('#uploadPicture').selectFile('cypress/fixtures/images/upexlogo.png')
         //submitButton click
         textForm.get.submitButton().click();
 
@@ -312,7 +312,7 @@ describe('22486 | TS: ✅ToolsQA | Forms | Practice Form', () =>
         textForm.get.citySelecter().click();
         textForm.selectRandomCityOption();
         //Picture
-        cy.get('#uploadPicture').selectFile('cypress/images/image.png')
+        cy.get('#uploadPicture').selectFile('cypress/fixtures/images/upexlogo.png')
         //submitButton click
         textForm.get.submitButton().click();
 
@@ -370,7 +370,7 @@ describe('22486 | TS: ✅ToolsQA | Forms | Practice Form', () =>
         textForm.get.citySelecter().click();
         textForm.selectRandomCityOption();
         //Picture
-        cy.get('#uploadPicture').selectFile('cypress/images/image.png')
+        cy.get('#uploadPicture').selectFile('cypress/fixtures/images/upexlogo.png')
         //submitButton click
         textForm.get.submitButton().click();
 
@@ -378,6 +378,7 @@ describe('22486 | TS: ✅ToolsQA | Forms | Practice Form', () =>
         textForm.get.formTable().should('not.exist');
         textForm.get.emailInput().should('have.css', 'border-color', 'rgb(220, 53, 69)');
     });
+    // El siguiente TC fue comentado por el comportamiento de la pagina, debido a que caundo ingresamos un número telefónico, con menos de 10 digitos 
     // it('22788 | TC8: Validar que al ingresar un número telefónico que no contenga 10 números, no se muestre ningún mensaje y que en el campo se muestre un borde rojo.', () => {
     //     //Invalid Phone Number
     //     cy.fixture("data/GX-22486-PracticeForm.json").then((the) => {
@@ -429,7 +430,7 @@ describe('22486 | TS: ✅ToolsQA | Forms | Practice Form', () =>
     //     textForm.get.citySelecter().click();
     //     textForm.selectRandomCityOption();
     //     //Picture
-    //     cy.get('#uploadPicture').selectFile('cypress/images/image.png')
+    //     cy.get('#uploadPicture').selectFile('cypress/fixtures/images/upexlogo.png')
         
     //     //submitButton click
     //     textForm.get.submitButton().click();
