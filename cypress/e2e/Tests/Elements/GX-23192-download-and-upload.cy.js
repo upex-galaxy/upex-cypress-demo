@@ -7,7 +7,7 @@ describe('US GX-23033 | TS: ✅ToolsQA | Widgets | Dropdown - Select Menu', () =
 
 	it('GX-23193 | TC1: Validate button “download” after click downloads an image file to the pc.', () => {
 		DaU.downloadButton();
-		//cy.readFile('C:UsersmaranDownloadssampleFile.jpeg').should('exist');
+		cy.readFile('cypress/downloads/sampleFile.jpeg').should('exist');
 	});
 });
 //Se importa la funcion
