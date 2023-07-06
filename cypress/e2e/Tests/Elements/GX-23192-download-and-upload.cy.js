@@ -1,5 +1,5 @@
 import { DaU } from '@pages/Elements/GX-23192-download-upload';
-describe('US GX-23033 | TS: ✅ToolsQA | Widgets | Dropdown - Select Menu', () => {
+describe('US GX-23192 | TS: ✅ToolsQA | Elements | Upload and Download', () => {
 	beforeEach('Precondition: Having access to SUT', () => {
 		cy.visit('/upload-download');
 		DaU.get.mainTitle().should('have.text', 'Upload and Download');
