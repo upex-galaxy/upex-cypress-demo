@@ -19,4 +19,60 @@ class Slecetores {
 		OptionStateAndCity: () => cy.get('[class$="-option"]'), // se debe usar eq().click() para seleccionar la opción
 		ButtonSubmit: () => cy.get('#submit'), // se debe usar .click() para activar el botón
 	};
+
+	EnterName(randomName) {
+		this.get.FirstName().type(randomName);
+	}
+
+	EnterLastName(randomLastName) {
+		this.get.LastName().type(randomLastName);
+	}
+
+	EnterEmail(randomEmail) {
+		this.get.Email().type(randomEmail);
+	}
+
+	SelectGender(randomGender) {
+		this.get.Gender().eq(randomGender).click();
+	}
+
+	EnterMobile(randomMobile) {
+		this.get.Mobile().type(randomMobile);
+	}
+
+	EnterSubjects(randomSubjects) {
+		this.get.Subjects().type(randomSubjects);
+	}
+
+	SelectOptionSubjects(randomOption) {
+		this.get.SelectOptionSubjects().eq(randomOption).click();
+	}
+
+	SelectHobbies(randomHobbies) {
+		this.get.Hobbies().eq(randomHobbies).click();
+	}
+
+	ChooseFile(File) {
+		this.get.UploadFile().attachFile(File);
+	}
+
+	EnterCurrentAddress(Info) {
+		this.get.CurrentAddress().type(Info);
+	}
+
+	SelectState(randomState) {
+		this.get.State().click();
+		this.get.OptionStateAndCity().eq(randomState).click({ force: true });
+	}
+
+	SelectCity(randomCity) {
+		this.get.City().click();
+		this.get.OptionStateAndCity().eq(randomCity).click({ force: true });
+	}
+
+	clickSubmit() {
+		this.get.ButtonSubmit().click();
+	}
 }
+
+export const FillForm = new Slecetores();
