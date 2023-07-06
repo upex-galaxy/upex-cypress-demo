@@ -7,11 +7,11 @@ describe('US GX-22811 | ToolsQA | Elements | Dynamic Properties', () => {
 	});
 
 	it('23134 | TC01: Validar visualizar correctamente imagen de ToolsQA al tomar la Valid Image', () => {
-		cy.get('img').eq(2).should('have.attr', 'src', '/images/Toolsqa.jpg').and('be.visible');
+		cy.get('div>img[src="/images/Toolsqa.jpg"]').should('be.visible').and('have.prop', 'naturalWidth').and('be.greaterThan', 0);
 	});
 
 	it('23134 | TC02: Validar visualizar ícono de imagen roto al tomar la Broken Image', () => {
-		cy.get('img[src="/images/Toolsqa_1.jpg"]').should('be.visible');
+		cy.get('div>img[src="/images/Toolsqa_1.jpg"]').should('be.visible').and('have.prop', 'naturalWidth').and('be.eq', 0);
 	});
 
 	it('23134 | TC03: Validar poder redirigirse a la main page al ingresar el Valid Link', () => {
