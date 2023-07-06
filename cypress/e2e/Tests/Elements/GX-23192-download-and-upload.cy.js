@@ -9,6 +9,11 @@ describe('US GX-23033 | TS: ✅ToolsQA | Widgets | Dropdown - Select Menu', () =
 		DaU.downloadButton();
 		cy.readFile('cypress/downloads/sampleFile.jpeg').should('exist');
 	});
+
+	it.only('GX-23193 | TC2: Validate button “Choose file” after click allows you to update a file.', () => {
+		DaU.uploadButton();
+		DaU.get.uploadButtonText().should('contain.text', 'upexlogo.png');
+	});
 });
 //Se importa la funcion
 import { removeLogs } from '@helper/RemoveLogs';
