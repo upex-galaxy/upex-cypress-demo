@@ -1,8 +1,8 @@
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
 
-describe('US GX-22811 | ToolsQA | Elements | Dynamic Properties', () => {
-	beforeEach('PRC: Usuario debe ubicarse en la Dynamic Properties Page', () => {
+describe('US GX-23133 | ToolsQA | Elements | Broken Links Images', () => {
+	beforeEach('PRC: Usuario debe ubicarse en la Broken Links Page', () => {
 		cy.visit('https://demoqa.com/broken');
 	});
 
