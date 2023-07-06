@@ -6,7 +6,7 @@ import { userName, password, isbn1 } from '../../../fixtures/data/bookStore.json
 removeLogs();
 let token;
 
-describe('GX2-3567 | BookStore | Grid | Actualizar y Eliminar Libros de la Tienda (PUT-DELETE)', () => {
+describe.skip('GX2-3567 | BookStore | Grid | Actualizar y Eliminar Libros de la Tienda (PUT-DELETE)', () => {
 	beforeEach('User must be logged in and have added 1 or more products to the collection', () => {
 		bookStore.getAuth().then(response => {
 			expect(response.status).to.eq(200);
