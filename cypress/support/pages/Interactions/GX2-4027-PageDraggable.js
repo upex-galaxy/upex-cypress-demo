@@ -10,7 +10,7 @@ class Draggable {
 		cursorCenter: () => cy.get('#cursorCenter'),
 		cursorTopLeft: () => cy.get('#cursorTopLeft'),
 		cursorBottom: () => cy.get('#cursorBottom'),
-		moverContenedor: () => cy.get('[class="ui-widget-header ui-draggable ui-draggable-handle"]'),
+		moverContenedor: () => cy.get('#containmentWrapper'),
 	};
 
 	visit() {
@@ -33,13 +33,13 @@ class Draggable {
 		return cy.get('#restrictedY');
 	}
 	contenedorEstático() {
-		return cy.get('[class="ui-widget-header ui-draggable ui-draggable-handle"]').parent('#containmentWrapper');
+		return cy.get('#draggableExample-tabpane-containerRestriction> :nth-child(2)> :nth-Child(1)');
 	}
 	restrictedX() {
 		return cy.get('#restrictedX');
 	}
 	moverContenedor() {
-		return cy.get('[class="draggable ui-widget-content ui-draggable ui-draggable-handle"]').parent('#containmentWrapper');
+		return cy.get('#containmentWrapper > :nth-child(1)');
 	}
 
 	getRandomNumber(min, max) {
