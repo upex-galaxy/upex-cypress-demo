@@ -1,29 +1,32 @@
-{
-	"fullname": {
-		"data": {
-			"filled": "Gustavo"
-		}
-	},
-	"currentAddress": {
-		"data": {
-			"filled": "verdaguer 12"
-		}
-	},
-	"permanentAddress": {
-		"data": {
-			"filled": "falucho 252"
-		}
-	},
-	"email": {
-		"data": {
-			"valid": "gualex89@gmail.com",
-			"invalid": {
-				"invalidEmail1": "gualexgmail.com",
-				"invalidEmail2": "@gmail.com",
-				"invalidEmail3": "gualex@.com",
-				"invalidEmail4": "gualex89@gmailcom",
-				"invalidEmail5": "gualex89@gmail.c"
+{	{
+    "fullname": {		"fullname": {
+        "data" : {			"data": {
+            "filled" : "Gustavo"				"filled": "Gustavo"
+        }			}
+    },		},
+    "currentAddress": {		"currentAddress": {
+        "data" : {			"data": {
+            "filled" : "verdaguer 12"				"filled": "verdaguer 12"
+        }			}
+    },		},
+    "permanentAddress": {		"permanentAddress": {
+        "data" : {			"data": {
+            "filled" : "falucho 252"				"filled": "falucho 252"
+        }			}
+    },		},
+    "email": {		"email": {
+        "data" : {			"data": {
+            "valid" : "gualex89@gmail.com",				"valid": "gualex89@gmail.com",
+            "invalid" : {				"invalid": {
+                "invalidEmail1": "gualexgmail.com",					"invalidEmail1": "gualexgmail.com",
+                "invalidEmail2": "@gmail.com",					"invalidEmail2": "@gmail.com",
+                "invalidEmail3": "gualex@.com",					"invalidEmail3": "gualex@.com",
+                "invalidEmail4": "gualex89@gmailcom",					"invalidEmail4": "gualex89@gmailcom",
+                "invalidEmail5": "gualex89@gmail.c"					"invalidEmail5": "gualex89@gmail.c"
+
 			}
-		}
-	}
-}
+            }			}
+        }		}
+    }	
+}	}
+ 3 changes: 0 additions & 3 deletions3  
