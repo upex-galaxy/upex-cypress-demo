@@ -4,7 +4,7 @@ describe('US GX-21075 | TS: ✅ToolsQA | Elements | Text Box: Fill form and Subm
 	});
 
 	it('GX-21076 | TC1: Validate all fields are submitted with validate data and string is displayed.', () => {
-		cy.fixture('data/GX-21075-TextBox.Page').then(the => {
+		cy.fixture('GX-21075/ToolsQA-TextBox.Page').then(the => {
 			cy.get(the.FullName.input).type(the.FullName.data.valid);
 			cy.get(the.email.input).type(the.email.data.valid);
 			cy.get(the.CurrentAddress.input).type(the.CurrentAddress.data.valid);
