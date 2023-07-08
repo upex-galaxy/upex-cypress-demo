@@ -1,8 +1,8 @@
 class Droppable {
 	elements = {
 		draggable: () => cy.get('#draggable'),
-
-		destino: () => cy.get('#droppable')[0],
+		droppable: () => cy.get('#droppable'),
+		droppable1: () => cy.get('#droppable')[1],
 		tabSimple: () => cy.get('#droppableExample-tab-simple'),
 		tabAccept: () => cy.get('#droppableExample-tab-accept'),
 		acceptable: () => cy.get('#acceptable'),
@@ -14,16 +14,32 @@ class Droppable {
 		greedyDropBox: () => cy.get('#greedyDropBox'),
 		greedyDropBoxInner: () => cy.get('#greedyDropBoxInner'),
 		tabRevert: () => cy.get('#droppableExample-tab-revertable'),
-		revert: () => cy.get('#revert'),
-		notRevert: () => cy.get('#notRevert'),
+		revert: () => cy.get('#revertable'),
+		notRevert: () => cy.get('#notRevertable'),
 		contenedorDropSimple: () => cy.get('#simpleDropContainer'),
+		accept: () => cy.get('[id=acceptDropContainer] [class*=drop-box]'),
+		revertDrop: () => cy.get('[id=revertableDropContainer] [class*=drop-box]'),
 	};
-
+	notgreedy() {
+		return this.elements.notgreedy();
+	}
+	revertDrop() {
+		return this.elements.revertDrop();
+	}
+	accept() {
+		return this.elements.accept();
+	}
 	visit() {
 		cy.visit('https://demoqa.com/droppable');
 	}
-	drag() {
-		return this.elements.drag().as('Origen');
+	draggable() {
+		return this.elements.draggable();
+	}
+	droppable() {
+		return this.elements.droppable();
+	}
+	droppable1() {
+		return this.elements.droppable1();
 	}
 	tabSimple() {
 		return this.elements.tabSimple();
@@ -36,12 +52,6 @@ class Droppable {
 	}
 	tabPropogation() {
 		return this.elements.tabPropogation();
-	}
-	draggable() {
-		return this.elements.draggable();
-	}
-	destino() {
-		return this.elements.destino();
 	}
 
 	acceptable() {
