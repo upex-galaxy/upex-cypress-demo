@@ -10,7 +10,7 @@ class form {
         radioGenderInput: () => cy.get('#genterWrapper [class="custom-control-input"]'),
         mobileInput: () => cy.get('#userNumber'),
         dateOfBirthInput: () => cy.get('#dateOfBirthInput'),
-        dateOfBirthOptions: () => cy.get('[class*="react-datepicker__day--0"]'),
+        dateOfBirthOptions: () => cy.get('.react-datepicker__day:not(.react-datepicker__day--outside-month)'),
         subjectsInput: () => cy.get('.subjects-auto-complete__value-container'),
         radioHobbieInput: () => cy.get('[id^="hobbies-checkbox"]'),
         labelHobbieInput: () => cy.get('#hobbiesWrapper [class="custom-control-label"]'),
@@ -47,6 +47,20 @@ class form {
     
     selectRandomDateOfBirth() {
         this.get.dateOfBirthInput().click();
+        let randomMonth;
+        cy.get('.react-datepicker__month-select').find('option').then((largo) => {
+            // Aquí puedes hacer lo que desees con el valor de length
+            cy.log(largo);
+            randomMonth = Cypress._.random(0, largo.length - 1)
+            cy.get('.react-datepicker__month-select').select(randomMonth);
+        });
+        let randomYear;
+        cy.get('.react-datepicker__year-select').find('option').then((largo) => {
+            // Aquí puedes hacer lo que desees con el valor de length
+            cy.log(largo);
+            randomYear = Cypress._.random(0, largo.length - 1)
+            cy.get('.react-datepicker__year-select').select(randomYear);
+        });
         let randomInput
         return this.get.dateOfBirthOptions().then(largo => {
                 randomInput = Cypress._.random(0, largo.length - 1)
