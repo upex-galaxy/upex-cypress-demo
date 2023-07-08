@@ -39,6 +39,7 @@ describe('GX2-3452 | ToolsQA | Interactions | Sortable', () => {
 			.then(() => {
 				expect(arrayNewList[Cypress.env('randomListTarget')]).to.be.equal(data.listItems[Cypress.env('randomListItem')]);
 			});
+		
 	});
 	it('GX2-3453 | TC3: Validate the grid items and a 3X3 grid is displayed', () => {
 		sortable.get.gridTab().should('exist').and('not.be.selected');
