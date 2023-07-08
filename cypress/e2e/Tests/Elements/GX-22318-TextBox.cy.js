@@ -49,6 +49,15 @@ describe('✅ToolsQA Elements Text Box: Fill form and Submit', () => {
 				});
 		});
 	});
+	it('TC3: Validate Not to submit the Fill form when "email" does not contain an "@"', () => {
+		cy.fixture('data/Gx-22318-TextBox.json').then(the => {
+			cy.get(the.ids.email).type(the.invalidInput.invalidEmail1);
+
+			cy.get(the.ids.submitButton).click();
+
+			cy.get(the.ids.email).should('have.class', 'mr-sm-2 field-error form-control');
+		});
+	});
 });
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
