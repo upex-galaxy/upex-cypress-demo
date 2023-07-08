@@ -21,51 +21,49 @@ describe('22038 | TS: ✅ToolsQA | Elements | Text Box: Fill form and Submit', (
             textForm.get.textBox().should('not.exist');
         });
     });
-    it('22039 | TC3: Validar que al enviar un  email  que no contenga “@” se muestre un borde rojo en "class="mr-sm-2 field-error form-control"', () =>
+    it('22039 | TC3: Validar no poder enviar formulario ingresando un email  que no contenga “@” ', () =>
     {
         cy.fixture("data/GX-22038-TextBox.json").then((the) =>
         {
             textForm.enterEmail(the.email.data.invalid.invalidEmail1);
             textForm.get.submitBtn().click();
-            textForm.get.redBorder().should('have.css', 'border-color', 'rgb(255, 0, 0)');
-            
+            textForm.get.EmailInput().should('have.class', 'field-error');
         });
     });
-    it('22039 | TC4: Validar que al enviar un  email  que no contenga “mínimo un carácter alfanumérico antes de @ ” se muestre un borde rojo en "class="mr-sm-2 field-error form-control"', () =>
+    it('22039 | TC4: Validar no poder enviar formulario ingresando un email  que no contenga “mínimo un carácter alfanumérico antes de @ ” ', () =>
     {
         cy.fixture("data/GX-22038-TextBox.json").then((the) =>
         {
             textForm.enterEmail(the.email.data.invalid.invalidEmail2);
             textForm.get.submitBtn().click();
-            textForm.get.redBorder().should('have.css', 'border-color', 'rgb(255, 0, 0)');
+            textForm.get.EmailInput().should('have.class', 'field-error');
         });
     });
-    it('22039 | TC5: Validar que al enviar un  email  que no contenga “mínimo un carácter alfanumérico después de @ ” se muestre un borde rojo en "class="mr-sm-2 field-error form-control"', () =>
+    it('22039 | TC5: Validar no poder enviar formulario ingresando un email  que no contenga “mínimo un carácter alfanumérico después de @ ” ', () =>
     {
         cy.fixture("data/GX-22038-TextBox.json").then((the) =>
         {
             textForm.enterEmail(the.email.data.invalid.invalidEmail3);
             textForm.get.submitBtn().click();
-            textForm.get.redBorder().should('have.css', 'border-color', 'rgb(255, 0, 0)');
+            textForm.get.EmailInput().should('have.class', 'field-error');
         });
     });
-    it('22039 | TC6: Validar que al enviar un  email  que no contenga “ (.) despues de al menos un caracter alfanumerico despues de @ ” se muestre un borde rojo en "class="mr-sm-2 field-error form-control"', () =>
+    it('22039 | TC6: Validar no poder enviar formulario ingresando un email  que no contenga “ (.) despues de al menos un caracter alfanumerico despues de @ ” ', () =>
     {
         cy.fixture("data/GX-22038-TextBox.json").then((the) =>
         {
             textForm.enterEmail(the.email.data.invalid.invalidEmail4);
             textForm.get.submitBtn().click();
-            textForm.get.redBorder().should('have.css', 'border-color', 'rgb(255, 0, 0)');
-            cy.get('.field-error').should('have.css', 'border-color', 'rgb(255, 0, 0)');
+            textForm.get.EmailInput().should('have.class', 'field-error');
         });
     });
-    it('22039 | TC7: Validar que al enviar un  email  que no contenga “mínimo 2 carácteres alfanuméricos despues del  (.) ” se muestre un borde rojo en "class="mr-sm-2 field-error form-control"', () =>
+    it('22039 | TC7: Validar no poder enviar formulario ingresando un email  que no contenga “mínimo 2 carácteres alfanuméricos despues del  (.) ” ', () =>
     {
-         cy.fixture("data/GX-22038-TextBox.json").then((the) =>
+        cy.fixture("data/GX-22038-TextBox.json").then((the) =>
         {
             textForm.enterEmail(the.email.data.invalid.invalidEmail5);
             textForm.get.submitBtn().click();
-            textForm.get.redBorder().should('have.css', 'border-color', 'rgb(255, 0, 0)');
+            textForm.get.EmailInput().should('have.class', 'field-error');
         });
     });
 })
