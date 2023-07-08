@@ -34,7 +34,7 @@ describe('GX2-3452 | ToolsQA | Interactions | Sortable', () => {
 				arrayNewList.push(item.text());
 			})
 			.then(() => {
-				// los números corresponden a las coordenadas X e Y de cada item de la lista.
+				// los números corresponden a las coordenadas X e Y de cada item de la lista.// los números corresponden a las coordenadas X e Y de cada item de la lista.
 				if (Cypress.env('randomCoordinateList') > 392 && Cypress.env('randomCoordinateList') < 442) {
 					expect(arrayNewList[0]).to.be.equal(data.listItems[Cypress.env('randomItem')]);
 				} else if (Cypress.env('randomCoordinateList') > 442 && Cypress.env('randomCoordinateList') < 491) {
