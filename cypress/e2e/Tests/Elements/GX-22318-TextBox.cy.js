@@ -39,14 +39,16 @@ describe('✅ToolsQA Elements Text Box: Fill form and Submit', () => {
 
 			cy.get(the.ids.submitButton).click();
 
-			cy.get('#output').should('not.exist').within(() => {
-
-			cy.get(the.outputIds.userName).should('not.exist');
-			cy.get(the.outputIds.userEmail).should('not.exist');
-			cy.get(the.outputIds.currentAddress).should('not.exist');
-			cy.get(the.outputIds.permanentAddress).should('not.exist');
+			cy.get('#output')
+				.should('not.be.visible')
+				.within(() => {
+					cy.get(the.outputIds.userName).should('not.exist');
+					cy.get(the.outputIds.userEmail).should('not.exist');
+					cy.get(the.outputIds.currentAddress).should('not.exist');
+					cy.get(the.outputIds.permanentAddress).should('not.exist');
+				});
 		});
 	});
 });
-		import { removeLogs } from '@helper/RemoveLogs';
-		removeLogs();
+import { removeLogs } from '@helper/RemoveLogs';
+removeLogs();

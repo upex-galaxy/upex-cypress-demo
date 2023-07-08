@@ -27,8 +27,8 @@
 
 	"validOutputs": {
 		"userName": "Name:Elena Valera",
-		"userEmail": "secretodelmar@gmail.com",
-		"currentAddress": "Calle mar menor 5",
-		"permanentAddress": "Calle Mar mayor 6"
+		"userEmail": "Email:secretodelmar@gmail.com",
+		"currentAddress": "Current Address :Calle mar menor 5 ",
+		"permanentAddress": "Permananet Address :Calle Mar mayor 6"
 	}
 }
