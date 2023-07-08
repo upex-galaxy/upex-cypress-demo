@@ -121,7 +121,7 @@ describe('This is your test project title', () => {
 		droppable.SeleccionarPropogation();
 		droppable.draggable().trigger('mousedown', { which: 1, force: true });
 		droppable.notGreedyInnerDropBox().trigger('mousemove');
-		droppable.notGreedyInnerDropBox().should('have.css', 'background-color', data.verdeclarogit);
+		droppable.notGreedyInnerDropBox().should('have.css', 'background-color', data.verde);
 		droppable.notGreedyDropBox().trigger('mousemove', { which: 1, force: true });
 		droppable.notGreedyDropBox().should('have.css', 'background-color', data.verde);
 	});
