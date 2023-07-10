@@ -75,25 +75,6 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 			// Click in the Submit Button
 			FillForm.clickSubmit();
 
-			// Date transformation to make it look complete
-			const DateOfBirth = date.split(' ', 3);
-			const month = {
-				Jan: 'January',
-				Feb: 'February',
-				Mar: 'March',
-				Apr: 'April',
-				May: 'May',
-				Jun: 'June',
-				Jul: 'July',
-				Aug: 'August',
-				Sep: 'September',
-				Oct: 'October',
-				Nov: 'November',
-				Dec: 'December',
-			};
-			const extendedNameMonth = month[DateOfBirth[1]];
-			const FullDateOfBirth = DateOfBirth[0] + ' ' + extendedNameMonth + ',' + DateOfBirth[2];
-
 			//----->  Modal info check  <--------
 			// Verification Student Name
 			FillForm.get
@@ -107,7 +88,7 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 			// Verification Student Mobile
 			FillForm.get.FormSubmitted().eq(the.Modal.Mobile).should('contain.text', Mobile);
 			//verification to Date of Birth
-			FillForm.get.FormSubmitted().eq(the.Modal.DateOfBirth).should('contain', FullDateOfBirth);
+			FillForm.get.FormSubmitted().eq(the.Modal.DateOfBirth).should('contain', FillForm.FullRandomDate(date));
 			// Verification Subject selected
 			FillForm.get
 				.selectedSubjects()

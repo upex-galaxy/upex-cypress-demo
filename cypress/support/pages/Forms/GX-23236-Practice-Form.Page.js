@@ -90,6 +90,27 @@ class Selectores {
 		return Day + ' ' + Month + ' ' + Year;
 	}
 
+	FullRandomDate(date) {
+		const DateOfBirth = date.split(' ', 3);
+		const month = {
+			Jan: 'January',
+			Feb: 'February',
+			Mar: 'March',
+			Apr: 'April',
+			May: 'May',
+			Jun: 'June',
+			Jul: 'July',
+			Aug: 'August',
+			Sep: 'September',
+			Oct: 'October',
+			Nov: 'November',
+			Dec: 'December',
+		};
+		const extendedNameMonth = month[DateOfBirth[1]];
+		let FullDateOfBirth = DateOfBirth[0] + ' ' + extendedNameMonth + ',' + DateOfBirth[2];
+		return FullDateOfBirth;
+	}
+
 	EnterSubjects() {
 		const randomSubjects = faker.random.alpha({ bannedChars: ['z', 'q', 'w', 'x', 'f', 'j', 'k', 'ñ'] });
 		this.get.Subjects().type(randomSubjects);
