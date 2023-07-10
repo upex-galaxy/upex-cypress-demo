@@ -13,14 +13,15 @@ class Selectores {
 		Day: () => cy.get('[class^="react-datepicker__day react-datepicker__day"]:not([class$="outside-month"])'), //usar .contains().click() para poder seleccionar el día
 		Subjects: () => cy.get('#subjectsContainer'), // se debe usar .type() para ingresar un carácter, así se despliega un dropdown
 		OptionSubjects: () => cy.get('[id^="react-select-2-option"]'), // para elegir una opción luego que se genera el dropdown al escribir
+		selectedSubjects: () => cy.get('#subjectsContainer > div'),
 		Hobbies: () => cy.get('div[class*="custom-checkbox"]'), // se debe manejar el rango de 3 a 5 (para seleccionar hobbies)
 		UploadFile: () => cy.get('#uploadPicture'), //usar .attachFile() para subir el archivo
 		CurrentAddress: () => cy.get('#currentAddress'), // usar .type() para ingresar información
 		State: () => cy.get('#state'), // se debe usar .click() para abrir el dropdown
 		City: () => cy.get('#city'), // se debe usar .click() para abrir el dropdown
 		OptionStateAndCity: () => cy.get('[class$="-option"]'), // se debe usar eq().click() para seleccionar la opción
-		selectState: () => cy.get('#state>div'),
-		selectCity: () => cy.get('#city > div'),
+		selectedState: () => cy.get('#state>div'),
+		selectedCity: () => cy.get('#city > div'),
 		ButtonSubmit: () => cy.get('#submit'), // se debe usar .click() para activar el botón
 		FormSubmitted: () => cy.get('.table-responsive table tbody tr td'),
 	};
