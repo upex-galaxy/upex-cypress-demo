@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-class Slecetores {
+class Selectores {
 	get = {
 		FirstName: () => cy.get('#firstName'), //se debe usar .type() para ingresar info
 		LastName: () => cy.get('#lastName'), //se debe usar .type() para ingresar info
@@ -19,6 +19,8 @@ class Slecetores {
 		State: () => cy.get('#state'), // se debe usar .click() para abrir el dropdown
 		City: () => cy.get('#city'), // se debe usar .click() para abrir el dropdown
 		OptionStateAndCity: () => cy.get('[class$="-option"]'), // se debe usar eq().click() para seleccionar la opción
+		selectState: () => cy.get('#state>div'),
+		selectCity: () => cy.get('#city > div'),
 		ButtonSubmit: () => cy.get('#submit'), // se debe usar .click() para activar el botón
 		FormSubmitted: () => cy.get('.table-responsive table tbody tr td'),
 	};
@@ -145,4 +147,4 @@ class Slecetores {
 	}
 }
 
-export const FillForm = new Slecetores();
+export const FillForm = new Selectores();
