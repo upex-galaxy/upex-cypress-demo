@@ -6,7 +6,7 @@ describe('US GX-23133 | ToolsQA | Elements | Broken Links Images', () => {
 		cy.visit('https://demoqa.com/broken');
 	});
 
-	it('23134 | TC01: Validar visualizar correctamente imagen de ToolsQA al tomar la Valid Image', () => {
+	it.only('23134 | TC01: Validar visualizar correctamente imagen de ToolsQA al tomar la Valid Image', () => {
 		cy.get('div>img[src="/images/Toolsqa.jpg"]').should('be.visible').and('have.prop', 'naturalWidth').and('be.greaterThan', 0);
 	});
 
