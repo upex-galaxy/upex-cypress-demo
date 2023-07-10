@@ -19,27 +19,35 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 			//Fill First Name
 			var FirstName = FillForm.EnterName();
 			FillForm.get.FirstName().should('have.value', FirstName);
+
 			// Fill Last Name
 			var LastName = FillForm.EnterLastName();
 			FillForm.get.LastName().should('have.value', LastName);
+
 			// Fill Email
 			var Email = FillForm.EnterEmail();
 			FillForm.get.Email().should('have.value', Email);
+
 			// Select Gender
 			FillForm.SelectGender();
 			FillForm.get.Gender().then(select => {
 				expect(select.text()).to.contain(Cypress.env('genderSelect'));
 			});
+
 			// Fill Mobile
 			var Mobile = FillForm.EnterMobile();
 			FillForm.get.Mobile().should('have.value', Mobile);
+
 			// Validate that today's date is a default Date of Birth
 			FillForm.get.DateOfBirth().should('have.value', actualDate);
-			// Select a Date
+
+			// Select a Date of Birth
 			var date = FillForm.SelectRandomDate();
 			FillForm.get.DateOfBirth().should('have.value', date);
+
 			// Fill Subjects
 			FillForm.EnterSubjects();
+
 			// Select a Subjects Options
 			FillForm.SelectOptionSubjects()
 				.invoke('text')
@@ -47,17 +55,21 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 					cy.log(Option);
 					FillForm.get.Subjects().should('contain.text', Option);
 				});
+
 			// Select Hobbies
 			FillForm.SelectHobbies();
 			FillForm.get.Hobbies().then(Options => {
 				expect(Options.text()).to.contain(Cypress.env('selectedHobbies'));
 			});
+
 			// Select and Upload File
 			FillForm.ChooseFile(the.File.valid1);
 			FillForm.get.UploadFile().should('contain.value', the.File.verification.V1);
+
 			// Fill Current Address
 			var CurrentAddress = FillForm.EnterCurrentAddress();
 			FillForm.get.CurrentAddress().should('have.value', CurrentAddress, { timeout: 5000 });
+
 			// Select to State
 			FillForm.SelectState()
 				.invoke('text')
@@ -65,6 +77,7 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 					cy.log(State);
 					FillForm.get.State().should('contain.text', State);
 				});
+
 			// Select to City
 			FillForm.SelectCity()
 				.invoke('text')
@@ -72,6 +85,7 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 					cy.log(City);
 					FillForm.get.City().should('contain.text', City);
 				});
+
 			// Click in the Submit Button
 			FillForm.clickSubmit();
 
@@ -119,6 +133,55 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 								.should('contain', State + ' ' + City);
 						});
 				});
+		});
+	});
+	it.only('23237 | TC02: Validar No enviar formulario cuando el First Name es vacío y es resto del formulario tiene data requerida válida', () => {
+		cy.fixture('data/GX-23236-Practice-Form.json').then(the => {
+			//Empty First Name
+			FillForm.get.FirstName().should('have.value', '');
+
+			// Fill Last Name
+			var LastName = FillForm.EnterLastName();
+			FillForm.get.LastName().should('have.value', LastName);
+
+			// Fill Email
+			var Email = FillForm.EnterEmail();
+			FillForm.get.Email().should('have.value', Email);
+
+			// Select Gender
+			FillForm.SelectGender();
+			FillForm.get.Gender().then(select => {
+				expect(select.text()).to.contain(Cypress.env('genderSelect'));
+			});
+
+			// Fill Mobile
+			var Mobile = FillForm.EnterMobile();
+			FillForm.get.Mobile().should('have.value', Mobile);
+
+			// Select a Date of Birth
+			var date = FillForm.SelectRandomDate();
+			FillForm.get.DateOfBirth().should('have.value', date);
+
+			// Fill Subjects
+			FillForm.EnterSubjects();
+
+			// Select a Subjects Options
+			FillForm.SelectOptionSubjects()
+				.invoke('text')
+				.then(Option => {
+					cy.log(Option);
+					FillForm.get.Subjects().should('contain.text', Option);
+				});
+
+			// Fill Current Address
+			var CurrentAddress = FillForm.EnterCurrentAddress();
+			FillForm.get.CurrentAddress().should('have.value', CurrentAddress, { timeout: 5000 });
+
+			// Click in the Submit Button
+			FillForm.clickSubmit();
+
+			// IF field First Name is empty = No message is displayed after submitting and the field turns red
+			FillForm.get.FirstName().should('have.css', 'border-color', the.RedBorder);
 		});
 	});
 });

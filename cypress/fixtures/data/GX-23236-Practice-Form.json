@@ -28,5 +28,7 @@
 		"Picture": 15,
 		"Address": 17,
 		"StateAndCity": 19
-	}
+	},
+
+	"RedBorder": "rgb(220, 53, 69)"
 }
