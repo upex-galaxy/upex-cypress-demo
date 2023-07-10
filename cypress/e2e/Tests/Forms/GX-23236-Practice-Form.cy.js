@@ -135,7 +135,7 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 				});
 		});
 	});
-	it.only('23237 | TC02: Validar No enviar formulario cuando el cuando está vacío ', () => {
+	it('23237 | TC02: Validar No enviar formulario cuando el cuando está vacío ', () => {
 		cy.fixture('data/GX-23236-Practice-Form.json').then(the => {
 			//Empty First Name
 			FillForm.get.FirstName().should('have.value', '');
@@ -170,6 +170,49 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 			FillForm.get.Email().should('have.css', 'border-color', the.GreenBorder);
 			FillForm.get.optionsGender().should('have.css', 'color', the.RedBorder);
 			FillForm.get.Mobile().should('have.css', 'border-color', the.RedBorder);
+			FillForm.get.DateOfBirth().should('have.css', 'border-color', the.GreenBorder);
+			FillForm.get.CurrentAddress().should('have.css', 'border-color', the.GreenBorder);
+		});
+	});
+	it('23237 | TC03: Validar No enviar formulario cuando Email No contiene “@” y el resto del formulario tiene data requerida y válida', () => {
+		cy.fixture('data/GX-23236-Practice-Form.json').then(the => {
+			//Fill First Name
+			var FirstName = FillForm.EnterName();
+			FillForm.get.FirstName().should('have.value', FirstName);
+
+			// Fill Last Name
+			var LastName = FillForm.EnterLastName();
+			FillForm.get.LastName().should('have.value', LastName);
+
+			// Empty Email
+			FillForm.get.Email().type(the.Email.invalid1);
+			FillForm.get.Email().should('have.value', the.Email.invalid1);
+
+			// Select Gender
+			FillForm.SelectGender();
+			FillForm.get.Gender().then(select => {
+				expect(select.text()).to.contain(Cypress.env('genderSelect'));
+			});
+
+			// Fill Mobile
+			var Mobile = FillForm.EnterMobile();
+			FillForm.get.Mobile().should('have.value', Mobile);
+
+			// Default a Date of Birth
+			FillForm.get.DateOfBirth().should('have.value', actualDate);
+
+			// Empty Current Address
+			FillForm.get.CurrentAddress().should('have.value', '');
+
+			// Click in the Submit Button
+			FillForm.clickSubmit();
+
+			// Field validations
+			FillForm.get.FirstName().should('have.css', 'border-color', the.GreenBorder);
+			FillForm.get.LastName().should('have.css', 'border-color', the.GreenBorder);
+			FillForm.get.Email().should('have.css', 'border-color', the.RedBorder);
+			FillForm.get.optionsGender().should('have.css', 'color', the.GreenBorder);
+			FillForm.get.Mobile().should('have.css', 'border-color', the.GreenBorder);
 			FillForm.get.DateOfBirth().should('have.css', 'border-color', the.GreenBorder);
 			FillForm.get.CurrentAddress().should('have.css', 'border-color', the.GreenBorder);
 		});
