@@ -135,53 +135,43 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 				});
 		});
 	});
-	it.only('23237 | TC02: Validar No enviar formulario cuando el First Name es vacío y es resto del formulario tiene data requerida válida', () => {
+	it.only('23237 | TC02: Validar No enviar formulario cuando el cuando está vacío ', () => {
 		cy.fixture('data/GX-23236-Practice-Form.json').then(the => {
 			//Empty First Name
 			FillForm.get.FirstName().should('have.value', '');
 
-			// Fill Last Name
-			var LastName = FillForm.EnterLastName();
-			FillForm.get.LastName().should('have.value', LastName);
+			// Empty Last Name
+			FillForm.get.LastName().should('have.value', '');
 
-			// Fill Email
-			var Email = FillForm.EnterEmail();
-			FillForm.get.Email().should('have.value', Email);
+			// Empty Email
+			FillForm.get.Email().should('have.value', '');
 
-			// Select Gender
-			FillForm.SelectGender();
-			FillForm.get.Gender().then(select => {
-				expect(select.text()).to.contain(Cypress.env('genderSelect'));
-			});
+			// Not Select Gender
+			FillForm.get.Gender().should('not.be.checked');
 
-			// Fill Mobile
-			var Mobile = FillForm.EnterMobile();
-			FillForm.get.Mobile().should('have.value', Mobile);
+			// Empty Mobile
+			FillForm.get.Mobile().should('have.value', '');
 
-			// Select a Date of Birth
-			var date = FillForm.SelectRandomDate();
-			FillForm.get.DateOfBirth().should('have.value', date);
+			// Default a Date of Birth
+			FillForm.get.DateOfBirth().should('have.value', actualDate);
 
-			// Fill Subjects
-			FillForm.EnterSubjects();
+			// Empty Subjects
+			FillForm.get.Subjects().should('have.value', '');
 
-			// Select a Subjects Options
-			FillForm.SelectOptionSubjects()
-				.invoke('text')
-				.then(Option => {
-					cy.log(Option);
-					FillForm.get.Subjects().should('contain.text', Option);
-				});
-
-			// Fill Current Address
-			var CurrentAddress = FillForm.EnterCurrentAddress();
-			FillForm.get.CurrentAddress().should('have.value', CurrentAddress, { timeout: 5000 });
+			// Empty Current Address
+			FillForm.get.CurrentAddress().should('have.value', '');
 
 			// Click in the Submit Button
 			FillForm.clickSubmit();
 
-			// IF field First Name is empty = No message is displayed after submitting and the field turns red
+			// Field validations
 			FillForm.get.FirstName().should('have.css', 'border-color', the.RedBorder);
+			FillForm.get.LastName().should('have.css', 'border-color', the.RedBorder);
+			FillForm.get.Email().should('have.css', 'border-color', the.GreenBorder);
+			FillForm.get.optionsGender().should('have.css', 'color', the.RedBorder);
+			FillForm.get.Mobile().should('have.css', 'border-color', the.RedBorder);
+			FillForm.get.DateOfBirth().should('have.css', 'border-color', the.GreenBorder);
+			FillForm.get.CurrentAddress().should('have.css', 'border-color', the.GreenBorder);
 		});
 	});
 });

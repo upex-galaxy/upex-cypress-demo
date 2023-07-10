@@ -30,5 +30,6 @@
 		"StateAndCity": 19
 	},
 
-	"RedBorder": "rgb(220, 53, 69)"
+	"RedBorder": "rgb(220, 53, 69)",
+	"GreenBorder": "rgb(40, 167, 69)"
 }

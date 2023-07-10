@@ -6,6 +6,7 @@ class Selectores {
 		LastName: () => cy.get('#lastName'), //se debe usar .type() para ingresar info
 		Email: () => cy.get('#userEmail'), //se debe usar .type() para ingresar info
 		Gender: () => cy.get('div[class*="custom-radio"]'), //se debe manejar el rango 0 a 2 (para seleccionar genero)
+		optionsGender: () => cy.get('[for^="gender-radio"]'),
 		Mobile: () => cy.get('#userNumber'), //debe contener exactamente 10 dígitos para ser válido
 		DateOfBirth: () => cy.get('#dateOfBirthInput'), //usar .click() para abrir el dropdown
 		Month: () => cy.get('[class$="month-select"]'), // usar .select() rango 0 a 11 (para elegir el mes)
