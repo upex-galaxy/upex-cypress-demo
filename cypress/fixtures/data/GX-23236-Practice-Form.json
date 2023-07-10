@@ -31,5 +31,6 @@
 	},
 
 	"RedBorder": "rgb(220, 53, 69)",
-	"GreenBorder": "rgb(40, 167, 69)"
+	"GreenBorder": "rgb(40, 167, 69)",
+	"empty": ""
 }

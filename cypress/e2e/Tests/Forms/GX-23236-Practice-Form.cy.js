@@ -137,24 +137,24 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 		});
 	});
 
-	it('23237 | TC02: Validar No enviar formulario cuando el cuando está vacío ', () => {
+	it.only('23237 | TC02: Validar No enviar formulario cuando el cuando está vacío ', () => {
 		cy.fixture('data/GX-23236-Practice-Form.json').then(the => {
 			//Empty First Name
-			FillForm.get.FirstName().should('have.value', '');
+			FillForm.get.FirstName().should('have.value', the.empty);
 			// Empty Last Name
-			FillForm.get.LastName().should('have.value', '');
+			FillForm.get.LastName().should('have.value', the.empty);
 			// Empty Email
-			FillForm.get.Email().should('have.value', '');
+			FillForm.get.Email().should('have.value', the.Email.empty);
 			// Not Select Gender
 			FillForm.get.Gender().should('not.be.checked');
 			// Empty Mobile
-			FillForm.get.Mobile().should('have.value', '');
+			FillForm.get.Mobile().should('have.value', the.empty);
 			// Default a Date of Birth
 			FillForm.get.DateOfBirth().should('have.value', actualDate);
 			// Empty Subjects
-			FillForm.get.Subjects().should('have.value', '');
+			FillForm.get.Subjects().should('have.value', the.empty);
 			// Empty Current Address
-			FillForm.get.CurrentAddress().should('have.value', '');
+			FillForm.get.CurrentAddress().should('have.value', the.empty);
 			// Click in the Submit Button
 			FillForm.clickSubmit();
 
@@ -183,7 +183,7 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 			// Fill Mobile
 			FillForm.EnterMobile();
 			// Empty Current Address
-			FillForm.get.CurrentAddress().should('have.value', '');
+			FillForm.get.CurrentAddress().should('have.value', the.empty);
 			// Click in the Submit Button
 			FillForm.clickSubmit();
 
@@ -212,7 +212,7 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 			// Fill Mobile
 			FillForm.EnterMobile();
 			// Empty Current Address
-			FillForm.get.CurrentAddress().should('have.value', '');
+			FillForm.get.CurrentAddress().should('have.value', the.empty);
 			// Click in the Submit Button
 			FillForm.clickSubmit();
 
@@ -240,7 +240,7 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 			// Fill Mobile
 			FillForm.EnterMobile();
 			// Empty Current Address
-			FillForm.get.CurrentAddress().should('have.value', '');
+			FillForm.get.CurrentAddress().should('have.value', the.empty);
 
 			// Click in the Submit Button
 			FillForm.clickSubmit();
@@ -255,7 +255,7 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 		});
 	});
 
-	it.only('23237 | TC06: Validar No enviar formulario cuando Email No contiene "." después de 1 carácter alfanumérico después de "@" y el resto del formulario tiene data requerida y válida ', () => {
+	it('23237 | TC06: Validar No enviar formulario cuando Email No contiene "." después de 1 carácter alfanumérico después de "@" y el resto del formulario tiene data requerida y válida ', () => {
 		cy.fixture('data/GX-23236-Practice-Form.json').then(the => {
 			//Fill First Name
 			FillForm.EnterName();
@@ -269,7 +269,36 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 			// Fill Mobile
 			FillForm.EnterMobile();
 			// Empty Current Address
-			FillForm.get.CurrentAddress().should('have.value', '');
+			FillForm.get.CurrentAddress().should('have.value', the.empty);
+			// Click in the Submit Button
+			FillForm.clickSubmit();
+
+			// Field validations
+			FillForm.get.FirstName().should('have.css', 'border-color', the.GreenBorder);
+			FillForm.get.LastName().should('have.css', 'border-color', the.GreenBorder);
+			FillForm.get.Email().should('have.css', 'border-color', the.RedBorder);
+			FillForm.get.optionsGender().should('have.css', 'color', the.GreenBorder);
+			FillForm.get.Mobile().should('have.css', 'border-color', the.GreenBorder);
+			FillForm.get.DateOfBirth().should('have.css', 'border-color', the.GreenBorder);
+			FillForm.get.CurrentAddress().should('have.css', 'border-color', the.GreenBorder);
+		});
+	});
+
+	it.only('23237 | TC07: Validar No enviar formulario cuando Email No contiene (mínimo) 2 caracteres alfanuméricos después de "." y el resto del formulario tiene data requerida y válida ', () => {
+		cy.fixture('data/GX-23236-Practice-Form.json').then(the => {
+			//Fill First Name
+			FillForm.EnterName();
+			// Fill Last Name
+			FillForm.EnterLastName();
+			// Empty Email
+			FillForm.get.Email().type(the.Email.invalid5);
+			FillForm.get.Email().should('have.value', the.Email.invalid5);
+			// Select Gender
+			FillForm.SelectGender();
+			// Fill Mobile
+			FillForm.EnterMobile();
+			// Empty Current Address
+			FillForm.get.CurrentAddress().should('have.value', the.empty);
 			// Click in the Submit Button
 			FillForm.clickSubmit();
 
