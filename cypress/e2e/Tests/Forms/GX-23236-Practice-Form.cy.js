@@ -313,7 +313,7 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 		});
 	});
 
-	it.only('23237 | TC08: Validar que al  Enviar formulario cuando Email Vacío y el resto del formulario tiene data requerida y válida, se visualiza vacío el campo Email en el popup.', () => {
+	it('23237 | TC08: Validar que al  Enviar formulario cuando Email Vacío y el resto del formulario tiene data requerida y válida, se visualiza vacío el campo Email en el popup.', () => {
 		cy.fixture('data/GX-23236-Practice-Form.json').then(the => {
 			//Fill First Name
 			let FirstName = FillForm.EnterName();
@@ -350,6 +350,34 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 			FillForm.get.FormSubmitted().eq(the.Modal.Address).should('have.text', the.empty);
 			// Verification of the selected state and city
 			FillForm.get.FormSubmitted().eq(the.Modal.StateAndCity).should('have.text', the.empty);
+		});
+	});
+
+	it.skip('23237 | TC09: Validar No enviar formulario cuando el “Mobile Number” es menor a 10 dígitos y el resto del formulario tiene data requerida y válida', () => {
+		cy.fixture('data/GX-23236-Practice-Form.json').then(the => {
+			//Fill First Name
+			FillForm.EnterName();
+			// Fill Last Name
+			FillForm.EnterLastName();
+			// Invalid Email
+			FillForm.EnterEmail();
+			// Select Gender
+			FillForm.SelectGender();
+			// Fill Mobile
+			FillForm.invalidMobile();
+			// Empty Current Address
+			FillForm.get.CurrentAddress().should('have.value', the.empty);
+			// Click in the Submit Button
+			FillForm.clickSubmit();
+
+			// Field validations
+			FillForm.get.FirstName().should('have.css', 'border-color', the.GreenBorder);
+			FillForm.get.LastName().should('have.css', 'border-color', the.GreenBorder);
+			FillForm.get.Email().should('have.css', 'border-color', the.GreenBorder);
+			FillForm.get.optionsGender().should('have.css', 'color', the.GreenBorder);
+			FillForm.get.Mobile().should('have.css', 'border-color', the.RedBorder);
+			FillForm.get.DateOfBirth().should('have.css', 'border-color', the.GreenBorder);
+			FillForm.get.CurrentAddress().should('have.css', 'border-color', the.GreenBorder);
 		});
 	});
 });

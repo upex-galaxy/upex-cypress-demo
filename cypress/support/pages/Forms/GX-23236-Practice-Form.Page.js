@@ -62,6 +62,12 @@ class Selectores {
 		return randomMobile;
 	}
 
+	invalidMobile() {
+		const randomMobile = faker.datatype.number({ min: 0, max: 999999999 });
+		this.get.Mobile().type(randomMobile);
+		return randomMobile;
+	}
+
 	SelectRandomDate() {
 		const randomDate = faker.date.birthdate({ min: 1900, max: 2100 }).toString();
 		const separarFecha = randomDate.split(' ', '4');
