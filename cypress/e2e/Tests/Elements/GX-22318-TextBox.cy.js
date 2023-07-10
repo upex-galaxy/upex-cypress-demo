@@ -2,11 +2,8 @@ describe('✅ToolsQA Elements Text Box: Fill form and Submit', () => {
 	beforeEach('precondition: visit website Demo QA', () => {
 		cy.visit('https://demoqa.com/text-box');
 		cy.url().should('contain', 'text-box');
-	
-		
 	});
 
-		
 	it('TC1: Validate fill the Fill form successfully with valide data verifying the correct message', () => {
 		//arrange
 		cy.fixture('data/Gx-22318-TextBox.json').then(the => {
@@ -72,5 +69,15 @@ describe('✅ToolsQA Elements Text Box: Fill form and Submit', () => {
 		});
 	});
 
+	it('TC5: Validate Not to submit the Fill form when "email" does not contain "." after 1 alphanumeric character after "@"', () => {
+		cy.fixture('data/Gx-22318-TextBox.json').then(the => {
+			cy.get(the.ids.email).type(the.invalidInput.invalidEmail3);
+
+			cy.get(the.ids.submitButton).click();
+
+			cy.get(the.ids.email).should('have.class', 'mr-sm-2 field-error form-control');
+		});
+	});
+});
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
