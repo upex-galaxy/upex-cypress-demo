@@ -9,9 +9,7 @@ describe('US GX-21075 | TS: ✅ToolsQA | Elements | Text Box: Fill form and Subm
 			cy.get(the.email.input).type(the.email.data.valid);
 			cy.get(the.CurrentAddress.input).type(the.CurrentAddress.data.valid);
 			cy.get(the.PermanentAddress.input).type(the.PermanentAddress.data.valid);
-
 			cy.get(the.SubmitButton).click();
-
 			cy.contains('Name:Upex').should('be.visible');
 			cy.contains('Email:hola@gmail.com').should('be.visible');
 			cy.contains('Current Address :Caracas, Venezuela').should('be.visible');
@@ -25,7 +23,6 @@ describe('US GX-21075 | TS: ✅ToolsQA | Elements | Text Box: Fill form and Subm
 			cy.get(the.email.input).should('be.empty');
 			cy.get(the.CurrentAddress.input).should('be.empty');
 			cy.get(the.PermanentAddress.input).should('be.empty');
-
 			cy.get(the.SubmitButton).click();
 		});
 	});
@@ -33,9 +30,7 @@ describe('US GX-21075 | TS: ✅ToolsQA | Elements | Text Box: Fill form and Subm
 	it('GX-21076 | TC3: Validate field “email” is submitted with invalid data and red border is displayed.', () => {
 		cy.fixture('GX-21075/ToolsQA-TextBox.Page').then(the => {
 			cy.get(the.email.input).type(the.email.data.invalid);
-
 			cy.get(the.SubmitButton).click();
-
 			cy.get('.form-control').eq('1').should('have.class', 'field-error');
 		});
 	});
