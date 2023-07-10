@@ -137,7 +137,7 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 		});
 	});
 
-	it.only('23237 | TC02: Validar No enviar formulario cuando el cuando está vacío ', () => {
+	it('23237 | TC02: Validar No enviar formulario cuando el cuando está vacío ', () => {
 		cy.fixture('data/GX-23236-Practice-Form.json').then(the => {
 			//Empty First Name
 			FillForm.get.FirstName().should('have.value', the.empty);
@@ -175,7 +175,7 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 			FillForm.EnterName();
 			// Fill Last Name
 			FillForm.EnterLastName();
-			// Empty Email
+			// Invalid Email
 			FillForm.get.Email().type(the.Email.invalid1);
 			FillForm.get.Email().should('have.value', the.Email.invalid1);
 			// Select Gender
@@ -204,7 +204,7 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 			FillForm.EnterName();
 			// Fill Last Name
 			FillForm.EnterLastName();
-			// Empty Email
+			// Invalid Email
 			FillForm.get.Email().type(the.Email.invalid2);
 			FillForm.get.Email().should('have.value', the.Email.invalid2);
 			// Select Gender
@@ -232,7 +232,7 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 			FillForm.EnterName();
 			// Fill Last Name
 			FillForm.EnterLastName();
-			// Empty Email
+			// Invalid Email
 			FillForm.get.Email().type(the.Email.invalid3);
 			FillForm.get.Email().should('have.value', the.Email.invalid3);
 			// Select Gender
@@ -261,7 +261,7 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 			FillForm.EnterName();
 			// Fill Last Name
 			FillForm.EnterLastName();
-			// Empty Email
+			// Invalid Email
 			FillForm.get.Email().type(the.Email.invalid4);
 			FillForm.get.Email().should('have.value', the.Email.invalid4);
 			// Select Gender
@@ -284,13 +284,13 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 		});
 	});
 
-	it.only('23237 | TC07: Validar No enviar formulario cuando Email No contiene (mínimo) 2 caracteres alfanuméricos después de "." y el resto del formulario tiene data requerida y válida ', () => {
+	it('23237 | TC07: Validar No enviar formulario cuando Email No contiene (mínimo) 2 caracteres alfanuméricos después de "." y el resto del formulario tiene data requerida y válida ', () => {
 		cy.fixture('data/GX-23236-Practice-Form.json').then(the => {
 			//Fill First Name
 			FillForm.EnterName();
 			// Fill Last Name
 			FillForm.EnterLastName();
-			// Empty Email
+			// Invalid Email
 			FillForm.get.Email().type(the.Email.invalid5);
 			FillForm.get.Email().should('have.value', the.Email.invalid5);
 			// Select Gender
@@ -310,6 +310,46 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 			FillForm.get.Mobile().should('have.css', 'border-color', the.GreenBorder);
 			FillForm.get.DateOfBirth().should('have.css', 'border-color', the.GreenBorder);
 			FillForm.get.CurrentAddress().should('have.css', 'border-color', the.GreenBorder);
+		});
+	});
+
+	it.only('23237 | TC08: Validar que al  Enviar formulario cuando Email Vacío y el resto del formulario tiene data requerida y válida, se visualiza vacío el campo Email en el popup.', () => {
+		cy.fixture('data/GX-23236-Practice-Form.json').then(the => {
+			//Fill First Name
+			let FirstName = FillForm.EnterName();
+			// Fill Last Name
+			let LastName = FillForm.EnterLastName();
+			// Empty Email
+			FillForm.get.Email().should('have.value', the.Email.empty);
+			// Select Gender
+			FillForm.SelectGender();
+			// Fill Mobile
+			let Mobile = FillForm.EnterMobile();
+			// Empty Current Address
+			FillForm.get.CurrentAddress().should('have.value', the.empty);
+			// Click in the Submit Button
+			FillForm.clickSubmit();
+
+			//----->  Modal info check  <--------
+			// Verification Student Name
+			FillForm.get
+				.FormSubmitted()
+				.eq(the.Modal.StudentName)
+				.should('have.text', FirstName + ' ' + LastName);
+			// Verification Student Email
+			FillForm.get.FormSubmitted().eq(the.Modal.StudentEmail).should('have.value', the.Email.empty);
+			// Verification Gender of selected student
+			FillForm.get.FormSubmitted().eq(the.Modal.Gender).should('have.text', Cypress.env('genderSelect'));
+			// Verification Student Mobile
+			FillForm.get.FormSubmitted().eq(the.Modal.Mobile).should('have.text', Mobile);
+			// Verification Hobbies of selected student
+			FillForm.get.FormSubmitted().eq(the.Modal.Hobbies).should('have.text', the.empty);
+			// Verification that an Picture file was uploaded
+			FillForm.get.FormSubmitted().eq(the.Modal.Picture).should('have.text', the.empty);
+			// Verification of the loaded current address
+			FillForm.get.FormSubmitted().eq(the.Modal.Address).should('have.text', the.empty);
+			// Verification of the selected state and city
+			FillForm.get.FormSubmitted().eq(the.Modal.StateAndCity).should('have.text', the.empty);
 		});
 	});
 });
