@@ -141,28 +141,20 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 		cy.fixture('data/GX-23236-Practice-Form.json').then(the => {
 			//Empty First Name
 			FillForm.get.FirstName().should('have.value', '');
-
 			// Empty Last Name
 			FillForm.get.LastName().should('have.value', '');
-
 			// Empty Email
 			FillForm.get.Email().should('have.value', '');
-
 			// Not Select Gender
 			FillForm.get.Gender().should('not.be.checked');
-
 			// Empty Mobile
 			FillForm.get.Mobile().should('have.value', '');
-
 			// Default a Date of Birth
 			FillForm.get.DateOfBirth().should('have.value', actualDate);
-
 			// Empty Subjects
 			FillForm.get.Subjects().should('have.value', '');
-
 			// Empty Current Address
 			FillForm.get.CurrentAddress().should('have.value', '');
-
 			// Click in the Submit Button
 			FillForm.clickSubmit();
 
@@ -181,23 +173,17 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 		cy.fixture('data/GX-23236-Practice-Form.json').then(the => {
 			//Fill First Name
 			FillForm.EnterName();
-
 			// Fill Last Name
 			FillForm.EnterLastName();
-
 			// Empty Email
 			FillForm.get.Email().type(the.Email.invalid1);
 			FillForm.get.Email().should('have.value', the.Email.invalid1);
-
 			// Select Gender
 			FillForm.SelectGender();
-
 			// Fill Mobile
 			FillForm.EnterMobile();
-
 			// Empty Current Address
 			FillForm.get.CurrentAddress().should('have.value', '');
-
 			// Click in the Submit Button
 			FillForm.clickSubmit();
 
@@ -216,23 +202,17 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 		cy.fixture('data/GX-23236-Practice-Form.json').then(the => {
 			//Fill First Name
 			FillForm.EnterName();
-
 			// Fill Last Name
 			FillForm.EnterLastName();
-
 			// Empty Email
 			FillForm.get.Email().type(the.Email.invalid2);
 			FillForm.get.Email().should('have.value', the.Email.invalid2);
-
 			// Select Gender
 			FillForm.SelectGender();
-
 			// Fill Mobile
 			FillForm.EnterMobile();
-
 			// Empty Current Address
 			FillForm.get.CurrentAddress().should('have.value', '');
-
 			// Click in the Submit Button
 			FillForm.clickSubmit();
 
@@ -246,27 +226,50 @@ describe('GX-23236-✅-tools-qa-forms-practice-form', () => {
 			FillForm.get.CurrentAddress().should('have.css', 'border-color', the.GreenBorder);
 		});
 	});
-	it.only('23237 | TC05: Validar No enviar formulario cuando Email No contiene (mínimo) 1 carácter alfanumérico después de "@" y el resto del formulario tiene data requerida y válida', () => {
+	it('23237 | TC05: Validar No enviar formulario cuando Email No contiene (mínimo) 1 carácter alfanumérico después de "@" y el resto del formulario tiene data requerida y válida', () => {
 		cy.fixture('data/GX-23236-Practice-Form.json').then(the => {
 			//Fill First Name
 			FillForm.EnterName();
-
 			// Fill Last Name
 			FillForm.EnterLastName();
-
 			// Empty Email
 			FillForm.get.Email().type(the.Email.invalid3);
 			FillForm.get.Email().should('have.value', the.Email.invalid3);
-
 			// Select Gender
 			FillForm.SelectGender();
-
 			// Fill Mobile
 			FillForm.EnterMobile();
-
 			// Empty Current Address
 			FillForm.get.CurrentAddress().should('have.value', '');
 
+			// Click in the Submit Button
+			FillForm.clickSubmit();
+			// Field validations
+			FillForm.get.FirstName().should('have.css', 'border-color', the.GreenBorder);
+			FillForm.get.LastName().should('have.css', 'border-color', the.GreenBorder);
+			FillForm.get.Email().should('have.css', 'border-color', the.RedBorder);
+			FillForm.get.optionsGender().should('have.css', 'color', the.GreenBorder);
+			FillForm.get.Mobile().should('have.css', 'border-color', the.GreenBorder);
+			FillForm.get.DateOfBirth().should('have.css', 'border-color', the.GreenBorder);
+			FillForm.get.CurrentAddress().should('have.css', 'border-color', the.GreenBorder);
+		});
+	});
+
+	it.only('23237 | TC06: Validar No enviar formulario cuando Email No contiene "." después de 1 carácter alfanumérico después de "@" y el resto del formulario tiene data requerida y válida ', () => {
+		cy.fixture('data/GX-23236-Practice-Form.json').then(the => {
+			//Fill First Name
+			FillForm.EnterName();
+			// Fill Last Name
+			FillForm.EnterLastName();
+			// Empty Email
+			FillForm.get.Email().type(the.Email.invalid4);
+			FillForm.get.Email().should('have.value', the.Email.invalid4);
+			// Select Gender
+			FillForm.SelectGender();
+			// Fill Mobile
+			FillForm.EnterMobile();
+			// Empty Current Address
+			FillForm.get.CurrentAddress().should('have.value', '');
 			// Click in the Submit Button
 			FillForm.clickSubmit();
 
