@@ -23,6 +23,14 @@ describe('US GX-23558 ✅ToolsQA | Forms | Practice Form', () => {
 		forms.userNumber(randomNumber);
 		forms.get.userNumber().should('have.value', randomNumber);
 
+		const fecha = new Date();
+		const day = fecha.getDate().toString().padStart(2, '0');
+		const month = fecha.toLocaleDateString('en-EN', { month: 'short' });
+		const year = fecha.getFullYear();
+		const currentDate = `${day} ${month} ${year}`;
+		forms.get.userDateOfBirth().should('have.value', currentDate);
+
+		forms.userSubjects();
 		//forms.get.submitButton().click();
 
 		//cy.get('@randomGender').then(randomGenderSelected => {
@@ -43,3 +51,4 @@ const randomName = faker.name.firstName();
 const randomLastName = faker.name.lastName();
 const randomEmail = faker.internet.email();
 const randomNumber = faker.phone.number('##########');
+//const randomSubject = faker.

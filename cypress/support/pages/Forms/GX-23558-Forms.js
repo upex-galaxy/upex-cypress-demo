@@ -7,10 +7,7 @@ class Forms {
 		userGender: () => cy.get('#genterWrapper [class=custom-control-input]'),
 		userNumber: () => cy.get('#userNumber'),
 		userDateOfBirth: () => cy.get('#dateOfBirthInput'),
-		userYearOfBirth: () => cy.get('[class="react-datepicker__year-select"]'),
-		userMonthOfBirth: () => cy.get('[class="react-datepicker__month-select"]'),
-		userDayOfBirth: () => cy.get('.react-datepicker__day--today'),
-		submitButton: () => cy.get('#submit'),
+		userSubjects: () => cy.get('#subjectsContainer'),
 	};
 
 	firstName(randomName) {
@@ -42,16 +39,8 @@ class Forms {
 		randomNumber && this.get.userNumber().type(randomNumber);
 	}
 
-	userYearOfBirth(randomYear) {
-		randomYear && this.get.userYearOfBirth().select(1900, 2100);
-	}
-
-	userMonthOfBirth(randomMonth) {
-		randomMonth && this.get.userMonthOfBirth().select(0, 11);
-	}
-
-	userDayOfBirth(randomDay) {
-		randomDay && this.get.userDayOfBirth();
+	userSubjects(randomSubject) {
+		randomSubject && this.get.userSubjects().type();
 	}
 }
 export const forms = new Forms();
