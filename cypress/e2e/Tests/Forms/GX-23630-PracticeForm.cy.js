@@ -9,9 +9,9 @@ const firstname = faker.name.firstName();
 const lastname = faker.name.lastName();
 const phoneNumber = faker.phone.number('##########');
 const address = faker.address.streetAddress();
-const date = faker.date.past();
-
-faker.address.streetAddress();
+const startDate = new Date('1920/01/01');
+const endDate = new Date('2023/01/01');
+const Mail = [data.Email1, data.Email3, data.Email5, data.Email7, data.Email8];
 
 describe('US GX-23630 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 	beforeEach(() => {
@@ -19,25 +19,32 @@ describe('US GX-23630 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 	});
 
 	it('23631 | TC1: Validate if every field are empty ', () => {
-		usuario.submit(); // Write your test case one here
+		usuario.datos.submit(); // Write your test case one here
 	});
 
-	it('23631 | TC3: Validate complete the form ', () => {
-		usuario.FillForm(lastname, firstname, data.Email7, phoneNumber, date);
+	it.only('23631 | TC3: Validate complete the form ', () => {
+		usuario.FillForm(lastname, firstname, usuario.obtenerMailAleatorio(Mail), phoneNumber, address);
+		usuario.datos.gender().eq(usuario.getRandomNumber(0, 2)).click();
+		usuario.datos.hobby().eq(usuario.getRandomNumber(3, 5)).click();
+		usuario.datos.Mobile().invoke('val').should('have.length', 10);
+		usuario.datos.submit().click();
 	});
+	// usuario.dato}s.submit().click();
 
 	it('23631 | TC5: Validate if field email is invalid, does not contain “@“ ', () => {
-		usuario.FillForm(lastname, firstname, data.Email5, phoneNumber, date, address);
+		usuario.FillForm(lastname, firstname, data.Email5, phoneNumber, address);
+
+		usuario.datos.Mobile().invoke('val').should('have.length', 10);
+		usuario.datos.submit().click();
 	});
 	it('23631 | TC6: Validate if field email is invalid, does not contain (minimum) 1 alphanumeric character before “@”', () => {
-		usuario.FillForm(lastname, firstname, data.Email8, phoneNumber, date, address);
+		usuario.FillForm(lastname, firstname, data.Email8, phoneNumber, address);
 	});
 	it.only('23631 | TC7: Validate if field email is invalid, does not contain “.” after 1 alphanumeric character after “@”.', () => {
-		usuario.FillForm(lastname, firstname, data.Email3, phoneNumber, date, address);
-		phoneNumber.should('have.length', 10);
+		usuario.FillForm(lastname, firstname, data.Email3, phoneNumber, address);
 	});
 	it('23631 | TC8: Validate if field email is invalid, does not contain  (minimum) 2 alphanumeric characters after “.”', () => {
-		usuario.FillForm(lastname, firstname, data.Email1, phoneNumber, date, address);
+		usuario.FillForm(lastname, firstname, data.Email1, phoneNumber, address);
 	});
 
 	it.only('23631 | TC10: Validate 3 Radio Buttons must have Male, Female, Other labels.', () => {
@@ -47,15 +54,8 @@ describe('US GX-23630 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 		usuario.datos.Other().should('contain', 'Other');
 	});
 
-	it('23631 | TC13: Validate if field mobile number is invalid.', () => {
-		phoneNumber.should('have.length', 10);
-	});
-	it.only('23631 | TC14: Validate if field date picker has the current date as a default value.', () => {
-		usuario.datos.dateOfBirth().should('have', 'value');
-	});
-	it('23631 | TC15: Validate choose the date of birth.', () => {
-		// Write your test case two here
-	});
+	it('23631 | TC14: Validate if field date picker has the current date as a default value.', () => {});
+
 	it('23631 | TC16: Validate if field subjects is empty.', () => {
 		// Write your test case two here
 	});
