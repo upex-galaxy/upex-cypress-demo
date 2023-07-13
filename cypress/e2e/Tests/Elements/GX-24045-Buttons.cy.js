@@ -18,6 +18,7 @@ describe('✅HerramientasQA | Elementos | Botones', () => {
 
 	it('24046 | TC3: Validar funcionamiento botón click', () => {
 		cy.get('[type="button"]').eq(3).click();
+
 		cy.get('[id="dynamicClickMessage"]').should('contain', 'You have done a dynamic click');
 	});
 });
