@@ -8,7 +8,7 @@ class Forms {
 		userNumber: () => cy.get('#userNumber'),
 		userDateOfBirth: () => cy.get('#dateOfBirthInput'),
 		userSubjects: () => cy.get('#subjectsContainer'),
-		userSubjectsList: () => cy.get('.subjects-auto-complete__menu'),
+		userSubjectChoice: () => cy.get('#react-select-2-option-0'),
 		userHobbies: () => cy.get('#hobbiesWrapper [class=custom-control-input]'),
 		uploadPictureButton: () => cy.get('#uploadPicture'),
 		submitButton: () => cy.get('#submit'),
@@ -48,6 +48,9 @@ class Forms {
 		randomSubject && this.get.userSubjects().type(randomSubject);
 	}
 
+	userSubjectChoice() {
+		this.get.userSubjectChoice().click({ force: true });
+	}
 	userHobbies() {
 		let randomCheck;
 		return this.get
