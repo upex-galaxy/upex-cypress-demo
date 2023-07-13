@@ -1,3 +1,6 @@
+import { removeLogs } from '@helper/RemoveLogs';
+removeLogs();
+
 describe('✅HerramientasQA | Elementos | Botones', () => {
 	beforeEach('precondición', () => {
 		cy.visit('https://demoqa.com/buttons');
@@ -14,7 +17,7 @@ describe('✅HerramientasQA | Elementos | Botones', () => {
 	});
 
 	it('24046 | TC3: Validar funcionamiento botón click', () => {
-		cy.get('[id="q6as7"]').click();
+		cy.get('[type="button"]').eq(3).click();
 		cy.get('[id="dynamicClickMessage"]').should('contain', 'You have done a dynamic click');
 	});
 });
