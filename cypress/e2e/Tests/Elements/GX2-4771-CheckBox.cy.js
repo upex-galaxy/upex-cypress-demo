@@ -7,9 +7,11 @@ describe('GX2-4771-✅-tools-qa-elements-check-box', () => {
 	beforeEach('precondition', () => {
 		cy.visit('/checkbox');
 	});
-	it('prueba', () => {
-		Selected.get.ButtonExpandAll().click();
-		//cy.get('[class="rct-collapse rct-collapse-btn"]').eq(0).click();
-		//cy.get('').should('have.class', 'rct-node-expanded');
+
+	it('4772 | TC1: Validar el funcionamiento del Botón “Expand All”.', () => {
+		cy.fixture('data/GX2-4771-CheckBox').then(the => {
+			Selected.get.ButtonExpandAll().click();
+			Selected.get.FolderExpanded().should('have.lengthOf', the.Folder.MaxFolderOpen);
+		});
 	});
 });
