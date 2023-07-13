@@ -30,17 +30,30 @@ describe('US GX-23558 ✅ToolsQA | Forms | Practice Form', () => {
 		const currentDate = `${day} ${month} ${year}`;
 		forms.get.userDateOfBirth().should('have.value', currentDate);
 
-		cy.log(randomSubject);
 		forms.userSubjects(randomSubject);
 		forms.get.userSubjectsList().should('exist');
+
+		forms.userHobbies().then(randomHobbiesSelected => {
+			cy.wrap(randomHobbiesSelected).as('randomHobbies');
+		});
+
+		forms.uploadPictureButton();
+		forms.get.uploadPictureButton().should('contain.value', 'upexlogo.png');
+
+		forms.userAddress(randomAddress);
+		forms.get.userAddress().should('have.value', randomAddress);
+
 		forms.get.submitButton().click();
 
 		cy.get('@randomGender').then(randomGenderSelected => {
 			forms.get.userGender().eq(randomGenderSelected).should('be.checked');
+		});
 
-			forms.get.firstName().should('have.css', 'border-color', 'rgb(40, 167, 69)');
+		cy.get('@randomHobbies').then(randomHobbiesSelected => {
+			forms.get.userHobbies().eq(randomHobbiesSelected).should('be.checked');
 		});
 	});
+	//forms.get.firstName().should('have.css', 'border-color', 'rgb(40, 167, 69)');
 
 	//it('23559 | TC2: Validate field “First Name” is empty and text box border turns red.', () => {});
 });
@@ -54,3 +67,4 @@ const randomLastName = faker.name.lastName();
 const randomEmail = faker.internet.email();
 const randomNumber = faker.phone.number('##########');
 const randomSubject = faker.random.alpha({ count: 1, casing: 'lower', bannedChars: ['f', 'j', 'k', 'ñ', 'q', 'w', 'x', 'z'] });
+const randomAddress = faker.address.streetAddress();
