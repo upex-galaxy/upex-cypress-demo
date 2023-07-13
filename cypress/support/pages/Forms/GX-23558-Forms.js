@@ -8,6 +8,7 @@ class Forms {
 		userNumber: () => cy.get('#userNumber'),
 		userDateOfBirth: () => cy.get('#dateOfBirthInput'),
 		userSubjects: () => cy.get('#subjectsContainer'),
+		userSubjectsList: () => cy.get('.subjects-auto-complete__menu'),
 	};
 
 	firstName(randomName) {
@@ -40,7 +41,7 @@ class Forms {
 	}
 
 	userSubjects(randomSubject) {
-		randomSubject && this.get.userSubjects().type();
+		randomSubject && this.get.userSubjects().type(randomSubject);
 	}
 }
 export const forms = new Forms();
