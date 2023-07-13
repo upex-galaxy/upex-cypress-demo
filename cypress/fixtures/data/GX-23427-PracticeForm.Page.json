@@ -1,8 +1,5 @@
 {
-    "firstname": {
-        "valid": "John",
-        "null": ""
-    },
+    "firstname": "John",
     "lastname": "Doe",
     "email": {
         "valid": "valid_email@gmail.com",
@@ -13,8 +10,7 @@
                 "afterAtSign": "valid_email@",
                 "afterDot": "valid_email@gmail.c"
             },
-        "noDot": "valid_email@gmailcom",
-        "null": ""
+        "noDot": "valid_email@gmailcom"
         }
         
     },
