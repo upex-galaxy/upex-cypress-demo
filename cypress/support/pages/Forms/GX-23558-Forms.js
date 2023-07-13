@@ -11,8 +11,10 @@ class Forms {
 		userSubjectChoice: () => cy.get('#react-select-2-option-0'),
 		userHobbies: () => cy.get('#hobbiesWrapper [class=custom-control-input]'),
 		uploadPictureButton: () => cy.get('#uploadPicture'),
-		submitButton: () => cy.get('#submit'),
 		userAddress: () => cy.get('#currentAddress'),
+		userState: () => cy.get('#state'),
+		userCity: () => cy.get('#city'),
+		submitButton: () => cy.get('#submit'),
 	};
 
 	firstName(randomName) {
@@ -68,6 +70,9 @@ class Forms {
 		this.get.uploadPictureButton().selectFile('cypress/fixtures/images/upexlogo.png');
 	}
 
+	userCity() {
+		this.get.userCity().click();
+	}
 	userAddress(randomAddress) {
 		randomAddress && this.get.userAddress().type(randomAddress);
 	}
