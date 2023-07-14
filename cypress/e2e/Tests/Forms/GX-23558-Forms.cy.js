@@ -44,11 +44,13 @@ describe('US GX-23558 ✅ToolsQA | Forms | Practice Form', () => {
 		forms.userAddress(randomAddress);
 		forms.get.userAddress().should('have.value', randomAddress); //done
 
-		const dropdownState = forms.get.userState().click();
-		dropdownState.find('[class$=option]').then(options => {
-			const randomIndex = Cypress._.random(0, options.length - 2);
-			cy.wrap(options[randomIndex]).click({ force: true });
-		}); //asserts
+		forms.selectRandomState().then(randomSelectedState => {
+			cy.wrap(randomSelectedState).as('randomSelectState');
+		});
+
+		cy.get('@randomSelectState').then(randomSelectedState => {
+			forms.get.dropdownStateText().should('have.text', randomSelectedState); //assert
+		});
 
 		const dropdownCity = forms.get.userCity().click();
 		dropdownCity.find('[class$=option]').then(options => {

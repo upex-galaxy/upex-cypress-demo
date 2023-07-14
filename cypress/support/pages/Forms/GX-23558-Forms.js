@@ -13,6 +13,8 @@ class Forms {
 		uploadPictureButton: () => cy.get('#uploadPicture'),
 		userAddress: () => cy.get('#currentAddress'),
 		userState: () => cy.get('#state'),
+		dropdownOptions: () => cy.get('[class$=option]'),
+		dropdownStateText: () => cy.get('[class$=singleValue]'),
 		userCity: () => cy.get('#city'),
 		submitButton: () => cy.get('#submit'),
 	};
@@ -68,6 +70,26 @@ class Forms {
 
 	uploadPictureButton() {
 		this.get.uploadPictureButton().selectFile('cypress/fixtures/images/upexlogo.png');
+	}
+
+	selectRandomState() {
+		let stateText;
+		this.get.userState().click();
+		return this.get
+			.dropdownOptions()
+			.then(options => {
+				const randomIndex = Cypress._.random(0, options.length - 1);
+				this.get
+					.dropdownOptions()
+					.eq(randomIndex)
+					.then(nameSelectedOption => {
+						stateText = nameSelectedOption.text();
+					})
+					.click({ force: true });
+			})
+			.then(() => {
+				return stateText;
+			});
 	}
 
 	userCity() {
