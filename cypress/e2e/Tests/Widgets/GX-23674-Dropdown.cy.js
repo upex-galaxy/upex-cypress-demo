@@ -26,16 +26,17 @@ describe('US GX-23674 | TS: ✅ToolsQA | Widgets | Dropdown - Select Menu', () =
 		// Act
 		// Selecciona un valor aleatorio del dropdown del Old Style
 		const numRandom = Cypress._.random(0, 10);
-		cy.fixture('data/GX-23674-Dropdown').then(the => {});
-		cy.visit('/select-menu');
-		cy.get('#oldSelectMenu').select(numRandom);
-		cy.log(the[numRandom]);
-		cy.get('#oldSelectMenu')
-			.invoke('text')
-			.then(textColor => {
-				cy.log(textColor);
-				expect(textColor).to.contain(the[numRandom]);
-			});
+		cy.fixture('data/GX-23674-Dropdown').then(the => {
+			cy.visit('/select-menu');
+			cy.get('#oldSelectMenu').select(numRandom);
+			cy.log(the[numRandom]);
+			cy.get('#oldSelectMenu')
+				.invoke('text')
+				.then(textColor => {
+					cy.log(textColor);
+					expect(textColor).to.contain(the[numRandom]);
+				});
+		});
 		// get the text of the element in the 'random' position
 
 		// Assert
