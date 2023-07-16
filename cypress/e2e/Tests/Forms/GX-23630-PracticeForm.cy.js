@@ -30,7 +30,7 @@ describe('US GX-23630 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 		usuario.datos.Mobile().should('have.css', 'border-color', 'rgb(206, 212, 218)');
 	});
 
-	it.only('23631 | TC2: Validate complete the form ', () => {
+	it('23631 | TC2: Validate complete the form ', () => {
 		const mail = usuario.obtenerMailAleatorio(Mail);
 		usuario.FillForm(lastname, firstname, mail, phoneNumber, address, data.subject1);
 		const gender = usuario.datos.gender().eq(usuario.getRandomNumber(0, 2)).click();
@@ -57,6 +57,7 @@ describe('US GX-23630 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 			contents: Cypress.Buffer.from('Imagen'),
 			fileName: 'photo.jpg',
 		});
+
 		usuario.datos.dateOfBirth().click();
 		usuario.datos.month().select(usuario.getRandomNumber(0, 11));
 		usuario.datos.year().select(usuario.getRandomNumber(0, 100));
@@ -67,7 +68,6 @@ describe('US GX-23630 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 		usuario.datos.selectState().click();
 		usuario.datos.selectState2().eq(usuario.getRandomNumber(0, 3)).click({ force: true });
 		usuario.datos.selectCity().click();
-		
 
 		usuario.datos.submit().click();
 		if (mail === data.Email7) {
@@ -81,11 +81,8 @@ describe('US GX-23630 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 		usuario.datos.dateOfBirth().should('have.value', actualDate);
 	});
 
-	});
-	it('23631 | TC19: Validate if A popup appears with the information chosen when the data is submitted.', () => {
-		
-	});
-	
+	it('23631 | TC19: Validate if A popup appears with the information chosen when the data is submitted.', () => {});
+
 	it('23631 | TC21: Validate select a state and city', () => {
 		// Write your test case two here
 	});
