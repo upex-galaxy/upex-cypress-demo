@@ -4,7 +4,13 @@
 	"Email3": "m@2.",
 	"Email4": "@ncom",
 	"Email5": "x.com.ar",
+	"image": "fotopersonal.jpg",
+	"image2": "fotopersonal2.jpg",
 	"Email6": "x@co.es",
 	"Email7": "maria@gmail.com",
-	"Email8": "maria@"
+	"Email8": "maria@",
+	"dirArchivo": "cypress/fixtures/images/fotopersonal.jpg",
+	"subject1": "Mathematics",
+	"subject2": "Natural Science",
+	"subject3": "History"
 }

@@ -5,26 +5,32 @@ class Usuario {
 		Email: () => cy.get('#userEmail'),
 		Mobile: () => cy.get('#userNumber'),
 		dateOfBirth: () => cy.get('#dateOfBirthInput'),
-		subjectsContainer: () => cy.get('#subjectsContainer'),
+		subjectsContainer: () => cy.get('.css-1hwfws3').eq(0),
 		hobby: () => cy.get('.custom-control-label').parent(),
 		uploadPicture: () => cy.get('#uploadPicture'),
 		currentAddress: () => cy.get('#currentAddress'),
-		state: () => cy.get('#state'),
-		city: () => cy.get('#city'),
+		selectCity: () => cy.get('.css-1hwfws3').eq(2),
 		submit: () => cy.get('#submit'),
 		gender: () => cy.get('.custom-control-label').parent(),
+		day: () => cy.get('div.react-datepicker__day'),
+		week: () => cy.get('div.react-datepicker__week'),
+		year: () => cy.get('.react-datepicker__year-select'),
+		month: () => cy.get('.react-datepicker__month-select'),
+		selectState: () => cy.get('.css-1hwfws3').eq(1),
+		selectState2: () => cy.get('.css-1gibzzn').children(),
 	};
 
 	submit() {
 		this.datos.submit().click();
 	}
-	FillForm(lastname, firstname, email, mobile, date, address) {
+	FillForm(lastname, firstname, email, mobile, date, address, subject) {
 		this.datos.FirstName().type(firstname);
 		this.datos.LastName().type(lastname);
 		this.datos.Email().type(email);
 		this.datos.Mobile().type(mobile);
 		this.datos.dateOfBirth(date).click();
 		this.datos.currentAddress(address);
+		this.datos.subjectsContainer(subject);
 	}
 	getRandomNumber(min, max) {
 		return Cypress._.random(min, max);

@@ -1,17 +1,20 @@
 import data from '../../../fixtures/data/GX-23630-PracticeForm.json';
 import { removeLogs } from '@helper/RemoveLogs';
+import { format } from 'date-fns';
 removeLogs();
 import { usuario } from '@pages/Forms/GX-23630-PracticeForm';
-
 import { faker } from '@faker-js/faker';
 
 const firstname = faker.name.firstName();
 const lastname = faker.name.lastName();
 const phoneNumber = faker.phone.number('##########');
-const address = faker.address.streetAddress();
-const startDate = new Date('1920/01/01');
-const endDate = new Date('2023/01/01');
+const address = faker.address.direction();
+const randomDate = faker.date.past();
 const Mail = [data.Email1, data.Email3, data.Email5, data.Email7, data.Email8];
+const fileContent = 'fotopersonal.jpg';
+const filePath = 'C:UsersUsuarioDesktop\fotos us\fotopersonal.jpg';
+const currentDate = new Date();
+const actualDate = format(currentDate, 'dd MMM yyyy');
 
 describe('US GX-23630 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 	beforeEach(() => {
@@ -19,58 +22,70 @@ describe('US GX-23630 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 	});
 
 	it('23631 | TC1: Validate if every field are empty ', () => {
-		usuario.datos.submit(); // Write your test case one here
+		usuario.datos.submit();
+		usuario.datos.Email().should('have.css', 'border-color', 'rgb(206, 212, 218)');
+		usuario.datos.FirstName().should('have.css', 'border-color', 'rgb(206, 212, 218)');
+		usuario.datos.LastName().should('have.css', 'border-color', 'rgb(206, 212, 218)');
+		usuario.datos.gender().should('have.css', 'border-color', 'rgb(33, 37, 41)');
+		usuario.datos.Mobile().should('have.css', 'border-color', 'rgb(206, 212, 218)');
 	});
 
-	it.only('23631 | TC3: Validate complete the form ', () => {
-		usuario.FillForm(lastname, firstname, usuario.obtenerMailAleatorio(Mail), phoneNumber, address);
-		usuario.datos.gender().eq(usuario.getRandomNumber(0, 2)).click();
-		usuario.datos.hobby().eq(usuario.getRandomNumber(3, 5)).click();
+	it.only('23631 | TC2: Validate complete the form ', () => {
+		const mail = usuario.obtenerMailAleatorio(Mail);
+		usuario.FillForm(lastname, firstname, mail, phoneNumber, address, data.subject1);
+		const gender = usuario.datos.gender().eq(usuario.getRandomNumber(0, 2)).click();
 		usuario.datos.Mobile().invoke('val').should('have.length', 10);
+
+		if (gender === 1) {
+			usuario.datos.gender().should('contain', 'Female');
+		} else if (gender === 0) {
+			usuario.datos.gender().should('contain', 'Male');
+		} else {
+			usuario.datos.gender().should('contain', 'Other');
+		}
+		const hobby = usuario.datos.hobby().eq(usuario.getRandomNumber(3, 5)).click();
+		if (hobby === 1) {
+			usuario.datos.hobby().should('contain', 'Sports');
+		} else if (hobby === 0) {
+			usuario.datos.hobby().should('contain', 'Reading');
+		} else {
+			usuario.datos.hobby().should('contain', 'Music');
+		}
+
+		usuario.datos.uploadPicture().click();
+		usuario.datos.uploadPicture().selectFile({
+			contents: Cypress.Buffer.from('Imagen'),
+			fileName: 'photo.jpg',
+		});
+		usuario.datos.dateOfBirth().click();
+		usuario.datos.month().select(usuario.getRandomNumber(0, 11));
+		usuario.datos.year().select(usuario.getRandomNumber(0, 100));
+		usuario.datos.week().eq(usuario.getRandomNumber(0, 5));
+		usuario.datos.day().eq(usuario.getRandomNumber(0, 31)).click();
+		expect(usuario.datos.dateOfBirth()).not.to.equal(currentDate);
+
+		usuario.datos.selectState().click();
+		usuario.datos.selectState2().eq(usuario.getRandomNumber(0, 3)).click({ force: true });
+		usuario.datos.selectCity().click();
+		
+
 		usuario.datos.submit().click();
-	});
-	// usuario.dato}s.submit().click();
-
-	it('23631 | TC5: Validate if field email is invalid, does not contain “@“ ', () => {
-		usuario.FillForm(lastname, firstname, data.Email5, phoneNumber, address);
-
-		usuario.datos.Mobile().invoke('val').should('have.length', 10);
-		usuario.datos.submit().click();
-	});
-	it('23631 | TC6: Validate if field email is invalid, does not contain (minimum) 1 alphanumeric character before “@”', () => {
-		usuario.FillForm(lastname, firstname, data.Email8, phoneNumber, address);
-	});
-	it.only('23631 | TC7: Validate if field email is invalid, does not contain “.” after 1 alphanumeric character after “@”.', () => {
-		usuario.FillForm(lastname, firstname, data.Email3, phoneNumber, address);
-	});
-	it('23631 | TC8: Validate if field email is invalid, does not contain  (minimum) 2 alphanumeric characters after “.”', () => {
-		usuario.FillForm(lastname, firstname, data.Email1, phoneNumber, address);
+		if (mail === data.Email7) {
+			usuario.datos.Email().should('have.css', 'border-color', 'rgb(40, 167, 69)');
+		} else {
+			usuario.datos.Email().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+		}
 	});
 
-	it.only('23631 | TC10: Validate 3 Radio Buttons must have Male, Female, Other labels.', () => {
-		usuario.datos.genderFemale();
-		usuario.datos.Female().should('contain', 'Female');
-		usuario.datos.Male().should('contain', 'Male');
-		usuario.datos.Other().should('contain', 'Other');
+	it('23631 | TC14: Validate if field date picker has the current date as a default value.', () => {
+		usuario.datos.dateOfBirth().should('have.value', actualDate);
 	});
 
-	it('23631 | TC14: Validate if field date picker has the current date as a default value.', () => {});
-
-	it('23631 | TC16: Validate if field subjects is empty.', () => {
-		// Write your test case two here
-	});
-	it('23631 | TC17: Validate if field subjects is filled.', () => {
-		// Write your test case two here
-	});
-	it('23631 | TC18: Validate if the 3 hobbies Check Boxes have the following label: Sports, Reading, Music.', () => {
-		// Write your test case two here
 	});
 	it('23631 | TC19: Validate if A popup appears with the information chosen when the data is submitted.', () => {
-		// Write your test case two here
+		
 	});
-	it('23631 | TC20: Validate upload a picture.', () => {
-		// Write your test case two here
-	});
+	
 	it('23631 | TC21: Validate select a state and city', () => {
 		// Write your test case two here
 	});
