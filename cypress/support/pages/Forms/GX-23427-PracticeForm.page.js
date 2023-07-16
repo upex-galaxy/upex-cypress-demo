@@ -17,20 +17,21 @@ class Form {
 	};
 
 	//actions - methods
-	typeFirstname(randomFirstname) {
-		this.get.firstnameInput.type(randomFirstname);
+	typeFirstname(name) {
+		this.get.firstnameInput.type(name);
 	}
 
-	typeLastname(randomLastname) {
-		this.get.lastnameInput.type(randomLastname);
+	typeLastname(name) {
+		this.get.lastnameInput.type(name);
 	}
 
-	typeEmail(randomEmail) {
-		this.get.emailInput.type(randomEmail);
+	typeEmail(email) {
+		this.get.emailInput.type(email);
 	}
 
+	//selecciona un género de manera aleatoria
 	selectGender() {
-		this.get.genderButton.then($genderElements => {
+		this.get.genderButton.click().then($genderElements => {
 			const maxIndex = $genderElements.length - 1;
 			const position = () => Math.floor(Math.random * maxIndex);
 			cy.wrap($genderElements).eq(position).click();
@@ -41,12 +42,26 @@ class Form {
 		this.get.mobilenumberInput.type(number);
 	}
 
-	selectBirthdatePicker() {
-		this.get.birthdatePicker;
+	//Nos da la fecha predeterminada del date picker
+	getDefaultDate() {
+		this.get.birthdatePicker.invoke('val').then(date => date.split(' ').join('-'));
 	}
 
 	typeSubjects(text) {
 		this.get.subjectsInput.type(text);
+	}
+
+	//marca cualquier casilla de hobbie
+	checkTheHobbie() {
+		this.get.hobbieCheckbox.then($box => {
+			const maxIndex = $box.length - 1;
+			const position = () => Math.floor(Math.random * maxIndex);
+			cy.wrap($box).eq(position).check({ force: true });
+		});
+	}
+
+	clickPictureButton() {
+		this.get.pictureButton.click();
 	}
 
 	typeAddress(text) {
@@ -59,19 +74,6 @@ class Form {
 
 	typeState(text) {
 		this.get.stateInput.type(text);
-	}
-
-	//En progreso de construcción
-	checkTheHobbie() {
-		this.get.hobbieCheckbox.then($box => {
-			const maxIndex = $box.length - 1;
-			const position = () => Math.floor(Math.random * maxIndex);
-			cy.wrap($box).eq(position).check();
-		});
-	}
-
-	clickPictureButton() {
-		this.get.pictureButton.click();
 	}
 
 	submitForm() {
