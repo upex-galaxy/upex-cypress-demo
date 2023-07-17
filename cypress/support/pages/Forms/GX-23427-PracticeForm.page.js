@@ -2,9 +2,9 @@ class Form {
 	//getters
 	get = {
 		firstnameInput: () => cy.get('#firstName'),
-		lastnameInput: () => cy.get('[#lastName'),
+		lastnameInput: () => cy.get('#lastName'),
 		emailInput: () => cy.get('#userEmail'),
-		genderButton: () => cy.get('[name*="gender"]'), //arreglo de tres posiciones -> male - female - other
+		genderButton: () => cy.get('[id*="gender-radio"]'), //arreglo de tres posiciones -> male - female - other
 		mobilenumberInput: () => cy.get('#userNumber'),
 		birthdatePicker: () => cy.get('#dateOfBirthInput'),
 		subjectsInput: () => cy.get('#subjectsInput'),
@@ -18,42 +18,45 @@ class Form {
 
 	//actions - methods
 	typeFirstname(name) {
-		this.get.firstnameInput.type(name);
+		this.get.firstnameInput().type(name);
 	}
 
 	typeLastname(name) {
-		this.get.lastnameInput.type(name);
+		this.get.lastnameInput().type(name);
 	}
 
 	typeEmail(email) {
-		this.get.emailInput.type(email);
+		this.get.emailInput().type(email);
 	}
 
 	//selecciona un género de manera aleatoria
 	selectGender() {
-		this.get.genderButton.click().then($genderElements => {
-			const maxIndex = $genderElements.length - 1;
-			const position = () => Math.floor(Math.random * maxIndex);
-			cy.wrap($genderElements).eq(position).click();
+		this.get.genderButton().then(genderElements => {
+			const maxIndex = genderElements.length - 1;
+			const position = Math.floor(Math.random() * maxIndex);
+			cy.wrap(genderElements).eq(position).click({ force: true });
 		});
 	}
 
 	typeMobileNumber(number) {
-		this.get.mobilenumberInput.type(number);
+		this.get.mobilenumberInput().type(number);
 	}
 
 	//Nos da la fecha predeterminada del date picker
 	getDefaultDate() {
-		this.get.birthdatePicker.invoke('val').then(date => date.split(' ').join('-'));
+		this.get
+			.birthdatePicker()
+			.invoke('val')
+			.then(date => date.split(' ').join('-'));
 	}
 
 	typeSubjects(text) {
-		this.get.subjectsInput.type(text);
+		this.get.subjectsInput().type(text);
 	}
 
 	//marca cualquier casilla de hobbie
 	checkTheHobbie() {
-		this.get.hobbieCheckbox.then($box => {
+		this.get.hobbieCheckbox().then($box => {
 			const maxIndex = $box.length - 1;
 			const position = () => Math.floor(Math.random * maxIndex);
 			cy.wrap($box).eq(position).check({ force: true });
@@ -61,23 +64,23 @@ class Form {
 	}
 
 	clickPictureButton() {
-		this.get.pictureButton.click();
+		this.get.pictureButton().click();
 	}
 
 	typeAddress(text) {
-		this.get.addressInput.type(text);
+		this.get.addressInput().type(text);
 	}
 
 	typeCity(text) {
-		this.get.cityInput.type(text);
+		this.get.cityInput().type(text);
 	}
 
 	typeState(text) {
-		this.get.stateInput.type(text);
+		this.get.stateInput().type(text);
 	}
 
 	submitForm() {
-		this.get.submitButton.click();
+		this.get.submitButton().click();
 	}
 }
 

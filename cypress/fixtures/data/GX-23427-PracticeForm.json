@@ -14,6 +14,7 @@
         }
         
     },
+    "phone": "1123456789",
     "subjects": "only valid data",
     "currentAddress": "only valid data"
 }

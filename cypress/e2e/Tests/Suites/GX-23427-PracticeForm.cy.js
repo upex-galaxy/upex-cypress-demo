@@ -1,19 +1,23 @@
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
-//23427-PracticeForm.Page.json
-import { firstname, lastname, email, noDot, subjects, currentAddress } from '/L1-cypex-demo/cypress/fixtures/data/GX-23427-PracticeForm.json';
-import { form } from '/L1-cypex-demo/cypress/support/pages/Forms/GX-23427-PracticeForm.page.js';
 import dayjs from 'dayjs';
-const { practiceForm } = Cypress.env('endpoint');
+import { form } from '@pages/Forms/GX-23427-PracticeForm.page';
 
 describe('US GX-23427 | ToolsQA | Forms | Practice Form', () => {
 	beforeEach('PRC: Usuario debe ubicarse en Practice Form', () => {
-		cy.visit('/');
-		cy.url().should('contain', practiceForm);
+		cy.visit('https://demoqa.com/automation-practice-form');
+		cy.url().should('contain', 'automation-practice-form');
 	});
 
-	it('23428 | TC01: Validar enviar formulario al ingresar datos válidos requeridos', () => {
-		cy.get();
+	it.only('23428 | TC01: Validar enviar formulario al ingresar datos válidos requeridos', () => {
+		cy.fixture('data/GX-23427-PracticeForm.json').then(the => {
+			form.typeFirstname(the.firstname);
+			form.typeLastname(the.lastname);
+			form.selectGender();
+			form.typeMobileNumber(the.phone);
+			form.submitForm();
+			cy.get('.modal-content').should('be.visible');
+		});
 	});
 
 	it('23428 | TC02: Validar NO mostrar pop-up con información al enviar formulario con datos insuficientes', () => {
@@ -28,7 +32,7 @@ describe('US GX-23427 | ToolsQA | Forms | Practice Form', () => {
 		cy.get();
 	});
 
-	it('23428 | TC05: Validar NO enviar formulario al ingresar email sin formato, nombres null, teléfono menor a diez dígitos y género no seleccionado', () => {
+	it('23428 | TC05: Validar NO enviar formulario al ingresar email sin formato, nombres null, teléfono menor a diez dígitos o género no seleccionado', () => {
 		cy.get();
 	});
 
