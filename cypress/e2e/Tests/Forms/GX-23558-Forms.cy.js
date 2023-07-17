@@ -83,7 +83,7 @@ describe('US GX-23558 ✅ToolsQA | Forms | Practice Form', () => {
 		forms.get.lastName().should('have.css', 'border-color', 'rgb(220, 53, 69)'); //assert from last name
 	});
 
-	it.only('23559 | TC3: Validate that student enters invalid data in fields “email” and “Mobile” and border turns red. ', () => {
+	it('23559 | TC3: Validate that student enters invalid data in fields “email” and “Mobile” and border turns red. ', () => {
 		forms.invalidEmail();
 
 		forms.invalidMobile(randomInvalidMobile);
