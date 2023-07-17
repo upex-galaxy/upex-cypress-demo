@@ -52,13 +52,15 @@ describe('US GX-23558 ✅ToolsQA | Forms | Practice Form', () => {
 			forms.get.dropdownStateText().should('have.text', randomSelectedState); //assert
 		});
 
-		const dropdownCity = forms.get.userCity().click();
-		dropdownCity.find('[class$=option]').then(options => {
-			const randomIndex = Cypress._.random(0, options.length - 1);
-			cy.wrap(options[randomIndex]).click({ force: true });
-		}); //asserts
+		forms.selectRandomCity().then(randomSelectedCity => {
+			cy.wrap(randomSelectedCity).as('randomSelectCity');
+		});
 
-		forms.get.submitButton().click();
+		cy.get('@randomSelectCity').then(randomSelectedCity => {
+			forms.get.dropdownCityText().should('have.text', randomSelectedCity); //assert
+		});
+
+		forms.get.submitButton().click(); //the test finishes here
 
 		// some asserts from here
 		cy.get('@randomGender').then(randomGenderSelected => {
@@ -69,11 +71,43 @@ describe('US GX-23558 ✅ToolsQA | Forms | Practice Form', () => {
 			forms.get.userHobbies().eq(randomHobbiesSelected).should('be.checked');
 		});
 	});
-	//forms.get.firstName().should('have.css', 'border-color', 'rgb(40, 167, 69)');
 
-	//it('23559 | TC2: Validate field “First Name” is empty and text box border turns red.', () => {});
+	it('3559|TC2: Validate student leaves fields “First Name” and “Last Name” empty, and text box border turns red after clicking  “submit” button.', () => {
+		forms.firstName();
+
+		forms.lastName();
+
+		forms.get.submitButton().click();
+
+		forms.get.firstName().should('have.css', 'border-color', 'rgb(220, 53, 69)'); //assert from first name
+		forms.get.lastName().should('have.css', 'border-color', 'rgb(220, 53, 69)'); //assert from last name
+	});
+
+	it.only('23559 | TC3: Validate that student enters invalid data in fields “email” and “Mobile” and border turns red. ', () => {
+		forms.invalidEmail();
+
+		forms.invalidMobile(randomInvalidMobile);
+
+		forms.get.submitButton().click();
+
+		forms.get.userEmail().should('have.css', 'border-color', 'rgb(220, 53, 69)'); //assert from email
+		forms.get.userNumber().should('have.css', 'border-color', 'rgb(220, 53, 69)'); //assert from mobile
+	});
+
+	it('23559 | TC4: Validate that no message is displayed after student leaves fields “email”, “subjects” and “current address” with empty data.', () => {
+		forms.userEmail();
+
+		forms.userSubjects();
+
+		forms.userAddress();
+
+		forms.get.submitButton().click();
+
+		forms.get.userEmail().should('have.value', '');
+		forms.get.userSubjects().should('not.have.value');
+		forms.get.userAddress().should('not.have.value');
+	});
 });
-//cy.get('#checkbox').eq(elementoRandom).check(); o click() .should havecss 40,167,69
 
 const randomName = faker.name.firstName();
 const randomLastName = faker.name.lastName();
@@ -81,6 +115,7 @@ const randomEmail = faker.internet.email();
 const randomNumber = faker.phone.number('##########');
 const randomSubject = faker.random.alpha({ count: 1, casing: 'lower', bannedChars: ['f', 'j', 'k', 'ñ', 'q', 'w', 'x', 'z'] });
 const randomAddress = faker.address.streetAddress();
+const randomInvalidMobile = faker.random.words(1);
 
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();

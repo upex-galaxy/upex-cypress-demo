@@ -13,9 +13,11 @@ class Forms {
 		uploadPictureButton: () => cy.get('#uploadPicture'),
 		userAddress: () => cy.get('#currentAddress'),
 		userState: () => cy.get('#state'),
-		dropdownOptions: () => cy.get('[class$=option]'),
+		dropdownStateOptions: () => cy.get('[class$=option]'),
 		dropdownStateText: () => cy.get('[class$=singleValue]'),
 		userCity: () => cy.get('#city'),
+		dropdownCityOptions: () => cy.get('[class$=option]'),
+		dropdownCityText: () => cy.get('[class$=singleValue]').eq(1),
 		submitButton: () => cy.get('#submit'),
 	};
 
@@ -76,11 +78,11 @@ class Forms {
 		let stateText;
 		this.get.userState().click();
 		return this.get
-			.dropdownOptions()
+			.dropdownStateOptions()
 			.then(options => {
 				const randomIndex = Cypress._.random(0, options.length - 1);
 				this.get
-					.dropdownOptions()
+					.dropdownStateOptions()
 					.eq(randomIndex)
 					.then(nameSelectedOption => {
 						stateText = nameSelectedOption.text();
@@ -92,11 +94,39 @@ class Forms {
 			});
 	}
 
+	selectRandomCity() {
+		let cityText;
+		this.get.userCity().click();
+		return this.get
+			.dropdownCityOptions()
+			.then(options => {
+				const randomIndex = Cypress._.random(0, options.lenght - 1);
+				this.get
+					.dropdownCityOptions()
+					.eq(randomIndex)
+					.then(nameSelectedOption => {
+						cityText = nameSelectedOption.text();
+					})
+					.click({ force: true });
+			})
+			.then(() => {
+				return cityText;
+			});
+	}
+
 	userCity() {
 		this.get.userCity().click();
 	}
 	userAddress(randomAddress) {
 		randomAddress && this.get.userAddress().type(randomAddress);
+	}
+
+	invalidEmail() {
+		this.get.userEmail().type('aaa.com');
+	}
+
+	invalidMobile(randomInvalidMobile) {
+		randomInvalidMobile && this.get.userNumber().type(randomInvalidMobile);
 	}
 }
 export const forms = new Forms();
