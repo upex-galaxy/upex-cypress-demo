@@ -1,9 +1,8 @@
 import data from '../../../fixtures/data/GX-23630-PracticeForm.json';
 import { removeLogs } from '@helper/RemoveLogs';
-import { format } from 'date-fns';
-removeLogs();
 import { usuario } from '@pages/Forms/GX-23630-PracticeForm';
 import { faker } from '@faker-js/faker';
+import { format } from 'date-fns';
 
 const firstname = faker.name.firstName();
 const lastname = faker.name.lastName();
@@ -147,3 +146,4 @@ describe('US GX-23630 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 		usuario.datos.dateOfBirth().should('have.value', actualDate);
 	});
 });
+removeLogs();
