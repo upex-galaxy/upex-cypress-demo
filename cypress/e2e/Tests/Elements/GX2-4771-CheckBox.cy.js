@@ -24,4 +24,32 @@ describe('GX2-4771-✅-tools-qa-elements-check-box', () => {
 			Selected.get.FolderExpanded().should('have.length', the.Folder.MinFolderOpen);
 		});
 	});
+
+	it('4772 | TC3: Validar el funcionamiento del Botón “Checkbox” que al seleccionar "Home" selecciona todos los folders', () => {
+		cy.fixture('data/GX2-4771-CheckBox').then(the => {
+			Selected.SelectedCheckbox(0);
+			Selected.get.CheckedBox().should('be.checked');
+			Selected.get
+				.SelectedResult()
+				.invoke('text')
+				.then(Result => {
+					cy.log(Result);
+					expect(Result.toLowerCase()).to.have.contain(the.OptionFolder.Home);
+				});
+		});
+	});
+
+	it('4772 | TC4: Validar el funcionamiento del Botón “Checkbox” seleccionar un folder se muestre su contenido dentro de result', () => {
+		//Precondition the whole folder is expanded
+		Selected.get.ButtonExpandAll().click();
+		// Use random selected
+		let c = Selected.SelectedCheckboxRandom();
+		Selected.get
+			.SelectedResult()
+			.invoke('text')
+			.then(Result => {
+				cy.log(Result);
+				expect(Result.toLowerCase()).to.have.contain(Selected.ResultSpect(c));
+			});
+	});
 });
