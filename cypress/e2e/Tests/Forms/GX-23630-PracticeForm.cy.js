@@ -35,17 +35,13 @@ describe('US GX-23630 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 
 		usuario.FillForm(lastname, firstname, mail, movile);
 		usuario.datos.Mobile().invoke('val').should('have.length', 10);
-		usuario.datos.selectSubj().type(subject);
+
+		usuario.datos.selectSubj().type(data.Pref1);
 		usuario.datos.seleccionarSub().click();
-		usuario.datos.selectSubj().type(subject2);
-		if (subject2 === subject) {
-			const subject2 = usuario.obtenerAleatorio(subjPref);
-			usuario.datos.seleccionarSub().click();
-			usuario.datos.selectSubj().type(subject2);
-		} else {
-			usuario.datos.seleccionarSub().click();
-			usuario.datos.selectSubj().type(subject2);
-		}
+		usuario.datos.selectSubj().type(data.Pref2);
+		usuario.datos.seleccionarSub().click();
+		usuario.datos.selectSubj().type(data.Pref3);
+		usuario.datos.seleccionarSub().click();
 
 		usuario.datos.currentAddress().type(address);
 		const gender = usuario.datos.gender().eq(usuario.getRandomNumber(0, 2)).click();
@@ -103,8 +99,7 @@ describe('US GX-23630 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 
 	it('23631 | TC3: Validate complete the form with invalid data ', () => {
 		const mail = usuario.obtenerAleatorio(Mail);
-		const subject = usuario.obtenerAleatorio(subjPref);
-		const subject2 = usuario.obtenerAleatorio(subjPref);
+
 		usuario.FillForm(lastname, firstname, mail, movile);
 		const gender = usuario.datos.gender().eq(usuario.getRandomNumber(0, 2)).click();
 		usuario.datos.Mobile().invoke('val').should('have.length', 10);
@@ -128,17 +123,12 @@ describe('US GX-23630 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 			contents: Cypress.Buffer.from('Imagen'),
 			fileName: 'photo.jpg',
 		});
-		usuario.datos.selectSubj().type(subject);
+		usuario.datos.selectSubj().type(data.Pref1);
 		usuario.datos.seleccionarSub().click();
-		usuario.datos.selectSubj().type(subject2);
-		if (subject2 === subject) {
-			const subject2 = usuario.obtenerAleatorio(subjPref);
-			usuario.datos.seleccionarSub().click();
-			usuario.datos.selectSubj().type(subject2);
-		} else {
-			usuario.datos.seleccionarSub().click();
-			usuario.datos.selectSubj().type(subject2);
-		}
+		usuario.datos.selectSubj().type(data.Pref2);
+		usuario.datos.seleccionarSub().click();
+		usuario.datos.selectSubj().type(data.Pref3);
+		usuario.datos.seleccionarSub().click();
 
 		usuario.datos.dateOfBirth().click();
 		usuario.datos.month().select(usuario.getRandomNumber(0, 11));
