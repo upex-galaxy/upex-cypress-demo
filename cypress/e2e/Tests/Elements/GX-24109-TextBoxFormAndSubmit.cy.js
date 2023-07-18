@@ -14,9 +14,9 @@ describe(' GX-24109 | ✅ToolsQA | Elements | Text Box: Fill form and Submit', (
 
 	it('GX-24109 |TC2: Validar que al estar los campos vacíos para “Nombre Completo”, “Dirección Actual” y “Dirección Permanente” , no se muestre ningún mensaje de registro después del envío.', () => {
 		cy.fixture('data/GX-24109-TextBoxForm').then(the => {
-			cy.get(the.FullName.input).type(the.FullName.data.vacio); //campo nombre completo vacio
-			cy.get(the.CurrentAddress.input).type(the.CurrentAddress.data.vacio); //campo direccion actual  vacio
-			cy.get(the.PermanentAddress.input).type(the.PermanentAddress.data.vacio); //campo permanente actual  vacio
+			cy.get(the.FullName.input).should('be.empty'); //campo nombre completo vacio
+			cy.get(the.CurrentAddress.input).should('be.empty'); //campo direccion actual  vacio
+			cy.get(the.PermanentAddress.input).should('be.empty'); //campo permanente actual  vacio
 			cy.get(the.SubmitButton).click(); //click en boton
 		});
 	});
@@ -28,10 +28,12 @@ describe(' GX-24109 | ✅ToolsQA | Elements | Text Box: Fill form and Submit', (
 		});
 	});
 
-	it('GX-24109 |  TC4: Validar que el campo "Correo electrónico" sea inválido sino contiene @.', () => {
+	it.only('GX-24109 |  TC4: Validar que el campo "Correo electrónico" sea inválido sino contiene @.', () => {
 		cy.fixture('data/GX-24109-TextBoxForm').then(the => {
 			cy.get(the.Email.input).type(the.Email.data.invalid1); //no contiene @.
 			cy.get(the.SubmitButton).click(); //click en boton
+			cy.get(the.Email.input).should('have.css', 'border', '0.740741px solid rgb(255, 0, 0)');
+			cy.get(the.Email.input).should('have.class', 'field-error');
 		});
 	});
 
@@ -39,6 +41,8 @@ describe(' GX-24109 | ✅ToolsQA | Elements | Text Box: Fill form and Submit', (
 		cy.fixture('data/GX-24109-TextBoxForm').then(the => {
 			cy.get(the.Email.input).type(the.Email.data.invalid2); //no contiene (mínimo) 1 carácter alfanumérico antes de “@” .
 			cy.get(the.SubmitButton).click(); //click en boton
+			cy.get(the.Email.input).should('have.css', 'border', '0.740741px solid rgb(255, 0, 0)');
+			cy.get(the.Email.input).should('have.class', 'field-error');
 		});
 	});
 
@@ -46,6 +50,8 @@ describe(' GX-24109 | ✅ToolsQA | Elements | Text Box: Fill form and Submit', (
 		cy.fixture('data/GX-24109-TextBoxForm').then(the => {
 			cy.get(the.Email.input).type(the.Email.data.invalid3); //no contiene "." después: 1 carácter alfanumérico después de “@”.
 			cy.get(the.SubmitButton).click(); //click en boton
+			cy.get(the.Email.input).should('have.css', 'border', '0.740741px solid rgb(255, 0, 0)');
+			cy.get(the.Email.input).should('have.class', 'field-error');
 		});
 	});
 
@@ -53,6 +59,8 @@ describe(' GX-24109 | ✅ToolsQA | Elements | Text Box: Fill form and Submit', (
 		cy.fixture('data/GX-24109-TextBoxForm').then(the => {
 			cy.get(the.Email.input).type(the.Email.data.invalid4); //no contiene (mínimo) 2 caracteres alfanuméricos después de “.”
 			cy.get(the.SubmitButton).click(); //click en boton
+			cy.get(the.Email.input).should('have.css', 'border', '0.740741px solid rgb(255, 0, 0)');
+			cy.get(the.Email.input).should('have.class', 'field-error');
 		});
 	});
 });

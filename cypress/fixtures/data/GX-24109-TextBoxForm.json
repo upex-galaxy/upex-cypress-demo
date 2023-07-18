@@ -3,7 +3,7 @@
 		"input": "#userName",
 		"data": {
 			"valid": "Natalia Pedraza",
-			"vacio": " "
+			"vacio": ""
 		}
 	},
 
@@ -15,7 +15,7 @@
 			"invalid2": "@gmail.com",
 			"invalid3": "natipedraza22@",
 			"invalid4": "natipedraza22@gmail.",
-			"vacio": " "
+			"vacio": ""
 		}
 	},
 
@@ -23,7 +23,7 @@
 		"input": "#currentAddress",
 		"data": {
 			"valid": "Barcelona",
-			"vacio": " "
+			"vacio": ""
 		}
 	},
 
@@ -31,7 +31,7 @@
 		"input": "#permanentAddress",
 		"data": {
 			"valid": "España",
-			"vacio": " "
+			"vacio": ""
 		}
 	},
 
