@@ -38,7 +38,6 @@ describe('US GX-23674 | TS: ✅ToolsQA | Widgets | Dropdown - Select Menu', () =
 				});
 		});
 		// get the text of the element in the 'random' position
-
 		// Assert
 		// El valor seleccionado aparece correctamente en el selector
 	});
@@ -50,21 +49,33 @@ describe('US GX-23674 | TS: ✅ToolsQA | Widgets | Dropdown - Select Menu', () =
 		cy.get('#react-select-4-option-2').click();
 		cy.get('#react-select-4-option-3').click();
 	});
-	it.only('23674 |TC5: Validate select random options in Multiselect dropdown', () => {
-		const numRandom = Cypress._.random(0, 4);
+
+	it('23674 |TC5: Validate select random options in Multiselect dropdown', () => {
+		const numRandom = Cypress._.random(0, 3);
 		cy.fixture('data/GX-23674-Dropdown').then(jsonFile => {
-			cy.get('#oldSelectMenu').select(numRandom);
-			cy.log(jsonFile.colors2[numRandom]);
-			cy.get('#oldSelectMenu')
+			cy.get('[class=" css-yk16xz-control"]').eq(2).click();
+
+			cy.get('[class=" css-11unzgr"]').children().eq(numRandom).click();
+
+			cy.get('[class="css-1rhbuit-multiValue"]')
 				.invoke('text')
-				.then(textColor => {
-					cy.log(textColor);
-					expect(textColor).to.contain(jsonFile.colors2[numRandom]);
+				.then(textColor2 => {
+					expect(textColor2).to.contain(jsonFile.Colors2[numRandom]);
 				});
 		});
 	});
-	it('23674 |TC6:');
-});
 
+	it('23674 |TC6: Validate select random options in Standard multi select ', () => {
+		const numRandom = Cypress._.random(0, 3);
+		cy.fixture('data/GX-23674-Dropdown').then(jsonFile => {
+			cy.get('#cars').select(numRandom);
+			cy.get('#cars')
+				.invoke('text')
+				.then(textCar => {
+					expect(textCar).to.contain(jsonFile.cars[numRandom]);
+				});
+		});
+	});
+});
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
