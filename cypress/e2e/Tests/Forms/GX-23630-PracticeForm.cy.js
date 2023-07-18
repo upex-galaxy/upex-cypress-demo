@@ -12,7 +12,6 @@ const address = faker.address.streetAddress();
 const Mail = [data.Email1, data.Email3, data.Email5, data.Email8];
 const currentDate = new Date();
 const actualDate = format(currentDate, 'dd MMM yyyy');
-const subjPref = [data.Pref1, data.Pref2, data.Pref3, data.Pref4, data.Pref5];
 
 describe('US GX-23630 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 	beforeEach(() => {
@@ -30,8 +29,6 @@ describe('US GX-23630 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 
 	it('23631 | TC2: Validate complete the form with valid data', () => {
 		const mail = data.Email7;
-		const subject = usuario.obtenerAleatorio(subjPref);
-		const subject2 = usuario.obtenerAleatorio(subjPref);
 
 		usuario.FillForm(lastname, firstname, mail, movile);
 		usuario.datos.Mobile().invoke('val').should('have.length', 10);
