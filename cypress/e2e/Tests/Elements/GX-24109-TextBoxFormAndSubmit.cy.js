@@ -28,11 +28,11 @@ describe(' GX-24109 | ✅ToolsQA | Elements | Text Box: Fill form and Submit', (
 		});
 	});
 
-	it.only('GX-24109 |  TC4: Validar que el campo "Correo electrónico" sea inválido sino contiene @.', () => {
+	it('GX-24109 |  TC4: Validar que el campo "Correo electrónico" sea inválido sino contiene @.', () => {
 		cy.fixture('data/GX-24109-TextBoxForm').then(the => {
 			cy.get(the.Email.input).type(the.Email.data.invalid1); //no contiene @.
 			cy.get(the.SubmitButton).click(); //click en boton
-			cy.get(the.Email.input).should('have.css', 'border', '0.740741px solid rgb(255, 0, 0)');
+			cy.get(the.Email.input).should('have.css', 'border', '1px solid rgb(255, 0, 0)');
 			cy.get(the.Email.input).should('have.class', 'field-error');
 		});
 	});
@@ -41,7 +41,7 @@ describe(' GX-24109 | ✅ToolsQA | Elements | Text Box: Fill form and Submit', (
 		cy.fixture('data/GX-24109-TextBoxForm').then(the => {
 			cy.get(the.Email.input).type(the.Email.data.invalid2); //no contiene (mínimo) 1 carácter alfanumérico antes de “@” .
 			cy.get(the.SubmitButton).click(); //click en boton
-			cy.get(the.Email.input).should('have.css', 'border', '0.740741px solid rgb(255, 0, 0)');
+			cy.get(the.Email.input).should('have.css', 'border', '1px solid rgb(255, 0, 0)');
 			cy.get(the.Email.input).should('have.class', 'field-error');
 		});
 	});
@@ -50,7 +50,7 @@ describe(' GX-24109 | ✅ToolsQA | Elements | Text Box: Fill form and Submit', (
 		cy.fixture('data/GX-24109-TextBoxForm').then(the => {
 			cy.get(the.Email.input).type(the.Email.data.invalid3); //no contiene "." después: 1 carácter alfanumérico después de “@”.
 			cy.get(the.SubmitButton).click(); //click en boton
-			cy.get(the.Email.input).should('have.css', 'border', '0.740741px solid rgb(255, 0, 0)');
+			cy.get(the.Email.input).should('have.css', 'border', '1px solid rgb(255, 0, 0)');
 			cy.get(the.Email.input).should('have.class', 'field-error');
 		});
 	});
@@ -59,7 +59,7 @@ describe(' GX-24109 | ✅ToolsQA | Elements | Text Box: Fill form and Submit', (
 		cy.fixture('data/GX-24109-TextBoxForm').then(the => {
 			cy.get(the.Email.input).type(the.Email.data.invalid4); //no contiene (mínimo) 2 caracteres alfanuméricos después de “.”
 			cy.get(the.SubmitButton).click(); //click en boton
-			cy.get(the.Email.input).should('have.css', 'border', '0.740741px solid rgb(255, 0, 0)');
+			cy.get(the.Email.input).should('have.css', 'border', '1px solid rgb(255, 0, 0)');
 			cy.get(the.Email.input).should('have.class', 'field-error');
 		});
 	});
