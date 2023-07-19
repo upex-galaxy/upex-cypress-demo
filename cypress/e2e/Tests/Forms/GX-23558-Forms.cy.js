@@ -59,7 +59,7 @@ describe('US GX-23558 ✅ToolsQA | Forms | Practice Form', () => {
 		});
 	});
 
-	it('3559|TC2: Validate student leaves fields “First Name” and “Last Name” empty, and text box border turns red after clicking  “submit” button.', () => {
+	it('23559 | TC2: Validate student leaves fields “First Name” and “Last Name” empty, and text box border turns red after clicking  “submit” button.', () => {
 		forms.firstName();
 		forms.lastName();
 		forms.get.submitButton().click();
