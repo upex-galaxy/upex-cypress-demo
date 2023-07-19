@@ -11,12 +11,12 @@ const Mail = [data.Email1, data.Email3, data.Email5, data.Email8];
 const currentDate = new Date('dd MMM yyyy');
 //const actualDate = format(currentDate, );
 
-describe('US GX-23690 | TS: ✅ToolsQA | Forms | Practice Form', () => {
+describe('US GX-23698 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 	beforeEach(() => {
 		cy.visit('https://demoqa.com/automation-practice-form');
 	});
 
-	it('23691 | TC1: Validate if every field are empty ', () => {
+	it('23699 | TC1: Validate if every field are empty ', () => {
 		usuario.datos.submit();
 		usuario.datos.Email().should('have.css', 'border-color', 'rgb(206, 212, 218)');
 		usuario.datos.FirstName().should('have.css', 'border-color', 'rgb(206, 212, 218)');
@@ -25,7 +25,7 @@ describe('US GX-23690 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 		usuario.datos.Mobile().should('have.css', 'border-color', 'rgb(206, 212, 218)');
 	});
 
-	it('23691 | TC2: Validate complete the form with valid data', () => {
+	it('23699 | TC2: Validate complete the form with valid data', () => {
 		const mail = data.Email7;
 
 		usuario.FillForm(lastname, firstname, mail, movile);
@@ -92,7 +92,7 @@ describe('US GX-23690 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 		usuario.datos.contenidoFormulario().contains('td', 'City').should('be.visible');
 	});
 
-	it('23691 | TC3: Validate complete the form with invalid data ', () => {
+	it('23699 | TC3: Validate complete the form with invalid data ', () => {
 		const mail = usuario.obtenerAleatorio(Mail);
 
 		usuario.FillForm(lastname, firstname, mail, movile);
@@ -141,7 +141,7 @@ describe('US GX-23690 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 		usuario.datos.Email().should('have.css', 'border-color', 'rgb(220, 53, 69)');
 	});
 
-	it('23691 | TC14: Validate if field date picker has the current date as a default value.', () => {
+	it('23699 | TC14: Validate if field date picker has the current date as a default value.', () => {
 		const fechaActual = new Date();
 		const dia = fechaActual.getDate();
 		const mes = fechaActual.toLocaleString('default', { month: 'short' });
