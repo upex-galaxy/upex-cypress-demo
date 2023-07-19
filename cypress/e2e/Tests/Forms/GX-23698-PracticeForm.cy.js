@@ -1,6 +1,6 @@
-import data from '../../../fixtures/data/GX-23630-PracticeForm.json';
+import data from '../../../fixtures/data/GX-23698-PracticeForm.json';
 import { removeLogs } from '@helper/RemoveLogs';
-import { usuario } from '@pages/Forms/GX-23630-PracticeForm';
+import { usuario } from '@pages/Forms/GX-23698-PracticeForm';
 import { faker } from '@faker-js/faker';
 
 const firstname = faker.name.firstName();
