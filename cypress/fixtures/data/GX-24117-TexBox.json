@@ -9,7 +9,11 @@
         "input": "#userEmail",
         "data": {
             "valid": "braianferreyra@gmail.com",
-            "invalid": "braianferreyrahotmail.com"
+            "invalid":{
+                "emailInvalid":"braianferreyrahotmail.com",
+                "emailInvalid2":"braianferreyra@hotmailcom"
+
+            } 
         }
 
     },

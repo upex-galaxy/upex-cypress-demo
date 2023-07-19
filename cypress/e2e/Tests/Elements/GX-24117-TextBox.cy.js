@@ -38,11 +38,16 @@ describe('24117 | TS: | Elements | Text Box', () => {
 	});
 	it('24117| TC3: Validar que el campo de "Email" contenga el @ obligatoriamente en la direccion de correo electronico', () => {
 		cy.fixture('data/GX-24117-TexBox.json').then((the) => {
-			cy.get(the.Email.input).type(the.Email.data.invalid);
+			cy.get(the.Email.input).type(the.Email.data.invalid.emailInvalid);
 			cy.get('#submit').click();
-			cy.get(the.Email.input).should('have.value', the.Email.data.invalid);
-			
-			
+			cy.get(the.Email.input).should('have.value', the.Email.data.invalid.emailInvalid);
+		});
+	});
+	it('24117| TC4: Validar que el campo de "Email" contenga al menos un caracter especal "." luego del @ ', () => {
+		cy.fixture('data/GX-24117-TexBox.json').then((the) => {
+			cy.get(the.Email.input).type(the.Email.data.invalid.emailInvalid2);
+			cy.get('#submit').click();
+			cy.get(the.Email.input).should('have.value', the.Email.data.invalid.emailInvalid2);
 		});
 	});
 
