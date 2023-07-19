@@ -2,7 +2,7 @@
 	"FullName": {
 		"input": "#userName",
 		"data": {
-			"valid": "Natalia Pedraza",
+			"valid": "NataliaPedraza",
 			"vacio": ""
 		}
 	},
