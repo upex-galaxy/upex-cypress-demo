@@ -58,4 +58,12 @@ describe('24117 | TS: | Elements | Text Box', () => {
 		});
 
 	});
+	it('24117| TC6: Validar que la direccion de correo electronico contenga un "dominio" despues del "@"', () => {
+		cy.fixture('data/GX-24117-TexBox.json').then((the) => {
+			cy.get(the.Email.input).type(the.Email.data.invalid.emailInvalid4);
+			cy.get('#submit').click();
+			cy.get(the.Email.input).should('have.value', the.Email.data.invalid.emailInvalid4);
+
+		});
+	});
 });

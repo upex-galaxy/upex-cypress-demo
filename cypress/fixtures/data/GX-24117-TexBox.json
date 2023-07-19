@@ -10,9 +10,11 @@
         "data": {
             "valid": "braianferreyra@gmail.com",
             "invalid":{
-                "emailInvalid":"braianferreyrahotmail.com",
-                "emailInvalid2":"braianferreyra@hotmailcom",
-                "emailInvalid3":"@hotmail.com"
+                "emailInvalid":  "braianferreyrahotmail.com",
+                "emailInvalid2": "braianferreyra@hotmailcom",
+                "emailInvalid3": "@hotmail.com",
+                "emailInvalid4": "braianferreyra@.com",
+                "emailInvalid5": "braian ferreyra@hotmail.com"
 
             } 
         }
