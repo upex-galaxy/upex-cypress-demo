@@ -21,7 +21,7 @@ describe('24117 | TS: | Elements | Text Box', () => {
 			cy.get('#email').should('contain', the.Email.data.valid);
 			cy.get('[class="mb-1"]').should('contain', the.CurrentAddress.data.valid);
 			cy.get('[class="mb-1"]').should('contain', the.CurrentAddress.data.valid);
-		});    
+		});
 	});
 	it('24117| TC2: Validar al enviar el formulario cuando todos los campos son vacíos, no se muestre ningún mensaje.', () => {
 		cy.fixture('data/GX-24117-TexBox.json').then((the) => {
@@ -50,5 +50,12 @@ describe('24117 | TS: | Elements | Text Box', () => {
 			cy.get(the.Email.input).should('have.value', the.Email.data.invalid.emailInvalid2);
 		});
 	});
+	it('24117| TC5: Validar que la direccion de correo electronico antes del "@" contenga un caracter como minimo', () => {
+		cy.fixture('data/GX-24117-TexBox.json').then((the) => {
+			cy.get(the.Email.input).type(the.Email.data.invalid.emailInvalid3);
+			cy.get('#submit').click();
+			cy.get(the.Email.input).should('have.value', the.Email.data.invalid.emailInvalid3);
+		});
 
+	});
 });

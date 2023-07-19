@@ -11,7 +11,8 @@
             "valid": "braianferreyra@gmail.com",
             "invalid":{
                 "emailInvalid":"braianferreyrahotmail.com",
-                "emailInvalid2":"braianferreyra@hotmailcom"
+                "emailInvalid2":"braianferreyra@hotmailcom",
+                "emailInvalid3":"@hotmail.com"
 
             } 
         }
