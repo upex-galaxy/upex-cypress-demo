@@ -2,15 +2,14 @@ import data from '../../../fixtures/data/GX-23630-PracticeForm.json';
 import { removeLogs } from '@helper/RemoveLogs';
 import { usuario } from '@pages/Forms/GX-23630-PracticeForm';
 import { faker } from '@faker-js/faker';
-import { format } from 'date-fns';
 
 const firstname = faker.name.firstName();
 const lastname = faker.name.lastName();
 const movile = faker.phone.number('##########');
 const address = faker.address.streetAddress();
 const Mail = [data.Email1, data.Email3, data.Email5, data.Email8];
-const currentDate = new Date();
-const actualDate = format(currentDate, 'dd MMM yyyy');
+const currentDate = new Date('dd MMM yyyy');
+//const actualDate = format(currentDate, );
 
 describe('US GX-23630 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 	beforeEach(() => {
@@ -143,7 +142,14 @@ describe('US GX-23630 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 	});
 
 	it('23631 | TC14: Validate if field date picker has the current date as a default value.', () => {
-		usuario.datos.dateOfBirth().should('have.value', actualDate);
+		const fechaActual = new Date();
+		const dia = fechaActual.getDate();
+		const mes = fechaActual.toLocaleString('default', { month: 'short' });
+		const mesCapitalized = mes.charAt(0).toUpperCase() + mes.slice(1);
+		const año = fechaActual.getFullYear();
+
+		const fechaFormateada = `${dia} ${mesCapitalized} ${año}`;
+		usuario.datos.dateOfBirth().should('have.value', fechaFormateada);
 	});
 });
 removeLogs();
