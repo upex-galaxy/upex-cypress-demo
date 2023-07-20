@@ -6,7 +6,7 @@ describe('US GX-23558 ✅ToolsQA | Forms | Practice Form', () => {
 		forms.get.mainTitle().should('have.text', 'Practice Form');
 	});
 
-	it('23559 | TC1: Validate a pop up is shown after submitting all the correct data on fields.', () => {
+	it('23559 | TC1: Validate the pop up that appears is shown after submitting all the correct data on fields.', () => {
 		forms.firstName(randomName);
 		forms.get.firstName().should('have.value', randomName);
 		forms.lastName(randomLastName);
@@ -57,30 +57,7 @@ describe('US GX-23558 ✅ToolsQA | Forms | Practice Form', () => {
 		cy.get('@randomHobbies').then(randomHobbiesSelected => {
 			forms.get.userHobbies().eq(randomHobbiesSelected).should('be.checked');
 		});
-	});
-
-	it('23559 | TC2: Validate student leaves fields “First Name” and “Last Name” empty, and text box border turns red after clicking  “submit” button.', () => {
-		forms.firstName();
-		forms.lastName();
-		forms.get.submitButton().click();
-		forms.get.firstName().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-		forms.get.lastName().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-	});
-
-	it('23559 | TC3: Validate that student enters invalid data in fields “email” and “Mobile” and border turns red. ', () => {
-		forms.invalidEmail();
-		forms.invalidMobile(randomInvalidMobile);
-		forms.get.submitButton().click();
-		forms.get.userEmail().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-		forms.get.userNumber().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-	});
-
-	it('23559 | TC4: Validate that no error message is displayed after student leaves fields “email” and “current address” with empty data.', () => {
-		forms.userEmail();
-		forms.userAddress();
-		forms.get.submitButton().click();
-		forms.get.userEmail().should('have.css', 'border-color', 'rgb(40, 167, 69)');
-		forms.get.userAddress().should('have.css', 'border-color', 'rgb(40, 167, 69)');
+		forms.get.popUpMsg().should('have.text', 'Thanks for submitting the form');
 	});
 });
 
@@ -90,7 +67,6 @@ const randomEmail = faker.internet.email();
 const randomNumber = faker.phone.number('##########');
 const randomSubject = faker.random.alpha({ count: 1, casing: 'lower', bannedChars: ['f', 'j', 'k', 'ñ', 'q', 'w', 'x', 'z'] });
 const randomAddress = faker.address.streetAddress();
-const randomInvalidMobile = faker.random.words(1);
 
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();

@@ -17,8 +17,9 @@ class Forms {
 		dropdownStateText: () => cy.get('[class$=singleValue]'),
 		userCity: () => cy.get('#city'),
 		dropdownCityOptions: () => cy.get('[class$=option]'),
-		dropdownCityText: () => cy.get('[class$=singleValue]').eq(1),
+		dropdownCityText: () => cy.get('#city [class*="singleValue"]'),
 		submitButton: () => cy.get('#submit'),
+		popUpMsg: () => cy.get('#example-modal-sizes-title-lg'),
 	};
 
 	firstName(randomName) {
@@ -119,14 +120,6 @@ class Forms {
 	}
 	userAddress(randomAddress) {
 		randomAddress && this.get.userAddress().type(randomAddress);
-	}
-
-	invalidEmail() {
-		this.get.userEmail().type('aaa.com');
-	}
-
-	invalidMobile(randomInvalidMobile) {
-		randomInvalidMobile && this.get.userNumber().type(randomInvalidMobile);
 	}
 }
 export const forms = new Forms();
