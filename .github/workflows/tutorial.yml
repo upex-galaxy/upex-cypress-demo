@@ -46,7 +46,7 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                      npm run file cypress/e2e/Tests/Elements/GX-10497-Buttons.cy.js
+                      npm run file cypress/e2e/Tests/BookStore/GX2-5110-Post-Get-Delete.cy.js
 
             #* Esto es para guardar el reporte previamente generado y colocarlo en Github.
             - name: 📊Upload Artifact ☕Mochawesome HTML Report
