@@ -4,7 +4,6 @@
 // cy.api() mostrará en la UI de Cypress toda la info sobre el Request y Response de la API llamada, en el Runner de Cypress.
 // PD: .then((response)=>{}) es usado para validar el response y además poder visualizar el body a través de la consola de Chrome.
 // Ahora dentro de cy.request vamos a agregar 3 opciones en un objeto;
-
 // TRELLO API DOCUMENTATION:
 // https://developer.atlassian.com/cloud/trello/rest/
 
