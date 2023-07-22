@@ -1,82 +1,104 @@
 class Form {
 	//getters
 	get = {
-		firstnameInput: () => cy.get('#firstName'),
-		lastnameInput: () => cy.get('#lastName'),
-		emailInput: () => cy.get('#userEmail'),
-		genderButton: () => cy.get('[id*="gender-radio"]'), //arreglo de tres posiciones -> male - female - other
-		mobilenumberInput: () => cy.get('#userNumber'),
-		birthdatePicker: () => cy.get('#dateOfBirthInput'),
+		firstname: () => cy.get('#firstName'),
+		lastname: () => cy.get('#lastName'),
+		email: () => cy.get('#userEmail'),
+		gender: () => cy.get('.custom-control.custom-radio.custom-control-inline'),
+		genderRadio: () => this.get.gender().find('[id*="gender-radio"]'), //arreglo de tres posiciones -> male - female - other
+		mobilenumber: () => cy.get('#userNumber'),
+		datepicker: () => cy.get('#dateOfBirthInput'),
 		subjectsInput: () => cy.get('#subjectsInput'),
-		hobbieCheckbox: () => cy.get('#hobbiesWrapper [type="checkbox"]'), //arreglo de tres posiciones -> sports - reading - music
-		pictureButton: () => cy.get('#uploadPicture'),
-		addressInput: () => cy.get('#currentAddress'),
-		stateInput: () => cy.get('#state'),
-		cityInput: () => cy.get('#city'),
+		subjectOptions: () => cy.get('[id^="react-select-2-option"]'),
+		hobbieCheckbox: () => cy.get('.custom-control.custom-checkbox.custom-control-inline'), //arreglo de tres posiciones -> sports - reading - music
+		checkboxButton: () => this.get.hobbieCheckbox().find('[type="checkbox"]'),
+		checkboxTagnames: () => this.get.hobbieCheckbox().find('[for^="hobbies-checkbox"]'),
+		pictureButton: () => cy.get('[type="file"]'),
+		address: () => cy.get('#currentAddress'),
+		stateButton: () => cy.get('#state .css-tlfecz-indicatorContainer'),
+		cityButton: () => cy.get('#city .css-tlfecz-indicatorContainer'),
+		statesAndCities: () => cy.get('[class$=-option]'),
 		submitButton: () => cy.get('#submit'),
+		database: '', //-> variable que almacena datos temporales
 	};
 
 	//actions - methods
 	typeFirstname(name) {
-		this.get.firstnameInput().type(name);
+		this.get.firstname().type(name);
 	}
 
 	typeLastname(name) {
-		this.get.lastnameInput().type(name);
+		this.get.lastname().type(name);
 	}
 
 	typeEmail(email) {
-		this.get.emailInput().type(email);
+		this.get.email().type(email);
 	}
 
 	//selecciona un género de manera aleatoria
 	selectGender() {
-		this.get.genderButton().then(genderElements => {
-			const maxIndex = genderElements.length - 1;
-			const position = Math.floor(Math.random() * maxIndex);
-			cy.wrap(genderElements).eq(position).click({ force: true });
+		this.get.genderRadio().then(genderArray => {
+			const position = Cypress._.random(0, genderArray.length - 1);
+			cy.wrap(genderArray).eq(position).click({ force: true });
+			this.get.database = position;
 		});
 	}
 
 	typeMobileNumber(number) {
-		this.get.mobilenumberInput().type(number);
+		this.get.mobilenumber().type(number);
 	}
 
-	//Nos da la fecha predeterminada del date picker
-	getDefaultDate() {
-		this.get
-			.birthdatePicker()
-			.invoke('val')
-			.then(date => date.split(' ').join('-'));
+	//Nos da una fecha aleatoria del date picker
+	currentDateSelector() {
+		return this.get.datepicker().invoke('val');
 	}
 
-	typeSubjects(text) {
-		this.get.subjectsInput().type(text);
-	}
-
-	//marca cualquier casilla de hobbie
-	checkTheHobbie() {
-		this.get.hobbieCheckbox().then($box => {
-			const maxIndex = $box.length - 1;
-			const position = () => Math.floor(Math.random * maxIndex);
-			cy.wrap($box).eq(position).check({ force: true });
+	//seleccionar un elemento de un dropdown list dinámico
+	subjectsSelector(wordMatching) {
+		this.get.subjectsInput().type(wordMatching);
+		this.get.subjectOptions().then(i => {
+			const r = Cypress._.random(0, i.length - 1);
+			cy.wrap(i).eq(r).click();
 		});
 	}
 
-	clickPictureButton() {
-		this.get.pictureButton().click();
+	//marca cualquier casilla de hobbies
+	hobbieChecker() {
+		this.get.checkboxButton().then(box => {
+			const position = Cypress._.random(0, box.length - 1);
+			cy.wrap(box).eq(position).check({ force: true }); //marca la casilla
+			//guarda valor en la var database
+			this.get.database = position;
+			cy.log(this.get.database);
+		});
+	}
+
+	uploadFile(file) {
+		this.get.pictureButton().selectFile(file);
 	}
 
 	typeAddress(text) {
-		this.get.addressInput().type(text);
+		this.get.address().type(text);
 	}
 
-	typeCity(text) {
-		this.get.cityInput().type(text);
-	}
+	//DropDown Estático:: Selecciona un estado y luego una ciudad
+	statecitySelector() {
+		this.get.stateButton().click();
+		this.get.statesAndCities().then(statesList => {
+			const position = Cypress._.random(0, statesList.length - 1);
+			cy.wrap(statesList).eq(position).click({ force: true });
+		});
 
-	typeState(text) {
-		this.get.stateInput().type(text);
+		//ahora selecciona una ciudad de un DDE
+		this.get
+			.cityButton()
+			.click()
+			.then(() => {
+				this.get.statesAndCities().then(cityList => {
+					const position = Cypress._.random(0, cityList.length - 1);
+					cy.wrap(cityList).eq(position).click({ force: true });
+				});
+			});
 	}
 
 	submitForm() {

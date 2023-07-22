@@ -1,20 +1,23 @@
 {
-    "firstname": "John",
-    "lastname": "Doe",
     "email": {
-        "valid": "valid_email@gmail.com",
         "invalid": {
             "noAtSign": "valid_emailgmail.com", 
             "noMinimChar": {
                 "beforeAtSign": "@gmail.com",
-                "afterAtSign": "valid_email@",
-                "afterDot": "valid_email@gmail.c"
+                "afterAtSign": "invalid_email@",
+                "afterDot": "invalid_email@gmail.c"
             },
-        "noDot": "valid_email@gmailcom"
+            "noDot": "invalid_email@gmailcom"
         }
-        
     },
-    "phone": "1123456789",
-    "subjects": "only valid data",
-    "currentAddress": "only valid data"
+
+    "files": {
+        "upex_logo": "cypress/fixtures/images/upexlogo.png"
+    },
+
+    "field": {
+        "greenBorder": "rgb(40, 167, 69)",
+        "redBorder": "rgb(220, 53, 69)"
+    }
+    
 }
