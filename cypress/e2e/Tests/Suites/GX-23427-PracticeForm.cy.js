@@ -3,14 +3,14 @@ removeLogs();
 import { faker } from '@faker-js/faker';
 import dayjs from 'dayjs';
 import { form } from '@pages/Forms/GX-23427-PracticeForm.page';
-import { email, files, field } from '../../../fixtures/data/GX-23427-PracticeForm.json';
+import { email, file, field, mobileNumber } from '../../../fixtures/data/GX-23427-PracticeForm';
 
 describe('US GX-23427 | ToolsQA | Forms | Practice Form', () => {
 	beforeEach('PRC: Usuario debe ubicarse en Practice Form', () => {
 		cy.visit('https://demoqa.com/automation-practice-form');
 	});
 
-	it.only('23428 | TC01: Validar enviar formulario al ingresar datos válidos', () => {
+	it('23428 | TC01: Validar enviar formulario al ingresar datos válidos', () => {
 		//valido los input texts
 		const fakeFirstname = faker.name.firstName();
 		const fakeLastname = faker.name.lastName();
@@ -50,7 +50,7 @@ describe('US GX-23427 | ToolsQA | Forms | Practice Form', () => {
 		form.hobbieChecker(randomCheck);
 
 		//agregar archivo
-		form.uploadFile(files.upex_logo);
+		form.uploadFile(file.upex_logo);
 
 		//elige ciudad y estado
 		const randomLocationByState = Cypress._.random(0, 3);
@@ -89,7 +89,7 @@ describe('US GX-23427 | ToolsQA | Forms | Practice Form', () => {
 				cy.get('tr').eq(7).should('contain', element);
 			});
 
-		cy.get('tr').eq(8).should('contain', 'upexlogo');
+		cy.get('tr').eq(8).should('contain', file.name);
 		cy.get('tr').eq(9).should('contain', fakeAddress);
 
 		//validate state on popup
@@ -119,27 +119,77 @@ describe('US GX-23427 | ToolsQA | Forms | Practice Form', () => {
 		form.get.address().should('have.css', 'border-color', field.greenBorder);
 	});
 
-	it('23428 | TC02: Validar NO enviar formulario al enviar formulario con datos inválidos', () => {
-		cy.get();
+	it.skip('23428 | TC02: Validar NO enviar formulario al ingresar datos inválidos', () => {
+		form.typeEmail(email.invalid.noMinimChar.afterAtSign);
+		form.typeMobileNumber(mobileNumber.insufficientDigits);
+
+		form.submitForm();
+
+		//campos que contienen datos no permitidos
+		form.get.firstname().should('have.css', 'border-color', field.redBorder);
+		form.get.lastname().should('have.css', 'border-color', field.redBorder);
+		form.get.email().should('have.css', 'border-color', field.redBorder);
+		form.get.mobilenumber().should('have.css', 'border-color', field.redBorder);
+		form.get.genderTag().eq(1).should('have.css', 'color', field.redBorder);
+
+		//campos que admiten no contener datos
+		form.get.checkboxTagnames().eq(1).should('have.css', 'color', field.greenBorder);
+		form.get.address().should('have.css', 'border-color', field.greenBorder);
 	});
 
-	it('23428 | TC03: Validar NO enviar formulario al ingresar email sin formato, nombres null, teléfono menor a diez dígitos o género no seleccionado', () => {
-		cy.get();
+	it('23428 | TC03: Validar NO enviar formulario cuando email no contiene @', () => {
+		const fakeFirstname = faker.name.firstName();
+		const fakeLastname = faker.name.lastName();
+		const randomGender = Cypress._.random(0, 2);
+		form.typeFirstname(fakeFirstname);
+		form.typeLastname(fakeLastname);
+		form.typeEmail(email.invalid.noAtSign);
+		form.typeMobileNumber(mobileNumber.valid);
+		form.selectGender(randomGender);
+
+		form.submitForm();
+		form.get.email().should('have.css', 'border-color', field.redBorder);
 	});
 
-	it('23428 | TC04: Validar NO enviar formulario cuando email no contiene @', () => {
-		cy.get();
+	it('23428 | TC04: Validar NO enviar formulario cuando email no contiene 1 caracter alfanumérico antes del @', () => {
+		const fakeFirstname = faker.name.firstName();
+		const fakeLastname = faker.name.lastName();
+		const randomGender = Cypress._.random(0, 2);
+		form.typeFirstname(fakeFirstname);
+		form.typeLastname(fakeLastname);
+		form.typeEmail(email.invalid.noMinimChar.beforeAtSign);
+		form.typeMobileNumber(mobileNumber.valid);
+		form.selectGender(randomGender);
+
+		form.submitForm();
+		form.get.email().should('have.css', 'border-color', field.redBorder);
 	});
 
-	it('23428 | TC05: Validar NO enviar formulario cuando email no contiene 1 caracter alfanumérico antes del @', () => {
-		cy.get();
+	it('23428 | TC05: Validar NO enviar formulario cuando email no contiene "punto" luego de 1 caracter alfanumérico después del @', () => {
+		const fakeFirstname = faker.name.firstName();
+		const fakeLastname = faker.name.lastName();
+		const randomGender = Cypress._.random(0, 2);
+		form.typeFirstname(fakeFirstname);
+		form.typeLastname(fakeLastname);
+		form.typeEmail(email.invalid.noDot);
+		form.typeMobileNumber(mobileNumber.valid);
+		form.selectGender(randomGender);
+
+		form.submitForm();
+		form.get.email().should('have.css', 'border-color', field.redBorder);
 	});
 
-	it('23428 | TC06: Validar NO enviar formulario cuando email no contiene "punto" luego de 1 caracter alfanumérico después del @', () => {
-		cy.get();
-	});
+	it('23428 | TC06: Validar NO enviar formulario cuando email no contiene 2 caracteres alfanuméricos después del "punto"', () => {
+		const fakeFirstname = faker.name.firstName();
+		const fakeLastname = faker.name.lastName();
+		const randomGender = Cypress._.random(0, 2);
+		form.typeFirstname(fakeFirstname);
+		form.typeLastname(fakeLastname);
+		form.typeEmail(email.invalid.noMinimChar.afterDot);
+		form.typeMobileNumber(mobileNumber.valid);
+		form.selectGender(randomGender);
 
-	it('23428 | TC07: Validar NO enviar formulario cuando email no contiene 2 caracteres alfanuméricos después del "punto"', () => {
-		cy.get();
+		form.submitForm();
+		form.get.email().should('have.css', 'border-color', field.redBorder);
 	});
 });
