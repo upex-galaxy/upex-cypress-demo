@@ -6,42 +6,38 @@ class Form {
 		email: () => cy.get('#userEmail'),
 		gender: () => cy.get('.custom-control.custom-radio.custom-control-inline'),
 		genderRadio: () => this.get.gender().find('[id*="gender-radio"]'), //arreglo de tres posiciones -> male - female - other
+		genderTag: () => this.get.gender().find('.custom-control-label'),
 		mobilenumber: () => cy.get('#userNumber'),
 		datepicker: () => cy.get('#dateOfBirthInput'),
 		subjectsInput: () => cy.get('#subjectsInput'),
 		subjectOptions: () => cy.get('[id^="react-select-2-option"]'),
 		hobbieCheckbox: () => cy.get('.custom-control.custom-checkbox.custom-control-inline'), //arreglo de tres posiciones -> sports - reading - music
 		checkboxButton: () => this.get.hobbieCheckbox().find('[type="checkbox"]'),
-		checkboxTagnames: () => this.get.hobbieCheckbox().find('[for^="hobbies-checkbox"]'),
+		checkboxTagnames: () => this.get.hobbieCheckbox().find('.custom-control-label'),
 		pictureButton: () => cy.get('[type="file"]'),
 		address: () => cy.get('#currentAddress'),
 		stateButton: () => cy.get('#state .css-tlfecz-indicatorContainer'),
 		cityButton: () => cy.get('#city .css-tlfecz-indicatorContainer'),
 		statesAndCities: () => cy.get('[class$=-option]'),
 		submitButton: () => cy.get('#submit'),
-		database: '', //-> variable que almacena datos temporales
 	};
 
 	//actions - methods
-	typeFirstname(name) {
-		this.get.firstname().type(name);
+	typeFirstname(randomFirst) {
+		this.get.firstname().type(randomFirst);
 	}
 
-	typeLastname(name) {
-		this.get.lastname().type(name);
+	typeLastname(randomLast) {
+		this.get.lastname().type(randomLast);
 	}
 
-	typeEmail(email) {
-		this.get.email().type(email);
+	typeEmail(randomEmail) {
+		this.get.email().type(randomEmail);
 	}
 
 	//selecciona un género de manera aleatoria
-	selectGender() {
-		this.get.genderRadio().then(genderArray => {
-			const position = Cypress._.random(0, genderArray.length - 1);
-			cy.wrap(genderArray).eq(position).click({ force: true });
-			this.get.database = position;
-		});
+	selectGender(randomGender) {
+		this.get.genderRadio().eq(randomGender).click({ force: true });
 	}
 
 	typeMobileNumber(number) {
@@ -54,23 +50,16 @@ class Form {
 	}
 
 	//seleccionar un elemento de un dropdown list dinámico
-	subjectsSelector(wordMatching) {
-		this.get.subjectsInput().type(wordMatching);
+	subjectsSelector(matching) {
+		this.get.subjectsInput().type(matching);
 		this.get.subjectOptions().then(i => {
 			const r = Cypress._.random(0, i.length - 1);
 			cy.wrap(i).eq(r).click();
 		});
 	}
 
-	//marca cualquier casilla de hobbies
-	hobbieChecker() {
-		this.get.checkboxButton().then(box => {
-			const position = Cypress._.random(0, box.length - 1);
-			cy.wrap(box).eq(position).check({ force: true }); //marca la casilla
-			//guarda valor en la var database
-			this.get.database = position;
-			cy.log(this.get.database);
-		});
+	hobbieChecker(randomCheck) {
+		this.get.checkboxButton().eq(randomCheck).check({ force: true });
 	}
 
 	uploadFile(file) {
@@ -82,23 +71,17 @@ class Form {
 	}
 
 	//DropDown Estático:: Selecciona un estado y luego una ciudad
-	statecitySelector() {
+	stateSelector(randomLocationByState) {
 		this.get.stateButton().click();
-		this.get.statesAndCities().then(statesList => {
-			const position = Cypress._.random(0, statesList.length - 1);
-			cy.wrap(statesList).eq(position).click({ force: true });
-		});
+		this.get.statesAndCities().eq(randomLocationByState).click({ force: true });
+	}
 
-		//ahora selecciona una ciudad de un DDE
-		this.get
-			.cityButton()
-			.click()
-			.then(() => {
-				this.get.statesAndCities().then(cityList => {
-					const position = Cypress._.random(0, cityList.length - 1);
-					cy.wrap(cityList).eq(position).click({ force: true });
-				});
-			});
+	citySelector() {
+		this.get.cityButton().click();
+		this.get.statesAndCities().then(cityList => {
+			const position = Cypress._.random(0, cityList.length - 1);
+			cy.wrap(cityList).eq(position).click({ force: true });
+		});
 	}
 
 	submitForm() {
