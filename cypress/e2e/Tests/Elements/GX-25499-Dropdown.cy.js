@@ -11,5 +11,10 @@ describe('25499 | TS: | Widgets | Dropdown - Select Menu', () => {
 		cy.get('[class$=indicatorContainer]').eq(0).click();
 		cy.get('[id^="react-select-2-option"]').eq(Cypress._.random(0, 5)).click();
 	});
+	it('25499| TC2: Validar poder seleccionar una opcion del desplegable "Select One."', () => {
+		cy.get('[class$=indicatorContainer]').eq(1).click();
+		cy.get('[id^="react-select-3-option"]').eq(Cypress._.random(0, 5)).click();
+	});
+	
 	
 });
