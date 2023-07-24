@@ -18,12 +18,12 @@ describe('25499 | TS: | Widgets | Dropdown - Select Menu', () => {
 	it('25499| TC3: Validar poder seleccionar una opcion en el "Old Style Select Menu"', () => {
 		cy.get('#oldSelectMenu option').then(options => {
 			const randomIndex = Cypress._.random(0, options.length - 1);
-			const optionValue = options[randomIndex].value;
+			const optionValue = options[ randomIndex ].value;
 			cy.get('#oldSelectMenu').select(optionValue);
 		});
 		
 	});
-	it('25499| TC4: Validar poder seleccionar hasta cuatro opciones en el desplegable "Multiselect drop down"', () => {
+	it('25499| TC4: Validar poder seleccionar hasta cuatro opciones en el desplegable "Multiselect drop down" si no quedan opciones se debera mostrar el mensaje "no options" en el mismo.', () => {
 		cy.get('[Class$="css-yk16xz-control"]').eq(2).click();
 		cy.get('[id^="react-select-4-option"]').eq(3).click();
 		cy.get('[id^="react-select-4-option"]').eq(2).click();
@@ -31,9 +31,8 @@ describe('25499 | TS: | Widgets | Dropdown - Select Menu', () => {
 		cy.get('[id^="react-select-4-option"]').eq(0).click();
 		
 	});
-
-	
-	
-	
-	
+	it('25499| TC5: Validar poder seleccionar mas de una opcion en el "Standard multi select" ', () => {
+		cy.get('#cars').select('volvo');
+		cy.get('#cars').select('audi');
+	});
 });
