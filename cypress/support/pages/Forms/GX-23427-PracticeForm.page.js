@@ -4,14 +4,14 @@ class Form {
 		firstname: () => cy.get('#firstName'),
 		lastname: () => cy.get('#lastName'),
 		email: () => cy.get('#userEmail'),
-		gender: () => cy.get('.custom-control.custom-radio.custom-control-inline'),
+		gender: () => cy.get('[class*="custom-radio"]'),
 		genderRadio: () => this.get.gender().find('[id*="gender-radio"]'), //arreglo de tres posiciones -> male - female - other
 		genderTag: () => this.get.gender().find('.custom-control-label'),
 		mobilenumber: () => cy.get('#userNumber'),
 		datepicker: () => cy.get('#dateOfBirthInput'),
 		subjectsInput: () => cy.get('#subjectsInput'),
 		subjectOptions: () => cy.get('[id^="react-select-2-option"]'),
-		hobbieCheckbox: () => cy.get('.custom-control.custom-checkbox.custom-control-inline'), //arreglo de tres posiciones -> sports - reading - music
+		hobbieCheckbox: () => cy.get('[class*="custom-checkbox"]'), //arreglo de tres posiciones -> sports - reading - music
 		checkboxButton: () => this.get.hobbieCheckbox().find('[type="checkbox"]'),
 		checkboxTagnames: () => this.get.hobbieCheckbox().find('.custom-control-label'),
 		pictureButton: () => cy.get('[type="file"]'),
@@ -37,7 +37,7 @@ class Form {
 
 	//selecciona un género de manera aleatoria
 	selectGender(randomGender) {
-		this.get.genderRadio().eq(randomGender).click({ force: true });
+		this.get.gender().eq(randomGender).click();
 	}
 
 	typeMobileNumber(number) {
@@ -59,7 +59,7 @@ class Form {
 	}
 
 	hobbieChecker(randomCheck) {
-		this.get.checkboxButton().eq(randomCheck).check({ force: true });
+		this.get.hobbieCheckbox().eq(randomCheck).click();
 	}
 
 	uploadFile(file) {
