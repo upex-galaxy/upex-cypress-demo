@@ -22,7 +22,7 @@ class Form {
 		submitButton: () => cy.get('#submit'),
 	};
 
-	//actions - methods
+	//actions
 	typeFirstname(randomFirst) {
 		this.get.firstname().type(randomFirst);
 	}
