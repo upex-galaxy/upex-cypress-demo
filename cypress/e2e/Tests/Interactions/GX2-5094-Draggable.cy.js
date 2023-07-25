@@ -6,6 +6,7 @@ import the from '@data/GX2-5094-Draggable';
 describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 	beforeEach('Precondición: encontrarse en la página de Draggable', () => {
 		cy.visit('/dragabble');
+		cy.url().should('contain', 'dragabble');
 	});
 	it('5095 | TC1: Validar que que se muestran las pestañas mencionadas dentro de la pagina y se visualiza una a la vez', () => {
 		//Tab 1 Simple: Validaremos que sea visible la elección de la pestaña "Simple" y que es por default la que se encuentra activa
@@ -26,5 +27,18 @@ describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 		Draggable.get.TabCursorStyle().should('not.contain.class', 'active');
 		Draggable.SelectTabCursorStyle();
 		Draggable.get.TabCursorStyle().should('contain.class', 'active');
+	});
+	it('5095 | TC2: Validar mover aleatoriamente recuadrado punteado “Drag me” de la pestaña “Simple”', () => {
+		// Se valida que el Posicionamiento inicial es "0"
+		Draggable.get.DragMe().should('have.css', 'left', `${0}px`);
+		Draggable.get.DragMe().should('have.css', 'top', `${0}px`);
+		// Se crean coordenadas random
+		const X = Cypress._.random(-500, 600);
+		const Y = Cypress._.random(-500, 600);
+		cy.log(X, Y);
+		// Se mueve el "Drag me" y se valida su nuevo posicionamiento
+		Draggable.MoveDragMe(X, Y);
+		Draggable.get.DragMe().should('have.css', 'left', `${X}px`);
+		Draggable.get.DragMe().should('have.css', 'top', `${Y}px`);
 	});
 });

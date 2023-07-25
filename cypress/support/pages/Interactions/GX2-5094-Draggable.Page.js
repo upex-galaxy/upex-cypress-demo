@@ -8,9 +8,7 @@ class draggable {
 		TabCursorStyle: () => cy.get('[id="draggableExample-tab-cursorStyle"]'),
 	};
 
-	MoveDragMe() {
-		const X = Cypress._.random(-500, 600);
-		const Y = Cypress._.random(-500, 600);
+	MoveDragMe(X, Y) {
 		this.get.DragMe().move({ deltaX: X, deltaY: Y });
 	}
 
