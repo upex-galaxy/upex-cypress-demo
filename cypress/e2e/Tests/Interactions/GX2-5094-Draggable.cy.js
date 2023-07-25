@@ -29,8 +29,8 @@ describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 		Draggable.get.TabCursorStyle().should('contain.class', 'active');
 	});
 	it('5095 | TC2: Validar mover aleatoriamente recuadrado punteado “Drag me” de la pestaña “Simple”', () => {
-		// Se valida que el Posicionamiento inicial es "0"
-		Draggable.get.DragMe().should('have.css', 'left', `${0}px`);
+		// Se valida que el Posicionamiento inicial es "0" y que sea visible
+		Draggable.get.DragMe().should('have.css', 'left', `${0}px`).and('be.visible');
 		Draggable.get.DragMe().should('have.css', 'top', `${0}px`);
 		// Se crean coordenadas random
 		const X = Cypress._.random(-500, 600);
@@ -40,5 +40,17 @@ describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 		Draggable.MoveDragMe(X, Y);
 		Draggable.get.DragMe().should('have.css', 'left', `${X}px`);
 		Draggable.get.DragMe().should('have.css', 'top', `${Y}px`);
+	});
+	it('5095 | TC3: Validar mover aleatoriamente recuadrado punteado “Only X” de la pestaña “Axis Restricted”', () => {
+		//Nos ubicamos en la pestaña Axis Restricted
+		Draggable.SelectTabAxisRestricted();
+		//Se valida que su posicionamiento inicial es "0" y que sea visible "Only X"
+		Draggable.get.OnlyX().should('have.css', 'left', `${0}px`).and('be.visible');
+		//Se crean coordenadas random
+		const X = Cypress._.random(-500, 600);
+		cy.log(X);
+		// Se mueve "only X" y se valida su nuevo posicionamiento
+		Draggable.MoveOnlyX(X);
+		Draggable.get.OnlyX().should('have.css', 'left', `${X}px`);
 	});
 });
