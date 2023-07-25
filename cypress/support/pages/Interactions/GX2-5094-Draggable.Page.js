@@ -5,6 +5,7 @@ class draggable {
 		DragMe: () => cy.get('[id="dragBox"]'),
 		TabAxisRestricted: () => cy.get('[id="draggableExample-tab-axisRestriction"]'),
 		OnlyX: () => cy.get('[id="restrictedX"]'),
+		OnlyY: () => cy.get('[id="restrictedY"]'),
 		TabContainerRestricted: () => cy.get('[id="draggableExample-tab-containerRestriction"]'),
 		TabCursorStyle: () => cy.get('[id="draggableExample-tab-cursorStyle"]'),
 	};
@@ -23,6 +24,10 @@ class draggable {
 
 	MoveOnlyX(X) {
 		this.get.OnlyX().move({ deltaX: X, deltaY: 0 });
+	}
+
+	MoveOnlyY(Y) {
+		this.get.OnlyY().move({ deltaX: 0, deltaY: Y });
 	}
 
 	SelectTabContainerRestricted() {

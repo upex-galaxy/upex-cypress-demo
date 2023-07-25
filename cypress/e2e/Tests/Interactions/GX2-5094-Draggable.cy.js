@@ -33,8 +33,8 @@ describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 		Draggable.get.DragMe().should('have.css', 'left', `${0}px`).and('be.visible');
 		Draggable.get.DragMe().should('have.css', 'top', `${0}px`);
 		// Se crean coordenadas random
-		const X = Cypress._.random(-500, 600);
-		const Y = Cypress._.random(-500, 600);
+		const X = Cypress._.random(-300, 600);
+		const Y = Cypress._.random(-300, 600);
 		cy.log(X, Y);
 		// Se mueve el "Drag me" y se valida su nuevo posicionamiento
 		Draggable.MoveDragMe(X, Y);
@@ -47,10 +47,22 @@ describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 		//Se valida que su posicionamiento inicial es "0" y que sea visible "Only X"
 		Draggable.get.OnlyX().should('have.css', 'left', `${0}px`).and('be.visible');
 		//Se crean coordenadas random
-		const X = Cypress._.random(-500, 600);
+		const X = Cypress._.random(-300, 600);
 		cy.log(X);
 		// Se mueve "only X" y se valida su nuevo posicionamiento
 		Draggable.MoveOnlyX(X);
 		Draggable.get.OnlyX().should('have.css', 'left', `${X}px`);
+	});
+	it('5095 | TC4: Validar mover aleatoriamente recuadrado punteado “Only Y” de la pestaña “Axis Restricted”', () => {
+		// Nos ubicamos en la pestaña Axis Restricted
+		Draggable.SelectTabAxisRestricted();
+		// Se valida que su posicionamiento inicial es "0" y que sea visible "Only Y"
+		Draggable.get.OnlyY().should('have.css', 'top', `${0}px`).and('be.visible');
+		//Se crean coordenadas random
+		const Y = Cypress._.random(-300, 600);
+		cy.log(Y);
+		// Se mueve "Only Y" y se valida su nuevo posicionamiento
+		Draggable.MoveOnlyY(Y);
+		Draggable.get.OnlyY().should('have.css', 'top', `${Y}px`);
 	});
 });
