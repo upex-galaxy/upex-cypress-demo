@@ -1,9 +1,8 @@
-class Selectable{
-	get={
-		bttnList: () => cy.get('demo-tab-list'),
-		bttnGrid: () => cy.get('demo-tab-grid'),
-		listContainer:()=>('verticalListContainer li'),
-
+class Selectable {
+	get = {
+		bttnList: () => cy.get('#demo-tab-list'),
+		bttnGrid: () => cy.get('#demo-tab-grid'),
+		listContainer: () => cy.get('#verticalListContainer li'),
 	};
 	clickBttnGrid() {
 		this.get.bttnGrid().click();

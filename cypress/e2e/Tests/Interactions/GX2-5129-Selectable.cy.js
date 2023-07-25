@@ -1,11 +1,12 @@
-import { selectable } from '../support/pages/Interactions/GX2-5129-Selectable.page';
-describe('5129 | TS: | Interactions | Selectable', () => {
+import { selectable } from '@pages/Interactions/GX2-5129-Selectable.page';
+describe('✅ToolsQA | Interactions | Selectable', () => {
 	beforeEach('visitar la página de Demo QA', () => {
-
-		it( '5129| TC1:' ,() => {
-			cy.visit('https://demoqa.com/selectable'),
-			selectable.clickBttnGrid();
-		});
-		
+		cy.visit('/selectable');
+		cy.url().should('contain', 'selectable');
+	});
+	it('5129| TC1:', () => {
+		selectable.clickBttnGrid();
 	});
 });
+import { removeLogs } from '@helper/RemoveLogs';
+removeLogs();
