@@ -7,6 +7,7 @@ class draggable {
 		OnlyX: () => cy.get('[id="restrictedX"]'),
 		OnlyY: () => cy.get('[id="restrictedY"]'),
 		TabContainerRestricted: () => cy.get('[id="draggableExample-tab-containerRestriction"]'),
+		ContainedInTheBox: () => cy.get('[class="draggable ui-widget-content ui-draggable ui-draggable-handle"]').eq(0),
 		TabCursorStyle: () => cy.get('[id="draggableExample-tab-cursorStyle"]'),
 	};
 
@@ -32,6 +33,10 @@ class draggable {
 
 	SelectTabContainerRestricted() {
 		this.get.TabContainerRestricted().click();
+	}
+
+	MoveContainedInTheBox(X, Y) {
+		this.get.ContainedInTheBox().move({ deltaX: X, deltaY: Y });
 	}
 
 	SelectTabCursorStyle() {

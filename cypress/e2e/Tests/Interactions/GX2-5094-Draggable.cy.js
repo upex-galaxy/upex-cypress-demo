@@ -65,4 +65,19 @@ describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 		Draggable.MoveOnlyY(Y);
 		Draggable.get.OnlyY().should('have.css', 'top', `${Y}px`);
 	});
+	it('5095 | TC5: Validar mover aleatoriamente recuadrado “I am contained within the box” dentro del área delimitada en la pestaña “Container Restricted”', () => {
+		// Nos ubicamos en la pestaña Container Restricted
+		Draggable.SelectTabContainerRestricted();
+		//se valida que su posicionamiento inicial es "0"
+		Draggable.get.ContainedInTheBox().should('have.css', 'left', `${0}px`);
+		Draggable.get.ContainedInTheBox().should('have.css', 'top', `${0}px`);
+		// Se crean coordenadas random
+		const X = Cypress._.random(0, 674); //Son los limites del cuadro del área delimitada
+		const Y = Cypress._.random(0, 107); //Son los limites del cuadro del área delimitada
+		cy.log(X, Y);
+		// Se mueve “I'm contained within the box” y se valida su nuevo posicionamiento
+		Draggable.MoveContainedInTheBox(X, Y);
+		Draggable.get.ContainedInTheBox().should('have.css', 'left', `${X}px`);
+		Draggable.get.ContainedInTheBox().should('have.css', 'top', `${Y}px`);
+	});
 });
