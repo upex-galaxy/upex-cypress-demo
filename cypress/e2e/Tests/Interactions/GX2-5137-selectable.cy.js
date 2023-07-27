@@ -28,9 +28,11 @@ describe('ToolsQA | Interactions | Selectable', () => {
 		selectable.get.listContainer().eq(1).should('not.have.class', 'active');
 	});
 
-	it.only('Validate selecting elements in list random', () => {
+	it('TC3 | Validate selecting elements in list random', () => {
 		selectable.selectListTab();
 		selectable.selectList(randomElementInList);
 		selectable.get.listContainer().eq(randomElementInList).should('have.class', 'active');
 	});
+
+	it('TC4 | Validate selecting one option in grid tab', () => {});
 });
