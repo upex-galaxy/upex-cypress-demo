@@ -2,15 +2,15 @@ class Selectable {
 	//selectors
 	get = {
 		endpoint: () => cy.visit('/selectable'),
-		buttonList: () => cy.get('[id="demo-tab-list"]'),
+		tabList: () => cy.get('[id="demo-tab-list"]'),
 		listContainer: () => cy.get('#verticalListContainer li'),
 		buttonGrid: () => cy.get('[id="demo-tab-grid"]'),
 		gridContainer: () => cy.get('#gridContainer li'),
 	};
 	//functions/methods
 
-	clickButtonList() {
-		return this.get.buttonList().click();
+	selectListTab() {
+		return this.get.tabList().click();
 	}
 	clickButtonGrid() {
 		return this.get.buttonGrid().click();
