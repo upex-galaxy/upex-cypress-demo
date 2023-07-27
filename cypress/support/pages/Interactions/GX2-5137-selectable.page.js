@@ -12,13 +12,13 @@ class Selectable {
 	selectListTab() {
 		return this.get.tabList().click();
 	}
-	clickButtonGrid() {
+	selectGridTab() {
 		return this.get.buttonGrid().click();
 	}
 	selectList(num) {
 		return this.get.listContainer().eq(num).click();
 	}
-	selectList2(num) {
+	selectGrid(num) {
 		return this.get.gridContainer().eq(num).click();
 	}
 }
