@@ -10,6 +10,7 @@ describe('✅ToolsQA | Interactions | Selectable', () => {
 		selectable.clickBttnList();
 		cy.get('#verticalListContainer li').each((clickElementList) => {
 			cy.wrap(clickElementList).click();
+			cy.wrap(clickElementList).should('have.class', 'active');
 		});
 	});
 	it('5130 | TC2: Validar que se puedan deseleccionar los elementos de la pestaña “List“.', () => {
@@ -17,6 +18,7 @@ describe('✅ToolsQA | Interactions | Selectable', () => {
 		cy.get('#verticalListContainer li').each((clickElementList) => {
 			cy.get(clickElementList).click();
 			cy.wrap(clickElementList).click();
+			cy.get(clickElementList).should('not.be.checked');
 
 		});
 	});
@@ -24,13 +26,15 @@ describe('✅ToolsQA | Interactions | Selectable', () => {
 		selectable.clickBttnGrid();
 		cy.get('#gridContainer li').each((clickElementGrid) => {
 			cy.wrap(clickElementGrid).click();
+			cy.wrap(clickElementGrid).should('have.class', 'active');
 		});
 	});
-	it.only('5130 | TC4: Validar que se puedan deseleccionar los elementos de la pestaña “Grid“.', () => {
+	it('5130 | TC4: Validar que se puedan deseleccionar los elementos de la pestaña “Grid“.', () => {
 		selectable.clickBttnGrid();
 		cy.get('#gridContainer li').each((clickElementGrid) => {
 			cy.get(clickElementGrid).click();
 			cy.wrap(clickElementGrid).click();
+			cy.get(clickElementGrid).should('not.be.checked');
 	
 		});
 	});
