@@ -3,6 +3,7 @@ import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
 
 const randomElementInList = Cypress._.random(0, 3);
+const randomElementInGrid = Cypress._.random(0, 8);
 
 describe('ToolsQA | Interactions | Selectable', () => {
 	beforeEach('user must be in the website', () => {
@@ -34,5 +35,11 @@ describe('ToolsQA | Interactions | Selectable', () => {
 		selectable.get.listContainer().eq(randomElementInList).should('have.class', 'active');
 	});
 
-	it('TC4 | Validate selecting one option in grid tab', () => {});
+	it.only('TC4 | Validate selecting one option in grid list', () => {
+		selectable.selectGridTab();
+		selectable.selectGrid(2);
+		selectable.get.gridContainer().eq(2).should('have.class', 'active');
+	});
+
+	it('TC5 | Validate selecting random elements in grid list');
 });
