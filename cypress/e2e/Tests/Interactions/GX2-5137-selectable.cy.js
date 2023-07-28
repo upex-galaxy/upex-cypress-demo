@@ -1,11 +1,8 @@
 import { selectable } from '@pages/Interactions/GX2-5137-selectable.page';
 import { removeLogs } from '@helper/RemoveLogs';
-//import { lastIndexOf } from 'cypress/types/lodash';
 removeLogs();
-
 const randomElementInList = Cypress._.random(0, 3);
 const randomElementInGrid = Cypress._.random(0, 8);
-//const lastElement = $elements.eq(lastElementIndex);
 
 describe('ToolsQA | Interactions | Selectable', () => {
 	beforeEach('user must be in the website', () => {
@@ -51,15 +48,16 @@ describe('ToolsQA | Interactions | Selectable', () => {
 
 	it('TC6 | Validate selecting the last element in grid list', () => {
 		selectable.selectGridTab();
-		selectable.selectGrid();
-		selectable.get.gridContainer().eq(lastElement);
+		selectable.get.gridContainer().then(Element => {
+			const lastElement = Element.length - 1;
+			selectable.selectGrid(lastElement);
+		});
 	});
-	it.only('TC7 | Validate selecting the last element in grid list', () => {
+	it('TC7 | Validate selecting random elements grid list with length', () => {
 		selectable.selectGridTab();
-		selectable.selectGrid();
 		selectable.get.gridContainer().then(selectGrid => {
 			const randomIndex = Cypress._.random(0, selectGrid.length - 1);
-			selectable.get.gridContainer.eq(randomIndex);
+			selectable.selectGrid(randomIndex);
 		});
 	});
 });
