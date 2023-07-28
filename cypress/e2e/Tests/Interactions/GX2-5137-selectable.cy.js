@@ -24,6 +24,7 @@ describe('ToolsQA | Interactions | Selectable', () => {
 	it('TC2 | Validate unselecting elements in list', () => {
 		selectable.selectListTab();
 		selectable.selectList(1);
+		//this is a second click for unselect the option
 		selectable.selectList(1);
 		selectable.get.listContainer().eq(1).should('not.have.class', 'active');
 	});
