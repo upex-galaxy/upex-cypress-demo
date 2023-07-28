@@ -54,7 +54,7 @@ describe('ToolsQA | Interactions | Selectable', () => {
 		selectable.selectGrid();
 		selectable.get.gridContainer().eq(lastElement);
 	});
-	it.only('TC6 | Validate selecting the last element in grid list', () => {
+	it.only('TC7 | Validate selecting the last element in grid list', () => {
 		selectable.selectGridTab();
 		selectable.selectGrid();
 		selectable.get.gridContainer().then(selectGrid => {
