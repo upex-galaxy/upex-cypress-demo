@@ -1,9 +1,11 @@
 import { selectable } from '@pages/Interactions/GX2-5137-selectable.page';
 import { removeLogs } from '@helper/RemoveLogs';
+//import { lastIndexOf } from 'cypress/types/lodash';
 removeLogs();
 
 const randomElementInList = Cypress._.random(0, 3);
 const randomElementInGrid = Cypress._.random(0, 8);
+//const lastElement = $elements.eq(lastElementIndex);
 
 describe('ToolsQA | Interactions | Selectable', () => {
 	beforeEach('user must be in the website', () => {
@@ -35,11 +37,29 @@ describe('ToolsQA | Interactions | Selectable', () => {
 		selectable.get.listContainer().eq(randomElementInList).should('have.class', 'active');
 	});
 
-	it.only('TC4 | Validate selecting one option in grid list', () => {
+	it('TC4 | Validate selecting one option in grid list', () => {
 		selectable.selectGridTab();
 		selectable.selectGrid(2);
 		selectable.get.gridContainer().eq(2).should('have.class', 'active');
 	});
 
-	it('TC5 | Validate selecting random elements in grid list');
+	it('TC5 | Validate selecting random elements in grid list', () => {
+		selectable.selectGridTab();
+		selectable.selectGrid(randomElementInGrid);
+		selectable.get.gridContainer().eq(randomElementInGrid).should('have.class', 'active');
+	});
+
+	it('TC6 | Validate selecting the last element in grid list', () => {
+		selectable.selectGridTab();
+		selectable.selectGrid();
+		selectable.get.gridContainer().eq(lastElement);
+	});
+	it.only('TC6 | Validate selecting the last element in grid list', () => {
+		selectable.selectGridTab();
+		selectable.selectGrid();
+		selectable.get.gridContainer().then(selectGrid => {
+			const randomIndex = Cypress._.random(0, selectGrid.length - 1);
+			selectable.get.gridContainer.eq(randomIndex);
+		});
+	});
 });
