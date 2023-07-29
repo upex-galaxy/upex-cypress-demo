@@ -4,15 +4,14 @@
 	"Email3": "m@2.",
 	"Email4": "@ncom",
 	"Email5": "x.com.ar",
-	"image": "fotopersonal.jpg",
-	"image2": "fotopersonal2.jpg",
 	"Email6": "x@co.es",
 	"Email7": "maria@gmail.com",
 	"Email8": "maria@",
-	"dirArchivo": "cypress/fixtures/images/fotopersonal.jpg",
 	"Pref1": "MA",
 	"Pref2": "CH",
 	"Pref3": "SO",
 	"Pref4": "BI",
-	"Pref5": "PH"
+	"Pref5": "PH",
+	"Photo": "photo.jpg",
+	"vacio": ""
 }

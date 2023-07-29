@@ -10,11 +10,11 @@ class Usuario {
 		currentAddress: () => cy.get('.form-control').eq(5),
 		selectSubj: () => cy.get('.css-1hwfws3').eq(0),
 		selectCity: () => cy.get('.css-1hwfws3').eq(2),
-		selectCity2: () => cy.get('.css-1n7v3ny-option'),
+		selectCity2: () => cy.get('[id^="react-select"]'),
 		submit: () => cy.get('#submit'),
 		gender: () => cy.get('.custom-control-label').parent(),
-		day: () => cy.get('div.react-datepicker__day'),
-		week: () => cy.get('div.react-datepicker__week'),
+		day: () => cy.get('[class^="react-datepicker__day react-datepicker__day"]:not([class$="outside-month"])'),
+		week: () => cy.get('.react-datepicker__week'),
 		year: () => cy.get('.react-datepicker__year-select'),
 		month: () => cy.get('.react-datepicker__month-select'),
 		selectState: () => cy.get('.css-1hwfws3').eq(1),
@@ -22,6 +22,8 @@ class Usuario {
 		formularioFinal: () => cy.get('.modal-content'),
 		contenidoFormulario: () => cy.get('.modal-body'),
 		seleccionarSub: () => cy.get('#react-select-2-option-0'),
+		stateE: () => cy.get('.css-1uccc91-singleValue'),
+		subjectContainer: () => cy.get('#subjectsContainer'),
 	};
 
 	submit() {
@@ -40,6 +42,30 @@ class Usuario {
 	obtenerAleatorio(textos) {
 		const indiceAleatorio = Math.floor(Math.random() * textos.length);
 		return textos[indiceAleatorio];
+	}
+	obtenerNombreMesEnIngles(numeroMes) {
+		const mesesEnIngles = [
+			'January',
+			'February',
+			'March',
+			'April',
+			'May',
+			'June',
+			'July',
+			'August',
+			'September',
+			'October',
+			'November',
+			'December',
+		];
+		return mesesEnIngles[numeroMes - 1];
+	}
+
+	formatearFecha(fecha) {
+		const dia = fecha.getDate();
+		const mes = this.obtenerNombreMesEnIngles(fecha.getMonth() + 1);
+		const anio = fecha.getFullYear();
+		return `${dia} ${mes}, ${anio}`;
 	}
 }
 export const usuario = new Usuario();
