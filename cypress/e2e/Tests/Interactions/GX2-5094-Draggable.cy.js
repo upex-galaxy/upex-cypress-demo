@@ -109,5 +109,26 @@ describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 		Draggable.get.CursorCenter().trigger('mousedown', { which: 1 }).trigger('mousemove', { which: 1, pageX: X, pageY: Y });
 		Draggable.get.CursorCenter().should('contain.class', 'ui-draggable-dragging');
 		Draggable.get.CursorCenter().should('have.css', 'cursor', 'move');
+		// Su posición final es distinta a la inicial
+		Draggable.get.CursorCenter().should('not.have.css', 'left', `${0}px`);
+		Draggable.get.CursorCenter().should('not.have.css', 'top', `${0}px`);
+	});
+	it('5095 | TC8: Validar que al mover aleatoriamente el recuadro punteado “My cursor is at top left” dentro de la pestaña “Cursor Style” se visualiza en la parte superior izquierda del recuadro', () => {
+		//Nos ubicamos en la pestaña Cursor Style
+		Draggable.SelectTabCursorStyle();
+		// Se valida que su posicionamiento inicial es "0"
+		Draggable.get.CursorLeft().should('have.css', 'left', `${0}px`);
+		Draggable.get.CursorLeft().should('have.css', 'top', `${0}px`);
+		// Se crean coordenadas random
+		var X = Cypress._.random(0, 1400);
+		var Y = Cypress._.random(0, 1000);
+		cy.log(X, Y);
+		//Se mueve “I will always stick to the center” y se valida su que el cursor tenga el style "crosshair"
+		Draggable.get.CursorLeft().trigger('mousedown', { which: 1 }).trigger('mousemove', { which: 1, pageX: X, pageY: Y });
+		Draggable.get.CursorLeft().should('contain.class', 'ui-draggable-dragging');
+		/*Draggable.get.CursorLeft().should('have.css', 'styleAttribute', 'crosshair');*/ //Se debería visualizar en style attribute el cursor = crosshair
+		// Su posición final es distinta a la inicial
+		Draggable.get.CursorLeft().should('not.have.css', 'left', `${0}px`);
+		Draggable.get.CursorLeft().should('not.have.css', 'top', `${0}px`);
 	});
 });

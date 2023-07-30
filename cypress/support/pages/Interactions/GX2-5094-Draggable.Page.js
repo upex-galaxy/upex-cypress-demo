@@ -11,6 +11,7 @@ class draggable {
 		ContainedInTheParent: () => cy.get('[class="ui-widget-header ui-draggable ui-draggable-handle"]').eq(0),
 		TabCursorStyle: () => cy.get('[id="draggableExample-tab-cursorStyle"]'),
 		CursorCenter: () => cy.get('#cursorCenter'),
+		CursorLeft: () => cy.get('#cursorTopLeft'),
 	};
 
 	SelectTabSimple() {
