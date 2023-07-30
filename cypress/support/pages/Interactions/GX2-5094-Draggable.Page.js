@@ -10,6 +10,7 @@ class draggable {
 		ContainedInTheBox: () => cy.get('[class="draggable ui-widget-content ui-draggable ui-draggable-handle"]').eq(0),
 		ContainedInTheParent: () => cy.get('[class="ui-widget-header ui-draggable ui-draggable-handle"]').eq(0),
 		TabCursorStyle: () => cy.get('[id="draggableExample-tab-cursorStyle"]'),
+		CursorCenter: () => cy.get('#cursorCenter'),
 	};
 
 	SelectTabSimple() {
@@ -46,6 +47,10 @@ class draggable {
 
 	SelectTabCursorStyle() {
 		this.get.TabCursorStyle().click();
+	}
+
+	MoveCursorCenter(X, Y) {
+		this.get.CursorCenter().move({ deltaX: X, deltaY: Y });
 	}
 }
 

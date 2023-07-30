@@ -80,7 +80,7 @@ describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 		Draggable.get.ContainedInTheBox().should('have.css', 'left', `${X}px`);
 		Draggable.get.ContainedInTheBox().should('have.css', 'top', `${Y}px`);
 	});
-	it.only('5095 | TC6: Validar mover aleatoriamente el texto “I`m contained within my parent” dentro del área delimita en la pestaña “Container Restricted”', () => {
+	it('5095 | TC6: Validar mover aleatoriamente el texto “I`m contained within my parent” dentro del área delimita en la pestaña “Container Restricted”', () => {
 		//Nos ubicamos en la pestaña Container Restricted
 		Draggable.SelectTabContainerRestricted();
 		// Se valida que su posicionamiento inicial es "0"
@@ -94,5 +94,20 @@ describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 		Draggable.MoveContainedInTheParent(X, Y);
 		Draggable.get.ContainedInTheParent().should('have.css', 'left', `${X}px`);
 		Draggable.get.ContainedInTheParent().should('have.css', 'top', `${Y}px`);
+	});
+	it('5095 | TC7: Validar que al mover aleatoriamente el recuadro punteado “I will always stick to the center” dentro de la pestaña “Cursor Style” se visualiza el cursor en el centro del recuadro', () => {
+		//Nos ubicamos en la pestaña Cursor Style
+		Draggable.SelectTabCursorStyle();
+		// Se valida que su posicionamiento inicial es "0"
+		Draggable.get.CursorCenter().should('have.css', 'left', `${0}px`);
+		Draggable.get.CursorCenter().should('have.css', 'top', `${0}px`);
+		// Se crean coordenadas random
+		var X = Cypress._.random(0, 1400);
+		var Y = Cypress._.random(0, 1000);
+		cy.log(X, Y);
+		//Se mueve “I will always stick to the center” y se valida su que el cursor tenga el style "move"
+		Draggable.get.CursorCenter().trigger('mousedown', { which: 1 }).trigger('mousemove', { which: 1, pageX: X, pageY: Y });
+		Draggable.get.CursorCenter().should('contain.class', 'ui-draggable-dragging');
+		Draggable.get.CursorCenter().should('have.css', 'cursor', 'move');
 	});
 });
