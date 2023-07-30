@@ -131,4 +131,21 @@ describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 		Draggable.get.CursorLeft().should('not.have.css', 'left', `${0}px`);
 		Draggable.get.CursorLeft().should('not.have.css', 'top', `${0}px`);
 	});
+	it('5095 | TC9: Validar que al mover aleatoriamente el recuadro punteado “My cursor is at bottom” dentro de la pestaña “Cursor Style” se visualiza en la parte inferior central del recuadro', () => {
+		//Nos ubicamos en la pestaña Cursor Style
+		Draggable.SelectTabCursorStyle();
+		// Se valida que su posicionamiento inicial es "0"
+		Draggable.get.CursorBottom().should('have.css', 'left', `${0}px`);
+		Draggable.get.CursorBottom().should('have.css', 'top', `${0}px`);
+		// Se crean coordenadas random
+		var X = Cypress._.random(0, 1400);
+		var Y = Cypress._.random(0, 1000);
+		cy.log(X, Y);
+		//Se mueve “I will always stick to the center”
+		Draggable.get.CursorBottom().trigger('mousedown', { which: 1 }).trigger('mousemove', { which: 1, pageX: X, pageY: Y });
+		Draggable.get.CursorBottom().should('contain.class', 'ui-draggable-dragging');
+		// Su posición final es distinta a la inicial
+		Draggable.get.CursorBottom().should('not.have.css', 'left', `${0}px`);
+		Draggable.get.CursorBottom().should('not.have.css', 'top', `${0}px`);
+	});
 });

@@ -12,6 +12,7 @@ class draggable {
 		TabCursorStyle: () => cy.get('[id="draggableExample-tab-cursorStyle"]'),
 		CursorCenter: () => cy.get('#cursorCenter'),
 		CursorLeft: () => cy.get('#cursorTopLeft'),
+		CursorBottom: () => cy.get('#cursorBottom'),
 	};
 
 	SelectTabSimple() {
