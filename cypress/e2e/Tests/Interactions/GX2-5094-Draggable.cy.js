@@ -5,28 +5,28 @@ import the from '@data/GX2-5094-Draggable';
 
 describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 	beforeEach('Precondición: encontrarse en la página de Draggable', () => {
-		cy.visit('/dragabble');
-		cy.url().should('contain', 'dragabble');
+		cy.visit(the.UrlVisit);
+		cy.url().should('contain', the.UrlVisit);
 	});
 	it('5095 | TC1: Validar que que se muestran las pestañas mencionadas dentro de la pagina y se visualiza una a la vez', () => {
 		//Tab 1 Simple: Validaremos que sea visible la elección de la pestaña "Simple" y que es por default la que se encuentra activa
 		Draggable.get.Tabs().should('contain.text', the.Tabs.Tab1);
-		Draggable.get.TabSimple().should('contain.class', 'active');
+		Draggable.get.TabSimple().should('contain.class', the.Status);
 		// Tab 2 Axis Restricted: Validaremos que sea visible la elección de la pestaña "Axis Restricted", que no está activa y luego que la seleccionemos se encuentre activa.
 		Draggable.get.Tabs().should('contain.text', the.Tabs.Tab2);
-		Draggable.get.TabAxisRestricted().should('not.contain.class', 'active');
+		Draggable.get.TabAxisRestricted().should('not.contain.class', the.Status);
 		Draggable.SelectTabAxisRestricted();
-		Draggable.get.TabAxisRestricted().should('contain.class', 'active');
+		Draggable.get.TabAxisRestricted().should('contain.class', the.Status);
 		// Tab 3 Contain Restricted: Validaremos que sea visible la elección de la pestaña "Contain Restricted", que no está activa y luego que la seleccionemos se encuentre activa.
 		Draggable.get.Tabs().should('contain.text', the.Tabs.Tab3);
-		Draggable.get.TabContainerRestricted().should('not.contain.class', 'active');
+		Draggable.get.TabContainerRestricted().should('not.contain.class', the.Status);
 		Draggable.SelectTabContainerRestricted();
-		Draggable.get.TabContainerRestricted().should('contain.class', 'active');
+		Draggable.get.TabContainerRestricted().should('contain.class', the.Status);
 		// Tab 4 Cursor Style: Validaremos que sea visible la elección de la pestaña "Cursor Style", que no está activa y luego que la seleccionemos se encuentre activa.
 		Draggable.get.Tabs().should('contain.text', the.Tabs.Tab4);
-		Draggable.get.TabCursorStyle().should('not.contain.class', 'active');
+		Draggable.get.TabCursorStyle().should('not.contain.class', the.Status);
 		Draggable.SelectTabCursorStyle();
-		Draggable.get.TabCursorStyle().should('contain.class', 'active');
+		Draggable.get.TabCursorStyle().should('contain.class', the.Status);
 	});
 	it('5095 | TC2: Validar mover aleatoriamente recuadrado punteado “Drag me” de la pestaña “Simple”', () => {
 		// Se valida que el Posicionamiento inicial es "0" y que sea visible
@@ -107,8 +107,8 @@ describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 		cy.log(X, Y);
 		//Se mueve “I will always stick to the center” y se valida su que el cursor tenga el style "move"
 		Draggable.get.CursorCenter().trigger('mousedown', { which: 1 }).trigger('mousemove', { which: 1, pageX: X, pageY: Y });
-		Draggable.get.CursorCenter().should('contain.class', 'ui-draggable-dragging');
-		Draggable.get.CursorCenter().should('have.css', 'cursor', 'move');
+		Draggable.get.CursorCenter().should('contain.class', the.ClassDragging);
+		Draggable.get.Body().should('have.css', 'cursor', 'move');
 		// Su posición final es distinta a la inicial
 		Draggable.get.CursorCenter().should('not.have.css', 'left', `${0}px`);
 		Draggable.get.CursorCenter().should('not.have.css', 'top', `${0}px`);
@@ -125,8 +125,8 @@ describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 		cy.log(X, Y);
 		//Se mueve “I will always stick to the center” y se valida su que el cursor tenga el style "crosshair"
 		Draggable.get.CursorLeft().trigger('mousedown', { which: 1 }).trigger('mousemove', { which: 1, pageX: X, pageY: Y });
-		Draggable.get.CursorLeft().should('contain.class', 'ui-draggable-dragging');
-		/*Draggable.get.CursorLeft().should('have.css', 'styleAttribute', 'crosshair');*/ //Se debería visualizar en style attribute el cursor = crosshair
+		Draggable.get.CursorLeft().should('contain.class', the.ClassDragging);
+		Draggable.get.Body().should('have.css', 'cursor', 'crosshair'); //Se debería visualizar en style attribute el cursor = crosshair
 		// Su posición final es distinta a la inicial
 		Draggable.get.CursorLeft().should('not.have.css', 'left', `${0}px`);
 		Draggable.get.CursorLeft().should('not.have.css', 'top', `${0}px`);
@@ -143,7 +143,8 @@ describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 		cy.log(X, Y);
 		//Se mueve “I will always stick to the center”
 		Draggable.get.CursorBottom().trigger('mousedown', { which: 1 }).trigger('mousemove', { which: 1, pageX: X, pageY: Y });
-		Draggable.get.CursorBottom().should('contain.class', 'ui-draggable-dragging');
+		Draggable.get.CursorBottom().should('contain.class', the.ClassDragging);
+		Draggable.get.Body().should('have.css', 'cursor', 'auto');
 		// Su posición final es distinta a la inicial
 		Draggable.get.CursorBottom().should('not.have.css', 'left', `${0}px`);
 		Draggable.get.CursorBottom().should('not.have.css', 'top', `${0}px`);

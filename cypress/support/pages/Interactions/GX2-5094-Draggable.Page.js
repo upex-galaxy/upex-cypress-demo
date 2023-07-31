@@ -1,5 +1,6 @@
 class draggable {
 	get = {
+		Body: () => cy.get('body'),
 		Tabs: () => cy.get('[class="nav nav-tabs"]'),
 		TabSimple: () => cy.get('[id="draggableExample-tab-simple"]'),
 		DragMe: () => cy.get('[id="dragBox"]'),
