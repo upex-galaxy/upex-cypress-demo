@@ -7,5 +7,10 @@
 		"Tab4": "Cursor Style"
 	},
 	"Status": "active",
-	"ClassDragging": "ui-draggable-dragging"
+	"ClassDragging": "ui-draggable-dragging",
+	"Cursor": {
+		"move": "move",
+		"crosshair": "crosshair",
+		"auto": "auto"
+	}
 }

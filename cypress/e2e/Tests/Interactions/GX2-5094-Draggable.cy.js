@@ -108,7 +108,7 @@ describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 		//Se mueve “I will always stick to the center” y se valida su que el cursor tenga el style "move"
 		Draggable.get.CursorCenter().trigger('mousedown', { which: 1 }).trigger('mousemove', { which: 1, pageX: X, pageY: Y });
 		Draggable.get.CursorCenter().should('contain.class', the.ClassDragging);
-		Draggable.get.Body().should('have.css', 'cursor', 'move');
+		Draggable.get.Body().should('have.css', 'cursor', the.Cursor.move);
 		// Su posición final es distinta a la inicial
 		Draggable.get.CursorCenter().should('not.have.css', 'left', `${0}px`);
 		Draggable.get.CursorCenter().should('not.have.css', 'top', `${0}px`);
@@ -126,7 +126,7 @@ describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 		//Se mueve “I will always stick to the center” y se valida su que el cursor tenga el style "crosshair"
 		Draggable.get.CursorLeft().trigger('mousedown', { which: 1 }).trigger('mousemove', { which: 1, pageX: X, pageY: Y });
 		Draggable.get.CursorLeft().should('contain.class', the.ClassDragging);
-		Draggable.get.Body().should('have.css', 'cursor', 'crosshair'); //Se debería visualizar en style attribute el cursor = crosshair
+		Draggable.get.Body().should('have.css', 'cursor', the.Cursor.crosshair); //Se debería visualizar en style attribute el cursor = crosshair
 		// Su posición final es distinta a la inicial
 		Draggable.get.CursorLeft().should('not.have.css', 'left', `${0}px`);
 		Draggable.get.CursorLeft().should('not.have.css', 'top', `${0}px`);
@@ -144,7 +144,7 @@ describe('GX2-5094-✅-tools-qa-interactions-dragabble', () => {
 		//Se mueve “I will always stick to the center”
 		Draggable.get.CursorBottom().trigger('mousedown', { which: 1 }).trigger('mousemove', { which: 1, pageX: X, pageY: Y });
 		Draggable.get.CursorBottom().should('contain.class', the.ClassDragging);
-		Draggable.get.Body().should('have.css', 'cursor', 'auto');
+		Draggable.get.Body().should('have.css', 'cursor', the.Cursor.auto);
 		// Su posición final es distinta a la inicial
 		Draggable.get.CursorBottom().should('not.have.css', 'left', `${0}px`);
 		Draggable.get.CursorBottom().should('not.have.css', 'top', `${0}px`);
