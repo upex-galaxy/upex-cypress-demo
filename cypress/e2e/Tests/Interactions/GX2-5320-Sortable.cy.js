@@ -16,4 +16,17 @@ describe('GX2-5320-✅-tools-qa-interactions-sortable', () => {
 				expect(item.text()).to.equal(the.itemList[index]);
 			});
 	});
+	it.only('5321 | TC2: Validar mover un objecto aleatoriamente entre los otros objectos de la pestaña “List” y que permanezca en su nueva posición', () => {
+		var NewList = [];
+		Sortable.selectItemRandomList();
+		Sortable.moveSelectItemList();
+		Sortable.ItemList()
+			.each(item => {
+				cy.log(item.text());
+				NewList.push(item.text());
+			})
+			.then(() => {
+				expect(NewList[Cypress.env('moveItemList')]).to.be.equal(the.itemList[Cypress.env('RandomItemList')]);
+			});
+	});
 });
