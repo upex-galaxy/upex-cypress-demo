@@ -38,4 +38,18 @@ describe('GX2-5320-✅-tools-qa-interactions-sortable', () => {
 				expect(item.text()).to.equal(the.itemGrid[index]);
 			});
 	});
+	it('5321 | TC4: Validar mover un objecto aleatoriamente entre los otros objectos de la pestaña “Grid” y que permanezca en su nueva posición', () => {
+		var NewGrid = [];
+		Sortable.get.tabGrid().click();
+		Sortable.selectItemRandomGrid();
+		Sortable.moveSelectItemGrid();
+		Sortable.ItemGrid()
+			.each(item => {
+				cy.log(item.text());
+				NewGrid.push(item.text());
+			})
+			.then(() => {
+				expect(NewGrid[Cypress.env('moveItemGrid')]).to.be.equal(the.itemGrid[Cypress.env('RandomItemGrid')]);
+			});
+	});
 });

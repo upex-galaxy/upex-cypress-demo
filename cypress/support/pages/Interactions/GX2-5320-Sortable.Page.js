@@ -26,6 +26,9 @@ class sortable {
 	moveSelectItemList() {
 		this.ItemList().then(length => {
 			var RandomItem = Cypress._.random(0, length.length - 1);
+			while (Cypress.env('RandomItemList') == RandomItem) {
+				RandomItem = Cypress._.random(0, length.length - 1);
+			}
 			cy.log(RandomItem);
 			this.ItemList()
 				.eq(RandomItem)
@@ -39,6 +42,36 @@ class sortable {
 
 	ItemGrid() {
 		return this.get.itemGrid().children();
+	}
+
+	selectItemRandomGrid() {
+		this.ItemGrid().then(length => {
+			var RandomItem = Cypress._.random(0, length.length - 1);
+			cy.log(RandomItem);
+			this.ItemGrid()
+				.eq(RandomItem)
+				.then(() => {
+					Cypress.env('RandomItemGrid', RandomItem);
+				})
+				.trigger('mousedown', { which: 1 });
+		});
+	}
+
+	moveSelectItemGrid() {
+		this.ItemGrid().then(length => {
+			var RandomItem = Cypress._.random(0, length.length - 1);
+			while (Cypress.env('RandomItemGrid') == RandomItem) {
+				RandomItem = Cypress._.random(0, length.length - 1);
+			}
+			cy.log(RandomItem);
+			this.ItemGrid()
+				.eq(RandomItem)
+				.then(() => {
+					Cypress.env('moveItemGrid', RandomItem);
+				})
+				.trigger('mousemove')
+				.click({ force: true });
+		});
 	}
 }
 
