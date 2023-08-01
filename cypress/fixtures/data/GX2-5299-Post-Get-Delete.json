@@ -1,0 +1,21 @@
+{
+	"status": "Success",
+	"result": "User authorized successfully.",
+	"statusCode": 200,
+	"statusText": "OK",
+	"deleteStatusOK": 204,
+	"wrongPassStatus": 400,
+	"invalidPasswordMessage": "Passwords must have at least one non alphanumeric character, one digit ('0'-'9'), one uppercase ('A'-'Z'), one lowercase ('a'-'z'), one special character and Password must be eight characters or longer.",
+	"requestState": "Complete",
+	"login": {
+		"loginText": "Welcome,Login in Book Store",
+		"wrongUserPass": "Invalid username or password!"
+	},
+	"profile": {
+		"profileHeader": "Profile",
+		"modalText": "Do you want to delete your account?"
+	},
+	"api": {
+		"API": "/Account/v1/User/"
+	}
+}
