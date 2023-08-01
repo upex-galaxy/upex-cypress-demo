@@ -2,6 +2,8 @@ class sortable {
 	get = {
 		tabList: () => cy.get('#demo-tab-list'),
 		itemList: () => cy.get('[class="vertical-list-container mt-4"]'),
+		tabGrid: () => cy.get('#demo-tab-grid'),
+		itemGrid: () => cy.get('[class="create-grid"]'),
 	};
 
 	ItemList() {
@@ -33,6 +35,10 @@ class sortable {
 				.trigger('mousemove')
 				.click({ force: true });
 		});
+	}
+
+	ItemGrid() {
+		return this.get.itemGrid().children();
 	}
 }
 

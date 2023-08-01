@@ -16,7 +16,7 @@ describe('GX2-5320-✅-tools-qa-interactions-sortable', () => {
 				expect(item.text()).to.equal(the.itemList[index]);
 			});
 	});
-	it.only('5321 | TC2: Validar mover un objecto aleatoriamente entre los otros objectos de la pestaña “List” y que permanezca en su nueva posición', () => {
+	it('5321 | TC2: Validar mover un objecto aleatoriamente entre los otros objectos de la pestaña “List” y que permanezca en su nueva posición', () => {
 		var NewList = [];
 		Sortable.selectItemRandomList();
 		Sortable.moveSelectItemList();
@@ -27,6 +27,15 @@ describe('GX2-5320-✅-tools-qa-interactions-sortable', () => {
 			})
 			.then(() => {
 				expect(NewList[Cypress.env('moveItemList')]).to.be.equal(the.itemList[Cypress.env('RandomItemList')]);
+			});
+	});
+	it('5321 | TC3: Validar la existencia de la pestaña “Grid” y que esté ordenada por default', () => {
+		Sortable.get.tabGrid().should('not.contain.class', the.StatusClass);
+		Sortable.get.tabGrid().click().should('exist').and('be.visible').and('contain.class', the.StatusClass);
+		Sortable.ItemGrid()
+			.should('be.visible')
+			.each((item, index) => {
+				expect(item.text()).to.equal(the.itemGrid[index]);
 			});
 	});
 });
