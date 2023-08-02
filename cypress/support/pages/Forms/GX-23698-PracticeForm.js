@@ -95,7 +95,7 @@ class Usuario {
 			case 'Dic':
 				return 'Dec';
 			default:
-				return mesEnIngles;
+				return mesEnEspañol;
 		}
 	}
 }
