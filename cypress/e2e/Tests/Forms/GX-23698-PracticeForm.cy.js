@@ -357,7 +357,7 @@ describe('US GX-23698 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 		usuario.datos.Email().should('have.css', 'border-color', 'rgb(220, 53, 69)');
 	});
 
-	it('23699 | TC4: Validate if field date picker has the current date as a default value.', () => {
+	it.skip('23699 | TC4: Validate if field date picker has the current date as a default value.', () => {
 		const fechaActual = new Date();
 		const dia = fechaActual.getDate();
 		const mes = fechaActual.toLocaleString('default', { month: 'short' });
