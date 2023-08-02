@@ -363,8 +363,9 @@ describe('US GX-23698 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 		const mes = fechaActual.toLocaleString('default', { month: 'short' });
 		const mesCapitalized = mes.charAt(0).toUpperCase() + mes.slice(1);
 		const año = fechaActual.getFullYear();
-
-		const fechaFormateada = `${dia} ${mesCapitalized} ${año}`;
+		const mesEnIngles = usuario.traducirMes(mesCapitalized);
+		const diaFormateado = dia < 10 ? `0${dia}` : dia;
+		const fechaFormateada = `${diaFormateado} ${mesEnIngles} ${año}`;
 		usuario.datos.dateOfBirth().should('have.value', fechaFormateada);
 	});
 });

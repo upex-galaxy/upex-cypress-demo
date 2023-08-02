@@ -67,5 +67,36 @@ class Usuario {
 		const anio = fecha.getFullYear();
 		return `${dia} ${mes}, ${anio}`;
 	}
+
+	traducirMes(mesEnEspañol) {
+		switch (mesEnEspañol) {
+			case 'Ene':
+				return 'Jan';
+			case 'Feb':
+				return 'Feb';
+			case 'Mar':
+				return 'Mar';
+			case 'Abr':
+				return 'Apr';
+			case 'May':
+				return 'May';
+			case 'Jun':
+				return 'Jun';
+			case 'Jul':
+				return 'Jul';
+			case 'Ago':
+				return 'Aug';
+			case 'Sep':
+				return 'Sep';
+			case 'Oct':
+				return 'Oct';
+			case 'Nov':
+				return 'Nov';
+			case 'Dic':
+				return 'Dec';
+			default:
+				return mesEnIngles;
+		}
+	}
 }
 export const usuario = new Usuario();
