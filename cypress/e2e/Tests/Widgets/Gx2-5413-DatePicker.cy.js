@@ -11,11 +11,33 @@ describe('GX2-5413-✅-tools-qa-widgets-date-picker', () => {
 	it('5414 | TC01: Validar seleccionar una fecha aleatoria del campo “Select Date”', () => {
 		//Validamos que la fecha por default es la fecha actual
 		DatePicker.get.SelectDate().should('have.value', DatePicker.CurrentDate());
-		//Seleccionamos una Fecha aleatoria
+		//Abrimos el Select Date
 		DatePicker.ClickOnSelectDate();
+		//Seleccionamos una Año random
 		DatePicker.SelectRandomYear();
+		//Validamos que el Año random esté  seleccionado
+		DatePicker.get
+			.Year()
+			.invoke('val')
+			.then(Year => {
+				expect(Year).to.equal(Cypress.env('RandomYear').toString());
+			});
+		//Seleccionamos un Mes random
 		DatePicker.SelectRandomMonth();
+		//Validamos que el Mes random esté seleccionado
+		DatePicker.get
+			.Month()
+			.invoke('val')
+			.then(Month => {
+				expect(Month).to.equal(Cypress.env('SelectedMonth').toString());
+			});
+		//Seleccionamos un Día random
 		DatePicker.SelectRandomDay();
+		//Validamos que el Día random esté seleccionado
+		DatePicker.ClickOnSelectDate();
+		DatePicker.get.Day().then(() => {
+			DatePicker.get.Day().contains(Cypress.env('RandomDay')).should('contain.class', the.selectedDay).click();
+		});
 		//Validamos que la fecha aleatoria seleccionada se visualiza correctamente
 		DatePicker.get
 			.SelectDate()
@@ -27,7 +49,20 @@ describe('GX2-5413-✅-tools-qa-widgets-date-picker', () => {
 	it('5414 | TC02: Validar seleccionar una fecha aleatoria del campo “Select Date” usando el botón “right arrow button”.', () => {
 		DatePicker.ClickOnSelectDate();
 		DatePicker.ClickOnRightArrow();
+		//Validamos que el se selecciono el mes con el Button right arrow
+		DatePicker.get
+			.Month()
+			.invoke('val')
+			.then(Month => {
+				expect(Month).to.equal(Cypress.env('NextsMonth').toString());
+			});
+		//Seleccionamos un Día random
 		DatePicker.SelectRandomDay();
+		//Validamos que el Día random esté seleccionado
+		DatePicker.ClickOnSelectDate();
+		DatePicker.get.Day().then(() => {
+			DatePicker.get.Day().contains(Cypress.env('RandomDay')).should('contain.class', the.selectedDay).click();
+		});
 		//Validamos que la fecha seleccionada no es igual a la fecha default
 		DatePicker.get
 			.SelectDate()

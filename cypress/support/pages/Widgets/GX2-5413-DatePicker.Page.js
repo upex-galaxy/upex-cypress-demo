@@ -25,20 +25,16 @@ class datePicker {
 			.then(length => {
 				let randomYear = Cypress._.random(0, length.length - 1);
 				cy.log(randomYear);
-				this.get
-					.Year()
-					.select(randomYear)
-					.invoke('val')
-					.then(value => {
-						cy.log(value);
-						Cypress.env('RandomYear', value);
-					});
+				this.get.Year().select(randomYear);
+				randomYear = 1900 + randomYear; // El valor inicial es 1900 según las BR's
+				Cypress.env('RandomYear', randomYear);
 			});
 	}
 
 	SelectRandomMonth() {
 		let randomMonth = Cypress._.random(0, 11);
 		this.get.Month().select(randomMonth);
+		Cypress.env('SelectedMonth', randomMonth);
 		randomMonth = randomMonth + 1;
 		cy.log(randomMonth);
 		Cypress.env('RandomMonth', randomMonth);
@@ -48,8 +44,8 @@ class datePicker {
 		this.get.Day().then(length => {
 			let randomDay = Cypress._.random(1, length.length);
 			cy.log(randomDay);
-			this.get.Day().contains(randomDay).click();
 			Cypress.env('RandomDay', randomDay);
+			this.get.Day().contains(randomDay).click();
 		});
 	}
 
@@ -68,6 +64,13 @@ class datePicker {
 			this.get.RightArrow().click();
 			i = i + 1;
 		}
+		this.get
+			.Month()
+			.invoke('val')
+			.then(Month => {
+				Cypress.env('NextsMonth', Month);
+				cy.log(Cypress.env('NextsMonth'));
+			});
 	}
 }
 

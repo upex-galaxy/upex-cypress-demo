@@ -1,3 +1,4 @@
 {
-	"url": "date-picker"
+	"url": "date-picker",
+	"selectedDay": "react-datepicker__day--selected"
 }
