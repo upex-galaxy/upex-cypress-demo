@@ -6,6 +6,7 @@ class datePicker {
 		Month: () => cy.get('[class$="month-select"]'),
 		Day: () => cy.get('[class^="react-datepicker__day react-datepicker__day"]:not([class$="outside-month"])'),
 		RightArrow: () => cy.get('[class$="navigation--next"]'),
+		LeftArrow: () => cy.get('[class$="navigation--previous"]'),
 	};
 
 	CurrentDate() {
@@ -69,7 +70,22 @@ class datePicker {
 			.invoke('val')
 			.then(Month => {
 				Cypress.env('NextsMonth', Month);
-				cy.log(Cypress.env('NextsMonth'));
+			});
+	}
+
+	ClickOnLeftArrow() {
+		let clicks = Cypress._.random(1, 12);
+		cy.log(clicks);
+		let i = 0;
+		while (i < clicks) {
+			this.get.LeftArrow().click();
+			i = i + 1;
+		}
+		this.get
+			.Month()
+			.invoke('val')
+			.then(Month => {
+				Cypress.env('PreviousMonth', Month);
 			});
 	}
 }

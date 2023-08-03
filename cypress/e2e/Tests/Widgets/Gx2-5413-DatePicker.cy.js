@@ -36,7 +36,13 @@ describe('GX2-5413-✅-tools-qa-widgets-date-picker', () => {
 		//Validamos que el Día random esté seleccionado
 		DatePicker.ClickOnSelectDate();
 		DatePicker.get.Day().then(() => {
-			DatePicker.get.Day().contains(Cypress.env('RandomDay')).should('contain.class', the.selectedDay).click();
+			DatePicker.get
+				.Day()
+				.contains(Cypress.env('RandomDay'))
+				.should('contain.class', the.selectedDay)
+				.and('contain.text', Cypress.env('RandomDay').toString())
+				.and('be.visible')
+				.click();
 		});
 		//Validamos que la fecha aleatoria seleccionada se visualiza correctamente
 		DatePicker.get
@@ -61,7 +67,44 @@ describe('GX2-5413-✅-tools-qa-widgets-date-picker', () => {
 		//Validamos que el Día random esté seleccionado
 		DatePicker.ClickOnSelectDate();
 		DatePicker.get.Day().then(() => {
-			DatePicker.get.Day().contains(Cypress.env('RandomDay')).should('contain.class', the.selectedDay).click();
+			DatePicker.get
+				.Day()
+				.contains(Cypress.env('RandomDay'))
+				.should('contain.class', the.selectedDay)
+				.and('contain.text', Cypress.env('RandomDay').toString())
+				.and('be.visible')
+				.click();
+		});
+		//Validamos que la fecha seleccionada no es igual a la fecha default
+		DatePicker.get
+			.SelectDate()
+			.invoke('val')
+			.then(dateValue => {
+				expect(dateValue).to.not.equal(DatePicker.CurrentDate());
+			});
+	});
+	it('5414 | TC03: Validar seleccionar una fecha aleatoria del campo “Select Date” usando el botón “left arrow button”.', () => {
+		DatePicker.ClickOnSelectDate();
+		DatePicker.ClickOnLeftArrow();
+		//Validamos que el se selecciono el mes con el Button right arrow
+		DatePicker.get
+			.Month()
+			.invoke('val')
+			.then(Month => {
+				expect(Month).to.equal(Cypress.env('PreviousMonth').toString());
+			});
+		//Seleccionamos un Día random
+		DatePicker.SelectRandomDay();
+		//Validamos que el Día random esté seleccionado
+		DatePicker.ClickOnSelectDate();
+		DatePicker.get.Day().then(() => {
+			DatePicker.get
+				.Day()
+				.contains(Cypress.env('RandomDay'))
+				.should('contain.class', the.selectedDay)
+				.and('contain.text', Cypress.env('RandomDay').toString())
+				.and('be.visible')
+				.click();
 		});
 		//Validamos que la fecha seleccionada no es igual a la fecha default
 		DatePicker.get
