@@ -5,29 +5,13 @@ class datePicker {
 		Year: () => cy.get('[class$="year-select"]'),
 		Month: () => cy.get('[class$="month-select"]'),
 		Day: () => cy.get('[class^="react-datepicker__day react-datepicker__day"]:not([class$="outside-month"])'),
+		RightArrow: () => cy.get('[class$="navigation--next"]'),
 	};
 
 	CurrentDate() {
-		const dayDate = faker.date.between().toString().split(' ', '4');
-		const Month = dayDate[1];
-		const optionMonth = {
-			Jan: '01',
-			Feb: '02',
-			Mar: '03',
-			Apr: '04',
-			May: '05',
-			Jun: '06',
-			Jul: '07',
-			Aug: '08',
-			Sep: '09',
-			Oct: '10',
-			Nov: '11',
-			Dec: '12',
-		};
-		let selectMonth = optionMonth[Month];
-		const CurrentDate = selectMonth + '/' + dayDate[2] + '/' + dayDate[3];
-		cy.log(CurrentDate);
-		return CurrentDate;
+		const hoy = new Date();
+		const opcionesFecha = { month: '2-digit', day: '2-digit', year: 'numeric' };
+		return hoy.toLocaleDateString('en-US', opcionesFecha);
 	}
 
 	ClickOnSelectDate() {
@@ -76,14 +60,15 @@ class datePicker {
 		return expectedDate;
 	}
 
-	/* Moverse con el botón de mes siguiente
-        let clicks = Cypress._.random(1, 12);
+	ClickOnRightArrow() {
+		let clicks = Cypress._.random(1, 12);
 		cy.log(clicks);
 		let i = 0;
 		while (i < clicks) {
-			cy.get('[class$="navigation--next"]').click();
+			this.get.RightArrow().click();
 			i = i + 1;
-		}*/
+		}
+	}
 }
 
 export const DatePicker = new datePicker();
