@@ -357,14 +357,15 @@ describe('US GX-23698 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 		usuario.datos.Email().should('have.css', 'border-color', 'rgb(220, 53, 69)');
 	});
 
-	it.skip('23699 | TC4: Validate if field date picker has the current date as a default value.', () => {
+	it('23699 | TC4: Validate if field date picker has the current date as a default value.', () => {
 		const fechaActual = new Date();
 		const dia = fechaActual.getDate();
 		const mes = fechaActual.toLocaleString('default', { month: 'short' });
 		const mesCapitalized = mes.charAt(0).toUpperCase() + mes.slice(1);
 		const año = fechaActual.getFullYear();
-
-		const fechaFormateada = `${dia} ${mesCapitalized} ${año}`;
+		const mesIngles = usuario.traducirMes(mesCapitalized);
+		const diaFormateado = dia < 10 ? `0${dia}` : dia;
+		const fechaFormateada = `${diaFormateado} ${mesIngles} ${año}`;
 		usuario.datos.dateOfBirth().should('have.value', fechaFormateada);
 	});
 });
