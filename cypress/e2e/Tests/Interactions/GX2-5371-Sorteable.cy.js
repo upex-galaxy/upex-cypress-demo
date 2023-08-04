@@ -61,13 +61,14 @@ describe('GX2-5371 | ✅ToolsQA | Interactions | Sortable', () => {
 	it('5372 | TC9: Validate Expected display: 3 x 3 grid.', () => {
 		// Write your test case one here
 	});
-	it.only('5372 | TC10: Validate when any item in the list is dragged, it must stay in the selected order.', () => {
+	it('5372 | TC10: Validate when any item in the list is dragged, it must stay in the selected order.', () => {
 		let source = lista.elementos.dos;
 		let destination = lista.elementos.tres;
 		lista.reorderItems(source, destination, 'Two');
 
 		source = lista.elementos.dos;
 		destination = lista.elementos.cinco;
+
 		lista.reorderItems(source, destination, 'Three');
 
 		source = lista.elementos.tres;
