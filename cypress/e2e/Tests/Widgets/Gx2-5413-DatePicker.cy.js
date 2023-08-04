@@ -126,4 +126,14 @@ describe('GX2-5413-✅-tools-qa-widgets-date-picker', () => {
 		//Validamos que la fecha random se ha ingresado correctamente
 		DatePicker.get.SelectDate().should('have.value', RandomDate);
 	});
+	it('5414 | TC05: Validar no ingresar fecha cuando se tipea un formato invalido en “Select Date” (texto)', () => {
+		// Antes de tipear vaciamos el input
+		DatePicker.get.SelectDate().clear();
+		//Validamos que el input esté vacío
+		DatePicker.get.SelectDate().should('be.visible').and('be.empty');
+		//Tipeamos algo que no sea una fecha
+		DatePicker.get.SelectDate().type(DatePicker.RandomText()).type('{enter}');
+		//Validamos que la fecha random se ha ingresado correctamente
+		DatePicker.get.SelectDate().should('be.visible').and('be.empty');
+	});
 });

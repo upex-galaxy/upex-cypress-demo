@@ -94,6 +94,11 @@ class datePicker {
 		const timestamp = Math.floor(Math.random() * maxDate);
 		return new Date(timestamp).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' });
 	}
+
+	RandomText() {
+		let text = faker.random.words(5);
+		return text;
+	}
 }
 
 export const DatePicker = new datePicker();
