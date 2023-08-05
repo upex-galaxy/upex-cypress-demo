@@ -119,64 +119,64 @@ describe('US GX-23698 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 			fechaSeleccionada = `${dia} ${mes},${anio}`;
 		}
 
-		let StateRandom = usuario.getRandomNumber(0, 3);
+		let StateRandom = usuario.getRandomNumber(1, 4);
 		usuario.datos.selectState().click();
 		usuario.datos.selectState2().eq(StateRandom).click({ force: true });
 		let CityRandom;
 		let State;
 		let City;
 
-		if (StateRandom === 0) {
+		if (StateRandom === 1) {
 			State = 'NCR';
-			CityRandom = usuario.getRandomNumber(2, 4);
+			CityRandom = usuario.getRandomNumber(1, 3);
 			usuario.datos.selectCity().click();
 			usuario.datos.selectCity2().eq(CityRandom).click({ force: true });
-			if (CityRandom === 2) {
+			if (CityRandom === 1) {
 				City = 'Delhi';
 			}
-			if (CityRandom === 3) {
+			if (CityRandom === 2) {
 				City = 'Gurgaon';
 			}
-			if (CityRandom === 4) {
+			if (CityRandom === 3) {
 				City = 'Noida';
 			}
 		}
-		if (StateRandom === 1) {
+		if (StateRandom === 2) {
 			State = 'Uttar Pradesh';
-			CityRandom = usuario.getRandomNumber(2, 4);
+			CityRandom = usuario.getRandomNumber(1, 3);
 			usuario.datos.selectCity().click();
 			usuario.datos.selectCity2().eq(CityRandom).click({ force: true });
-			if (CityRandom === 2) {
+			if (CityRandom === 1) {
 				City = 'Agra';
 			}
-			if (CityRandom === 3) {
+			if (CityRandom === 2) {
 				City = 'Lucknow';
 			}
-			if (CityRandom === 4) {
+			if (CityRandom === 3) {
 				City = 'Merrut';
 			}
 		}
-		if (StateRandom === 2) {
+		if (StateRandom === 3) {
 			State = 'Haryana';
-			CityRandom = usuario.getRandomNumber(2, 3);
+			CityRandom = usuario.getRandomNumber(1, 2);
 			usuario.datos.selectCity().click();
 			usuario.datos.selectCity2().eq(CityRandom).click({ force: true });
-			if (CityRandom === 2) {
+			if (CityRandom === 1) {
 				City = 'Karnal';
 			}
-			if (CityRandom === 3) {
+			if (CityRandom === 2) {
 				City = 'Panipat';
 			}
 		}
-		if (StateRandom === 3) {
+		if (StateRandom === 4) {
 			State = 'Rajasthan';
-			CityRandom = usuario.getRandomNumber(2, 3);
+			CityRandom = usuario.getRandomNumber(1, 2);
 			usuario.datos.selectCity().click();
 			usuario.datos.selectCity2().eq(CityRandom).click();
-			if (CityRandom === 2) {
+			if (CityRandom === 1) {
 				City = 'Jaipur';
 			}
-			if (CityRandom === 3) {
+			if (CityRandom === 2) {
 				City = 'Jaiselmer';
 			}
 		}
@@ -289,64 +289,64 @@ describe('US GX-23698 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 			fechaSeleccionada = `${dia} ${mes},${anio}`;
 		}
 
-		let StateRandom = usuario.getRandomNumber(0, 3);
+		let StateRandom = usuario.getRandomNumber(1, 4);
 		usuario.datos.selectState().click();
 		usuario.datos.selectState2().eq(StateRandom).click({ force: true });
 		let CityRandom;
 		let State;
 		let City;
 
-		if (StateRandom === 0) {
+		if (StateRandom === 1) {
 			State = 'NCR';
-			CityRandom = usuario.getRandomNumber(2, 4);
+			CityRandom = usuario.getRandomNumber(1, 3);
 			usuario.datos.selectCity().click();
 			usuario.datos.selectCity2().eq(CityRandom).click({ force: true });
-			if (CityRandom === 2) {
+			if (CityRandom === 1) {
 				City = 'Delhi';
 			}
-			if (CityRandom === 3) {
+			if (CityRandom === 2) {
 				City = 'Gurgaon';
 			}
-			if (CityRandom === 4) {
+			if (CityRandom === 3) {
 				City = 'Noida';
 			}
 		}
-		if (StateRandom === 1) {
+		if (StateRandom === 2) {
 			State = 'Uttar Pradesh';
-			CityRandom = usuario.getRandomNumber(2, 4);
+			CityRandom = usuario.getRandomNumber(1, 3);
 			usuario.datos.selectCity().click();
 			usuario.datos.selectCity2().eq(CityRandom).click({ force: true });
-			if (CityRandom === 2) {
+			if (CityRandom === 1) {
 				City = 'Agra';
 			}
-			if (CityRandom === 3) {
+			if (CityRandom === 2) {
 				City = 'Lucknow';
 			}
-			if (CityRandom === 4) {
+			if (CityRandom === 3) {
 				City = 'Merrut';
 			}
 		}
-		if (StateRandom === 2) {
+		if (StateRandom === 3) {
 			State = 'Haryana';
-			CityRandom = usuario.getRandomNumber(2, 3);
+			CityRandom = usuario.getRandomNumber(1, 2);
 			usuario.datos.selectCity().click();
 			usuario.datos.selectCity2().eq(CityRandom).click({ force: true });
-			if (CityRandom === 2) {
+			if (CityRandom === 1) {
 				City = 'Karnal';
 			}
-			if (CityRandom === 3) {
+			if (CityRandom === 2) {
 				City = 'Panipat';
 			}
 		}
-		if (StateRandom === 3) {
+		if (StateRandom === 4) {
 			State = 'Rajasthan';
-			CityRandom = usuario.getRandomNumber(2, 3);
+			CityRandom = usuario.getRandomNumber(1, 2);
 			usuario.datos.selectCity().click();
 			usuario.datos.selectCity2().eq(CityRandom).click();
-			if (CityRandom === 2) {
+			if (CityRandom === 1) {
 				City = 'Jaipur';
 			}
-			if (CityRandom === 3) {
+			if (CityRandom === 2) {
 				City = 'Jaiselmer';
 			}
 		}
