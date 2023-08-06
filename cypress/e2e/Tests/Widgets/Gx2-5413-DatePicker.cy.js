@@ -2,6 +2,7 @@ import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
 import the from '@data/GX2-5413-DatePicker.json';
 import { DatePicker } from '@pages/Widgets/GX2-5413-DatePicker.Page';
+import { DateAndTimePicker } from '@pages/Widgets/GX2-5413-DatePicker.Page';
 
 describe('GX2-5413-✅-tools-qa-widgets-date-picker', () => {
 	beforeEach('Usuario debería estar situado en la pagina en DatePicker', () => {
@@ -135,5 +136,65 @@ describe('GX2-5413-✅-tools-qa-widgets-date-picker', () => {
 		DatePicker.get.SelectDate().type(DatePicker.RandomText()).type('{enter}');
 		//Validamos que la fecha random se ha ingresado correctamente
 		DatePicker.get.SelectDate().should('be.visible').and('be.empty');
+	});
+	it('5414 | TC06: Validar seleccionar una fecha aleatoria del campo “Date And Time”.', () => {
+		//Validamos que la fecha por default es la fecha actual
+		DateAndTimePicker.get.DateAndTime().should('have.value', DateAndTimePicker.currentDateAndTime());
+		//Seleccionamos Date and Time
+		DateAndTimePicker.ClickOnDateAndTime();
+		//Seleccionamos una Año random
+		DateAndTimePicker.SelectedRandomYear();
+		//Validamos que el Año random esté  seleccionado
+		DateAndTimePicker.get
+			.Year()
+			.invoke('text')
+			.then(Year => {
+				expect(Year).to.equal(Cypress.env('DateYear').toString());
+			});
+		DateAndTimePicker.get.Year().click();
+		DateAndTimePicker.get.YearSelect().should('contain', the.checkMark).click();
+		//Seleccionamos un Mes random
+		DateAndTimePicker.SelectedRandomMonth();
+		//Validamos que el Mes random esté seleccionado
+		DateAndTimePicker.get
+			.Month()
+			.invoke('text')
+			.then(Month => {
+				expect(Month).to.equal(Cypress.env('DateMonth').toString());
+			});
+		DateAndTimePicker.get.Month().click();
+		DateAndTimePicker.get.MonthSelect().should('contain', the.checkMark).click();
+		//Seleccionamos un Día random
+		DateAndTimePicker.SelectedRandomDay();
+		//Validamos que el Día random esté seleccionado
+		DateAndTimePicker.get.Day().then(() => {
+			DateAndTimePicker.get
+				.Day()
+				.contains(Cypress.env('DateDay'))
+				.should('contain.class', the.selectedDay)
+				.and('contain.text', Cypress.env('DateDay').toString())
+				.and('be.visible')
+				.click();
+		});
+		//Seleccionamos una Hora random
+		DateAndTimePicker.SelectedRandomTime();
+		//Validamos que la Hora esté seleccionada
+		DateAndTimePicker.ClickOnDateAndTime();
+		DateAndTimePicker.get.TimeList().then(() => {
+			DateAndTimePicker.get
+				.TimeItem()
+				.contains(Cypress.env('DateTime'))
+				.should('contain.class', the.selectedTime)
+				.and('contain.text', Cypress.env('DateTime').toString())
+				.and('be.visible')
+				.click();
+		});
+		//Validamos que la fecha aleatoria seleccionada se visualiza correctamente
+		DateAndTimePicker.get
+			.DateAndTime()
+			.invoke('val')
+			.then(dateValue => {
+				expect(dateValue).to.contain(DateAndTimePicker.ExpectedDate());
+			});
 	});
 });
