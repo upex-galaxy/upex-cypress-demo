@@ -121,6 +121,7 @@ describe('GX2-5413-✅-tools-qa-widgets-date-picker', () => {
 		//Seleccionamos Date and Time
 		DateAndTimePicker.ClickOnDateAndTime();
 		//Seleccionamos una Año random
+		DateAndTimePicker.ClickOnYear();
 		DateAndTimePicker.SelectedRandomYear();
 		//Validamos que el Año random esté  seleccionado
 		DateAndTimePicker.get
@@ -129,7 +130,7 @@ describe('GX2-5413-✅-tools-qa-widgets-date-picker', () => {
 			.then(Year => {
 				expect(Year).to.equal(Cypress.env('DateYear').toString());
 			});
-		DateAndTimePicker.get.Year().click();
+		DateAndTimePicker.ClickOnYear();
 		DateAndTimePicker.get.YearSelect().should('contain', the.checkMark).click();
 		//Seleccionamos un Mes random
 		DateAndTimePicker.SelectedRandomMonth();
@@ -218,5 +219,17 @@ describe('GX2-5413-✅-tools-qa-widgets-date-picker', () => {
 			.then(dateValue => {
 				expect(dateValue).to.equal(DateAndTimePicker.ExpectedArrowButtonDate());
 			});
+	});
+	it('5414 | TC09: Validar seleccionar una fecha aleatoria del campo “Date And Time” usando el botón “up year”', () => {
+		DateAndTimePicker.ClickOnDateAndTime();
+		DateAndTimePicker.ClickOnYear();
+		DateAndTimePicker.ListOfTheYear();
+		DateAndTimePicker.ClickOnUpYear();
+		DateAndTimePicker.SelectedRandomYear();
+		//Validamos que la lista de años a seleccionar han cambiado
+		DateAndTimePicker.ActualListYear();
+		DateAndTimePicker.get.YearOption().then(() => {
+			expect(Cypress.env('ActualList')).to.not.equal(Cypress.env('DefaultList'));
+		});
 	});
 });

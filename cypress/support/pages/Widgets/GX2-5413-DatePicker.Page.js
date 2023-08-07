@@ -137,6 +137,7 @@ class DateAndTime {
 		TimeItem: () => cy.get('li[class*="time-list-item "]'),
 		RightArrow: () => cy.get('[class$="navigation--next--with-time"]'),
 		LeftArrow: () => cy.get('[class$="navigation--previous"]'),
+		UpYear: () => cy.get('a[class$="navigation--years-upcoming"]'),
 	};
 
 	currentDateAndTime() {
@@ -152,8 +153,11 @@ class DateAndTime {
 		this.get.DateAndTime().click();
 	}
 
-	SelectedRandomYear() {
+	ClickOnYear() {
 		this.get.Year().click();
+	}
+
+	SelectedRandomYear() {
 		this.get.YearOption().then(length => {
 			let randomYear = Cypress._.random(1, length.length - 2);
 			this.get
@@ -286,6 +290,36 @@ class DateAndTime {
 		let prueba = this.ChangeTimeFormat();
 		const expectedDate = Cypress.env('ActualMonth') + ' ' + Cypress.env('DateDay') + ', ' + Cypress.env('ActualYear') + ' ' + prueba;
 		return expectedDate;
+	}
+
+	ClickOnUpYear() {
+		let clicks = Cypress._.random(6, 30);
+		cy.log(clicks);
+		let i = 0;
+		while (i < clicks) {
+			this.get.UpYear().click();
+			i = i + 1;
+		}
+	}
+
+	ListOfTheYear() {
+		let List = [];
+		DateAndTimePicker.get.YearOption().each(item => {
+			cy.log(item.text());
+			List.push(item.text());
+		});
+		Cypress.env('DefaultList', List);
+		return List;
+	}
+
+	ActualListYear() {
+		this.ClickOnYear();
+		let List = [];
+		DateAndTimePicker.get.YearOption().each(item => {
+			cy.log(item.text());
+			List.push(item.text());
+		});
+		return Cypress.env('ActualList', List);
 	}
 }
 
