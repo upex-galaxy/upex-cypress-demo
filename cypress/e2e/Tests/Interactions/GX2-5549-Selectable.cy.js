@@ -1,4 +1,4 @@
-describe('✅ToolsQA | Interactions | Selectable', () => {
+describe('✅ToolsQA | Widgets | Dropdown - Select Menu', () => {
 	beforeEach('visitar la página de Demo QA', () => {
 		selectable.urlVisit();
 		cy.url().should('contain', 'selectable');
