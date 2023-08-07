@@ -61,27 +61,16 @@ describe('GX2-5413-✅-tools-qa-widgets-date-picker', () => {
 			.Month()
 			.invoke('val')
 			.then(Month => {
-				expect(Month).to.equal(Cypress.env('NextsMonth').toString());
+				expect(Month).to.equal(Cypress.env('ActualMonth').toString());
 			});
 		//Seleccionamos un Día random
 		DatePicker.SelectRandomDay();
-		//Validamos que el Día random esté seleccionado
-		DatePicker.ClickOnSelectDate();
-		DatePicker.get.Day().then(() => {
-			DatePicker.get
-				.Day()
-				.contains(Cypress.env('RandomDay'))
-				.should('contain.class', the.selectedDay)
-				.and('contain.text', Cypress.env('RandomDay').toString())
-				.and('be.visible')
-				.click();
-		});
 		//Validamos que la fecha seleccionada no es igual a la fecha default
 		DatePicker.get
 			.SelectDate()
 			.invoke('val')
 			.then(dateValue => {
-				expect(dateValue).to.not.equal(DatePicker.CurrentDate());
+				expect(dateValue).to.equal(DatePicker.ExpectedArrowButtonDate());
 			});
 	});
 	it('5414 | TC03: Validar seleccionar una fecha aleatoria del campo “Select Date” usando el botón “left arrow button”.', () => {
@@ -92,27 +81,16 @@ describe('GX2-5413-✅-tools-qa-widgets-date-picker', () => {
 			.Month()
 			.invoke('val')
 			.then(Month => {
-				expect(Month).to.equal(Cypress.env('PreviousMonth').toString());
+				expect(Month).to.equal(Cypress.env('ActualMonth').toString());
 			});
 		//Seleccionamos un Día random
 		DatePicker.SelectRandomDay();
-		//Validamos que el Día random esté seleccionado
-		DatePicker.ClickOnSelectDate();
-		DatePicker.get.Day().then(() => {
-			DatePicker.get
-				.Day()
-				.contains(Cypress.env('RandomDay'))
-				.should('contain.class', the.selectedDay)
-				.and('contain.text', Cypress.env('RandomDay').toString())
-				.and('be.visible')
-				.click();
-		});
-		//Validamos que la fecha seleccionada no es igual a la fecha default
+		//Validamos que la fecha fue seleccionada correctamente
 		DatePicker.get
 			.SelectDate()
 			.invoke('val')
 			.then(dateValue => {
-				expect(dateValue).to.not.equal(DatePicker.CurrentDate());
+				expect(dateValue).to.contain(DatePicker.ExpectedArrowButtonDate());
 			});
 	});
 	it('5414 | TC04: Validar tipear un fecha valida en “Select Date” y que quede seleccionada', () => {
@@ -195,6 +173,28 @@ describe('GX2-5413-✅-tools-qa-widgets-date-picker', () => {
 			.invoke('val')
 			.then(dateValue => {
 				expect(dateValue).to.contain(DateAndTimePicker.ExpectedDate());
+			});
+	});
+	it('5414 | TC07: Validar seleccionar una fecha aleatoria del campo “Date And Time” usando el botón “right arrow button”.', () => {
+		DateAndTimePicker.ClickOnDateAndTime();
+		DateAndTimePicker.ClickOnRightArrow();
+		//Validamos que el se selecciono el mes con el Button right arrow
+		DateAndTimePicker.get
+			.Month()
+			.invoke('text')
+			.then(Month => {
+				expect(Month).to.equal(Cypress.env('NextMonth').toString());
+			});
+		//Seleccionamos un Día random
+		DateAndTimePicker.SelectedRandomDay();
+		//Seleccionamos una Hora random
+		DateAndTimePicker.SelectedRandomTime();
+		//Validamos que la fue seleccionada correctamente
+		DateAndTimePicker.get
+			.DateAndTime()
+			.invoke('val')
+			.then(dateValue => {
+				expect(dateValue).to.equal(DateAndTimePicker.ExpectedArrowButtonDate());
 			});
 	});
 });

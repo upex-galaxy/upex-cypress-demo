@@ -69,8 +69,22 @@ class datePicker {
 			.Month()
 			.invoke('val')
 			.then(Month => {
-				Cypress.env('NextsMonth', Month);
+				Cypress.env('ActualMonth', Month);
 			});
+		this.get
+			.Year()
+			.invoke('val')
+			.then(Year => {
+				Cypress.env('ActualYears', Year);
+			});
+	}
+
+	ExpectedArrowButtonDate() {
+		const Month = parseInt(Cypress.env('ActualMonth')) + 1;
+		const MonthSelect = Month.toString().padStart(2, 0);
+		const DaySelect = Cypress.env('RandomDay').toString().padStart(2, 0);
+		const expectedDate = MonthSelect + '/' + DaySelect + '/' + Cypress.env('ActualYears');
+		return expectedDate;
 	}
 
 	ClickOnLeftArrow() {
@@ -85,7 +99,13 @@ class datePicker {
 			.Month()
 			.invoke('val')
 			.then(Month => {
-				Cypress.env('PreviousMonth', Month);
+				Cypress.env('ActualMonth', Month);
+			});
+		this.get
+			.Year()
+			.invoke('val')
+			.then(Year => {
+				Cypress.env('ActualYears', Year);
 			});
 	}
 
@@ -115,7 +135,7 @@ class DateAndTime {
 		Day: () => cy.get('[class^="react-datepicker__day react-datepicker__day"]:not([class$="outside-month"])'),
 		TimeList: () => cy.get('ul[class$="time-list"]'),
 		TimeItem: () => cy.get('li[class*="time-list-item "]'),
-		RightArrow: () => cy.get('[class$="navigation--next"]'),
+		RightArrow: () => cy.get('[class$="navigation--next--with-time"]'),
 		LeftArrow: () => cy.get('[class$="navigation--previous"]'),
 	};
 
@@ -215,6 +235,34 @@ class DateAndTime {
 	ExpectedDate() {
 		let prueba = this.ChangeTimeFormat();
 		const expectedDate = Cypress.env('DateMonth') + ' ' + Cypress.env('DateDay') + ', ' + Cypress.env('DateYear') + ' ' + prueba;
+		return expectedDate;
+	}
+
+	ClickOnRightArrow() {
+		let clicks = Cypress._.random(1, 12);
+		cy.log(clicks);
+		let i = 0;
+		while (i < clicks) {
+			this.get.RightArrow().click();
+			i = i + 1;
+		}
+		this.get
+			.Month()
+			.invoke('text')
+			.then(Month => {
+				Cypress.env('NextMonth', Month);
+			});
+		this.get
+			.Year()
+			.invoke('text')
+			.then(Year => {
+				Cypress.env('ActualYear', Year);
+			});
+	}
+
+	ExpectedArrowButtonDate() {
+		let prueba = this.ChangeTimeFormat();
+		const expectedDate = Cypress.env('NextMonth') + ' ' + Cypress.env('DateDay') + ', ' + Cypress.env('ActualYear') + ' ' + prueba;
 		return expectedDate;
 	}
 }
