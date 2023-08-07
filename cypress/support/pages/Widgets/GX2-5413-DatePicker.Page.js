@@ -250,7 +250,29 @@ class DateAndTime {
 			.Month()
 			.invoke('text')
 			.then(Month => {
-				Cypress.env('NextMonth', Month);
+				Cypress.env('ActualMonth', Month);
+			});
+		this.get
+			.Year()
+			.invoke('text')
+			.then(Year => {
+				Cypress.env('ActualYear', Year);
+			});
+	}
+
+	ClickOnLeftArrow() {
+		let clicks = Cypress._.random(1, 12);
+		cy.log(clicks);
+		let i = 0;
+		while (i < clicks) {
+			this.get.LeftArrow().click();
+			i = i + 1;
+		}
+		this.get
+			.Month()
+			.invoke('text')
+			.then(Month => {
+				Cypress.env('ActualMonth', Month);
 			});
 		this.get
 			.Year()
@@ -262,7 +284,7 @@ class DateAndTime {
 
 	ExpectedArrowButtonDate() {
 		let prueba = this.ChangeTimeFormat();
-		const expectedDate = Cypress.env('NextMonth') + ' ' + Cypress.env('DateDay') + ', ' + Cypress.env('ActualYear') + ' ' + prueba;
+		const expectedDate = Cypress.env('ActualMonth') + ' ' + Cypress.env('DateDay') + ', ' + Cypress.env('ActualYear') + ' ' + prueba;
 		return expectedDate;
 	}
 }

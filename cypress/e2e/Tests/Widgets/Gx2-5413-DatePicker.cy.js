@@ -183,7 +183,29 @@ describe('GX2-5413-✅-tools-qa-widgets-date-picker', () => {
 			.Month()
 			.invoke('text')
 			.then(Month => {
-				expect(Month).to.equal(Cypress.env('NextMonth').toString());
+				expect(Month).to.equal(Cypress.env('ActualMonth').toString());
+			});
+		//Seleccionamos un Día random
+		DateAndTimePicker.SelectedRandomDay();
+		//Seleccionamos una Hora random
+		DateAndTimePicker.SelectedRandomTime();
+		//Validamos que la fue seleccionada correctamente
+		DateAndTimePicker.get
+			.DateAndTime()
+			.invoke('val')
+			.then(dateValue => {
+				expect(dateValue).to.equal(DateAndTimePicker.ExpectedArrowButtonDate());
+			});
+	});
+	it('5414 | TC08: Validar seleccionar una fecha aleatoria del campo “Date And Time” usando el botón “left arrow button”.', () => {
+		DateAndTimePicker.ClickOnDateAndTime();
+		DateAndTimePicker.ClickOnLeftArrow();
+		//Validamos que el se selecciono el mes con el Button Left arrow
+		DateAndTimePicker.get
+			.Month()
+			.invoke('text')
+			.then(Month => {
+				expect(Month).to.equal(Cypress.env('ActualMonth').toString());
 			});
 		//Seleccionamos un Día random
 		DateAndTimePicker.SelectedRandomDay();
