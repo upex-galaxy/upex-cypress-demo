@@ -138,6 +138,7 @@ class DateAndTime {
 		RightArrow: () => cy.get('[class$="navigation--next--with-time"]'),
 		LeftArrow: () => cy.get('[class$="navigation--previous"]'),
 		UpYear: () => cy.get('a[class$="navigation--years-upcoming"]'),
+		DownYear: () => cy.get('a[class$="navigation--years-previous"]'),
 	};
 
 	currentDateAndTime() {
@@ -320,6 +321,16 @@ class DateAndTime {
 			List.push(item.text());
 		});
 		return Cypress.env('ActualList', List);
+	}
+
+	ClickOnDownYear() {
+		let clicks = Cypress._.random(6, 30);
+		cy.log(clicks);
+		let i = 0;
+		while (i < clicks) {
+			this.get.DownYear().click();
+			i = i + 1;
+		}
 	}
 }
 

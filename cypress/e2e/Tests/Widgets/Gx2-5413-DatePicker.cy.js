@@ -232,4 +232,16 @@ describe('GX2-5413-✅-tools-qa-widgets-date-picker', () => {
 			expect(Cypress.env('ActualList')).to.not.equal(Cypress.env('DefaultList'));
 		});
 	});
+	it('5414 | TC10: Validar seleccionar una fecha aleatoria del campo “Date And Time” usando el botón “down year”', () => {
+		DateAndTimePicker.ClickOnDateAndTime();
+		DateAndTimePicker.ClickOnYear();
+		DateAndTimePicker.ListOfTheYear();
+		DateAndTimePicker.ClickOnDownYear();
+		DateAndTimePicker.SelectedRandomYear();
+		//Validamos que la lista de años a seleccionar han cambiado
+		DateAndTimePicker.ActualListYear();
+		DateAndTimePicker.get.YearOption().then(() => {
+			expect(Cypress.env('ActualList')).to.not.equal(Cypress.env('DefaultList'));
+		});
+	});
 });
