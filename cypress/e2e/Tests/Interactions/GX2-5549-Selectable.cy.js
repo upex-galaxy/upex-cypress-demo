@@ -1,5 +1,5 @@
 describe('✅ToolsQA | Widgets | Dropdown - Select Menu', () => {
-	beforeEach('visitar la página de Demo QA', () => {
+	beforeEach('Visitar la página', () => {
 		selectable.urlVisit();
 		cy.url().should('contain', 'selectable');
 	});
