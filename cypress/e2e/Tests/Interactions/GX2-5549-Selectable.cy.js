@@ -3,7 +3,7 @@ describe('✅ToolsQA | Widgets | Dropdown - Select Menu', () => {
 		selectable.urlVisit();
 		cy.url().should('contain', 'selectable');
 	});
-	it.only('5550 | TC1: Validar que el elemento “List” tenga el funcionamiento correcto al seleccionarse.', () => {
+	it('5550 | TC1: Validar que el elemento “List” tenga el funcionamiento correcto al seleccionarse.', () => {
 		selectable.btnListClick();
 		selectable.get.btnList().should('have.attr', 'aria-selected', 'true');
 		selectable.elementsListClick();
