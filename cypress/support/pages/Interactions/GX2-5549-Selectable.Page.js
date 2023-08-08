@@ -15,14 +15,14 @@ class Selectable {
 	}
 
 	btnGridClick() {
-		this.get.bttnList().click();
+		this.get.btnGrid().click();
 	}
 
 	elementsListClick() {
-		this.get.elementsList().click();
+		this.get.elementsList().click({ multiple: true });
 	}
 	elementsGridClick() {
-		this.get.elementsGrid().click();
+		this.get.elementsGrid().click({ multiple: true });
 	}
 }
 
