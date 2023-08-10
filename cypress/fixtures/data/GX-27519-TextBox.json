@@ -1,0 +1,42 @@
+{
+	"fullName": {
+		"input": "input#userName",
+		"data": {
+			"empty": null,
+			"valid": "Lucas"
+		},
+		"output": ".output.fullName"
+	},
+	"email": {
+		"input": "input#userEmail",
+		"data": {
+			"empty": null,
+			"valid": "l@A.30",
+			"invalid": {
+				"not_@": "l.co",
+				"not_*@": "@mail.com",
+				"not_@*": "lucas@.com",
+				"not_@*.": "lucas@mailcom",
+				"not_.**": "lucas@mail.a"
+			}
+		},
+		"output": ".output.email"
+	},
+	"currentAddress": {
+		"input": "textArea#currentAddress",
+		"data": {
+			"empty": null,
+			"valid": "Av. Siempreviva 742 - Springfield"
+		},
+		"output": ".output.currentAddress"
+	},
+	"permanentAddress": {
+		"input": "textArea#permanentAddress",
+		"data": {
+			"empty": null,
+			"valid": "Eveergrenn Terrace 742 - Spingfield 00"
+		},
+		"output": ".output.permanentAddress"
+	},
+	"buttonSubmit": "#submit"
+}
