@@ -1,8 +1,0 @@
-{
-	"uno": "div.vertical-list-container').children().eq(0)",
-	"dos": "div.vertical-list-container').children().eq(1)",
-	"tres": "div.vertical-list-container').children().eq(2)",
-	"cuatro": "div.vertical-list-container').children().eq(3)",
-	"cinco": "div.vertical-list-container').children().eq(4)",
-	"seis": "div.vertical-list-container').children().eq(5)"
-}

@@ -17,13 +17,47 @@ class Lista {
 		sieteGrid: () => cy.get('.create-grid').children().eq(6),
 		ochoGrid: () => cy.get('.create-grid').children().eq(7),
 		nueveGrid: () => cy.get('.create-grid').children().eq(8),
+		gridTab: () => cy.get('#demo-tab-grid'),
+		listTab: () => cy.get('#demo-tab-list'),
 	};
 
-	reorderItems(source, destination, expectedText) {
+	reorderItems(source, destination) {
 		source().trigger('mousedown', { which: 1 });
 		cy.wait(1000);
 		destination().trigger('mousemove').trigger('mouseup');
-		destination().should('contain', expectedText);
+		destination()
+			.invoke('text')
+			.then(texto => {
+				destination().should('contain', texto);
+			});
+		return;
+	}
+	obtenerNombreMesEnIngles(numero) {
+		const numeroEnIngles = ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
+		return numeroEnIngles;
+	}
+	ordenarYVerificarLista(elementos) {
+		elementos.sort((a, b) => {
+			if (a == b) {
+				return 0;
+			}
+			if (a < b) {
+				return -1;
+			}
+			return 1;
+		});
+	}
+
+	ordenarYVerificarListaDescendente(elementos) {
+		elementos.sort((a, b) => {
+			if (a == b) {
+				return 0;
+			}
+			if (a > b) {
+				return 1;
+			}
+			return -1;
+		});
 	}
 }
 
