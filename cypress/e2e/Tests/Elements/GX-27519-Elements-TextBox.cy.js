@@ -18,7 +18,7 @@ describe('TS#27520 : ✅ToolsQA | Elements | Text Box: Fill form and Submit', ()
 		cy.get(data.currentAddress.output).should('not.exist');
 		cy.get(data.permanentAddress.output).should('not.exist');
 	});
-	it('US # | TC#2: 27520 | Validatgit e submit form with valid data', () => {
+	it('US # | TC#2: 27520 | Validate submit form with valid data', () => {
 		//complete Form
 		cy.get(data.fullName.input).type(data.fullName.data.valid);
 		cy.get(data.fullName.input).should('have.value', data.fullName.data.valid);
