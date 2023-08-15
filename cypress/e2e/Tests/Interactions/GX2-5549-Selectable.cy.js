@@ -7,15 +7,21 @@ describe('✅ToolsQA | Widgets | Dropdown - Select Menu', () => {
 		selectable.btnListClick();
 		selectable.get.btnList().should('have.attr', 'aria-selected', 'true');
 		selectable.elementsListClick();
-		selectable.get.elementsList().should('contain', 'Cras justo odio');
+		selectable.get.elementsList().each(Elementos => {
+			cy.wrap(Elementos).should('have.class', data.active);
+		});
 	});
 	it('5550 | TC2: Validar que el elemento “List” tenga el funcionamiento correcto al deseleccionarse.', () => {
 		selectable.btnListClick();
 		selectable.get.btnList().should('have.attr', 'aria-selected', 'true');
 		selectable.elementsListClick();
-		selectable.get.elementsList().should('contain', 'Cras justo odio');
+		selectable.get.elementsList().each(Elementos => {
+			cy.wrap(Elementos).should('have.class', data.active);
+		});
 		selectable.elementsListClick();
-		selectable.get.elementsList().should('contain', 'Dapibus ac facilisis in');
+		selectable.get.elementsList().each(Elementos => {
+			cy.wrap(Elementos).should('not.have.class', data.active);
+		});
 	});
 	it('5550 | TC3: Validar que el elemento “Grid” tenga el funcionamiento correcto al seleccionarse.', () => {
 		selectable.btnGridClick();
@@ -36,4 +42,6 @@ describe('✅ToolsQA | Widgets | Dropdown - Select Menu', () => {
 import { selectable } from '@pages/Interactions/GX2-5549-Selectable.Page';
 
 import { removeLogs } from '@helper/RemoveLogs';
+
+import data from '@data/GX2-5549-Selectable.json';
 removeLogs();

@@ -19,10 +19,14 @@ class Selectable {
 	}
 
 	elementsListClick() {
-		this.get.elementsList().click({ multiple: true });
+		this.get.elementsList().each(Elementos => {
+			cy.wrap(Elementos).click();
+		});
 	}
 	elementsGridClick() {
-		this.get.elementsGrid().click({ multiple: true });
+		this.get.elementsGrid().each(Elementos => {
+			cy.wrap(Elementos).click();
+		});
 	}
 }
 
