@@ -1,10 +1,10 @@
 import data from '../../../fixtures/data/GX-27519-TextBox.json';
-describe('TS#27520 : ✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
+describe('27520 : ✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	beforeEach('Precondition: user should be stay in register page', () => {
 		cy.visit('https://demoqa.com/text-box'); // Esto es un Comando de Acción directa
 		cy.url().should('contain', 'text-box');
 	});
-	it('US # | TC#1: 27520 | Validate submit form with empty data', () => {
+	it('27519 | TC01: Validate submit form with empty data', () => {
 		//complete Form
 		cy.get(data.fullName.input).should('be.empty');
 		cy.get(data.email.input).should('be.empty');
@@ -18,7 +18,7 @@ describe('TS#27520 : ✅ToolsQA | Elements | Text Box: Fill form and Submit', ()
 		cy.get(data.currentAddress.output).should('not.exist');
 		cy.get(data.permanentAddress.output).should('not.exist');
 	});
-	it('US # | TC#2: 27520 | Validatgit e submit form with valid data', () => {
+	it('27519 | TC02: Validate submit form with valid data', () => {
 		//complete Form
 		cy.get(data.fullName.input).type(data.fullName.data.valid);
 		cy.get(data.fullName.input).should('have.value', data.fullName.data.valid);
@@ -36,7 +36,7 @@ describe('TS#27520 : ✅ToolsQA | Elements | Text Box: Fill form and Submit', ()
 		cy.get(data.currentAddress.output).should('contain', data.currentAddress.data.valid);
 		cy.get(data.permanentAddress.output).should('contain', data.permanentAddress.data.valid);
 	});
-	it('US # | TC#3: 27520 | Validate not submit form when email not contain “@”', () => {
+	it('27519 | TC03: Validate not submit form when email not contain “@”', () => {
 		//complete Form
 		cy.get(data.fullName.input).type(data.fullName.data.validNumber);
 		cy.get(data.fullName.input).should('have.value', data.fullName.data.validNumber);
@@ -55,7 +55,7 @@ describe('TS#27520 : ✅ToolsQA | Elements | Text Box: Fill form and Submit', ()
 		cy.get(data.currentAddress.output).should('not.exist');
 		cy.get(data.permanentAddress.output).should('not.exist');
 	});
-	it('US # | TC#4: 27520 | Validate not submit form when email not contain (minimum) 1 alphanumeric character before “@”', () => {
+	it('27519 | TC04: Validate not submit form when email not contain (minimum) 1 alphanumeric character before “@”', () => {
 		//complete Form
 		cy.get(data.fullName.input).type(data.fullName.data.stringSpace);
 		cy.get(data.fullName.input).should('have.value', data.fullName.data.stringSpace);
@@ -74,7 +74,7 @@ describe('TS#27520 : ✅ToolsQA | Elements | Text Box: Fill form and Submit', ()
 		cy.get(data.currentAddress.output).should('not.exist');
 		cy.get(data.permanentAddress.output).should('not.exist');
 	});
-	it('US # | TC#5: 27520 | Validate not submit form when email not contain (minimum) 1 alphanumeric character after “@”', () => {
+	it('27519 | TC05: Validate not submit form when email not contain (minimum) 1 alphanumeric character after “@”', () => {
 		//complete Form
 		cy.get(data.fullName.input).should('be.empty');
 		cy.get(data.email.input).type(data.email.data.invalid.not_Char_At);
@@ -90,7 +90,7 @@ describe('TS#27520 : ✅ToolsQA | Elements | Text Box: Fill form and Submit', ()
 		cy.get(data.currentAddress.output).should('not.exist');
 		cy.get(data.permanentAddress.output).should('not.exist');
 	});
-	it('US # | TC#6: 27520 | Validate not submit form when email not contain “.” after: 1 alphanumeric character after “@”', () => {
+	it('27519 | TC06: Validate not submit form when email not contain “.” after: 1 alphanumeric character after “@”', () => {
 		//complete Form
 		cy.get(data.fullName.input).should('be.empty');
 		cy.get(data.email.input).type(data.email.data.invalid.not_At_Char_Point);
@@ -106,7 +106,7 @@ describe('TS#27520 : ✅ToolsQA | Elements | Text Box: Fill form and Submit', ()
 		cy.get(data.currentAddress.output).should('not.exist');
 		cy.get(data.permanentAddress.output).should('not.exist');
 	});
-	it('US # | TC#7: 27520 | Validate not submit form when email not contain (minimum) 2 alphanumeric characters after “.”', () => {
+	it('27519 | TC07: Validate not submit form when email not contain (minimum) 2 alphanumeric characters after “.”', () => {
 		//complete Form
 		cy.get(data.fullName.input).should('be.empty');
 		cy.get(data.email.input).type(data.email.data.invalid.not_Point_Char_Char);
