@@ -3,23 +3,18 @@
 # 🧪Consiste en ejecutar TODOS los tests del Repo e importar los resultados a Jira!🚀
 # 👩🏻‍🔬Este Pipeline de CI NO DEBE EDITARSE sin permiso del QA Lead.
 
-name: 🤖CI run Regression in QA🧪
-run-name: ${{github.actor}}👨🏻‍🔬 run Regression in ${{github.ref_name}}
+name: CI run Regression in Parallel
+run-name: ${{github.actor}} CI run Regression in Parallel ${{github.ref_name}}
 
 on:
     push:
         branches:
-            - QA
+            - TX-Parallel
 
-jobs:
-    RegressionTest:
-        name: regression
-        runs-on: ubuntu-latest
-
-        steps:
-            - name: 💻Checkout
+.before_script_template: &before_script_precondition
+  before_script:
+    - name: 💻Checkout
               uses: actions/checkout@v3
-
             - name: 💿Install Node.js
               uses: actions/setup-node@v3
               with:
@@ -34,34 +29,9 @@ jobs:
               run: |
                   yarn
 
-            - name: 🔌Cucumber Preprocessor JSON Setup
-              uses: DamianReeves/write-file-action@master
-              with:
-                  write-mode: overwrite
-                  path: .cypress-cucumber-preprocessorrc.json
-                  contents: |
-                      {
-                        "nonGlobalStepDefinitions": true,
-                        "stepDefinitions": "cypress/e2e/cucumber-test/stepDefinitions/*.{js,ts}",
-                        "json": {
-                          "enabled": false,
-                          "formatter": "./cucumber-formatter/cucumber-json-formatter",
-                          "output": "./reports/cucumber-report.json"
-                        },
-                        "messages": {
-                          "enabled": false,
-                          "output": "./reports/cucumber-messages.ndjson"
-                        }
-                      }
-
-            - name: 🧪Cypress E2E Regression Test in Chrome
-              uses: cypress-io/github-action@v4
-              with:
-                  browser: chrome
-                  command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
-                      yarn regression
-
-            - name: 📬Generate XML Regression Report
+.after_script_template: &after_script_report_and_slack
+  after_script:
+                - name: 📬Generate XML Regression Report
               if: always()
               run: |
                   yarn report:xml
@@ -89,53 +59,57 @@ jobs:
                   name: regression-allure-report
                   path: reports/allure-report
 
-            - name: 🔔Slack Notification of Done
-              if: always()
-              uses: rtCamp/action-slack-notify@v2.2.0
-              env:
-                  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-                  SLACK_USERNAME: Ari✨
-                  SLACK_MESSAGE: ':test_tube: Tests run in ToolsQA: Regression Testing is Done and updated in Jira :rocket:'
-                  SLACK_COLOR: ${{ job.status }}
-                  SLACK_ICON: https://i.imgur.com/q9kvQCp_d.webp?maxwidth=760&fidelity=grand
-
-    Create-PullRequest:
-        needs: [RegressionTest]
+jobs:
+    RegressionTest:
+        name: regression
         runs-on: ubuntu-latest
-        steps:
-            - name: Create Pull Request
-              uses: actions/github-script@v6
-              with:
-                  script: |
-                      const { repo, owner } = context.repo;
-                      const result = await github.rest.pulls.create({
-                      title: '✅[QA REGRESSION PASSED]: Ready to Merge into MAIN',
-                      owner,
-                      repo,
-                      head: '${{ github.ref_name }}',
-                      base: 'main',
-                      body: [
-                          'Update branch by Automation Pipeline',
-                          '- (CI) Build Test Execution is Done✅',
-                          '- (CI) Integration-Regression Report is Done✅',
-                          '- (TestResults) No Conflicts in Repo Branch QA✅ '
-                      ].join('\n')
-                      });
-                      github.rest.issues.addLabels({
-                      owner,
-                      repo,
-                      issue_number: result.data.number,
-                      labels: ['autoPullRequest']
-                      });
 
-    AutoMerge-into-Main:
-        needs: [Create-PullRequest]
-        runs-on: ubuntu-latest
         steps:
-            - name: 🧬Merge QA -> MAIN
-              uses: devmasx/merge-branch@master
+          <<: *before_script_precondition
+            - name: 🧪Cypress E2E Regression Test of Bookstore
+              uses: cypress-io/github-action@v4
               with:
-                  type: now
-                  label_name: 'autoPullRequest'
-                  target_branch: 'main' #ESTE ES LA RAMA PRINCIPAL DEL REPOSITORIO PRESENTE
-                  github_token: ${{ github.token }}
+                  browser: chrome
+                  command: |
+                      yarn regression:bookstore
+
+          <<: *after_script_report_and_slack
+                  steps:
+          <<: *before_script_precondition
+            - name: 🧪Cypress E2E Regression Test of Elements
+              uses: cypress-io/github-action@v4
+              with:
+                  browser: chrome
+                  command: |
+                      yarn regression:elements
+          <<: *after_script_report_and_slack
+
+        steps:
+          <<: *before_script_precondition
+            - name: 🧪Cypress E2E Regression Test of Forms
+              uses: cypress-io/github-action@v4
+              with:
+                  browser: chrome
+                  command: |
+                      yarn regression:forms
+          <<: *after_script_report_and_slack
+
+        steps:
+          <<: *before_script_precondition
+            - name: 🧪Cypress E2E Regression Test of Interactions
+              uses: cypress-io/github-action@v4
+              with:
+                  browser: chrome
+                  command: |
+                      yarn regression:interactions
+          <<: *after_script_report_and_slack
+
+        steps:
+          <<: *before_script_precondition
+            - name: 🧪Cypress E2E Regression Test of Widgets
+              uses: cypress-io/github-action@v4
+              with:
+                  browser: chrome
+                  command: |
+                      yarn regression:widgets
+          <<: *after_script_report_and_slack
