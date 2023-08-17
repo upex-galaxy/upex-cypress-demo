@@ -1,8 +1,3 @@
-# 🧙🏻‍♂️BIENVENIDO A LOS PIPELINES DE CONTINUOUS INTEGRATION DE "ARI - Hija de Aurora"!
-# 🤖Este Pipeline de CI se activa al hacer MERGE a la rama "QA" o "MAIN",
-# 🧪Consiste en ejecutar TODOS los tests del Repo e importar los resultados a Jira!🚀
-# 👩🏻‍🔬Este Pipeline de CI NO DEBE EDITARSE sin permiso del QA Lead.
-
 name: CI run Regression in Parallel
 run-name: ${{github.actor}} CI run Regression in Parallel ${{github.ref_name}}
 
@@ -11,47 +6,47 @@ on:
         branches:
             - TX-Parallel
 
-.before_script_template: &before_script_precondition
-  before_script:
-    - name: 💻Checkout
+jobs:
+    RegressionTestBookstore:
+        name: Regression Test - Bookstore
+        runs-on: ubuntu-latest
+        steps:
+            # Setup steps
+            - name: 💻Checkout
               uses: actions/checkout@v3
             - name: 💿Install Node.js
               uses: actions/setup-node@v3
               with:
                   node-version: 16
-
             - name: 💿Yarn Setup
               uses: DerYeger/yarn-setup-action@master
               with:
                   node-version: 16
-
             - name: 🧬Install All Dependencies
-              run: |
-                  yarn
-
-.after_script_template: &after_script_report_and_slack
-  after_script:
-                - name: 📬Generate XML Regression Report
+              run: yarn
+            # Test step
+            - name: 🧪Cypress E2E Regression Test of Bookstore
+              uses: cypress-io/github-action@v4
+              with:
+                  browser: chrome
+                  command: yarn regression:bookstore
+            # After script steps
+            - name: 📬Generate XML Regression Report
               if: always()
-              run: |
-                  yarn report:xml
-
+              run: yarn report:xml
             - name: ✅Import Test Results to Xray
               if: always()
               uses: mikepenz/xray-action@v2
-              with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
+              with:
                   username: ${{secrets.XRAY_CLIENT_ID}}
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit'
                   testPaths: 'reports/regression-report.xml'
-                  testExecKey: 'GX-3704' #todo: ToolsQA Regression Test Plan TX
-                  projectKey: 'GX' #todo: UPEX LEVEL 1
-
+                  testExecKey: 'GX-3704'
+                  projectKey: 'GX'
             - name: 📬Generate Allure Regression Report
               if: always()
-              run: |
-                  yarn allure:ci
-
+              run: yarn allure:ci
             - name: 📊Upload Artifact Allure
               if: always()
               uses: actions/upload-artifact@v3
@@ -59,57 +54,190 @@ on:
                   name: regression-allure-report
                   path: reports/allure-report
 
-jobs:
-    RegressionTest:
-        name: regression
+    RegressionTestElements:
+        name: Regression Test - Elements
         runs-on: ubuntu-latest
-
         steps:
-          <<: *before_script_precondition
-            - name: 🧪Cypress E2E Regression Test of Bookstore
-              uses: cypress-io/github-action@v4
+            # Setup steps (same as above)
+            - name: 💻Checkout
+              uses: actions/checkout@v3
+            - name: 💿Install Node.js
+              uses: actions/setup-node@v3
               with:
-                  browser: chrome
-                  command: |
-                      yarn regression:bookstore
-
-          <<: *after_script_report_and_slack
-                  steps:
-          <<: *before_script_precondition
+                  node-version: 16
+            - name: 💿Yarn Setup
+              uses: DerYeger/yarn-setup-action@master
+              with:
+                  node-version: 16
+            - name: 🧬Install All Dependencies
+              run: yarn
+            # Test step
             - name: 🧪Cypress E2E Regression Test of Elements
               uses: cypress-io/github-action@v4
               with:
                   browser: chrome
-                  command: |
-                      yarn regression:elements
-          <<: *after_script_report_and_slack
+                  command: yarn regression:elements
+            # After script steps (same as above)
+            - name: 📬Generate XML Regression Report
+              if: always()
+              run: yarn report:xml
+            - name: ✅Import Test Results to Xray
+              if: always()
+              uses: mikepenz/xray-action@v2
+              with:
+                  username: ${{secrets.XRAY_CLIENT_ID}}
+                  password: ${{secrets.XRAY_CLIENT_SECRET}}
+                  testFormat: 'junit'
+                  testPaths: 'reports/regression-report.xml'
+                  testExecKey: 'GX-3704'
+                  projectKey: 'GX'
+            - name: 📬Generate Allure Regression Report
+              if: always()
+              run: yarn allure:ci
+            - name: 📊Upload Artifact Allure
+              if: always()
+              uses: actions/upload-artifact@v3
+              with:
+                  name: regression-allure-report
+                  path: reports/allure-report
 
+    RegressionTestForms:
+        name: Regression Test - Forms
+        runs-on: ubuntu-latest
         steps:
-          <<: *before_script_precondition
+            # Setup steps (same as above)
+            - name: 💻Checkout
+              uses: actions/checkout@v3
+            - name: 💿Install Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+            - name: 💿Yarn Setup
+              uses: DerYeger/yarn-setup-action@master
+              with:
+                  node-version: 16
+            - name: 🧬Install All Dependencies
+              run: yarn
+            # Test step
             - name: 🧪Cypress E2E Regression Test of Forms
               uses: cypress-io/github-action@v4
               with:
                   browser: chrome
-                  command: |
-                      yarn regression:forms
-          <<: *after_script_report_and_slack
-
-        steps:
-          <<: *before_script_precondition
-            - name: 🧪Cypress E2E Regression Test of Interactions
-              uses: cypress-io/github-action@v4
+                  command: yarn regression:forms
+            # After script steps (same as above)
+            - name: 📬Generate XML Regression Report
+              if: always()
+              run: yarn report:xml
+            - name: ✅Import Test Results to Xray
+              if: always()
+              uses: mikepenz/xray-action@v2
               with:
-                  browser: chrome
-                  command: |
-                      yarn regression:interactions
-          <<: *after_script_report_and_slack
-
-        steps:
-          <<: *before_script_precondition
-            - name: 🧪Cypress E2E Regression Test of Widgets
-              uses: cypress-io/github-action@v4
+                  username: ${{secrets.XRAY_CLIENT_ID}}
+                  password: ${{secrets.XRAY_CLIENT_SECRET}}
+                  testFormat: 'junit'
+                  testPaths: 'reports/regression-report.xml'
+                  testExecKey: 'GX-3704'
+                  projectKey: 'GX'
+            - name: 📬Generate Allure Regression Report
+              if: always()
+              run: yarn allure:ci
+            - name: 📊Upload Artifact Allure
+              if: always()
+              uses: actions/upload-artifact@v3
               with:
-                  browser: chrome
-                  command: |
-                      yarn regression:widgets
-          <<: *after_script_report_and_slack
+                  name: regression-allure-report
+                  path: reports/allure-report
+
+  RegressionTestInteractions:
+    name: Regression Test - Interactions
+    runs-on: ubuntu-latest
+    steps:
+      # Setup steps (same as above)
+      - name: 💻Checkout
+        uses: actions/checkout@v3
+      - name: 💿Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: 💿Yarn Setup
+        uses: DerYeger/yarn-setup-action@master
+        with:
+          node-version: 16
+      - name: 🧬Install All Dependencies
+        run: yarn
+      # Test step
+      - name: 🧪Cypress E2E Regression Test of Interactions
+        uses: cypress-io/github-action@v4
+        with:
+          browser: chrome
+          command: yarn regression:interactions
+      # After script steps (same as above)
+      - name: 📬Generate XML Regression Report
+        if: always()
+        run: yarn report:xml
+      - name: ✅Import Test Results to Xray
+        if: always()
+        uses: mikepenz/xray-action@v2
+        with:
+          username: ${{secrets.XRAY_CLIENT_ID}}
+          password: ${{secrets.XRAY_CLIENT_SECRET}}
+          testFormat: 'junit'
+          testPaths: 'reports/regression-report.xml'
+          testExecKey: 'GX-3704'
+          projectKey: 'GX'
+      - name: 📬Generate Allure Regression Report
+        if: always()
+        run: yarn allure:ci
+      - name: 📊Upload Artifact Allure
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: regression-allure-report
+          path: reports/allure-report
+
+  RegressionTestWidgets:
+    name: Regression Test - Widgets
+    runs-on: ubuntu-latest
+    steps:
+      # Setup steps (same as above)
+      - name: 💻Checkout
+        uses: actions/checkout@v3
+      - name: 💿Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: 💿Yarn Setup
+        uses: DerYeger/yarn-setup-action@master
+        with:
+          node-version: 16
+      - name: 🧬Install All Dependencies
+        run: yarn
+      # Test step
+      - name: 🧪Cypress E2E Regression Test of Widgets
+        uses: cypress-io/github-action@v4
+        with:
+          browser: chrome
+          command: yarn regression:widgets
+      # After script steps (same as above)
+      - name: 📬Generate XML Regression Report
+        if: always()
+        run: yarn report:xml
+      - name: ✅Import Test Results to Xray
+        if: always()
+        uses: mikepenz/xray-action@v2
+        with:
+          username: ${{secrets.XRAY_CLIENT_ID}}
+          password: ${{secrets.XRAY_CLIENT_SECRET}}
+          testFormat: 'junit'
+          testPaths: 'reports/regression-report.xml'
+          testExecKey: 'GX-3704'
+          projectKey: 'GX'
+      - name: 📬Generate Allure Regression Report
+        if: always()
+        run: yarn allure:ci
+      - name: 📊Upload Artifact Allure
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: regression-allure-report
+          path: reports/allure-report
