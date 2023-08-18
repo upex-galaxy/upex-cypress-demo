@@ -3,23 +3,33 @@ class Selectable {
 		endpoint: () => cy.visit('/selectable'),
 		tabList: () => cy.get('[id="demo-tab-list"]'),
 		tabGrid: () => cy.get('[id="demo-tab-grid"]'),
-		ulList: () => cy.get('[id="verticalListContainer"]'),
-		gridContainer: () => cy.get('[id="gridContainer"]'),
+		listItem: () => cy.get('#verticalListContainer li'),
+		gridItem: () => cy.get('#gridContainer li'),
 	};
-	//functions/methods
-
-	selectListTab() {
-		return this.get.tabList().click();
+	selectTabList() {
+		this.get.tabList().click();
 	}
-	selectGridTab() {
-		return this.get.buttonGrid().click();
+	selectTabGrid() {
+		this.get.tabGrid().click();
 	}
-	selectList(num) {
-		return this.get.listContainer().eq(num).click();
+	selectListItem(num) {
+		this.get.listItem().eq(num).click();
 	}
-	selectGrid(num) {
-		return this.get.gridContainer().eq(num).click();
+	selectGridItem(num) {
+		this.get.gridItem().eq(num).click();
 	}
 }
+
+// SelectAllElementsList(){
+// 	this.get.allElementsList().click({ multiple: true });
+// }
+
+// deselectAllElementsList(){
+// 	this.get.allElementsList().click({ multiple: true });
+// }
+
+// SelectAllElementsGrid(){
+// 	this.get.allElementsGrid().click({ multiple: true });
+// }
 
 export const selectable = new Selectable();
