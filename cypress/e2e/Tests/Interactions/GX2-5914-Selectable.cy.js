@@ -38,7 +38,7 @@ describe('US GX2-5914 | TS: ✅✅ToolsQA | Interactions | Selectable', () => {
 			.should('not.have.class', 'active')
 			.and('have.css', 'background-color', 'rgb(255, 255, 255)');
 	});
-	it.only('5915 | TC03: Validate “Selectable Grid” is displaying and working as expected', () => {
+	it('5915 | TC03: Validate “Selectable Grid” is displaying and working as expected', () => {
 		//POSTCONDICION
 		selectable.selectTabGrid();
 		selectable.get.tabGrid().should('have.attr', 'aria-selected', 'true');
