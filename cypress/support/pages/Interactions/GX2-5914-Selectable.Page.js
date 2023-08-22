@@ -13,24 +13,6 @@ class Selectable {
 	selectTabGrid() {
 		this.get.tabGrid().click();
 	}
-	selectListItem(num) {
-		this.get.listItem().eq(num).click();
-	}
-	selectGridItem(num) {
-		this.get.gridItem().eq(num).click();
-	}
 }
-
-// SelectAllElementsList(){
-// 	this.get.allElementsList().click({ multiple: true });
-// }
-
-// deselectAllElementsList(){
-// 	this.get.allElementsList().click({ multiple: true });
-// }
-
-// SelectAllElementsGrid(){
-// 	this.get.allElementsGrid().click({ multiple: true });
-// }
 
 export const selectable = new Selectable();

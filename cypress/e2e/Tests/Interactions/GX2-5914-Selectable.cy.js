@@ -7,10 +7,10 @@ describe('US GX2-5914 | TS: ✅✅ToolsQA | Interactions | Selectable', () => {
 	beforeEach('user is on Selectable page in DemoQA site', () => {
 		selectable.get.endpoint();
 	});
-	// it('5915 | TC01: Validate tabs “List” and “Grid” must be showing and tab “List” must be opened by default', () => {
-	// 	selectable.get.tabList().should('exist').and('be.visible').and('have.attr', 'aria-selected', 'true');
-	// 	selectable.get.tabGrid().should('exist').and('be.visible').and('have.attr', 'aria-selected', 'false');
-	// });
+	it('5915 | TC01: Validate tabs “List” and “Grid” must be showing and tab “List” must be opened by default', () => {
+		selectable.get.tabList().should('exist').and('be.visible').and('have.attr', 'aria-selected', 'true');
+		selectable.get.tabGrid().should('exist').and('be.visible').and('have.attr', 'aria-selected', 'false');
+	});
 	it('5915 | TC02: Validate “Selectable List” is displaying and working as expected', () => {
 		//POSTCONDICION
 		selectable.selectTabList();
@@ -38,12 +38,15 @@ describe('US GX2-5914 | TS: ✅✅ToolsQA | Interactions | Selectable', () => {
 			.should('not.have.class', 'active')
 			.and('have.css', 'background-color', 'rgb(255, 255, 255)');
 	});
-	it('5915 | TC03: Validate “Selectable Grid” is displaying and working as expected', () => {
+	it.only('5915 | TC03: Validate “Selectable Grid” is displaying and working as expected', () => {
 		//POSTCONDICION
 		selectable.selectTabGrid();
 		selectable.get.tabGrid().should('have.attr', 'aria-selected', 'true');
 		//TEST
-		//selectable.get.gridContainer().should('have.css', 'display', 'grid');
+		selectable.get.gridContainer().find('div').should('have.length', '3');
+		selectable.get.gridContainer().find('#row1>li').should('have.length', '3');
+		selectable.get.gridContainer().find('#row2>li').should('have.length', '3');
+		selectable.get.gridContainer().find('#row3>li').should('have.length', '3');
 		selectable.get.gridItem().should('have.length', 9);
 		selectable.get.gridItem().eq(0).should('have.text', 'One').and('not.have.class', 'active');
 		selectable.get.gridItem().eq(1).should('have.text', 'Two').and('not.have.class', 'active');
