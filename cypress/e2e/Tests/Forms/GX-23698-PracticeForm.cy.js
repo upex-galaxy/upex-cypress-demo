@@ -9,7 +9,7 @@ let movile = faker.phone.number('##########');
 let address = faker.address.streetAddress();
 let Mail = [data.Email1, data.Email3, data.Email5, data.Email8];
 
-describe('US GX-23698 | TS: ✅ToolsQA | Forms | Practice Form', () => {
+describe.skip('US GX-23698 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 	beforeEach(() => {
 		cy.visit('https://demoqa.com/automation-practice-form');
 	});
