@@ -5,7 +5,6 @@ removeLogs();
 describe('Elements | ToolsQA | RadioButtons', () => {
 	//precondiciones:
 	beforeEach('PRC: User must be logged in radioButton endpoint', () => {
-		const endpoint = '/radio-button';
 		cy.visit('https://demoqa.com/radio-button');
 	});
 	//test case

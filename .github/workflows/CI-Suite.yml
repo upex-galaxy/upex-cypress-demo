@@ -63,7 +63,7 @@ jobs:
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
-                  testExecKey: 'GX-29755' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+                  testExecKey: 'GX-29768' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
                   projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
 
             - name: 🔔Slack Notification of Done
