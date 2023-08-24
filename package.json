@@ -6,7 +6,7 @@
 	"scripts": {
 		"test": "cypress open",
 		"rm:reports": "rm reports/* || true",
-		"file": "cypress run --browser electron --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --record --key b6bde345-a36c-4fab-ad8c-cddc065d2cba --spec",
+		"file": "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --record --key b6bde345-a36c-4fab-ad8c-cddc065d2cba --spec",
 		"regression": "cypress run --browser electron --reporter cypress-multi-reporters --reporter-options configFile=jsregression.json",
 		"regression:report": "cypress run --browser electron --reporter mochawesome --reporter-options reportDir=mochawesome-report,overwrite=false,html=false,json=true",
 		"report:xml": "jrm reports/regression-report.xml \"reports/*.xml\"",
