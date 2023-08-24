@@ -18,9 +18,8 @@ describe('Elements | ToolsQA | RadioButtons', () => {
 		cy.get('#impressiveRadio').click({ force: true });
 		cy.get('.mt-3').should('have.text', 'You have selected Impressive');
 	});
+
+	it('TC3: Validate Radio Button "no" is disabled', () => {
+		cy.get('#noRadio').should('be.disabled');
+	});
 });
-///test case
-//it('TC3: VALIDAR que el botón "no" esté deshabilitado ...', () => {
-//	cy.get('#noRadio').should('be.disabled');
-//	cy.contains('you have selected').should('not.exist');
-//});
