@@ -55,7 +55,7 @@ jobs:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
         
-                     yarn file L1-cypex-demo/cypress/e2e/Tests/Elements/GX-29181_Elements_Buttons.cy.js
+                     yarn file cypress/e2e/Tests/Elements/GX-29181_Elements_Buttons.cy.js
 
 
             - name: ✅Import Test Results to Xray
