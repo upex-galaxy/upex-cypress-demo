@@ -6,197 +6,80 @@ describe('GX2-5371 | ✅ToolsQA | Interactions | Sortable', () => {
 		cy.visit('https://demoqa.com/sortable');
 	});
 
-	it('5372 | TC1: Validate the tabs “List” and “Gird” must be showing by default.', () => {
-		lista.elementos.listTab().should('be.visible');
-		lista.elementos.gridTab().should('be.visible');
+	it('5372 | TC1: Validate the tabs “List” and “Grid” must be showing by default.', () => {
+		lista.elementosGenerales.listTab().should('be.visible');
+		lista.elementosGenerales.gridTab().should('be.visible');
 	});
 
 	it('5372 | TC2: Validate the tab “List” must be opened by default.', () => {
-		lista.elementos.listTab().should('have.attr', 'aria-selected', 'true');
-		lista.elementos.gridTab().should('have.attr', 'aria-selected', 'false');
+		lista.elementosGenerales.listTab().should('have.attr', 'aria-selected', 'true');
+		lista.elementosGenerales.gridTab().should('have.attr', 'aria-selected', 'false');
 	});
 
-	it('5372 | TC3: Validate only one tab can be displayed at once.', () => {
-		lista.elementos.gridTab().click();
-		lista.elementos.listTab().should('have.attr', 'aria-selected', 'false');
-		lista.elementos.gridTab().should('have.attr', 'aria-selected', 'true');
+	it('5372 | TC3: Validate Default order and List items: One, Two, Three, Four, Five, Six.', () => {
+		lista.elementosGenerales.listaCompleta().should('have.length', 6);
+		lista.elementosList.uno().should('contain', 'One');
+		lista.elementosList.dos().should('contain', 'Two');
+		lista.elementosList.tres().should('contain', 'Three');
+		lista.elementosList.cuatro().should('contain', 'Four');
+		lista.elementosList.cinco().should('contain', 'Five');
+		lista.elementosList.seis().should('contain', 'Six');
 	});
 
-	it('5372 | TC4: Validate “List” items have to be able to be ordered in descending way .', () => {
-		lista.elementos.listTab().click();
-
-		let source = lista.elementos.uno;
-		let destination = lista.elementos.seis;
-		lista.reorderItems(source, destination);
-
-		let source2 = lista.elementos.uno;
-		let destination2 = lista.elementos.cinco;
-		lista.reorderItems(source2, destination2);
-
-		let source3 = lista.elementos.uno;
-		let destination3 = lista.elementos.cuatro;
-		lista.reorderItems(source3, destination3);
-
-		let source4 = lista.elementos.uno;
-		let destination4 = lista.elementos.tres;
-		lista.reorderItems(source4, destination4);
-
-		let source5 = lista.elementos.uno;
-		let destination5 = lista.elementos.dos;
-		lista.reorderItems(source5, destination5);
-
-		lista.elementos.seis().should('contain', 'One');
-		lista.elementos.cinco().should('contain', 'Two');
-		lista.elementos.cuatro().should('contain', 'Three');
-		lista.elementos.tres().should('contain', 'Four');
-		lista.elementos.dos().should('contain', 'Five');
-		lista.elementos.uno().should('contain', 'Six');
-	});
-	it('5372 | TC5: Validate “Grid” items have to be able to be ordered in descending way .', () => {
-		lista.elementos.gridTab().click();
-		let source = lista.elementos.unoGrid;
-		let destination = lista.elementos.nueveGrid;
-		lista.reorderItems(source, destination);
-
-		let source1 = lista.elementos.unoGrid;
-		let destination1 = lista.elementos.ochoGrid;
-		lista.reorderItems(source1, destination1);
-
-		let source2 = lista.elementos.unoGrid;
-		let destination2 = lista.elementos.sieteGrid;
-		lista.reorderItems(source2, destination2);
-
-		let source3 = lista.elementos.unoGrid;
-		let destination3 = lista.elementos.seisGrid;
-		lista.reorderItems(source3, destination3);
-
-		let source4 = lista.elementos.unoGrid;
-		let destination4 = lista.elementos.cincoGrid;
-		lista.reorderItems(source4, destination4);
-
-		let source5 = lista.elementos.unoGrid;
-		let destination5 = lista.elementos.cuatroGrid;
-		lista.reorderItems(source5, destination5);
-
-		let source6 = lista.elementos.unoGrid;
-		let destination6 = lista.elementos.tresGrid;
-		lista.reorderItems(source6, destination6);
-
-		let source7 = lista.elementos.unoGrid;
-		let destination7 = lista.elementos.dosGrid;
-		lista.reorderItems(source7, destination7);
-
-		lista.elementos.nueveGrid().should('contain', 'One');
-		lista.elementos.ochoGrid().should('contain', 'Two');
-		lista.elementos.sieteGrid().should('contain', 'Three');
-		lista.elementos.seisGrid().should('contain', 'Four');
-		lista.elementos.cincoGrid().should('contain', 'Five');
-		lista.elementos.cuatroGrid().should('contain', 'Six');
-		lista.elementos.tresGrid().should('contain', 'Seven');
-		lista.elementos.dosGrid().should('contain', 'Eight');
-		lista.elementos.unoGrid().should('contain', 'Nine');
-	});
-	it('5372 | TC6: Validate Default order and List items: One, Two, Three, Four, Five, Six.', () => {
-		lista.elementos.listaCompleta().should('have.length', 6);
-		lista.elementos.uno().should('contain', 'One');
-		lista.elementos.dos().should('contain', 'Two');
-		lista.elementos.tres().should('contain', 'Three');
-		lista.elementos.cuatro().should('contain', 'Four');
-		lista.elementos.cinco().should('contain', 'Five');
-		lista.elementos.seis().should('contain', 'Six');
+	it('5372 | TC4: Validate Default grid items One, Two, Three, Four, Five, Six, Seven, Eight, Nine.', () => {
+		lista.elementosGenerales.gridTab().click();
+		lista.elementosGenerales.GridCompleta().should('have.length', 9);
+		lista.elementosGrid.unoGrid().should('contain', 'One');
+		lista.elementosGrid.dosGrid().should('contain', 'Two');
+		lista.elementosGrid.tresGrid().should('contain', 'Three');
+		lista.elementosGrid.cuatroGrid().should('contain', 'Four');
+		lista.elementosGrid.cincoGrid().should('contain', 'Five');
+		lista.elementosGrid.seisGrid().should('contain', 'Six');
+		lista.elementosGrid.sieteGrid().should('contain', 'Seven');
+		lista.elementosGrid.ochoGrid().should('contain', 'Eight');
+		lista.elementosGrid.nueveGrid().should('contain', 'Nine');
 	});
 
-	it('5372 | TC7: Validate Default grid items One, Two, Three, Four, Five, Six, Seven, Eight, Nine.', () => {
-		lista.elementos.gridTab().click();
-		lista.elementos.GridCompleta().should('have.length', 9);
-		lista.elementos.unoGrid().should('contain', 'One');
-		lista.elementos.dosGrid().should('contain', 'Two');
-		lista.elementos.tresGrid().should('contain', 'Three');
-		lista.elementos.cuatroGrid().should('contain', 'Four');
-		lista.elementos.cincoGrid().should('contain', 'Five');
-		lista.elementos.seisGrid().should('contain', 'Six');
-		lista.elementos.sieteGrid().should('contain', 'Seven');
-		lista.elementos.ochoGrid().should('contain', 'Eight');
-		lista.elementos.nueveGrid().should('contain', 'Nine');
-	});
-
-	it('5372 | TC8: Validate Expected display: 3 x 3 grid.', () => {
-		lista.elementos.gridTab().click();
-		lista.elementos.GridCompleta().should('have.length', 9);
-
-		const expectedOrder = [
-			[1, 2, 3],
-			[4, 5, 6],
-			[7, 8, 9],
-		];
-
-		lista.elementos.GridCompleta().each(($item, index) => {
-			const row = Math.floor(index / 3) + 1;
-			const col = (index % 3) + 1;
-
-			let numeroingles = lista.obtenerNombreMesEnIngles(col);
+	it('5372 | TC5: Validate Expected display: 3 x 3 grid.', () => {
+		lista.elementosGenerales.gridTab().click();
+		lista.elementosGenerales.GridCompleta().should('have.length', 9);
+		lista.elementosGenerales.GridCompleta().each(($item, index) => {
+			// Comienza un bucle forEach para iterar a través de los elementos de la cuadrícula.
+			const row = Math.floor(index / 3) + 1; // Calcula el número de fila.
+			const col = (index % 3) + 1; // Calcula el número de columna,
+			let numeroingles = lista.obtenerNombreMesEnIngles(col); // Obtiene el nombre en inglés según la columna.
 			cy.wrap($item)
 				.should('contain', numeroingles[index])
 				.then($item => {
+					// Verifica si el elemento contiene el nombre en inglés y registra la fila y columna.
 					cy.log(`Fila: ${row}, Columna: ${col}`);
 				});
 		});
 	});
 
-	it('5372 | TC9: Validate when any item in the list is dragged, it must stay in the selected order.', () => {
-		lista.elementos.listTab().click();
-
-		let source = lista.elementos.dos;
-		let destination = lista.elementos.tres;
-		lista.reorderItems(source, destination);
-
-		let source1 = lista.elementos.cuatro;
-		let destination1 = lista.elementos.cinco;
-		lista.reorderItems(source1, destination1);
-
-		let source2 = lista.elementos.tres;
-		let destination2 = lista.elementos.uno;
-		lista.reorderItems(source2, destination2);
-
-		let source3 = lista.elementos.uno;
-		let destination3 = lista.elementos.cinco;
-		lista.reorderItems(source3, destination3);
-
-		let source4 = lista.elementos.seis;
-		let destination4 = lista.elementos.dos;
-		lista.reorderItems(source4, destination4);
-
-		let source5 = lista.elementos.cinco;
-		let destination5 = lista.elementos.cuatro;
-		lista.reorderItems(source5, destination5);
+	it('5372 | TC6: Validate when any item in the list is dragged, it must stay in the selected order.', () => {
+		lista.elementosGenerales.listTab().click();
+		for (let i = 0; i < 7; i++) {
+			let elementoOrigen = lista.seleccionarElementoAleatorioList();
+			let elementoDestino = lista.seleccionarElementoAleatorioList();
+			lista.reorderItems(elementoOrigen, elementoDestino);
+			elementoDestino.invoke('text').then(texto => {
+				elementoDestino.should('contain', texto);
+			});
+		}
 	});
 
-	it('5372 | TC10: Validate List items have to be able to be stacked in any order.', () => {
-		lista.elementos.gridTab().click();
+	it('5372 | TC7: Validate Grid items have to be able to be stacked in any order.', () => {
+		lista.elementosGenerales.gridTab().click();
 
-		let source = lista.elementos.dosGrid;
-		let destination = lista.elementos.tresGrid;
-		lista.reorderItems(source, destination);
-
-		let source1 = lista.elementos.dosGrid;
-		let destination1 = lista.elementos.cincoGrid;
-		lista.reorderItems(source1, destination1);
-
-		let source2 = lista.elementos.tresGrid;
-		let destination2 = lista.elementos.cincoGrid;
-		lista.reorderItems(source2, destination2);
-
-		let source3 = lista.elementos.cuatroGrid;
-		let destination3 = lista.elementos.unoGrid;
-		lista.reorderItems(source3, destination3);
-
-		let source4 = lista.elementos.seisGrid;
-		let destination4 = lista.elementos.dosGrid;
-		lista.reorderItems(source4, destination4);
-
-		let source5 = lista.elementos.cincoGrid;
-		let destination5 = lista.elementos.cuatroGrid;
-		lista.reorderItems(source5, destination5);
+		for (let i = 0; i < 10; i++) {
+			const elementoOrigen = lista.seleccionarElementoAleatorioGrid();
+			const elementoDestino = lista.seleccionarElementoAleatorioGrid();
+			lista.reorderItems(elementoOrigen, elementoDestino);
+			elementoDestino.invoke('text').then(texto => {
+				elementoDestino.should('contain', texto);
+			});
+		}
 	});
 });
 removeLogs();

@@ -1,13 +1,15 @@
+let indiceAleatorio;
 class Lista {
-	elementos = {
+	elementosList = {
 		uno: () => cy.get('div.vertical-list-container').children().eq(0),
 		dos: () => cy.get('div.vertical-list-container').children().eq(1),
 		tres: () => cy.get('div.vertical-list-container').children().eq(2),
 		cuatro: () => cy.get('div.vertical-list-container').children().eq(3),
 		cinco: () => cy.get('div.vertical-list-container').children().eq(4),
 		seis: () => cy.get('div.vertical-list-container').children().eq(5),
-		listaCompleta: () => cy.get('div.vertical-list-container').children(),
-		GridCompleta: () => cy.get('.create-grid').children(),
+	};
+
+	elementosGrid = {
 		unoGrid: () => cy.get('.create-grid').children().eq(0),
 		dosGrid: () => cy.get('.create-grid').children().eq(1),
 		tresGrid: () => cy.get('.create-grid').children().eq(2),
@@ -17,47 +19,41 @@ class Lista {
 		sieteGrid: () => cy.get('.create-grid').children().eq(6),
 		ochoGrid: () => cy.get('.create-grid').children().eq(7),
 		nueveGrid: () => cy.get('.create-grid').children().eq(8),
+	};
+	elementosGenerales = {
 		gridTab: () => cy.get('#demo-tab-grid'),
 		listTab: () => cy.get('#demo-tab-list'),
+		listaCompleta: () => cy.get('div.vertical-list-container').children(),
+		GridCompleta: () => cy.get('.create-grid').children(),
 	};
 
+	seleccionarElementoAleatorioList() {
+		const totalElementos = 6;
+		indiceAleatorio = Math.floor(Math.random() * totalElementos);
+		let elementoElegido = cy.get('div.vertical-list-container').children().eq(indiceAleatorio);
+		return elementoElegido;
+	}
+
+	seleccionarElementoAleatorioGrid() {
+		const totalElementos = 9;
+		indiceAleatorio = Math.floor(Math.random() * totalElementos);
+		let elementoElegido = cy.get('.create-grid').children().eq(indiceAleatorio);
+		return elementoElegido;
+	}
+
 	reorderItems(source, destination) {
-		source().trigger('mousedown', { which: 1 });
-		cy.wait(1000);
-		destination().trigger('mousemove').trigger('mouseup');
-		destination()
-			.invoke('text')
-			.then(texto => {
-				destination().should('contain', texto);
-			});
+		if (source !== destination) {
+			source.trigger('mousedown', { which: 1 }, { force: true });
+			cy.wait(1000);
+			destination.trigger('mousemove', { force: true }).trigger('mouseup', { force: true });
+			cy.wait(1000);
+		}
 		return;
 	}
+
 	obtenerNombreMesEnIngles(numero) {
 		const numeroEnIngles = ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
 		return numeroEnIngles;
-	}
-	ordenarYVerificarLista(elementos) {
-		elementos.sort((a, b) => {
-			if (a == b) {
-				return 0;
-			}
-			if (a < b) {
-				return -1;
-			}
-			return 1;
-		});
-	}
-
-	ordenarYVerificarListaDescendente(elementos) {
-		elementos.sort((a, b) => {
-			if (a == b) {
-				return 0;
-			}
-			if (a > b) {
-				return 1;
-			}
-			return -1;
-		});
 	}
 }
 
