@@ -11,7 +11,7 @@ describe('Elements | ToolsQA | RadioButtons', () => {
 	//test case
 	it.only('TC1: Validate visualize log message "you have selected yes" when select "yes"', () => {
 		cy.get('#yesRadio').click({ force: true });
-		cy.contains('you have selected Yes').should('have.text', 'Yes');
+		cy.get('.mt-3').should('have.text', 'You have selected Yes');
 	});
 });
 
