@@ -45,7 +45,3 @@ describe('TS GX-29182: ToolsQA | Elements | Buttons', () => {
 		return false;
 	});
 });
-
-import { removeLogs } from "@helper/RemoveLogs";
-
-removeLogs()
