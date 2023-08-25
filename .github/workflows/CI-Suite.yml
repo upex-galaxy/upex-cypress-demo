@@ -66,7 +66,7 @@ jobs:
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
                   testExecKey: 'GX-30383' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
                   projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
-
+                  
             - name: 🔔Slack Notification of Done
               if: always()
               uses: rtCamp/action-slack-notify@v2.2.0
