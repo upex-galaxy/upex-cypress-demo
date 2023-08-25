@@ -12,7 +12,7 @@ describe('GX-29736 ToolsQA | Elements | Radio Buttons', () => {
 
 	// })
 
-	it('TC1: Validar visualizar el label', () => {
+	it('TC1: Validar visualizar el label YES cuando se selecciona el radio button Yes', () => {
 		//tags
 		cy.get('#yesRadio').click({ force: true });
 		cy.contains('You have selected').children().should('have.text', 'Yes');
