@@ -12,7 +12,7 @@ describe('GX-29736 ToolsQA | Elements | Radio Buttons', () => {
 
 	// })
 
-	it('TC1: Validar visualizar el label YES cuando se selecciona el radio button Yes', () => {
+	it('29756 | TC1: Validar visualizar el label YES cuando se selecciona el radio button Yes', () => {
 		//tags
 		cy.get('#yesRadio').click({ force: true });
 		cy.contains('You have selected').children().should('have.text', 'Yes');
@@ -20,7 +20,7 @@ describe('GX-29736 ToolsQA | Elements | Radio Buttons', () => {
 		//
 	});
 
-	it('TC2: Validar visualizar el label Impressive cuando se selecciona el radio button Impressive', () => {
+	it('29756 | TC2: Validar visualizar el label Impressive cuando se selecciona el radio button Impressive', () => {
 		//tags
 		cy.get('#impressiveRadio').click({ force: true });
 		cy.contains('You have selected').children().should('have.text', 'impressive');
@@ -29,7 +29,7 @@ describe('GX-29736 ToolsQA | Elements | Radio Buttons', () => {
 		//
 	});
 
-	it('TC3: Validar que el radio button con label "NO" este deshabilitado y no se pueda seleccionar', () => {
+	it('29756 | TC3: Validar que el radio button con label "NO" este deshabilitado y no se pueda seleccionar', () => {
 		//tags
 		cy.get('#noRadio').should('be.disabled');
 		cy.contains('You have selected').should('not.exist');
