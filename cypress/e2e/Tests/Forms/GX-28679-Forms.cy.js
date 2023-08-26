@@ -27,5 +27,8 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		form.selectHobbies();
 		form.selectFile();
 		form.CurrentAddress(homeAddress);
+		form.selectState();
+		form.selectCity();
+		form.buttonSubmith();
 	});
 });

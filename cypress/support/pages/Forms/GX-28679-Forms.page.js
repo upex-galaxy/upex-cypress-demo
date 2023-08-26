@@ -13,7 +13,12 @@ class Form {
 		subjectsInput: () => cy.get('#subjectsInput'),
 		hobbies: () => cy.get('.custom-control.custom-checkbox.custom-control-inline'),
 		picture: () => cy.get('.form-control-file'),
-		addressInput: () => cy.get('#currentAddress')
+		addressInput: () => cy.get('#currentAddress'),
+		State: () => cy.get('#state'),
+		menuState:() => cy.get('#react-select-3-option-1'),
+		City: () => cy.get('#city'),
+		menuCity: () => cy.get('.css-1uccc91-singleValue'),
+		idButtonSubmith: () => cy.get('#submit') 
 	};
 	firstNameField(name) {
 		this.get.firstNameInput().type(name);
@@ -84,6 +89,17 @@ class Form {
 	CurrentAddress(address) {
 		this.get.addressInput().type(address);
 
+	}
+	selectState() {
+		this.get.State().click();
+		this.get.menuState().click({ force: true });
+	}
+	selectCity() {
+		this.get.City().click();
+		this.get.menuCity().click({ force: true });
+	}
+	buttonSubmith() {
+		this.get.idButtonSubmith().click();
 	}
 }
 export const form = new Form();
