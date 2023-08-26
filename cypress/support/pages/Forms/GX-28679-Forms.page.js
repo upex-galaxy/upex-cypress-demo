@@ -1,3 +1,4 @@
+
 class Form {
 	get = {
 		firstNameInput: () => cy.get('#firstName'),
@@ -8,7 +9,10 @@ class Form {
 		calendar: () => cy.get('#dateOfBirthInput'),
 		year: () => cy.get('.react-datepicker__year-select'),
 		month: () => cy.get('.react-datepicker__month-select'),
-		day:  () => cy.get('.react-datepicker__week')
+		day: () => cy.get('.react-datepicker__week'),
+		subjectsInput: () => cy.get('#subjectsInput'),
+		hobbies: () => cy.get('.custom-control.custom-checkbox.custom-control-inline'),
+		picture:()=> cy.get('.form-control-file')
 	};
 	firstNameField(name) {
 		this.get.firstNameInput().type(name);	
@@ -45,7 +49,6 @@ class Form {
 				cy.wrap($select).select(selectedValue);
 			});
 	}
-
 	selectMonth() {
 		cy.get('.react-datepicker__month-select', { timeout: 15000 })
 			.should('exist')
@@ -64,6 +67,18 @@ class Form {
 				const $randomDay = $days.eq(randomIndex);
 				$randomDay.click();
 			});
+	}
+	writeSubjects() {
+		const subjectsText = 'Math, literature and science.';
+		this.get.subjectsInput().type(subjectsText);
+	}
+	selectHobbies() {
+		const randomIndex = Math.floor(Math.random() * 3);
+		this.get.hobbies().eq(randomIndex).click();
+	}
+	selectFile() {
+		this.get.picture().click();
+		cy.get('.form-control-file').selectFile('cypress/fixtures/images/upexlogo.png', { force: true });
 	}
 
 }

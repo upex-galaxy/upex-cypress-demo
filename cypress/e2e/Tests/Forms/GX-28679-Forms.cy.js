@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker/locale/en';
 import { form } from '../../../support/pages/Forms/GX-28679-Forms.page';
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
+
 describe('✅ToolsQA | Forms | Practice Form', () => {
 	beforeEach('visitar la página DemoQA', () => {
 		cy.visit('https://demoqa.com/automation-practice-form');
@@ -21,5 +22,8 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		form.selectYear();
 		form.selectMonth();
 		form.selectDay();
+		form.writeSubjects();
+		form.selectHobbies();
+		form.selectFile();
 	});
 });
