@@ -18,6 +18,8 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		form.selectGenderOption();
 		form.numberField(phoneNumber);
 		form.dateOfBirth();
-		form.SelectYear();
+		form.selectRandomYear();
+		form.selectRandomMonth();
+		form.selectRandomDayWithTabIndex();
 	});
 });
