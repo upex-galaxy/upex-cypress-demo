@@ -13,6 +13,7 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		const lastName = faker.name.lastName();
 		const email = faker.internet.email();
 		const phoneNumber = form.RandomPhoneNumber();
+		const homeAddress = faker.address.streetAddress();
 		form.firstNameField(firstName);
 		form.lastNameField(lastName);
 		form.emailField(email);
@@ -25,5 +26,6 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		form.writeSubjects();
 		form.selectHobbies();
 		form.selectFile();
+		form.CurrentAddress(homeAddress);
 	});
 });

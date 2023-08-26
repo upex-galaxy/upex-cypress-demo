@@ -12,10 +12,11 @@ class Form {
 		day: () => cy.get('.react-datepicker__week'),
 		subjectsInput: () => cy.get('#subjectsInput'),
 		hobbies: () => cy.get('.custom-control.custom-checkbox.custom-control-inline'),
-		picture:()=> cy.get('.form-control-file')
+		picture: () => cy.get('.form-control-file'),
+		addressInput: () => cy.get('#currentAddress')
 	};
 	firstNameField(name) {
-		this.get.firstNameInput().type(name);	
+		this.get.firstNameInput().type(name);
 	}
 	lastNameField(name) {
 		this.get.lastNameInput().type(name);
@@ -80,6 +81,9 @@ class Form {
 		this.get.picture().click();
 		cy.get('.form-control-file').selectFile('cypress/fixtures/images/upexlogo.png', { force: true });
 	}
+	CurrentAddress(address) {
+		this.get.addressInput().type(address);
 
+	}
 }
 export const form = new Form();
