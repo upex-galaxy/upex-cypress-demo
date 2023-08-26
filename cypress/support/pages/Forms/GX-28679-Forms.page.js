@@ -5,10 +5,9 @@ class Form {
 		emailInput: () => cy.get('#userEmail'),
 		genderContain: () => cy.get('.custom-control.custom-radio.custom-control-inline'),
 		movilNumber: () => cy.get('#userNumber'),
-		
-
-        
-
+		calendar: () => cy.get('#dateOfBirthInput'),
+		year: () => cy.get('.react-datepicker__year-select'),
+		month:() => cy.get('.react-datepicker__month-select'),
 	};
 	firstNameField(name) {
 		this.get.firstNameInput().type(name);	
@@ -32,7 +31,16 @@ class Form {
 	numberField(number) {
 		this.get.movilNumber().type(number);
 	}
-	
-
+	dateOfBirth() {
+		this.get.calendar().click();
+	}
+	SelectYear() {
+		const randomIndex = Math.floor(Math.random() * 200);
+		this.get.year().eq(randomIndex).select();
+	}
+	SelectMonth() {
+		const randomIndex = Math.floor(Math.random() * 11);
+		this.get.month().eq(randomIndex).select();
+	}
 }
 export const form = new Form();

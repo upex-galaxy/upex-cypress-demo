@@ -17,5 +17,7 @@ describe('✅ToolsQA | Forms | Practice Form', () => {
 		form.emailField(email);
 		form.selectGenderOption();
 		form.numberField(phoneNumber);
+		form.dateOfBirth();
+		form.SelectYear();
 	});
 });
