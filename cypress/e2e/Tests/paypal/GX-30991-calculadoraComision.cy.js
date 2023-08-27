@@ -79,4 +79,43 @@ describe('GX-30991: Paypal | Comisiones | Calcular las comisiones para enviar y 
 		message1().should('have.text', 'Solo puedes introducir Números');
 		*/
 	});
+
+	//BR: Límite de Input Value = 0
+	it('30993 | TC03: Validar fórmula al insertar valor = 0 en ambas calculadoras: "para Recibir" y "para Enviar"', () => {
+		calculatorPage.get.toGetInput().type('0');
+		calculatorPage.get.amountToSend().should('have.value', '0,32');
+		calculatorPage.get.fee1ToRecive().should('have.value', '0,32');
+
+		calculatorPage.get.toSendInput().type('0');
+		calculatorPage.get.fee2ToSend().should('have.value', '0,3');
+		calculatorPage.get.amountToRecive().should('have.value', '-0,3');
+	});
+
+	/*	
+	// "comission": 5,4% = 0.054  y  "rate": 0,30 USD
+	it.skip('30993 | TC02: Validar fórmula: ("ParaRecibir" + "rate") / (1 - "commission")', () => {
+		const toRecive = calculatorPage.get.toGetInput().type('10');
+		const dividendo = toRecive + calculatorPage.get.paypalFee();
+		const divisor = 1 - calculatorPage.get.paypalCommission();
+		const resultReciveFormula = dividendo / divisor;
+
+		const cadena1 = resultReciveFormula.toString();
+		calculatorPage.get.toGetInput().clear();
+		calculatorPage.get.toGetInput().type(cadena1);
+		expect(true).equal(true);
+		//calculatorPage.get.amountToSend().should('have.value', valorDecimal);
+
+		//const valorDecimal = parseFloat(resultReciveFormula).toFixed(2); //convertir a decimal con 2 valores después de la coma
+		//calculatorPage.get.amountToSend().should('have.value', valorDecimal);
+		//calculatorPage.get.toGetInput().clear();
+	});
+
+	it.skip('30993 | TC0: ', () => {
+		calculatorPage.get.toGetInput().type('10');
+		expect(true).equal(true);
+		//continuar
+	});
+
+
+	*/
 });
