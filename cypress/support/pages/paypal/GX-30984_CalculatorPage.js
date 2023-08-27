@@ -7,15 +7,20 @@ class CalculatorPage {
 	get = {
 		// obtener "Locators"
 		//input 0.30usd
-		paypalFee: () => this.cy.get(data.Precondiciones.Inputs.inputfee), //*propiedad y el metodo que arroja un elemento
-		paypalCommission: () => this.cy.get(data.Precondiciones.Inputs.inputPercentage),
-		PaypalCommissionsTitle: () => this.cy.get(data.Precondiciones.ElementTitle).eq(0),
-		PaypalCalculatorReceiveTitle: () => this.cy.get(data.Precondiciones.ElementTitle).eq(1),
-		PaypalCalculatorSendTitle: () => this.cy.get(data.Precondiciones.ElementTitle).eq(2),
+		Rate: () => this.cy.get(data.Precondiciones.Inputs.inputRate), //*propiedad y el metodo que arroja un elemento
+		Commision: () => this.cy.get(data.Precondiciones.Inputs.inputComision),
+		CommissionsTitle: () => this.cy.get(data.Precondiciones.ElementTitle).eq(0),
+		CalculatorRecibirTitle: () => this.cy.get(data.Precondiciones.ElementTitle).eq(1),
+		CalculatorSendTitle: () => this.cy.get(data.Precondiciones.ElementTitle).eq(2),
 		toGetInput: () => this.cy.get(data.CalculoRecibir.Inputs.InputRecibir),
-		toSendInput: () => this.cy.get(data.CalculoEnviar.Inputs.inputEnviar),
-		InputEnviarPaypal: () => this.cy.get(data.CalculoRecibir.Input.InputEnviar),
+		toSendInput: () => this.cy.get(data.CalculoRecibir.Inputs.inputEnviar),
+		InputEnviar: () => this.cy.get(data.CalculoEnviar.Inputs.InputEnviar),
 	};
+	// obtValor() {
+	// 	let valueToSend = (data.CalculoRecibir.montoParaRecibir + data.Precondiciones.rate) / (1 - data.Precondiciones.comisionFormula).toFixed(2);
+	// 	cy.log(valueToSend);
+	// 	return (valueToSend);
+	// }
 
 	//* Act/Methods (Definen las interacciones del Usuario y Algoritmos de la página)
 }

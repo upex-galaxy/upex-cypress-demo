@@ -1,32 +1,32 @@
 {
-    "Precondiciones":{
-        "tasa":"5.4",
-        "tarifa":"0.30",
-        "ElementTitle":"h2",
-        "Title":{
-            "TitleComision":"Las Comisiones PayPal",
-            "TitleRecibir":"Calculadora PayPal para Recibir",
-            "TitleEnviar":"Calculadora PayPal para Enviar"
-        },
-        "Inputs":{
-            "inputfee":"#fee",
-            "inputPercentage":"#percentage"
-        }
-    },
+	"Precondiciones": {
+		"comision": "5.4",
+		"comisionFormula": "0.054",
+		"rate": "0.30",
+		"ElementTitle": "h2",
+		"Title": {
+			"TitleComision": "Las Comisiones PayPal",
+			"TitleRecibir": "Calculadora PayPal para Recibir",
+			"TitleEnviar": "Calculadora PayPal para Enviar"
+		},
+		"Inputs": {
+			"inputRate": "#fee",
+			"inputComision": "#percentage"
+		}
+	},
 	"CalculoRecibir": {
 		"montoParaRecibir": 100,
 		"Inputs": {
 			"InputRecibir": "input[name='toGet']",
-			"InputEnviar": "[name='toCharge']",
-			"InputComision": "#"
+			"InputEnviar": "[name='toCharge']"
+			
 		}
 	},
 	"CalculoEnviar": {
 		"montoParaEnviar": 106.03,
 		"Inputs": {
 			"InputEnviar": "input[name='amountSent']",
-			"InputComision": "#",
-			"InputReciben": "#"
+			"InputComision": "[name='fees']"
 		}
 	}
 }
