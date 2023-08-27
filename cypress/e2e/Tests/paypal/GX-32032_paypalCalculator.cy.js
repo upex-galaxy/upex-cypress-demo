@@ -4,9 +4,22 @@ describe('31032 | Paypal | Comisiones | Calcular las comisiones para enviar y re
 	beforeEach('precondición: para usar la calculadora');
 
 	cy.visit('https://vendercomprardolares.com/calculadora-comisiones-paypal.php');
-	//cy.get('selector').should(have.text, '5,4')
-	calculatorPage.get.paypalCommission().should('have.value', '5,4');
-	calculatorPage.get.paypalFee().should('have.value', '0,30');
 
-	it('31033|TC1...', () => {});
+	//destructuración con constantes
+	const (paypalFee, paypalCommission, paypalCommissionTitle, paypalCalculatorReceiveTitle, paypalCalculatorSendTitle) = calculatorPage.get;
+
+	paypalCommission().should('have.value', '5,4');
+	paypalFee().should('have.value', '0,30');
+	paypalCommissionTitle().should('have.text', 'Las Comisiones Paypal');
+	paypalCalculatorReceiveTitle().should('have.text', 'Calculadora Paypal para recibir');
+	paypalCalculatorSendTitle().should('have.text', 'Calculadora Paypal para Enviar');
+
+	//cy.get('selector').should(have.text, '5,4')
+	//calculatorPage.get.paypalCommission().should('have.value', '5,4');
+	//calculatorPage.get.paypalFee().should('have.value', '0,30');
+
+	//assertions
+	it('31033|TC1...', () => {
+		calculatorPage.get.toGetInput().type('10');
+	});
 });
