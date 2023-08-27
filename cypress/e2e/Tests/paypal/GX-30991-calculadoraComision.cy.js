@@ -14,9 +14,22 @@ describe('GX-30991: Paypal | Comisiones | Calcular las comisiones para enviar y 
 		PaypalCalculatorSendTitle().should('have.text', 'Calculadora PayPal para Enviar');
 	});
 
-	it('30993 | TC01: Validar la fórmula que calcula el monto que hay que Enviar dado el Recibido', () => {
-		calculatorPage.get.toGetInput().type('10');
-		expect(true).equal(true);
-		//continuar
+	it('30993 | TC01: Validar que la cantidad a recibir solo admita valores valor numéricos', () => {
+		const { toGetInput, message } = calculatorPage.get;
+
+		toGetInput().type(1);
+		message().should('not.have.text', 'Indica cuánto vas a Recibir');
+		message().should('not.have.text', 'Solo puedes introducir Números');
+		toGetInput().clear();
+
+		toGetInput().type(15.8);
+		message().should('not.have.text', 'Indica cuánto vas a Recibir');
+		message().should('not.have.text', 'Solo puedes introducir Números');
+		toGetInput().clear();
+
+		toGetInput().type('Hola mundo');
+		message().should('have.text', 'Indica cuánto vas a Recibir');
+		toGetInput().type('!#$%&*(((())+-+"');
+		message().should('have.text', 'Solo puedes introducir Números');
 	});
 });
