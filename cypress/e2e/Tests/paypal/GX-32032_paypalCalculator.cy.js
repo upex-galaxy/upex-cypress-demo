@@ -6,6 +6,7 @@ describe('31032 | Paypal | Comisiones | Calcular las comisiones para enviar y re
 	cy.visit('https://vendercomprardolares.com/calculadora-comisiones-paypal.php');
 	//cy.get('selector').should(have.text, '5,4')
 	calculatorPage.get.paypalCommission().should('have.value', '5,4');
+	calculatorPage.get.paypalFee().should('have.value', '0,30');
 
 	it('31033|TC1...', () => {});
 });

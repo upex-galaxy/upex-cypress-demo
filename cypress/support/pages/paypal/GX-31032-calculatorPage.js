@@ -6,6 +6,8 @@ class CalculatorPage {
 		paypalFee: () => cy.get('#fee'),
 		paypalCommission: () => cy.get('#percentage'),
 		paypalCommissionTitle: () => cy.get('h2').eq(0),
+		paypalCalculatorReceiveTitle: () => cy.get('h2').eq(1),
+		paypalCommissionTitle: () => cy.get('h2').eq(2),
 	};
 	//2.ACT: Methods (definen las interacciones del usuario y algoritmos de la página)
 }
