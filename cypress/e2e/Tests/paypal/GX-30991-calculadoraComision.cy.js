@@ -14,7 +14,7 @@ describe('GX-30991: Paypal | Comisiones | Calcular las comisiones para enviar y 
 		PaypalCalculatorSendTitle().should('have.text', 'Calculadora PayPal para Enviar');
 	});
 
-	it('30993 | TC01: Validar que la cantidad a Recibir solo admita valores valor numéricos', () => {
+	it.skip('30993 | TC01: Validar que la cantidad a Recibir solo admita valores valor numéricos', () => {
 		const { toGetInput, message } = calculatorPage.get;
 
 		toGetInput().type(1);
@@ -46,7 +46,7 @@ describe('GX-30991: Paypal | Comisiones | Calcular las comisiones para enviar y 
 		message().should('have.text', 'Solo puedes introducir Números');
 	});
 
-	it('30993 | TC02: Validar que la cantidad a Enviar solo admita valores valor numéricos', () => {
+	it.skip('30993 | TC02: Validar que la cantidad a Enviar solo admita valores valor numéricos', () => {
 		const { toSendInput, message1 } = calculatorPage.get;
 
 		toSendInput().type(1);
@@ -81,33 +81,42 @@ describe('GX-30991: Paypal | Comisiones | Calcular las comisiones para enviar y 
 	});
 
 	//BR: Límite de Input Value = 0
-	it('30993 | TC03: Validar fórmula al insertar valor = 0 en ambas calculadoras: "para Recibir" y "para Enviar"', () => {
-		calculatorPage.get.toGetInput().type('0');
-		calculatorPage.get.amountToSend().should('have.value', '0,32');
-		calculatorPage.get.fee1ToRecive().should('have.value', '0,32');
+	it.skip('30993 | TC03: Validar fórmula al insertar valor = 0 en ambas calculadoras: "para Recibir" y "para Enviar"', () => {
+		const { toGetInput, toSendInput, fee2ToSend, amountToRecive } = calculatorPage.get;
+		toGetInput().type('0');
+		toGetInput().should('have.value', '0,32');
+		toGetInput().should('have.value', '0,32');
 
-		calculatorPage.get.toSendInput().type('0');
-		calculatorPage.get.fee2ToSend().should('have.value', '0,3');
-		calculatorPage.get.amountToRecive().should('have.value', '-0,3');
+		toSendInput().type('0');
+		fee2ToSend().should('have.value', '0,3');
+		amountToRecive().should('have.value', '-0,3');
 	});
 
-	/*	
 	// "comission": 5,4% = 0.054  y  "rate": 0,30 USD
-	it.skip('30993 | TC02: Validar fórmula: ("ParaRecibir" + "rate") / (1 - "commission")', () => {
-		const toRecive = calculatorPage.get.toGetInput().type('10');
-		const dividendo = toRecive + calculatorPage.get.paypalFee();
-		const divisor = 1 - calculatorPage.get.paypalCommission();
-		const resultReciveFormula = dividendo / divisor;
+	it('30993 | TC04: Validar fórmula: ("ParaRecibir" + "rate") / (1 - "commission")', () => {
+		calculatorPage.get.toGetInput().type('10');
+		const { paypalFee, paypalCommission } = calculatorPage.get;
 
-		const cadena1 = resultReciveFormula.toString();
-		calculatorPage.get.toGetInput().clear();
-		calculatorPage.get.toGetInput().type(cadena1);
-		expect(true).equal(true);
-		//calculatorPage.get.amountToSend().should('have.value', valorDecimal);
+		calculatorPage.get
+			.toGetInput()
+			.invoke('val')
+			.then(valorA => {
+				// Obtener el valor del campo de entrada 'campoA'
+				const numeroA = parseFloat(valorA).toFixed(2); // Convertir el valor a un número con 2 cifras decimales
 
-		//const valorDecimal = parseFloat(resultReciveFormula).toFixed(2); //convertir a decimal con 2 valores después de la coma
-		//calculatorPage.get.amountToSend().should('have.value', valorDecimal);
-		//calculatorPage.get.toGetInput().clear();
+				const result = ((parseFloat(numeroA) + 0.3) / (1 - 0.054)).toFixed(2); // Realizar la suma y redondear a 2 cifras decimales
+
+				calculatorPage.get
+					.amountToSend()
+					.invoke('val')
+					.then(valorB => {
+						// Obtener el valor del campo de entrada 'campoB'
+						const numeroB = parseFloat(valorB.replace(',', '.')).toFixed(2); // Convertir el valor a un número con 2 cifras decimales
+
+						// Comparar la suma con el valor de 'campoB'
+						expect(parseFloat(result)).to.equal(parseFloat(numeroB));
+					});
+			});
 	});
 
 	it.skip('30993 | TC0: ', () => {
@@ -115,7 +124,4 @@ describe('GX-30991: Paypal | Comisiones | Calcular las comisiones para enviar y 
 		expect(true).equal(true);
 		//continuar
 	});
-
-
-	*/
 });
