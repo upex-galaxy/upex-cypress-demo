@@ -1,4 +1,4 @@
-import { calculatorPage } from '@pages/paypal/GX-31032-calculatorPage';
+import { calculatorPage } from '@pages/paypal/GX-32032-calculatorPage';
 
 describe('31032 | Paypal | Comisiones | Calcular las comisiones para enviar y recibir', () => {
 	beforeEach('precondición: para usar la calculadora');
