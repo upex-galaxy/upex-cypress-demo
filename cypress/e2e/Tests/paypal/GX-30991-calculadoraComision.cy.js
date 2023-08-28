@@ -82,10 +82,11 @@ describe('GX-30991: Paypal | Comisiones | Calcular las comisiones para enviar y 
 
 	//BR: Límite de Input Value = 0
 	it('30993 | TC03: Validar fórmula al insertar valor = 0 en ambas calculadoras: "para Recibir" y "para Enviar"', () => {
-		const { toGetInput, toSendInput, fee2ToSend, amountToRecive } = calculatorPage.get;
+		const { toGetInput, amountToSend, fee1ToRecive, toSendInput, fee2ToSend, amountToRecive } = calculatorPage.get;
+
 		toGetInput().type('0');
-		toGetInput().should('have.value', '0,32');
-		toGetInput().should('have.value', '0,32');
+		amountToSend().should('have.value', '0,32');
+		fee1ToRecive().should('have.value', '0,32');
 
 		toSendInput().type('0');
 		fee2ToSend().should('have.value', '0,3');
