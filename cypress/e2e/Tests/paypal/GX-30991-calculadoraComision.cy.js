@@ -39,15 +39,17 @@ describe('GX-30991: Paypal | Comisiones | Calcular las comisiones para enviar y 
 
 		toGetInput().type('Hola mundo');
 		toGetInput().should('not.have.text', null);
+		toGetInput().should('be.empty');
 		message().should('have.text', 'Indica cuánto vas a Recibir');
 
 		toGetInput().type('!#$%&*(((())+-+');
 		toGetInput().should('not.have.text', null);
+		toGetInput().should('be.empty');
 		message().should('have.text', 'Solo puedes introducir Números');
 	});
 
 	it('30993 | TC02: Validar que la cantidad a Enviar solo admita valores valor numéricos', () => {
-		const { toSendInput, message1 } = calculatorPage.get;
+		const { toSendInput, message1, fee2ToSend, amountToRecive } = calculatorPage.get;
 
 		toSendInput().type(1);
 		message1().should('not.have.text', 'Indica cuánto vas a Enviar');
@@ -69,15 +71,14 @@ describe('GX-30991: Paypal | Comisiones | Calcular las comisiones para enviar y 
 		message1().should('not.have.text', 'Solo puedes introducir Números');
 		toSendInput().clear();
 
-		/*
 		toSendInput().type('Hola mundo');
 		toSendInput().should('not.have.text', null);
+		toSendInput().should('be.empty');
 		message1().should('have.text', 'Indica cuánto vas a Enviar');
 
 		toSendInput().type('!#$%&*(((())+-+"');
-		toSendInput().should('not.have.text', null);
-		message1().should('have.text', 'Solo puedes introducir Números');
-		*/
+		fee2ToSend().should('have.value', 'NaN');
+		amountToRecive().should('have.value', 'NaN');
 	});
 
 	//BR: Límite de Input Value = 0
@@ -93,35 +94,25 @@ describe('GX-30991: Paypal | Comisiones | Calcular las comisiones para enviar y 
 		amountToRecive().should('have.value', '-0,3');
 	});
 
-	// "comission": 5,4% = 0.054  y  "rate": 0,30 USD
 	it('30993 | TC04: Validar fórmula: ("ParaRecibir" + "rate") / (1 - "commission")', () => {
 		calculatorPage.get.toGetInput().type('10');
-		const { paypalFee, paypalCommission } = calculatorPage.get;
-
 		calculatorPage.get
 			.toGetInput()
 			.invoke('val')
 			.then(valorA => {
-				// Obtener el valor del campo de entrada 'campoA'
-				const numeroA = parseFloat(valorA).toFixed(2); // Convertir el valor a un número con 2 cifras decimales
-
-				const result = ((parseFloat(numeroA) + 0.3) / (1 - 0.054)).toFixed(2); // Realizar la suma y redondear a 2 cifras decimales
+				const result = ((parseFloat(valorA) + 0.3) / (1 - 0.054)).toFixed(2);
 
 				calculatorPage.get
 					.amountToSend()
 					.invoke('val')
 					.then(valorB => {
-						// Obtener el valor del campo de entrada 'campoB'
-						const numeroB = parseFloat(valorB.replace(',', '.')).toFixed(2); // Convertir el valor a un número con 2 cifras decimales
-
-						// Comparar la suma con el valor de 'campoB'
-						expect(parseFloat(result)).to.equal(parseFloat(numeroB));
+						const valueAmontToSend = parseFloat(valorB.replace(',', '.')).toFixed(2);
+						expect(parseFloat(result)).to.equal(parseFloat(valueAmontToSend));
 					});
 			});
 	});
 
-	it.skip('30993 | TC0: ', () => {
-		calculatorPage.get.toGetInput().type('10');
+	it.skip('30993 | TC05: ', () => {
 		expect(true).equal(true);
 		//continuar
 	});
