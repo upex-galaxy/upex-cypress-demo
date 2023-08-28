@@ -14,7 +14,7 @@ describe('GX-30991: Paypal | Comisiones | Calcular las comisiones para enviar y 
 		PaypalCalculatorSendTitle().should('have.text', 'Calculadora PayPal para Enviar');
 	});
 
-	it.skip('30993 | TC01: Validar que la cantidad a Recibir solo admita valores valor numéricos', () => {
+	it('30993 | TC01: Validar que la cantidad a Recibir solo admita valores valor numéricos', () => {
 		const { toGetInput, message } = calculatorPage.get;
 
 		toGetInput().type(1);
@@ -46,7 +46,7 @@ describe('GX-30991: Paypal | Comisiones | Calcular las comisiones para enviar y 
 		message().should('have.text', 'Solo puedes introducir Números');
 	});
 
-	it.skip('30993 | TC02: Validar que la cantidad a Enviar solo admita valores valor numéricos', () => {
+	it('30993 | TC02: Validar que la cantidad a Enviar solo admita valores valor numéricos', () => {
 		const { toSendInput, message1 } = calculatorPage.get;
 
 		toSendInput().type(1);
@@ -81,7 +81,7 @@ describe('GX-30991: Paypal | Comisiones | Calcular las comisiones para enviar y 
 	});
 
 	//BR: Límite de Input Value = 0
-	it.skip('30993 | TC03: Validar fórmula al insertar valor = 0 en ambas calculadoras: "para Recibir" y "para Enviar"', () => {
+	it('30993 | TC03: Validar fórmula al insertar valor = 0 en ambas calculadoras: "para Recibir" y "para Enviar"', () => {
 		const { toGetInput, toSendInput, fee2ToSend, amountToRecive } = calculatorPage.get;
 		toGetInput().type('0');
 		toGetInput().should('have.value', '0,32');
