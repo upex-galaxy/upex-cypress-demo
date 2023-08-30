@@ -2,21 +2,40 @@
 
 class CalculatorPage {
 	get = {
-		// obtener Locators
-		paypalFee: () => cy.get('#fee'),
-		paypalCommission: () => cy.get('#percentage'),
+		// * ---- Headers -----
 		PaypalCommissionsTitle: () => cy.get('h2').eq(0),
 		PaypalCalculatorReceiveTitle: () => cy.get('h2').eq(1),
 		PaypalCalculatorSendTitle: () => cy.get('h2').eq(2),
+		paypalFee: () => cy.get('#fee'),
+		paypalCommission: () => cy.get('#percentage'),
+		// * ---- inputs -----
 		inputParaRecibir: () => cy.get('input[name=toGet]'),
 		inputParaEnviar: () => cy.get('input[name=amountSent]'),
 		inputHayQueEnviar: () => cy.get('input[name=toCharge]'),
 		inputSeReciben: () => cy.get('input[name=amountAfterFees]'),
 		inputCommissionParaRecibir: () => cy.get('input[name=fees1]'),
 		inputCommissionParaEnviar: () => cy.get('input[name=fees]'),
+		// * ---- Log Messages -----
+		logMessageParaRecibir: () => cy.get('#mensaje'),
+		logMessageParaEnviar: () => cy.get('#mensaje1'),
 	};
 
 	//* Act/Methods (Definen las interacciones del Usuario y Algoritmos de la página)
+
+	getInputValue(InputLocator) {
+		return InputLocator.invoke('val').then(val => {
+			return val;
+		});
+	}
+	getInputNumber(InputLocator) {
+		return this.getInputValue(InputLocator).then(val => {
+			const valRefined = val.replaceAll('.', '');
+			const stringValue = valRefined.replaceAll(',', '.');
+			const numberValue = parseFloat(stringValue);
+			return numberValue;
+		});
+	}
+
 	calculateFormulaToGet(inputValue, commission, fee) {
 		const value = (inputValue + fee) / (1 - commission);
 		return parseFloat(value.toFixed(2));
@@ -30,32 +49,6 @@ class CalculatorPage {
 	getOutputCommision(ToSend, ToGet) {
 		const value = ToSend - ToGet;
 		return parseFloat(value.toFixed(2));
-	}
-
-	getInputValue(InputLocator) {
-		return InputLocator.invoke('val').then(val => {
-			const valRefined = val.replaceAll('.', '');
-			const stringValue = valRefined.replaceAll(',', '.');
-			const numberValue = parseFloat(stringValue);
-			return numberValue;
-		});
-	}
-
-	getRandomString(givenLength, onlyNumbers, decimalNumbers, specialChars) {
-		const numChars = '0123456789';
-		const textChars = 'abcdefghijklmnñopqrstuvwxyz';
-		const specialChars = '=?¡*¨][_:#"$$&%/';
-		const upperTextChars = textChars.toUpperCase();
-
-		let randomString = '';
-
-		if (onlyNumbers === true) {
-			for (i = 0; i < givenLength; i++) {
-				const randomIndex = Math.floor(Math.random() * numChars.length);
-				randomString += numChars[randomIndex];
-			}
-			return randomString;
-		}
 	}
 }
 

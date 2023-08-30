@@ -14,6 +14,16 @@ import 'cypress-downloadfile/lib/downloadFileCommand';
 
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
+
+Cypress.Commands.add('getInputFloat', inputLocator => {
+	return inputLocator.invoke('val').then(val => {
+		const valRefined = val.replaceAll('.', '');
+		const stringValue = valRefined.replaceAll(',', '.');
+		const numberValue = parseFloat(stringValue);
+		return numberValue;
+	});
+});
+
 //
 //
 // -- This is a child command --
