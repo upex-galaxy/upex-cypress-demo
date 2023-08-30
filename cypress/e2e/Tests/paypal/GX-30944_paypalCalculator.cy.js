@@ -54,7 +54,7 @@ describe('GX-30944: Paypal | Comisiones | Calcular las comisiones para enviar y 
 
 		calculatorPage.getInputNumber(inputSeReciben()).then(calculatedValueToGet => {
 			cy.log(calculatedValueToGet);
-			const expectedCalculatedValue = calculatorPage.calculateFormulaToSend(givenValueToSend, commission, fee);
+			const expectedCalculatedValue = calculatorPage.calculateFormulaToSend(givenValueToSend, data.commission, data.fee);
 			expect(calculatedValueToGet).equal(expectedCalculatedValue);
 
 			calculatorPage.getInputNumber(inputCommissionParaEnviar()).then(calculatedCommission => {
