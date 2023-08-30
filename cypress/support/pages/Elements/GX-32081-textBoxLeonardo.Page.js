@@ -7,8 +7,8 @@ class textboxPage {
 		submitButton: () => cy.get('#submit'),
 		nameResult: () => cy.get('#name'),
 		emailResult: () => cy.get('#email'),
-		currentAddressResult: () => cy.get('#currentAddress'),
-		permanentAddressResult: () => cy.get('#permanentAddress'),
+		currentAddressResult: () => cy.get('p[id=currentAddress]'),
+		permanentAddressResult: () => cy.get('p[id=permanentAddress]'),
 	};
 	fillInputUserName(val) {
 		this.get.inputUserName().type(val);

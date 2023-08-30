@@ -17,7 +17,7 @@ describe('GX-32081-✅-tools-qa-elements-text-box-fill-form-and-submit', () => {
 		textBoxPage.get.permanentAddressResult().should('contain', data.valid.userPermanentAddress);
 	});
 	//todo: Forma 2
-	it('32082 | TC1: Validar resultado después de completar formulario con datos validos', () => {
+	it.only('32082 | TC1: Validar resultado después de completar formulario con datos validos', () => {
 		textBoxPage.completeForm({
 			userName: data.valid.userName,
 			email: data.valid.userEmail,
