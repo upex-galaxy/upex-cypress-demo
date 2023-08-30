@@ -1,0 +1,21 @@
+{
+	"selectValue": {
+		"group1": {
+			"titleGroup1": "Group 1",
+			"option1": "Group 1, option 1",
+			"option2": "Group 1, option 2"
+		},
+		"group2": {
+			"titleGroup2": "Group 2",
+			"option1": "Group 2, option 1",
+			"option2": "Group 2, option 2"
+		},
+		"outOfGroup": {
+			"value1": "A root option",
+			"value2": "Another root option"
+		},
+		"Colors": ["Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"],
+		"Colors2": ["Green", "Blue", "Black", "Red"],
+		"cars": ["Volvo", "Saab", "Opel", "Audi"]
+	}
+}

@@ -1,48 +1,24 @@
-class DropdownPage {
+class dropDownPage {
 	get = {
-		mainTitle: () => cy.get('.playgound-header'),
-		clickOptionValue1: () => cy.get('.col-sm-12').eq(1),
-		optionValue1Picked: () => cy.get('#react-select-2-group-1-heading'),
-		clickOptionValue2: () => cy.get('#react-select-2-option-1-0'),
-
-		LinputSelectValue: () => cy.get('#react-select-2-input'),
-		LvalueSelectValue: () => cy.get('.css-1uccc91-singleValue'),
-
-		selectOptionOne: () => cy.get('.col-sm-12').eq(3),
-		optionOnePicked: () => cy.get('#react-select-3-group-0-heading'),
-		clickOptionOne: () => cy.get('#react-select-3-option-0-5'),
-		clickOldMenu: () => cy.get('#oldSelectMenu'),
-		multiSelectOption: () => cy.get('.css-1wa3eu0-placeholder').eq(2),
-		clickMultiSelect: () => cy.get('#react-select-4-option-0'),
-		standardSelectOption: () => cy.get('#cars'),
+		containerSelectValue: () => cy.get('#withOptGroup'),
+		titleGroup1SelectValue: () => cy.get('#react-select-2-group-0-heading'),
+		option1Group1SelectValue: () => cy.get('#react-select-2-option-0-0'),
+		option2Group1SelectValue: () => cy.get('#react-select-2-option-0-1'),
+		titleGroup2SelectValue: () => cy.get('#react-select-2-group-1-heading'),
+		option1Group2SelectValue: () => cy.get('#react-select-2-option-1-0'),
+		option2Group2SelectValue: () => cy.get('#react-select-2-option-1-1'),
+		rootOptionSelectValue: () => cy.get('#react-select-2-option-2'),
+		anotherOptionSelectValue: () => cy.get('#react-select-2-option-3'),
+		allOptionsSelectValue: () => cy.get('[id^="react-select-2-option"]'),
+		valueSelectedSelectValue: () => cy.get('[class^=" css-1uccc91-singleValue"]'),
+		containerSelectOne: () => cy.get('#selectOne'),
 	};
 
-	clickOptionValue1() {
-		this.get.clickOptionValue1().click();
+	clickSelectValue() {
+		this.get.containerSelectValue().click();
 	}
-
-	clickOptionValue2() {
-		this.get.clickOptionValue2().click();
-	}
-
-	selectOptionOne() {
-		this.get.selectOptionOne().click();
-	}
-
-	clickOptionOne() {
-		this.get.clickOptionOne().click();
-	}
-
-	clickOldMenu() {
-		this.get.clickOldMenu().select(5);
-	}
-
-	multiSelectOption() {
-		this.get.multiSelectOption().click();
-	}
-
-	standardSelectOption() {
-		this.get.standardSelectOption().children().first().click();
+	clickSelectOne() {
+		this.get.containerSelectOne().click();
 	}
 }
-export const dropPage = new DropdownPage();
+export const dropDown = new dropDownPage();
