@@ -23,7 +23,7 @@ describe('GX-29736 ToolsQA | Elements | Radio Buttons', () => {
 	it('29756 | TC2: Validar visualizar el label Impressive cuando se selecciona el radio button Impressive', () => {
 		//tags
 		cy.get('#impressiveRadio').click({ force: true });
-		cy.contains('You have selected').children().should('have.text', 'impressive');
+		cy.contains('You have selected').children().should('have.text', 'Impressive');
 		//cy.contains('You have selected').children().should.equal('yes');
 
 		//
