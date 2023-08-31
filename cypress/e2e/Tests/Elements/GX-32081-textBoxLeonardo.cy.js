@@ -36,7 +36,8 @@ describe('GX-32081-✅-tools-qa-elements-text-box-fill-form-and-submit', () => {
 			textBoxPage.clickOnSubmitButton();
 			//todo: validaciones
 			textBoxPage.get.emailResult().should('not.exist');
-			textBoxPage.get.inputEmail().should('have.css', 'border', 'rgb(255,0,0)');
+			textBoxPage.get.inputEmail().should('have.css', 'border', '1px solid rgb(255,0,0)');
+			textBoxPage.clearInputEmail();
 		});
 	});
 });

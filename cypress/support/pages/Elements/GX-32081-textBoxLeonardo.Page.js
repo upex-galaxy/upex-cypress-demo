@@ -25,6 +25,9 @@ class textboxPage {
 	clickOnSubmitButton() {
 		this.get.submitButton().click();
 	}
+	clearInputEmail() {
+		this.get.inputEmail().clear();
+	}
 	completeForm({ userName: val, email: val2, currentAddress: val3, permanentAddress: val4 }) {
 		this.get.inputUserName().type(val);
 		this.get.inputEmail().type(val2);
