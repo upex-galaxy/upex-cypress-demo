@@ -50,13 +50,13 @@ describe('ToolsQA | Interactions | Droppable', () => {
 		droppables.elements
 			.draggableSimple()
 			.should('be.visible')
-			.and('have.css', 'border', `0.8px dashed ${values.black}`)
+			.and('have.css', 'border', `1px dashed ${values.black}`)
 			.and('have.css', 'background-color', values.transparent)
 			.and('have.text', values.nameCardDragMe);
 		droppables.elements
 			.droppableSimple()
 			.should('be.visible')
-			.and('have.css', 'border', `0.8px solid ${values.black}`)
+			.and('have.css', 'border', `1px solid ${values.black}`)
 			.and('have.css', 'background-color', values.transparent)
 			.and('have.text', values.nameCardDropHere);
 	});
@@ -73,19 +73,19 @@ describe('ToolsQA | Interactions | Droppable', () => {
 		droppables.elements
 			.acceptable()
 			.should('be.visible')
-			.and('have.css', 'border', `0.8px dashed ${values.black}`)
+			.and('have.css', 'border', `1px dashed ${values.black}`)
 			.and('have.css', 'background-color', values.transparent)
 			.and('have.text', values.nameCardAcceptable);
 		droppables.elements
 			.notAcceptable()
 			.should('be.visible')
-			.and('have.css', 'border', `0.8px dashed ${values.black}`)
+			.and('have.css', 'border', `1px dashed ${values.black}`)
 			.and('have.css', 'background-color', values.transparent)
 			.and('have.text', values.nameCardNotAcceptable);
 		droppables.elements
 			.droppableAccept()
 			.should('be.visible')
-			.and('have.css', 'border', `0.8px solid ${values.black}`)
+			.and('have.css', 'border', `1px solid ${values.black}`)
 			.and('have.css', 'background-color', values.transparent)
 			.and('have.text', values.nameCardDropHere);
 	});
@@ -127,7 +127,7 @@ describe('ToolsQA | Interactions | Droppable', () => {
 		droppables.elements
 			.draggablePrevent()
 			.should('be.visible')
-			.and('have.css', 'border', `0.8px dashed ${values.black}`)
+			.and('have.css', 'border', `1px dashed ${values.black}`)
 			.and('have.css', 'background-color', values.transparent)
 			.and('have.text', values.nameCardDragMePrevent);
 	});
@@ -137,13 +137,13 @@ describe('ToolsQA | Interactions | Droppable', () => {
 		droppables.elements
 			.notGreedyOuterDroppable()
 			.should('be.visible')
-			.and('have.css', 'border', `0.8px solid ${values.black}`)
+			.and('have.css', 'border', `1px solid ${values.black}`)
 			.and('have.css', 'background-color', values.transparent)
 			.and('have.contain', values.nameCardOuterDroppable);
 		droppables.elements
 			.notGreedyInnerDroppable()
 			.should('be.visible')
-			.and('have.css', 'border', `0.8px solid ${values.black}`)
+			.and('have.css', 'border', `1px solid ${values.black}`)
 			.and('have.css', 'background-color', values.transparent)
 			.and('have.text', values.nameCardInnerDroppableNotGreedy);
 		droppables.elements.notGreedyOuterDroppable().within(() => {
@@ -163,13 +163,13 @@ describe('ToolsQA | Interactions | Droppable', () => {
 		droppables.elements
 			.greedyOuterDroppable()
 			.should('be.visible')
-			.and('have.css', 'border', `0.8px solid ${values.black}`)
+			.and('have.css', 'border', `1px solid ${values.black}`)
 			.and('have.css', 'background-color', values.transparent)
 			.and('have.contain', values.nameCardOuterDroppable);
 		droppables.elements
 			.greedyInnerDroppable()
 			.should('be.visible')
-			.and('have.css', 'border', `0.8px solid ${values.black}`)
+			.and('have.css', 'border', `1px solid ${values.black}`)
 			.and('have.css', 'background-color', values.transparent)
 			.and('have.text', values.nameCardInnerDroppableGreedy);
 		droppables.elements.greedyOuterDroppable().within(() => {
@@ -295,19 +295,19 @@ describe('ToolsQA | Interactions | Droppable', () => {
 		droppables.elements
 			.revertable()
 			.should('be.visible')
-			.and('have.css', 'border', `0.8px dashed ${values.black}`)
+			.and('have.css', 'border', `1px dashed ${values.black}`)
 			.and('have.css', 'background-color', values.transparent)
 			.and('have.text', values.nameCardWillRevert);
 		droppables.elements
 			.notRevertable()
 			.should('be.visible')
-			.and('have.css', 'border', `0.8px dashed ${values.black}`)
+			.and('have.css', 'border', `1px dashed ${values.black}`)
 			.and('have.css', 'background-color', values.transparent)
 			.and('have.text', values.nameCardNotRevert);
 		droppables.elements
 			.droppableRevertDraggable()
 			.should('be.visible')
-			.and('have.css', 'border', `0.8px solid ${values.black}`)
+			.and('have.css', 'border', `1px solid ${values.black}`)
 			.and('have.css', 'background-color', values.transparent)
 			.and('have.text', values.nameCardDropHere);
 	});
