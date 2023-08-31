@@ -5,10 +5,10 @@ describe('GX-32081-✅-tools-qa-elements-text-box-fill-form-and-submit', () => {
 	//todo: Forma 1
 	it('32082 | TC1: Validar resultado después de completar formulario con datos validos', () => {
 		//todo: Completar formularios
-		textBoxPage.fillInputUserName(data.valid.userName);
-		textBoxPage.fillInputEmail(data.valid.userEmail);
-		textBoxPage.fillInputCurrentAddress(data.valid.userCurrentAddress);
-		textBoxPage.fillInputPermanentAddress(data.valid.userPermanentAddress);
+		textBoxPage.fillUserNameInput(data.valid.userName);
+		textBoxPage.fillEmailInput(data.valid.userEmail);
+		textBoxPage.fillCurrentAddressInput(data.valid.userCurrentAddress);
+		textBoxPage.fillPermanentAddressInput(data.valid.userPermanentAddress);
 		textBoxPage.clickOnSubmitButton();
 		//todo: Validaciones
 		textBoxPage.get.nameResult().should('contain', data.valid.userName);
@@ -32,12 +32,12 @@ describe('GX-32081-✅-tools-qa-elements-text-box-fill-form-and-submit', () => {
 	});
 	it.only('32082 | TC2: Validar No genere resultado después de completar “Input email” con datos inválidos', () => {
 		data.invalid.forEach(invalidData => {
-			textBoxPage.fillInputEmail(invalidData.email);
+			textBoxPage.fillEmailInput(invalidData.email);
 			textBoxPage.clickOnSubmitButton();
 			//todo: validaciones
 			textBoxPage.get.emailResult().should('not.exist');
 			textBoxPage.get.inputEmail().should('have.css', 'border', '1px solid rgb(255,0,0)');
-			textBoxPage.clearInputEmail();
+			textBoxPage.clearEmailInput();
 		});
 	});
 });

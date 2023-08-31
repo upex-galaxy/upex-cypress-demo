@@ -10,22 +10,22 @@ class textboxPage {
 		currentAddressResult: () => cy.get('p[id=currentAddress]'),
 		permanentAddressResult: () => cy.get('p[id=permanentAddress]'),
 	};
-	fillInputUserName(val) {
+	fillUserNameInput(val) {
 		this.get.inputUserName().type(val);
 	}
-	fillInputEmail(val) {
+	fillEmailInput(val) {
 		this.get.inputEmail().type(val);
 	}
-	fillInputCurrentAddress(val) {
+	fillCurrentAddressInput(val) {
 		this.get.inputCurrentAddress().type(val);
 	}
-	fillInputPermanentAddress(val) {
+	fillPermanentAddressInput(val) {
 		this.get.inputPermanentAddress().type(val);
 	}
 	clickOnSubmitButton() {
 		this.get.submitButton().click();
 	}
-	clearInputEmail() {
+	clearEmailInput() {
 		this.get.inputEmail().clear();
 	}
 	completeForm({ userName: val, email: val2, currentAddress: val3, permanentAddress: val4 }) {
