@@ -13,9 +13,13 @@
 		"outOfGroup": {
 			"value1": "A root option",
 			"value2": "Another root option"
-		},
-		"Colors": ["Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"],
-		"Colors2": ["Green", "Blue", "Black", "Red"],
-		"cars": ["Volvo", "Saab", "Opel", "Audi"]
-	}
+		}
+	},
+	"selectOne": {
+		"options": ["Dr.", "Mrt.", "Mrs.", "M.", "Prof.", "Other"],
+		"messageNoMatch": "No options"
+	},
+	"Colors": ["Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"],
+	"Colors2": ["Green", "Blue", "Black", "Red"],
+	"cars": ["Volvo", "Saab", "Opel", "Audi"]
 }
