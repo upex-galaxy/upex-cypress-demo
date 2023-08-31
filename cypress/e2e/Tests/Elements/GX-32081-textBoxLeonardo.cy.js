@@ -17,7 +17,7 @@ describe('GX-32081-✅-tools-qa-elements-text-box-fill-form-and-submit', () => {
 		textBoxPage.get.permanentAddressResult().should('contain', data.valid.userPermanentAddress);
 	});
 	//todo: Forma 2
-	it.only('32082 | TC1: Validar resultado después de completar formulario con datos validos', () => {
+	it('32082 | TC1: Validar resultado después de completar formulario con datos validos', () => {
 		textBoxPage.completeForm({
 			userName: data.valid.userName,
 			email: data.valid.userEmail,
@@ -29,6 +29,15 @@ describe('GX-32081-✅-tools-qa-elements-text-box-fill-form-and-submit', () => {
 		textBoxPage.get.emailResult().should('contain', data.valid.userEmail);
 		textBoxPage.get.currentAddressResult().should('contain', data.valid.userCurrentAddress);
 		textBoxPage.get.permanentAddressResult().should('contain', data.valid.userPermanentAddress);
+	});
+	it.only('32082 | TC2: Validar No genere resultado después de completar “Input email” con datos inválidos', () => {
+		data.invalid.forEach(invalidData => {
+			textBoxPage.fillInputEmail(invalidData.email);
+			textBoxPage.clickOnSubmitButton();
+			//todo: validaciones
+			textBoxPage.get.emailResult().should('not.exist');
+			textBoxPage.get.inputEmail().should('have.css', 'border', 'rgb(255,0,0)');
+		});
 	});
 });
 import data from '../../../fixtures/data/GX-32081-textBoxLeonardo.json';

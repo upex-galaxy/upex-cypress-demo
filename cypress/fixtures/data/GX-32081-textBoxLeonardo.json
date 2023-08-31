@@ -5,9 +5,15 @@
 		"userCurrentAddress": "Calle 1",
 		"userPermanentAddress": "Calle 2"
 	},
-	"invalid": {
-		"email1": "leonardo@",
-		"email2": "leonardo",
-		"email3": "leonardo.com"
-	}
+	"invalid": [
+		{
+			"email": "leonardo@"
+		},
+		{
+			"email": "leonardo"
+		},
+		{
+			"email": "leonardo.com"
+		}
+	]
 }
