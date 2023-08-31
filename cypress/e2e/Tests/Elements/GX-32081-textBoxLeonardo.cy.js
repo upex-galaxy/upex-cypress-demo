@@ -30,13 +30,13 @@ describe('GX-32081-✅-tools-qa-elements-text-box-fill-form-and-submit', () => {
 		textBoxPage.get.currentAddressResult().should('contain', data.valid.userCurrentAddress);
 		textBoxPage.get.permanentAddressResult().should('contain', data.valid.userPermanentAddress);
 	});
-	it.only('32082 | TC2: Validar No genere resultado después de completar “Input email” con datos inválidos', () => {
+	it('32082 | TC2: Validar No genere resultado después de completar “Input email” con datos inválidos', () => {
 		data.invalid.forEach(invalidData => {
 			textBoxPage.fillEmailInput(invalidData.email);
 			textBoxPage.clickOnSubmitButton();
 			//todo: validaciones
 			textBoxPage.get.emailResult().should('not.exist');
-			textBoxPage.get.inputEmail().should('have.css', 'border', '1px solid rgb(255,0,0)');
+			textBoxPage.get.inputEmail().should('have.css', 'border', '1px solid rgb(255, 0, 0)');
 			textBoxPage.clearEmailInput();
 		});
 	});
