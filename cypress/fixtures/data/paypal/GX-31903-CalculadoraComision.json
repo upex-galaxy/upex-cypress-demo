@@ -1,0 +1,13 @@
+{
+	"commissionDefault": "5,4",
+	"feeDefault": "0,30",
+	"MaxCaracteres": {
+		"CommissionError": "Infinity",
+		"FeeError": "Infinity"
+	},
+	"Title": {
+		"commission": "Las Comisiones PayPal",
+		"paraRecibir": "Calculadora PayPal para Recibir",
+		"paraEnviar": "Calculadora PayPal para Enviar"
+	}
+}

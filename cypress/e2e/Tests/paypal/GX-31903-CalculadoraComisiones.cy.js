@@ -1,17 +1,21 @@
 import { calculatorPage } from '@pages/paypal/GX-31903-CalculadorComsiones.Page';
-const CalculadoraCommission = 'https://vendercomprardolares.com/calculadora-comisiones-paypal.php';
 import { faker } from '@faker-js/faker';
+import data from '@data/paypal/GX-31903-CalculadoraComision.json';
+import { removeLogs } from '@helper/RemoveLogs';
+removeLogs();
+
+const urlCalculadorPaypal = 'https://vendercomprardolares.com/calculadora-comisiones-paypal.php';
 
 describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-recibir', () => {
 	beforeEach('Precondition: para usar la Calculadora Paypal', () => {
-		cy.visit(CalculadoraCommission);
+		cy.visit(urlCalculadorPaypal);
 		// * Destructuración:
 		const { paypalFee, paypalCommission, PaypalCommissionsTitle, PaypalCalculatorReceiveTitle, PaypalCalculatorSendTitle } = calculatorPage.get;
-		paypalCommission().should('have.value', '5,4');
-		paypalFee().should('have.value', '0,30');
-		PaypalCommissionsTitle().should('have.text', 'Las Comisiones PayPal');
-		PaypalCalculatorReceiveTitle().should('have.text', 'Calculadora PayPal para Recibir');
-		PaypalCalculatorSendTitle().should('have.text', 'Calculadora PayPal para Enviar');
+		paypalCommission().should('have.value', data.commissionDefault);
+		paypalFee().should('have.value', data.feeDefault);
+		PaypalCommissionsTitle().should('have.text', data.Title.commission);
+		PaypalCalculatorReceiveTitle().should('have.text', data.Title.paraRecibir);
+		PaypalCalculatorSendTitle().should('have.text', data.Title.paraEnviar);
 	});
 	it('31904 | TC1: Verificar poder Calcular la comisión cuando se introduce 1 caracter', () => {
 		const { inputParaRecibir, inputParaEnviar, inputHayQueEnviar, inputCommissionParaRecibir, inputSeReciben, inputCommissionParaEnviar } =
@@ -83,5 +87,52 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 				expect(calculatedCommission.toString()).to.equal(Cypress.env('SendTotalFees'));
 			});
 		});
+	});
+	it.skip('31904 | TC3: Verificar NO poder Calcular la comisión hay que Recibir cuando se introduce 307 caracteres', () => {
+		//! Aquí tenemos un defecto: Cuando se ingresan 307 caracteres no aparece "NaN" en el campo Fee aparece "Infinity"
+		const { inputParaRecibir, inputHayQueEnviar, inputCommissionParaRecibir } = calculatorPage.get;
+		calculatorPage.CommissionAndFeeDefault();
+
+		const stringValueToGet = faker.random.numeric(307);
+		inputParaRecibir().type(stringValueToGet);
+
+		calculatorPage.getInputValue(inputHayQueEnviar()).then(calculatedValueToSend => {
+			cy.log(calculatedValueToSend);
+			expect(calculatedValueToSend.toString()).equal(data.MaxCaracteres.CommissionError);
+
+			calculatorPage.getInputValue(inputCommissionParaRecibir()).then(calculatedCommission => {
+				cy.log(calculatedCommission);
+				expect(calculatedCommission.toString()).to.equal(data.MaxCaracteres.FeeError);
+			});
+		});
+	});
+
+	it.skip('31904 | TC4: Verificar NO poder Calcular la comisión hay que Enviar cuando se introduce 307 caracteres', () => {
+		//! Aquí tenemos un defecto: Cuando se ingresan 307 caracteres no aparece "NaN" en el campo Fee sino que se hace el calculo
+		const { inputParaEnviar, inputSeReciben, inputCommissionParaEnviar } = calculatorPage.get;
+		calculatorPage.CommissionAndFeeDefault();
+		const stringValueToSend = faker.random.numeric(307);
+		inputParaEnviar().type(stringValueToSend);
+
+		calculatorPage.getInputValue(inputSeReciben()).then(calculatedValueToGet => {
+			cy.log(calculatedValueToGet);
+			expect(calculatedValueToGet.toString()).equal(data.MaxCaracteres.CommissionError);
+
+			calculatorPage.getInputValue(inputCommissionParaEnviar()).then(calculatedCommission => {
+				cy.log(calculatedCommission);
+				expect(calculatedCommission.toString()).to.equal(data.MaxCaracteres.FeeError);
+			});
+		});
+	});
+
+	it.skip('prueba de Fee y commision (Fuera de Scope)', () => {
+		// * estába probando que se pudiera cambiar las comisiones y el fee
+		const { paypalFee, paypalCommission } = calculatorPage.get;
+		const randomCommission = Cypress._.random(0, 50, true).toFixed(2).toString().replace('.', ',');
+		const randomFee = (Cypress._.random(0, 100, true) / 10).toFixed(2).toString().replace('.', ',');
+		paypalCommission().clear().type(randomCommission);
+		paypalCommission().should('have.value', randomCommission);
+		paypalFee().clear().type(randomFee);
+		paypalFee().should('have.value', randomFee);
 	});
 });
