@@ -9,5 +9,9 @@
 		"commission": "Las Comisiones PayPal",
 		"paraRecibir": "Calculadora PayPal para Recibir",
 		"paraEnviar": "Calculadora PayPal para Enviar"
+	},
+	"LogMsg": {
+		"Recibir": "Indica cuánto vas a Recibir",
+		"Enviar": "Indica cuánto vas a Enviar"
 	}
 }

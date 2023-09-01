@@ -237,20 +237,20 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 			});
 		});
 	});
-	it.only('31904 | TC7: Validar que se muestre el mensaje de la BR cuando el input se envía vació', () => {
+	it('31904 | TC7: Validar que se muestre el mensaje de la BR cuando el input se envía vació', () => {
 		const { inputParaRecibir, inputParaEnviar, LogMsgRecibir, LogMsgEnviar } = calculatorPage.get;
 		inputParaRecibir().type('{enter}');
-		LogMsgRecibir().should('contain.text', 'Indica cuánto vas a Recibir');
+		LogMsgRecibir().should('contain.text', data.LogMsg.Recibir);
 		inputParaEnviar().type('{enter}');
-		LogMsgEnviar().should('contain.text', 'Indica cuánto vas a Enviar');
+		LogMsgEnviar().should('contain.text', data.LogMsg.Enviar);
 	});
-	it.only('31904 | TC8: Validar que se muestre el mensaje de la BR cuando el input se borra el contenido', () => {
+	it('31904 | TC8: Validar que se muestre el mensaje de la BR cuando el input se borra el contenido', () => {
 		const { inputParaRecibir, inputParaEnviar, LogMsgRecibir, LogMsgEnviar } = calculatorPage.get;
 		let randomInput = Cypress._.random(0, 100);
 		inputParaRecibir().type(randomInput).clear();
-		LogMsgRecibir().should('contain.text', 'Indica cuánto vas a Recibir');
+		LogMsgRecibir().should('contain.text', data.LogMsg.Recibir);
 		inputParaEnviar().type(randomInput).clear();
-		LogMsgEnviar().should('contain.text', 'Indica cuánto vas a Enviar');
+		LogMsgEnviar().should('contain.text', data.LogMsg.Enviar);
 	});
 
 	it.skip('prueba de Fee y commision (Fuera de Scope)', () => {
