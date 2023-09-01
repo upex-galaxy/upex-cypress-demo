@@ -12,6 +12,8 @@ class CalculatorPage {
 		inputSeReciben: () => cy.get('input[name=amountAfterFees]'),
 		inputCommissionParaRecibir: () => cy.get('input[name=fees1]'),
 		inputCommissionParaEnviar: () => cy.get('input[name=fees]'),
+		LogMsgRecibir: () => cy.get('#mensaje'),
+		LogMsgEnviar: () => cy.get('#mensaje1'),
 	};
 	CommissionAndFeeDefault() {
 		this.get

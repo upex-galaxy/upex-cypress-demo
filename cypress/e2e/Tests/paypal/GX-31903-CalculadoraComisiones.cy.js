@@ -88,6 +88,10 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 				expect(calculatedCommission.toString()).to.equal(data.MaxCaracteres.FeeError);
 			});
 		});
+		//! Tener en cuenta que el calculo no se hace con cantidad de caracteres sino con un valor muy grande que luego de cierto
+		//! valor esté ya no se calcula, ejemplo de cantidad de caracteres:
+		//! Si ingreso un número flotante que tenga 306 caracteres antes de la coma y luego 10 caracteres luego de la coma esté
+		//! será calculado y nos mostrara los valores de comisión y fee
 	});
 	it.skip('31904 | TC4: Verificar NO poder Calcular la comisión hay que Enviar cuando se introduce 307 caracteres', () => {
 		//! Aquí tenemos un defecto: Cuando se ingresan 307 caracteres no aparece "NaN" en el campo Fee sino que se hace el calculo
@@ -107,6 +111,7 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 		const { inputParaRecibir, inputParaEnviar, inputHayQueEnviar, inputCommissionParaRecibir, inputSeReciben, inputCommissionParaEnviar } =
 			calculatorPage.get;
 		calculatorPage.CommissionAndFeeDefault();
+		//* Para Valores Enteros
 		let givenValueToGet = Cypress._.random(-1000, 0);
 		inputParaRecibir().type(givenValueToGet.toString());
 		calculatorPage.getInputValue(inputHayQueEnviar()).then(calculatedValueToSend => {
@@ -131,11 +136,45 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 				expect(calculatedCommission).equal(expectedCom);
 			});
 		});
+		//* Para Valores Float
+		let givenValueToGetFloat = Cypress._.random(-100, 0, true).toFixed(2);
+		cy.log(givenValueToGetFloat);
+		inputParaRecibir().clear().type(givenValueToGetFloat.toString().replace('.', ','));
+		calculatorPage.getInputValue(inputHayQueEnviar()).then(calculatedValueToSend => {
+			const expectedCalculatedValue = calculatorPage.calculateFormulaToGet(
+				parseFloat(givenValueToGetFloat),
+				Cypress.env('Commission'),
+				Cypress.env('Fee')
+			);
+			expect(calculatedValueToSend).equal(expectedCalculatedValue);
+			calculatorPage.getInputValue(inputCommissionParaRecibir()).then(calculatedCommission => {
+				cy.log(calculatedCommission);
+				const expectedCom = calculatorPage.getOutputCommission(calculatedValueToSend, givenValueToGetFloat);
+				expect(calculatedCommission).equal(expectedCom);
+			});
+		});
+		const givenValueToSendFloat = Cypress._.random(-100, 0, true).toFixed(2);
+		inputParaEnviar().clear().type(givenValueToSendFloat.toString().replace('.', ','));
+		calculatorPage.getInputValue(inputSeReciben()).then(calculatedValueToGet => {
+			cy.log(calculatedValueToGet);
+			const expectedCalculatedValue = calculatorPage.calculateFormulaToSend(
+				givenValueToSendFloat,
+				Cypress.env('Commission'),
+				Cypress.env('Fee')
+			);
+			expect(calculatedValueToGet).equal(expectedCalculatedValue);
+			calculatorPage.getInputValue(inputCommissionParaEnviar()).then(calculatedCommission => {
+				cy.log(calculatedCommission);
+				const expectedCom = calculatorPage.getOutputCommission(givenValueToSendFloat, calculatedValueToGet);
+				expect(calculatedCommission).equal(expectedCom);
+			});
+		});
 	});
 	it('31904 | TC6: Verificar poder Calcular la comisión cuando se introduce el caracter "+" y luego un número', () => {
 		const { inputParaRecibir, inputParaEnviar, inputHayQueEnviar, inputCommissionParaRecibir, inputSeReciben, inputCommissionParaEnviar } =
 			calculatorPage.get;
 		calculatorPage.CommissionAndFeeDefault();
+		//* Para Valores Enteros
 		let givenValueToGet = Cypress._.random(0, 100);
 		inputParaRecibir().type('+' + givenValueToGet.toString());
 		calculatorPage.getInputValue(inputHayQueEnviar()).then(calculatedValueToSend => {
@@ -160,6 +199,58 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 				expect(calculatedCommission).equal(expectedCom);
 			});
 		});
+		//* Para Valores Float
+		let givenValueToGetFloat = Cypress._.random(0, 100, true).toFixed(2);
+		cy.log(givenValueToGetFloat);
+		inputParaRecibir()
+			.clear()
+			.type('+' + givenValueToGetFloat.toString().replace('.', ','));
+		calculatorPage.getInputValue(inputHayQueEnviar()).then(calculatedValueToSend => {
+			const expectedCalculatedValue = calculatorPage.calculateFormulaToGet(
+				parseFloat(givenValueToGetFloat),
+				Cypress.env('Commission'),
+				Cypress.env('Fee')
+			);
+			expect(calculatedValueToSend).equal(expectedCalculatedValue);
+			calculatorPage.getInputValue(inputCommissionParaRecibir()).then(calculatedCommission => {
+				cy.log(calculatedCommission);
+				const expectedCom = calculatorPage.getOutputCommission(calculatedValueToSend, givenValueToGetFloat);
+				expect(calculatedCommission).equal(expectedCom);
+			});
+		});
+		const givenValueToSendFloat = Cypress._.random(0, 100, true).toFixed(2);
+		inputParaEnviar()
+			.clear()
+			.type('+' + givenValueToSendFloat.toString().replace('.', ','));
+		calculatorPage.getInputValue(inputSeReciben()).then(calculatedValueToGet => {
+			cy.log(calculatedValueToGet);
+			const expectedCalculatedValue = calculatorPage.calculateFormulaToSend(
+				givenValueToSendFloat,
+				Cypress.env('Commission'),
+				Cypress.env('Fee')
+			);
+			expect(calculatedValueToGet).equal(expectedCalculatedValue);
+			calculatorPage.getInputValue(inputCommissionParaEnviar()).then(calculatedCommission => {
+				cy.log(calculatedCommission);
+				const expectedCom = calculatorPage.getOutputCommission(givenValueToSendFloat, calculatedValueToGet);
+				expect(calculatedCommission).equal(expectedCom);
+			});
+		});
+	});
+	it.only('31904 | TC7: Validar que se muestre el mensaje de la BR cuando el input se envía vació', () => {
+		const { inputParaRecibir, inputParaEnviar, LogMsgRecibir, LogMsgEnviar } = calculatorPage.get;
+		inputParaRecibir().type('{enter}');
+		LogMsgRecibir().should('contain.text', 'Indica cuánto vas a Recibir');
+		inputParaEnviar().type('{enter}');
+		LogMsgEnviar().should('contain.text', 'Indica cuánto vas a Enviar');
+	});
+	it.only('31904 | TC8: Validar que se muestre el mensaje de la BR cuando el input se borra el contenido', () => {
+		const { inputParaRecibir, inputParaEnviar, LogMsgRecibir, LogMsgEnviar } = calculatorPage.get;
+		let randomInput = Cypress._.random(0, 100);
+		inputParaRecibir().type(randomInput).clear();
+		LogMsgRecibir().should('contain.text', 'Indica cuánto vas a Recibir');
+		inputParaEnviar().type(randomInput).clear();
+		LogMsgEnviar().should('contain.text', 'Indica cuánto vas a Enviar');
 	});
 
 	it.skip('prueba de Fee y commision (Fuera de Scope)', () => {
