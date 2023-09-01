@@ -1,3 +1,6 @@
+import { removeLogs } from '@helper/RemoveLogs';
+removeLogs();
+
 describe('GX-32427 tools-qa-elements-radio-buttons', () => {
 	beforeEach('Precondicion: Usuario debe estar en la pagina Radio-Button', () => {
 		cy.visit('https://demoqa.com/radio-button');
@@ -13,5 +16,3 @@ describe('GX-32427 tools-qa-elements-radio-buttons', () => {
 		cy.contains('No').should('be.visible');
 	});
 });
-import { removeLogs } from '@helper/RemoveLogs';
-removeLogs();
