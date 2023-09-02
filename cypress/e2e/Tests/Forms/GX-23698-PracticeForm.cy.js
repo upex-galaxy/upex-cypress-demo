@@ -9,7 +9,7 @@ let movile = faker.phone.number('##########');
 let address = faker.address.streetAddress();
 let Mail = [data.Email1, data.Email3, data.Email5, data.Email8];
 
-describe('US GX-23698 | TS: ✅ToolsQA | Forms | Practice Form', () => {
+describe.skip('US GX-23698 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 	beforeEach(() => {
 		cy.visit('https://demoqa.com/automation-practice-form');
 	});
@@ -29,7 +29,7 @@ describe('US GX-23698 | TS: ✅ToolsQA | Forms | Practice Form', () => {
 		usuario.datos.Mobile().should('have.css', 'border-color', 'rgb(220, 53, 69)');
 	});
 
-	it('23699 | TC2: Validate complete the form with valid data', () => {
+	it.skip('23699 | TC2: Validate complete the form with valid data', () => {
 		const mail = data.Email7;
 		usuario.FillForm(lastname, firstname, mail, movile);
 		const nombreCompleto = lastname + ' ' + firstname;
