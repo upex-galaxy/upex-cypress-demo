@@ -67,6 +67,17 @@ class CalculatorPage {
 			return numberValue;
 		});
 	}
+	randomCaracterEspecial(givenLength, onlySpecialChars) {
+		const specialChars = '$!"#$%&/(()+-*,,-';
+		let randomString = '';
+		if (onlySpecialChars === true) {
+			for (let i = 0; i < givenLength; i++) {
+				const randomIndex = Math.floor(Math.random() * specialChars.length);
+				randomString += specialChars[randomIndex];
+			}
+			return randomString;
+		}
+	}
 }
 
 export const calculatorPage = new CalculatorPage();

@@ -90,8 +90,8 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 		});
 		//! Tener en cuenta que el calculo no se hace con cantidad de caracteres sino con un valor muy grande que luego de cierto
 		//! valor esté ya no se calcula, ejemplo de cantidad de caracteres:
-		//! Si ingreso un número flotante que tenga 306 caracteres antes de la coma y luego 10 caracteres luego de la coma esté
-		//! será calculado y nos mostrara los valores de comisión y fee
+		//! Si ingreso un número flotante que tenga 306 caracteres antes de la coma y agrego 10 caracteres luego de la coma esté
+		//! será calculado y nos mostrara los valores de comisión y fee siendo un total de 317 caracteres (incluyendo la coma)
 	});
 	it.skip('31904 | TC4: Verificar NO poder Calcular la comisión hay que Enviar cuando se introduce 307 caracteres', () => {
 		//! Aquí tenemos un defecto: Cuando se ingresan 307 caracteres no aparece "NaN" en el campo Fee sino que se hace el calculo
@@ -106,6 +106,10 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 				expect(calculatedCommission.toString()).to.equal(data.MaxCaracteres.FeeError);
 			});
 		});
+		//! Tener en cuenta que el calculo no se hace con cantidad de caracteres sino con un valor muy grande que luego de cierto
+		//! valor esté ya no se calcula, ejemplo de cantidad de caracteres:
+		//! Si ingreso un número flotante que tenga 306 caracteres antes de la coma y agrego 10 caracteres luego de la coma esté
+		//! será calculado y nos mostrara los valores de comisión y fee siendo un total de 317 caracteres (incluyendo la coma)
 	});
 	it('31904 | TC5: Verificar poder Calcular la comisión cuando se introduce un numero negativo', () => {
 		const { inputParaRecibir, inputParaEnviar, inputHayQueEnviar, inputCommissionParaRecibir, inputSeReciben, inputCommissionParaEnviar } =
@@ -239,17 +243,36 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 	});
 	it('31904 | TC7: Validar que se muestre el mensaje de la BR cuando el input se envía vació', () => {
 		const { inputParaRecibir, inputParaEnviar, LogMsgRecibir, LogMsgEnviar } = calculatorPage.get;
-		inputParaRecibir().type('{enter}');
+		inputParaRecibir().should('be.empty').type('{enter}');
 		LogMsgRecibir().should('contain.text', data.LogMsg.Recibir);
-		inputParaEnviar().type('{enter}');
+		inputParaEnviar().should('be.empty').type('{enter}');
 		LogMsgEnviar().should('contain.text', data.LogMsg.Enviar);
 	});
 	it('31904 | TC8: Validar que se muestre el mensaje de la BR cuando el input se borra el contenido', () => {
 		const { inputParaRecibir, inputParaEnviar, LogMsgRecibir, LogMsgEnviar } = calculatorPage.get;
-		let randomInput = Cypress._.random(0, 100);
-		inputParaRecibir().type(randomInput).clear();
+		const randomNumber = Cypress._.random(0, 100);
+		inputParaRecibir().type(randomNumber).clear().should('be.empty');
 		LogMsgRecibir().should('contain.text', data.LogMsg.Recibir);
-		inputParaEnviar().type(randomInput).clear();
+		inputParaEnviar().type(randomNumber).clear().should('be.empty');
+		LogMsgEnviar().should('contain.text', data.LogMsg.Enviar);
+	});
+	it('31904 | TC9: Validar que se muestre el mensaje de la BR cuando se ingresan caracteres especiales en el input', () => {
+		const { inputParaRecibir, inputParaEnviar, LogMsgRecibir, LogMsgEnviar } = calculatorPage.get;
+		const randomText = calculatorPage.randomCaracterEspecial(Cypress._.random(0, 20), true);
+		inputParaRecibir().type(randomText);
+		LogMsgRecibir().should('contain.text', data.LogMsg.SoloNumeros);
+		//! Se ha comentado la parte de codigo que fallaba por un defecto encontrado
+		//! Defecto: No se dispara el mensaje correspondiente cuando se ingresan caracteres especiales
+		/*inputParaEnviar().type(randomText);
+		LogMsgEnviar().should('contain.text', data.LogMsg.SoloNumeros); //! No se puede validar la aserción 
+		*/
+	});
+	it('31904 | TC10: Validar que se eliminan automaticamente cuando se ingresan letras en el input', () => {
+		const { inputParaRecibir, inputParaEnviar, LogMsgRecibir, LogMsgEnviar } = calculatorPage.get;
+		const randomText = faker.random.alpha(50);
+		inputParaRecibir().type(randomText).should('be.empty');
+		LogMsgRecibir().should('contain.text', data.LogMsg.Recibir);
+		inputParaEnviar().type(randomText).should('be.empty');
 		LogMsgEnviar().should('contain.text', data.LogMsg.Enviar);
 	});
 

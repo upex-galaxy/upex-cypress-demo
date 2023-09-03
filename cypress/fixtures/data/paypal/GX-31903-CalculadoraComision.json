@@ -12,6 +12,7 @@
 	},
 	"LogMsg": {
 		"Recibir": "Indica cuánto vas a Recibir",
-		"Enviar": "Indica cuánto vas a Enviar"
+		"Enviar": "Indica cuánto vas a Enviar",
+		"SoloNumeros": "Solo puedes introducir Números"
 	}
 }
