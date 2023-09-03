@@ -241,3 +241,4 @@ jobs:
         with:
           name: regression-allure-report
           path: reports/allure-report
+          
