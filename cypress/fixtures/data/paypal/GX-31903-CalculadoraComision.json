@@ -14,5 +14,9 @@
 		"Recibir": "Indica cuánto vas a Recibir",
 		"Enviar": "Indica cuánto vas a Enviar",
 		"SoloNumeros": "Solo puedes introducir Números"
+	},
+	"validCaracter": {
+		"mas": "+",
+		"menos": "-"
 	}
 }

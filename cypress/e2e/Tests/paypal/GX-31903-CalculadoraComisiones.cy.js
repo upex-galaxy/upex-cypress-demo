@@ -18,13 +18,21 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 		PaypalCalculatorSendTitle().should('have.text', data.Title.paraEnviar);
 	});
 	it('31904 | TC1: Verificar poder Calcular la comisión cuando se introduce 1 caracter', () => {
-		const { inputParaRecibir, inputParaEnviar, inputHayQueEnviar, inputCommissionParaRecibir, inputSeReciben, inputCommissionParaEnviar } =
-			calculatorPage.get;
+		const {
+			inputParaRecibir,
+			inputParaEnviar,
+			inputHayQueEnviar,
+			inputCommissionParaRecibir,
+			inputSeReciben,
+			inputCommissionParaEnviar,
+			LogMsgRecibir,
+			LogMsgEnviar,
+		} = calculatorPage.get;
 		calculatorPage.CommissionAndFeeDefault();
 		let givenValueToGet = Cypress._.random(0, 9);
 		inputParaRecibir().type(givenValueToGet.toString());
+		LogMsgRecibir().should('be.empty');
 		calculatorPage.getInputValue(inputHayQueEnviar()).then(calculatedValueToSend => {
-			cy.log(givenValueToGet, Cypress.env('Commission'), Cypress.env('Fee'));
 			const expectedCalculatedValue = calculatorPage.calculateFormulaToGet(givenValueToGet, Cypress.env('Commission'), Cypress.env('Fee'));
 			expect(calculatedValueToSend).equal(expectedCalculatedValue);
 			calculatorPage.getInputValue(inputCommissionParaRecibir()).then(calculatedCommission => {
@@ -35,6 +43,7 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 		});
 		const givenValueToSend = Cypress._.random(0, 9);
 		inputParaEnviar().type(givenValueToSend.toString());
+		LogMsgEnviar().should('be.empty');
 		calculatorPage.getInputValue(inputSeReciben()).then(calculatedValueToGet => {
 			cy.log(calculatedValueToGet);
 			const expectedCalculatedValue = calculatorPage.calculateFormulaToSend(givenValueToSend, Cypress.env('Commission'), Cypress.env('Fee'));
@@ -180,7 +189,7 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 		calculatorPage.CommissionAndFeeDefault();
 		//* Para Valores Enteros
 		let givenValueToGet = Cypress._.random(0, 100);
-		inputParaRecibir().type('+' + givenValueToGet.toString());
+		inputParaRecibir().type(data.validCaracter.mas + givenValueToGet.toString());
 		calculatorPage.getInputValue(inputHayQueEnviar()).then(calculatedValueToSend => {
 			cy.log(givenValueToGet, Cypress.env('Commission'), Cypress.env('Fee'));
 			const expectedCalculatedValue = calculatorPage.calculateFormulaToGet(givenValueToGet, Cypress.env('Commission'), Cypress.env('Fee'));
@@ -192,7 +201,7 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 			});
 		});
 		const givenValueToSend = Cypress._.random(0, 100);
-		inputParaEnviar().type('+' + givenValueToSend.toString());
+		inputParaEnviar().type(data.validCaracter.mas + givenValueToSend.toString());
 		calculatorPage.getInputValue(inputSeReciben()).then(calculatedValueToGet => {
 			cy.log(calculatedValueToGet);
 			const expectedCalculatedValue = calculatorPage.calculateFormulaToSend(givenValueToSend, Cypress.env('Commission'), Cypress.env('Fee'));
@@ -208,7 +217,7 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 		cy.log(givenValueToGetFloat);
 		inputParaRecibir()
 			.clear()
-			.type('+' + givenValueToGetFloat.toString().replace('.', ','));
+			.type(data.validCaracter.mas + givenValueToGetFloat.toString().replace('.', ','));
 		calculatorPage.getInputValue(inputHayQueEnviar()).then(calculatedValueToSend => {
 			const expectedCalculatedValue = calculatorPage.calculateFormulaToGet(
 				parseFloat(givenValueToGetFloat),
@@ -225,7 +234,7 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 		const givenValueToSendFloat = Cypress._.random(0, 100, true).toFixed(2);
 		inputParaEnviar()
 			.clear()
-			.type('+' + givenValueToSendFloat.toString().replace('.', ','));
+			.type(data.validCaracter.mas + givenValueToSendFloat.toString().replace('.', ','));
 		calculatorPage.getInputValue(inputSeReciben()).then(calculatedValueToGet => {
 			cy.log(calculatedValueToGet);
 			const expectedCalculatedValue = calculatorPage.calculateFormulaToSend(
@@ -263,7 +272,7 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 		inputParaRecibir().type(randomText);
 		LogMsgRecibir().should('contain.text', data.LogMsg.SoloNumeros);
 		inputParaEnviar().type(randomText);
-		LogMsgEnviar().should('contain.text', data.LogMsg.SoloNumeros); //! No se puede validar la aserción
+		LogMsgEnviar().should('contain.text', data.LogMsg.SoloNumeros);
 	});
 	it('31904 | TC10: Validar que se eliminan automáticamente cuando se ingresan letras en el input', () => {
 		const { inputParaRecibir, inputParaEnviar, LogMsgRecibir, LogMsgEnviar } = calculatorPage.get;
@@ -272,6 +281,17 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 		LogMsgRecibir().should('contain.text', data.LogMsg.Recibir);
 		inputParaEnviar().type(randomText).should('be.empty');
 		LogMsgEnviar().should('contain.text', data.LogMsg.Enviar);
+	});
+	it('31904 | TC11: Validar que se muestre el mensaje de la BR cuando el input se únicamente “+” o “-”', () => {
+		const { inputParaRecibir, inputParaEnviar, LogMsgRecibir, LogMsgEnviar } = calculatorPage.get;
+		inputParaRecibir().type(data.validCaracter.mas);
+		LogMsgRecibir().should('contain.text', data.LogMsg.SoloNumeros);
+		inputParaEnviar().type(data.validCaracter.mas); //! Defecto: intenta hacer el calculo con el carácter especial devuelve "NaN"
+		// LogMsgEnviar().should('contain.text', data.LogMsg.SoloNumeros); //! No se puede validar la aserción
+		inputParaRecibir().clear().type(data.validCaracter.menos);
+		LogMsgRecibir().should('contain.text', data.LogMsg.SoloNumeros);
+		inputParaEnviar().clear().type(data.validCaracter.menos); //! Defecto: intenta hacer el calculo con el carácter especial devuelve "NaN"
+		// LogMsgEnviar().should('contain.text', data.LogMsg.SoloNumeros);  //! No se puede validar la aserción
 	});
 
 	it.skip('prueba de Fee y commision (Fuera de Scope)', () => {
