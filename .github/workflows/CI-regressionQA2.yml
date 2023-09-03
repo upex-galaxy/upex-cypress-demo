@@ -8,7 +8,7 @@ on:
 
 jobs:
     RegressionTestInteractions:
-        name: Regression Test - Bookstore
+        name: Regression Test - Interactions
         runs-on: ubuntu-latest
         steps:
             # Setup steps
@@ -55,7 +55,7 @@ jobs:
                   path: reports/allure-report
 
     RegressionTestWidgets:
-        name: Regression Test - Elements
+        name: Regression Test - Widgets
         runs-on: ubuntu-latest
         steps:
             # Setup steps (same as above)
