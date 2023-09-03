@@ -68,7 +68,7 @@ class CalculatorPage {
 		});
 	}
 	randomCaracterEspecial(givenLength, onlySpecialChars) {
-		const specialChars = '$!"#$%&/(()+-*,,-';
+		const specialChars = '$!"#$%&/(()@¡?°*~^`><}{[],';
 		let randomString = '';
 		if (onlySpecialChars === true) {
 			for (let i = 0; i < givenLength; i++) {

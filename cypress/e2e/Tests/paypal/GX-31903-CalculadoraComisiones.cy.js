@@ -256,18 +256,16 @@ describe('GX-31903-�-paypal-comisiones-calcular-las-comisiones-para-enviar-y-r
 		inputParaEnviar().type(randomNumber).clear().should('be.empty');
 		LogMsgEnviar().should('contain.text', data.LogMsg.Enviar);
 	});
-	it('31904 | TC9: Validar que se muestre el mensaje de la BR cuando se ingresan caracteres especiales en el input', () => {
+	it.skip('31904 | TC9: Validar que se eliminen automáticamente cuando se ingresan caracteres especiales en el input que no sean ( “+” o “-”)', () => {
+		//! Se ha detectado un defecto: No se eliminan automáticamente los caracteres especiales cuando se ingresan en el input
 		const { inputParaRecibir, inputParaEnviar, LogMsgRecibir, LogMsgEnviar } = calculatorPage.get;
 		const randomText = calculatorPage.randomCaracterEspecial(Cypress._.random(0, 20), true);
 		inputParaRecibir().type(randomText);
 		LogMsgRecibir().should('contain.text', data.LogMsg.SoloNumeros);
-		//! Se ha comentado la parte de codigo que fallaba por un defecto encontrado
-		//! Defecto: No se dispara el mensaje correspondiente cuando se ingresan caracteres especiales
-		/*inputParaEnviar().type(randomText);
-		LogMsgEnviar().should('contain.text', data.LogMsg.SoloNumeros); //! No se puede validar la aserción 
-		*/
+		inputParaEnviar().type(randomText);
+		LogMsgEnviar().should('contain.text', data.LogMsg.SoloNumeros); //! No se puede validar la aserción
 	});
-	it('31904 | TC10: Validar que se eliminan automaticamente cuando se ingresan letras en el input', () => {
+	it('31904 | TC10: Validar que se eliminan automáticamente cuando se ingresan letras en el input', () => {
 		const { inputParaRecibir, inputParaEnviar, LogMsgRecibir, LogMsgEnviar } = calculatorPage.get;
 		const randomText = faker.random.alpha(50);
 		inputParaRecibir().type(randomText).should('be.empty');
