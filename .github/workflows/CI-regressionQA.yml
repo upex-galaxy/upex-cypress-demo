@@ -173,7 +173,7 @@ jobs:
               with:
                   browser: chrome
                   command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
-                      yarn regression:ci cypress/e2e/Tests/Forms
+                      yarn regression:ci cypress/e2e/Tests/Interactions
 
             - name: 📬Generate XML Regression Report
               if: always()
@@ -240,7 +240,7 @@ jobs:
               with:
                   browser: chrome
                   command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
-                      yarn regression:ci cypress/e2e/Tests/Forms
+                      yarn regression:ci cypress/e2e/Tests/Widgets
 
             - name: 📬Generate XML Regression Report
               if: always()
