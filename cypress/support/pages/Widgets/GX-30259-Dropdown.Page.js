@@ -10,7 +10,7 @@ class dropDownPage {
 		option2Group2SelectValue: () => cy.get('#react-select-2-option-1-1'),
 		rootOptionSelectValue: () => cy.get('#react-select-2-option-2'),
 		anotherOptionSelectValue: () => cy.get('#react-select-2-option-3'),
-		allOptionsSelectValue: () => cy.get('[id^="react-select-2-option"]'),
+		allOptionsSelectValue: () => cy.get('[id^=react-select-2-option]'),
 		valueSelectedSelectValue: () => cy.get('[class^=" css-1uccc91-singleValue"]').eq(0),
 		//DropdownSelectOne
 		containerSelectOne: () => cy.get('#selectOne'),
