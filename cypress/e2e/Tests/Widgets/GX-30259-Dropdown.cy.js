@@ -20,19 +20,19 @@ describe('GX-30259 | TS: ✅ToolsQA | Widgets | Dropdown - Select Menu', () => {
 	it.only('30260 | TC02: Validate choice random option in dropdown "Select Value"', () => {
 		cy.fixture('/data/GX-30259-Dropdown.json').then(data => {
 			dropDown.clickSelectValue(); //click to active and show options
-			cy.log('selector' + dropDown.get.allOptionsSelectValue());
-			cy.log('its' + parseFloat(dropDown.get.allOptionsSelectValue().length));
-			const longitud = parseFloat(dropDown.get.allOptionsSelectValue().length);
-			cy.log('longitud' + longitud);
-			const n = parseFloat(longitud - 1);
-			cy.log('valor de n' + n);
-			function RandomItem(min, max) {
-				min = Math.ceil(0);
-				max = Math.floor(n);
-				return Math.floor(Math.random() * (max - min + 1) + min);
-			}
-			dropDown.get.allOptionsSelectValue().eq(RandomItem()).click();
-			dropDown.get.valueSelectedSelectValue().should('contain.text', 'option');
+			dropDoWn.get.allOptionsSelectValue().then(elm =>{
+				Cypress.env('longitud', elm.length)
+			});
+			cy.then(()=>{
+				const n = Cypress.env('longitud') - 1;
+				function RandomItem(min, max) {
+					min = Math.ceil(0);
+					max = Math.floor(n);
+					return Math.floor(Math.random() * (max - min + 1) + min);
+				}
+				dropDown.get.allOptionsSelectValue().eq(RandomItem()).click();
+				dropDown.get.valueSelectedSelectValue().should('contain.text', 'option');
+			})
 		});
 	});
 	it('30260 | TC03: Validate choice a random option in dropdown "Select One"', () => {
