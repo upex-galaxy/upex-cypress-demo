@@ -13,141 +13,241 @@ describe('ToolsQA | Interactions | Droppable', () => {
 		}
 	);
 
-
-	//-----For the component:-----
-
-	it('5655 | TC1: Validate default display of the "Simple" tab.', () => {
-		cy.visit('/droppable');
-		droppables.elements.tabSimple().should('have.attr', 'aria-selected', 'true');
-	});
-
-	it('5655 | TC2: Validate that only the content of one tab is displayed at a time', () => {
-		droppables.tabLength().then(() => {
-			for (let eq = 0; eq < Cypress.env('tabLg'); eq++) {
-				droppables.trueName(eq);
-				droppables.falseName(eq);
-
-				droppables.selectTabs(eq).then($el => {
-					expect($el[eq].name).to.equal(Cypress.env('textN'));
-					expect($el[eq].attrAriaSelected).to.equal('true');
-					$el.splice(eq, 1);
-					$el.map((elementsFalse, index) => {
-						expect(elementsFalse.name).to.equal(Cypress.env('elemF')[index].name);
-						expect(elementsFalse.attrAriaSelected).to.equal('false');
-					});
-				});
-			}
-		});
-	});
-
-	it('5655 | TC3: Validate display of "Propogation" instead of "Propagation" in the "Prevent propagation" tab.', () => {
-		droppables.elements.tabPreventPropogation().should('contain.text', 'Propogation');
-	});
-
 	//-----For the “Simple” tab:-----
 
-	it('5655 | TC4:  Validate display of areas in the "Simple" tab', () => {
-		droppables.elements
-			.draggableSimple()
+	it('5655 | TC1: Validate drag and drop the "Drag me" area over the "Drop here" area in the "Simple" tab', () => {
+		const { tabs, tabSimple, draggableSimple, dropContainerSimple, droppable } = droppables.elements;
+		tabSimple().should('have.attr', 'aria-selected', 'true'); // Tab “Simple” is displayed by default.
+
+		tabs().then($el => {
+			tabSimple().then(tab => {
+				const textoABuscar = tab.text();
+				cy.log(textoABuscar);
+				cy.wrap($el).each((elemento, i) => {
+					if (Cypress.$(elemento).text() === textoABuscar) {
+						droppables.trueName(i);
+						droppables.falseName(i);
+						droppables.selectTabs().then($tab => {
+							expect($tab[i].name).to.equal(Cypress.env('elemT').name);
+							expect($tab[i].attrAriaSelected).to.equal(Cypress.env('elemT').attrAriaSelected);
+							$tab.splice(i, 1);
+							$tab.map((elementFalse, index) => {
+								expect(elementFalse.name).to.equal(Cypress.env('elemF')[index].name);
+								expect(elementFalse.attrAriaSelected).to.equal(Cypress.env('elemF')[index].attrAriaSelected);
+							});
+						});
+					}
+				});
+			});
+		}); // Only one tab is displayed at once.
+
+		draggableSimple()
 			.should('be.visible')
 			.and('have.css', 'border-style', 'dashed')
 			.and('have.css', 'background-color', values.transparent)
-			.and('have.text', values.nameCardDragMe);
-		droppables.elements
-			.droppableSimple()
-			.should('be.visible')
-			.and('have.css', 'border-style', 'solid')
-			.and('have.css', 'background-color', values.transparent)
-			.and('have.text', values.nameCardDropHere);
-	});
+			.and('have.text', values.nameCardDragMe); //“Drag me” dashed area must be displayed.
 
-	it('5655 | TC5: Validate the change the background color and display of the text "Dropped!" after dropping the "Drag Me" area into the "Drop Here" area, in the "Simple" tab', () => {
-		droppables.dragAndDrop(values.draggableSimple, values.droppableSimple);
-		droppables.elements.droppableSimple().should('have.css', 'background-color', values.steelBlue).and('have.text', values.textDropped);
+		dropContainerSimple().within(() => {
+			droppable()
+				.should('be.visible')
+				.and('have.css', 'border-style', 'solid')
+				.and('have.css', 'background-color', values.transparent)
+				.and('have.text', values.nameCardDropHere); //“Drop here” bordered area must be displayed.
+			droppable()
+				.invoke('attr', 'id')
+				.then(drop => {
+					draggableSimple().drag(`#${drop}`, { force: true });
+				});
+			droppable().should('have.css', 'background-color', values.steelBlue).and('have.text', values.textDropped);
+		});
 	});
 
 	//-----For the “Accept” tab:-----
 
-	it('5655 | TC6:  Validate display of areas in the "Accept" tab', () => {
-		droppables.selectTabAccept();
-		droppables.elements
-			.acceptable()
-			.should('be.visible')
-			.and('have.css', 'border-style', 'dashed')
-			.and('have.css', 'background-color', values.transparent)
-			.and('have.text', values.nameCardAcceptable);
-		droppables.elements
-			.notAcceptable()
-			.should('be.visible')
-			.and('have.css', 'border-style', 'dashed')
-			.and('have.css', 'background-color', values.transparent)
-			.and('have.text', values.nameCardNotAcceptable);
-		droppables.elements
-			.droppableAccept()
-			.should('be.visible')
-			.and('have.css', 'border-style', 'solid')
-			.and('have.css', 'background-color', values.transparent)
-			.and('have.text', values.nameCardDropHere);
-	});
+	it('5655 | TC2:   Validate dragging of the "Acceptable" area in the "Accept" tab', () => {
+		const { tabs, tabSimple, tabAccept, dropContainerAccept, acceptable, notAcceptable, droppable } = droppables.elements;
+		tabSimple().should('have.attr', 'aria-selected', 'true'); // Tab “Simple” is displayed by default.
 
-	it('5655 | TC7:   Validate the background color change of "Drop here" area when "Acceptable" area is dragged, in the "Accept" tab', () => {
 		droppables.selectTabAccept();
-		droppables.position(values.droppableAccept).then(coordenadas => {
-			droppables.dragElement(values.acceptable, coordenadas.x, coordenadas.y);
-		});
-		droppables.elements.droppableAccept().should('have.css', 'background-color', values.mediumSeaGreen);
-	});
-
-	/* values.deltaPosition.map((delta, index) => {
-		it(`'5655 | TC7-${index+1}:   Validate color change of "Drop here" area when "Acceptable" area is dragged of the "Accept" tab'`, () => {
-			droppables.selectTabAccept();
-			droppables.position(values.acceptable).then(coordenadas => {
-				droppables.dragElement(values.acceptable, coordenadas.x + delta.x, coordenadas.y + delta.y);
+		tabs().then($el => {
+			tabAccept().then(tab => {
+				const textoABuscar = tab.text();
+				cy.log(textoABuscar);
+				cy.wrap($el).each((elemento, i) => {
+					if (Cypress.$(elemento).text() === textoABuscar) {
+						droppables.trueName(i);
+						droppables.falseName(i);
+						droppables.selectTabs().then($tab => {
+							expect($tab[i].name).to.equal(Cypress.env('elemT').name);
+							expect($tab[i].attrAriaSelected).to.equal(Cypress.env('elemT').attrAriaSelected);
+							$tab.splice(i, 1);
+							$tab.map((elementFalse, index) => {
+								expect(elementFalse.name).to.equal(Cypress.env('elemF')[index].name);
+								expect(elementFalse.attrAriaSelected).to.equal(Cypress.env('elemF')[index].attrAriaSelected);
+							});
+						});
+					}
+				});
 			});
-			droppables.elements.droppableAccept().should('have.css', 'background-color', values.mediumSeaGreen);
-		});
-	}); */
+		}); // Only one tab is displayed at once.
 
-	it('5655 | TC8:  Validate the change the background color and display of the text "Dropped!"  when dragging and dropping the "Acceptable" area onto the "Drop here" area, in the "Accept" tab', () => {
-		droppables.selectTabAccept();
-		droppables.dragAndDrop(values.acceptable, values.droppableAccept);
-		droppables.elements.droppableAccept().should('have.css', 'background-color', values.steelBlue).and('have.text', values.textDropped);
+		acceptable()
+			.should('be.visible')
+			.and('have.css', 'border-style', 'dashed')
+			.and('have.css', 'background-color', values.transparent)
+			.and('have.text', values.nameCardAcceptable); // “Acceptable” dashed area must be displayed.
+		notAcceptable()
+			.should('be.visible')
+			.and('have.css', 'border-style', 'dashed')
+			.and('have.css', 'background-color', values.transparent)
+			.and('have.text', values.nameCardNotAcceptable); // “Not Acceptable” dashed area must be displayed.
+
+		dropContainerAccept().within(() => {
+			droppable()
+				.should('be.visible')
+				.and('have.css', 'border-style', 'solid')
+				.and('have.css', 'background-color', values.transparent)
+				.and('have.text', values.nameCardDropHere); //“Drop here” bordered area must be displayed.
+			acceptable()
+				.invoke('attr', 'id')
+				.then($id => {
+					droppables.position(`#${$id}`).then(coordenadas => {
+						droppables.dragElement(`#${$id}`, coordenadas.x + values.deltaPosition[0].x, coordenadas.y + values.deltaPosition[0].y);
+					});
+				}); // "Acceptable" area is dragged
+
+			droppable().should('have.css', 'background-color', values.mediumSeaGreen);
+		});
+
+		dropContainerAccept().within(() => {
+			droppable()
+				.invoke('attr', 'id')
+				.then($id => {
+					droppables.position(`#${$id}`).then(coordenadas => {
+						acceptable()
+							.invoke('attr', 'id')
+							.then(idDrag => {
+								droppables.dragElement(`#${idDrag}`, coordenadas.x, coordenadas.y);
+							});
+					});
+				}); // "Acceptable" area is dragged over the “Drop here” area
+
+			droppable().should('have.css', 'background-color', values.mediumSeaGreen);
+		});
 	});
 
-	it('5655 | TC9:  Validate that the "Drop here" area remains unchanged in the background color and no text appears when placing the "Not Acceptable" area in the "Drop here" area, in the "Accept" tab', () => {
+	it('5655 | TC3:   Validate dragging of the "Not Acceptable" area in the "Accept" tab', () => {
+		const { dropContainerAccept, notAcceptable, droppable } = droppables.elements;
 		droppables.selectTabAccept();
-		droppables.dragAndDrop(values.notAcceptable, values.droppableAccept);
-		droppables.elements.droppableAccept().should('have.css', 'background-color', values.transparent).and('not.contain', values.textDropped);
+		dropContainerAccept().within(() => {
+			droppable()
+				.invoke('attr', 'id')
+				.then($id => {
+					droppables.position(`#${$id}`).then(coordenadas => {
+						notAcceptable()
+							.invoke('attr', 'id')
+							.then(id => {
+								droppables.dragElement(`#${id}`, coordenadas.x, coordenadas.y);
+							});
+					});
+				});
+
+			droppable().should('not.have.css', 'background-color', values.mediumSeaGreen);
+			droppable().should('have.css', 'background-color', values.transparent);
+		});
+	});
+
+	it('5655 | TC4:  Validate drag and drop the "Acceptable" area over the "Drop here" area in the "Accept" tab', () => {
+		const { dropContainerAccept, acceptable, droppable } = droppables.elements;
+		droppables.selectTabAccept();
+
+		dropContainerAccept().within(() => {
+			droppable()
+				.invoke('attr', 'id')
+				.then(drop => {
+					acceptable().drag(`#${drop}`, { force: true });
+				});
+
+			droppable().should('have.css', 'background-color', values.steelBlue).and('have.text', values.textDropped);
+		});
+	});
+
+	it('5655 | TC5: Validate drag and drop the "Not Acceptable" area over the "Drop here" area in the "Accept" tab', () => {
+		const { dropContainerAccept, notAcceptable, droppable } = droppables.elements;
+		droppables.selectTabAccept();
+
+		dropContainerAccept().within(() => {
+			droppable()
+				.invoke('attr', 'id')
+				.then(drop => {
+					notAcceptable().drag(`#${drop}`, { force: true });
+				});
+
+			droppable().should('not.have.css', 'background-color', values.steelBlue).and('not.have.text', values.textDropped);
+			droppable().should('have.css', 'background-color', values.transparent);
+		});
 	});
 
 	//-----For the “Prevent Propogation” tab:-----
 
-	it('5655 | TC10:  Validate visibility of "Drag me" area in the "Prevent Propagation" tab', () => {
+	it('5655 | TC6:  Validate dragging of the "Drag me" area in the "Prevent Propagation" tab', () => {
+		const {
+			tabs,
+			tabSimple,
+			tabPreventPropogation,
+			draggablePrevent,
+			notGreedyOuterDroppable,
+			notGreedyInnerDroppable,
+			greedyOuterDroppable,
+			greedyInnerDroppable,
+		} = droppables.elements;
+
+		tabSimple().should('have.attr', 'aria-selected', 'true'); // Tab “Simple” is displayed by default.
 		droppables.selectTabPreventPropogation();
-		droppables.elements
-			.draggablePrevent()
+		tabPreventPropogation().should('contain.text', 'Propogation'); // Prevent “*Propogation*” is accepted.
+		tabs().then($el => {
+			tabPreventPropogation().then(tab => {
+				const textoABuscar = tab.text();
+				cy.log(textoABuscar);
+				cy.wrap($el).each((elemento, i) => {
+					if (Cypress.$(elemento).text() === textoABuscar) {
+						droppables.trueName(i);
+						droppables.falseName(i);
+						droppables.selectTabs().then($tab => {
+							expect($tab[i].name).to.equal(Cypress.env('elemT').name);
+							expect($tab[i].attrAriaSelected).to.equal(Cypress.env('elemT').attrAriaSelected);
+							$tab.splice(i, 1);
+							$tab.map((elementFalse, index) => {
+								expect(elementFalse.name).to.equal(Cypress.env('elemF')[index].name);
+								expect(elementFalse.attrAriaSelected).to.equal(Cypress.env('elemF')[index].attrAriaSelected);
+							});
+						});
+					}
+				});
+			});
+		}); // Only one tab is displayed at once.
+
+		draggablePrevent()
 			.should('be.visible')
 			.and('have.css', 'border-style', 'dashed')
 			.and('have.css', 'background-color', values.transparent)
-			.and('have.text', values.nameCardDragMePrevent);
-	});
+			.and('have.text', values.nameCardDragMePrevent); // “Drag me” dashed area must be displayed.
 
-	it('5655 | TC11:  Validate that the first "Outer droppable" area is visible and contains “Inner droppable (not greedy)” area inside,  in the "Prevent Propogation" tab', () => {
-		droppables.selectTabPreventPropogation();
-		droppables.elements
-			.notGreedyOuterDroppable()
+		// the first "Outer droppable" area must be displayed
+		notGreedyOuterDroppable()
 			.should('be.visible')
 			.and('have.css', 'border-style', 'solid')
 			.and('have.css', 'background-color', values.transparent)
 			.and('have.contain', values.nameCardOuterDroppable);
-		droppables.elements
-			.notGreedyInnerDroppable()
+		notGreedyInnerDroppable()
 			.should('be.visible')
 			.and('have.css', 'border-style', 'solid')
 			.and('have.css', 'background-color', values.transparent)
 			.and('have.text', values.nameCardInnerDroppableNotGreedy);
-		droppables.elements.notGreedyOuterDroppable().within(() => {
-			droppables.elements.notGreedyInnerDroppable().should('exist');
+
+		// The first "Outer Droppable" bordered area must contain an "Inner Droppable (not greedy)" area inside it.
+		notGreedyOuterDroppable().within(() => {
+			notGreedyInnerDroppable().should('exist');
 		});
 		droppables.coordsNotGreedy().then(coords => {
 			const [outerRectCoords, innerRectCoords] = coords;
@@ -156,24 +256,22 @@ describe('ToolsQA | Interactions | Droppable', () => {
 			expect(innerRectCoords.right < outerRectCoords.right).to.be.true;
 			expect(innerRectCoords.bottom < outerRectCoords.bottom).to.be.true;
 		});
-	});
 
-	it('5655 | TC12:  Validate that the second "Outer droppable" area is visible and contains “Inner droppable (greedy)” area inside,  in the "Prevent Propogation" tab', () => {
-		droppables.selectTabPreventPropogation();
-		droppables.elements
-			.greedyOuterDroppable()
+		// the second "Outer droppable" area must be displayed
+		greedyOuterDroppable()
 			.should('be.visible')
 			.and('have.css', 'border-style', 'solid')
 			.and('have.css', 'background-color', values.transparent)
 			.and('have.contain', values.nameCardOuterDroppable);
-		droppables.elements
-			.greedyInnerDroppable()
+		greedyInnerDroppable()
 			.should('be.visible')
 			.and('have.css', 'border-style', 'solid')
 			.and('have.css', 'background-color', values.transparent)
 			.and('have.text', values.nameCardInnerDroppableGreedy);
-		droppables.elements.greedyOuterDroppable().within(() => {
-			droppables.elements.greedyInnerDroppable().should('exist');
+
+		// The second "Outer Droppable" bordered area must contain an "Inner Droppable (greedy)" area inside it.
+		greedyOuterDroppable().within(() => {
+			greedyInnerDroppable().should('exist');
 		});
 		droppables.coordsGreedy().then(coords => {
 			const [outerRectCoords, innerRectCoords] = coords;
@@ -182,207 +280,359 @@ describe('ToolsQA | Interactions | Droppable', () => {
 			expect(innerRectCoords.right < outerRectCoords.right).to.be.true;
 			expect(innerRectCoords.bottom < outerRectCoords.bottom).to.be.true;
 		});
+
+		draggablePrevent()
+			.invoke('attr', 'id')
+			.then($id => {
+				droppables.position(`#${$id}`).then(coordenadas => {
+					droppables.dragElement(`#${$id}`, coordenadas.x + values.deltaPosition[0].x, coordenadas.y + values.deltaPosition[0].y);
+				});
+			}); // "Drag me" area is dragged
+
+		notGreedyOuterDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
+		notGreedyInnerDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
+		greedyOuterDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
+		greedyInnerDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
 	});
 
-	it('5655 | TC13:  Validate the background color change of first “Outer Droppable” area and the “Inner droppable (not greedy)” area when "Drag me" area is dragged, in the "Prevent Propogation" tab', () => {
+	it('5655 | TC7:  Validate dragging of the "Drag me" area over the first “Outer Droppable” area, in the "Prevent Propogation" tab', () => {
+		const { draggablePrevent, notGreedyOuterDroppable, notGreedyInnerDroppable, greedyOuterDroppable, greedyInnerDroppable } =
+			droppables.elements;
 		droppables.selectTabPreventPropogation();
-		droppables.position(values.draggablePP).then(coordenadas => {
-			droppables.dragElement(values.draggablePP, coordenadas.x + values.deltaPosition[0].x, coordenadas.y + values.deltaPosition[0].y);
-		});
-		droppables.elements.notGreedyOuterDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
-		droppables.elements.notGreedyInnerDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
-	});
-
-	it('5655 | TC14:  Validate the background color change of first “Outer Droppable” area and the “Inner droppable (not greedy)” area when " Drag me " area is dragged to “Outer Droppable” area, in the "Prevent Propogation" tab', () => {
-		droppables.selectTabPreventPropogation();
-		droppables.positionTope(values.notGreedyOuterDroppable).then(coordenadas => {
-			droppables.elements.draggablePrevent().then(delta => {
-				const deltaPosition = delta[0].getBoundingClientRect().height / 2;
-				droppables.dragElement(values.draggablePP, coordenadas.x, coordenadas.y + deltaPosition);
+		notGreedyOuterDroppable()
+			.invoke('attr', 'id')
+			.then(idDrop => {
+				droppables.coordsTope(`#${idDrop}`).then(coordenadas => {
+					draggablePrevent().then(value => {
+						const heightMedia = value[0].getBoundingClientRect().height / 2;
+						cy.wrap(value)
+							.invoke('attr', 'id')
+							.then(idDrag => {
+								droppables.dragElement(`#${idDrag}`, coordenadas.x, coordenadas.y + heightMedia);
+							});
+					});
+				});
 			});
-		});
-		droppables.elements.notGreedyOuterDroppable().should('have.css', 'background-color', values.darkSeaGreen);
-		droppables.elements.notGreedyInnerDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
+		notGreedyOuterDroppable().should('have.css', 'background-color', values.darkSeaGreen);
+		notGreedyInnerDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
+		greedyOuterDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
+		greedyInnerDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
 	});
 
-	it('5655 | TC15:  Validate the background color change of first “Outer Droppable” area and the “Inner droppable (not greedy)” area when "Drag me" area is dragged to “Inner droppable (not greedy)” area, in the "Prevent Propogation” tab', () => {
+	it('5655 | TC8: Validate dragging of the "Drag me" area over the “Inner droppable (not greedy)” area, in the "Prevent Propogation” tab', () => {
+		const { draggablePrevent, notGreedyOuterDroppable, notGreedyInnerDroppable, greedyOuterDroppable, greedyInnerDroppable } =
+			droppables.elements;
 		droppables.selectTabPreventPropogation();
-		droppables.position(values.notGreedyInnerDroppable).then(coordenadas => {
-			droppables.dragElement(values.draggablePP, coordenadas.x, coordenadas.y);
-		});
-		droppables.elements.notGreedyOuterDroppable().should('have.css', 'background-color', values.darkSeaGreen);
-		droppables.elements.notGreedyInnerDroppable().should('have.css', 'background-color', values.darkSeaGreen);
-	});
-
-	it('5655 | TC16:  Validate the change the background color and display of the text "Dropped!"  when dragging and dropping the "Drag me" area onto the "Inner droppable (not greedy)" area, in the "Prevent Propogation” tab', () => {
-		droppables.selectTabPreventPropogation();
-		droppables.dragAndDrop(values.draggablePP, values.notGreedyInnerDroppable);
-		droppables.elements
-			.notGreedyOuterDroppable()
-			.should('have.css', 'background-color', values.steelBlue)
-			.and('have.contain', values.textDropped);
-		droppables.elements.notGreedyInnerDroppable().should('have.css', 'background-color', values.steelBlue).and('have.text', values.textDropped);
-	});
-
-	it('5655 | TC17:  Validate the change the background color and display of the text "Dropped!"  when dragging and dropping the " Drag me " area onto the first "Outer Droppable" area, in the "Prevent Propogation” tab', () => {
-		droppables.selectTabPreventPropogation();
-		droppables.dragAndDropOuter(values.draggablePP, values.notGreedyOuterDroppable);
-		droppables.elements
-			.notGreedyOuterDroppable()
-			.should('have.css', 'background-color', values.steelBlue)
-			.and('have.contain', values.textDropped);
-		droppables.elements
-			.notGreedyInnerDroppable()
-			.should('have.css', 'background-color', values.transparent)
-			.and('not.have.text', values.textDropped);
-	});
-
-	it('5655 | TC18:  Validate the background color change of the second “Outer Droppable” area and the “Inner droppable (greedy)” area when "Drag me" area is dragged, in the "Prevent Propogation" tab', () => {
-		droppables.selectTabPreventPropogation();
-		droppables.position(values.draggablePP).then(coordenadas => {
-			droppables.dragElement(values.draggablePP, coordenadas.x + values.deltaPosition[1].x, coordenadas.y + values.deltaPosition[1].y);
-		});
-		droppables.elements.greedyOuterDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
-		droppables.elements.greedyInnerDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
-	});
-
-	it('5655 | TC19:  Validate the background color change of the second “Outer Droppable” area and the “Inner droppable (greedy)” area when "Drag me" area is dragged to “Outer Droppable” area, in the "Prevent Propogation" tab', () => {
-		droppables.selectTabPreventPropogation();
-		droppables.positionTope(values.greedyOuterDroppable).then(coordenadas => {
-			droppables.elements.draggablePrevent().then(delta => {
-				const deltaPosition = delta[0].getBoundingClientRect().height / 2;
-				cy.log(deltaPosition);
-				droppables.dragElement(values.draggablePP, coordenadas.x, coordenadas.y + deltaPosition);
+		notGreedyInnerDroppable()
+			.invoke('attr', 'id')
+			.then(idDrop => {
+				droppables.position(`#${idDrop}`).then(coordenadas => {
+					draggablePrevent()
+						.invoke('attr', 'id')
+						.then(idDrag => {
+							droppables.dragElement(`#${idDrag}`, coordenadas.x, coordenadas.y);
+						});
+				});
 			});
-		});
-		droppables.elements.greedyOuterDroppable().should('have.css', 'background-color', values.darkSeaGreen);
-		droppables.elements.greedyInnerDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
+
+		notGreedyInnerDroppable().should('have.css', 'background-color', values.darkSeaGreen);
+		notGreedyOuterDroppable().should('have.css', 'background-color', values.darkSeaGreen);
+		greedyOuterDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
+		greedyInnerDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
 	});
 
-	it('5655 | TC20:  Validate the background color change of the second “Outer Droppable” area and the “Inner droppable (greedy)” area when "Drag me" area is dragged to “Inner droppable (greedy)” area, in the "Prevent Propogation” tab', () => {
+	it('5655 | TC9:  Validate dragging and dropping the "Drag me" area onto the "Inner droppable (not greedy)" area, in the "Prevent Propogation” tab', () => {
+		const { draggablePrevent, notGreedyOuterDroppable, notGreedyInnerDroppable, greedyOuterDroppable, greedyInnerDroppable } =
+			droppables.elements;
 		droppables.selectTabPreventPropogation();
-		droppables.position(values.greedyInnerDroppable).then(coordenadas => {
-			droppables.dragElement(values.draggablePP, coordenadas.x, coordenadas.y);
-		});
-		droppables.elements.greedyOuterDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
-		droppables.elements.greedyInnerDroppable().should('have.css', 'background-color', values.darkSeaGreen);
+
+		notGreedyInnerDroppable()
+			.invoke('attr', 'id')
+			.then(drop => {
+				draggablePrevent().drag(`#${drop}`, { force: true });
+			});
+
+		notGreedyOuterDroppable().should('have.css', 'background-color', values.steelBlue).and('have.contain', values.textDropped);
+		notGreedyInnerDroppable().should('have.css', 'background-color', values.steelBlue).and('have.text', values.textDropped);
+		greedyOuterDroppable().should('have.css', 'background-color', values.transparent).and('not.have.text', values.textDropped);
+		greedyInnerDroppable().should('have.css', 'background-color', values.transparent).and('not.have.text', values.textDropped);
 	});
 
-	it('5655 | TC21:  Validate the change of the background color and the display of the text "Dropped!" in the "Inner droppable (greedy)" area when the "Drag Me" area is dragged and dropped onto it, in the "Prevent Propogation" tab', () => {
+	it('5655 | TC10:  Validate dragging and dropping the " Drag me " area onto the first "Outer Droppable" area, in the "Prevent Propogation” tab', () => {
+		const { draggablePrevent, notGreedyOuterDroppable, notGreedyInnerDroppable, greedyOuterDroppable, greedyInnerDroppable } =
+			droppables.elements;
 		droppables.selectTabPreventPropogation();
-		droppables.dragAndDrop(values.draggablePP, values.greedyInnerDroppable);
-		droppables.elements
-			.greedyOuterDroppable()
-			.should('have.css', 'background-color', values.transparent)
-			.and('not.have.text', values.textDropped);
-		droppables.elements.greedyInnerDroppable().should('have.css', 'background-color', values.steelBlue).and('have.text', values.textDropped);
+
+		notGreedyOuterDroppable()
+			.invoke('attr', 'id')
+			.then(idDrop => {
+				draggablePrevent()
+					.invoke('attr', 'id')
+					.then($idDrag => {
+						droppables.dragAndDropOuter(`#${$idDrag}`, `#${idDrop}`);
+					});
+			});
+
+		notGreedyOuterDroppable().should('have.css', 'background-color', values.steelBlue).and('have.contain', values.textDropped);
+		notGreedyInnerDroppable().should('have.css', 'background-color', values.transparent).and('not.have.text', values.textDropped);
+		greedyOuterDroppable().should('have.css', 'background-color', values.transparent).and('not.have.text', values.textDropped);
+		greedyInnerDroppable().should('have.css', 'background-color', values.transparent).and('not.have.text', values.textDropped);
 	});
 
-	it('5655 | TC22:  Validate the change of the background color and the display of the text "Dropped!" in the second "Outer droppable" area when the "Drag Me" area is dragged and dropped onto it, in the "Prevent Propogation" tab', () => {
+	it('5655 | TC11:  Validate dragging of the "Drag me" area over the second “Outer Droppable” area, in the "Prevent Propogation" tab', () => {
+		const { draggablePrevent, notGreedyOuterDroppable, notGreedyInnerDroppable, greedyOuterDroppable, greedyInnerDroppable } =
+			droppables.elements;
 		droppables.selectTabPreventPropogation();
-		droppables.dragAndDropOuter(values.draggablePP, values.greedyOuterDroppable);
-		droppables.elements.greedyOuterDroppable().should('have.css', 'background-color', values.steelBlue).and('have.contain', values.textDropped);
-		droppables.elements
-			.greedyInnerDroppable()
-			.should('have.css', 'background-color', values.transparent)
-			.and('not.have.text', values.textDropped);
+		greedyOuterDroppable()
+			.invoke('attr', 'id')
+			.then(idDrop => {
+				droppables.coordsTope(`#${idDrop}`).then(coordenadas => {
+					draggablePrevent().then(value => {
+						const heightMedia = value[0].getBoundingClientRect().height / 2;
+						cy.wrap(value)
+							.invoke('attr', 'id')
+							.then(idDrag => {
+								droppables.dragElement(`#${idDrag}`, coordenadas.x, coordenadas.y + heightMedia);
+							});
+					});
+				});
+			});
+
+		greedyOuterDroppable().should('have.css', 'background-color', values.darkSeaGreen);
+		greedyInnerDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
+		notGreedyOuterDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
+		notGreedyInnerDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
+	});
+
+	it('5655 | TC12:  Validate dragging of the "Drag me" area over the “Inner droppable (greedy)” area, in the "Prevent Propogation" tab', () => {
+		const { draggablePrevent, notGreedyOuterDroppable, notGreedyInnerDroppable, greedyOuterDroppable, greedyInnerDroppable } =
+			droppables.elements;
+
+		droppables.selectTabPreventPropogation();
+		greedyInnerDroppable()
+			.invoke('attr', 'id')
+			.then(idDrop => {
+				droppables.position(`#${idDrop}`).then(coordenadas => {
+					draggablePrevent()
+						.invoke('attr', 'id')
+						.then(idDrag => {
+							droppables.dragElement(`#${idDrag}`, coordenadas.x, coordenadas.y);
+						});
+				});
+			});
+
+		greedyInnerDroppable().should('have.css', 'background-color', values.darkSeaGreen);
+		greedyOuterDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
+		notGreedyOuterDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
+		notGreedyInnerDroppable().should('have.css', 'background-color', values.mediumSeaGreen);
+	});
+
+	it('5655 | TC13:  Validate dragging and dropping the "Drag me" area onto the "Inner droppable (greedy)" area, in the "Prevent Propogation” tab', () => {
+		const { draggablePrevent, notGreedyOuterDroppable, notGreedyInnerDroppable, greedyOuterDroppable, greedyInnerDroppable } =
+			droppables.elements;
+		droppables.selectTabPreventPropogation();
+
+		greedyInnerDroppable()
+			.invoke('attr', 'id')
+			.then(drop => {
+				draggablePrevent().drag(`#${drop}`, { force: true });
+			});
+
+		greedyInnerDroppable().should('have.css', 'background-color', values.steelBlue).and('have.text', values.textDropped);
+		greedyOuterDroppable().should('have.css', 'background-color', values.transparent).and('not.have.text', values.textDropped);
+		notGreedyOuterDroppable().should('have.css', 'background-color', values.transparent).and('not.have.text', values.textDropped);
+		notGreedyInnerDroppable().should('have.css', 'background-color', values.transparent).and('not.have.text', values.textDropped);
+	});
+
+	it('5655 | TC14:  Validate dragging and dropping the " Drag me " area onto the second "Outer Droppable" area, in the "Prevent Propogation” tab', () => {
+		const { draggablePrevent, notGreedyOuterDroppable, notGreedyInnerDroppable, greedyOuterDroppable, greedyInnerDroppable } =
+			droppables.elements;
+		droppables.selectTabPreventPropogation();
+
+		greedyOuterDroppable()
+			.invoke('attr', 'id')
+			.then(idDrop => {
+				draggablePrevent()
+					.invoke('attr', 'id')
+					.then($idDrag => {
+						droppables.dragAndDropOuter(`#${$idDrag}`, `#${idDrop}`);
+					});
+			});
+
+		greedyOuterDroppable().should('have.css', 'background-color', values.steelBlue).and('have.contain', values.textDropped);
+		greedyInnerDroppable().should('have.css', 'background-color', values.transparent).and('not.have.text', values.textDropped);
+		notGreedyOuterDroppable().should('have.css', 'background-color', values.transparent).and('not.have.text', values.textDropped);
+		notGreedyInnerDroppable().should('have.css', 'background-color', values.transparent).and('not.have.text', values.textDropped);
 	});
 
 	//-----For the “Revert Draggable” tab:-----
 
-	it('5655 | TC23:Validate display of areas in the "Revert Draggable" tab', () => {
-		droppables.selectTabRevertDraggable();
-		droppables.elements
-			.revertable()
-			.should('be.visible')
-			.and('have.css', 'border-style', 'dashed')
-			.and('have.css', 'background-color', values.transparent)
-			.and('have.text', values.nameCardWillRevert);
-		droppables.elements
-			.notRevertable()
-			.should('be.visible')
-			.and('have.css', 'border-style', 'dashed')
-			.and('have.css', 'background-color', values.transparent)
-			.and('have.text', values.nameCardNotRevert);
-		droppables.elements
-			.droppableRevertDraggable()
-			.should('be.visible')
-			.and('have.css', 'border-style', 'solid')
-			.and('have.css', 'background-color', values.transparent)
-			.and('have.text', values.nameCardDropHere);
-	});
+	it('5655 | TC15:  Validate dragging of the "Will Revert" area in the "Revert Draggable" tab', () => {
+		const { tabs, tabSimple, tabRevertDraggable, revertable, notRevertable, dropContainerRevertable, droppable } = droppables.elements;
 
-	it('5655 | TC24:Validate the background color change of the "Drop Here" area when the "Will Revert" area is dragged, in the "Draggable Revert" tab', () => {
+		tabSimple().should('have.attr', 'aria-selected', 'true'); // Tab “Simple” is displayed by default.
 		droppables.selectTabRevertDraggable();
-		droppables.position(values.revertable).then(coordenadas => {
-			droppables.dragElement(values.revertable, coordenadas.x + values.deltaPosition[0].x, coordenadas.y + values.deltaPosition[0].y);
-		});
-		droppables.elements.droppableRevertDraggable().should('have.css', 'background-color', values.mediumSeaGreen);
-	});
-	
-	it('5655 | TC25:Validate the background color change of the "Drop Here" area when the "Will Revert" area is dragged to the "Drop here" area, in the " Revert Draggable " tab', () => {
-		droppables.selectTabRevertDraggable();
-		droppables.position(values.droppableRevertDraggable).then(coordenadas => {
-			droppables.dragElement(values.revertable, coordenadas.x, coordenadas.y);
-		});
-		droppables.elements.droppableRevertDraggable().should('have.css', 'background-color', values.darkSeaGreen);
-	});
 
-	it('5655 | TC26:Validate the "Will Revert" area revert when dragged and dropped in the "Drop Here" area, in the "Revert Draggable" tab', () => {
-		droppables.selectTabRevertDraggable();
-		droppables.cssPosition(values.revertable).then(cssValue => {
-			const [positionInitial, leftInitial, topInitial] = cssValue;
-			droppables.dragAndDrop(values.revertable, values.droppableRevertDraggable);
-			droppables.elements
-				.revertable()
-				.should('have.css', 'position', positionInitial)
-				.and('have.css', 'left', leftInitial)
-				.and('have.css', 'top', topInitial);
-		});
-	});
-
-	it('5655 | TC27:Validate the change of the background color and the display of the text "Dropped!" in the " Drop here" area when the " Will Revert" area is dragged and dropped onto it, in the " Revert Draggable " tab', () => {
-		droppables.selectTabRevertDraggable();
-		droppables.dragAndDrop(values.revertable, values.droppableRevertDraggable);
-		droppables.elements.droppableRevertDraggable().should('have.css', 'background-color', values.steelBlue).and('have.text', values.textDropped);
-	});
-
-	it('5655 | TC28:Validate the background color change of the "Drop Here" area when the "Not Revert" area is dragged, in the "Draggable Revert" tab', () => {
-		droppables.selectTabRevertDraggable();
-		droppables.position(values.notRevertable).then(coordenadas => {
-			droppables.dragElement(values.notRevertable, coordenadas.x + values.deltaPosition[0].x, coordenadas.y + values.deltaPosition[0].y);
-		});
-		droppables.elements.droppableRevertDraggable().should('have.css', 'background-color', values.mediumSeaGreen);
-	});
-
-	it('5655 | TC29:Validate the background color change of the "Drop Here" area when the "Not Revert" area is dragged to the "Drop here" area, in the " Revert Draggable " tab', () => {
-		droppables.selectTabRevertDraggable();
-		droppables.position(values.droppableRevertDraggable).then(coordenadas => {
-			droppables.dragElement(values.notRevertable, coordenadas.x, coordenadas.y);
-		});
-		droppables.elements.droppableRevertDraggable().should('have.css', 'background-color', values.darkSeaGreen);
-	});
-
-	it('5655 | TC30:Validate the permanence of the "Not Revert" area when dragging and dropping it in the "Drop Here" area, in the "Revert Draggable” tab', () => {
-		droppables.selectTabRevertDraggable();
-		droppables.position(values.notRevertable).then(coordPreArrastre => {
-			droppables.dragAndDrop(values.notRevertable, values.droppableRevertDraggable);
-			droppables.cssPosition(values.notRevertable).then(cssValue => {
-				const [positionInitial, leftInitial, topInitial] = cssValue;
-				droppables.dragElementDrop(values.notRevertable, coordPreArrastre.x, coordPreArrastre.y);
-				droppables.elements
-					.notRevertable()
-					.should('have.css', 'position', positionInitial)
-					.and('have.css', 'left', leftInitial)
-					.and('have.css', 'top', topInitial);
+		tabs().then($el => {
+			tabRevertDraggable().then(tab => {
+				const textoABuscar = tab.text();
+				cy.log(textoABuscar);
+				cy.wrap($el).each((elemento, i) => {
+					if (Cypress.$(elemento).text() === textoABuscar) {
+						droppables.trueName(i);
+						droppables.falseName(i);
+						droppables.selectTabs().then($tab => {
+							expect($tab[i].name).to.equal(Cypress.env('elemT').name);
+							expect($tab[i].attrAriaSelected).to.equal(Cypress.env('elemT').attrAriaSelected);
+							$tab.splice(i, 1);
+							$tab.map((elementFalse, index) => {
+								expect(elementFalse.name).to.equal(Cypress.env('elemF')[index].name);
+								expect(elementFalse.attrAriaSelected).to.equal(Cypress.env('elemF')[index].attrAriaSelected);
+							});
+						});
+					}
+				});
 			});
+		}); // Only one tab is displayed at once.
+
+		revertable()
+			.should('be.visible')
+			.and('have.css', 'border-style', 'dashed')
+			.and('have.css', 'background-color', values.transparent)
+			.and('have.text', values.nameCardWillRevert); // “Will Revert” dashed area must be displayed.
+
+		notRevertable()
+			.should('be.visible')
+			.and('have.css', 'border-style', 'dashed')
+			.and('have.css', 'background-color', values.transparent)
+			.and('have.contain', values.nameCardNotRevert); // “Not Revert” dashed area must be displayed.
+
+		dropContainerRevertable().within(() => {
+			droppable()
+				.should('be.visible')
+				.and('have.css', 'border-style', 'solid')
+				.and('have.css', 'background-color', values.transparent)
+				.and('have.text', values.nameCardDropHere); //“Drop here” bordered area must be displayed.
+		});
+
+		revertable()
+			.invoke('attr', 'id')
+			.then(idDrag => {
+				droppables.position(`#${idDrag}`).then(coordenadas => {
+					droppables.dragElement(`#${idDrag}`, coordenadas.x + values.deltaPosition[0].x, coordenadas.y + values.deltaPosition[0].y);
+				});
+			}); // "Will Revert" area is dragged
+
+		dropContainerRevertable().within(() => {
+			droppable().should('have.css', 'background-color', values.mediumSeaGreen);
+		});
+
+		dropContainerRevertable().within(() => {
+			droppable()
+				.invoke('attr', 'id')
+				.then($id => {
+					droppables.position(`#${$id}`).then(coordenadas => {
+						revertable()
+							.invoke('attr', 'id')
+							.then(idDrag => {
+								droppables.dragElement(`#${idDrag}`, coordenadas.x, coordenadas.y);
+							});
+					});
+				}); // "Will Revert" area is dragged over the “Drop here” area
+
+			droppable().should('have.css', 'background-color', values.darkSeaGreen);
 		});
 	});
 
-	it('5655 | TC31:Validate the change of the background color and the display of the text "Dropped!" in the " Drop here" area when the " Not Revert" area is dragged and dropped onto it, in the " Revert Draggable " tab', () => {
+	it('5655 | TC16:  Validate dragging of the "Not Revert" area in the "Revert Draggable" tab', () => {
+		const { notRevertable, dropContainerRevertable, droppable } = droppables.elements;
 		droppables.selectTabRevertDraggable();
-		droppables.dragAndDrop(values.notRevertable, values.droppableRevertDraggable);
-		droppables.elements.droppableRevertDraggable().should('have.css', 'background-color', values.steelBlue).and('have.text', values.textDropped);
+
+		notRevertable()
+			.invoke('attr', 'id')
+			.then(idDrag => {
+				droppables.position(`#${idDrag}`).then(coordenadas => {
+					droppables.dragElement(`#${idDrag}`, coordenadas.x + values.deltaPosition[0].x, coordenadas.y + values.deltaPosition[0].y);
+				});
+			}); // "Not Revert" area is dragged
+
+		dropContainerRevertable().within(() => {
+			droppable().should('have.css', 'background-color', values.mediumSeaGreen);
+		});
+
+		dropContainerRevertable().within(() => {
+			droppable()
+				.invoke('attr', 'id')
+				.then($id => {
+					droppables.position(`#${$id}`).then(coordenadas => {
+						notRevertable()
+							.invoke('attr', 'id')
+							.then(idDrag => {
+								droppables.dragElement(`#${idDrag}`, coordenadas.x, coordenadas.y);
+							});
+					});
+				}); // "Not Revert" area is dragged over the “Drop here” area
+
+			droppable().should('have.css', 'background-color', values.darkSeaGreen);
+		});
+	});
+
+	it('5655 | TC17: Validate dragging and dropping the "Will Revert" area onto the “Drop here” area, in the " Revert Draggable " tab', () => {
+		const { revertable, dropContainerRevertable, droppable } = droppables.elements;
+
+		droppables.selectTabRevertDraggable();
+
+		revertable()
+			.invoke('attr', 'id')
+			.then(id => {
+				droppables.cssPosition(`#${id}`).then(cssValue => {
+					const [positionInitial, leftInitial, topInitial] = cssValue;
+					dropContainerRevertable().within(() => {
+						droppable()
+							.invoke('attr', 'id')
+							.then(drop => {
+								revertable().drag(`#${drop}`, { force: true });
+							});
+
+						revertable()
+							.should('have.css', 'position', positionInitial)
+							.and('have.css', 'left', leftInitial)
+							.and('have.css', 'top', topInitial);
+						droppable().should('have.css', 'background-color', values.steelBlue).and('have.text', values.textDropped);
+					});
+				});
+			});
+	});
+
+	it('5655 | TC18: Validate dragging and dropping the "Not Revert" area onto the “Drop here” area, in the " Revert Draggable " tab', () => {
+		const { notRevertable, dropContainerRevertable, droppable } = droppables.elements;
+		droppables.selectTabRevertDraggable();
+
+		notRevertable()
+			.invoke('attr', 'id')
+			.then(idNotRev => {
+				droppables.position(`#${idNotRev}`).then(coordBeforeDrop => {
+					dropContainerRevertable().within(() => {
+						droppable()
+							.invoke('attr', 'id')
+							.then(drop => {
+								notRevertable().drag(`#${drop}`, { force: true });
+							});
+
+						droppable().should('have.css', 'background-color', values.steelBlue).and('have.text', values.textDropped);
+
+						droppables.cssPosition(`#${idNotRev}`).then(cssValue => {
+							const [positionAfterDrop, leftAfterDrop, topAfterDrop] = cssValue;
+							droppables.dragElementDrop(`#${idNotRev}`, coordBeforeDrop.x, coordBeforeDrop.y); // dragging and dropping the "Not Revert" area in its initial position
+
+							notRevertable()
+								.should('have.css', 'position', positionAfterDrop)
+								.and('have.css', 'left', leftAfterDrop)
+								.and('have.css', 'top', topAfterDrop);
+						});
+					});
+				});
+			});
 	});
 });
 

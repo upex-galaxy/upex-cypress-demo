@@ -7,11 +7,12 @@ class droppable {
 		tabAccept: () => cy.get('#droppableExample-tab-accept'),
 		tabPreventPropogation: () => cy.get('#droppableExample-tab-preventPropogation'),
 		tabRevertDraggable: () => cy.get('#droppableExample-tab-revertable'),
-		draggableSimple: () => cy.get('[class=simple-drop-container]>[id=draggable]'),
-		draggablePrevent: () => cy.get('[class=pp-drop-container]>[id=dragBox]'),
-		droppableSimple: () => cy.get('[class=simple-drop-container]>[id=droppable]'),
-		droppableAccept: () => cy.get('[class=accept-drop-container]>[id=droppable]'),
-		droppableRevertDraggable: () => cy.get('[class=revertable-drop-container]>[id=droppable]'),
+		draggableSimple: () => cy.get('[id=draggable]'),
+		draggablePrevent: () => cy.get('[id=dragBox]'),
+		dropContainerSimple: () => cy.get('[class="simple-drop-container"]'),
+		dropContainerAccept: () => cy.get('[class="accept-drop-container"]'),
+		dropContainerRevertable: () => cy.get('[class="revertable-drop-container"]'),
+		droppable: () => cy.get('[id=droppable]'),
 		acceptable: () => cy.get('#acceptable'),
 		notAcceptable: () => cy.get('#notAcceptable'),
 		notGreedyOuterDroppable: () => cy.get('#notGreedyDropBox'),
@@ -22,25 +23,18 @@ class droppable {
 		notRevertable: () => cy.get('#notRevertable'),
 	};
 
-	tabLength() {
-		return this.elements.tabs().then($tab => {
-			let tabLg = $tab.length;
-			Cypress.env('tabLg', tabLg);
-			return tabLg;
-		});
-	}
-
 	trueName(value) {
 		return this.elements.tabs().then($el => {
 			cy.wrap($el)
 				.eq(value)
 				.then($text => {
-					let textName = $text.text();
-					Cypress.env('textN', textName);
-					return textName;
+					let textElemTrue = { name: $text.text(), attrAriaSelected: $text.attr('aria-selected') };
+					Cypress.env('elemT', textElemTrue);
+					return textElemTrue;
 				});
 		});
 	}
+
 	falseName(value) {
 		return this.elements.tabs().then($el => {
 			$el.splice(value, 1);
@@ -51,6 +45,7 @@ class droppable {
 					.then($text => {
 						textElemFalse.push({
 							name: $text.text(),
+							attrAriaSelected: $text.attr('aria-selected'),
 						});
 						Cypress.env('elemF', textElemFalse);
 						return textElemFalse;
@@ -59,9 +54,8 @@ class droppable {
 		});
 	}
 
-	selectTabs(value) {
+	selectTabs() {
 		return this.elements.tabs().then($el => {
-			cy.wrap($el).eq(value).click();
 			const textElements = [];
 			for (let i = 0; i < $el.length; i++) {
 				cy.wrap($el)
@@ -75,10 +69,6 @@ class droppable {
 					});
 			}
 		});
-	}
-
-	dragAndDrop(valueDrag, valueDropHere) {
-		cy.get(valueDrag).drag(`${valueDropHere}`, { force: true });
 	}
 
 	selectTabAccept() {
@@ -160,8 +150,8 @@ class droppable {
 		});
 	}
 
-	//posición en el tope central del elemento con respecto al viewport
-	positionTope(value) {
+	//coordenadas en el tope central del elemento con respecto al viewport
+	coordsTope(value) {
 		return cy.get(value).then($elemento => {
 			this.winScrollX();
 			this.winScrollY();
