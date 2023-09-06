@@ -16,10 +16,13 @@
 		}
 	},
 	"selectOne": {
-		"options": ["Dr.", "Mrt.", "Mrs.", "M.", "Prof.", "Other"],
+		"options": ["Dr.", "Mr.", "Mrs.", "M.", "Prof.", "Other"],
 		"messageNoMatch": "No options"
 	},
-	"Colors": ["Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"],
+	"oldSelectMenu": {
+		"options": ["Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"],
+		"default": "red"
+	},
 	"Colors2": ["Green", "Blue", "Black", "Red"],
 	"cars": ["Volvo", "Saab", "Opel", "Audi"]
 }

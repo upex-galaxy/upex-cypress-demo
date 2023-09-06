@@ -17,45 +17,58 @@ describe('GX-30259 | TS: ✅ToolsQA | Widgets | Dropdown - Select Menu', () => {
 			dropDown.get.anotherOptionSelectValue().should('have.text', data.selectValue.outOfGroup.value2);
 		});
 	});
-	it.only('30260 | TC02: Validate choice random option in dropdown "Select Value"', () => {
+	it('30260 | TC02: Validate choice random option in dropdown "Select Value"', () => {
 		cy.fixture('/data/GX-30259-Dropdown.json').then(data => {
 			dropDown.clickSelectValue(); //click to active and show options
-			dropDoWn.get.allOptionsSelectValue().then(elm =>{
-				Cypress.env('longitud', elm.length)
-			});
-			cy.then(()=>{
-				const n = Cypress.env('longitud') - 1;
-				function RandomItem(min, max) {
-					min = Math.ceil(0);
-					max = Math.floor(n);
-					return Math.floor(Math.random() * (max - min + 1) + min);
-				}
-				dropDown.get.allOptionsSelectValue().eq(RandomItem()).click();
+			dropDown.get.allOptionsSelectValue().then(elm => {
+				Cypress.env('longitud', elm.length);
+				const max = Cypress.env('longitud') - 1;
+				dropDown.get.allOptionsSelectValue().eq(Cypress._.random(0, max)).click();
 				dropDown.get.valueSelectedSelectValue().should('contain.text', 'option');
-			})
+			});
 		});
 	});
 	it('30260 | TC03: Validate choice a random option in dropdown "Select One"', () => {
 		cy.fixture('/data/GX-30259-Dropdown.json').then(data => {
 			dropDown.clickSelectOne();
-
-			const lengthOptionSelectOne = parseFloat(dropDown.get.allOptionsSelectOne().its('length'));
-			const n = parseFloat(lengthOptionSelectOne) - 1;
-
-			function RandomItem(min, max) {
-				min = Math.ceil(0);
-				max = Math.floor(n);
-				return Math.floor(Math.random() * (max - min + 1) + min);
-			}
-
-			dropDown.get.allOptionsSelectOne().eq(RandomItem()).click();
-			dropDown.get.valueSelectedSelectOne().invoke('text').should('eq', data.selectOne.option[n]);
+			dropDown.get.allOptionsSelectOne().then(elm => {
+				Cypress.env('longitud', elm.length);
+				const max = Cypress.env('longitud') - 1;
+				const random = Cypress._.random(0, max);
+				dropDown.get.allOptionsSelectOne().eq(random).click();
+				dropDown.get.valueSelectedSelectOne().invoke('text').should('eq', data.selectOne.options[random]);
+			});
 		});
 	});
 	it('30260 | TC04: Validate show massage "No options" when the type text not match in dropdown "Select One"', () => {
 		cy.fixture('/data/GX-30259-Dropdown.json').then(data => {
 			dropDown.typeSelectOne('hola');
 			dropDown.get.messageNoMatchSelectOne().should('have.text', data.selectOne.messageNoMatch);
+		});
+	});
+	it('30260 | TC05: Validate choice a random option in dropdown "Old Style Select Menu"', () => {
+		cy.fixture('/data/GX-30259-Dropdown.json').then(data => {
+			dropDown.clickOldSelectMenu();
+			dropDown.get.optionsOldSelectMenu().then(elm => {
+				Cypress.env('longitud', elm.length);
+				cy.log('longitud');
+				const max = Cypress.env('longitud') - 1;
+				cy.log(max);
+				const random = Cypress._.random(0, max);
+				cy.log(random);
+				dropDown.get.containerOldSelectMenu().select(random);
+				dropDown.get.containerOldSelectMenu().should('have.value', random);
+			});
+		});
+	});
+	it('30260 | TC06: Validate show "red" by default in "Old Style Select Menu"', () => {
+		cy.fixture('/data/GX-30259-Dropdown.json').then(data => {
+			dropDown.get.containerOldSelectMenu().should('have.value', data.oldSelectMenu.default);
+		});
+	});
+	it.only('30260 | TC07: Validate no show a option when type incorrect value in dropdown "Multiselect drop down""', () => {
+		cy.fixture('/data/GX-30259-Dropdown.json').then(data => {
+			dropDown.typeMultiselect('Rojo');
 		});
 	});
 });
