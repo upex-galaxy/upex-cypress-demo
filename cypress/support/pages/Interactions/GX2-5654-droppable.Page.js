@@ -21,6 +21,16 @@ class droppable {
 		greedyInnerDroppable: () => cy.get('#greedyDropBoxInner'),
 		revertable: () => cy.get('#revertable'),
 		notRevertable: () => cy.get('#notRevertable'),
+		idDroppable: '#droppable',
+		idAcceptable: '#acceptable',
+		idNotAcceptable: '#notAcceptable',
+		idDraggablePrevent: '#dragBox',
+		idNotGreedyOuterDroppable: '#notGreedyDropBox',
+		idNotGreedyInnerDroppable: '#notGreedyInnerDropBox',
+		idGreedyOuterDroppable: '#greedyDropBox',
+		idGreedyInnerDroppable: '#greedyDropBoxInner',
+		idRevertable: '#revertable',
+		idNotRevertable: '#notRevertable'
 	};
 
 	trueName(value) {
