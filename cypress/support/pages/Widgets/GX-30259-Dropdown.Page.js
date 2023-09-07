@@ -23,6 +23,15 @@ class dropDownPage {
 		//Multiselect drop down
 		containerMultiselect: () => cy.get('p+[class=" css-2b097c-container"]'),
 		inputMultiselect: () => cy.get('#react-select-4-input'),
+		noMatchMultiselect: () => cy.get('[class=" css-1gl4k7y"]'),
+		greenOptionMultiselect: () => cy.get('#react-select-4-option-0'),
+		blueOptionMultiselect: () => cy.get('#react-select-4-option-1'),
+		blackOptionMultiselect: () => cy.get('#react-select-4-option-2'),
+		redOptionMultiselect: () => cy.get('#react-select-4-option-3'),
+		selectedOptionMultiselect: () => cy.get('.css-1rhbuit-multiValue'),
+		//Standard multi select
+		containerStandardSelect: () => cy.get('#cars'),
+		allOptionsStandardSelect: () => cy.get('#cars>option'),
 	};
 
 	clickSelectValue() {
@@ -39,6 +48,15 @@ class dropDownPage {
 	}
 	typeMultiselect(text) {
 		this.get.containerMultiselect().type(text);
+	}
+	clickMultiselect() {
+		this.get.containerMultiselect().click();
+	}
+	clickAllOptionsMultiselect() {
+		this.get.greenOptionMultiselect().click();
+		this.get.blueOptionMultiselect().click();
+		this.get.blackOptionMultiselect().click();
+		this.get.redOptionMultiselect().click();
 	}
 }
 export const dropDown = new dropDownPage();

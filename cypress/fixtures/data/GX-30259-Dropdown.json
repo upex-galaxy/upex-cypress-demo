@@ -23,6 +23,11 @@
 		"options": ["Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"],
 		"default": "red"
 	},
-	"Colors2": ["Green", "Blue", "Black", "Red"],
-	"cars": ["Volvo", "Saab", "Opel", "Audi"]
+	"multiselect": {
+		"options": ["Green", "Blue", "Black", "Red"],
+		"noMatch": "No options"
+	},
+	"standardSelect": {
+		"options": ["Volvo", "Saab", "Opel", "Audi"]
+	}
 }

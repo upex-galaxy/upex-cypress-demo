@@ -66,10 +66,32 @@ describe('GX-30259 | TS: ✅ToolsQA | Widgets | Dropdown - Select Menu', () => {
 			dropDown.get.containerOldSelectMenu().should('have.value', data.oldSelectMenu.default);
 		});
 	});
-	it.only('30260 | TC07: Validate no show a option when type incorrect value in dropdown "Multiselect drop down""', () => {
+	it('30260 | TC07: Validate no show a option when type incorrect value in dropdown "Multiselect drop down"', () => {
 		cy.fixture('/data/GX-30259-Dropdown.json').then(data => {
 			dropDown.typeMultiselect('Rojo');
+			dropDown.get.noMatchMultiselect().should('have.text', data.multiselect.noMatch);
 		});
+	});
+	it('30260 | TC08: Validate select all options in dropdown "Multiselect drop down"', () => {
+		cy.fixture('/data/GX-30259-Dropdown.json').then(data => {
+			dropDown.clickMultiselect();
+			dropDown.clickAllOptionsMultiselect();
+			const arrayToString = data.multiselect.options.toString();
+			const replaceInString = arrayToString.replaceAll(/,/g, '');
+			dropDown.get.selectedOptionMultiselect().should('contain.text', replaceInString);
+		});
+	});
+	it('30260 | TC09: Validate select a random option in dropdown "Standard multi select"', () => {
+		cy.fixture('/data/GX-30259-Dropdown.json').then(data => {
+			dropDown.get.allOptionsStandardSelect().then(elm => {
+				const max = elm.length - 1;
+				const random = Cypress._.random(0, max);
+				dropDown.get.allOptionsStandardSelect().eq(random).should('have.text', data.standardSelect.options[random]);
+			});
+		});
+	});
+	it.only('30260 | TC10: Validate select all option in dropdown "Standard multi select"', () => {
+		cy.fixture('/data/GX-30259-Dropdown.json').then(data => {});
 	});
 });
 import { removeLogs } from '@helper/RemoveLogs';
