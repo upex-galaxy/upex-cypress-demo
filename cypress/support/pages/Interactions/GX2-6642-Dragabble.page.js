@@ -17,13 +17,18 @@ class dragabble {
 		cy.get('#dragBox').move({ deltaX: 200, deltaY: 125 });
 		
 	}
-	clickAxisRestricted(){
+	clickAxisRestricted() {
 		this.get.tabAxisRestricted().click();
 	}
 	moveX() {
-		cy.get('#restrictedX').move({ deltaX: 200 });
+		cy.get('#restrictedX').move({ deltaX: 500, deltaY: 200 }, { force: true });
+	}
+	moveY() {
+		cy.get('#restrictedY').move({ deltaX: 300, deltaY: 500 }, { force: true });
+	}
+	clickContainerRestricted() {
+		this.get.tabContainerRestricted().click();
 	}
 }
-
 
 export const Dragabble = new dragabble();
