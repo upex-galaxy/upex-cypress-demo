@@ -21,47 +21,47 @@ describe('GX-31016: Paypal | Comisiones | Calcular las comisiones para enviar y 
 		calculatorSendTitle().should('have.text', data.calculatorSendTitle);
 	});
 
-	it.skip('31017 | TC1: Validar poder calcular la comisión cuando se introduce 1 caracter.', () => {
-		const { inputParaRecibir, inputParaEnviar, inputHayQueEnviar, inputCommissionToReceive, inputSeReciben, inputCommissionToSend } =
+	it('31017 | TC1: Validar poder calcular la comisión cuando se introduce 1 caracter.', () => {
+		const { inputToReceive, inputToSend, inputHayQueEnviar, inputCommissionToReceive, inputSeReciben, inputCommissionToSend } =
 			calculatorPage.get;
 
 		//* Generar un número aleatorio en el input "Para Recibir" entre 0 y 9.
 		const amountToReceive = Cypress._.random(0, 9);
 
-		inputParaRecibir().type(amountToReceive.toString());
+		inputToReceive().type(amountToReceive.toString());
 
 		calculatorPage.getInputNumber(inputHayQueEnviar()).then(calculatedValueToSend => {
-			//* calculateFormularioToSend(inputValue, commission, fee)
-			const expectedCalculatedValue = calculatorPage.calculateFormulaToReceive(amountToReceive, data.commission, data.fee);
+			//* calculateFormulaToReceive(inputValue, commission, fee)
+			const expectedCalculatedValue = calculatorPage.calculateFormulaToReceive(amountToReceive, data.commissionForCalculate, data.fee);
 
-			expect(calculatedValueToSend).equal(expectedCalculatedValue);
+			expect(calculatedValueToSend).eql(expectedCalculatedValue);
 
 			calculatorPage.getInputNumber(inputCommissionToReceive()).then(calculatedCommission => {
 				const expectedCommission = calculatorPage.getOutputCommission(calculatedValueToSend, amountToReceive);
 
-				expect(calculatedCommission).eql(expectedCommission);
+				expect(calculatedCommission.toString()).eql(expectedCommission.toFixed(2));
 			});
 		});
 
 		const amountToSend = Cypress._.random(0, 9);
 
-		inputParaEnviar().type(amountToSend.toString());
+		inputToSend().type(amountToSend.toString());
 
 		calculatorPage.getInputNumber(inputSeReciben()).then(calculatedValueToGet => {
-			//* calculateFormularioToSend(inputValue, commission, fee)
-			const expectedCalculatedValue = calculatorPage.calculateFormulaToSend(amountToSend, data.commission, data.fee);
+			//* calculateFormulaToSend(inputValue, commission, fee)
+			const expectedCalculatedValue = calculatorPage.calculateFormulaToSend(amountToSend, data.commissionForCalculate, data.fee);
 
-			expect(calculatedValueToGet).equal(expectedCalculatedValue);
+			expect(calculatedValueToGet).eql(expectedCalculatedValue);
 
 			calculatorPage.getInputNumber(inputCommissionToSend()).then(calculatedCommission => {
-				const expectedCom = calculatorPage.getOutputCommission(amountToSend, calculatedValueToGet);
+				const expectedCommission = calculatorPage.getOutputCommission(amountToSend, calculatedValueToGet);
 
-				expect(calculatedCommission).eql(expectedCom);
+				expect(calculatedCommission.toString()).eql(expectedCommission.toFixed(2));
 			});
 		});
 	});
 
-	it.skip('31017 | TC2: Validar NO poder calcular la comisión cuando el campo queda vacío.', () => {
+	it('31017 | TC2: Validar NO poder calcular la comisión cuando el campo queda vacío.', () => {
 		const { inputToReceive, messageToReceive, inputToSend, messageToSend } = calculatorPage.get;
 		const amountToReceive = Cypress._.random(0, 9);
 		const amountToSend = Cypress._.random(0, 9);
@@ -73,53 +73,46 @@ describe('GX-31016: Paypal | Comisiones | Calcular las comisiones para enviar y 
 		messageToSend().should('have.text', data.message.clearedFieldParaEnviar);
 	});
 
-	it.only('31017 | TC5: Validar poder calcular la comisión cuando se introduce 306 caracteres.', () => {
+	it('31017 | TC5: Validar poder calcular la comisión cuando se introduce 306 caracteres.', () => {
 		const { inputToReceive, inputToSend, inputHayQueEnviar, inputCommissionToReceive, inputSeReciben, inputCommissionToSend } =
 			calculatorPage.get;
 
 		const stringValueToGet = faker.random.numeric(306);
 		inputToReceive().type(stringValueToGet);
 
-		calculatorPage.getInputValue(inputHayQueEnviar()).then(calculatedValueToSend => {
-			cy.log(calculatedValueToSend);
-			cy.log(parseFloat(calculatedValueToSend).toFixed(2));
-
+		calculatorPage.getInputNumber(inputHayQueEnviar()).then(calculatedValueToSend => {
 			const givenValueToGet = parseFloat(stringValueToGet);
 
-			const expectedCalculatedValue = calculatorPage.calculateFormulaToReceive(givenValueToGet, data.commission, data.fee);
+			const expectedCalculatedValue = calculatorPage.calculateFormulaToReceive(givenValueToGet, data.commissionForCalculate, data.fee);
 
-			//expect(calculatedValueToSend).equal(expectedCalculatedValue);
+			expect(calculatedValueToSend).eql(expectedCalculatedValue);
 
-			calculatorPage.getInputValue(inputCommissionToReceive()).then(calculatedCommission => {
-				cy.log(calculatedCommission);
-				cy.log(parseFloat(calculatedCommission).toFixed(2));
-				//expect(calculatedCommission.toString()).to.equal(Cypress.env('FeeTotal'));
+			calculatorPage.getInputNumber(inputCommissionToReceive()).then(calculatedCommission => {
+				expect(calculatedCommission.toString()).eql(Cypress.env('FeeTotal'));
 			});
 		});
 
 		const stringValueToSend = faker.random.numeric(306);
 		inputToSend().type(stringValueToSend);
 
-		calculatorPage.getInputValue(inputSeReciben()).then(calculatedValueToGet => {
-			//cy.log(calculatedValueToGet);
-
+		calculatorPage.getInputNumber(inputSeReciben()).then(calculatedValueToGet => {
 			const givenValueToSend = parseFloat(stringValueToSend);
-			const expectedCalculatedValue = calculatorPage.calculateFormulaToSend(givenValueToSend, data.commission, data.fee);
+			const expectedCalculatedValue = calculatorPage.calculateFormulaToSend(givenValueToSend, data.commissionForCalculate, data.fee);
 
-			//expect(calculatedValueToGet).equal(expectedCalculatedValue);
+			expect(calculatedValueToGet).eql(expectedCalculatedValue);
 
-			calculatorPage.getInputValue(inputCommissionToSend()).then(calculatedCommission => {
-				//cy.log(calculatedCommission);
-				//expect(calculatedCommission.toString()).to.equal(Cypress.env('SendTotalFees'));
+			calculatorPage.getInputNumber(inputCommissionToSend()).then(calculatedCommission => {
+				expect(calculatedCommission.toString()).eql(Cypress.env('SendTotalFees'));
 			});
 		});
 	});
 
-	it.skip('', () => {
-		var numeroEnNotacionCientifica = '1,1.531.137.903.689.702e+43';
-		var numeroCompleto = parseFloat(numeroEnNotacionCientifica.replace(',', '').replace('e+', 'e'));
-		cy.log(numeroEnNotacionCientifica);
-		cy.log(numeroCompleto); // 11.531
+	it('31017 | TC7: Validar NO poder calcular la comisión cuando se introduce 306 carácteres y sólo se inserta "+" o "-".', () => {
+		const { inputToReceive, inputToSend, inputHayQueEnviar, inputCommissionToReceive, inputSeReciben, inputCommissionToSend } =
+			calculatorPage.get;
+
+		const stringValueToGet = faker.random.numeric(306);
+		inputToReceive().type(stringValueToGet);
 	});
 });
 

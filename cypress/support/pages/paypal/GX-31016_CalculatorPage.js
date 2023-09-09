@@ -25,6 +25,7 @@ class CalculatorPage {
 		return inputLocator.invoke('val');
 	}
 
+	//* Para números grandes.
 	getInputNumber(inputLocator) {
 		return this.getInputValue(inputLocator).then(val => {
 			const valRefined = val.replaceAll('.', '');
@@ -34,40 +35,37 @@ class CalculatorPage {
 		});
 	}
 
-	getOutputCommission(ToSend, ToGet) {
-		const value = parseFloat(ToSend) - parseFloat(ToGet);
-		return value;
+	getOutputCommission(toSend, toReceive) {
+		return parseFloat(toSend) - parseFloat(toReceive);
+	}
+
+	// Validate input arguments.
+	validateInputs(inputValue, commission, fee) {
+		if (typeof inputValue !== 'number' || typeof commission !== 'number' || typeof fee !== 'number') {
+			throw new Error('All arguments must be numbers.');
+		}
 	}
 
 	calculateFormulaToReceive(inputValue, commission, fee) {
-		const toCharge = (100 * (fee + inputValue)) / (100 - commission);
-		const totalCharge = parseFloat(toCharge.toFixed(2));
-		const dif = totalCharge - inputValue;
-		const totalFee = parseFloat(dif.toFixed(2)).toString();
+		this.validateInputs(inputValue, commission, fee);
+
+		const toCharge = (100 * (fee + inputValue)) / (0 - commission + 100);
+
+		const totalCharge = Math.round(toCharge * 100) / 100;
+
+		let dif = parseFloat(totalCharge - inputValue);
+
+		let totalFee = Math.round(dif * 100) / 100;
+
+		totalFee = parseFloat(totalFee).toString();
 
 		Cypress.env('FeeTotal', totalFee);
 
 		return parseFloat(totalCharge);
 	}
 
-	/*calculateFormulaToReceive(inputValue, commission, fee) {
-		const result = (inputValue + fee) / (1 - commission);
-		return parseFloat(result.toFixed(2));
-	}*/
-
-	/**
-	 * Calculates the amount to send after applying a commission and a fee.
-	 *
-	 * @param {number} inputValue - The initial amount
-	 * @param {number} commission - The commission rate in percentage
-	 * @param {number} fee - The flat fee
-	 * @returns {number} - The amount to send, rounded to 2 decimal places
-	 */
 	calculateFormulaToSend(inputValue, commission, fee) {
-		// Validate input arguments
-		if (typeof inputValue !== 'number' || typeof commission !== 'number' || typeof fee !== 'number') {
-			throw new Error('All arguments must be numbers.');
-		}
+		this.validateInputs(inputValue, commission, fee);
 
 		// Calculate the total fees
 		const totalFees = (commission * inputValue) / 100 + fee;
@@ -80,6 +78,7 @@ class CalculatorPage {
 
 		// Update the environment variable and return the final amount
 		Cypress.env('SendTotalFees', roundToTwoDecimalPlaces(totalFees).toString());
+
 		return roundToTwoDecimalPlaces(sendAmount);
 	}
 }

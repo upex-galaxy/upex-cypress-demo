@@ -1,5 +1,6 @@
 {
 	"commission": 0.054,
+	"commissionForCalculate": 5.4,
 	"fee": 0.3,
 	"headersTitle": "Calculadora de Comisiones PayPal Actualizada",
 	"commissionsTitle": "Las Comisiones PayPal",
