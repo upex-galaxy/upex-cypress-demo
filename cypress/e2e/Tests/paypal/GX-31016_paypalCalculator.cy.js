@@ -106,14 +106,6 @@ describe('GX-31016: Paypal | Comisiones | Calcular las comisiones para enviar y 
 			});
 		});
 	});
-
-	it('31017 | TC7: Validar NO poder calcular la comisión cuando se introduce 306 carácteres y sólo se inserta "+" o "-".', () => {
-		const { inputToReceive, inputToSend, inputHayQueEnviar, inputCommissionToReceive, inputSeReciben, inputCommissionToSend } =
-			calculatorPage.get;
-
-		const stringValueToGet = faker.random.numeric(306);
-		inputToReceive().type(stringValueToGet);
-	});
 });
 
 removeLogs();
