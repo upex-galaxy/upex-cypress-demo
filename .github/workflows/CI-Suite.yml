@@ -1,10 +1,10 @@
-# 🧙🏻‍♂️BIENVENIDO A LOS PIPELINES DE CONTINUOUS INTEGRATION DE "ARI - Hija de Aurora"!tu ID del TX
-# 🤖Este Pipeline de CI se activa al PUSHEAR, y consiste en ejecutar los tests de una US e importar los resultados a Jira!🚀
-# 👩🏻‍🔬Para utilizar este Pipeline de Ari, sigue los siguientes pasos:
-#     1ro: debes modificar el script: "npm run file" + tu archivo de Prueba Ejecutable (ver ejemplo en este archivo)
-#     2do: debes modificar la propiedad: "testExecKey:" + tu ID del TX de Jira para importar automáticamente el resultado.
-#     3ro: guarda los cambios en el repositorio local (git add + git commit) y envíalos al Repo Remoto (git push)
-#     Expected Result: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí.
+#* 🧙🏻‍♂️BIENVENIDO A LOS PIPELINES DE CONTINUOUS INTEGRATION DE "ARI - Hija de Aurora"!tu ID del TX
+#* 🤖Este Pipeline de CI se activa al PUSHEAR, y consiste en ejecutar los tests de una US e importar los resultados a Jira!🚀
+#* 👩🏻‍🔬Para utilizar este Pipeline de Ari, sigue los siguientes pasos:
+#todo 1ro: debes modificar el script: "npm run file" + tu archivo de Prueba Ejecutable (ver ejemplo en este archivo)
+#todo 2do: debes modificar la propiedad: "testExecKey:" + tu ID del TX de Jira para importar automáticamente el resultado.
+#todo 3ro: guarda los cambios en el repositorio local (git add + git commit) y envíalos al Repo Remoto (git push)
+#todo Expected Result: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí.
 
 name: 🤖CI run (BUILD) Test Suite Execution⚡
 run-name: ${{github.actor}}👨🏻‍🔬 run Test Suite in ${{github.ref_name}}
@@ -16,7 +16,7 @@ on: # This Run is a template. The correct "Run On" should be: Any except QA and 
             - QA
 
 jobs:
-    Build-Cypress-TestSuite-AfterPush:
+    SanityTest:
         runs-on: ubuntu-latest
 
         steps:
@@ -54,7 +54,7 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                      yarn file cypress/e2e/Tests/Elements/GX-32427-RadioButtons.cy.js
+                      yarn file cypress/e2e/Tests/paypal/GX-30991-calculadoraComision.cy.js
 
             - name: ✅Import Test Results to Xray
               if: always()
@@ -64,7 +64,7 @@ jobs:
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
-                  testExecKey: 'GX-32429' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+                  testExecKey: 'GX-30994' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
                   projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
 
             - name: 🔔Slack Notification of Done
