@@ -4,7 +4,7 @@ class Paypal {
 		fee: () => cy.get('[name="fee"]'),
 		toGet: () => cy.get('[name="toGet"]'), //para recibir
 		commission: () => cy.get('[name="fees1"]'), //la comisión es
-
+		toCharge: () => cy.get('[name="toCharge"]'),
 		readonly: () => cy.get('[readonly="readonly"]'), //hay que enviar
 		amountSent: () => cy.get('[name="amountSent"]'), //si se envían
 		recibe: () => cy.get('[name="amountAfterFees"]'), //reciben

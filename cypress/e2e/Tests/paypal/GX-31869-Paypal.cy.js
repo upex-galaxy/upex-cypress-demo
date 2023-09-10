@@ -27,7 +27,7 @@ describe('This is your test project title', () => {
 		const calculatedValueComa = calculatedValue.toString().replace('.', ',');
 		cy.log(calculatedValue);
 		cy.wait(2000);
-		paypal.elements.readonly({ timeout: 10000 }).should('be.visible').invoke('val').should('eq', calculatedValueComa);
+		paypal.elements.toCharge({ timeout: 10000 }).should('be.visible').invoke('val').should('eq', calculatedValueComa);
 	});
 
 	it('TC2: Validar monto a enviar', () => {
@@ -48,28 +48,16 @@ describe('This is your test project title', () => {
 	});
 
 	it('TC3: Validar que el inputValue NO está entre 0 a 306 Caracteres y Infinito', () => {
-		paypal.elements.toGet().clear();
-		Cypress.on('uncaught:exception', (err, runnable) => {
-			return false;
-		});
-		paypal.elements.message().should('be.visible').should('have.text', 'Indica cuánto vas a Recibir');
-		paypal.elements.toGet().type('+');
-		paypal.elements.message().should('be.visible').should('have.text', 'Solo puedes introducir Números');
-
-		const numerostr = String(data.toGetMaximo);
-		const toGet = parseFloat(data.toGet);
+		const numerostr = String(data.toGetInfinito);
+		const toGetMax = parseFloat(data.toGetInfinito);
 
 		if (numerostr.length > 306) {
-			paypal.elements.toGet().type(data.toGetMaximo);
-
-			cy.log(toGet);
-			cy.log(fee);
-			cy.log(commission);
-			const calculatedValue = paypal.calculateToGet(toGet, fee, commission);
+			paypal.elements.toGet().type(numerostr);
+			const calculatedValue = paypal.calculateToGet(toGetMax, fee, commission);
 			const calculatedValueComa = calculatedValue.toString().replace('.', ',');
 			cy.log(calculatedValue);
 			cy.wait(2000);
-			paypal.elements.readonly({ timeout: 10000 }).should('be.visible').invoke('val').should('equal', 'Infinity');
+			paypal.elements.toCharge({ timeout: 10000 }).should('be.visible').invoke('val').should('equal', 'Infinity');
 		}
 	});
 
@@ -79,36 +67,65 @@ describe('This is your test project title', () => {
 		paypal.elements.toGet().clear();
 		paypal.elements.message().should('be.visible').should('have.text', 'Indica cuánto vas a Recibir');
 
-		const toGet = parseFloat(data.toGetNegativo);
+		const toGet = String(data.toGetNegativo);
+		const toGetNegativo = parseFloat(data.toGetNegativo);
 		cy.log(toGet);
 		paypal.elements.toGet().type(toGet);
 		Cypress.on('uncaught:exception', (err, runnable) => {
 			return false;
 		});
-		const calculatedValue = paypal.calculateToGet(toGet, fee, commission);
+		const calculatedValue = paypal.calculateToGet(toGetNegativo, fee, commission);
 		cy.log(calculatedValue);
 		const calculatedValueComa = calculatedValue.toString().replace('.', ',');
 
 		cy.wait(2000);
-		paypal.elements.readonly({ timeout: 10000 }).should('be.visible').invoke('val').should('eq', calculatedValueComa);
+		paypal.elements.toCharge({ timeout: 10000 }).should('be.visible').invoke('val').should('eq', calculatedValueComa);
 	});
 
 	it('TC5: Validar que el imput si se envían acepta valores numéricos (-1)', () => {
+		paypal.elements.amountSent().type('-');
+		cy.wait(2000);
+		paypal.elements.commissionSent().eq(1).should('be.visible').should('have.value', 'NaN');
 		paypal.elements.amountSent().clear();
 		paypal.elements.message1().should('be.visible').should('have.text', 'Indica cuánto vas a Enviar');
-		const amountSent = parseFloat(data.amountSentNeg);
-		cy.log(amountSent);
-		paypal.elements.amountSent().type(amountSent, { force: true });
+
+		const amountStr = String(data.amountSentNeg);
+		const value = data.amountSentNeg;
+		const amountSent = parseFloat(value).toFixed(2);
+
+		paypal.elements.amountSent().type(amountStr);
 		Cypress.on('uncaught:exception', (err, runnable) => {
 			return false;
 		});
 		const calculatedValue = paypal.calculateamountSent(amountSent, fee, commission);
 		cy.log(calculatedValue);
 		const calculatedValueComa = calculatedValue.toString().replace('.', ',');
-		//cy.log(calculatedValueComa);
+
 		cy.wait(2000);
 		paypal.elements.recibe({ timeout: 10000 }).should('be.visible').invoke('val').should('eq', calculatedValueComa);
 	});
 
-	it('TC8: Validar que los signos de puntuación o cualquier carácter especial no numérico se eliminen automáticamente.', () => {});
+	it('TC6: Validar que el inputValue si se envían NO está entre 0 a 306 Caracteres y Infinito', () => {
+		paypal.elements.amountSent().clear();
+		Cypress.on('uncaught:exception', (err, runnable) => {
+			return false;
+		});
+		paypal.elements.message1().should('be.visible').should('have.text', 'Indica cuánto vas a Enviar');
+
+		const numerostr = String(data.amountSentInfinito);
+		const toGet = parseFloat(data.amountSentInfinito);
+
+		if (numerostr.length > 306) {
+			paypal.elements.amountSent().type(numerostr);
+
+			cy.log(toGet);
+			cy.log(fee);
+			cy.log(commission);
+			const calculatedValue = paypal.calculateamountSent(toGet, fee, commission);
+			const calculatedValueComa = calculatedValue.toString().replace('.', ',');
+			cy.log(calculatedValue);
+			cy.wait(2000);
+			paypal.elements.recibe({ timeout: 10000 }).should('be.visible').invoke('val').should('equal', 'NaN');
+		}
+	});
 });
