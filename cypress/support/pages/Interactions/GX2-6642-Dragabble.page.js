@@ -12,7 +12,7 @@ class dragabble {
 		cursorTopLeft: () => cy.get('#cursorTopLeft'),
 		cursorBotton: () => cy.get('#cursorBottom')
 	};
-	
+	//Movimiento random
 	dragToRandomPosition() {
 		cy.get('#dragBox').move({ deltaX: 200, deltaY: 125 });
 		
@@ -25,6 +25,7 @@ class dragabble {
 				return style;
 			});
 	}
+	//Movimiento de coordenadas X, Y.
 	clickAxisRestricted() {
 		this.get.tabAxisRestricted().click();
 	}

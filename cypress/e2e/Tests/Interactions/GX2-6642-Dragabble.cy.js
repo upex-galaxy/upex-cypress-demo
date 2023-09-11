@@ -31,4 +31,9 @@ describe('GX2-6642 ✅ToolsQA | Interactions | Dragabble', () => {
 		Dragabble.moveBoxCenter();
 		Dragabble.validationMoveCenter();
 	});
+	it('GX2-6643 | TC7: Validar al arrastrar el cuadro “My cursor is at top left“ de la pestaña “Cursor Style” que el cursor siempre se ubique en la parte superior izquierda del mismo.', () => {
+		Dragabble.clickCursorStyle();
+		Dragabble.moveBoxTopLeft();
+		Dragabble.validationMoveTopLeft();
+	});
 });
