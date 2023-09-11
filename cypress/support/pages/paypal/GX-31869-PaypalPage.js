@@ -14,11 +14,11 @@ class Paypal {
 	};
 	calculateToGet(toGet, fee, commission) {
 		const value = (toGet + fee) / (1 - commission);
-		return parseFloat(value.toFixed(2));
+		return parseFloat(value).toFixed(2);
 	}
-	calculateamountSent(amountSent, fee, commission) {
+	calculateAmountSent(amountSent, fee, commission) {
 		const value = amountSent - (amountSent * commission + fee);
-		return parseFloat(value.toFixed(2));
+		return parseFloat(value).toFixed(2);
 	}
 }
 export const paypal = new Paypal();
