@@ -10,6 +10,8 @@ describe('GX2-6567 ✅ToolsQA | Elements | Web Table', () => {
 	});
 	it.only('6568 | TC1: Validate add new record', () => {
 		webTables.elements.addButtonClick().click();
+		webTables.addNewRecord();
+		webTables.elements.summitClick().click();
 	});
 	it('6568 | TC2: Validate cancel adding record', () => {});
 	it('6568 | TC3: Validate records filter', () => {});
