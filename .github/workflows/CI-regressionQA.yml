@@ -12,8 +12,8 @@ on:
             - QA
 
 jobs:
-    RegressionTest:
-        name: regression
+    RegressionTest-Elements:
+        name: regression-elements
         runs-on: ubuntu-latest
 
         steps:
@@ -34,32 +34,12 @@ jobs:
               run: |
                   yarn
 
-            - name: 🔌Cucumber Preprocessor JSON Setup
-              uses: DamianReeves/write-file-action@master
-              with:
-                  write-mode: overwrite
-                  path: .cypress-cucumber-preprocessorrc.json
-                  contents: |
-                      {
-                        "nonGlobalStepDefinitions": true,
-                        "stepDefinitions": "cypress/e2e/cucumber-test/stepDefinitions/*.{js,ts}",
-                        "json": {
-                          "enabled": false,
-                          "formatter": "./cucumber-formatter/cucumber-json-formatter",
-                          "output": "./reports/cucumber-report.json"
-                        },
-                        "messages": {
-                          "enabled": false,
-                          "output": "./reports/cucumber-messages.ndjson"
-                        }
-                      }
-
             - name: 🧪Cypress E2E Regression Test in Chrome
               uses: cypress-io/github-action@v4
               with:
                   browser: chrome
                   command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
-                      yarn regression cypress/e2e/Tests/Elements/GX-29755-Elements-radioButtons.cy.js
+                      yarn regression:ci cypress/e2e/Tests/Elements
 
             - name: 📬Generate XML Regression Report
               if: always()
@@ -95,12 +75,213 @@ jobs:
               env:
                   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
                   SLACK_USERNAME: Ari✨
-                  SLACK_MESSAGE: ':test_tube: Tests run in ToolsQA: Regression Testing is Done and updated in Jira :rocket:'
+                  SLACK_MESSAGE: ':test_tube:TESTS RESULTS from ${{github.job}}:rocket:'
+                  SLACK_COLOR: ${{ job.status }}
+                  SLACK_ICON: https://i.imgur.com/q9kvQCp_d.webp?maxwidth=760&fidelity=grand
+
+    RegressionTest-Forms:
+        name: regression-forms
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 💻Checkout
+              uses: actions/checkout@v3
+
+            - name: 💿Install Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - name: 💿Yarn Setup
+              uses: DerYeger/yarn-setup-action@master
+              with:
+                  node-version: 16
+
+            - name: 🧬Install All Dependencies
+              run: |
+                  yarn
+
+            - name: 🧪Cypress E2E Regression Test in Chrome
+              uses: cypress-io/github-action@v4
+              with:
+                  browser: chrome
+                  command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
+                      yarn regression:ci cypress/e2e/Tests/Forms
+
+            - name: 📬Generate XML Regression Report
+              if: always()
+              run: |
+                  yarn report:xml
+
+            - name: ✅Import Test Results to Xray
+              if: always()
+              uses: mikepenz/xray-action@v2
+              with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
+                  username: ${{secrets.XRAY_CLIENT_ID}}
+                  password: ${{secrets.XRAY_CLIENT_SECRET}}
+                  testFormat: 'junit'
+                  testPaths: 'reports/regression-report.xml'
+                  testExecKey: 'GX-3704' #todo: ToolsQA Regression Test Plan TX
+                  projectKey: 'GX' #todo: UPEX LEVEL 1
+
+            - name: 📬Generate Allure Regression Report
+              if: always()
+              run: |
+                  yarn allure:ci
+
+            - name: 📊Upload Artifact Allure
+              if: always()
+              uses: actions/upload-artifact@v3
+              with:
+                  name: regression-allure-report
+                  path: reports/allure-report
+
+            - name: 🔔Slack Notification of Done
+              if: always()
+              uses: rtCamp/action-slack-notify@v2.2.0
+              env:
+                  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+                  SLACK_USERNAME: Ari✨
+                  SLACK_MESSAGE: ':test_tube:TESTS RESULTS from ${{github.job}}:rocket:'
+                  SLACK_COLOR: ${{ job.status }}
+                  SLACK_ICON: https://i.imgur.com/q9kvQCp_d.webp?maxwidth=760&fidelity=grand
+
+    RegressionTest-Interactions:
+        name: regression-interactions
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 💻Checkout
+              uses: actions/checkout@v3
+
+            - name: 💿Install Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - name: 💿Yarn Setup
+              uses: DerYeger/yarn-setup-action@master
+              with:
+                  node-version: 16
+
+            - name: 🧬Install All Dependencies
+              run: |
+                  yarn
+
+            - name: 🧪Cypress E2E Regression Test in Chrome
+              uses: cypress-io/github-action@v4
+              with:
+                  browser: chrome
+                  command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
+                      yarn regression:ci cypress/e2e/Tests/Interactions
+
+            - name: 📬Generate XML Regression Report
+              if: always()
+              run: |
+                  yarn report:xml
+
+            - name: ✅Import Test Results to Xray
+              if: always()
+              uses: mikepenz/xray-action@v2
+              with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
+                  username: ${{secrets.XRAY_CLIENT_ID}}
+                  password: ${{secrets.XRAY_CLIENT_SECRET}}
+                  testFormat: 'junit'
+                  testPaths: 'reports/regression-report.xml'
+                  testExecKey: 'GX-3704' #todo: ToolsQA Regression Test Plan TX
+                  projectKey: 'GX' #todo: UPEX LEVEL 1
+
+            - name: 📬Generate Allure Regression Report
+              if: always()
+              run: |
+                  yarn allure:ci
+
+            - name: 📊Upload Artifact Allure
+              if: always()
+              uses: actions/upload-artifact@v3
+              with:
+                  name: regression-allure-report
+                  path: reports/allure-report
+
+            - name: 🔔Slack Notification of Done
+              if: always()
+              uses: rtCamp/action-slack-notify@v2.2.0
+              env:
+                  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+                  SLACK_USERNAME: Ari✨
+                  SLACK_MESSAGE: ':test_tube:TESTS RESULTS from ${{github.job}}:rocket:'
+                  SLACK_COLOR: ${{ job.status }}
+                  SLACK_ICON: https://i.imgur.com/q9kvQCp_d.webp?maxwidth=760&fidelity=grand
+
+    RegressionTest-Widgets:
+        name: regression-widgets
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 💻Checkout
+              uses: actions/checkout@v3
+
+            - name: 💿Install Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - name: 💿Yarn Setup
+              uses: DerYeger/yarn-setup-action@master
+              with:
+                  node-version: 16
+
+            - name: 🧬Install All Dependencies
+              run: |
+                  yarn
+
+            - name: 🧪Cypress E2E Regression Test in Chrome
+              uses: cypress-io/github-action@v4
+              with:
+                  browser: chrome
+                  command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
+                      yarn regression:ci cypress/e2e/Tests/Widgets
+
+            - name: 📬Generate XML Regression Report
+              if: always()
+              run: |
+                  yarn report:xml
+
+            - name: ✅Import Test Results to Xray
+              if: always()
+              uses: mikepenz/xray-action@v2
+              with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
+                  username: ${{secrets.XRAY_CLIENT_ID}}
+                  password: ${{secrets.XRAY_CLIENT_SECRET}}
+                  testFormat: 'junit'
+                  testPaths: 'reports/regression-report.xml'
+                  testExecKey: 'GX-3704' #todo: ToolsQA Regression Test Plan TX
+                  projectKey: 'GX' #todo: UPEX LEVEL 1
+
+            - name: 📬Generate Allure Regression Report
+              if: always()
+              run: |
+                  yarn allure:ci
+
+            - name: 📊Upload Artifact Allure
+              if: always()
+              uses: actions/upload-artifact@v3
+              with:
+                  name: regression-allure-report
+                  path: reports/allure-report
+
+            - name: 🔔Slack Notification of Done
+              if: always()
+              uses: rtCamp/action-slack-notify@v2.2.0
+              env:
+                  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+                  SLACK_USERNAME: Ari✨
+                  SLACK_MESSAGE: ':test_tube:TESTS RESULTS from ${{github.job}}:rocket:'
                   SLACK_COLOR: ${{ job.status }}
                   SLACK_ICON: https://i.imgur.com/q9kvQCp_d.webp?maxwidth=760&fidelity=grand
 
     Create-PullRequest:
-        needs: [RegressionTest]
+        needs: [RegressionTest-Elements, RegressionTest-Forms, RegressionTest-Interactions, RegressionTest-Widgets]
         runs-on: ubuntu-latest
         steps:
             - name: Create Pull Request
