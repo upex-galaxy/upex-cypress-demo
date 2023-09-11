@@ -33,7 +33,7 @@ class dragabble {
 		cy.get('.draggable.ui-widget-content.ui-draggable.ui-draggable-handle').move({ deltaX: 300, deltaY: 500 }, { force: true });
 	}
 	moveInTheParents() {
-		cy.get('.draggable.ui-widget-content.m-3').move({ deltaX: 200, deltaY: 700 }, { force: true });
+		cy.get('.draggable.ui-widget-content.m-3').move({ deltaX: 20, deltaY: 90 });
 	}
 }
 

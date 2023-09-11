@@ -22,4 +22,8 @@ describe('GX2-6642 ✅ToolsQA | Interactions | Dragabble', () => {
 		Dragabble.clickContainerRestricted();
 		Dragabble.moveInTheBox();
 	});
+	it('GX2-6643 | TC5: Validar el cuadro que contiene el texto “I`m contained within my parent“ NO se pueda arrastrar fuera del área de acción delimitada correspondiente de la pestaña “Container Restricted”.', () => {
+		Dragabble.clickContainerRestricted();
+		Dragabble.moveInTheParents();
+	});
 });
