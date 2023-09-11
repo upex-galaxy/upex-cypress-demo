@@ -90,8 +90,12 @@ describe('GX-30259 | TS: ✅ToolsQA | Widgets | Dropdown - Select Menu', () => {
 			});
 		});
 	});
-	it.only('30260 | TC10: Validate select all option in dropdown "Standard multi select"', () => {
-		cy.fixture('/data/GX-30259-Dropdown.json').then(data => {});
+	it('30260 | TC10: Validate select all option in dropdown "Standard multi select"', () => {
+		cy.fixture('/data/GX-30259-Dropdown.json').then(data => {
+			const arrayToString = data.standardSelect.options.toString();
+			const replaceInString = arrayToString.replaceAll(/,/g, '');
+			dropDown.get.containerStandardSelect().should('have.text', replaceInString);
+		});
 	});
 });
 import { removeLogs } from '@helper/RemoveLogs';
