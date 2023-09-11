@@ -30,6 +30,5 @@ describe('GX2-6642 ✅ToolsQA | Interactions | Dragabble', () => {
 		Dragabble.clickCursorStyle();
 		Dragabble.moveBoxCenter();
 		Dragabble.validationMoveCenter();
-		
 	});
 });
