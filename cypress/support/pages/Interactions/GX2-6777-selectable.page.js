@@ -3,24 +3,20 @@ class selectable {
 		list: () => cy.get('#demo-tab-list'),
 		grid: () => cy.get('#demo-tab-grid'),
 		itemList: () => cy.get('#verticalListContainer'),
-		itemGrid: () => cy.get('#gridContainer'),
-		// itemGridTwo: () => cy.get('#row2>.list-group-item'),
-		// itemGridThree: () => cy.get('#row3>.list-group-item'),
+		itemGrid: () => cy.get("div[id^='row'] li"),
 	};
 
 	ItemList() {
 		return this.get.itemList().children();
 	}
-
-	ItemGrid() {
-		return this.get.itemGrid().children();
+	clickItemGrid() {
+		this.get.grid().click();
 	}
-	// 	clickItemGridTwo() {
-	// 		this.get.itemGridTwo().click();
-	// 	}
-	// 	clickItemGridThree() {
-	// 		this.get.itemGridThree().click();
-	// 	}
-	// }
+	showItemGrid() {
+		this.get.itemGrid().each(item => {
+			cy.wrap(item).should('be.visible').click();
+		});
+	}
 }
+
 export const accSelect = new selectable();

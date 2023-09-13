@@ -5,7 +5,7 @@ import { accSelect } from '@pages/Interactions/GX2-6777-selectable.page';
 describe('GX2-6777-✅-tools-qa-interactions-selectable', () => {
 	let data;
 	beforeEach('Precondicion: Usuario debe estar situado en la pagina demoqa', () => {
-		cy.visit('https://demoqa.com/selectable');
+		cy.visit('selectable');
 		cy.url().should('contain', 'selectable');
 		cy.fixture('data/GX2-6777-selectable').then(fixtureData => {
 			data = fixtureData;
@@ -19,6 +19,14 @@ describe('GX2-6777-✅-tools-qa-interactions-selectable', () => {
 		const itemListElements = accSelect.ItemList();
 		itemListElements.each(($item, index) => {
 			cy.wrap($item).should('contain', data.itemList[index]);
+		});
+	});
+	it('6778 | TC3: Validar La pestaña “Grid” debe estar abierta por defecto mostrando la lista de elementos contenidos.', () => {
+		accSelect.clickItemGrid();
+		accSelect.get.grid().should('have.class', data.active);
+		accSelect.showItemGrid();
+		accSelect.get.itemGrid().each(items => {
+			cy.wrap(items).should('have.class', data.active);
 		});
 	});
 });

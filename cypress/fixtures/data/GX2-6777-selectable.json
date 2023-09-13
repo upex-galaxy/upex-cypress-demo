@@ -1,5 +1,4 @@
 {
-	"itemList": ["Cras justo odio", "Dapibus ac facilisis in", "Morbi leo risus", "Porta ac consectetur ac"],
-
-	"ItemGrid": ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"]
+	"active": "active",
+	"itemList": ["Cras justo odio", "Dapibus ac facilisis in", "Morbi leo risus", "Porta ac consectetur ac"]
 }
