@@ -1,3 +1,4 @@
+import data from '../../../fixtures/data/GX-34011-textBox-fillFormAndSubmit.json';
 class textBox {
 	get = {
 		fullName: () => cy.get('#userName'),
@@ -17,6 +18,11 @@ class textBox {
 		this.get.email().type(val2);
 		this.get.currentAddress().type(val3);
 		this.get.permanentAddress().type(val4);
+		this.get.submitBtn().click();
+	}
+
+	fillEmail(email) {
+		this.get.email().type(email);
 		this.get.submitBtn().click();
 	}
 }
