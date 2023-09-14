@@ -37,7 +37,7 @@ describe('GX2-6642 ✅ToolsQA | Interactions | Dragabble', () => {
 		cy.get('.draggable.ui-widget-content.m-3 span').should('have.css', 'left');
 		cy.get('.draggable.ui-widget-content.m-3 span').should('have.css', 'top');
 	});
-	it.only('GX2-6643 | TC6: Validar al arrastrar el cuadro “I will always stick to the center“ de la pestaña “Cursor Style” que el cursor siempre se ubique en el centro del mismo.', () => {
+	it('GX2-6643 | TC6: Validar al arrastrar el cuadro “I will always stick to the center“ de la pestaña “Cursor Style” que el cursor siempre se ubique en el centro del mismo.', () => {
 		Dragabble.clickCursorStyle();
 		Dragabble.moveBoxCenter();
 		cy.get('#cursorCenter').should('have.css', 'left');

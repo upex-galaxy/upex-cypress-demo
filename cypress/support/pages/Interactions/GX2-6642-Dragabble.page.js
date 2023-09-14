@@ -16,7 +16,6 @@ class dragabble {
 	dragToRandomPosition() {
 		cy.get('#dragBox').move({ deltaX: 200, deltaY: 125 });
 	}
-	
 	//Movimiento de coordenadas X, Y.
 	clickAxisRestricted() {
 		this.get.tabAxisRestricted().click();
@@ -28,7 +27,6 @@ class dragabble {
 	moveY() {
 		cy.get('#restrictedY').move({ deltaX: 300, deltaY: 500 }, { force: true });
 	}
-	
 	//movimiento dentro de estructura
 	clickContainerRestricted() {
 		this.get.tabContainerRestricted().click();
@@ -40,7 +38,6 @@ class dragabble {
 	moveInTheParents() {
 		cy.get('.draggable.ui-widget-content.m-3 span').move({ deltaX: 20, deltaY: 90 });
 	}
-	
 	//movimiento de cursor//
 	clickCursorStyle() {
 		this.get.tabCursorStyle().click();
