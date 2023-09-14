@@ -14,10 +14,10 @@ class textBox {
 	};
 
 	fillForm({ name: val1, email: val2, currentAddress: val3, permanentAddress: val4 }) {
-		this.get.fullName().type(val1);
-		this.get.email().type(val2);
-		this.get.currentAddress().type(val3);
-		this.get.permanentAddress().type(val4);
+		this.get.fullName().clear().type(val1);
+		this.get.email().clear().type(val2);
+		this.get.currentAddress().clear().type(val3);
+		this.get.permanentAddress().clear().type(val4);
 		this.get.submitBtn().click();
 	}
 

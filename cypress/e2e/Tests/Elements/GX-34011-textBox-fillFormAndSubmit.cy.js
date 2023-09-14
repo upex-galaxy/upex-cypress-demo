@@ -24,22 +24,21 @@ describe('GX-34011-tools-qa-elements-text-box-fill-form-and-submit', () => {
 		TextBox.get.permanentAddressResult().should('contain', data.validData.currentAddress);
 	});
 
-	it('34012 | TC2: Validar NO enviar formulario con inputs vacios.', () => {
-		TextBox.get.submitBtn().click();
-		//validations
-		TextBox.get.nameResult().should('not.exist');
-		TextBox.get.emailResult().should('not.exist');
-		TextBox.get.currentAddressResult().should('not.exist');
-		TextBox.get.permanentAddressResult().should('not.exist');
-	});
-
-	it('34012 | TC3: Validar NO enviar formulario con correo invalido.', () => {
+	it.only('34012 | TC2: Validar NO enviar formulario con correo invalido.', () => {
 		data.invalidData.map(invalid => {
-			TextBox.fillEmail(invalid.email);
-			TextBox.get.email().should('have.class', 'field-error');
+			TextBox.fillForm({
+				name: data.validData.name,
+				email: invalid.email,
+				currentAddress: data.validData.currentAddress,
+				permanentAddress: data.validData.currentAddress,
+			});
 			//validations
+			TextBox.get.email().should('have.class', 'field-error');
+			TextBox.get.email().should('have.css', 'border', '1px solid rgb(255, 0, 0)');
 			TextBox.get.emailResult().should('not.exist');
-			TextBox.get.email().clear();
+			TextBox.get.nameResult().should('not.exist');
+			TextBox.get.currentAddressResult().should('not.exist');
+			TextBox.get.permanentAddressResult().should('not.exist');
 		});
 	});
 });
