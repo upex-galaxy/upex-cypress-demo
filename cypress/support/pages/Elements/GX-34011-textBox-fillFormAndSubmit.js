@@ -1,4 +1,3 @@
-import data from '../../../fixtures/data/GX-34011-textBox-fillFormAndSubmit.json';
 class textBox {
 	get = {
 		fullName: () => cy.get('#userName'),

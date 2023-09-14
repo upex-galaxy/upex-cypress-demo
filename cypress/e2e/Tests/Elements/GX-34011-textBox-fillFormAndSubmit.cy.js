@@ -24,7 +24,7 @@ describe('GX-34011-tools-qa-elements-text-box-fill-form-and-submit', () => {
 		TextBox.get.permanentAddressResult().should('contain', data.validData.currentAddress);
 	});
 
-	it.only('34012 | TC2: Validar NO enviar formulario con correo invalido.', () => {
+	it('34012 | TC2: Validar NO mostar "Result Box" del  formulario con correo no valido.', () => {
 		data.invalidData.map(invalid => {
 			TextBox.fillForm({
 				name: data.validData.name,
