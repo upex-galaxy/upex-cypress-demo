@@ -2,12 +2,17 @@ class selectable {
 	get = {
 		list: () => cy.get('#demo-tab-list'),
 		grid: () => cy.get('#demo-tab-grid'),
-		itemList: () => cy.get('#verticalListContainer'),
+		itemList: () => cy.get("ul[id^='verticalListContainer'] li"),
 		itemGrid: () => cy.get("div[id^='row'] li"),
 	};
 
-	ItemList() {
-		return this.get.itemList().children();
+	clickList() {
+		this.get.list().click();
+	}
+	showItemList() {
+		this.get.itemList().each(item => {
+			cy.wrap(item).should('be.visible').click();
+		});
 	}
 	clickItemGrid() {
 		this.get.grid().click();

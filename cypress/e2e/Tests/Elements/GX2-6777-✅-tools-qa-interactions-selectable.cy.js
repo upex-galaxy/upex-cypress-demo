@@ -16,9 +16,9 @@ describe('GX2-6777-✅-tools-qa-interactions-selectable', () => {
 		accSelect.get.grid().should('be.visible');
 	});
 	it('6778 | TC2: Validar La pestaña “List” debe estar abierta por defecto mostrando la lista de elementos contenidos.', () => {
-		const itemListElements = accSelect.ItemList();
-		itemListElements.each(($item, index) => {
-			cy.wrap($item).should('contain', data.itemList[index]);
+		accSelect.showItemList();
+		accSelect.get.itemList().each(items => {
+			cy.wrap(items).should('have.class', data.active);
 		});
 	});
 	it('6778 | TC3: Validar La pestaña “Grid” debe estar abierta por defecto mostrando la lista de elementos contenidos.', () => {
