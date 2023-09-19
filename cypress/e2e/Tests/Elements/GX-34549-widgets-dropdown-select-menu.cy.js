@@ -12,4 +12,8 @@ describe("GX-34548-✅-tools-qa-widgets-dropdown-select-menu", () => {
        
         
     })
+    it("34549 | TC2: Validar seleccionar una opción en el Select One", ()=> {
+        menuDropdown.get.selectOne().should('contain.text', 'Select One').and('be.visible')
+
+    })
 })
