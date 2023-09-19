@@ -28,4 +28,4 @@ class dropdown {
 	}
 }
 
-const menuDropdown = new dropdown();
+export const menuDropdown = new dropdown();
