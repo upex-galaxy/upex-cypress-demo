@@ -6,7 +6,8 @@ class dropdown {
 		selectTitle: () => cy.get('.css-1wa3eu0-placeholder').eq(0),
 		oldStyle: () => cy.get("div[id^='selectMenuContainer'] .col-md-6").eq(4),
 		oldSelectMenu: () => cy.get('select#oldSelectMenu>option'),
-		multiselect: () => cy.get('.css-1wa3eu0-placeholder').eq(1),
+		multiselectDropdown: () =>  cy.get('.col-md-6.col-sm-12>p>b').eq(0),
+		multiselect: () => cy.get('[class="css-1rhbuit-multiValue"]'),
 		standardMultiselect: () => cy.get('.col-md-6.col-sm-12>p>b').eq(1),
 		itemMultiselect: () => cy.get('select[id^=cars] option'),
 	};
@@ -29,6 +30,15 @@ class dropdown {
 	clickOldStyle() {
 		this.get.oldStyle().click();
 	}
+	clickmultidropdown() {
+		this.get.multiselectDropdown().click()
+	}
+	itemMultiSelect() {
+		this.get.multiselect().click()
+		for (let step = 0; step < 4; step++) {
+			this.get.menuDropdown.click();
+		}
+   }
 	
 	itemOldStyle() {
 		

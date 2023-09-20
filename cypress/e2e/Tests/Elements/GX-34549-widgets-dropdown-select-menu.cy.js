@@ -29,12 +29,18 @@ describe("GX-34548-✅-tools-qa-widgets-dropdown-select-menu", () =>{
         menuDropdown.itemSelectOption(optionRandom)
 
     })
-     it.only("34549| TC3: Validar seleccionar en el Dropdown OLd una opción ", ()=> {
+     it("34549| TC3: Validar seleccionar en el Dropdown OLd una opción ", ()=> {
         menuDropdown.get.oldStyle().should('contain.text', 'Old Style Select Menu').and('be.visible')
          menuDropdown.itemOldStyle();
          menuDropdown.get.oldSelectMenu().then(item => {
              expect(item.text()).to.contain(Cypress.env('selectColor'))
          })
+
+
+    })
+     it.only("34549 | TC4: Validar seleccionar en el Multiselect  Dropdown 4 opciones ", ()=> {
+        menuDropdown.get.multiselectDropdown().should('contain.text', 'Multiselect drop down').and('be.visible')
+         menuDropdown.itemMultiSelect();
 
 
     })
