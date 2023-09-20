@@ -9,7 +9,7 @@ class dropdown {
 		multiselectDropdown: () =>  cy.get('.col-md-6.col-sm-12>p>b').eq(0),
 		multiselect: () => cy.get('[class="css-1rhbuit-multiValue"]'),
 		standardMultiselect: () => cy.get('.col-md-6.col-sm-12>p>b').eq(1),
-		itemMultiselect: () => cy.get('select[id^=cars] option'),
+		itemMultiselectStandard: () => cy.get('select[id^=cars] option'),
 	};
 
 	clickSelectValue() {
@@ -38,7 +38,10 @@ class dropdown {
 		for (let step = 0; step < 4; step++) {
 			this.get.menuDropdown.click();
 		}
-   }
+	}
+	clickStandardMultiselec() {
+		this.get.standardMultiselect().click()
+	}
 	
 	itemOldStyle() {
 		
@@ -48,6 +51,15 @@ class dropdown {
 		selectElement.invoke('val', randomColor)
 	
 		Cypress.env('selectColor' ,randomColor)
+	}
+	itemMultiStandard() {
+		
+		const cars = ['Volvo', 'Saab', 'Opel', 'Audi']
+		const selectElement = this.get.itemMultiselectStandard();
+		const randomCars =cars[Math.floor(Math.random() * cars.length)] ;
+		selectElement.invoke('val', randomCars)
+	
+		Cypress.env('selectCars' ,randomCars)
 	}
 }
 

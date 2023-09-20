@@ -38,9 +38,18 @@ describe("GX-34548-✅-tools-qa-widgets-dropdown-select-menu", () =>{
 
 
     })
-     it.only("34549 | TC4: Validar seleccionar en el Multiselect  Dropdown 4 opciones ", ()=> {
+     it("34549 | TC4: Validar seleccionar en el Multiselect  Dropdown 4 opciones ", ()=> {
         menuDropdown.get.multiselectDropdown().should('contain.text', 'Multiselect drop down').and('be.visible')
          menuDropdown.itemMultiSelect();
+
+
+     })
+       it("34549 | TC5: Validar seleccionar en el Standard multi select una opción aleatoria ", ()=> {
+        menuDropdown.get.standardMultiselect().should('contain.text', 'Standard multi select').and('be.visible')
+           menuDropdown.itemMultiStandard();
+           menuDropdown.get.itemMultiselectStandard().then(item => {
+               expect(item.text()).to.contain(Cypress.env('selectCars'))
+           })
 
 
     })
