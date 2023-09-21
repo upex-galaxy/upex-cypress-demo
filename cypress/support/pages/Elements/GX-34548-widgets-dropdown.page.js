@@ -7,7 +7,9 @@ class dropdown {
 		oldStyle: () => cy.get("div[id^='selectMenuContainer'] .col-md-6").eq(4),
 		oldSelectMenu: () => cy.get('select#oldSelectMenu>option'),
 		multiselectDropdown: () =>  cy.get('.col-md-6.col-sm-12>p>b').eq(0),
+		optionMenu: () => cy.get('[id*=react-select][id*=option]'),
 		multiselect: () => cy.get('[class="css-1rhbuit-multiValue"]'),
+		closedMultiSelect: () => cy.get('[class=" css-1wy0on6"]').eq(2),
 		standardMultiselect: () => cy.get('.col-md-6.col-sm-12>p>b').eq(1),
 		itemMultiselectStandard: () => cy.get('select[id^=cars] option'),
 	};
@@ -34,11 +36,12 @@ class dropdown {
 		this.get.multiselectDropdown().click()
 	}
 	itemMultiSelect() {
-		this.get.multiselect().click()
-		for (let step = 0; step < 4; step++) {
-			this.get.menuDropdown.click();
+		const elementRandom = Math.floor(Math.random() * 3);
+		this.get.multiselect().click();
+		this.get.optionMenu().eq(elementRandom).click();
+		this.get.closedMultiSelect().click()
 		}
-	}
+	
 	clickStandardMultiselec() {
 		this.get.standardMultiselect().click()
 	}

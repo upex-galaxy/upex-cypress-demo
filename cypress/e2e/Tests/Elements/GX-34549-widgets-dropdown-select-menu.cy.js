@@ -40,7 +40,10 @@ describe("GX-34548-✅-tools-qa-widgets-dropdown-select-menu", () =>{
     })
      it("34549 | TC4: Validar seleccionar en el Multiselect  Dropdown 4 opciones ", ()=> {
         menuDropdown.get.multiselectDropdown().should('contain.text', 'Multiselect drop down').and('be.visible')
-         menuDropdown.itemMultiSelect();
+         menuDropdown.itemMultiSelect().invoke('text').then(values => {
+             cy.log(values)
+             menuDropdown.get.multiselect().should('contain.text', values)
+         })
 
 
      })
