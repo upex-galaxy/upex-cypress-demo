@@ -68,4 +68,53 @@ describe('🪶ToolsQA | Widgets | Date Picker', () => {
 	it('7100 | TC8: Validar que el background del día seleccionado sea blue en Select Date', () => {
 		dataPickerPage.ValidateColorBlue('Select Date').invoke('css', 'background-color').should('contain', data.BlueColor);
 	});
+
+	it('7100 | TC9: Validar Default values de Date and time', () => {
+		dataPickerPage.DataAndTime({}).then(TimeValues => {
+			let [month, day, year, HourAndMinutes, formattAmPm] = TimeValues;
+
+			const expectedCompleteDate = `${month} ${day}, ${year} ${HourAndMinutes} ${formattAmPm}`;
+
+			dataPickerPage.get
+				.inputDateAndTime()
+				.invoke('val')
+				.then(currentDate => {
+					// Compara la fecha y hora completas permitiendo una diferencia de hasta 1 minuto
+					const expectedTime = new Date(expectedCompleteDate).getTime();
+					const actualTime = new Date(currentDate).getTime();
+
+					const minuteDiff = Math.abs((actualTime - expectedTime) / (1000 * 60));
+
+					expect(currentDate).to.contain(`${monthName} ${day}, ${year}`);
+					// Comprueba si la diferencia en minutos es menor o igual a 1
+					expect(minuteDiff).to.be.lte(1);
+				});
+		});
+	});
+
+	it('7100 | TC10: Validar Formato de fecha de Date and time', () => {
+		const randomMonth = Cypress._.random(1, 12);
+		const mesRandom = data.MonthSelect[randomMonth.toString()];
+
+		dataPickerPage.DataAndTime({ month: mesRandom }).then(TimeValues => {
+			let [monthName, day, year, HourAndMinutes, formattAmPm] = TimeValues;
+
+			const expectedCompleteDate = `${monthName} ${day}, ${year} ${HourAndMinutes} ${formattAmPm}`;
+
+			dataPickerPage.get
+				.inputDateAndTime()
+				.invoke('val')
+				.then(currentDate => {
+					// Compara la fecha y hora completas permitiendo una diferencia de hasta 1 minuto
+					const expectedTime = new Date(expectedCompleteDate).getTime();
+					const actualTime = new Date(currentDate).getTime();
+
+					const minuteDiff = Math.abs((actualTime - expectedTime) / (1000 * 60));
+
+					expect(currentDate).to.contain(`${monthName} ${day}, ${year}`);
+					// Comprueba si la diferencia en minutos es menor o igual a 1
+					expect(minuteDiff).to.be.lte(1);
+				});
+		});
+	});
 });

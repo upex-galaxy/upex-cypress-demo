@@ -101,6 +101,48 @@ class DataPick {
 		this.get.inputSelectDate().click();
 		return cy.get('[class*="day--selected"]');
 	}
+
+	DataAndTime({ monthName: month = '' }) {
+		if (month == '' || month == undefined) {
+			month = date.getMonth();
+			const monthsName = [
+				'January',
+				'February',
+				'March',
+				'April',
+				'May',
+				'June',
+				'July',
+				'August',
+				'September',
+				'October',
+				'November',
+				'December',
+			];
+			month = monthsName[month];
+		}
+
+		let currentHourMinute, hour, minute;
+		let currentDay = date.getDate();
+
+		hour = date.getHours() % 12;
+		if (hour == 0) {
+			hour = 12;
+		}
+		minute = date.getMinutes().toString().padStart(2, '0');
+		currentHourMinute = `${hour}:${minute}`;
+
+		const currentMonthName = month;
+		const currentFullYear = date.getFullYear();
+		this.get.inputDateAndTime().click();
+		return this.get
+			.inputDateAndTime()
+			.invoke('val')
+			.then(value => {
+				const PmOrAm = value.substring(19, 24) >= '00:00' && value.substring(19, 24) <= '11:59' ? 'AM' : 'PM';
+				return [currentMonthName, currentDay, currentFullYear, currentHourMinute, PmOrAm];
+			});
+	}
 }
 
 export const dataPickerPage = new DataPick();
