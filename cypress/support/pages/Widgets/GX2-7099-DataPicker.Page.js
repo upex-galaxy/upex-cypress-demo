@@ -4,7 +4,8 @@ class DataPick {
 	get = {
 		inputSelectDate: () => cy.get('[id="datePickerMonthYearInput"]'),
 		DropDownDateAndTime: () => cy.get('[class*="month-dropdown-container"]'),
-		DropDownMonthDateAndTime: () => cy.get('[class*="month-dropdown"]'),
+		DropDownMonthDateAndTime: () => cy.get('[class$="month-read-view"]'),
+		ListMonthDateAndTime: () => cy.get('[class$="month-dropdown"]'),
 		ButtonNextMonth: () => cy.get('[aria-label="Next Month"]'),
 		ButtonPreviousMonth: () => cy.get('[aria-label="Previous Month"]'),
 		CurrentMonthAndYear: () => cy.get('[class~="react-datepicker__current-month"]'),
@@ -71,8 +72,8 @@ class DataPick {
 		return this.get.inputSelectDate().invoke('val');
 	}
 
-	ValidateFunctionalityButtonMonth(Button) {
-		this.get.inputSelectDate().click();
+	ValidateFunctionalityButtonMonth({ target: target, button: button }) {
+		target == 'Select Date' ? this.get.inputSelectDate().click() : this.get.inputDateAndTime().click();
 		return this.get
 			.CurrentMonthAndYear()
 			.invoke('text')
@@ -80,7 +81,7 @@ class DataPick {
 				let BeforeMonth = PrevMonth.split(' ')[0];
 				let MonthBeforeButton = parseInt(data.MonthDataAndTime[BeforeMonth], 10);
 
-				Button == 'Next' ? this.get.ButtonNextMonth().click() : this.get.ButtonPreviousMonth().click();
+				button == 'Next' ? this.get.ButtonNextMonth().click() : this.get.ButtonPreviousMonth().click();
 
 				this.get
 					.CurrentMonthAndYear()
@@ -142,6 +143,20 @@ class DataPick {
 				const PmOrAm = value.substring(19, 24) >= '00:00' && value.substring(19, 24) <= '11:59' ? 'AM' : 'PM';
 				return [currentMonthName, currentDay, currentFullYear, currentHourMinute, PmOrAm];
 			});
+	}
+
+	ValidateRangeMonth() {
+		this.get.inputDateAndTime().click();
+
+		this.get.DropDownMonthDateAndTime().click();
+
+		return this.get.ListMonthDateAndTime().invoke('text');
+	}
+
+	ValidateRangeTime() {
+		this.get.inputDateAndTime().click();
+
+		return this.get.ElementHourAndMinutes().invoke('text');
 	}
 }
 

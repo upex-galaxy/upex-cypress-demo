@@ -52,14 +52,14 @@ describe('🪶ToolsQA | Widgets | Date Picker', () => {
 	it('7100 | TC7: Validar funcionalidad de left y right button de Month pagination de Select Date', () => {
 		//right button (Next)
 
-		dataPickerPage.ValidateFunctionalityButtonMonth('Next').then(Months => {
+		dataPickerPage.ValidateFunctionalityButtonMonth({ target: 'Select Date', button: 'Next' }).then(Months => {
 			let [beforeMonth, afterMonth] = Months;
 			expect(afterMonth).greaterThan(beforeMonth);
 		});
 
 		//left button (Prev)
 
-		dataPickerPage.ValidateFunctionalityButtonMonth('Prev').then(Months => {
+		dataPickerPage.ValidateFunctionalityButtonMonth({ target: 'Select Date', button: 'Prev' }).then(Months => {
 			let [beforeMonth, afterMonth] = Months;
 			expect(afterMonth).to.below(beforeMonth);
 		});
@@ -85,7 +85,7 @@ describe('🪶ToolsQA | Widgets | Date Picker', () => {
 
 					const minuteDiff = Math.abs((actualTime - expectedTime) / (1000 * 60));
 
-					expect(currentDate).to.contain(`${monthName} ${day}, ${year}`);
+					expect(currentDate).to.contain(`${month} ${day}, ${year}`);
 					// Comprueba si la diferencia en minutos es menor o igual a 1
 					expect(minuteDiff).to.be.lte(1);
 				});
@@ -96,7 +96,7 @@ describe('🪶ToolsQA | Widgets | Date Picker', () => {
 		const randomMonth = Cypress._.random(1, 12);
 		const mesRandom = data.MonthSelect[randomMonth.toString()];
 
-		dataPickerPage.DataAndTime({ month: mesRandom }).then(TimeValues => {
+		dataPickerPage.DataAndTime({ monthName: mesRandom }).then(TimeValues => {
 			let [monthName, day, year, HourAndMinutes, formattAmPm] = TimeValues;
 
 			const expectedCompleteDate = `${monthName} ${day}, ${year} ${HourAndMinutes} ${formattAmPm}`;
@@ -115,6 +115,39 @@ describe('🪶ToolsQA | Widgets | Date Picker', () => {
 					// Comprueba si la diferencia en minutos es menor o igual a 1
 					expect(minuteDiff).to.be.lte(1);
 				});
+		});
+	});
+
+	it('7100 | TC11: Validar el rango de meses de January a December de Date and time', () => {
+		dataPickerPage.ValidateRangeMonth().then(CurrentMonth => {
+			const monthRanges = Object.values(data.MonthSelect);
+			monthRanges.map(monthsExpect => {
+				expect(CurrentMonth).to.include(monthsExpect);
+			});
+		});
+	});
+
+	it('7100 | TC12: Validar funcionalidad de left y right button de Month pagination de Date and time', () => {
+		//right button (Next)
+
+		dataPickerPage.ValidateFunctionalityButtonMonth({ target: 'Data Time', button: 'Next' }).then(Months => {
+			let [beforeMonth, afterMonth] = Months;
+			expect(afterMonth).greaterThan(beforeMonth);
+		});
+
+		//left button (Prev)
+
+		dataPickerPage.ValidateFunctionalityButtonMonth({ target: 'Data Time', button: 'Prev' }).then(Months => {
+			let [beforeMonth, afterMonth] = Months;
+			expect(afterMonth).to.below(beforeMonth);
+		});
+	});
+	it('7100 | TC13: Validar el rango de tiempo de 00:00 a 23:45 de Date and time', () => {
+		dataPickerPage.ValidateRangeTime().then(CurrentTime => {
+			const timeRanges = Object.values(data.TimeRange);
+			timeRanges.map(rangeTimeExpect => {
+				expect(CurrentTime).to.include(rangeTimeExpect);
+			});
 		});
 	});
 });
