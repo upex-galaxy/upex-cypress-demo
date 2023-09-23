@@ -1,4 +1,5 @@
 const date = new Date();
+import data from '@data/GX2-7099-DataPicker.json';
 class DataPick {
 	get = {
 		inputSelectDate: () => cy.get('[id="datePickerMonthYearInput"]'),
@@ -60,6 +61,45 @@ class DataPick {
 			.then(() => {
 				return [monthValue, dayValue, yearValue];
 			});
+	}
+
+	TypeSelectDate({ year: year }) {
+		let Month = date.getMonth().toString().padStart(2, '0');
+		let Day = date.getDate().toString().padStart(2, '0');
+
+		this.get.inputSelectDate().clear().type(`${Month}/${Day}/${year}`);
+		return this.get.inputSelectDate().invoke('val');
+	}
+
+	ValidateFunctionalityButtonMonth(Button) {
+		this.get.inputSelectDate().click();
+		return this.get
+			.CurrentMonthAndYear()
+			.invoke('text')
+			.then(PrevMonth => {
+				let BeforeMonth = PrevMonth.split(' ')[0];
+				let MonthBeforeButton = parseInt(data.MonthDataAndTime[BeforeMonth], 10);
+
+				Button == 'Next' ? this.get.ButtonNextMonth().click() : this.get.ButtonPreviousMonth().click();
+
+				this.get
+					.CurrentMonthAndYear()
+					.invoke('text')
+					.then(NextMonth => {
+						let AfterMonth = NextMonth.split(' ')[0];
+						let MonthAfterButton = parseInt(data.MonthDataAndTime[AfterMonth], 10);
+
+						return [MonthBeforeButton, MonthAfterButton];
+					});
+			});
+	}
+
+	ValidateColorBlue() {
+		this.get.inputSelectDate().click();
+		let day = Cypress._.random(0, this.get.AttrDayOptions().length);
+		this.get.AttrDayOptions().eq(day);
+		this.get.inputSelectDate().click();
+		return cy.get('[class*="day--selected"]');
 	}
 }
 
