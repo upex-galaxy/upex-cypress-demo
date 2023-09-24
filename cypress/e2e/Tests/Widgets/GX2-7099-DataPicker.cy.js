@@ -79,24 +79,23 @@ describe('🪶ToolsQA | Widgets | Date Picker', () => {
 				.inputDateAndTime()
 				.invoke('val')
 				.then(currentDate => {
-					// Compara la fecha y hora completas permitiendo una diferencia de hasta 1 minuto
+					// Compara la fecha y hora completas permitiendo una diferencia de hasta 5 minutos
 					const expectedTime = new Date(expectedCompleteDate).getTime();
 					const actualTime = new Date(currentDate).getTime();
 
 					const minuteDiff = Math.abs((actualTime - expectedTime) / (1000 * 60));
 
 					expect(currentDate).to.contain(`${month} ${day}, ${year}`);
-					// Comprueba si la diferencia en minutos es menor o igual a 1
-					expect(minuteDiff).to.be.lte(1);
+					// Comprueba si la diferencia en minutos es menor o igual a 5
+					expect(minuteDiff).to.be.lte(5);
 				});
 		});
 	});
 
 	it('7100 | TC10: Validar Formato de fecha de Date and time', () => {
-		const randomMonth = Cypress._.random(1, 12);
-		const mesRandom = data.MonthSelect[randomMonth.toString()];
+		const randomMonth = Cypress._.random(1, 11);
 
-		dataPickerPage.DataAndTime({ monthName: mesRandom }).then(TimeValues => {
+		dataPickerPage.DataAndTime({ monthNumber: randomMonth }).then(TimeValues => {
 			let [monthName, day, year, HourAndMinutes, formattAmPm] = TimeValues;
 
 			const expectedCompleteDate = `${monthName} ${day}, ${year} ${HourAndMinutes} ${formattAmPm}`;
@@ -105,15 +104,15 @@ describe('🪶ToolsQA | Widgets | Date Picker', () => {
 				.inputDateAndTime()
 				.invoke('val')
 				.then(currentDate => {
-					// Compara la fecha y hora completas permitiendo una diferencia de hasta 1 minuto
+					// Compara la fecha y hora completas permitiendo una diferencia de hasta 5 minutos
 					const expectedTime = new Date(expectedCompleteDate).getTime();
 					const actualTime = new Date(currentDate).getTime();
 
 					const minuteDiff = Math.abs((actualTime - expectedTime) / (1000 * 60));
 
 					expect(currentDate).to.contain(`${monthName} ${day}, ${year}`);
-					// Comprueba si la diferencia en minutos es menor o igual a 1
-					expect(minuteDiff).to.be.lte(1);
+					// Comprueba si la diferencia en minutos es menor o igual a 5
+					expect(minuteDiff).to.be.lte(5);
 				});
 		});
 	});

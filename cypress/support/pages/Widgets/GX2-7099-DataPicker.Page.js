@@ -103,8 +103,8 @@ class DataPick {
 		return cy.get('[class*="day--selected"]');
 	}
 
-	DataAndTime({ monthName: month = '' }) {
-		if (month == '' || month == undefined) {
+	DataAndTime({ monthNumber: month = 0 }) {
+		if (month == '' || month == 0) {
 			month = date.getMonth();
 			const monthsName = [
 				'January',
@@ -121,6 +121,11 @@ class DataPick {
 				'December',
 			];
 			month = monthsName[month];
+		} else {
+			this.get.inputDateAndTime().click();
+			this.get.DropDownMonthDateAndTime().click();
+			this.get.ListMonthDateAndTime().children().eq(month).click();
+			month = data.MonthSelect[month + 1];
 		}
 
 		let currentHourMinute, hour, minute;
@@ -136,6 +141,13 @@ class DataPick {
 		const currentMonthName = month;
 		const currentFullYear = date.getFullYear();
 		this.get.inputDateAndTime().click();
+
+		this.get.AttrDayOptions().each(dayOption => {
+			if (dayOption.text() == currentDay) {
+				dayOption.trigger('click');
+			}
+		});
+
 		return this.get
 			.inputDateAndTime()
 			.invoke('val')
