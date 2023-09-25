@@ -1,15 +1,15 @@
 class dropdown {
 	get = {
 		selectValue: () => cy.get("div[id^='selectMenuContainer'] .col-md-6").eq(0),
-		selectGroup2: () => cy.get("div[id^='withOptGroup'] div> .css-1uccc91-singleValue"),
+		selectGroup2: () => cy.get("div[id^='withOptGroup']"),
 		selectOne: () => cy.get("div[id^='selectMenuContainer'] .col-md-6").eq(2),
 		selectTitle: () => cy.get('.css-1wa3eu0-placeholder').eq(0),
-		selectTitleChoice: () => cy.get('.css-1uccc91-singleValue'),
 		oldStyle: () => cy.get("div[id^='selectMenuContainer'] .col-md-6").eq(4),
 		oldSelectMenu: () => cy.get('select#oldSelectMenu>option'),
-		multiselect: () => cy.get('.css-1wa3eu0-placeholder').eq(1),
+		multiselectDropdown: () => cy.get('.col-md-6.col-sm-12>p>b').eq(0),
+		optionMenu: () => cy.get('[id*=react-select][id*=option]'),
 		standardMultiselect: () => cy.get('.col-md-6.col-sm-12>p>b').eq(1),
-		itemMultiselect: () => cy.get('select[id^=cars] option'),
+		itemMultiselectStandard: () => cy.get('select[id^=cars] option'),
 	};
 
 	clickSelectValue() {
@@ -22,10 +22,38 @@ class dropdown {
 		this.get.selectOne().click();
 	}
 	itemSelectOption() {
-		this.get.selectOption().each(item => {
-			cy.wrap(item).should('be.visible').click();
-		});
+		this.get.selectGroup2().should('be.visible').click();
+	}
+	itemSelectTitle() {
+		this.get.selectTitle().should('be.visible').click();
+	}
+	clickOldStyle() {
+		this.get.oldStyle().click();
+	}
+	clickmultidropdown() {
+		this.get.multiselectDropdown().click();
+	}
+
+	clickStandardMultiselec() {
+		this.get.standardMultiselect().click();
+	}
+
+	itemOldStyle() {
+		const color = ['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Black', 'White', 'Voilet', 'Indigo', 'Magenta', 'Aqua'];
+		const selectElement = this.get.oldSelectMenu();
+		const randomColor = color[Math.floor(Math.random() * color.length)];
+		selectElement.invoke('val', randomColor);
+
+		Cypress.env('selectColor', randomColor);
+	}
+	itemMultiStandard() {
+		const cars = ['Volvo', 'Saab', 'Opel', 'Audi'];
+		const selectElement = this.get.itemMultiselectStandard();
+		const randomCars = cars[Math.floor(Math.random() * cars.length)];
+		selectElement.invoke('val', randomCars);
+
+		Cypress.env('selectCars', randomCars);
 	}
 }
 
-const menuDropdown = new dropdown();
+export const menuDropdown = new dropdown();
