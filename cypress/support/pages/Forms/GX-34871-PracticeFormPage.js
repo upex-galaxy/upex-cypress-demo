@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { random } from 'cypress/types/lodash';
+
 class PracticeFormPage {
 	get = {
 		// * ---- inputs -----
@@ -17,8 +17,6 @@ class PracticeFormPage {
 		musicHobbiesInput: () => cy.get('#hobbies-checkbox-3'),
 		uploadPictureInput: () => cy.get('#uploadPicture'),
 		currentAddressInput: () => cy.get('#currentAddress'),
-
-		// * ---- Log Messages -----
 	};
 
 	fillFirstName() {
@@ -41,12 +39,8 @@ class PracticeFormPage {
 
 	fillMobile() {
 		const randomMobile = faker.datatype.number({ min: 1000000000, max: 9999999999 });
-	}
-
-	fillcurrentAddressInput() {
-		const randomAddress = faker.address.direction();
-		this.get.currentAddressInput().type(randomAddress);
-		return randomAddress;
+		this.get.mobileInput().type(randomMobile.toString());
+		return randomMobile.toString();
 	}
 }
 

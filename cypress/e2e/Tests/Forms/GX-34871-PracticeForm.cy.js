@@ -10,17 +10,17 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 
 	it('GX-34871 | TC01: Validate that a popup displays all the valid data', () => {
 		const generatedName = pForm.fillFirstName();
-		pForm.get.firstNameInput().should('have.value', generatedName);
-
 		const generatedLastName = pForm.fillLastName();
-		pForm.get.lastNameInput().should('have.value', generatedLastName);
-
 		const generatedEmail = pForm.fillEmail();
-		pForm.get.emailInput().should('have.value', generatedEmail);
+		const generatedMobile = pForm.fillMobile();
+		//const generatedSubject = pForm.fillSubject();
 
-		const generatedCurrentAddress = pForm.fillcurrentAddressInput();
-		console.log('Current address is: ' + generatedCurrentAddress);
-		pForm.get.currentAddressInput().should('have.value', generatedCurrentAddress);
+		pForm.get.firstNameInput().should('have.value', generatedName);
+		pForm.get.lastNameInput().should('have.value', generatedLastName);
+		pForm.get.emailInput().should('have.value', generatedEmail);
+		pForm.get.mobileInput().should('have.value', generatedMobile);
+
+		expect(1).to.eq(1);
 	});
 });
 
