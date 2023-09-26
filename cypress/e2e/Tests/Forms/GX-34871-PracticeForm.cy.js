@@ -14,6 +14,13 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 
 		const generatedLastName = pForm.fillLastName();
 		pForm.get.lastNameInput().should('have.value', generatedLastName);
+
+		const generatedEmail = pForm.fillEmail();
+		pForm.get.emailInput().should('have.value', generatedEmail);
+
+		const generatedCurrentAddress = pForm.fillcurrentAddressInput();
+		console.log('Current address is: ' + generatedCurrentAddress);
+		pForm.get.currentAddressInput().should('have.value', generatedCurrentAddress);
 	});
 });
 
