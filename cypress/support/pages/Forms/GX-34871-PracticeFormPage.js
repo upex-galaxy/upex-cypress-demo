@@ -19,28 +19,29 @@ class PracticeFormPage {
 		currentAddressInput: () => cy.get('#currentAddress'),
 	};
 
-	fillFirstName() {
-		const randomName = faker.name.firstName();
-		this.get.firstNameInput().type(randomName);
-		return randomName;
+	fillField(fieldName, value) {
+		const field = this.get[fieldName]();
+		field.type(value);
+		return value;
 	}
 
-	fillLastName() {
+	fillForm() {
+		const randomFirstName = faker.name.firstName();
 		const randomLastName = faker.name.lastName();
-		this.get.lastNameInput().type(randomLastName);
-		return randomLastName;
-	}
-
-	fillEmail() {
 		const randomEmail = faker.internet.email();
-		this.get.emailInput().type(randomEmail);
-		return randomEmail;
-	}
-
-	fillMobile() {
 		const randomMobile = faker.datatype.number({ min: 1000000000, max: 9999999999 });
-		this.get.mobileInput().type(randomMobile.toString());
-		return randomMobile.toString();
+
+		this.fillField('firstNameInput', randomFirstName);
+		this.fillField('lastNameInput', randomLastName);
+		this.fillField('emailInput', randomEmail);
+		this.fillField('mobileInput', randomMobile.toString());
+
+		return {
+			firstName: randomFirstName,
+			lastName: randomLastName,
+			email: randomEmail,
+			mobile: randomMobile.toString(),
+		};
 	}
 }
 
