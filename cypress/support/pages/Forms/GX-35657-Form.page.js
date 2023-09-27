@@ -30,6 +30,7 @@ class Form {
 		city: () => cy.get('[id=city]'),
 		selectCity: () => cy.get('[id*=react-select]'),
 		btn: () => cy.get('[id=submit]'),
+		popUp: () => cy.get('[class=modal-content]'),
 		//Validations
 		studentInfo: value => cy.get('table[class*=table]').contains('td', value).siblings(),
 	};
@@ -77,7 +78,9 @@ class Form {
 				});
 				this.get
 					.mobileNumber()
-					.then(() => (mobileNumber == '' ? this.get.mobileNumber().clear() : this.get.mobileNumber().clear().type(mobileNumber)));
+					.then(() =>
+						mobileNumber == '' ? this.get.mobileNumber().clear() : this.get.mobileNumber().clear().type(mobileNumber, { delay: 100 })
+					);
 				//realizar if para los dias del mes
 				this.get.dateOfBirth().then(() => {
 					let month;

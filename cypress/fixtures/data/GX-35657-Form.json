@@ -1,0 +1,25 @@
+{
+	"invalidEmail": [
+		{
+			"email": "rafhotmail.com"
+		},
+		{
+			"email": "@hotmail.com"
+		},
+		{
+			"email": "raf@"
+		},
+		{
+			"email": "raf@hotmailcom"
+		},
+		{
+			"email": "raf@hotmail.c"
+		}
+	],
+
+	"invalidMobileNumber": [
+		{
+			"number": "abcde"
+		}
+	]
+}

@@ -1,5 +1,6 @@
 import { form } from '@pages/Forms/GX-35657-Form.page';
 import { faker } from '@faker-js/faker';
+import data from '../../../fixtures/data/GX-35657-Form.json';
 
 import { removeLogs } from '@helper/RemoveLogs';
 
@@ -46,6 +47,26 @@ describe(' GX-35657 | ToolsQA | Forms | Practice Form', () => {
 			cy.log('hobbies', hobbies);
 			cy.log('state', state);
 			cy.log('city', city);
+		});
+	});
+	it('35658 | TC2: Validar no enviar formulario con campos vacíos.', () => {
+		form.fillForm({});
+
+		form.get.popUp().should('not.exist');
+		form.get.gender().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+		form.get.firstName().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+		form.get.lastName().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+		form.get.mobileNumber().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+	});
+
+	it('35658 | TC3: Validar no enviar formulario con campos no validos.', () => {
+		data.invalidEmail.map(invalid => {
+			form.fillForm({
+				email: invalid.email,
+				mobileNumber: data.invalidMobileNumber[0].number,
+			});
+			form.get.email().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+			form.get.mobileNumber().should('have.css', 'border-color', 'rgb(220, 53, 69)');
 		});
 	});
 });
