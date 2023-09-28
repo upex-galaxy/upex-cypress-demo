@@ -36,6 +36,7 @@ jobs:
             - name: 🧬Install All Dependencies
               run: |
                   yarn
+                  yarn cypress cache list
 
             - name: 💾Download Cucumber-Formatter
               uses: suisei-cn/actions-download-file@v1.3.0
@@ -49,10 +50,10 @@ jobs:
                   mv cucumber-formatter/cucumber-json-formatter-linux-amd64 cucumber-formatter/cucumber-json-formatter
                   chmod +x cucumber-formatter/cucumber-json-formatter
 
-            - name: 🧪Cypress Run Test Coverage in Chrome
+            - name: 🧪Cypress Run Test Coverage in Electron
               uses: cypress-io/github-action@v4
               with:
-                  browser: chrome
+                  browser: electron
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
                       yarn file cypress/e2e/Tests/Elements/GX-34011-textBox-fillFormAndSubmit.cy.js
 
