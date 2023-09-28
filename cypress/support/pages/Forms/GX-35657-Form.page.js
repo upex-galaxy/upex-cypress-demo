@@ -78,10 +78,8 @@ class Form {
 				});
 				this.get
 					.mobileNumber()
-					.then(() =>
-						mobileNumber == '' ? this.get.mobileNumber().clear() : this.get.mobileNumber().clear().type(mobileNumber, { delay: 100 })
-					);
-				//realizar if para los dias del mes
+					.then(() => (mobileNumber == '' ? this.get.mobileNumber().clear() : this.get.mobileNumber().clear().type(mobileNumber)));
+
 				this.get.dateOfBirth().then(() => {
 					let month;
 					let day;
