@@ -18,19 +18,12 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 		pForm.get.mobileInput().should('have.value', formData.mobile);
 		pForm.get.currentAddressInput().should('have.value', formData.address);
 
-		//pForm.get.subjectsInput().type('a');
-		//obtener largo, si es igual a 0, hacer función para que haga random de nuevo: borrar la tra y poner otra
-		//const num = Cypress._.random(0, 3);
-		//cy.get('[id*="react-select-2-option"]').eq(num).click();
-
-		pForm.get.subjectsInput().should('have.value', inputDataSubject);
-
-		//pForm.get.maleGenderInput().should('be.visible');
-		//pForm.get.femaleGenderInput().should('be.visible');
-		//pForm.get.otherGenderInput().should('be.visible');
-		//console.log('ESTAN AHI LOS 3 RADIOS');
-
-		expect(1).to.eq(1);
+		pForm
+			.selectOptionSubjects()
+			.invoke('text')
+			.then(Option => {
+				pForm.get.subjectsContainer().should('contain.text', Option);
+			});
 	});
 });
 

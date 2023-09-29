@@ -13,7 +13,10 @@ class PracticeFormPage {
 		mobileInput: () => cy.get('#userNumber'),
 		//dateBirthInput: () cy.get(''),
 		subjectsInput: () => cy.get('#subjectsInput'),
-		subjectInputParent: () => cy.get('#subjectsInput').parent(),
+		subjectsContainer: () => cy.get('#subjectsContainer'), // se debe usar .type() para ingresar un carácter, así se despliega un dropdown
+		optionSubjects: () => cy.get('[id^="react-select-2-option"]'), // para elegir una opción luego que se genera el dropdown al escribir
+
+		//subjectList: () => cy.get('[class^="css-1rhbuit-multiValue"]'),
 
 		sportsHobbiesInput: () => cy.get('#hobbies-checkbox-1'),
 		readingHobbiesInput: () => cy.get('#hobbies-checkbox-2'),
@@ -52,11 +55,20 @@ class PracticeFormPage {
 		};
 	}
 
-	//*método del Subject, selección, longitud, random, etc
-
 	generateLetters() {
 		let letter;
-		letter = faker.random.alpha();
+		do {
+			letter = faker.random.alpha();
+		} while (
+			letter === 'x' ||
+			letter === 'z' ||
+			letter === 'j' ||
+			letter === 'q' ||
+			letter === 'w' ||
+			letter === 'f' ||
+			letter === 'k' ||
+			letter === 'ñ'
+		);
 		return letter;
 	}
 
@@ -66,20 +78,13 @@ class PracticeFormPage {
 		return randomLetter;
 	}
 
-	/*selectRandomGender() {
-		const randomGender = Math.floor(Math.random() * 3);
-		switch (randomGender) {
-			case 0:
-				this.get.maleGenderInput().click({ force: true });
-				break;
-			case 1:
-				this.get.femaleGenderInput().click({ force: true });
-				break;
-			case 2:
-				this.get.otherGenderInput().click({ force: true });
-				break;
-		}
-	}*/
+	selectOptionSubjects() {
+		let randomSubjects;
+		return this.get.optionSubjects().then(length => {
+			randomSubjects = Cypress._.random(0, length.length - 1);
+			this.get.optionSubjects().eq(randomSubjects).click();
+		});
+	}
 }
 
 export const pForm = new PracticeFormPage();
