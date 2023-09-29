@@ -13,10 +13,8 @@ class PracticeFormPage {
 		mobileInput: () => cy.get('#userNumber'),
 		//dateBirthInput: () cy.get(''),
 		subjectsInput: () => cy.get('#subjectsInput'),
-		subjectsContainer: () => cy.get('#subjectsContainer'), // se debe usar .type() para ingresar un carácter, así se despliega un dropdown
-		optionSubjects: () => cy.get('[id^="react-select-2-option"]'), // para elegir una opción luego que se genera el dropdown al escribir
-
-		//subjectList: () => cy.get('[class^="css-1rhbuit-multiValue"]'),
+		subjectsContainer: () => cy.get('#subjectsContainer'),
+		optionSubjects: () => cy.get('[id^="react-select-2-option"]'),
 
 		sportsHobbiesInput: () => cy.get('#hobbies-checkbox-1'),
 		readingHobbiesInput: () => cy.get('#hobbies-checkbox-2'),
@@ -72,18 +70,24 @@ class PracticeFormPage {
 		return letter;
 	}
 
-	fillSubjects() {
+	fillAndSelectSubject() {
 		const randomLetter = this.generateLetters();
 		this.get.subjectsInput().type(randomLetter);
-		return randomLetter;
-	}
-
-	selectOptionSubjects() {
-		let randomSubjects;
-		return this.get.optionSubjects().then(length => {
-			randomSubjects = Cypress._.random(0, length.length - 1);
-			this.get.optionSubjects().eq(randomSubjects).click();
-		});
+		cy.wait(1000);
+		return this.get
+			.optionSubjects()
+			.its('length')
+			.then(length => {
+				if (length > 0) {
+					const randomIndex = Cypress._.random(0, length - 1);
+					let selectedSubject = this.get.optionSubjects().eq(randomIndex).invoke('text');
+					this.get.optionSubjects().eq(randomIndex).click();
+					return selectedSubject;
+				} else {
+					this.get.subjectsInput().clear();
+					return this.fillAndSelectSubject();
+				}
+			});
 	}
 }
 

@@ -10,19 +10,23 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 
 	it.only('GX-34871 | TC01: Validate that a popup displays all the valid data', () => {
 		const formData = pForm.fillAndGetInputData();
-		const inputDataSubject = pForm.fillSubjects();
-
-		pForm.get.firstNameInput().should('have.value', formData.firstName);
-		pForm.get.lastNameInput().should('have.value', formData.lastName);
-		pForm.get.emailInput().should('have.value', formData.email);
-		pForm.get.mobileInput().should('have.value', formData.mobile);
-		pForm.get.currentAddressInput().should('have.value', formData.address);
+		const check = [
+			{ data: 'firstNameInput', value: formData.firstName },
+			{ data: 'lastNameInput', value: formData.lastName },
+			{ data: 'emailInput', value: formData.email },
+			{ data: 'mobileInput', value: formData.mobile },
+			{ data: 'currentAddressInput', value: formData.address },
+		];
+		check.forEach(({ data, value }) => {
+			pForm.get[data]().should('have.value', value);
+		});
 
 		pForm
-			.selectOptionSubjects()
+			.fillAndSelectSubject()
 			.invoke('text')
-			.then(Option => {
-				pForm.get.subjectsContainer().should('contain.text', Option);
+			.then(subjectName => {
+				cy.log(subjectName);
+				pForm.get.subjectsContainer().should('contain.text', subjectName);
 			});
 	});
 });
