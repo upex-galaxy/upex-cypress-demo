@@ -10,16 +10,20 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 
 	it.only('GX-34871 | TC01: Validate that a popup displays all the valid data', () => {
 		const formData = pForm.fillAndGetInputData();
+		const inputDataSubject = pForm.fillSubjects();
+
 		pForm.get.firstNameInput().should('have.value', formData.firstName);
 		pForm.get.lastNameInput().should('have.value', formData.lastName);
 		pForm.get.emailInput().should('have.value', formData.email);
 		pForm.get.mobileInput().should('have.value', formData.mobile);
 		pForm.get.currentAddressInput().should('have.value', formData.address);
 
-		pForm.get.subjectsInput().type('a');
+		//pForm.get.subjectsInput().type('a');
 		//obtener largo, si es igual a 0, hacer función para que haga random de nuevo: borrar la tra y poner otra
-		const num = Cypress._.random(0, 3);
-		cy.get('[id*="react-select-2-option"]').eq(num).click();
+		//const num = Cypress._.random(0, 3);
+		//cy.get('[id*="react-select-2-option"]').eq(num).click();
+
+		pForm.get.subjectsInput().should('have.value', inputDataSubject);
 
 		//pForm.get.maleGenderInput().should('be.visible');
 		//pForm.get.femaleGenderInput().should('be.visible');

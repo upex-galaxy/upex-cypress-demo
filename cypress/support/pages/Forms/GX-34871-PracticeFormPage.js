@@ -13,6 +13,8 @@ class PracticeFormPage {
 		mobileInput: () => cy.get('#userNumber'),
 		//dateBirthInput: () cy.get(''),
 		subjectsInput: () => cy.get('#subjectsInput'),
+		subjectInputParent: () => cy.get('#subjectsInput').parent(),
+
 		sportsHobbiesInput: () => cy.get('#hobbies-checkbox-1'),
 		readingHobbiesInput: () => cy.get('#hobbies-checkbox-2'),
 		musicHobbiesInput: () => cy.get('#hobbies-checkbox-3'),
@@ -21,26 +23,12 @@ class PracticeFormPage {
 		stateInput: () => cy.get('[id="state"]'),
 	};
 
-	selectRandomGender() {
-		const randomGender = Math.floor(Math.random() * 3);
-		switch (randomGender) {
-			case 0:
-				this.get.maleGenderInput().click({ force: true });
-				break;
-			case 1:
-				this.get.femaleGenderInput().click({ force: true });
-				break;
-			case 2:
-				this.get.otherGenderInput().click({ force: true });
-				break;
-		}
-	}
-
 	fillField(fieldName, value) {
-		const field = this.get[fieldNyarname]();
+		const field = this.get[fieldName]();
 		field.type(value);
 		return value;
 	}
+
 	fillAndGetInputData() {
 		const randomFirstName = faker.name.firstName();
 		const randomLastName = faker.name.lastName();
@@ -53,7 +41,6 @@ class PracticeFormPage {
 		this.fillField('emailInput', randomEmail);
 		this.fillField('mobileInput', randomMobile.toString());
 		this.fillField('currentAddressInput', randomAddress);
-
 		//this.selectRandomGender();
 
 		return {
@@ -66,6 +53,33 @@ class PracticeFormPage {
 	}
 
 	//*método del Subject, selección, longitud, random, etc
+
+	generateLetters() {
+		let letter;
+		letter = faker.random.alpha();
+		return letter;
+	}
+
+	fillSubjects() {
+		const randomLetter = this.generateLetters();
+		this.get.subjectsInput().type(randomLetter);
+		return randomLetter;
+	}
+
+	/*selectRandomGender() {
+		const randomGender = Math.floor(Math.random() * 3);
+		switch (randomGender) {
+			case 0:
+				this.get.maleGenderInput().click({ force: true });
+				break;
+			case 1:
+				this.get.femaleGenderInput().click({ force: true });
+				break;
+			case 2:
+				this.get.otherGenderInput().click({ force: true });
+				break;
+		}
+	}*/
 }
 
 export const pForm = new PracticeFormPage();
