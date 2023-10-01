@@ -1,6 +1,6 @@
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
-import { menuDropdown } from '@pages/Elements/GX-34548-widgets-dropdown.page';
+import { menuDropdown } from '@pages/Widgets/GX-34548-widgets-dropdown.page';
 
 describe('GX-34548-✅-tools-qa-widgets-dropdown-select-menu', () => {
 	let data;
