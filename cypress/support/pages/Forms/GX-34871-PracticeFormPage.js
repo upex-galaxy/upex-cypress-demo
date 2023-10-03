@@ -1,20 +1,22 @@
 import { faker } from '@faker-js/faker';
 
 class PracticeFormPage {
+	// * Constructor
 	get = {
 		firstNameInput: () => cy.get('#firstName'),
 		lastNameInput: () => cy.get('#lastName'),
 		emailInput: () => cy.get('#userEmail'),
-
-		maleGenderInput: () => cy.get('#gender-radio-1').parent(),
-		femaleGenderInput: () => cy.get('#gender-radio-2'),
-		otherGenderInput: () => cy.get('#gender-radio-3'),
-
+		gender: () => cy.get('[class*="custom-radio"]'),
+		// maleGenderInput: () => cy.get('#gender-radio-1').parent(),
+		// femaleGenderInput: () => cy.get('#gender-radio-2'),
+		// otherGenderInput: () => cy.get('#gender-radio-3'),
 		mobileInput: () => cy.get('#userNumber'),
 		//dateBirthInput: () cy.get(''),
 		subjectsInput: () => cy.get('#subjectsInput'),
 		subjectsContainer: () => cy.get('#subjectsContainer'),
 		optionSubjects: () => cy.get('[id^="react-select-2-option"]'),
+
+		hobbies: () => cy.get('[class*="custom-checkbox"]'),
 
 		sportsHobbiesInput: () => cy.get('#hobbies-checkbox-1'),
 		readingHobbiesInput: () => cy.get('#hobbies-checkbox-2'),
@@ -93,6 +95,17 @@ class PracticeFormPage {
 			});
 	}
 
+	selectGender() {
+		const randomGender = faker.datatype.number({ min: 0, max: 2 });
+		const genderType = {
+			0: 'Male',
+			1: 'Female',
+			2: 'Other',
+		};
+		Cypress.env('genderSelected', genderType[randomGender]); // variable de entorno de Cypress: genderSelect
+		this.get.gender().eq(randomGender).click();
+	}
+
 	selectState() {
 		this.get.state().click();
 		return this.get
@@ -119,20 +132,15 @@ class PracticeFormPage {
 			});
 	}
 
-	selectGender(gender) {
-		switch (gender) {
-			case 'Male':
-				this.get.maleGenderInput().click();
-				break;
-			case 'Female':
-				this.get.femaleGenderInput().click();
-				break;
-			case 'Other':
-				this.get.otherGenderInput().click();
-				break;
-			default:
-				throw Error('Not valid gender ' + gender);
-		}
+	SelectHobbies() {
+		const randomHobbies = faker.datatype.number({ min: 0, max: 2 });
+		const Hobbies = {
+			0: 'Sports',
+			1: 'Reading',
+			2: 'Music',
+		};
+		Cypress.env('hobbiesSelected', Hobbies[randomHobbies]);
+		this.get.hobbies().eq(randomHobbies).click();
 	}
 }
 

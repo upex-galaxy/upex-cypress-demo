@@ -21,6 +21,11 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 			pForm.get[data]().should('have.value', value);
 		});
 
+		pForm.selectGender();
+		pForm.get.gender().then(select => {
+			expect(select.text()).to.contain(Cypress.env('genderSelected'));
+		});
+
 		pForm
 			.fillAndSelectSubject()
 			.invoke('text')
@@ -28,6 +33,11 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 				cy.log(subjectName);
 				pForm.get.subjectsContainer().should('contain.text', subjectName);
 			});
+
+		pForm.SelectHobbies();
+		pForm.get.hobbies().then(selectHobbie => {
+			expect(selectHobbie.text()).to.contain(Cypress.env('hobbiesSelected'));
+		});
 
 		pForm
 			.selectState()
@@ -44,29 +54,6 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 				cy.log(city);
 				pForm.get.city().should('be.visible');
 			});
-
-		// const genders = ['Male', 'Female', 'Other'];
-		// const randomGender = genders[Math.floor(Math.random() * genders.length)];
-		// pForm.selectGender(randomGender);
-		// switch (randomGender) {
-		// 	case 'Male':
-		// 		pForm.get.maleGenderInput().should('be.checked');
-		// 		pForm.get.femaleGenderInput().should('not.be.checked');
-		// 		pForm.get.otherGenderInput().should('not.be.checked');
-		// 		break;
-		// 	case 'Female':
-		// 		pForm.get.maleGenderInput().should('not.be.checked');
-		// 		pForm.get.femaleGenderInput().should('be.checked');
-		// 		pForm.get.otherGenderInput().should('not.be.checked');
-		// 		break;
-		// 	case 'Other':
-		// 		pForm.get.maleGenderInput().should('not.be.checked');
-		// 		pForm.get.femaleGenderInput().should('not.be.checked');
-		// 		pForm.get.otherGenderInput().should('be.checked');
-		// 		break;
-		// 	default:
-		// 		throw new Error('Not valid gender ' + randomGender);
-		// }
 	});
 });
 
