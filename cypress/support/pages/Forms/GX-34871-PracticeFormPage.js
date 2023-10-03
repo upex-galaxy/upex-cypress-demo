@@ -20,8 +20,12 @@ class PracticeFormPage {
 		readingHobbiesInput: () => cy.get('#hobbies-checkbox-2'),
 		musicHobbiesInput: () => cy.get('#hobbies-checkbox-3'),
 		uploadPictureInput: () => cy.get('#uploadPicture'),
+
 		currentAddressInput: () => cy.get('#currentAddress'),
-		stateInput: () => cy.get('[id="state"]'),
+		state: () => cy.get('#state'),
+		optionState: () => cy.get('[class$="-option"]'),
+		city: () => cy.get('#city'),
+		optionCity: () => cy.get('[id^="react-select-4-option"]'),
 	};
 
 	fillField(fieldName, value) {
@@ -71,9 +75,8 @@ class PracticeFormPage {
 	}
 
 	fillAndSelectSubject() {
-		const randomLetter = this.generateLetters();
+		let randomLetter = this.generateLetters();
 		this.get.subjectsInput().type(randomLetter);
-		cy.wait(1000);
 		return this.get
 			.optionSubjects()
 			.its('length')
@@ -88,6 +91,48 @@ class PracticeFormPage {
 					return this.fillAndSelectSubject();
 				}
 			});
+	}
+
+	selectState() {
+		this.get.state().click();
+		return this.get
+			.optionState()
+			.its('length')
+			.then(length => {
+				let randomState = Cypress._.random(0, length - 1);
+				let selectedState = this.get.optionState().eq(randomState).invoke('text');
+				this.get.optionState().eq(randomState).click({ force: true });
+				return selectedState;
+			});
+	}
+
+	selectCity() {
+		this.get.city().click();
+		return this.get
+			.optionCity()
+			.its('length')
+			.then(length => {
+				let randomCity = Cypress._.random(0, length - 1);
+				let selectedCity = this.get.optionCity().eq(randomCity).invoke('text');
+				this.get.optionCity().eq(randomCity).click({ force: true });
+				return selectedCity;
+			});
+	}
+
+	selectGender(gender) {
+		switch (gender) {
+			case 'Male':
+				this.get.maleGenderInput().click();
+				break;
+			case 'Female':
+				this.get.femaleGenderInput().click();
+				break;
+			case 'Other':
+				this.get.otherGenderInput().click();
+				break;
+			default:
+				throw Error('Not valid gender ' + gender);
+		}
 	}
 }
 
