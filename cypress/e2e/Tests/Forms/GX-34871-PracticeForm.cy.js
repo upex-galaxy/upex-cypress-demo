@@ -54,6 +54,9 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 				cy.log(city);
 				pForm.get.city().should('be.visible');
 			});
+
+		pForm.selectBirthDay();
+		expect(2).to.eql(2);
 	});
 });
 

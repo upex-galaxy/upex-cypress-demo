@@ -7,20 +7,21 @@ class PracticeFormPage {
 		lastNameInput: () => cy.get('#lastName'),
 		emailInput: () => cy.get('#userEmail'),
 		gender: () => cy.get('[class*="custom-radio"]'),
-		// maleGenderInput: () => cy.get('#gender-radio-1').parent(),
-		// femaleGenderInput: () => cy.get('#gender-radio-2'),
-		// otherGenderInput: () => cy.get('#gender-radio-3'),
 		mobileInput: () => cy.get('#userNumber'),
-		//dateBirthInput: () cy.get(''),
+
+		dateBirthInput: () => cy.get('[class="react-datepicker-wrapper"]'),
+		month: () => cy.get('[class="react-datepicker__month-select"]'),
+		monthOptions: () => cy.get('[class="react-datepicker__month-select"] option'),
+
 		subjectsInput: () => cy.get('#subjectsInput'),
 		subjectsContainer: () => cy.get('#subjectsContainer'),
 		optionSubjects: () => cy.get('[id^="react-select-2-option"]'),
 
 		hobbies: () => cy.get('[class*="custom-checkbox"]'),
-
 		sportsHobbiesInput: () => cy.get('#hobbies-checkbox-1'),
 		readingHobbiesInput: () => cy.get('#hobbies-checkbox-2'),
 		musicHobbiesInput: () => cy.get('#hobbies-checkbox-3'),
+
 		uploadPictureInput: () => cy.get('#uploadPicture'),
 
 		currentAddressInput: () => cy.get('#currentAddress'),
@@ -57,6 +58,17 @@ class PracticeFormPage {
 			mobile: randomMobile.toString(),
 			address: randomAddress,
 		};
+	}
+
+	selectBirthDay() {
+		this.get.dateBirthInput().click();
+		const randomMonthIndex = Cypress._.random(0, 11);
+		const monthOption = this.get.month().find('option');
+		monthOption.eq(randomMonthIndex).then(option => {
+			const selectedMonth = option.text();
+			cy.log(selectedMonth);
+			//cy.get('select').select(selectedMonth);
+		});
 	}
 
 	generateLetters() {
