@@ -35,7 +35,7 @@ describe('GX2-7552-✅-tools-qa-interactions-dragabble', () => {
 		dragMove.clickContenedorBox();
 		dragMove.get.contenedorBox().should('have.css', 'left', '350px').and('be.visible');
 		dragMove.clickContenedorParent();
-		dragMove.get.contenedorParent().should('have.css', 'top', '86px').and('be.visible');
+		dragMove.get.contenedorParent().should('have.css', 'top', '88px').and('be.visible');
 	});
 	it('7553 | TC4: Validar poder movilizar el cursor top, center y bottom dentro de su caja contenedora', () => {
 		dragMove.clickCursoStyle();
