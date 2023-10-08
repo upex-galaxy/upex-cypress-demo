@@ -32,7 +32,7 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 		});
 
 		pForm.uploadPicture();
-		//pForm.get.pictureButton().value.should('have.value', 'upexlogo.png');
+		pForm.get.pictureButton().should('contain.value', 'upexlogo.png');
 
 		pForm
 			.fillAndSelectSubject()
