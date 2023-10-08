@@ -25,7 +25,15 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 		pForm.get.gender().then(select => {
 			expect(select.text()).to.contain(Cypress.env('genderSelected'));
 		});
-
+		//* -------------------------------
+		// pForm
+		// 	.selectRandomBirthday()
+		// 	.invoke('text')
+		// 	.then(option => {
+		// 		cy.log(option);
+		// 		pForm.get.year().should('have.value');
+		// 	});
+		//* -------------------------------
 		pForm
 			.fillAndSelectSubject()
 			.invoke('text')
@@ -38,6 +46,8 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 		pForm.get.hobbies().then(selectHobbie => {
 			expect(selectHobbie.text()).to.contain(Cypress.env('hobbiesSelected'));
 		});
+
+		pForm.uploadPicture();
 
 		pForm
 			.selectState()
@@ -54,9 +64,6 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 				cy.log(city);
 				pForm.get.city().should('be.visible');
 			});
-
-		pForm.selectBirthDay();
-		expect(2).to.eql(2);
 	});
 });
 

@@ -12,6 +12,9 @@ class PracticeFormPage {
 		dateBirthInput: () => cy.get('[class="react-datepicker-wrapper"]'),
 		month: () => cy.get('[class="react-datepicker__month-select"]'),
 		monthOptions: () => cy.get('[class="react-datepicker__month-select"] option'),
+		year: () => cy.get('[class="react-datepicker__year-select"]'),
+		yearOptions: () => cy.get('[class="react-datepicker__year-select"] option'),
+		daysOfMonthAndYearSelected: () => '[class*="react-datepicker__day--"]:not([class*="outside-month"])',
 
 		subjectsInput: () => cy.get('#subjectsInput'),
 		subjectsContainer: () => cy.get('#subjectsContainer'),
@@ -21,21 +24,13 @@ class PracticeFormPage {
 		sportsHobbiesInput: () => cy.get('#hobbies-checkbox-1'),
 		readingHobbiesInput: () => cy.get('#hobbies-checkbox-2'),
 		musicHobbiesInput: () => cy.get('#hobbies-checkbox-3'),
-
-		uploadPictureInput: () => cy.get('#uploadPicture'),
-
+		pictureButton: () => cy.get('#uploadPicture'),
 		currentAddressInput: () => cy.get('#currentAddress'),
 		state: () => cy.get('#state'),
 		optionState: () => cy.get('[class$="-option"]'),
 		city: () => cy.get('#city'),
 		optionCity: () => cy.get('[id^="react-select-4-option"]'),
 	};
-
-	fillField(fieldName, value) {
-		const field = this.get[fieldName]();
-		field.type(value);
-		return value;
-	}
 
 	fillAndGetInputData() {
 		const randomFirstName = faker.name.firstName();
@@ -60,14 +55,44 @@ class PracticeFormPage {
 		};
 	}
 
-	selectBirthDay() {
+	fillField(fieldName, value) {
+		const field = this.get[fieldName]();
+		field.type(value);
+		return value;
+	}
+
+	//* --------------------------------------
+	// selectRandomMonth() {
+	// 	this.get.dateBirthInput().click();
+	// 	const randomMonthIndex = Cypress._.random(0, 11);
+	// 	const monthOption = this.get.month().find('option');
+	// 	monthOption.eq(randomMonthIndex).then(option => {
+	// 		const selectedMonth = option.text();
+	// 		cy.log(selectedMonth);
+	// 	});
+	// }
+	//* --------------------------------------
+
+	selectRandomBirthday() {
 		this.get.dateBirthInput().click();
 		const randomMonthIndex = Cypress._.random(0, 11);
 		const monthOption = this.get.month().find('option');
 		monthOption.eq(randomMonthIndex).then(option => {
 			const selectedMonth = option.text();
 			cy.log(selectedMonth);
-			//cy.get('select').select(selectedMonth);
+
+		const yearQuantityOptions = this.get.yearOptions().length;
+		cy.log('There are ' + yearQuantityOptions + ' years.');
+		const randomYearIndex = Cypress._.random(0, yearQuantityOptions - 1);
+		const yearOption = this.get.year().find('option');
+		yearOption.eq(randomYearIndex).then(option => {
+			const selectedYear = option.text();
+			cy.log(selectedYear);
+
+			const lengthAvaliableDays = daysOfMonthAndYearSelected().length;
+			const selectedDay = Cypress._.random(0, length - 1);
+			daysOfMonthAndYearSelected().eq(selectedDay).click();
+
 		});
 	}
 
@@ -83,7 +108,7 @@ class PracticeFormPage {
 			letter === 'w' ||
 			letter === 'f' ||
 			letter === 'k' ||
-			letter === 'ñ'
+			letter === 'ñ',
 		);
 		return letter;
 	}
@@ -118,6 +143,22 @@ class PracticeFormPage {
 		this.get.gender().eq(randomGender).click();
 	}
 
+	SelectHobbies() {
+		const randomHobbies = faker.datatype.number({ min: 0, max: 2 });
+		const Hobbies = {
+			0: 'Sports',
+			1: 'Reading',
+			2: 'Music',
+		};
+		Cypress.env('hobbiesSelected', Hobbies[randomHobbies]);
+		this.get.hobbies().eq(randomHobbies).click();
+	}
+
+	uploadPicture(file) {
+		this.get.pictureButton().click();
+		this.get.pictureButton().selectFile('cypress/fixtures/images/upexlogo.png');
+	}
+
 	selectState() {
 		this.get.state().click();
 		return this.get
@@ -142,17 +183,6 @@ class PracticeFormPage {
 				this.get.optionCity().eq(randomCity).click({ force: true });
 				return selectedCity;
 			});
-	}
-
-	SelectHobbies() {
-		const randomHobbies = faker.datatype.number({ min: 0, max: 2 });
-		const Hobbies = {
-			0: 'Sports',
-			1: 'Reading',
-			2: 'Music',
-		};
-		Cypress.env('hobbiesSelected', Hobbies[randomHobbies]);
-		this.get.hobbies().eq(randomHobbies).click();
 	}
 }
 
