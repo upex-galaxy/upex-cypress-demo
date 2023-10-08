@@ -57,6 +57,9 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 				cy.log(city);
 				pForm.get.city().should('be.visible');
 			});
+
+		pForm.submitForm();
+		pForm.get.popup().should('contain.text', 'Thanks for submitting the form');
 	});
 });
 

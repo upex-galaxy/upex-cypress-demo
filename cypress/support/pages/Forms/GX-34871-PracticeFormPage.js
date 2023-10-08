@@ -29,6 +29,8 @@ class PracticeFormPage {
 		optionState: () => cy.get('[class$="-option"]'),
 		city: () => cy.get('#city'),
 		optionCity: () => cy.get('[id^="react-select-4-option"]'),
+		submitButton: () => cy.get('#submit'),
+		popup: () => cy.get('#example-modal-sizes-title-lg'),
 	};
 
 	fillAndGetInputData() {
@@ -146,6 +148,10 @@ class PracticeFormPage {
 				this.get.optionCity().eq(randomCity).click({ force: true });
 				return selectedCity;
 			});
+	}
+
+	submitForm() {
+		this.get.submitButton().click();
 	}
 }
 
