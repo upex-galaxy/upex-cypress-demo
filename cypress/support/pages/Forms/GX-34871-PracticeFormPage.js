@@ -14,12 +14,11 @@ class PracticeFormPage {
 		monthOptions: () => cy.get('[class="react-datepicker__month-select"] option'),
 		year: () => cy.get('[class="react-datepicker__year-select"]'),
 		yearOptions: () => cy.get('[class="react-datepicker__year-select"] option'),
-		daysOfMonthAndYearSelected: () => '[class*="react-datepicker__day--"]:not([class*="outside-month"])',
+		//daysOfMonthAndYearSelected: () => cy.get('[class*="react-datepicker__day--"]:not([class*="outside-month"])'),
 
 		subjectsInput: () => cy.get('#subjectsInput'),
 		subjectsContainer: () => cy.get('#subjectsContainer'),
 		optionSubjects: () => cy.get('[id^="react-select-2-option"]'),
-
 		hobbies: () => cy.get('[class*="custom-checkbox"]'),
 		sportsHobbiesInput: () => cy.get('#hobbies-checkbox-1'),
 		readingHobbiesInput: () => cy.get('#hobbies-checkbox-2'),
@@ -44,7 +43,6 @@ class PracticeFormPage {
 		this.fillField('emailInput', randomEmail);
 		this.fillField('mobileInput', randomMobile.toString());
 		this.fillField('currentAddressInput', randomAddress);
-		//this.selectRandomGender();
 
 		return {
 			firstName: randomFirstName,
@@ -61,41 +59,6 @@ class PracticeFormPage {
 		return value;
 	}
 
-	//* --------------------------------------
-	// selectRandomMonth() {
-	// 	this.get.dateBirthInput().click();
-	// 	const randomMonthIndex = Cypress._.random(0, 11);
-	// 	const monthOption = this.get.month().find('option');
-	// 	monthOption.eq(randomMonthIndex).then(option => {
-	// 		const selectedMonth = option.text();
-	// 		cy.log(selectedMonth);
-	// 	});
-	// }
-	//* --------------------------------------
-
-	selectRandomBirthday() {
-		this.get.dateBirthInput().click();
-		const randomMonthIndex = Cypress._.random(0, 11);
-		const monthOption = this.get.month().find('option');
-		monthOption.eq(randomMonthIndex).then(option => {
-			const selectedMonth = option.text();
-			cy.log(selectedMonth);
-
-		const yearQuantityOptions = this.get.yearOptions().length;
-		cy.log('There are ' + yearQuantityOptions + ' years.');
-		const randomYearIndex = Cypress._.random(0, yearQuantityOptions - 1);
-		const yearOption = this.get.year().find('option');
-		yearOption.eq(randomYearIndex).then(option => {
-			const selectedYear = option.text();
-			cy.log(selectedYear);
-
-			const lengthAvaliableDays = daysOfMonthAndYearSelected().length;
-			const selectedDay = Cypress._.random(0, length - 1);
-			daysOfMonthAndYearSelected().eq(selectedDay).click();
-
-		});
-	}
-
 	generateLetters() {
 		let letter;
 		do {
@@ -108,7 +71,7 @@ class PracticeFormPage {
 			letter === 'w' ||
 			letter === 'f' ||
 			letter === 'k' ||
-			letter === 'ñ',
+			letter === 'ñ'
 		);
 		return letter;
 	}

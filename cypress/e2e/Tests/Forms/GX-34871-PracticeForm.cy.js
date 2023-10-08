@@ -1,6 +1,6 @@
 import { removeLogs } from '@helper/RemoveLogs';
 import { pForm } from '@pages/Forms/GX-34871-PracticeFormPage';
-import { faker } from '@faker-js/faker';
+//import { faker } from '@faker-js/faker';
 
 describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 	beforeEach('Precondition: to use the Practice Form', () => {
@@ -25,22 +25,6 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 		pForm.get.gender().then(select => {
 			expect(select.text()).to.contain(Cypress.env('genderSelected'));
 		});
-		//* -------------------------------
-		// pForm
-		// 	.selectRandomBirthday()
-		// 	.invoke('text')
-		// 	.then(option => {
-		// 		cy.log(option);
-		// 		pForm.get.year().should('have.value');
-		// 	});
-		//* -------------------------------
-		pForm
-			.fillAndSelectSubject()
-			.invoke('text')
-			.then(subjectName => {
-				cy.log(subjectName);
-				pForm.get.subjectsContainer().should('contain.text', subjectName);
-			});
 
 		pForm.SelectHobbies();
 		pForm.get.hobbies().then(selectHobbie => {
@@ -48,6 +32,15 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 		});
 
 		pForm.uploadPicture();
+		//pForm.get.pictureButton().value.should('have.value', 'upexlogo.png');
+
+		pForm
+			.fillAndSelectSubject()
+			.invoke('text')
+			.then(subjectName => {
+				cy.log(subjectName);
+				pForm.get.subjectsContainer().should('contain.text', subjectName);
+			});
 
 		pForm
 			.selectState()
