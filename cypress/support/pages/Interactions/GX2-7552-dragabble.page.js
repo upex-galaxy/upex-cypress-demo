@@ -24,15 +24,19 @@ class dgb {
 	}
 	clickOnly() {
 		this.get.OnlyX().click();
+		dragMove.get.OnlyX().move({ deltaX: 250 });
 	}
 	clickOnlyY() {
 		this.get.OnlyY().click();
+		dragMove.get.OnlyY().move({ deltaX: 150, deltaY: 150 });
 	}
 	clickContenedor() {
 		this.get.restricted().click();
+		dragMove.get.contenedorBox().move({ deltaX: 350, deltaY: 100 });
 	}
 	clickContenedorBox() {
 		this.get.contenedorBox().click();
+		dragMove.get.contenedorParent().move({ deltaX: 86, deltaY: 150 });
 	}
 	clickContenedorParent() {
 		this.get.contenedorParent().click();
@@ -40,14 +44,27 @@ class dgb {
 	clickCursoStyle() {
 		this.get.cursoStyle().click();
 	}
+
 	clickCursorCenter() {
 		this.get.cursorCenter().click();
+		dragMove.get.cursorCenter().move({ deltaX: 250, deltaY: 100 });
+	}
+	resetCursorCenter() {
+		dragMove.get.cursorCenter().move({ deltaX: -150, deltaY: 0 });
 	}
 	clickCursorTopLeft() {
 		this.get.cursorTopLeft().click();
+		dragMove.get.cursorTopLeft().move({ deltaX: 350, deltaY: 0 });
+	}
+	resetCursorTopLeft() {
+		dragMove.get.cursorTopLeft().move({ deltaX: -350, deltaY: 0 });
 	}
 	clickCursorBottom() {
 		this.get.cursorBottom().click();
+		dragMove.get.cursorBottom().move({ deltaX: 100, deltaY: 200 });
+	}
+	resetCursorbottom() {
+		dragMove.get.cursorBottom().move({ deltaX: -100, deltaY: 150 });
 	}
 }
 
