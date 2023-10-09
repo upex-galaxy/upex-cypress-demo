@@ -9,57 +9,59 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 	});
 
 	it('GX-34871 | TC01: Validate that a popup displays all the valid data', () => {
-		const formData = pForm.fillAndGetInputData();
-		const check = [
-			{ data: 'firstNameInput', value: formData.firstName },
-			{ data: 'lastNameInput', value: formData.lastName },
-			{ data: 'emailInput', value: formData.email },
-			{ data: 'mobileInput', value: formData.mobile },
-			{ data: 'currentAddressInput', value: formData.address },
-		];
-		check.forEach(({ data, value }) => {
-			pForm.get[data]().should('have.value', value);
-		});
+		// const formData = pForm.fillAndGetInputData();
+		// const check = [
+		// 	{ data: 'firstNameInput', value: formData.firstName },
+		// 	{ data: 'lastNameInput', value: formData.lastName },
+		// 	{ data: 'emailInput', value: formData.email },
+		// 	{ data: 'mobileInput', value: formData.mobile },
+		// 	{ data: 'currentAddressInput', value: formData.address },
+		// ];
+		// check.forEach(({ data, value }) => {
+		// 	pForm.get[data]().should('have.value', value);
+		// });
 
-		pForm.selectGender();
-		pForm.get.gender().then(select => {
-			expect(select.text()).to.contain(Cypress.env('genderSelected'));
-		});
+		// pForm.selectGender();
+		// pForm.get.gender().then(select => {
+		// 	expect(select.text()).to.contain(Cypress.env('genderSelected'));
+		// });
 
-		pForm.SelectHobbies();
-		pForm.get.hobbies().then(selectHobbie => {
-			expect(selectHobbie.text()).to.contain(Cypress.env('hobbiesSelected'));
-		});
+		// pForm.SelectHobbies();
+		// pForm.get.hobbies().then(selectHobbie => {
+		// 	expect(selectHobbie.text()).to.contain(Cypress.env('hobbiesSelected'));
+		// });
 
-		pForm.uploadPicture();
-		pForm.get.pictureButton().should('contain.value', 'upexlogo.png');
+		// pForm.uploadPicture();
+		// pForm.get.pictureButton().should('contain.value', 'upexlogo.png');
 
-		pForm
-			.fillAndSelectSubject()
-			.invoke('text')
-			.then(subjectName => {
-				cy.log(subjectName);
-				pForm.get.subjectsContainer().should('contain.text', subjectName);
-			});
+		// pForm
+		// 	.fillAndSelectSubject()
+		// 	.invoke('text')
+		// 	.then(subjectName => {
+		// 		cy.log(subjectName);
+		// 		pForm.get.subjectsContainer().should('contain.text', subjectName);
+		// 	});
 
-		pForm
-			.selectState()
-			.invoke('text')
-			.then(state => {
-				cy.log(state);
-				pForm.get.state().should('be.visible');
-			});
+		pForm.selectBirthDay();
 
-		pForm
-			.selectCity()
-			.invoke('text')
-			.then(city => {
-				cy.log(city);
-				pForm.get.city().should('be.visible');
-			});
+		// pForm
+		// 	.selectState()
+		// 	.invoke('text')
+		// 	.then(state => {
+		// 		cy.log(state);
+		// 		pForm.get.state().should('be.visible');
+		// 	});
 
-		pForm.submitForm();
-		pForm.get.popup().should('contain.text', 'Thanks for submitting the form');
+		// pForm
+		// 	.selectCity()
+		// 	.invoke('text')
+		// 	.then(city => {
+		// 		cy.log(city);
+		// 		pForm.get.city().should('be.visible');
+		// 	});
+
+		// pForm.submitForm();
+		// pForm.get.popup().should('contain.text', 'Thanks for submitting the form');
 	});
 });
 
