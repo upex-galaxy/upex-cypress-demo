@@ -33,128 +33,128 @@ class PracticeFormPage {
 		popup: () => cy.get('#example-modal-sizes-title-lg'),
 	};
 
-	// fillAndGetInputData() {
-	// 	const randomFirstName = faker.name.firstName();
-	// 	const randomLastName = faker.name.lastName();
-	// 	const randomEmail = faker.internet.email();
-	// 	const randomMobile = faker.datatype.number({ min: 1000000000, max: 9999999999 });
-	// 	const randomAddress = faker.address.streetAddress();
+	fillAndGetInputData() {
+		const randomFirstName = faker.name.firstName();
+		const randomLastName = faker.name.lastName();
+		const randomEmail = faker.internet.email();
+		const randomMobile = faker.datatype.number({ min: 1000000000, max: 9999999999 });
+		const randomAddress = faker.address.streetAddress();
 
-	// 	this.fillField('firstNameInput', randomFirstName);
-	// 	this.fillField('lastNameInput', randomLastName);
-	// 	this.fillField('emailInput', randomEmail);
-	// 	this.fillField('mobileInput', randomMobile.toString());
-	// 	this.fillField('currentAddressInput', randomAddress);
+		this.fillField('firstNameInput', randomFirstName);
+		this.fillField('lastNameInput', randomLastName);
+		this.fillField('emailInput', randomEmail);
+		this.fillField('mobileInput', randomMobile.toString());
+		this.fillField('currentAddressInput', randomAddress);
 
-	// 	return {
-	// 		firstName: randomFirstName,
-	// 		lastName: randomLastName,
-	// 		email: randomEmail,
-	// 		mobile: randomMobile.toString(),
-	// 		address: randomAddress,
-	// 	};
-	// }
+		return {
+			firstName: randomFirstName,
+			lastName: randomLastName,
+			email: randomEmail,
+			mobile: randomMobile.toString(),
+			address: randomAddress,
+		};
+	}
 
-	// fillField(fieldName, value) {
-	// 	const field = this.get[fieldName]();
-	// 	field.type(value);
-	// 	return value;
-	// }
+	fillField(fieldName, value) {
+		const field = this.get[fieldName]();
+		field.type(value);
+		return value;
+	}
 
-	// generateLetters() {
-	// 	let letter;
-	// 	do {
-	// 		letter = faker.random.alpha();
-	// 	} while (
-	// 		letter === 'x' ||
-	// 		letter === 'z' ||
-	// 		letter === 'j' ||
-	// 		letter === 'q' ||
-	// 		letter === 'w' ||
-	// 		letter === 'f' ||
-	// 		letter === 'k' ||
-	// 		letter === 'ñ'
-	// 	);
-	// 	return letter;
-	// }
+	generateLetters() {
+		let letter;
+		do {
+			letter = faker.random.alpha();
+		} while (
+			letter === 'x' ||
+			letter === 'z' ||
+			letter === 'j' ||
+			letter === 'q' ||
+			letter === 'w' ||
+			letter === 'f' ||
+			letter === 'k' ||
+			letter === 'ñ'
+		);
+		return letter;
+	}
 
-	// fillAndSelectSubject() {
-	// 	let randomLetter = this.generateLetters();
-	// 	this.get.subjectsInput().type(randomLetter);
-	// 	return this.get
-	// 		.optionSubjects()
-	// 		.its('length')
-	// 		.then(length => {
-	// 			if (length > 0) {
-	// 				const randomIndex = Cypress._.random(0, length - 1);
-	// 				let selectedSubject = this.get.optionSubjects().eq(randomIndex).invoke('text');
-	// 				this.get.optionSubjects().eq(randomIndex).click();
-	// 				return selectedSubject;
-	// 			} else {
-	// 				this.get.subjectsInput().clear();
-	// 				return this.fillAndSelectSubject();
-	// 			}
-	// 		});
-	// }
+	fillAndSelectSubject() {
+		let randomLetter = this.generateLetters();
+		this.get.subjectsInput().type(randomLetter);
+		return this.get
+			.optionSubjects()
+			.its('length')
+			.then(length => {
+				if (length > 0) {
+					const randomIndex = Cypress._.random(0, length - 1);
+					let selectedSubject = this.get.optionSubjects().eq(randomIndex).invoke('text');
+					this.get.optionSubjects().eq(randomIndex).click();
+					return selectedSubject;
+				} else {
+					this.get.subjectsInput().clear();
+					return this.fillAndSelectSubject();
+				}
+			});
+	}
 
-	// selectGender() {
-	// 	const randomGender = faker.datatype.number({ min: 0, max: 2 });
-	// 	const genderType = {
-	// 		0: 'Male',
-	// 		1: 'Female',
-	// 		2: 'Other',
-	// 	};
-	// 	Cypress.env('genderSelected', genderType[randomGender]); // variable de entorno de Cypress: genderSelect
-	// 	this.get.gender().eq(randomGender).click();
-	// }
+	selectGender() {
+		const randomGender = faker.datatype.number({ min: 0, max: 2 });
+		const genderType = {
+			0: 'Male',
+			1: 'Female',
+			2: 'Other',
+		};
+		Cypress.env('genderSelected', genderType[randomGender]); // variable de entorno de Cypress: genderSelect
+		this.get.gender().eq(randomGender).click();
+	}
 
-	// SelectHobbies() {
-	// 	const randomHobbies = faker.datatype.number({ min: 0, max: 2 });
-	// 	const Hobbies = {
-	// 		0: 'Sports',
-	// 		1: 'Reading',
-	// 		2: 'Music',
-	// 	};
-	// 	Cypress.env('hobbiesSelected', Hobbies[randomHobbies]);
-	// 	this.get.hobbies().eq(randomHobbies).click();
-	// }
+	SelectHobbies() {
+		const randomHobbies = faker.datatype.number({ min: 0, max: 2 });
+		const Hobbies = {
+			0: 'Sports',
+			1: 'Reading',
+			2: 'Music',
+		};
+		Cypress.env('hobbiesSelected', Hobbies[randomHobbies]);
+		this.get.hobbies().eq(randomHobbies).click();
+	}
 
-	// uploadPicture(file) {
-	// 	this.get.pictureButton().click();
-	// 	this.get.pictureButton().selectFile('cypress/fixtures/images/upexlogo.png');
-	// }
+	uploadPicture(file) {
+		this.get.pictureButton().click();
+		this.get.pictureButton().selectFile('cypress/fixtures/images/upexlogo.png');
+	}
 
-	// selectState() {
-	// 	this.get.state().click();
-	// 	return this.get
-	// 		.optionState()
-	// 		.its('length')
-	// 		.then(length => {
-	// 			let randomState = Cypress._.random(0, length - 1);
-	// 			let selectedState = this.get.optionState().eq(randomState).invoke('text');
-	// 			this.get.optionState().eq(randomState).click({ force: true });
-	// 			return selectedState;
-	// 		});
-	// }
+	selectState() {
+		this.get.state().click();
+		return this.get
+			.optionState()
+			.its('length')
+			.then(length => {
+				let randomState = Cypress._.random(0, length - 1);
+				let selectedState = this.get.optionState().eq(randomState).invoke('text');
+				this.get.optionState().eq(randomState).click({ force: true });
+				return selectedState;
+			});
+	}
 
-	// selectCity() {
-	// 	this.get.city().click();
-	// 	return this.get
-	// 		.optionCity()
-	// 		.its('length')
-	// 		.then(length => {
-	// 			let randomCity = Cypress._.random(0, length - 1);
-	// 			let selectedCity = this.get.optionCity().eq(randomCity).invoke('text');
-	// 			this.get.optionCity().eq(randomCity).click({ force: true });
-	// 			return selectedCity;
-	// 		});
-	// }
+	selectCity() {
+		this.get.city().click();
+		return this.get
+			.optionCity()
+			.its('length')
+			.then(length => {
+				let randomCity = Cypress._.random(0, length - 1);
+				let selectedCity = this.get.optionCity().eq(randomCity).invoke('text');
+				this.get.optionCity().eq(randomCity).click({ force: true });
+				return selectedCity;
+			});
+	}
 
 	selectBirthDay() {
 		this.get.dateBirthInput().click();
 		this.selectRandomMonth();
 		this.selectRandomYear();
-		// this.selectRandomDay();
+		this.selectRandomDay();
 	}
 
 	selectRandomMonth() {
@@ -169,11 +169,10 @@ class PracticeFormPage {
 	}
 
 	selectRandomYear() {
-		const yearOptions = this.get.yearOptions();
 		const randomYearIndex = Cypress._.random(0, 199);
-		//const randomYearIndex = Cypress._.random(0, yearOptions.length - 1);
 		cy.log(randomYearIndex);
-		yearOptions
+		this.get
+			.yearOptions()
 			.eq(randomYearIndex)
 			.invoke('text')
 			.then(selectedYear => {
@@ -181,17 +180,47 @@ class PracticeFormPage {
 			});
 	}
 
-	// selectRandomDay() {
-	// 	const dayLength = this.get.yearOptions();
-	// 	const randomDayIndex = Cypress._.random(0, yearOptions() - 1);
-	// 	const selectedYear = this.get.yearOptions().eq(randomDayIndex).invoke('text');
-	// 	cy.log(selectedYear);
-	// 	this.get.year().select(selectedYear);
+	selectRandomDay() {
+		this.get.daysOfMonthAndYearSelected().then(selectedDay => {
+			const dayLenght = selectedDay.length;
+			cy.log('The length of the availables days is: ' + selectedDay);
+			cy.log(dayLenght);
+			const dayRandomIndex = Cypress._.random(0, dayLenght - 1);
+			cy.log('The selected day is: ' + dayRandomIndex);
+
+			cy.wrap(selectedDay.eq(dayRandomIndex))
+				.invoke('text')
+				.then(selectedDayText => {
+					cy.wrap(selectedDay.eq(dayRandomIndex)).click();
+					cy.log('The selected day is: ' + selectedDayText);
+				});
+		});
+	}
+
+	// selectRandomYear() {
+	// 	this.get
+	// 		.yearOptions()
+	// 		.should('have.length.gt', 0)
+	// 		.then(years => {
+	// 			const yearOptions = years.lenght();
+	// 			if (yearOptions.length > 0) {
+	// 				const randomYearIndex = Cypress._.random(0, yearOptions.length - 1);
+	// 				cy.log(randomYearIndex);
+	// 				yearOptions
+	// 					.eq(randomYearIndex)
+	// 					.invoke('text')
+	// 					.then(selectedYear => {
+	// 						this.get.year().select(selectedYear);
+	// 					});
+	// 			} else {
+	// 				cy.log('No se encontraron opciones de año disponibles.');
+	// 			}
+	// 		});
 	// }
 
-	// submitForm() {
-	// 	this.get.submitButton().click();
-	// }
+	submitForm() {
+		this.get.submitButton().click();
+	}
 }
 
 export const pForm = new PracticeFormPage();
