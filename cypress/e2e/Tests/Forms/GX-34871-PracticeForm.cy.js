@@ -45,7 +45,7 @@ describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 		pForm.get.BirthdayInputCompleted().should('not.have.value', '');
 		const dateOfBirthField = pForm.get.BirthdayInputCompleted();
 		dateOfBirthField.invoke('val').then(dateOfBirth => {
-			expect(dateOfBirth).to.match(/^(0[1-9]|1[0-2])\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(19\d\d|20\d\d|2100)$/);
+			expect(dateOfBirth).to.match(/^(0[1-9]|[12]\d|3[01]) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (19\d\d|20\d\d|2100)$/);
 		});
 
 		pForm
