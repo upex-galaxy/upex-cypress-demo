@@ -8,13 +8,13 @@ class PracticeFormPage {
 		emailInput: () => cy.get('#userEmail'),
 		gender: () => cy.get('[class*="custom-radio"]'),
 		mobileInput: () => cy.get('#userNumber'),
-
 		dateBirthInput: () => cy.get('[class="react-datepicker-wrapper"]'),
 		month: () => cy.get('[class="react-datepicker__month-select"]'),
 		monthOptions: () => cy.get('[class="react-datepicker__month-select"] option'),
 		year: () => cy.get('[class="react-datepicker__year-select"]'),
 		yearOptions: () => cy.get('[class="react-datepicker__year-select"] option'),
 		daysOfMonthAndYearSelected: () => cy.get('[class*="react-datepicker__day--"]:not([class*="outside-month"])'),
+		BirthdayInputCompleted: () => cy.get('[id="dateOfBirthInput"]'),
 
 		subjectsInput: () => cy.get('#subjectsInput'),
 		subjectsContainer: () => cy.get('#subjectsContainer'),
