@@ -1,6 +1,5 @@
 import { removeLogs } from '@helper/RemoveLogs';
 import { pForm } from '@pages/Forms/GX-34871-PracticeFormPage';
-//import { faker } from '@faker-js/faker';
 
 describe('GX-34872 | ✅ToolsQA | Forms | Practice Form', () => {
 	beforeEach('Precondition: to use the Practice Form', () => {

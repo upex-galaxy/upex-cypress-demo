@@ -169,23 +169,26 @@ class PracticeFormPage {
 	}
 
 	selectRandomYear() {
-		const randomYearIndex = Cypress._.random(0, 199);
-		cy.log(randomYearIndex);
-		this.get
-			.yearOptions()
-			.eq(randomYearIndex)
-			.invoke('text')
-			.then(selectedYear => {
-				this.get.year().select(selectedYear);
-			});
+		this.get.yearOptions().then(yearOptions => {
+			if (yearOptions.length > 0) {
+				const randomYearIndex = Cypress._.random(0, yearOptions.length - 1);
+				cy.wrap(yearOptions[randomYearIndex])
+					.invoke('text')
+					.then(selectedYear => {
+						this.get.year().select(selectedYear);
+					});
+			} else {
+				cy.log('No se encontraron opciones de año disponibles.');
+			}
+		});
 	}
 
 	selectRandomDay() {
 		this.get.daysOfMonthAndYearSelected().then(selectedDay => {
-			const dayLenght = selectedDay.length;
-			cy.log('The length of the availables days is: ' + selectedDay);
-			cy.log(dayLenght);
-			const dayRandomIndex = Cypress._.random(0, dayLenght - 1);
+			const dayLength = selectedDay.length;
+			cy.log('The length of the available days is: ' + selectedDay);
+			cy.log(dayLength);
+			const dayRandomIndex = Cypress._.random(0, dayLength - 1);
 			cy.log('The selected day is: ' + dayRandomIndex);
 
 			cy.wrap(selectedDay.eq(dayRandomIndex))
@@ -196,27 +199,6 @@ class PracticeFormPage {
 				});
 		});
 	}
-
-	// selectRandomYear() {
-	// 	this.get
-	// 		.yearOptions()
-	// 		.should('have.length.gt', 0)
-	// 		.then(years => {
-	// 			const yearOptions = years.lenght();
-	// 			if (yearOptions.length > 0) {
-	// 				const randomYearIndex = Cypress._.random(0, yearOptions.length - 1);
-	// 				cy.log(randomYearIndex);
-	// 				yearOptions
-	// 					.eq(randomYearIndex)
-	// 					.invoke('text')
-	// 					.then(selectedYear => {
-	// 						this.get.year().select(selectedYear);
-	// 					});
-	// 			} else {
-	// 				cy.log('No se encontraron opciones de año disponibles.');
-	// 			}
-	// 		});
-	// }
 
 	submitForm() {
 		this.get.submitButton().click();
