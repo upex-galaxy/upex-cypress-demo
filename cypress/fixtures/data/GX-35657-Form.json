@@ -1,4 +1,7 @@
 {
+	"validCss": "rgb(40, 167, 69)",
+	"invalidCss": "rgb(220, 53, 69)",
+	"logo": "upexlogo",
 	"invalidEmail": [
 		{
 			"email": "rafhotmail.com"
@@ -14,12 +17,6 @@
 		},
 		{
 			"email": "raf@hotmail.c"
-		}
-	],
-
-	"invalidMobileNumber": [
-		{
-			"number": "abcde"
 		}
 	]
 }

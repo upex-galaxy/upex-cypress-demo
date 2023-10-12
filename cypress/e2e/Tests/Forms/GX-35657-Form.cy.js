@@ -1,81 +1,71 @@
-import { form } from '@pages/Forms/GX-35657-Form.page';
+import { formPage } from '@pages/Forms/GX-35657-Form.page';
 import { faker } from '@faker-js/faker';
 import data from '../../../fixtures/data/GX-35657-Form.json';
 
 import { removeLogs } from '@helper/RemoveLogs';
 
-const validCss = 'rgb(40, 167, 69)';
-const invalidCss = 'rgb(220, 53, 69)';
-
 describe(' GX-35657 | ToolsQA | Forms | Practice Form', () => {
 	beforeEach(() => {
 		cy.visit('/automation-practice-form');
+		cy.url().should('contain', '/automation-practice-form');
 	});
 
 	it('35658 | TC1: Validar enviar formulario con datos validos.', () => {
-		const name = faker.name.firstName();
-		const lastName = faker.name.lastName();
-		const email = faker.internet.email();
-		const validMobileNumber = faker.datatype.number({ min: 1000000000, max: 9999999999 });
-		const currentAddress = faker.address.streetAddress();
-		form.fillForm({
-			firstName: name,
-			lastName: lastName,
-			email: email,
-			gender: true,
-			mobileNumber: validMobileNumber,
-			subject: true,
-			hobbies: true,
-			picture: 'cypress/fixtures/images/upexlogo.png',
-			currentAddress: currentAddress,
-			state: true,
-			city: true,
-		}).then(index => {
-			const [gender, subject, hobbies, state, city, birthday] = index;
+		const randomName = faker.name.firstName();
+		const randomLastName = faker.name.lastName();
+		const randomEmail = faker.internet.email();
+		const randomValidMobileNumber = faker.datatype.number({ min: 1000000000, max: 9999999999 });
+		const randomCurrentAddress = faker.address.streetAddress();
 
-			form.get.studentInfo('Student Name').should('have.text', `${name} ${lastName}`);
-			form.get.studentInfo('Student Email').should('have.text', email);
-			form.get.studentInfo('Gender').should('have.text', gender);
-			form.get.studentInfo('Mobile').should('have.text', validMobileNumber);
-			form.get.studentInfo('Date of Birth').should('contain.text', birthday);
-			form.get.studentInfo('Subjects').should('have.text', subject);
-			form.get.studentInfo('Hobbies').should('have.text', hobbies);
-			form.get.studentInfo('Address').should('have.text', currentAddress);
-			form.get.studentInfo('State and City').should('have.text', `${state} ${city}`);
-			form.get.studentInfo('Picture').should('have.text', 'upexlogo.png');
+		formPage
+			.fillForm({
+				firstName: randomName,
+				lastName: randomLastName,
+				email: randomEmail,
+				currentAddress: randomCurrentAddress,
+				mobileNumber: randomValidMobileNumber,
+			})
+			.then(Data => {
+				const [gender, subject, hobbies, state, city, birthday] = Data;
 
-			cy.log('genero', gender);
-			cy.log('subject', subject);
-			cy.log('hobbies', hobbies);
-			cy.log('state', state);
-			cy.log('city', city);
-		});
+				formPage.get.popUp().should('exist');
+				formPage.get.studentInfo('Student Name').should('have.text', `${randomName} ${randomLastName}`);
+				formPage.get.studentInfo('Student Email').should('have.text', randomEmail);
+				formPage.get.studentInfo('Gender').should('have.text', gender);
+				formPage.get.studentInfo('Mobile').should('have.text', randomValidMobileNumber);
+				formPage.get.studentInfo('Date of Birth').should('contain.text', birthday);
+				formPage.get.studentInfo('Subjects').should('have.text', subject);
+				formPage.get.studentInfo('Hobbies').should('have.text', hobbies);
+				formPage.get.studentInfo('Address').should('have.text', randomCurrentAddress);
+				formPage.get.studentInfo('State and City').should('have.text', `${state} ${city}`);
+				formPage.get.studentInfo('Picture').should('contain.text', data.logo);
+			});
 	});
 	it('35658 | TC2: Validar no enviar formulario con campos vacíos.', () => {
-		form.fillForm({});
+		formPage.submitEmptyForm();
 
-		form.get.popUp().should('not.exist');
-		form.get.firstName().should('have.css', 'border-color', invalidCss);
-		form.get.lastName().should('have.css', 'border-color', invalidCss);
-		form.get.email().should('have.css', 'border-color', validCss);
-		form.get.gender().should('have.css', 'border-color', invalidCss);
-		form.get.mobileNumber().should('have.css', 'border-color', invalidCss);
-		form.get.dateOfBirth().should('have.css', 'border-color', validCss);
-		form.get.currentAddress().should('have.css', 'border-color', validCss);
+		formPage.get.popUp().should('not.exist');
+		formPage.get.firstNameInput().should('have.css', 'border-color', data.invalidCss);
+		formPage.get.lastNameInput().should('have.css', 'border-color', data.invalidCss);
+		formPage.get.emailInput().should('have.css', 'border-color', data.validCss);
+		formPage.get.genderInput().should('have.css', 'border-color', data.invalidCss);
+		formPage.get.mobileNumberInput().should('have.css', 'border-color', data.invalidCss);
+		formPage.get.dateOfBirthInput().should('have.css', 'border-color', data.validCss);
+		formPage.get.currentAddressInput().should('have.css', 'border-color', data.validCss);
+		formPage.get.popUp().should('not.exist');
 	});
 
 	it('35658 | TC3: Validar no enviar formulario con campos no validos.', () => {
-		const invalidMobileNumber = faker.datatype.number({ min: 100000000, max: 999999999 });
+		const randomInvalidMobileNumber = faker.datatype.number({ min: 100000000, max: 999999999 });
 
 		data.invalidEmail.map(invalid => {
-			form.fillForm({
+			formPage.fillInvalidForm({
 				email: invalid.email,
-				mobileNumber: invalidMobileNumber,
+				mobileNumber: randomInvalidMobileNumber,
 			});
 
-			form.get.popUp().should('not.exist');
-			form.get.email().should('have.css', 'border-color', invalidCss);
-			// form.get.mobileNumber().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+			formPage.get.popUp().should('not.exist');
+			formPage.get.emailInput().should('have.css', 'border-color', data.invalidCss);
 		});
 	});
 });
