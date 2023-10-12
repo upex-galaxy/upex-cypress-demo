@@ -4,6 +4,7 @@ import data from '@data/GX2-7099-DataPicker.json';
 removeLogs();
 describe('🪶ToolsQA | Widgets | Date Picker', () => {
 	beforeEach('PCR: Situarse en la Website Demoqa en el endpoint data-picker', () => {
+		cy.intercept({ resourceType: /^(xhr|fetch)$/ }, { statusCode: 200, body: { data: 'fake data' } });
 		cy.visit('/date-picker');
 		cy.url().should('equal', data.Url);
 	});
