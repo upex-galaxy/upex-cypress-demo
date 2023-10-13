@@ -1,0 +1,23 @@
+{
+    "selectValue": {
+        "data" : {
+            "group1": "option1",
+            "group1": "option2",
+            "group2": "option1",
+            "group2": "option2",
+            "group3": "a root option",
+            "group3": "another root option"
+        }
+   },
+   
+    "selectOne": {
+        "data": {
+            "item1": "Dr.",
+            "item2": "Mr.",
+            "item3": "Ms.",
+            "item4": "Prof.",
+            "item5": "Other"
+
+        }
+    }
+}

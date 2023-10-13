@@ -36,6 +36,7 @@ jobs:
             - name: 🧬Install All Dependencies
               run: |
                   yarn
+                  yarn cypress cache list
 
             - name: 💾Download Cucumber-Formatter
               uses: suisei-cn/actions-download-file@v1.3.0
@@ -49,7 +50,7 @@ jobs:
                   mv cucumber-formatter/cucumber-json-formatter-linux-amd64 cucumber-formatter/cucumber-json-formatter
                   chmod +x cucumber-formatter/cucumber-json-formatter
 
-            - name: 🧪Cypress Run Test Coverage in Chrome
+            - name: 🧪Cypress Run Test Coverage in Electron
               uses: cypress-io/github-action@v4
               with:
                   browser: electron
@@ -66,6 +67,7 @@ jobs:
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
                   testExecKey: 'GX-35659' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
                   projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
+
 
             - name: 🔔Slack Notification of Done
               if: always()

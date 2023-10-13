@@ -33,8 +33,9 @@ jobs:
             - name: 🧬Install All Dependencies
               run: |
                   yarn
+                  yarn cypress cache list
 
-            - name: 🧪Cypress E2E Regression Test in Chrome
+            - name: 🧪Cypress E2E Regression Test in Electron
               uses: cypress-io/github-action@v4
               with:
                   browser: electron
