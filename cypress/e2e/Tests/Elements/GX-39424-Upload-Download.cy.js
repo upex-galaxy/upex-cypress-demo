@@ -12,8 +12,8 @@ describe('ToolsQA | Elements | Upload and Download', () => {
 		expect(uploadDownloadPage.isdownloadButtonClicked()).to.be.true;
 	});
 
-	it.skip('TC2: Validate the upload of an image from a local file', () => {
-		uploadDownloadPage.downloadFile();
+	it('TC2: Validate the upload of an image from a local file', () => {
+		uploadDownloadPage.selectUploadFile();
 		uploadDownloadPage.get.uploadedFilePath().contains('upexgalaxy.gif');
 	});
 });
