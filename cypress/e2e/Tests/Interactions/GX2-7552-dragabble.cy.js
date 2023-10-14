@@ -42,8 +42,8 @@ describe('GX2-7552-✅-tools-qa-interactions-dragabble', () => {
 	});
 	it('7553 | TC4: Validar poder movilizar el cursor top, center y bottom dentro de su caja contenedora', () => {
 		dragMovePage.clickCursoStyle();
-		dragMovePage.clickCursorCenter(randomX, randomY);
-		dragMovePage.get.cursorCenter().move({ deltaX: randomX, deltaY: randomY });
+		dragMovePage.clickCursorCenter();
+		dragMovePage.get.cursorCenter().move({ deltaX: '250px', deltaY: '300px' });
 
 		dragMovePage.get.cursorCenter().should('not.have.css', 'left', `${0}px`).and('not.have.css', 'top', `${0}px`);
 		dragMovePage.clickCursorTopLeft(randomX, randomY);
