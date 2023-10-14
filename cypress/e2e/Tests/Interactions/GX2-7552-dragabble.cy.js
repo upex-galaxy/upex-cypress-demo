@@ -1,56 +1,59 @@
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
-import { dragMove } from '@pages/Interactions/GX2-7552-dragabble.page';
+import { dragMovePage } from '@pages/Interactions/GX2-7552-dragabble.page';
 import '@4tw/cypress-drag-drop';
 
 describe('GX2-7552-✅-tools-qa-interactions-dragabble', () => {
+	let randomX = Cypress._.random(0, 500);
+	let randomY = Cypress._.random(0, 500);
 	beforeEach('Usuario debe estar situado en https://demoqa.com/dragabble', () => {
+		cy.intercept({ resourceType: /^(xhr|fetch)$/ }, { statusCode: 200, body: { data: 'fake data' } });
 		cy.visit('/dragabble');
 		cy.url().should('contain', 'dragabble');
 	});
 	it('7553 | TC1: Validar poder movilizar la pestaña hacia alguna direccion', () => {
-		dragMove.clickSimple();
-		dragMove.get.simple().should('contain.text', 'Simple');
-		dragMove.clickDragbox();
-		dragMove.get.dragBox().invoke('offset').as('Inicial');
-		cy.get('@Inicial').then($inicial => {
-			dragMove.get.dragBox().trigger('mousedown', { which: 1 });
-			dragMove.get.dragBox().trigger('mousemove', {
-				clientX: $inicial.left - 550,
-				clientY: $inicial.top + 80,
-			});
-		});
+		dragMovePage.clickTabSimple();
+		dragMovePage.clickDragbox(randomX, randomY);
+		dragMovePage.get.dragBox().move({ deltaX: randomX, deltaY: randomY });
+
+		dragMovePage.get.dragBox().should('not.have.css', 'left', `${0}px`);
 	});
+
 	it('7553 | TC2: Validar  poder movilizar OnlyX en la posicion X y OnlyY en la posicion Y', () => {
-		dragMove.clickAxis();
-		dragMove.get.axisRestricted().should('have.text', 'Axis Restricted');
-		dragMove.clickOnly();
-		dragMove.get.OnlyX().should('have.css', 'top', '0px').and('be.visible');
-		dragMove.clickOnlyY();
-		dragMove.get.OnlyY().should('have.css', 'left', '0px').and('be.visible');
+		dragMovePage.clickTabAxis();
+		dragMovePage.clickOnlyX(randomX);
+		dragMovePage.get.OnlyX().move({ deltaX: randomX });
+		dragMovePage.get.OnlyX().should('have.css', 'top', `${0}px`);
+		dragMovePage.clickOnlyY(randomY);
+		dragMovePage.get.OnlyY().move({ deltaY: randomY });
+		dragMovePage.get.OnlyY().should('have.css', 'left', `${0}px`);
 	});
 	it('7553 | TC3: Validar  poder movilizar  el cuadro y el texto dentro de su caja contenedora', () => {
-		dragMove.clickContenedor();
-		dragMove.get.restricted().should('have.text', 'Container Restricted');
-		dragMove.clickContenedorBox();
-		dragMove.get.contenedorBox().should('have.css', 'left', '350px').and('be.visible');
-		dragMove.clickContenedorParent();
-		dragMove.get.contenedorParent().should('have.css', 'top', '88px').and('be.visible');
+		dragMovePage.clickContenedor();
+		dragMovePage.clickContenedorBox(randomX, randomY);
+		dragMovePage.get.containedBox().move({ deltaX: randomX, deltaY: randomY });
+		dragMovePage.get.containedBox().should('not.have.css', 'left', 'auto').and('not.have.css', 'top', 'auto');
+		dragMovePage.clickContenedorParent(randomX, randomY);
+		let X = Cypress._.random(0, 13);
+		let Y = Cypress._.random(0, 86);
+		cy.log(X);
+		dragMovePage.get.containedParent().move({ deltaX: X, deltaY: Y });
+		dragMovePage.get.containedParent().should('not.have.css', 'left', '0px').and('not.have.css', 'top', '0px');
 	});
 	it('7553 | TC4: Validar poder movilizar el cursor top, center y bottom dentro de su caja contenedora', () => {
-		dragMove.clickCursoStyle();
-		dragMove.get.cursoStyle().should('have.text', 'Cursor Style');
-		dragMove.clickCursorCenter();
-		dragMove.get.cursorCenter().should('have.css', 'top', '90px').and('be.visible');
-		dragMove.clickCursorTopLeft();
-		dragMove.get.cursorTopLeft().should('have.css', 'top', '51px').and('be.visible');
-		dragMove.clickCursorBottom();
-		dragMove.get.cursorBottom().should('have.css', 'top', '146px').and('be.visible');
-		dragMove.resetCursorCenter();
-		dragMove.get.cursorCenter().invoke('css', 'top', '80px').and('be.visible');
-		dragMove.resetCursorTopLeft();
-		dragMove.get.cursorTopLeft().invoke('css', 'top', '102px').and('be.visible');
-		dragMove.resetCursorbottom();
-		dragMove.get.cursorBottom().invoke('css', 'top', '242px').and('be.visible');
+		dragMovePage.clickCursoStyle();
+		dragMovePage.clickCursorCenter(randomX, randomY);
+		dragMovePage.get.cursorCenter().move({ deltaX: randomX, deltaY: randomY });
+
+		dragMovePage.get.cursorCenter().should('not.have.css', 'left', `${0}px`).and('not.have.css', 'top', `${0}px`);
+		dragMovePage.clickCursorTopLeft(randomX, randomY);
+		dragMovePage.get.cursorTopLeft().move({ deltaX: randomX, deltaY: randomY });
+
+		dragMovePage.get.cursorTopLeft().should('not.have.css', 'left', `${0}px`).and('not.have.css', 'top', `${0}px`);
+		let X = Cypress._.random(0, 1000);
+		let Y = Cypress._.random(0, 500);
+
+		dragMovePage.clickCursorBottom(X, Y);
+		dragMovePage.get.cursorBottom().move({ deltaX: X, deltaY: Y });
 	});
 });

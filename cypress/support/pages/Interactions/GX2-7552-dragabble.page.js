@@ -1,71 +1,56 @@
 class dgb {
 	get = {
-		simple: () => cy.get('#draggableExample-tab-simple'),
+		tabSimple: () => cy.get('#draggableExample-tab-simple'),
 		dragBox: () => cy.get('#dragBox'),
-		axisRestricted: () => cy.get('#draggableExample-tab-axisRestriction'),
+		axisTabRestricted: () => cy.get('#draggableExample-tab-axisRestriction'),
 		OnlyX: () => cy.get('#restrictedX'),
 		OnlyY: () => cy.get('#restrictedY'),
-		restricted: () => cy.get('#draggableExample-tab-containerRestriction'),
-		contenedorBox: () => cy.get('.draggable.ui-widget-content.ui-draggable.ui-draggable-handle'),
-		contenedorParent: () => cy.get('span.ui-widget-header.ui-draggable.ui-draggable-handle'),
-		cursoStyle: () => cy.get('#draggableExample-tab-cursorStyle'),
+		tabRestricted: () => cy.get('#draggableExample-tab-containerRestriction'),
+		containedBox: () => cy.get('#containmentWrapper div'),
+		containedParent: () => cy.get('span[class="ui-widget-header ui-draggable ui-draggable-handle"]'),
+		tabCursoStyle: () => cy.get('#draggableExample-tab-cursorStyle'),
 		cursorCenter: () => cy.get('#cursorCenter'),
 		cursorTopLeft: () => cy.get('#cursorTopLeft'),
 		cursorBottom: () => cy.get('#cursorBottom'),
 	};
-	clickSimple() {
-		this.get.simple().click();
+
+	clickTabSimple() {
+		this.get.tabSimple().click().should('contain.text', 'Simple');
 	}
 	clickDragbox() {
-		this.get.dragBox().click();
+		this.get.dragBox().click().should('have.css', 'left', `${0}px`).and('have.css', 'top', `${0}px`);
 	}
-	clickAxis() {
-		this.get.axisRestricted().click();
+	clickTabAxis() {
+		this.get.axisTabRestricted().click().should('have.text', 'Axis Restricted');
 	}
-	clickOnly() {
-		this.get.OnlyX().click();
-		dragMove.get.OnlyX().move({ deltaX: 250 });
+	clickOnlyX() {
+		this.get.OnlyX().click().should('have.css', 'left', `${0}px`).and('have.css', 'top', `${0}px`);
 	}
 	clickOnlyY() {
-		this.get.OnlyY().click();
-		dragMove.get.OnlyY().move({ deltaX: 150, deltaY: 150 });
+		this.get.OnlyY().click().should('have.css', 'left', `${0}px`).and('have.css', 'top', `${0}px`);
 	}
 	clickContenedor() {
-		this.get.restricted().click();
-		dragMove.get.contenedorBox().move({ deltaX: 350, deltaY: 100 });
+		this.get.tabRestricted().click().should('have.text', 'Container Restricted');
 	}
 	clickContenedorBox() {
-		this.get.contenedorBox().click();
-		dragMove.get.contenedorParent().move({ deltaX: 86, deltaY: 150 });
+		this.get.containedBox().click().should('have.css', 'left', `${0}px`).and('have.css', 'top', `${0}px`);
 	}
 	clickContenedorParent() {
-		this.get.contenedorParent().click();
+		this.get.containedParent().click().should('have.css', 'left', `${0}px`).and('have.css', 'top', `${0}px`);
 	}
 	clickCursoStyle() {
-		this.get.cursoStyle().click();
+		this.get.tabCursoStyle().click().should('have.text', 'Cursor Style');
 	}
 
 	clickCursorCenter() {
-		this.get.cursorCenter().click();
-		dragMove.get.cursorCenter().move({ deltaX: 250, deltaY: 100 });
-	}
-	resetCursorCenter() {
-		dragMove.get.cursorCenter().move({ deltaX: -150, deltaY: 0 });
+		this.get.cursorCenter().click().should('have.css', 'left', `${0}px`).and('have.css', 'top', `${0}px`);
 	}
 	clickCursorTopLeft() {
-		this.get.cursorTopLeft().click();
-		dragMove.get.cursorTopLeft().move({ deltaX: 350, deltaY: 0 });
-	}
-	resetCursorTopLeft() {
-		dragMove.get.cursorTopLeft().move({ deltaX: -350, deltaY: 0 });
+		this.get.cursorTopLeft().click().should('have.css', 'left', `${0}px`).and('have.css', 'top', `${0}px`);
 	}
 	clickCursorBottom() {
-		this.get.cursorBottom().click();
-		dragMove.get.cursorBottom().move({ deltaX: 100, deltaY: 200 });
-	}
-	resetCursorbottom() {
-		dragMove.get.cursorBottom().move({ deltaX: -100, deltaY: 150 });
+		this.get.cursorBottom().click().should('have.css', 'left', `${0}px`).and('have.css', 'top', `${0}px`);
 	}
 }
 
-export const dragMove = new dgb();
+export const dragMovePage = new dgb();
