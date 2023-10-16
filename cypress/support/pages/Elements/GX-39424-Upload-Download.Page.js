@@ -13,7 +13,6 @@ class uploadDownloadFile {
 		this.get.downloadBttn().click();
 		this.isDownloadButtonClicked = true;
 	}
-
 	isdownloadButtonClicked() {
 		return this.isDownloadButtonClicked;
 	}
