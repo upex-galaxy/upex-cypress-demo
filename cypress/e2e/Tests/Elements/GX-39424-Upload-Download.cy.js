@@ -3,6 +3,7 @@ import { uploadDownloadPage } from '@pages/Elements/GX-39424-Upload-Download.Pag
 
 describe('ToolsQA | Elements | Upload and Download', () => {
 	beforeEach('Preconditions', () => {
+		cy.intercept({ resourceType: /^(xhr|fetch)$/ }, { statusCode: 200, body: { data: 'fake data' } });
 		cy.visit('https://demoqa.com/upload-download');
 		cy.url().should('contain', 'upload-download');
 	});

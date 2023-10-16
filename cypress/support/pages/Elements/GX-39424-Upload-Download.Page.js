@@ -1,6 +1,6 @@
 class uploadDownloadFile {
 	constructor() {
-		this.downloadButtonClicked = false;
+		this.isDownloadButtonClicked = false;
 	}
 
 	get = {
@@ -11,11 +11,11 @@ class uploadDownloadFile {
 
 	downloadFile() {
 		this.get.downloadBttn().click();
-		this.downloadButtonClicked = true;
+		this.isDownloadButtonClicked = true;
 	}
 
 	isdownloadButtonClicked() {
-		return this.downloadButtonClicked;
+		return this.isDownloadButtonClicked;
 	}
 
 	selectUploadFile() {
