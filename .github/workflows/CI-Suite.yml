@@ -55,7 +55,7 @@ jobs:
               with:
                   browser: electron
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                      yarn file L1-cypex-demo/cypress/e2e/Tests/Elements/GX-39854-radioButtons.cy.js
+                      yarn file cypress/e2e/Tests/Elements/GX-39854-radioButtons.cy.js
 
             - name: ✅Import Test Results to Xray
               if: always()
