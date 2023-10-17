@@ -12,7 +12,7 @@ class Drag {
 		xDrag: () => cy.get('[id=restrictedX]'),
 		yDrag: () => cy.get('[id=restrictedY]'),
 		dragContainer: () => cy.get('[id=containmentWrapper] div'),
-		dragText: () => cy.get('[id^=draggable] span').eq(0),
+		dragText: () => cy.get('.ui-widget-header'),
 		dragCenter: () => cy.get('[id=cursorCenter]'),
 		dragTopLeft: () => cy.get('[id=cursorTopLeft]'),
 		dragBottomContainer: () => cy.get('[id=cursorBottom]'),
@@ -50,31 +50,9 @@ class Drag {
 		this.get.dragContainer().move({
 			deltaX: X,
 			deltaY: Y,
-			force: true,
 		});
-		// let yCoordinateCss, xCoordinateCss;
-		// this.get.containerTab().click();
-		// this.get.dragContainer().should('be.visible');
-		// this.get
-		// 	.dragContainer()
-		// 	.trigger('mousedown', { which: 1 })
-		// 	.trigger('mousemove', { which: 1, pageX: 53, pageY: 0 })
-		// 	.trigger('mouseup', { force: true });
-		// return this.get
-		// 	.containerPanel()
-		// 	.then(() => {
-		// 		this.get.dragContainer().then(data => {
-		// 			//Se tomaron los valores de las coordenadas X y Y de la etiqueta HTML, se lo redondeo al valor entero y se lo convirtió a un valor Number
-		// 			console.log(data);
-		// 			yCoordinateCss = Math.floor(parseInt(data[0].style.top));
-		// 			xCoordinateCss = Math.floor(parseInt(data[0].style.left));
-		// 			cy.log('data', data[0].style.left);
-		// 		});
-		// 	})
-		// 	.then(() => {
-		// 		return [xCoordinateCss, yCoordinateCss];
-		// 	});
 	}
+
 	textDrag({ X, Y }) {
 		this.get.containerTab().click();
 		this.get.dragText().should('be.visible');
@@ -100,7 +78,6 @@ class Drag {
 					//Se tomaron los valores de las coordenadas X y Y de la etiqueta HTML, se lo redondeo al valor entero y se lo convirtió a un valor Number
 					yCoordinateCss = Math.floor(parseInt(data[0].style.top));
 					xCoordinateCss = Math.floor(parseInt(data[0].style.left));
-					cy.log('data', data[0].style.left);
 				});
 			})
 			.then(() => {

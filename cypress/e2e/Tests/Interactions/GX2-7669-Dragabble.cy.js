@@ -8,7 +8,7 @@ function randomCoordinate(val1, val2) {
 
 describe('GX2-7669-tools-qa-interactions-dragabble', () => {
 	beforeEach(() => {
-		// cy.intercept({ resourceType: /^(xhr|fetch)$/ }, { statusCode: 200, body: { data: 'fake data' } });
+		cy.intercept({ resourceType: /^(xhr|fetch)$/ }, { statusCode: 200, body: { data: 'fake data' } });
 		cy.visit('/dragabble');
 		cy.url().should('contain', '/dragabble');
 	});
@@ -37,30 +37,21 @@ describe('GX2-7669-tools-qa-interactions-dragabble', () => {
 		});
 		dragPage.get.yDrag().should('have.css', 'top', `${yRandomCoordinate}px`);
 	});
-	it.only('7670 | TC4: Validar mover el recuadro “Im contained within the box” dentro de su container de la pestaña “Container Restricted”.', () => {
-		const xRandomCoordinate = randomCoordinate(0, 75);
-
+	it('7670 | TC4: Validar mover el recuadro “Im contained within the box” dentro de su container de la pestaña “Container Restricted”.', () => {
+		const xRandomCoordinate = randomCoordinate(0, 533);
 		const yRandomCoordinate = randomCoordinate(0, 106);
-		dragPage.containerDrag({
-			x: 90,
-			Y: yRandomCoordinate,
-		});
-		// .then(data => {
-		// 	const [xCoordinateCss, yCoordinateCss] = data;
-		// 	const x = xRandomCoordinate - (xRandomCoordinate - xCoordinateCss);
-		// 	const y = yRandomCoordinate - (yRandomCoordinate - yCoordinateCss);
-		// 	console.log('cx page', xCoordinateCss);
-		// 	console.log('cy page', yCoordinateCss);
-		// 	expect(xCoordinateCss).to.equal(x);
-		// 	expect(yCoordinateCss).to.equal(y);
-		// });
+		dragPage.get.containerTab().click();
+		dragPage.containerDrag({ X: xRandomCoordinate, Y: yRandomCoordinate });
+		dragPage.get.dragContainer().should('have.css', 'left', `${xRandomCoordinate}px`);
+		dragPage.get.dragContainer().should('have.css', 'top', `${yRandomCoordinate}px`);
 	});
-
 	it('7670 | TC5: Validar mover el texto “Im contained within my parent” dentro de su container de la pestaña “Container Restricted”.', () => {
-		const xRandomCoordinate = randomCoordinate(9, 14);
+		const xRandomCoordinate = randomCoordinate(0, 13);
 		const yRandomCoordinate = randomCoordinate(-1, 86);
+
+		dragPage.get.containerTab().click();
 		dragPage.textDrag({
-			x: xRandomCoordinate,
+			X: xRandomCoordinate,
 			Y: yRandomCoordinate,
 		});
 		dragPage.get.dragText().should('have.css', 'left', `${xRandomCoordinate}px`);
@@ -74,10 +65,9 @@ describe('GX2-7669-tools-qa-interactions-dragabble', () => {
 
 		dragPage.dragFromCenter({ X: xRandomCoordinate, Y: yRandomCoordinate }).then(data => {
 			const [xCoordinateCss, yCoordinateCss] = data;
+			// Se realiza esta resta para encontrar el punto exacto donde se hace click para luego poder validar con las aserciones
 			const x = xRandomCoordinate - (xRandomCoordinate - xCoordinateCss);
 			const y = yRandomCoordinate - (yRandomCoordinate - yCoordinateCss);
-			console.log('cx page', xCoordinateCss);
-			console.log('cy page', yCoordinateCss);
 			expect(xCoordinateCss).to.equal(x);
 			expect(yCoordinateCss).to.equal(y);
 		});
@@ -88,10 +78,9 @@ describe('GX2-7669-tools-qa-interactions-dragabble', () => {
 		dragPage.get.cursorTab().click();
 		dragPage.dragFromTopLeft({ X: xRandomCoordinate, Y: yRandomCoordinate }).then(data => {
 			const [xCoordinateCss, yCoordinateCss] = data;
+			// Se realiza esta resta para encontrar el punto exacto donde se hace click para luego poder validar con las aserciones
 			const x = xRandomCoordinate - (xRandomCoordinate - xCoordinateCss);
 			const y = yRandomCoordinate - (yRandomCoordinate - yCoordinateCss);
-			console.log('cx page', xCoordinateCss);
-			console.log('cy page', yCoordinateCss);
 			expect(xCoordinateCss).to.equal(x);
 			expect(yCoordinateCss).to.equal(y);
 		});
@@ -106,10 +95,9 @@ describe('GX2-7669-tools-qa-interactions-dragabble', () => {
 			})
 			.then(data => {
 				const [xCoordinateCss, yCoordinateCss] = data;
+				// Se realiza esta resta para encontrar el punto exacto donde se hace click para luego poder validar con las aserciones
 				const x = xRandomCoordinate - (xRandomCoordinate - xCoordinateCss);
 				const y = yRandomCoordinate - (yRandomCoordinate - yCoordinateCss);
-				console.log('cx page', xCoordinateCss);
-				console.log('cy page', yCoordinateCss);
 				expect(xCoordinateCss).to.equal(x);
 				expect(yCoordinateCss).to.equal(y);
 			});
