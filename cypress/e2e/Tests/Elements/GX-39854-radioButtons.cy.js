@@ -1,4 +1,4 @@
-describe('US GX-22440 | ToolsQA | Elements | Radio Buttons', () => {
+describe('US GX-39854 | ToolsQA | Elements | Radio Buttons', () => {
     // Precondiciones
     beforeEach('The user must be in Tool QA-Raddio-Buttons', () => {
     cy.visit('https://demoqa.com/radio-button')
@@ -10,6 +10,7 @@ describe('US GX-22440 | ToolsQA | Elements | Radio Buttons', () => {
         cy.get('p.mt-3').should('have.text', 'You have selected Yes')
         //cy.get('.text-success').should('have.text', 'Yes')
     } );
+
     //TC2
     it('39855|  TC2: Validate that “Impressive” can be selected in Radio Buttons',() => {
         cy.get('#impressiveRadio').click({ force : true }) // Click on button
@@ -17,9 +18,8 @@ describe('US GX-22440 | ToolsQA | Elements | Radio Buttons', () => {
         //cy.get('.text-success').should('have.text', 'Impressive')
     } );
     //TC3
-    it('TC3: Validate that “NO” cannot be selected in Radio Buttons',() => {
+    it('39855|TC3: Validate that “NO” cannot be selected in Radio Buttons',() => {
         cy.get('#noRadio').should('be.disabled')
     } );
-
-
+    
 });
