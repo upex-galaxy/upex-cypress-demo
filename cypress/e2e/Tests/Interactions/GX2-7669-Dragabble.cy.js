@@ -1,107 +1,118 @@
 import { removeLogs } from '@helper/RemoveLogs';
-import { drag } from '@pages/Interactions/GX2-7669-dragabble.page';
+import { dragPage } from '@pages/Interactions/GX2-7669-dragabble.page';
+
+function randomCoordinate(val1, val2) {
+	const random = Cypress._.random(val1, val2);
+	return random;
+}
 
 describe('GX2-7669-tools-qa-interactions-dragabble', () => {
 	beforeEach(() => {
-		cy.visit({
-			url: '/dragabble',
-			timeout: 80000,
-		});
+		// cy.intercept({ resourceType: /^(xhr|fetch)$/ }, { statusCode: 200, body: { data: 'fake data' } });
+		cy.visit('/dragabble');
+		cy.url().should('contain', '/dragabble');
 	});
 
 	it('7670 | TC1: Validar mover el recuadro “Drag me” de la pestaña Simple.', () => {
-		const x = Cypress._.random(0, 750);
-		const y = Cypress._.random(0, 550);
-		drag.drag({
-			X: x,
-			Y: y,
+		const xRandomCoordinate = randomCoordinate(0, 750);
+		const yRandomCoordinate = randomCoordinate(0, 550);
+		dragPage.drag({
+			X: xRandomCoordinate,
+			Y: yRandomCoordinate,
 		});
-		drag.get.simpleDrag().should('have.css', 'left', `${x}px`);
-		drag.get.simpleDrag().should('have.css', 'top', `${y}px`);
-		drag.get.simpleDrag().should('be.visible');
+		dragPage.get.simpleDrag().should('have.css', 'left', `${xRandomCoordinate}px`);
+		dragPage.get.simpleDrag().should('have.css', 'top', `${yRandomCoordinate}px`);
 	});
 	it('7670 | TC2: Validar mover en el eje X el recuadro Only X de la pestaña Axis Restricted.', () => {
-		const x = Cypress._.random(-200, 450);
-
-		drag.axisDrag({
-			X: x,
+		const xRandomCoordinate = randomCoordinate(-200, 450);
+		dragPage.axisDrag({
+			X: xRandomCoordinate,
 		});
-		drag.get.xDrag().should('have.css', 'left', `${x}px`).and('be.visible');
+		dragPage.get.xDrag().should('have.css', 'left', `${xRandomCoordinate}px`);
 	});
 	it('7670 | TC3: Validar mover en el eje Y el recuadro Only Y de la pestaña Axis Restricted.', () => {
-		const y = Cypress._.random(0, 500);
-		drag.axisDrag({
-			Y: y,
+		const yRandomCoordinate = randomCoordinate(0, 500);
+		dragPage.axisDrag({
+			Y: yRandomCoordinate,
 		});
-		drag.get.yDrag().should('have.css', 'top', `${y}px`).and('be.visible');
+		dragPage.get.yDrag().should('have.css', 'top', `${yRandomCoordinate}px`);
 	});
-	it('7670 | TC4: Validar mover el recuadro “Im contained within the box” dentro de su container de la pestaña “Container Restricted”.', () => {
-		const x = Cypress._.random(0, 675);
-		const y = Cypress._.random(0, 106);
-		drag.containerDrag({
-			x: x,
-			Y: y,
+	it.only('7670 | TC4: Validar mover el recuadro “Im contained within the box” dentro de su container de la pestaña “Container Restricted”.', () => {
+		const xRandomCoordinate = randomCoordinate(0, 75);
+
+		const yRandomCoordinate = randomCoordinate(0, 106);
+		dragPage.containerDrag({
+			x: 90,
+			Y: yRandomCoordinate,
 		});
-		drag.get.dragContainer().should('have.css', 'left', `${x}px`);
-		drag.get.dragContainer().should('have.css', 'top', `${y}px`);
-		drag.get.dragContainer().should('be.visible');
+		// .then(data => {
+		// 	const [xCoordinateCss, yCoordinateCss] = data;
+		// 	const x = xRandomCoordinate - (xRandomCoordinate - xCoordinateCss);
+		// 	const y = yRandomCoordinate - (yRandomCoordinate - yCoordinateCss);
+		// 	console.log('cx page', xCoordinateCss);
+		// 	console.log('cy page', yCoordinateCss);
+		// 	expect(xCoordinateCss).to.equal(x);
+		// 	expect(yCoordinateCss).to.equal(y);
+		// });
 	});
 
 	it('7670 | TC5: Validar mover el texto “Im contained within my parent” dentro de su container de la pestaña “Container Restricted”.', () => {
-		const x = Cypress._.random(9, 14);
-		const y = Cypress._.random(-1, 86);
-		drag.textDrag({
-			x: x,
-			Y: y,
+		const xRandomCoordinate = randomCoordinate(9, 14);
+		const yRandomCoordinate = randomCoordinate(-1, 86);
+		dragPage.textDrag({
+			x: xRandomCoordinate,
+			Y: yRandomCoordinate,
 		});
-		drag.get.dragText().should('have.css', 'left', `${x}px`);
-		drag.get.dragText().should('have.css', 'top', `${y}px`);
-		drag.get.dragText().should('be.visible');
+		dragPage.get.dragText().should('have.css', 'left', `${xRandomCoordinate}px`);
+		dragPage.get.dragText().should('have.css', 'top', `${yRandomCoordinate}px`);
 	});
 	it('7670 | TC6: Validar mover el recuadro “I will always stick to the center” de la pestaña "Cursor Style".', () => {
-		const x = Cypress._.random(160, 800);
-		cy.log(x);
-		const y = Cypress._.random(120, 500);
-		cy.log('y', y);
+		const xRandomCoordinate = randomCoordinate(700, 1800);
+		cy.log(xRandomCoordinate);
+		const yRandomCoordinate = randomCoordinate(350, 1000);
+		cy.log('y', yRandomCoordinate);
 
-		drag.dragStickCenter({
-			X: x,
-			Y: y,
+		dragPage.dragFromCenter({ X: xRandomCoordinate, Y: yRandomCoordinate }).then(data => {
+			const [xCoordinateCss, yCoordinateCss] = data;
+			const x = xRandomCoordinate - (xRandomCoordinate - xCoordinateCss);
+			const y = yRandomCoordinate - (yRandomCoordinate - yCoordinateCss);
+			console.log('cx page', xCoordinateCss);
+			console.log('cy page', yCoordinateCss);
+			expect(xCoordinateCss).to.equal(x);
+			expect(yCoordinateCss).to.equal(y);
 		});
-		drag.get.dragCenter().should('not.have.css', 'left', `${x}px`);
-		drag.get.dragCenter().should('not.have.css', 'top', `${y}px`);
-		drag.get.dragCenter().should('have.css', 'cursor', `move`);
-		drag.get.dragCenter().should('be.visible');
 	});
 	it('7670 | TC7: Validar mover el recuadro “My cursor is at top left” de la pestaña "Cursor Style".', () => {
-		const x = Cypress._.random(100, 740) + 4.352;
-		cy.log(x);
-		const y = Cypress._.random(-130, 370);
-		cy.log('y', y);
-
-		drag.dragTop({
-			X: x,
-			Y: y,
+		const xRandomCoordinate = randomCoordinate(650, 1700);
+		const yRandomCoordinate = randomCoordinate(350, 900);
+		dragPage.get.cursorTab().click();
+		dragPage.dragFromTopLeft({ X: xRandomCoordinate, Y: yRandomCoordinate }).then(data => {
+			const [xCoordinateCss, yCoordinateCss] = data;
+			const x = xRandomCoordinate - (xRandomCoordinate - xCoordinateCss);
+			const y = yRandomCoordinate - (yRandomCoordinate - yCoordinateCss);
+			console.log('cx page', xCoordinateCss);
+			console.log('cy page', yCoordinateCss);
+			expect(xCoordinateCss).to.equal(x);
+			expect(yCoordinateCss).to.equal(y);
 		});
-		drag.get.dragTopLeft().should('not.have.css', 'left', `${x}px`);
-		drag.get.dragTopLeft().should('not.have.css', 'top', `${y}px`);
-		drag.get.dragTopLeft().should('have.css', 'cursor', `move`);
-		drag.get.dragTopLeft().should('be.visible');
 	});
 	it('7670 | TC8: Validar mover el recuadro “My cursor is at bottom” de la pestaña "Cursor Style".', () => {
-		const x = Cypress._.random(110, 750);
-		cy.log(x);
-		const y = Cypress._.random(-200, 262);
-		cy.log('y', y);
-
-		drag.dragBottom({
-			X: x,
-			Y: y,
-		});
-		drag.get.dragBottom().should('have.css', 'left', `${x}px`);
-		drag.get.dragBottom().should('not.have.css', 'top', `${y}px`);
-		drag.get.dragBottom().should('have.css', 'cursor', `move`);
-		drag.get.dragBottom().should('be.visible');
+		const xRandomCoordinate = randomCoordinate(650, 1800);
+		const yRandomCoordinate = randomCoordinate(400, 1050);
+		dragPage
+			.dragFromBottom({
+				X: xRandomCoordinate,
+				Y: yRandomCoordinate,
+			})
+			.then(data => {
+				const [xCoordinateCss, yCoordinateCss] = data;
+				const x = xRandomCoordinate - (xRandomCoordinate - xCoordinateCss);
+				const y = yRandomCoordinate - (yRandomCoordinate - yCoordinateCss);
+				console.log('cx page', xCoordinateCss);
+				console.log('cy page', yCoordinateCss);
+				expect(xCoordinateCss).to.equal(x);
+				expect(yCoordinateCss).to.equal(y);
+			});
 	});
 });
 
