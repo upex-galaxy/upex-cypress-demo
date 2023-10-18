@@ -1,9 +1,0 @@
-{
-	"endpoints": {
-		"profile": "/profile",
-		"login": "/login"
-	},
-
-	"username": "Lazzeration",
-	"password": "Lazzeration123%"
-}
