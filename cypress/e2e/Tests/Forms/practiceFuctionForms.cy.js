@@ -1,10 +1,7 @@
-import { removeLogs } from '@helper/RemoveLogs';
 import { formPage } from '@pages/Examples/practiceForms.Page';
-removeLogs();
 
 describe('PRACTICE Practice Form', () => {
 	beforeEach(() => {
-		cy.intercept({ resourceType: /^(xhr|fetch)$/ }, { statusCode: 200, body: { data: 'fake data' } });
 		cy.visit('https://demoqa.com/automation-practice-form');
 	});
 
