@@ -1,7 +1,7 @@
 import data from '../../../fixtures/data/GX2-8176-Bookstore-put-delete.json';
 let response1, response2, response3;
 class BookStore {
-	Precondition() {
+	precondition() {
 		return cy
 			.api({
 				failOnStatusCode: false,
@@ -52,6 +52,26 @@ class BookStore {
 				Cypress.env('book1', response.body.books[0].isbn);
 				Cypress.env('book2', response.body.books[1].isbn);
 				return [response1, response2, response3];
+			});
+	}
+
+	deleteBook({ isbn: isbn = '', userId: userId = '' }) {
+		return cy
+			.api({
+				failOnStatusCode: false,
+				method: 'DELETE',
+				url: `${data.dom}/BookStore/v1/Book`,
+				auth: {
+					username: data.username,
+					password: data.password,
+				},
+				body: {
+					isbn: isbn == '' ? '' : isbn,
+					userId: userId == '' ? '' : userId,
+				},
+			})
+			.then(response => {
+				return response;
 			});
 	}
 }

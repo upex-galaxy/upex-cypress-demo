@@ -4,7 +4,7 @@
 import data from '../../../fixtures/data/GX2-8176-Bookstore-put-delete.json';
 import { BookStorePage } from '@pages/BookStore/GX2-8176-Bookstore-put-delete';
 const initialSetup = () => {
-	BookStorePage.Precondition().then(([response1, response2, response3]) => {
+	BookStorePage.precondition().then(([response1, response2, response3]) => {
 		expect(response1.status).to.eq(200);
 		expect(response2.status).to.eq(200);
 		expect(response3.status).to.eq(201);
@@ -19,5 +19,10 @@ describe('BookStore | Grid | Actualizar y Eliminar Libros de la Tienda (PUT-DELE
 		initialSetup();
 	});
 
-	it('TC3: (DELETE) Validar remover un producto del profile', () => {});
+	it('TC3: (DELETE) Validar remover un producto del profile', () => {
+		BookStorePage.deleteBook({ isbn: data.idBook1, userId: data.userID }).then(response => {
+			expect(response.status).to.eq(204);
+			expect(response.statusText).to.equal('No Content');
+		});
+	});
 });
