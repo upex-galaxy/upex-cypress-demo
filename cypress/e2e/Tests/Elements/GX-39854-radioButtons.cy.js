@@ -20,5 +20,6 @@ describe('US GX-39854 | ToolsQA | Elements | Radio Buttons', () => {
 	//TC3
 	it('39855|TC3: Validate that “NO” cannot be selected in Radio Buttons', () => {
 		cy.get('#noRadio').should('be.disabled');
+		
 	});
 });
