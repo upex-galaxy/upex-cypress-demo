@@ -22,7 +22,7 @@ describe('BookStore | Grid | Actualizar y Eliminar Libros de la Tienda (PUT-DELE
 		initialSetup();
 	});
 
-	it('TC3: (DELETE) Validar remover un producto del profile', () => {
+	it('8177 | TC3: (DELETE) Validar remover un producto del profile', () => {
 		BookStorePage.deleteBook({ isbn: data.idBook1, userId: data.userID }).then(response => {
 			expect(response.status).to.eq(204);
 			expect(response.statusText).to.equal('No Content');
