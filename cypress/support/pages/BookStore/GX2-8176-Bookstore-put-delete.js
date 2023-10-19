@@ -13,7 +13,7 @@ class BookStore {
 				},
 			})
 			.then(response => {
-				Cypress.env('token', response.token);
+				Cypress.env('token', response.body.token);
 				response1 = response;
 				return cy.api({
 					failOnStatusCode: false,
@@ -68,6 +68,24 @@ class BookStore {
 				body: {
 					isbn: isbn == '' ? '' : isbn,
 					userId: userId == '' ? '' : userId,
+				},
+			})
+			.then(response => {
+				return response;
+			});
+	}
+
+	deleteAllBooks({ userId = '' }) {
+		userId = userId == '' ? '' : userId;
+
+		return cy
+			.api({
+				failOnStatusCode: false,
+				method: 'DELETE',
+				url: `${data.dom}/BookStore/v1/Books?UserId=${userId}`,
+				auth: {
+					username: data.username,
+					password: data.password,
 				},
 			})
 			.then(response => {

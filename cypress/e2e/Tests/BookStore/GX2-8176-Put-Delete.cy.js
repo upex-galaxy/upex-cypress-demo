@@ -25,4 +25,11 @@ describe('BookStore | Grid | Actualizar y Eliminar Libros de la Tienda (PUT-DELE
 			expect(response.statusText).to.equal('No Content');
 		});
 	});
+
+	it('8177 | TC4: (DELETE) Validar remover todos los producto del profile', () => {
+		BookStorePage.deleteAllBooks({ userId: data.userID }).then(response => {
+			expect(response.status).to.eq(204);
+			expect(response.statusText).to.equal('No Content');
+		});
+	});
 });
