@@ -12,7 +12,8 @@
 	"idBook1": "9781593275846",
 	"idBook2": "9781491950296",
 	"idBook3": "9781593277574",
-	"messageEmptyIsbn": "ISBN supplied is not available",
+	"isbnInexistent": "9777225555553",
+	"messageEmptyIsbnOrInexistent": "ISBN supplied is not available",
 	"messageEmptyIdOrInexistent": "User Id not correct!",
 	"messageEmptyIdOrIsbnPUTmethod": "Request Body is Invalid!"
 }

@@ -39,7 +39,7 @@ describe('BookStore | Grid | Actualizar y Eliminar Libros de la Tienda (PUT-DELE
 		BookStorePage.deleteBook({ isbn: '', userId: data.userID }).then(response => {
 			expect(response.status).to.eq(400);
 			expect(response.statusText).to.equal('Bad Request');
-			expect(response.body.message).to.include(data.messageEmptyIsbn);
+			expect(response.body.message).to.include(data.messageEmptyIsbnOrInexistent);
 		});
 	});
 	it('8177 | TC6: (DELETE) Validar NO remover un producto del profile con “userId” vacio', () => {
@@ -79,6 +79,24 @@ describe('BookStore | Grid | Actualizar y Eliminar Libros de la Tienda (PUT-DELE
 			expect(response.status).to.eq(400);
 			expect(response.statusText).to.equal('Bad Request');
 			expect(response.body.message).to.contain(data.messageEmptyIdOrIsbnPUTmethod);
+		});
+	});
+	it('8177 | TC11: (PUT) Validar NO actualizar un libro/producto del profile con “isbn” inexistente', () => {
+		preconditionDeleteAllBooks();
+		initialSetup();
+		BookStorePage.replaceBookISBN({ NewIsbn: data.isbnInexistent, userId: data.userID, ToReplaceIsbn: data.idBook1 }).then(response => {
+			expect(response.status).to.eq(400);
+			expect(response.statusText).to.equal('Bad Request');
+			expect(response.body.message).to.contain(data.messageEmptyIsbnOrInexistent);
+		});
+	});
+	it('8177 | TC12: (PUT) Validar NO actualizar un libro/producto del profile con “userId” inexistente', () => {
+		preconditionDeleteAllBooks();
+		initialSetup();
+		BookStorePage.replaceBookISBN({ NewIsbn: data.idBook3, userId: data.UserIDInexistent, ToReplaceIsbn: data.idBook1 }).then(response => {
+			expect(response.status).to.eq(401);
+			expect(response.statusText).to.equal('Unauthorized');
+			expect(response.body.message).to.contain(data.messageEmptyIdOrInexistent);
 		});
 	});
 });
