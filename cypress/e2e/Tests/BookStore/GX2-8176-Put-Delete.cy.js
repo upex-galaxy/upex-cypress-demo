@@ -43,7 +43,22 @@ describe('BookStore | Grid | Actualizar y Eliminar Libros de la Tienda (PUT-DELE
 		BookStorePage.deleteBook({ isbn: data.idBook1, userId: '' }).then(response => {
 			expect(response.status).to.eq(401);
 			expect(response.statusText).to.equal('Unauthorized');
-			expect(response.body.message).to.contain(data.emptyId);
+			expect(response.body.message).to.contain(data.emptyIdOrInexistent);
+		});
+	});
+	it('8177 | TC7: (DELETE) Validar NO remover todos los producto del profile con “userId” vacio', () => {
+		BookStorePage.deleteAllBooks({ userId: '' }).then(response => {
+			expect(response.status).to.eq(401);
+			expect(response.statusText).to.equal('Unauthorized');
+			expect(response.body.message).to.contain(data.emptyIdOrInexistent);
+		});
+	});
+
+	it('8177 | TC8: (DELETE) Validar NO remover todos los producto del profile con “userId” inexistente', () => {
+		BookStorePage.deleteAllBooks({ userId: data.UserIDInexistent }).then(response => {
+			expect(response.status).to.eq(401);
+			expect(response.statusText).to.equal('Unauthorized');
+			expect(response.body.message).to.contain(data.emptyIdOrInexistent);
 		});
 	});
 });

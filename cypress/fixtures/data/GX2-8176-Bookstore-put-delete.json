@@ -8,8 +8,9 @@
 	"username": "Lazzeration",
 	"password": "Lazzeration123%",
 	"userID": "1dcf8d6d-4f0b-4704-87d4-537eba179b7a",
+	"UserIDInexistent": "787dfd4f-5ddd-6442-s7$7-a#e64$56ff6s",
 	"idBook1": "9781593275846",
 	"idBook2": "9781491950296",
 	"emptyIsbn": "ISBN supplied is not available",
-	"emptyId": "User Id not correct!"
+	"emptyIdOrInexistent": "User Id not correct!"
 }
