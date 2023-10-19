@@ -55,11 +55,7 @@ jobs:
               with:
                   browser: electron
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-<<<<<<< HEAD
                       yarn file cypress/e2e/Tests/BookStore/GX2-8176-Put-Delete.cy.js
-=======
-                      yarn file cypress/e2e/Tests/Forms/GX-34871-PracticeForm.cy.js
->>>>>>> 5b45cd73cd42a16e53754744210b37da8251a789
 
             - name: ✅Import Test Results to Xray
               if: always()
@@ -69,13 +65,8 @@ jobs:
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
-<<<<<<< HEAD
                   testExecKey: 'GX2-8178' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
                   projectKey: 'GX2' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
-=======
-                  testExecKey: 'GX-34873' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
-                  projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
->>>>>>> 5b45cd73cd42a16e53754744210b37da8251a789
 
             - name: 🔔Slack Notification of Done
               if: always()
