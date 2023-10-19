@@ -13,6 +13,9 @@ const initialSetup = () => {
 		expect(response3.body.books[1].isbn).to.equal(Cypress.env('book2'));
 	});
 };
+const preconditionDeleteAllBooks = () => {
+	BookStorePage.deleteAllBooks({ userId: data.userID });
+};
 
 describe('BookStore | Grid | Actualizar y Eliminar Libros de la Tienda (PUT-DELETE)', () => {
 	beforeEach('precondition', () => {
@@ -36,21 +39,21 @@ describe('BookStore | Grid | Actualizar y Eliminar Libros de la Tienda (PUT-DELE
 		BookStorePage.deleteBook({ isbn: '', userId: data.userID }).then(response => {
 			expect(response.status).to.eq(400);
 			expect(response.statusText).to.equal('Bad Request');
-			expect(response.body.message).to.include(data.emptyIsbn);
+			expect(response.body.message).to.include(data.messageEmptyIsbn);
 		});
 	});
 	it('8177 | TC6: (DELETE) Validar NO remover un producto del profile con “userId” vacio', () => {
 		BookStorePage.deleteBook({ isbn: data.idBook1, userId: '' }).then(response => {
 			expect(response.status).to.eq(401);
 			expect(response.statusText).to.equal('Unauthorized');
-			expect(response.body.message).to.contain(data.emptyIdOrInexistent);
+			expect(response.body.message).to.contain(data.messageEmptyIdOrInexistent);
 		});
 	});
 	it('8177 | TC7: (DELETE) Validar NO remover todos los producto del profile con “userId” vacio', () => {
 		BookStorePage.deleteAllBooks({ userId: '' }).then(response => {
 			expect(response.status).to.eq(401);
 			expect(response.statusText).to.equal('Unauthorized');
-			expect(response.body.message).to.contain(data.emptyIdOrInexistent);
+			expect(response.body.message).to.contain(data.messageEmptyIdOrInexistent);
 		});
 	});
 
@@ -58,7 +61,24 @@ describe('BookStore | Grid | Actualizar y Eliminar Libros de la Tienda (PUT-DELE
 		BookStorePage.deleteAllBooks({ userId: data.UserIDInexistent }).then(response => {
 			expect(response.status).to.eq(401);
 			expect(response.statusText).to.equal('Unauthorized');
-			expect(response.body.message).to.contain(data.emptyIdOrInexistent);
+			expect(response.body.message).to.contain(data.messageEmptyIdOrInexistent);
+		});
+	});
+	it('8177 | TC9: (PUT) Validar actualizar un libro/producto del profile', () => {
+		preconditionDeleteAllBooks();
+		initialSetup();
+		BookStorePage.replaceBookISBN({ NewIsbn: data.idBook3, userId: data.userID, ToReplaceIsbn: data.idBook1 }).then(response => {
+			expect(response.status).to.eq(200);
+			expect(response.body.books[1].isbn).to.contain(data.idBook3);
+		});
+	});
+	it('8177 | TC10: (PUT) Validar NO actualizar un libro/producto del profile con “isbn” vacio', () => {
+		preconditionDeleteAllBooks();
+		initialSetup();
+		BookStorePage.replaceBookISBN({ NewIsbn: '', userId: data.userID, ToReplaceIsbn: data.idBook1 }).then(response => {
+			expect(response.status).to.eq(400);
+			expect(response.statusText).to.equal('Bad Request');
+			expect(response.body.message).to.contain(data.messageEmptyIdOrIsbnPUTmethod);
 		});
 	});
 });

@@ -92,6 +92,25 @@ class BookStore {
 				return response;
 			});
 	}
+	replaceBookISBN({ NewIsbn: NewIsbn = '', userId: userId = '', ToReplaceIsbn: ToReplaceIsbn }) {
+		return cy
+			.api({
+				failOnStatusCode: false,
+				method: 'PUT',
+				url: `${data.dom}/BookStore/v1/Books/${ToReplaceIsbn}`,
+				auth: {
+					username: data.username,
+					password: data.password,
+				},
+				body: {
+					userId: userId == '' ? '' : userId,
+					isbn: NewIsbn == '' ? '' : NewIsbn,
+				},
+			})
+			.then(response => {
+				return response;
+			});
+	}
 }
 
 export const BookStorePage = new BookStore();
