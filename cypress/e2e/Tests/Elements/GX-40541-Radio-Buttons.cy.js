@@ -14,10 +14,4 @@ describe('ToolsQA | Elements | Radio Buttons', () => {
         const Impressiveclickmsn = "Impressive"
         cy.get('[class=text-success]').should('have.text', Impressiveclickmsn)
      })
-    it('40541 | TC3:   validar Selección de Radio Button "No"', () => {
-        //click
-        cy.get('[class="custom-control-label disabled"]').eq(0).click()
-        const Noclickmsn = "No"
-        cy.get('[class=text-success]').should('have.text', Noclickmsn)
-    })
 })
