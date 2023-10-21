@@ -5,7 +5,7 @@ describe(' GX2-8336-✅ToolsQA | Interactions | Selectable', () => {
 	beforeEach('PRC:visit toolQA', () => {
 		selectablePage.get.endpoint();
 	});
-	it.only('TC1:The tabs “List” and “Gird” must be showing by default. ', () => {
+	it('TC1:The tabs “List” and “Gird” must be showing by default. ', () => {
 		selectablePage.get.list().should('exist').and('have.attr', data.attribute, data.positiveValue);
 		selectablePage.get.grid().should('exist').and('have.attr', data.attribute, data.negativeValue);
 	});
@@ -16,7 +16,7 @@ describe(' GX2-8336-✅ToolsQA | Interactions | Selectable', () => {
 		selectablePage.get.listContainer().each(($item, index) => {
 			cy.wrap($item).invoke('text').should('eq', data.List[index]);
 		});
-		selectablePage.elemDefListContainer();
+		selectablePage.colorNoClickList();
 	});
 	it('TC3: Validate that the “Grid” tab is displayed and working as expected', () => {
 		selectablePage.clickGrid();
