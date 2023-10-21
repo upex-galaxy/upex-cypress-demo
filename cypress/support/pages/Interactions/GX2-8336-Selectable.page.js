@@ -7,47 +7,52 @@ class Selectable {
 		gridContainer: () => cy.get('#gridContainer li'),
 	};
 
-	listTabClick() {
+	clickList() {
 		this.get.list().click();
 	}
-	gridTabClick() {
+
+	clickGrid() {
 		this.get.grid().click();
 	}
-	elemListContainer() {
+
+	colorClickList() {
 		this.get.listContainer().each(el => {
 			cy.wrap(el).click().should('have.css', 'background-color', 'rgb(0, 123, 255)');
 		});
 	}
 
-	elemGridContainer() {
+	colorClickGrid() {
 		this.get.gridContainer().each(el => {
 			cy.wrap(el).click().should('have.css', 'background-color', 'rgb(0, 123, 255)');
 		});
 	}
 
-	elemDefListContainer() {
+	colorNoClickList() {
 		this.get.listContainer().each(el => {
 			cy.wrap(el).click().should('have.css', 'background-color', 'rgb(255, 255, 255)');
 		});
 	}
 
-	elemDefGridContainer() {
+	colorNoClickGrid() {
 		this.get.gridContainer().each(el => {
-			cy.wrap(el).click().should('have.css', 'background-color', 'rgb(0, 123, 255)');
+			cy.wrap(el).click().should('have.css', 'background-color', 'rgb(255, 255, 255)');
 		});
 	}
 
-	defaultElemListContainer() {
+	defaultColorList() {
 		this.get.listContainer().each(el => {
 			cy.wrap(el).should('have.css', 'background-color', 'rgb(255, 255, 255)');
 		});
 	}
 
-	defaultElemGridContainer() {
+	defaultColorGrid() {
 		this.get.gridContainer().each(el => {
 			cy.wrap(el).should('have.css', 'background-color', 'rgb(255, 255, 255)');
 		});
 	}
+	getElementsByRow() {
+		cy.get('#row1 > li, #row2 > li, #row3 > li').should('have.length', 9);
+	}
 }
 
-export const selectable = new Selectable();
+export const selectablePage = new Selectable();

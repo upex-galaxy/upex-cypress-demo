@@ -1,42 +1,31 @@
-import { selectable } from '@pages/Interactions/GX2-8336-Selectable.page';
+import { selectablePage } from '@pages/Interactions/GX2-8336-Selectable.page';
+import data from '@data/GX2-8336-Selectable.json';
+
 describe(' GX2-8336-✅ToolsQA | Interactions | Selectable', () => {
 	beforeEach('PRC:visit toolQA', () => {
-		selectable.get.endpoint();
+		selectablePage.get.endpoint();
 	});
-	it('TC1:The tabs “List” and “Gird” must be showing by default. ', () => {
-		selectable.get.list().should('exist').and('have.attr', 'aria-selected', 'true');
-		selectable.get.grid().should('exist').and('have.attr', 'aria-selected', 'false');
+	it.only('TC1:The tabs “List” and “Gird” must be showing by default. ', () => {
+		selectablePage.get.list().should('exist').and('have.attr', data.attribute, data.positiveValue);
+		selectablePage.get.grid().should('exist').and('have.attr', data.attribute, data.negativeValue);
 	});
 	it('TC2: Validate that the “List” tab is displayed and working as expected', () => {
-		//hacer clic en tab "List"
-		selectable.listTabClick();
-		// evaluar que los elementos de la lista estan por defecto NO seleccionados
-		selectable.defaultElemListContainer();
-		// evaluar que los elementos de la lista al ser clickeados se colorean de color azul
-		selectable.elemListContainer();
-		// evaluar que el texto de los elementos de la lista coinciden con el texto dado
-		const expectedTexts = ['Cras justo odio', 'Dapibus ac facilisis in', 'Morbi leo risus', 'Porta ac consectetur ac'];
-		selectable.get.listContainer().each(($item, index) => {
-			cy.wrap($item).invoke('text').should('eq', expectedTexts[index]);
+		selectablePage.clickList();
+		selectablePage.defaultColorList();
+		selectablePage.colorClickList();
+		selectablePage.get.listContainer().each(($item, index) => {
+			cy.wrap($item).invoke('text').should('eq', data.List[index]);
 		});
-		// evaluar que los elementos de la lista al ser clickeados nuevamente se colorean de blanco(default)
-		selectable.elemDefListContainer();
+		selectablePage.elemDefListContainer();
 	});
-	it.only('TC3: Validate that the “Grid” tab is displayed and working as expected', () => {
-		//hacer clic en tab "Grid"
-		selectable.gridTabClick();
-		// evaluar que los elementos de la lista estan por defecto seleccionados
-		selectable.defaultElemGridContainer();
-		// evaluar que los elementos de la lista al ser clickeados se colorean de color azul
-		selectable.elemGridContainer();
-		// evaluar que el texto de los elementos de la lista coinciden con el texto dado
-		const expectedTexts = ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
-		selectable.get.gridContainer().each(($item, index) => {
-			cy.wrap($item).invoke('text').should('eq', expectedTexts[index]);
+	it('TC3: Validate that the “Grid” tab is displayed and working as expected', () => {
+		selectablePage.clickGrid();
+		selectablePage.defaultColorGrid();
+		selectablePage.colorClickGrid();
+		selectablePage.get.gridContainer().each(($item, index) => {
+			cy.wrap($item).invoke('text').should('eq', data.Grid[index]);
 		});
-		// evaluar que los elementos de la lista al ser clickeados nuevamente se colorean de blanco(default)
-		selectable.elemDefGridContainer();
-		// validar que el grid esta compuesto de una matriz 3x3
-		cy.get('#row1 > li, #row2 > li, #row3 > li').should('have.length', 9);
+		selectablePage.colorNoClickGrid();
+		selectablePage.getElementsByRow();
 	});
 });
