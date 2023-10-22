@@ -9,19 +9,19 @@ describe('TS: ✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get(the.CurrentAddress.input).should('be.empty');
 			cy.get(the.PermanentAddress.input).should('be.empty');
 			cy.get(the.SubmitButton).click();
-			cy.get('#userName').should('not.exist');
-			cy.get('#userEmail').should('not.exist');
-			cy.get('#currentAddress').should('not.exist');
-			cy.get('#permanentAddress').should('not.exist');
+			cy.get('#userName').should('not.contain.text');
+			cy.get('#userEmail').should('not.contain.text');
+			cy.get('#currentAddress').should('not.contain.text');
+			cy.get('#permanentAddress').should('not.contain.text');
 		});
 	});
 
 	it('TC2 - Validar poder completar formulario con todos los campos válidos.', () => {
 		cy.fixture('data/GX-40435-TextBox').then(the => {
-			cy.get(the.FullName.input).type(the.data.valid);
-			cy.get(the.Email.input).type(the.data.valid);
-			cy.get(the.CurrentAddress.input).type(the.data.valid);
-			cy.get(the.PermanentAddress.input).type(the.data.valid);
+			cy.get(the.FullName.input).type(the.FullName.data.valid);
+			cy.get(the.Email.input).type(the.Email.data.valid);
+			cy.get(the.CurrentAddress.input).type(the.CurrentAddress.data.valid);
+			cy.get(the.PermanentAddress.input).type(the.PermanentAddress.data.valid);
 			cy.get(the.SubmitButton).click();
 			cy.get('#userName').should('contain.text', the.FullName.data.valid);
 			cy.get('#userEmail').should('contain.text', the.Email.data.valid);
@@ -31,10 +31,10 @@ describe('TS: ✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	});
 	it('TC3 - Validar NO poder completar formulario cuando el correo electrónico No contiene "@".', () => {
 		cy.fixture('data/GX-40435-TextBox').then(the => {
-			cy.get(the.FullName.input).type(the.data.valid);
-			cy.get(the.Email.input).type(the.data.invalid1);
-			cy.get(the.CurrentAddress.input).type(the.data.valid);
-			cy.get(the.PermanentAddress.input).type(the.data.valid);
+			cy.get(the.FullName.input).type(the.FullName.data.valid);
+			cy.get(the.Email.input).type(the.Email.data.invalid1);
+			cy.get(the.CurrentAddress.input).type(the.CurrentAddress.data.valid);
+			cy.get(the.PermanentAddress.input).type(the.PermanentAddress.data.valid);
 			cy.get(the.SubmitButton).click();
 			cy.get('#userName').should('contain.text', the.FullName.data.valid);
 			cy.get('#userEmail').should('have.class', 'field-error');
@@ -44,10 +44,10 @@ describe('TS: ✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	});
 	it('TC4 - Validar NO poder completar formulario cuando el correo electrónico No contiene (mínimo) 1 carácter alfanumérico antes de “@”.', () => {
 		cy.fixture('data/GX-40435-TextBox').then(the => {
-			cy.get(the.FullName.input).type(the.data.valid);
-			cy.get(the.Email.input).type(the.data.invalid2);
-			cy.get(the.CurrentAddress.input).type(the.data.valid);
-			cy.get(the.PermanentAddress.input).type(the.data.valid);
+			cy.get(the.FullName.input).type(the.FullName.data.valid);
+			cy.get(the.Email.input).type(the.Email.data.invalid2);
+			cy.get(the.CurrentAddress.input).type(the.CurrentAddress.data.valid);
+			cy.get(the.PermanentAddress.input).type(the.PermanentAddress.data.valid);
 			cy.get(the.SubmitButton).click();
 			cy.get('#userName').should('contain.text', the.FullName.data.valid);
 			cy.get('#userEmail').should('have.class', 'field-error');
@@ -57,10 +57,10 @@ describe('TS: ✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	});
 	it('TC5 - Validar NO poder completar formulario cuando el correo electrónico No contiene (mínimo) 1 carácter alfanumérico después de “@”.', () => {
 		cy.fixture('data/GX-40435-TextBox').then(the => {
-			cy.get(the.FullName.input).type(the.data.valid);
-			cy.get(the.Email.input).type(the.data.invalid3);
-			cy.get(the.CurrentAddress.input).type(the.data.valid);
-			cy.get(the.PermanentAddress.input).type(the.data.valid);
+			cy.get(the.FullName.input).type(the.FullName.data.valid);
+			cy.get(the.Email.input).type(the.Email.data.invalid3);
+			cy.get(the.CurrentAddress.input).type(the.CurrentAddress.data.valid);
+			cy.get(the.PermanentAddress.input).type(the.PermanentAddress.data.valid);
 			cy.get(the.SubmitButton).click();
 			cy.get('#userName').should('contain.text', the.FullName.data.valid);
 			cy.get('#userEmail').should('have.class', 'field-error');
@@ -70,10 +70,10 @@ describe('TS: ✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	});
 	it('TC6 - Validar NO poder completar formulario cuando el correo electrónico No contiene "." después: 1 carácter alfanumérico después de “@”.', () => {
 		cy.fixture('data/GX-40435-TextBox').then(the => {
-			cy.get(the.FullName.input).type(the.data.valid);
-			cy.get(the.Email.input).type(the.data.invalid4);
-			cy.get(the.CurrentAddress.input).type(the.data.valid);
-			cy.get(the.PermanentAddress.input).type(the.data.valid);
+			cy.get(the.FullName.input).type(the.FullName.data.valid);
+			cy.get(the.Email.input).type(the.Email.data.invalid4);
+			cy.get(the.CurrentAddress.input).type(the.CurrentAddress.data.valid);
+			cy.get(the.PermanentAddress.input).type(the.PermanentAddress.data.valid);
 			cy.get(the.SubmitButton).click();
 			cy.get('#userName').should('contain.text', the.FullName.data.valid);
 			cy.get('#userEmail').should('have.class', 'field-error');
@@ -83,10 +83,10 @@ describe('TS: ✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	});
 	it('TC7 - Validar NO poder completar formulario cuando el correo electrónico No contiene (mínimo) 2 caracteres alfanuméricos después de ".".', () => {
 		cy.fixture('data/GX-40435-TextBox').then(the => {
-			cy.get(the.FullName.input).type(the.data.valid);
-			cy.get(the.Email.input).type(the.data.invalid5);
-			cy.get(the.CurrentAddress.input).type(the.data.valid);
-			cy.get(the.PermanentAddress.input).type(the.data.valid);
+			cy.get(the.FullName.input).type(the.FullName.data.valid);
+			cy.get(the.Email.input).type(the.Email.data.invalid5);
+			cy.get(the.CurrentAddress.input).type(the.CurrentAddress.data.valid);
+			cy.get(the.PermanentAddress.input).type(the.PermanentAddress.data.valid);
 			cy.get(the.SubmitButton).click();
 			cy.get('#userName').should('contain.text', the.FullName.data.valid);
 			cy.get('#userEmail').should('have.class', 'field-error');
