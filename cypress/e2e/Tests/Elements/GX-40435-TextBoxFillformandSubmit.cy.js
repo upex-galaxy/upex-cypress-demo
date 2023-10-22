@@ -18,10 +18,10 @@ describe('TS: ✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 
 	it('TC2 - Validar poder completar formulario con todos los campos válidos.', () => {
 		cy.fixture('data/GX-40435-TextBox').then(the => {
-			cy.get(the.FullName.input).type(the.FullName.data.valid);
-			cy.get(the.Email.input).type(the.Email.data.valid);
-			cy.get(the.CurrentAddress.input).type(the.CurrentAddress.data.valid);
-			cy.get(the.PermanentAddress.input).type(the.PermanentAddress.data.valid);
+			cy.get(the.FullName.input).type(the.data.valid);
+			cy.get(the.Email.input).type(the.data.valid);
+			cy.get(the.CurrentAddress.input).type(the.data.valid);
+			cy.get(the.PermanentAddress.input).type(the.data.valid);
 			cy.get(the.SubmitButton).click();
 			cy.get('#userName').should('contain.text', the.FullName.data.valid);
 			cy.get('#userEmail').should('contain.text', the.Email.data.valid);
