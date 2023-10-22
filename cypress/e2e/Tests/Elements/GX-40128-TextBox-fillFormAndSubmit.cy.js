@@ -19,7 +19,6 @@ describe('GX-40128-ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 
 			cy.get(the.submitButton).click();
 
-			//VALIDACIONES
 			cy.get(the.confirmRegister).should('contain', 'Name');
 		});
 	});
