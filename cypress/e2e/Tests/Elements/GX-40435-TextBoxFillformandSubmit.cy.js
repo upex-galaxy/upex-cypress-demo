@@ -1,6 +1,7 @@
 describe('TS: ✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	beforeEach('Precondición: Usuario debe situarse en el formulario', () => {
-		cy.visit('https://demoqa.com/text-box'); // Esto es un Comando de Acción directa
+		cy.visit('https://demoqa.com/text-box');
+		cy.url().should('contain', 'text-box'); // Esto es un Comando de Acción directa
 	});
 	it('TC1 - Validar NO poder completar formulario con todos los campos vacíos.', () => {
 		cy.fixture('data/GX-40435-TextBox').then(the => {
