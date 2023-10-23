@@ -1,20 +1,16 @@
 {
-    "FullName": {
-        "input": "#userName",
-        "data": {
-            "valid": "Francisco Medina"
-        }
-    },
+    "FullNameInput":"#userName", 
+    "FullNameValid": "Francisco Medina",
     "email": {
         "input": "#userEmail",
         "data": {
             "valid": "franciscomedina240792@gmail.com",
             "invalid": {
                 "invalidMail": "",
-                "invalidMail1":"franciscomedina240792gmail.com",
-                "invalidMail2": "franciscomedina240792@",
-                "invalidaMail3": "franciscomedina240792@gmailcom",
-                "InvalidMail4":"franciscomedina240792@gmail.c"
+                "emailWithOutAt":"franciscomedina240792gmail.com",
+                "emailWithoutDomain": "franciscomedina240792@",
+                "emailWithOutDot": "franciscomedina240792@gmailcom",
+                "emailWithout":"franciscomedina240792@gmail.c"
             }
         }
     },
