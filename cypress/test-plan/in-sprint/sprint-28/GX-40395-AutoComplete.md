@@ -24,7 +24,7 @@ Validaciones 39414| TC1: Validar que al desplegarse la lista de opciones haga ma
 
 39414| TC2: Validar que se pueda seleccionar 2 o mas colores en el imput “Type Multiple color name”
 
-39414| TC3: Validar eliminar 1 color cuando hay 3  en el imput “Type Multiple color name”
+39414| TC3: Validar eliminar 1 color cuando hay 2  en el imput “Type Multiple color name”
 
 39414| TC4: Validar eliminar todos colores seleccionados en el imput “Type Multiple color name”
 
