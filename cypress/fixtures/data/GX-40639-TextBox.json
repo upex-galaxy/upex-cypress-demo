@@ -1,19 +1,17 @@
 {
     "FullNameInput":"#userName", 
     "FullNameValid": "Francisco Medina",
-    "email": {
-        "input": "#userEmail",
-        "data": {
-            "valid": "franciscomedina240792@gmail.com",
-            "invalid": {
+    "emailInput": "#userEmail", 
+    "emailValid": "franciscomedina240792@gmail.com",
+    "emailInvalid":{
+            "data": {
                 "invalidMail": "",
                 "emailWithOutAt":"franciscomedina240792gmail.com",
                 "emailWithoutDomain": "franciscomedina240792@",
                 "emailWithOutDot": "franciscomedina240792@gmailcom",
                 "emaiIncomplete":"franciscomedina240792@gmail.c"
             }
-        }
-    },
+        },
     "CurrentAddress": {
         "input": "#currentAddress",
         "data": {
