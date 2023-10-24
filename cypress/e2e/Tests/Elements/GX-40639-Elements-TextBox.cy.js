@@ -36,6 +36,5 @@ describe('ToolsQA | Elements | Text Box', () => {
                 cy.get(data.PermanentAddress.input).type(data.PermanentAddress.data.valid),
                 cy.get(data.PermanentAddress.input).should('have.value', data.PermanentAddress.data.valid)//Verificación campo 'PErmanent Address'
         })
-    }
-    )
+    })
 })
