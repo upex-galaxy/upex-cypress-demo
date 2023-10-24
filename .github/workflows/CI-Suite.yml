@@ -55,7 +55,7 @@ jobs:
               with:
                   browser: electron
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                      yarn file cypress/e2e/Tests/Elements/GX-40128-TextBox-fillFormAndSubmit.cy.js
+                      yarn file cypress/e2e/Tests/Elements/GX-40938-broken-links-images.cy.js
 
             - name: ✅Import Test Results to Xray
               if: always()
@@ -65,7 +65,7 @@ jobs:
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
-                  testExecKey: 'GX-40130' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+                  testExecKey: 'GX-40947' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
                   projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
 
             - name: 🔔Slack Notification of Done
