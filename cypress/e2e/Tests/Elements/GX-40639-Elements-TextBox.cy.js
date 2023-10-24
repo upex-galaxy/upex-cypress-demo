@@ -15,8 +15,8 @@ describe('ToolsQA | Elements | Text Box', () => {
     })
     it('40639 | TC1: Validar completar el formulario con Datos Validos', () => {
         cy.fixture("data/GX-40639-TextBox").then(data => {
-            cy.get(data.FullName.input).type(data.FullName.data.valid),
-                cy.get(data.FullName.input).should('have.value', data.FullName.data.valid),//verificación campo 'Full name'
+            cy.get(data.FullNameInput).type(data.FullNameValid),
+                cy.get(data.FullNameInput).should('have.value', data.FullNameValid),//verificación campo 'Full name'
                 cy.get(data.email.input).type(data.email.data.valid),
                 cy.get(data.email.input).should('have.value', data.email.data.valid),//Verificación campo 'email'
                 cy.get(data.CurrentAddress.input).type(data.CurrentAddress.data.valid),
