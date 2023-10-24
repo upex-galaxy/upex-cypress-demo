@@ -23,10 +23,19 @@ describe('ToolsQA | Elements | Text Box', () => {
                 cy.get(data.CurrentAddress.input).should('have.value', data.CurrentAddress.data.valid),//verificación campo 'Current Address'
                 cy.get(data.PermanentAddress.input).type(data.PermanentAddress.data.valid),
                 cy.get(data.PermanentAddress.input).should('have.value', data.PermanentAddress.data.valid)//verificación campo 'Permanent Address'
+        });
+    });
+    it('40639 | TC2: Validar completar el formulario con Email vacío', () => {
+        cy.fixture("data/GX-40639-TextBox").then(data => {
+            cy.get(data.FullNameInput).type(data.FullNameValid),
+                cy.get(data.FullNameInput).should('have.value', data.FullNameValid),//Verificación campo 'Full Name'
+                cy.get(data.email.input).type(data.email.data.invalid.invalidMail),
+                cy.get(data.email.input).should('have.value', data.email.data.invalid.invalidMail),//Verificación campo 'email' Vacío
+                cy.get(data.CurrentAddress.input).type(data.CurrentAddress.data.valid),
+                cy.get(data.CurrentAddress.input).should('have.value', data.CurrentAddress.data.valid),//Verificación campo 'Current Address'
+                cy.get(data.PermanentAddress.input).type(data.PermanentAddress.data.valid),
+                cy.get(data.PermanentAddress.input).should('have.value', data.PermanentAddress.data.valid)//Verificación campo 'PErmanent Address'
         })
     }
     )
-
-        
-
 })
