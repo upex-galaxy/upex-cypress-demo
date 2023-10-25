@@ -61,5 +61,17 @@ describe('ToolsQA | Elements | Text Box', () => {
                 cy.get(data.PermanentAddress.input).should('have.value', data.PermanentAddress.data.valid)
         })
     });
+    it('40639 | TC5: Validar Completar el formulario con Email sin. previo al domain', () => {
+        cy.fixture("data/GX-40639-TextBox").then(data => {
+            cy.get(data.FullNameInput).type(data.FullNameValid),
+                cy.get(data.FullNameInput).should('have.value', data.FullNameValid),//Validar campo 'Full name'
+                cy.get(data.emailInput).type(data.emailInvalid.emailWithOutDot),
+                cy.get(data.emailInput).should('have.value', data.emailInvalid.emailWithOutDot),//Validar campo 'Email'
+                cy.get(data.CurrentAddress.input).type(data.CurrentAddress.data.valid),
+                cy.get(data.CurrentAddress.input).should('have.value', data.CurrentAddress.data.valid),//Validar campo 'Current Address'
+                cy.get(data.PermanentAddress.input).type(data.PermanentAddress.data.valid),
+                cy.get(data.PermanentAddress.input).should('have.value', data.PermanentAddress.data.valid)//Validar campo 'Permanent Address'
+        })
+    })
     
 })
