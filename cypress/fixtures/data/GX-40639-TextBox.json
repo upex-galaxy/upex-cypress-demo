@@ -7,9 +7,9 @@
             "data": {
                 "invalidMail": "",
                 "emailWithOutAt":"franciscomedina240792gmail.com",
-                "emailWithoutDomain": "franciscomedina240792@",
-                "emailWithOutDot": "franciscomedina240792@gmailcom",
-                "emaiIncomplete":"franciscomedina240792@gmail.c"
+                "emailWithoutDomain":"franciscomedina240792@",
+                "emailWithOutDot":"franciscomedina240792@gmailcom",
+                "emailIncomplete":"franciscomedina240792@gmail.c"
             }
         },
     "CurrentAddress": {
