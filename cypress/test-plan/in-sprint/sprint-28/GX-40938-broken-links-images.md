@@ -19,3 +19,13 @@ For the invalid link:
 THEN: must go to a webpage showing a 500 status code.
 
 Destination: http://the-internet.herokuapp.com/status_codes/500
+
+Validaciones
+
+40945| TC1: Validar que el logotipo de Tool QA se muestre correctamente
+
+40945| TC2: Validar que aparezcas la imagen rota en el titulo “Broken image”
+
+40945| TC3: Validar que al hacer click en el link “Valid link” funcione correctamente
+
+40945| TC4: Validar que al hacer click en el link “Broken link” se  muestre un código 500

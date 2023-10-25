@@ -1,7 +1,7 @@
 {
 	"workbench.settings.editor": "json",
-	"workbench.colorTheme": "Andromeda Italic",
-	"workbench.iconTheme": "vscode-icons",
+	"workbench.colorTheme": "Winter is Coming (Dark Blue - No Italics)",
+	"workbench.iconTheme": "material-icon-theme",
 	"cSpell.language": "en,es",
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
