@@ -33,5 +33,10 @@
 		}
 	},
 	"SubmitButton": "#submit",
-	"confirmRegister": "#name"
+	"name": "#name",
+	"email": "#email",
+	"currentAddress": "p#currentAddress",
+	"permanentAddress": "p#permanentAddress",
+
+	"output": "#output"
 }
