@@ -1,0 +1,27 @@
+{
+	"fullName": {
+		"data": {
+			"valido": "LuisManuel"
+		}
+	},
+	"email": {
+		"dataEmail": {
+			"valid": "luis_ns_124@hotmail.com",
+			"invalido": "luis_ns_124hotmail.com",
+			"invalido1": "@hotmail.com",
+			"invalido2": "luis_ns_124@.com",
+			"invalido3": "luis_ns_124@hotmailcom",
+			"invalido4": "luis_ns_124@hotmailcom."
+		}
+	},
+	"currentAddress": {
+		"dataCurrentAddress": {
+			"valid": "Carabobo"
+		}
+	},
+	"permanentAddress": {
+		"dataPermanentAddress": {
+			"valid": "Valencia calle 10"
+		}
+	}
+}
