@@ -10,7 +10,7 @@
 		"input": "#userEmail",
 		"data": {
 			"valid": "eritolo123@gmail.com",
-			"invalid1": "eritologmail.com",
+			"emailSinArroba": "eritologmail.com",
 			"invalid2": "@gmail.com",
 			"invalid3": "eritolo123@",
 			"invalid4": "eritolo123@gmailcom",
