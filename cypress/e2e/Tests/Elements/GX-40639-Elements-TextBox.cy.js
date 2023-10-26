@@ -12,9 +12,14 @@ describe('ToolsQA | Elements | Text Box', () => {
     beforeEach(() => {
         cy.visit('/text-box')
         cy.url().should('contain', 'text-box')
-    })
+    });
+    let data;
+    before(() => {
+        cy.fixture('data/GX-40639-TextBox').then(fixtureData => {
+            data = fixtureData;
+        });
+    });
     it('40639 | TC1: Validar completar el formulario con Datos Validos', () => {
-        cy.fixture("data/GX-40639-TextBox").then(data => {
             cy.get(data.FullNameInput).type(data.FullNameValid),
                 cy.get(data.FullNameInput).should('have.value', data.FullNameValid),//verificación campo 'Full name'
                 cy.get(data.emailInput).type(data.emailValid),
@@ -25,10 +30,8 @@ describe('ToolsQA | Elements | Text Box', () => {
                 cy.get(data.PermanentAddress.input).should('have.value', data.PermanentAddress.data.valid),//verificación campo 'Permanent Address'
                 cy.get('#submit').click(),
                 cy.get('#output').should('have.class', 'mt-4 row')
-        });
     });
     it('40639 | TC2: Validar completar el formulario con Email vacío', () => {
-        cy.fixture("data/GX-40639-TextBox").then(data => {
             cy.get(data.FullNameInput).type(data.FullNameValid),
                 cy.get(data.FullNameInput).should('have.value', data.FullNameValid),//Verificación campo 'Full Name'
                 cy.get(data.emailInput).should('be.empty'),//Verificación campo 'email' Vacío
@@ -38,10 +41,8 @@ describe('ToolsQA | Elements | Text Box', () => {
                 cy.get(data.PermanentAddress.input).should('have.value', data.PermanentAddress.data.valid),//Verificación campo 'PErmanent Address'
                 cy.get('#submit').click(),
                 cy.get('#output').should('have.class', 'mt-4 row')
-        })
     });
     it('40639 | TC3: Validar completar el formulario con Email sin @', () => {
-        cy.fixture("data/GX-40639-TextBox").then(data => {
             cy.get(data.FullNameInput).type(data.FullNameValid),
                 cy.get(data.FullNameInput).should('have.value', data.FullNameValid),//Verificación campo 'Full Name'
                 cy.get(data.emailInput).type(data.emailInvalid.data.emailWithOutAt),
@@ -52,10 +53,8 @@ describe('ToolsQA | Elements | Text Box', () => {
                 cy.get(data.PermanentAddress.input).should('have.value', data.PermanentAddress.data.valid),//Verificación campo 'Permanent Address'
                 cy.get('#submit').click(),
                 cy.get('#output').should('have.class', 'mt-4 row')
-        })
     });
     it('40639 | TC4: Validar Completar el formulario com Email sin Domain', () => {
-        cy.fixture("data/GX-40639-TextBox").then(data => {
             cy.get(data.FullNameInput).type(data.FullNameValid),
                 cy.get(data.FullNameInput).should('have.value', data.FullNameValid),//Validar campo 'Full Name'
                 cy.get(data.emailInput).type(data.emailInvalid.data.emailWithoutDomain),
@@ -66,10 +65,8 @@ describe('ToolsQA | Elements | Text Box', () => {
                 cy.get(data.PermanentAddress.input).should('have.value', data.PermanentAddress.data.valid),
                 cy.get('#submit').click(),
                 cy.get('#output').should('have.class', 'mt-4 row')
-        })
     });
     it('40639 | TC5: Validar Completar el formulario con Email sin . previo al domain', () => {
-        cy.fixture("data/GX-40639-TextBox").then(data => {
             cy.get(data.FullNameInput).type(data.FullNameValid),
                 cy.get(data.FullNameInput).should('have.value', data.FullNameValid),//Validar campo 'Full name'
                 cy.get(data.emailInput).type(data.emailInvalid.data.emailWithOutDot),
@@ -80,10 +77,8 @@ describe('ToolsQA | Elements | Text Box', () => {
                 cy.get(data.PermanentAddress.input).should('have.value', data.PermanentAddress.data.valid),//Validar campo 'Permanent Address'
                 cy.get('#submit').click(),
                 cy.get('#output').should('have.class', 'mt-4 row')
-        })
     });
     it('40639 | TC6: Validar completar Formulario con Email incompleto', () => {
-        cy.fixture("data/GX-40639-TextBox").then(data => {
             cy.get(data.FullNameInput).type(data.FullNameValid),
                 cy.get(data.FullNameInput).should('have.value', data.FullNameValid),//Validar campo 'Full Name'
                 cy.get(data.emailInput).type(data.emailInvalid.data.emailIncomplete),
@@ -94,10 +89,8 @@ describe('ToolsQA | Elements | Text Box', () => {
                 cy.get(data.PermanentAddress.input).should('have.value', data.PermanentAddress.data.valid),//Validar Campo 'Permanent Adress'
                 cy.get('#submit').click(),
                 cy.get('#output').should('have.class', 'mt-4 row')
-        })
     });
     it('40639 | TC7: Validar completar el formulario con Current Adress vacío', () => {
-        cy.fixture("data/GX-40639-TextBox").then(data => {
             cy.get(data.FullNameInput).type(data.FullNameValid),
                 cy.get(data.FullNameInput).should('have.value', data.FullNameValid),//verificación campo 'Full name'
                 cy.get(data.emailInput).type(data.emailValid),
@@ -107,10 +100,8 @@ describe('ToolsQA | Elements | Text Box', () => {
                 cy.get(data.PermanentAddress.input).should('have.value', data.PermanentAddress.data.valid),
                 cy.get('#submit').click(),
                 cy.get('#output').should('have.class', 'mt-4 row')
-        })
     });
     it('40639 | TC8: Validar completar el formulario con Permanent Adress Vacío', () => {
-        cy.fixture("data/GX-40639-TextBox").then(data => {
             cy.get(data.FullNameInput).type(data.FullNameValid),
                 cy.get(data.FullNameInput).should('have.value', data.FullNameValid),//Validar campo 'Full Name'
                 cy.get(data.emailInput).type(data.emailValid),
@@ -120,6 +111,5 @@ describe('ToolsQA | Elements | Text Box', () => {
                 cy.get(data.PermanentAddress.input).should('not.have.text'),//Validar Campo 'Permanent Address'
                 cy.get('#submit').click(),
                 cy.get('#output').should('have.class', 'mt-4 row')
-        })
     })
 })
