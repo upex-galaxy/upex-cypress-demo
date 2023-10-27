@@ -6,7 +6,7 @@
 	},
 	"email": {
 		"dataEmail": {
-			"valid": "luis_ns_124@hotmail.com",
+			"valido": "luis_ns_124@hotmail.com",
 			"invalido": "luis_ns_124hotmail.com",
 			"invalido1": "@hotmail.com",
 			"invalido2": "luis_ns_124@.com",
@@ -16,12 +16,12 @@
 	},
 	"currentAddress": {
 		"dataCurrentAddress": {
-			"valid": "Carabobo"
+			"valido": "Carabobo"
 		}
 	},
 	"permanentAddress": {
 		"dataPermanentAddress": {
-			"valid": "Valencia calle 10"
+			"valido": "Valencia calle 10"
 		}
 	}
 }
