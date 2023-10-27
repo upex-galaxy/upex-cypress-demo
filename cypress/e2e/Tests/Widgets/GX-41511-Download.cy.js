@@ -1,11 +1,11 @@
-class download {
+class Download {
     get = {
         endpoint: () => cy.visit("/upload-download"),
         downloadButton: () => cy.get('#downloadButton'),
         uploadButton: () => cy.get('#uploadFile')
     };
 
-    download() {
+    downloadBttn() {
         this.get.downloadButton().click()
     };
     upload() {
@@ -13,4 +13,4 @@ class download {
     }
 }
 
-export const download = new download;
+export const download = new Download;
