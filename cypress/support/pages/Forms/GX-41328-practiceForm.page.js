@@ -19,7 +19,7 @@ class Form {
 		selectableState: () => cy.get('#state'),
 		clickState: () => cy.get('#react-select-3-option-1'),
 		selectableCity: () => cy.get('#city'),
-		clickCity: () => cy.get('#react-select-4-option-1'),
+		clickCity: () => cy.get('#react-select-4-option-0'),
 		buttonSubmit: () => cy.get('#submit'),
 		submitAssert: () => cy.get('.modal-content'),
 	};
