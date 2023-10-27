@@ -1,3 +1,4 @@
+import data from '@data/Form/GX-41328-practiceForm.json';
 class Form {
 	get = {
 		imputFirstName: () => cy.get('#firstName'),
@@ -21,6 +22,7 @@ class Form {
 		selectableCity: () => cy.get('#city'),
 		clickCity: () => cy.get('#react-select-4-option-0'),
 		buttonSubmit: () => cy.get('#submit'),
+		submitAssert: () => cy.get('.modal-content'),
 	};
 
 	typeFirstname(randomFirstname) {
@@ -61,22 +63,22 @@ class Form {
 		this.get.checkBoxHobbies().eq(randomHobbies).click();
 	}
 	selectSubjects() {
-		this.get.inputSubjects().type('Chemistry');
+		this.get.inputSubjects().type(data.subjects);
 		this.get.clickInSubjects().click();
 	}
 	selectPicture() {
 		this.get.inputPicture().click();
 		this.get.inputPicture().selectFile('cypress/fixtures/images/upexgalaxy.gif');
 	}
-	typeCurrentAddress() {
-		this.get.textAreaCurrentAddress().type('san cristobal');
+	typeCurrentAddress(randomAddress) {
+		this.get.textAreaCurrentAddress().type(randomAddress);
 	}
 	selectState() {
-		this.get.selectableState().type('NCR');
+		this.get.selectableState().type(data.state);
 		this.get.clickState().click();
 	}
 	selectCity() {
-		this.get.selectableCity().type('Delhi');
+		this.get.selectableCity().type(data.city);
 		this.get.clickCity().click();
 	}
 	clickSubmit() {
