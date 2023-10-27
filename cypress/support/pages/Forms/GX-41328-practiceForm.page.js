@@ -1,4 +1,3 @@
-import data from '@data/Form/GX-41328-practiceForm.json';
 class Form {
 	get = {
 		imputFirstName: () => cy.get('#firstName'),
@@ -18,9 +17,9 @@ class Form {
 		inputPicture: () => cy.get('#uploadPicture'),
 		textAreaCurrentAddress: () => cy.get('#currentAddress'),
 		selectableState: () => cy.get('#state'),
-		clickState: () => cy.get('#react-select-3-option-0'),
+		clickState: () => cy.get('#react-select-3-option-1'),
 		selectableCity: () => cy.get('#city'),
-		clickCity: () => cy.get('#react-select-4-option-0'),
+		clickCity: () => cy.get('#react-select-4-option-1'),
 		buttonSubmit: () => cy.get('#submit'),
 		submitAssert: () => cy.get('.modal-content'),
 	};
@@ -62,8 +61,8 @@ class Form {
 	selectHobbies(randomHobbies) {
 		this.get.checkBoxHobbies().eq(randomHobbies).click();
 	}
-	selectSubjects() {
-		this.get.inputSubjects().type(data.subjects);
+	selectSubjects(letter) {
+		this.get.inputSubjects().type(letter);
 		this.get.clickInSubjects().click();
 	}
 	selectPicture() {
@@ -73,12 +72,12 @@ class Form {
 	typeCurrentAddress(randomAddress) {
 		this.get.textAreaCurrentAddress().type(randomAddress);
 	}
-	selectState() {
-		this.get.selectableState().type(data.state);
+	selectState(letterState) {
+		this.get.selectableState().type(letterState);
 		this.get.clickState().click();
 	}
-	selectCity() {
-		this.get.selectableCity().type(data.city);
+	selectCity(letterCity) {
+		this.get.selectableCity().type(letterCity);
 		this.get.clickCity().click();
 	}
 	clickSubmit() {

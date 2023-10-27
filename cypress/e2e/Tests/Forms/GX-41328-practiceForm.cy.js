@@ -1,6 +1,5 @@
 import { faker } from '@faker-js/faker';
 import { formPage } from '@pages/Forms/GX-41328-practiceForm.page';
-import data from '@data/Form/GX-41328-practiceForm.json';
 
 describe('GX-41328 |ToolsQA | Forms | Practice Form', () => {
 	beforeEach('PRC:Visitar para registro de estudiantes', () => {
@@ -26,7 +25,9 @@ describe('GX-41328 |ToolsQA | Forms | Practice Form', () => {
 		const stringYear = randomYear.toString();
 		const dateAssert = formattedDay + ' ' + randomMonth + ' ' + stringYear;
 		const randomAddress = faker.address.streetAddress();
-
+		const letter = faker.helpers.arrayElement(['a', 'c', 'd', 'e', 'g', 'h', 'i', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'v', 'y']);
+		const letterState = faker.helpers.arrayElement(['a', 'c', 'd', 'e', 'h', 'n', 'p', 'r', 's', 't', 'u', 'y']);
+		const letterCity = faker.helpers.arrayElement(['a', 'd', 'e', 'g', 'h', 'i', 'l', 'n', 'o', 'r', 'u']);
 		formPage.typeFirstname(randomFirstname);
 		formPage.get.imputFirstName().should('have.value', randomFirstname);
 		formPage.typeLastName(randomLastName);
@@ -43,16 +44,16 @@ describe('GX-41328 |ToolsQA | Forms | Practice Form', () => {
 		formPage.get.inputDate().should('have.value', dateAssert);
 		formPage.selectHobbies(randomHobbies);
 		formPage.get.checksHobbies().should('be.checked', randomHobbies);
-		formPage.selectSubjects();
-		formPage.get.inputSubjects().should('contain', data.subjects);
+		formPage.selectSubjects(letter);
+		formPage.get.inputSubjects().should('contain', letter);
 		formPage.selectPicture();
 		formPage.get.inputPicture().should('have.prop', 'files');
 		formPage.typeCurrentAddress(randomAddress);
 		formPage.get.textAreaCurrentAddress().should('have.value', randomAddress);
-		formPage.selectState();
-		formPage.get.selectableState().should('contain', data.state);
-		formPage.selectCity();
-		formPage.get.selectableCity().should('contain', data.city);
+		formPage.selectState(letterState);
+		formPage.get.selectableState().should('contain', letterState);
+		formPage.selectCity(letterCity);
+		formPage.get.selectableCity().should('contain', letterCity);
 		formPage.clickSubmit();
 		formPage.get.submitAssert().should('have.class', 'modal-content');
 	});
