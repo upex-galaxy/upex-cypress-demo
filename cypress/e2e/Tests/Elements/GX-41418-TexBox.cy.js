@@ -62,7 +62,7 @@ describe('GX-41418 | TS: 🪶ToolsQA | Elements | Text Box: Fill form and Submit
 			cy.get('input.mr-sm-2.field-error.form-control').should('be.enabled');
 		});
 	});
-	it.skip('41426| TC6 Validar no poder ingresar el formulario cuando el “email” no contenga 1 carácter alfanuméricos  después del “.”', () => {
+	it('41426| TC6 Validar no poder ingresar el formulario cuando el “email” no contenga 1 carácter alfanuméricos  después del “.”', () => {
 		cy.fixture('data/Elements/GX-41418-TextBox').then(the => {
 			cy.get('#userName').should('be.empty');
 
