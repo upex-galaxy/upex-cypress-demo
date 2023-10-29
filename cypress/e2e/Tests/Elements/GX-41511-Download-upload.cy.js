@@ -6,7 +6,8 @@ describe('ToolsQA | Elements | Upload and Download', () => {
         cy.url().should('contain', 'upload-download')
     });
     it('41511 | TC1: Validar Download Button', () => {
-        download.downloadBttn()
+        download.downloadBttn(),
+            cy.readFile('cypress/downloads/sampleFile.jpeg').should('exist');
     });
     it('41511 | TC2: Validar Upload Choose File Button', () => {
         download.upload()
