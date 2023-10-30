@@ -1,4 +1,9 @@
 {
-	"active": "active",
-	"itemList": ["Cras justo odio", "Dapibus ac facilisis in", "Morbi leo risus", "Porta ac consectetur ac"]
+	"List": ["Cras justo odio", "Dapibus ac facilisis in", "Morbi leo risus", "Porta ac consectetur ac"],
+	"Grid": ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"],
+
+	"StatusClass": "active",
+	"attribute": "aria-selected",
+	"valueTrue": "true",
+	"valueFalse": "false"
 }

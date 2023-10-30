@@ -1,37 +1,30 @@
-import { selectable } from '@pages/Interactions/GX2-5129-Selectable.page';
-import { removeLogs } from '@helper/RemoveLogs';
-removeLogs();
+import { selectablePage } from '@pages/Interactions/GX2-8536-Selectable.page';
+import data from '@data/GX2-8536-Selectable.json';
+
 describe('✅ToolsQA | Interactions | Selectable', () => {
 	beforeEach('visitar la página de Demo QA', () => {
-		cy.visit('/selectable');
+		cy.visit('https://demoqa.com/selectable');
 		cy.url().should('contain', 'selectable');
 	});
-	it('GX2-8537 | TC1 Validar poder seleccionar los elementos de la pestaña “List“', () => {
-		selectable.clickBttnList();
-		selectable.get.bttnList().should('have.class', 'active');
-		selectable.SelectAllElementsList();
-		selectable.get.allElementsList().should('have.class', 'active');
+
+	it('GX2-8537 | TC1 Validar que los elementos de la pestaña “List“ y "Grid" se muestren de forma predeterminada', () => {
+		selectablePage.get.list().should('have.attr', data.attribute, data.valueTrue);
+		selectablePage.defaultColorList();
+		selectablePage.get.grid().should('have.attr', data.attribute, data.valueFalse);
 	});
-	it('GX2-8537 | TC2 Validar poder des-seleccionar los elementos de la pestaña “List“', () => {
-		selectable.clickBttnList();
-		selectable.get.bttnList().should('have.class', 'active');
-		selectable.deselectAllElementsList();
-		selectable.get.allElementsList().should('have.class', 'active');
-		selectable.deselectAllElementsList(); //Aca tengo dudas: no encontre la forma de hacer que lo deseleccione sin llamar de vuelta
-		selectable.get.allElementsList().should('not.have.class', 'active');
+	it('GX2-8537 | TC2 Validar poder seleccionar y des-seleccionar los elementos de la pestaña “List“', () => {
+		selectablePage.clickList();
+		selectablePage.defaultColorList();
+		selectablePage.clickColorList();
+		selectablePage.textList();
+		selectablePage.unClickColorList();
 	});
-	it('GX2-8537 | TC3 Validar poder seleccionar los elementos de la pestaña “Grid“', () => {
-		selectable.clickBttnGrid();
-		selectable.get.bttnGrid().should('have.class', 'active');
-		selectable.SelectAllElementsGrid();
-		selectable.get.allElementsGrid().should('have.class', 'active');
-	});
-	it('GX2-8537 | TC4 Validar poder des-seleccionar los elementos de la pestaña “Grid“', () => {
-		selectable.clickBttnGrid();
-		selectable.get.bttnGrid().should('have.class', 'active');
-		selectable.SelectAllElementsGrid();
-		selectable.get.allElementsGrid().should('have.class', 'active');
-		selectable.SelectAllElementsGrid();
-		selectable.get.gridContainer().should('not.be.checked');
+
+	it('GX2-8537 | TC3 Validar poder seleccionar y des-seleccionar los elementos de la pestaña “Grid“', () => {
+		selectablePage.clickGrid();
+		selectablePage.defaultColorGrid();
+		selectablePage.clickColorGrid();
+		selectablePage.textGrid();
+		selectablePage.unClickColorGrid();
 	});
 });
