@@ -78,7 +78,7 @@ class Form {
 	}
 	selectCity(letterCity) {
 		this.get.selectableCity().type(letterCity);
-		this.get.clickCity().eq(0git ).click();
+		this.get.clickCity().eq(0).click();
 	}
 	clickSubmit() {
 		this.get.buttonSubmit().click();
