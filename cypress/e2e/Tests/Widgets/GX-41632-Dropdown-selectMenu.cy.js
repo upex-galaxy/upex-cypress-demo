@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import data from '@data/Widgets/GX-41632-Dropdown-SelectMenu.json';
+import data from '@data/Widgets/GX-41632-Dropdown-selectMenu.json';
 import { selectMenuPage } from '@pages/Widgets/GX-41632-Dropdown-selectMenu.page';
 
 describe('GX-41632|ToolsQA | Widgets | Dropdown - Select Menu', () => {
