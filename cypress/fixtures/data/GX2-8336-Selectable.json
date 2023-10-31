@@ -1,0 +1,7 @@
+{
+	"List": ["Cras justo odio", "Dapibus ac facilisis in", "Morbi leo risus", "Porta ac consectetur ac"],
+	"Grid": ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"],
+	"attribute": "aria-selected",
+	"positiveValue": "true",
+	"negativeValue": "false"
+}
