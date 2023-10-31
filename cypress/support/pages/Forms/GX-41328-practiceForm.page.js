@@ -19,7 +19,7 @@ class Form {
 		selectableState: () => cy.get('#state'),
 		clickState: () => cy.get('#react-select-3-option-1'),
 		selectableCity: () => cy.get('#city'),
-		clickCity: () => cy.get('#react-select-4-option-0'),
+		clickCity: () => cy.get('#city div[id*=react-select]'),
 		buttonSubmit: () => cy.get('#submit'),
 		submitAssert: () => cy.get('.modal-content'),
 	};
@@ -78,7 +78,7 @@ class Form {
 	}
 	selectCity(letterCity) {
 		this.get.selectableCity().type(letterCity);
-		this.get.clickCity().click();
+		this.get.clickCity().eq(0git ).click();
 	}
 	clickSubmit() {
 		this.get.buttonSubmit().click();
