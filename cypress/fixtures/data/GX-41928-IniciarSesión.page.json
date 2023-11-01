@@ -1,0 +1,19 @@
+{
+	"input": {
+		"UserName": "#user-name",
+		"Password": "#password"
+	},
+	"data": {
+		"dataUser": {
+			"validUser": "standard_user",
+			"lockedUser": "locked_out_user",
+			"notMachUser": "problem_user",
+			"nullUser": "null"
+		},
+		"dataPass": {
+			"validPass": "secret_sauce",
+			"nullPass": "null",
+			"invalidPass": "secret_sauce2"
+		}
+	}
+}
