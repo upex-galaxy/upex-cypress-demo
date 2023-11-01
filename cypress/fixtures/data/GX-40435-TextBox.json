@@ -1,0 +1,42 @@
+{
+	"FullName": {
+		"input": "#userName",
+		"data": {
+			"valid": "EriTolo",
+			"empty": ""
+		}
+	},
+	"Email": {
+		"input": "#userEmail",
+		"data": {
+			"valid": "eritolo123@gmail.com",
+			"emailSinArroba": "eritologmail.com",
+			"invalid2": "@gmail.com",
+			"invalid3": "eritolo123@",
+			"invalid4": "eritolo123@gmailcom",
+			"invalid5": "eritolo@gmail.c",
+			"empty": ""
+		}
+	},
+	"CurrentAddress": {
+		"input": "#currentAddress",
+		"data": {
+			"valid": "Soycordobesa",
+			"empty": ""
+		}
+	},
+	"PermanentAddress": {
+		"input": "#permanentAddress",
+		"data": {
+			"valid": "nonecesitodocumento",
+			"empty": ""
+		}
+	},
+	"SubmitButton": "#submit",
+	"name": "#name",
+	"email": "#email",
+	"currentAddress": "p#currentAddress",
+	"permanentAddress": "p#permanentAddress",
+
+	"output": "#output"
+}
