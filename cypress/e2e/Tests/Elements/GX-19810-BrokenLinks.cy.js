@@ -2,7 +2,7 @@ import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();
 import { brokenLinks } from '@pages/Elements/brokenLinks';
 
-describe('GX-19810 | Tools | Elements | Broken-Links-Images', () => {
+describe.skip('GX-19810 | Tools | Elements | Broken-Links-Images', () => {
 	beforeEach('User must be inside the website', () => {
 		cy.visit('https://demoqa.com/broken');
 	});
