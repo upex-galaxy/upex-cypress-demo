@@ -16,9 +16,9 @@ describe('TS-397 : ToolsQA | Elements | Buttons', () => {
 		cy.get('#rightClickMessage').should('exist');
 		cy.get('#rightClickMessage').should('contain.text', 'You have done a right click');
 	});
-	// it('TC3: Verify ‘Click’ button can be clicked', () => {
-	// 	cy.get("[type='button']").eq(3).click();
-	// 	cy.get('#dynamicClickMessage').should('exist');
-	// 	cy.get('#dynamicClickMessage').should('contain.text', 'You have done a dynamic click');
-	// });
+	it('TC3: Verify ‘Click’ button can be clicked', () => {
+		cy.get("[type='button']").eq(3).click();
+		cy.get('#dynamicClickMessage').should('exist');
+		cy.get('#dynamicClickMessage').should('contain.text', 'You have done a dynamic click');
+	});
 });
