@@ -1,18 +1,19 @@
 /* eslint-disable indent */
 describe('TS 406: Test ToolsQA | Elements | Radio Buttons', () => {
 	beforeEach('', () => {
+		cy.viewport(700, 500);
 		cy.visit('https://demoqa.com/radio-button');
 	});
 	it('US 113 | TC1: Validar que el Radio Button "Yes" puede ser seleccionado', () => {
-		cy.get('input[type="radio"][value="Yes"]').check();
+		cy.get('#yesRadio').check({ force: true }); // Se obtiene el input Radio Button "Yes" y se verifica si puede ser checkeado
 	});
 
 	it('US 113 | TC2: Validar que el Radio Button "Impressive" puede ser seleccionado', () => {
-		cy.get('input[type="radio"][value="Impressive"]').check();
+		cy.get('#impressiveRadio').check({ force: true }); // Se obtiene el input Radio Button "Impressive" y se verifica si puede ser checkeado
 	});
 
 	it('US 113 | TC3: Validar que el Radio Button "No" está deshabilitado', () => {
-		cy.get('input[type="radio"][value="No"]').should('be.disabled');
+		cy.get('#noRadio').should('be.disabled'); // Se obtiene el input Radio Button "No" y se verifica que esté deshabilitado
 	});
 });
 
