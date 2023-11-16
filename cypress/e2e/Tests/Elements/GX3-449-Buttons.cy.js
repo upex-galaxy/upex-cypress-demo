@@ -1,5 +1,5 @@
 describe('Buttons', () => {
-	before('', () => {
+	beforeEach('', () => {
 		cy.visit('https://demoqa.com/buttons');
 	});
 	it('double click button', () => {
