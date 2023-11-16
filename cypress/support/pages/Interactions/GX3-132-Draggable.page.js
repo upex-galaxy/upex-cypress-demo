@@ -13,6 +13,7 @@ class Dragabble {
 		cursorCenter: () => cy.get('#cursorCenter'),
 		cursorTopLeft: () => cy.get('#cursorTopLeft'),
 		cursorBottom: () => cy.get('#cursorBottom'),
+		body: () => cy.get('body')
 	};
 
 	moveRandom(deltaX, deltaY) {

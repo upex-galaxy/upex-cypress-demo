@@ -46,7 +46,7 @@ describe('US GX3-132 | ToolsQA | Interactions | Dragabble', () => {
 		draggable.get.textContainedParent().should('have.css', 'left', `${ramdomParentX}px`);
 		draggable.get.textContainedParent().should('have.css', 'top', `${ramdomParentY}px`);
 	});
-	it.only('132 | TC5: Validar que el cursor permanece en el centro del cuadro "I will always stick to the center” de la pestaña Cursor Style”', () => {
+	it('132 | TC5: Validar que el cursor permanece en el centro del cuadro "I will always stick to the center” de la pestaña Cursor Style”', () => {
 		draggable.get.cursorStyleTab().click();
 		const ramdomCenterX = faker.datatype.number({ min: 450, max: 1400 });
 		const ramdomCenterY = faker.datatype.number({ min: 450, max: 1000 });
@@ -55,5 +55,28 @@ describe('US GX3-132 | ToolsQA | Interactions | Dragabble', () => {
 			.cursorCenter()
 			.trigger('mousedown', { which: 1 })
 			.trigger('mousemove', { which: 1, pageX: ramdomCenterX, pageY: ramdomCenterY });
+		draggable.get.body().should('have.css', 'cursor', 'move');
+	});
+	it('132 | TC6: Validar que el cursor permanece en la parte superior del cuadro "My cursor is at top left” de la pestaña Cursor Style”', () => {
+		draggable.get.cursorStyleTab().click();
+		const ramdomCenterX = faker.datatype.number({ min: 450, max: 1400 });
+		const ramdomCenterY = faker.datatype.number({ min: 450, max: 1000 });
+		cy.log(ramdomCenterX, ramdomCenterY);
+		draggable.get
+			.cursorTopLeft()
+			.trigger('mousedown', { which: 1 })
+			.trigger('mousemove', { which: 1, pageX: ramdomCenterX, pageY: ramdomCenterY });
+		draggable.get.body().should('have.css', 'cursor', 'crosshair');
+	});
+	it('132 |  TC7: Validar que el cursor permanece en en la parte inferior central del cuadro "My cursor is at bottom” de la pestaña Cursor Style”', () => {
+		draggable.get.cursorStyleTab().click();
+		const ramdomCenterX = faker.datatype.number({ min: 450, max: 1400 });
+		const ramdomCenterY = faker.datatype.number({ min: 450, max: 1000 });
+		cy.log(ramdomCenterX, ramdomCenterY);
+		draggable.get
+			.cursorBottom()
+			.trigger('mousedown', { which: 1 })
+			.trigger('mousemove', { which: 1, pageX: ramdomCenterX, pageY: ramdomCenterY });
+		draggable.get.body().should('have.css', 'cursor', 'auto');
 	});
 });
