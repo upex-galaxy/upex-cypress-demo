@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 describe('TS 406: Test ToolsQA | Elements | Radio Buttons', () => {
-	beforeEach('', () => {
+	beforeEach('Precondición: Usuario debe estar situado en la web de DemoQA, sección de Radio Buttons', () => {
 		cy.viewport(700, 500);
 		cy.visit('https://demoqa.com/radio-button');
 	});
