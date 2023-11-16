@@ -10,7 +10,8 @@ describe('Buttons', () => {
 		cy.get('.row').find('#rightClickBtn').rightclick();
 		cy.get('#rightClickMessage').should('contain', 'You have done a right click');
 	});
-	it.only('single click on button', () => {
-		cy.get('button[class="btn btn-primary"]').click({ multiple: true });
+	it('single click on button', () => {
+		cy.get('button[class="btn btn-primary"]').eq(2).contains('Click Me').click();
+		cy.get('#dynamicClickMessage').contains('You have done a dynamic click');
 	});
 });
