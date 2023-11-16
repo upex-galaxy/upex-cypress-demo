@@ -1,0 +1,26 @@
+{
+	"selectValue": {
+		"group1Option1": "Group 1, option 1",
+		"group1Option2": "Group 1, option 2",
+		"group2Option1": "Group 2, option 1",
+		"group2Option2": "Group 2, option 2",
+		"rootOption": "A root option",
+		"anotherRootOption": "Another root option"
+	},
+	"selectOne": {
+		"Dr": "Dr.",
+		"Mr": "Mr.",
+		"Mrs": "Mrs.",
+		"Ms": "Ms.",
+		"Prof": "Prof.",
+		"Other": "Other"
+	},
+	"oldStyleMenu": ["Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"],
+	"multiSelectDropdown": {
+		"green": "Green",
+		"blue": "Blue",
+		"black": "Black",
+		"red": "Red"
+	},
+	"standarMultiSelect": ["Volvo", "Saab", "Opel", "Audi"]
+}
