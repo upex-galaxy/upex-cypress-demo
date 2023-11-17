@@ -5,7 +5,7 @@ describe('GX3-440 | ToolsQA | Widgets | selectMenu - Select Menu', () => {
 		cy.visit('https://demoqa.com/select-menu');
 	});
 
-	it.only('440 | TC1: Validate dropdown "Select Value" by select each one.', () => {
+	it('440 | TC1: Validate dropdown "Select Value" by select each one.', () => {
 		cy.fixture('/data/Widgets/GX3-440-SelecMenu.json').then(data => {
 			selectMenu.clickSelectValue();
 			selectMenu.get.optionA().should('have.text', data.selectValue.group1.OptionA);
@@ -57,9 +57,7 @@ describe('GX3-440 | ToolsQA | Widgets | selectMenu - Select Menu', () => {
 		});
 	});
 });
-import { removeLogs } from '@helper/RemoveLogs';
-import { any } from 'cypress/types/bluebird';
-removeLogs();
+
 /*
 440 | TC1: Validate dropdown "Select Value" by select each one.
 440 | TC2: Validate dropdown "Select Value" by selecting a random one.
