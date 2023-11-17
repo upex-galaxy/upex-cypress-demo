@@ -57,4 +57,4 @@ class SelecMenu {
 		this.get.redOptionMultiselect().click();
 	}
 }
-export const selectMenu = new SelecMenu();
+export const SelectMenuPage = new SelecMenu();
