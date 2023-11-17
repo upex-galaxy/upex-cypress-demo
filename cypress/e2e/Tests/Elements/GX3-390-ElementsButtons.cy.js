@@ -23,6 +23,12 @@ describe('⚡️ToolsQA | Elements | Buttons', () => {
 		cy.wait(2000);
 	});
 	it('392 | TC3: Validar hacer click en el botón de click', () => {
-		cy.get('.mt-4 > button').eq(1).click().should('exist').and('have.attr', 'type', 'button').and('contain.text', 'Me');
+		cy.get('.mt-4 > button')
+			.eq(1)
+			.click()
+			.should('exist')
+			.and('have.attr', 'type', 'button')
+			.and('contain.text', 'Me')
+			.and('not.equal', 'double');
 	});
 });
