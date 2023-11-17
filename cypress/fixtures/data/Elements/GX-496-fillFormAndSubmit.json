@@ -1,0 +1,37 @@
+{
+	"fullName": {
+		"input": "#userName",
+		"data": {
+			"valid": "Juana de Arcos",
+			"invalid": ""
+		}
+	},
+	"userEmail": {
+		"input": "#userEmail",
+		"dataEmail": {
+			"valid": "eleana@gmail.com",
+			"invalid1": "@gmail.com",
+			"invalid2": "eleana@gmail.co",
+			"invalid3": "eleana.com",
+			"invalid4": "eleanagmail.com",
+			"invalid5": "eleana@.com",
+			"invalid6": "eleana@gmailcom",
+			"invalid7": "eleana@gmail"
+		}
+	},
+	"currenAddress": {
+		"input": "#currentAddress-wrapper",
+		"dataCurrentAddress": {
+			"validAddress": "1425 Recoleta"
+		}
+	},
+	"permanentAddress": {
+		"input": "#permanentAddress",
+		"permanentAddressData": {
+			"valid": "Austria Recoleta Argentina "
+		}
+	},
+	"submitButton": {
+		"input": "#submit"
+	}
+}
