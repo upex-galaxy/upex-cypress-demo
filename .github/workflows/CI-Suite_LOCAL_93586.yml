@@ -55,11 +55,7 @@ jobs:
               with:
                   browser: electron
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-<<<<<<< HEAD
                       yarn file cypress/e2e/Tests/Elements/GX3-449-Buttons.cy.js
-=======
-                  yarn file cypress/e2e/Tests/Elements/GX3-391-buttons.cy.js
->>>>>>> cf8f84d72bee75392cc6d70c7e7666d2523c7d33
 
             - name: ✅Import Test Results to Xray
               if: always()
@@ -69,13 +65,7 @@ jobs:
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
-<<<<<<< HEAD
                   testExecKey: 'GX3-463' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
-=======
-
-                  testExecKey: 'GX3-405' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
-
->>>>>>> cf8f84d72bee75392cc6d70c7e7666d2523c7d33
                   projectKey: 'GX3' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
 
             - name: 🔔Slack Notification of Done
