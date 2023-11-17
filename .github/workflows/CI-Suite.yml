@@ -55,8 +55,7 @@ jobs:
               with:
                   browser: electron
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                  yarn file cypress/e2e/Tests/Elements/GX3-391-buttons.cy.js
-
+                  yarn file cypress/test-plan/in-sprint/sprint-30/GX3-118.md
             - name: ✅Import Test Results to Xray
               if: always()
               uses: mikepenz/xray-action@v2
@@ -66,7 +65,7 @@ jobs:
                   testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
 
-                  testExecKey: 'GX3-405' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+                  testExecKey: 'GX3-503' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
 
                   projectKey: 'GX3' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
 
