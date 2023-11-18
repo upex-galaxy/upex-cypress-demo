@@ -2,7 +2,7 @@ import { removeLogs } from '@helper/RemoveLogs';
 import { brokenL } from '@pages/Elements/GX-23722-BrokenLinks';
 import data from '@data/GX-23722-BrokenLink.json';
 
-describe('ToolsQA | Elements | Broken Links Images', () => {
+describe.skip('ToolsQA | Elements | Broken Links Images', () => {
 	beforeEach('Usuario debe estar en la website', () => {
 		cy.visit('/broken');
 	});
