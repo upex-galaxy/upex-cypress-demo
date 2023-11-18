@@ -2,21 +2,22 @@
 	"fullName": {
 		"input": "#userName",
 		"data": {
-			"valid": "Juana de Arcos",
+			"validName": "Juana de Arcos",
 			"invalid": ""
 		}
 	},
 	"userEmail": {
 		"input": "#userEmail",
-		"dataEmail": {
-			"valid": "eleana@gmail.com",
-			"invalid1": "@gmail.com",
-			"invalid2": "eleana@gmail.co",
-			"invalid3": "eleana.com",
-			"invalid4": "eleanagmail.com",
-			"invalid5": "eleana@.com",
-			"invalid6": "eleana@gmailcom",
-			"invalid7": "eleana@gmail"
+		"data": {
+			"validEmail": "Juana@gmail.com",
+			"invalidEmail": {
+				"domainOnly": "@gmail.com",
+				"typoError": "eleana@gmail.co",
+				"missingDomain": "eleana.com",
+				"missingAtSign": "eleanagmail.com",
+				"missingDot": "eleana@gmailcom",
+				"domainIncomplete": "eleana@gmail"
+			}
 		}
 	},
 	"currenAddress": {
@@ -33,5 +34,21 @@
 	},
 	"submitButton": {
 		"input": "#submit"
+	},
+
+	"outPutMessage": {
+		"campos": {
+			"outputContainer": "#output",
+			"inputName": "#name",
+			"inputEmail": "#email",
+			"inputCurrenAddress": "#currentAddress",
+			"inputPermanentAddress": "permanentAddress"
+		},
+		"data": {
+			"name": "Juana de Arcos",
+			"email": "Juana@gmail.com",
+			"currenAddress": "1425 Recoleta",
+			"permanentAddress": "Austria Recoleta Argentina "
+		}
 	}
 }
