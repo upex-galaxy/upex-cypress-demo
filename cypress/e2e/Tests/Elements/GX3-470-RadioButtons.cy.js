@@ -42,4 +42,14 @@ describe('GX3-470 | Tool QA | Elements | Radio Buttons', () => {
 		cy.get('.mt-3').should('contain.text', 'You have selected');
 		cy.get('.text-success').should('contain.text', 'Impressive');
 	});
+	it('GX3-470 | TC5: Validar poder cambiar de ‘Impressive’ a ‘Yes’', () => {
+		cy.get('[for="impressiveRadio"]').click();
+		cy.get('[type="radio"]').eq(0).should('not.be.checked');
+		cy.get('[type="radio"]').eq(1).should('be.checked');
+		cy.get('[for="yesRadio"]').click();
+		cy.get('[type="radio"]').eq(0).should('be.checked');
+		cy.get('[type="radio"]').eq(1).should('not.be.checked');
+		cy.get('.mt-3').should('contain.text', 'You have selected');
+		cy.get('.text-success').should('contain.text', 'Yes');
+	});
 });
