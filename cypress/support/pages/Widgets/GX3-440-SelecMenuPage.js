@@ -2,25 +2,25 @@ class SelecMenu {
 	get = {
 		//selectMenuSelectValue
 		containerSelectValue: () => cy.get('#withOptGroup'),
-		optionA: () => cy.get('.div.css-1uccc91-singleValue').eq(0),
-		optionB: () => cy.get('.div.css-1uccc91-singleValue').eq(0),
-		optionC: () => cy.get('.div.css-1uccc91-singleValue').eq(0),
-		optionD: () => cy.get('.div.css-1uccc91-singleValue').eq(0),
-		optionE: () => cy.get('.div.css-1uccc91-singleValue').eq(0),
-		optionF: () => cy.get('.div.css-1uccc91-singleValue').eq(0),
-		allOptionsSelectValue: () => cy.get('.div.css-1uccc91-singleValue').eq(0),
-		inputInvalidSelectValue: () => cy.get('#react-select-2-input').eq(0),
+		optionA: () => cy.get('#react-select-2-option-0-0'),
+		optionB: () => cy.get('#react-select-2-option-0-1'),
+		optionC: () => cy.get('#react-select-2-option-1-0'),
+		optionD: () => cy.get('#react-select-2-option-1-1'),
+		optionE: () => cy.get('#react-select-2-option-2'),
+		optionF: () => cy.get('#react-select-2-option-3'),
+		allOptionsSelectValue: () => cy.get('[id^=react-select-2-option]'),
+		inputInvalidSelectValue: () => cy.get('.css-1gl4k7y'),
 		//selectMenuSelectOne
 		containerSelectOne: () => cy.get('#selectOne'),
-		allOptionsSelectOne: () => cy.get('.css-1uccc91-singleValue').eq(1),
-		valueSelectedSelectOne: () => cy.get('.css-1uccc91-singleValue"]').eq(1),
-		inputInvalidSelectOne: () => cy.get('#react-select-3-input'),
+		allOptionsSelectOne: () => cy.get('[id^=react-select-3-input]'),
+		valueSelectedSelectOne: () => cy.get('[class^=" css-1uccc91-singleValue"]').eq(0),
+		inputInvalidSelectOne: () => cy.get('.css-1gl4k7y'),
 		//selectMenuOldStyleSelectMenu
 		containerOldSelectMenu: () => cy.get('#oldSelectMenu'),
-		optionsOldSelectMenu: () => cy.get('#oldSelectMenu>option'),
+		optionsOldSelectMenu: () => cy.get('[id^=react-select-4-input]'),
 		//Multiselect drop down
 		containerMultiselect: () => cy.get('p+[class=" css-2b097c-container"]'),
-		inputMultiselect: () => cy.get('#react-select-4-input'),
+		inputInvalidMultiselect: () => cy.get('.css-1gl4k7y'),
 		noMatchMultiselect: () => cy.get('[class=" css-1gl4k7y"]'),
 		greenOptionMultiselect: () => cy.get('#react-select-4-option-0'),
 		blueOptionMultiselect: () => cy.get('#react-select-4-option-1'),
@@ -38,8 +38,14 @@ class SelecMenu {
 	clickSelectOne() {
 		this.get.containerSelectOne().click();
 	}
+	typeSelectValue(text) {
+		this.get.containerSelectValue().type(text);
+	}
 	typeSelectOne(text) {
 		this.get.containerSelectOne().type(text);
+	}
+	typeSelectMenu(text) {
+		this.get.containerOldSelectMenu().type(text);
 	}
 	clickOldSelectMenu() {
 		this.get.containerOldSelectMenu().trigger('click');
@@ -55,6 +61,12 @@ class SelecMenu {
 		this.get.blueOptionMultiselect().click();
 		this.get.blackOptionMultiselect().click();
 		this.get.redOptionMultiselect().click();
+	}
+	clickStandardMultiSelect() {
+		this.get.containerStandardSelect().click();
+	}
+	typeStandar(text) {
+		this.get.containerStandardSelect().type(text);
 	}
 }
 export const SelectMenuPage = new SelecMenu();

@@ -16,7 +16,7 @@
 	},
 	"selectOne": {
 		"options": ["Dr.", "Mr.", "Mrs.", "M.", "Prof.", "Other"],
-		"messageNoMatch": "No options"
+		"messageSelectOne": "No options"
 	},
 	"oldSelectMenu": {
 		"options": ["Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"],
@@ -24,7 +24,7 @@
 	},
 	"multiselect": {
 		"options": ["Green", "Blue", "Black", "Red"],
-		"noMatch": "No options"
+		"messageMultiselect": "No options"
 	},
 	"standardSelect": {
 		"options": ["Volvo", "Saab", "Opel", "Audi"]
