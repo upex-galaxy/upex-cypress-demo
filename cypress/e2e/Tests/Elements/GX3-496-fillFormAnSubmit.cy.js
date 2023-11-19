@@ -24,7 +24,8 @@ describe('Text Box: Fill Form and Submit', () => {
 	});
 	it('497 | TC6: Validar despliegue de mensaje de error', () => {
 		cy.fixture('data/Elements/GX-496-fillFormAndSubmit').then(the => {
-			cy.get(the.outputMessage.outputContainer).should('exist');
+			cy.get(the.outputMessage.input).should('exist');
+			cy.get(the.outputMessage.customerConfirmedInput).should('contain', 'Juana de Arco');
 		});
 	});
 });

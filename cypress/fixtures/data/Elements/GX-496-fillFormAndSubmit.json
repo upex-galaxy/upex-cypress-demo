@@ -36,19 +36,10 @@
 		"input": "#submit"
 	},
 
-	"outPutMessage": {
-		"campos": {
-			"outputContainer": "#output",
-			"inputName": "#name",
-			"inputEmail": "#email",
-			"inputCurrenAddress": "#currentAddress",
-			"inputPermanentAddress": "permanentAddress"
-		},
-		"data": {
-			"name": "Juana de Arcos",
-			"email": "Juana@gmail.com",
-			"currenAddress": "1425 Recoleta",
-			"permanentAddress": "Austria Recoleta Argentina "
+	"outputMessage": {
+		"input": "#output",
+		"inputData": {
+			"customerConfirmedInput": "#name"
 		}
 	}
 }
