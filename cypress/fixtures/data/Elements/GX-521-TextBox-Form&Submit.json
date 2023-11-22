@@ -1,0 +1,25 @@
+{
+	"FullName": {
+		"input": "[type = 'text']",
+		"name": "Máximo Décimo Meridio"
+	},
+
+	"Email": {
+		"input": "[type = 'email']",
+		"email": "maxmeridio@gmail.com"
+	},
+
+	"CurrentAddress": {
+		"input": "#currentAddress",
+		"address": "Turgalium"
+	},
+
+	"PermanentAddress": {
+		"input": "#permanentAddress",
+		"address": "Coliseum"
+	},
+
+	"SubmitButton": {
+		"input": "#submit"
+	}
+}
