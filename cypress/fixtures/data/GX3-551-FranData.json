@@ -30,6 +30,12 @@
 			"valid": "Cobo"
 		}
 	},
+	"RegisteredData": {
+		"username": "div > p#name",
+		"email": "div > p#email",
+		"currentAddress": "div > p#currentAddress",
+		"permanentAddress": "div > p#permanentAddress"
+	},
 
 	"errorField": ".field-error",
 	"SubmitButton": "#submit"

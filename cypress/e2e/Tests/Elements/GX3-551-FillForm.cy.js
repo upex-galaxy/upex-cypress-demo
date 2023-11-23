@@ -17,6 +17,10 @@ describe('⚡️ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 				.should('have.value', the.permanentAddress.data.valid)
 				.and('have.attr', 'rows', '5');
 			cy.get(the.SubmitButton).click().should('contain.text', 'mit').and('exist').and('have.attr', 'type', 'button');
+			cy.get(the.RegisteredData.username).should('be.visible').and('contain.text', the.username.data.valid);
+			cy.get(the.RegisteredData.email).should('be.visible').and('contain.text', the.email.data.valid);
+			cy.get(the.RegisteredData.currentAddress).should('be.visible').and('contain.text', the.currentAddress.data.valid);
+			cy.get(the.RegisteredData.permanentAddress).should('be.visible').and('contain.text', the.permanentAddress.data.valid);
 		});
 	});
 
@@ -31,6 +35,9 @@ describe('⚡️ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get(the.permanentAddress.textarea).should('be.empty').and('have.class', 'form-control');
 			//por ahora se elige no hacer type vacío por error
 			cy.get(the.SubmitButton).click().should('have.class', 'btn');
+			cy.get(the.RegisteredData.username).should('be.visible').and('contain.text', the.username.data.valid);
+			cy.get(the.RegisteredData.email).should('be.visible').and('contain.text', the.email.data.valid);
+			cy.get(the.RegisteredData.currentAddress).should('be.visible').and('contain.text', the.currentAddress.data.valid);
 		});
 	});
 
@@ -133,6 +140,9 @@ describe('⚡️ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 				.should('have.value', the.permanentAddress.data.valid)
 				.and('have.class', 'form-control');
 			cy.get(the.SubmitButton).click().should('contain.text', 'ubm');
+			cy.get(the.RegisteredData.username).should('be.visible').and('contain.text', the.username.data.valid);
+			cy.get(the.RegisteredData.currentAddress).should('be.visible').and('contain.text', the.currentAddress.data.valid);
+			cy.get(the.RegisteredData.permanentAddress).should('be.visible').and('contain.text', the.permanentAddress.data.valid);
 		});
 	});
 });
