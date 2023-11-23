@@ -1,0 +1,36 @@
+{
+	"username": {
+		"input": "#userName",
+		"data": {
+			"valid": "Franquito"
+		}
+	},
+	"email": {
+		"input": "#userEmail",
+		"data": {
+			"valid": "carrefranco@test.com",
+			"invalid": {
+				"Option1": "testing.12ar",
+				"Option2": "@gol.web",
+				"Option3": "guzmán@.com",
+				"Option4": "benja@suarez",
+				"Option5": "automation@a."
+			}
+		}
+	},
+	"currentAddress": {
+		"textarea": "#currentAddress",
+		"data": {
+			"valid": "Parquechacabuco"
+		}
+	},
+	"permanentAddress": {
+		"textarea": "#permanentAddress",
+		"data": {
+			"valid": "Cobo"
+		}
+	},
+
+	"errorField": ".field-error",
+	"SubmitButton": "#submit"
+}
