@@ -39,4 +39,16 @@ describe('Text Box: Fill Form and Submit', () => {
 		cy.get('#submit').click();
 		cy.get('#userEmail').should('have.class', 'field-error');
 	});
+	it('497 | TC6: Validar despliegue de mensaje de confirmación', () => {
+		cy.get('#userName').type(data.fullName.validName);
+		cy.get('#userEmail').type(data.userEmail.data.validEmail);
+		cy.get('#currentAddress-wrapper').type(data.currentAddress.dataCurrentAddress.validAddress);
+		cy.get('#permanentAddress').type(data.permanentAddress.permanentAddressData);
+		cy.get('#submit').click();
+		cy.get('#output');
+		cy.get('#output').should('contain', data.fullName.validName, data.userEmail.data.validEmail);
+		cy.get('#output').should('contain', data.userEmail.data.validEmail);
+		cy.get('#output').should('contain', data.currentAddress.dataCurrentAddress.validAddress);
+		cy.get('#output').should('contain', data.permanentAddress.permanentAddressData);
+	});
 });
