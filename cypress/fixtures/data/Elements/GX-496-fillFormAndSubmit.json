@@ -1,15 +1,12 @@
 {
 	"fullName": {
-		"input": "#userName",
-		"data": {
-			"validName": "Juana de Arcos",
-			"invalid": ""
-		}
+		"validName": "Juana de Arcos",
+		"invalid": ""
 	},
 	"userEmail": {
 		"input": "#userEmail",
 		"data": {
-			"validEmail": "Juana@gmail.com",
+			"validEmail": "eleanavcg@gmail.com",
 			"invalidEmail": {
 				"domainOnly": "@gmail.com",
 				"typoError": "eleana@gmail.co",
@@ -20,26 +17,13 @@
 			}
 		}
 	},
-	"currenAddress": {
-		"input": "#currentAddress-wrapper",
+	"currentAddress": {
 		"dataCurrentAddress": {
 			"validAddress": "1425 Recoleta"
 		}
 	},
 	"permanentAddress": {
 		"input": "#permanentAddress",
-		"permanentAddressData": {
-			"valid": "Austria Recoleta Argentina "
-		}
-	},
-	"submitButton": {
-		"input": "#submit"
-	},
-
-	"outputMessage": {
-		"input": "#output",
-		"inputData": {
-			"customerConfirmedInput": "#name"
-		}
+		"permanentAddressData": "Austria Recoleta Argentina "
 	}
 }
