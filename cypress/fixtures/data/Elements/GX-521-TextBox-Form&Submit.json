@@ -6,7 +6,16 @@
 
 	"Email": {
 		"input": "[type = 'email']",
-		"email": "maxmeridio@gmail.com"
+		"email": {
+			"valid": "maxmeridio@gmail.com",
+			"invalid": {
+				"invalid1": "maxmeridiogmail.com",
+				"invalid2": "@gmail.com",
+				"invalid3": "maxmeridio@",
+				"invalid4": "maxmeridio@gmailcom",
+				"invalid5": "maxmeridio@gmail."
+			}
+		}
 	},
 
 	"CurrentAddress": {
@@ -21,5 +30,15 @@
 
 	"SubmitButton": {
 		"input": "#submit"
+	},
+
+	"LogMessage": {
+		"input": {
+			"FullName": "#name",
+			"email": "#email",
+			"errorEmail": "[type = 'email']",
+			"currentAddress": "#currentAddress",
+			"permanentAddress": "#permanentAddress"
+		}
 	}
 }

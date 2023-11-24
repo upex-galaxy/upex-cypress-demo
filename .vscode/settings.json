@@ -67,5 +67,6 @@
 	"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
 	"cucumberautocomplete.stepRegExSymbol": "'",
 	"git.enableSmartCommit": true,
-	"githubPullRequests.ignoredPullRequestBranches": ["main"]
+	"githubPullRequests.ignoredPullRequestBranches": ["main"],
+	"cSpell.words": ["Meridio"]
 }
