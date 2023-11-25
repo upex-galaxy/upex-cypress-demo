@@ -1,14 +1,14 @@
-#!ESTE ARCHIVO ES UN TEMPLATE, NO CAMBIARLO EN ABSOLUTO.
-#todo: Cambiar solamente lo que viene después de "(Run Cypress)"
-#todo: Utiliza el mismo nombre de la Historia de Usuario con su ID.
+# #!ESTE ARCHIVO ES UN TEMPLATE, NO CAMBIARLO EN ABSOLUTO.
+# #todo: Cambiar solamente lo que viene después de "(Run Cypress)"
+# #todo: Utiliza el mismo nombre de la Historia de Usuario con su ID.
 name: 🧪Cypress In-Sprint Testing
-#todo: Solamente colocar el ID de la US que se va a correr. Cambiar el actual:
+# #todo: Solamente colocar el ID de la US que se va a correr. Cambiar el actual:
 run-name: ${{github.actor}}👨🏻‍🔬 ran TestSuite in ${{github.ref_name}}
 
 # on:
 #     push:
 #         branches-ignore: [main, QA]
-#*Esto indica que se ejecutará con PUSH o MERGE en cualquier rama que no sea 'main' ni 'QA'
+# #*Esto indica que se ejecutará con PUSH o MERGE en cualquier rama que no sea 'main' ni 'QA'
 
 on: [workflow_dispatch] #Esta opción es  para este Tutorial, para que no se ejecute en CI.
 

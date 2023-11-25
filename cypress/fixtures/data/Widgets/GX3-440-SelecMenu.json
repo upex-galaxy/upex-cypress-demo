@@ -1,0 +1,32 @@
+{
+	"selectValue": {
+		"group1": {
+			"OptionA": "Group 1, option 1",
+			"OptionB": "Group 1, option 2"
+		},
+		"group2": {
+			"OptionC": "Group 2, option 1",
+			"OptionD": "Group 2, option 2"
+		},
+		"outOfGroup": {
+			"OptionE": "A root option",
+			"OptionF": "Another root option"
+		},
+		"messageSelectValue": "No options"
+	},
+	"selectOne": {
+		"options": ["Dr.", "Mr.", "Mrs.", "M.", "Prof.", "Other"],
+		"messageSelectOne": "No options"
+	},
+	"oldSelectMenu": {
+		"options": ["Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"],
+		"default": "red"
+	},
+	"multiselect": {
+		"options": ["Green", "Blue", "Black", "Red"],
+		"messageMultiselect": "No options"
+	},
+	"standardSelect": {
+		"options": ["Volvo", "Saab", "Opel", "Audi"]
+	}
+}
