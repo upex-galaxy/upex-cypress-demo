@@ -33,7 +33,6 @@ describe('⚡️ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 				.should('have.value', the.currentAddress.data.valid)
 				.and('not.equal', 'Permanent');
 			cy.get(the.permanentAddress.textarea).should('be.empty').and('have.class', 'form-control');
-			//por ahora se elige no hacer type vacío por error
 			cy.get(the.SubmitButton).click().should('have.class', 'btn');
 			cy.get(the.RegisteredData.username).should('be.visible').and('contain.text', the.username.data.valid);
 			cy.get(the.RegisteredData.email).should('be.visible').and('contain.text', the.email.data.valid);

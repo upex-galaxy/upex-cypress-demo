@@ -27,7 +27,7 @@
 	"permanentAddress": {
 		"textarea": "#permanentAddress",
 		"data": {
-			"valid": "Cobo"
+			"valid": "CoboAv"
 		}
 	},
 	"RegisteredData": {
