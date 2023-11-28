@@ -56,4 +56,7 @@ export default defineConfig({
 		allureReuseAfterSpec: true,
 		allureResultsPath: 'reports/allure-results',
 	},
+	endpoint: {
+		textBox: '/text-box',
+	},
 });
