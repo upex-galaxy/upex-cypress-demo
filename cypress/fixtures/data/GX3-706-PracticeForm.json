@@ -1,0 +1,20 @@
+{
+	"email": {
+		"validMail": "erika10@gmail.com",
+		"empty": "",
+		"invalidMail": {
+			"email1": "erika10gmail.com",
+			"email2": "@gmail.com",
+			"email3": "erika10@",
+			"email4": "erika10@gmailcom",
+			"email5": "erika10@gmail.c"
+		},
+
+		"pixture": {
+			"file1": "cypress/fixtures/images/upexlogo.png",
+			"file2": "cypress/fixtures/images/upexlogo.png",
+			"nameFile1": "upexgalaxy.png",
+			"nameFile2": "upexgalaxy.gif"
+		}
+	}
+}
