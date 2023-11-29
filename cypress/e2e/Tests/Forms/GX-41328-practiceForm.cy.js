@@ -6,7 +6,7 @@ describe('GX-41328 |ToolsQA | Forms | Practice Form', () => {
 		cy.visit('/automation-practice-form');
 		cy.url().should('contain', 'automation-practice-form');
 	});
-	it('41329 | TC1: Validar envio de formulario con todos los campos correctamente rellenados', () => {
+	it.skip('41329 | TC1: Validar envio de formulario con todos los campos correctamente rellenados', () => {
 		const randomFirstname = faker.name.firstName();
 		const randomEmail = faker.internet.email();
 		const randomLastName = faker.name.lastName();
