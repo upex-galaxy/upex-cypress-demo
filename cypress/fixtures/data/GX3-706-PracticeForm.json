@@ -10,7 +10,7 @@
 			"email5": "erika10@gmail.c"
 		},
 
-		"pixture": {
+		"picture": {
 			"file1": "cypress/fixtures/images/upexlogo.png",
 			"file2": "cypress/fixtures/images/upexlogo.png",
 			"nameFile1": "upexgalaxy.png",
