@@ -1,4 +1,4 @@
-import { data } from '@data/GX3-706.PracticeForm.json';
+import data from '../../../fixtures/data/GX3-706-PracticeForm.json';
 class Formulario {
 	get = {
 		inputFirstName: () => cy.get('#firstName'),
@@ -12,7 +12,7 @@ class Formulario {
 		selectDay: () => cy.get('.react-datepicker__day'),
 		inputSubjects: () => cy.get('#subjectsContainer'),
 		selectHobbie: () => cy.get('div[class*="custom-control-inline"]'),
-		selectFileButton: () => cy.get('#uploadPicture'),
+		selectFile: () => cy.get('#uploadPicture'),
 		inputAddress: () => cy.get('#currentAddress'),
 		selectState: () => cy.get('#state'),
 		selectOneState: () => cy.get('#react-select-3-input'),
@@ -27,20 +27,14 @@ class Formulario {
 	typeLastName(randomLastName) {
 		randomLastName && this.get.inputLastName().type(randomLastName);
 	}
+	typeEmail(ramdomEmail) {
+		ramdomEmail && this.get.inputMail().type(ramdomEmail);
+	}
+	selectOneGenero(randomGenero) {
+		randomGenero && this.get.selectGenero().type(randomGenero);
+	}
 	typeMobile(randomMobile) {
 		randomMobile && this.get.inputMobile().type(randomMobile);
-	}
-	typeSubjects(randomSubjects) {
-		randomSubjects && this.get.inputSubjects().type(randomSubjects);
-	}
-	typeAdress(randomAddress) {
-		randomAddress && this.get.inputAddress().type(randomAddress);
-	}
-	selectOneGenero() {
-		this.get.selectGenero().click();
-	}
-	typeEmail() {
-		this.get.inputMail().type(data.email.validMail);
 	}
 	selectBirthDay() {
 		this.get.selectDate().click();
@@ -86,14 +80,17 @@ class Formulario {
 				});
 		});
 	}
+	typeSubjects(randomSubjects) {
+		this.get.inputSubjects().click();
+	}
 	selectOneHobbie() {
 		this.get.selectHobbie().click();
 	}
-	selectPicture1() {
-		this.get.selectFileButton().get(data.picture.file1);
+	selectPicture() {
+		this.get.selectFile().get(data.picture.file1);
 	}
-	selectPicture2() {
-		this.get.selectFileButton().get(data.picture.file2);
+	typeAdress(randomAddress) {
+		randomAddress && this.get.inputAddress().type(randomAddress);
 	}
 	selectRandomState() {
 		this.get.selectState().click();
