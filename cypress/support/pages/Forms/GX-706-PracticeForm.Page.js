@@ -63,7 +63,6 @@ class Formulario {
 		this.get.inputPicture().click();
 		this.get.inputPicture().selectFile(data.picture.file);
 	}
-
 	typeAdress(randomAddress) {
 		randomAddress && this.get.inputAddress().type(randomAddress);
 	}

@@ -92,21 +92,11 @@ describe('US GX-23427 | ToolsQA | Forms | Practice Form', () => {
 		cy.get('tr').eq(8).should('contain', file.name);
 		cy.get('tr').eq(9).should('contain', fakeAddress);
 
-		//validate state on popup
-		cy.get('.css-1uccc91-singleValue')
-			.eq(0)
-			.invoke('text')
-			.then(txt => {
-				cy.get('tr').eq(10).should('contain', txt);
-			});
-
-		//validate city on popup
-		cy.get('.css-1uccc91-singleValue')
-			.eq(1)
-			.invoke('text')
-			.then(txt => {
-				cy.get('tr').eq(10).should('contain', txt);
-			});
+		cy.get('@selectedState').then(selectedState => {
+		cy.get('@selectedCity').then(selectedCity => {
+    const expectedStateAndCity = `${selectedState} ${selectedCity}`;
+    cy.get('tr').eq(10).invoke('text').should('include', `State and City${expectedStateAndCity}`);
+	});
 
 		//valido color de bordes con datos válidos
 		form.get.firstname().should('have.css', 'border-color', field.greenBorder);
