@@ -7,7 +7,7 @@ describe('GX3-691 | TS: ToolsQA | Elements | Radio Buttons', () => {
 	//ACTIONS y ASSENT
 	it('Validar que al presionar YES se muestre el mensaje: "You have selected  YES', () => {
 		cy.get('[for="yesRadio"]').click();
-		cy.get('.text-success').should('have.test', 'Yes');
+		cy.get('.text-success').should('have.text', 'Yes');
 	});
 
 	it('Validar que al presionar IMPRESSIVE se muestre el mensaje: "You have selected IMPRESSIVE', () => {
