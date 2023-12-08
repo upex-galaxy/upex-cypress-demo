@@ -53,8 +53,7 @@ class Formulario {
 		randomSelectSubject && this.get.selectSubject().click();
 	}
 	selectRandomGender(randomOneSubject) {
-		randomOneSubject && this.get.selectSubject().type(randomOneSubject);
-		this.get.selectSubject().click();
+		randomOneSubject && this.get.selectGender().type(randomOneSubject).click();
 	}
 	selectRandomHobbie(randomHobbies) {
 		this.get.selectHobbie().eq(randomHobbies).click();
@@ -68,13 +67,24 @@ class Formulario {
 	}
 	selectRandomState(randomState) {
 		this.get.selectState().click();
+		const selectedStateText = cy
+			.get('#react-select-3-option-' + randomState)
+			.invoke('text')
+			.then(text => text.trim());
 		cy.get('#react-select-3-option-' + randomState).click({ force: true });
+		return selectedStateText;
 	}
 
 	selectRandomCity(randomCity) {
 		this.get.selectCity().click();
+		const selectedCityText = cy
+			.get('#react-select-4-option-' + randomCity)
+			.invoke('text')
+			.then(text => text.trim());
 		cy.get('#react-select-4-option-' + randomCity).click({ force: true });
+		return selectedCityText;
 	}
+
 	selectSubmit() {
 		this.get.submitButton().click();
 	}

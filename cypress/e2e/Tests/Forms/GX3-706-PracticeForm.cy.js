@@ -59,10 +59,14 @@ describe('GX3-706 ToolsQA | Forms | Practice Form', () => {
 		cy.get('tr').eq(7).invoke('text').should('include', `Hobbies${selectedHobbies}`);
 		cy.get('tr').eq(8).should('contain', 'upexlogo.png');
 		cy.get('tr').eq(9).should('contain', randomAddress);
-		expect(randomState).to.be.within(0, 3);
 
 		// Validar estado y ciudad juntos
-		const expectedStateAndCity = `${randomState} ${randomCity}`;
-		cy.get('tr').eq(10).invoke('text').should('include', `State and City${expectedStateAndCity}`);
+
+		formPage.selectRandomState(randomState).then(selectedStateText => {
+			formPage.selectRandomCity(randomCity).then(selectedCityText => {
+				const expectedStateAndCity = `${selectedStateText} ${selectedCityText}`;
+				cy.get('tr').eq(10).invoke('text').should('include', `State and City${expectedStateAndCity}`);
+			});
+		});
 	});
 });
