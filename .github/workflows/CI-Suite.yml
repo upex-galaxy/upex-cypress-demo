@@ -55,7 +55,11 @@ jobs:
               with:
                   browser: electron
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
+<<<<<<< HEAD
                       yarn file cypress/e2e/Tests/SwagLabs/GX-39880-SwagLabs-Login.cy.js
+=======
+                      yarn file cypress/e2e/Tests/Widgets/GX-41632-Dropdown-selectMenu.cy.js
+>>>>>>> 6945496efe0b9a3bc1557bb36f148bfad14a712d
 
             - name: ✅Import Test Results to Xray
               if: always()
@@ -65,7 +69,11 @@ jobs:
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
+<<<<<<< HEAD
                   testExecKey: 'GX-39882' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+=======
+                  testExecKey: 'GX-41634' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+>>>>>>> 6945496efe0b9a3bc1557bb36f148bfad14a712d
                   projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
 
             - name: 🔔Slack Notification of Done
