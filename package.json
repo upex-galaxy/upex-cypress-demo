@@ -29,7 +29,7 @@
 	"type": "module",
 	"devDependencies": {
 		"@4tw/cypress-drag-drop": "2.2.5",
-		"@badeball/cypress-cucumber-preprocessor": "19.2.0",
+		"@badeball/cypress-cucumber-preprocessor": "16.0.3",
 		"@bahmutov/cypress-esbuild-preprocessor": "2.2.0",
 		"@esbuild-plugins/node-modules-polyfill": "0.2.2",
 		"@faker-js/faker": "8.3.1",
