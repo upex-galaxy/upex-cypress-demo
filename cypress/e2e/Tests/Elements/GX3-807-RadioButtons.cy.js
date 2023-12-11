@@ -10,7 +10,7 @@ describe('🧪GX3-806 | TS: ⚡️ToolsQA | Elements | Radio Buttons', () => {
 
 	it('GX3-807 | TC2: Validar que RB "Impressive" pueda ser seleccionado', () => {
 		cy.get('#impressiveRadio').click({ force: true });
-		cy.get('.qmt-3').should('have.text', 'You have selected Impressive');
+		cy.get('.mt-3').should('have.text', 'You have selected Impressive');
 	});
 
 	it('GX3-807 | TC3: Validar NO poder seleccionar RB "No"', () => {
