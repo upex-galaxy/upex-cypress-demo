@@ -32,5 +32,15 @@
                 "invalidEmail": "castm@gmail.c"
             }
         }
+    },
+    "SubmitButton": ".btn.btn-primary",
+    "Submitted": {
+        "output": "#output",
+        "data": {
+            "FullName": "#name",
+            "Email": "#email",
+            "CurrentAddress": "#currentAddress.mb-1",
+            "PermanentAddress": "#permanentAddress.mb-1"
+        }
     }
 }
