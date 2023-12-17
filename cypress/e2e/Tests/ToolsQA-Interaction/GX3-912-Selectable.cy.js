@@ -14,4 +14,31 @@ describe('GX3-912 | ToolsQA | Interactions | Selectable', () => {
 		selectablePage.selectListItem();
 		selectablePage.UnselectListItem();
 	});
+	it('GX3-913 | TC3: Validate select multiples items from “List” tab', () => {
+		selectablePage.clickList();
+		selectablePage.selectMultipleListItems();
+	});
+	it('GX3-913 | TC4: Validate unselect multiples items from “List” tab', () => {
+		selectablePage.clickList();
+		selectablePage.selectMultipleListItems();
+		selectablePage.unselectMultipleListItems();
+	});
+	it('GX3-913 | TC5: Validate select item from “Grid” tab', () => {
+		selectablePage.clickGrid();
+		selectablePage.selectGridItem();
+	});
+	it('GX3-913 | TC6: Validate unselect item from “Grid” tab', () => {
+		selectablePage.clickGrid();
+		selectablePage.selectGridItem();
+		selectablePage.UnselectGridItem();
+	});
+	it('GX3-913 | TC7: Validate select multiples items from “Grid” tab', () => {
+		selectablePage.clickGrid();
+		selectablePage.selectMultipleGridItems();
+	});
+	it('GX3-913 | TC8: Validate unselect multiples items from “Grid” tab', () => {
+		selectablePage.clickGrid();
+		selectablePage.selectMultipleGridItems();
+		selectablePage.unselectMultipleGridItems();
+	});
 });
