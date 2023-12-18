@@ -10,7 +10,6 @@ class selectable {
 	}
 	selectListItem() {
 		this.get.ListItems().eq(2).click();
-		this.get.ListItems().should('have.class', 'active');
 	}
 	UnselectListItem() {
 		this.get.ListItems().eq(2).click();
@@ -19,7 +18,6 @@ class selectable {
 		this.get.ListItems().eq(1).click();
 		this.get.ListItems().eq(0).click();
 		this.get.ListItems().eq(3).click();
-		this.get.ListItems().should('have.class', 'active');
 	}
 	unselectMultipleListItems() {
 		this.get.ListItems().eq(1).click();
@@ -30,7 +28,6 @@ class selectable {
 	}
 	selectGridItem() {
 		this.get.GridItems().eq(10).click();
-		this.get.GridItems().should('have.class', 'active');
 	}
 	UnselectGridItem() {
 		this.get.GridItems().eq(10).click();
@@ -39,7 +36,6 @@ class selectable {
 		this.get.GridItems().eq(7).click();
 		this.get.GridItems().eq(5).click();
 		this.get.GridItems().eq(12).click();
-		this.get.GridItems().should('have.class', 'active');
 	}
 	unselectMultipleGridItems() {
 		this.get.GridItems().eq(7).click();
