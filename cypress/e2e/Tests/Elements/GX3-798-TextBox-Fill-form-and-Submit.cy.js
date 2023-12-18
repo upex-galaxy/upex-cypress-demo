@@ -19,7 +19,11 @@ describe('GX3-798 | TS: ToolsQA | Elements | Text Box', () => {
 		cy.get('textarea#currentAddress').type('j_CurrentAddress');
 		cy.get('textarea#permanentAddress').type('j_PermanentAddress');
 		cy.get('#submit').click();
+
 		//Assertions
+		cy.get('#userName').should('contains.text', j_UserName);
+		cy.get('#userEmail').should('contains.text', j_UserEmails);
+		cy.get('#userName').should('contains.text', j_UserName);
 		cy.get('#userName').should('contains.text', j_UserName);
 	});
 
