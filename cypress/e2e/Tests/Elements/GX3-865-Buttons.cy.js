@@ -1,6 +1,6 @@
 describe('GX3-865 | demoQA | Buttons');
 
-it('simple', () => {
+it('buttons', () => {
 	cy.visit('https://demoqa.com/buttons');
 });
 
