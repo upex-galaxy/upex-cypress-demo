@@ -73,7 +73,7 @@ jobs:
               uses: rtCamp/action-slack-notify@v2.2.0
               env:
                   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-                  SLACK_USERNAME: Ariel Jusid✨
+                  SLACK_USERNAME: Ari✨
                   SLACK_MESSAGE: ':test_tube: Tests run in ToolsQA: User Story Test Execution is Done and updated in Jira :rocket:'
                   SLACK_COLOR: ${{ job.status }}
                   SLACK_ICON: https://i.imgur.com/q9kvQCp_d.webp?maxwidth=760&fidelity=grand
