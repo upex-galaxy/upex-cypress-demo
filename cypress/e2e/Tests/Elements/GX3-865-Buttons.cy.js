@@ -16,7 +16,7 @@ describe('865 | demoQA | Buttons', () => {
 	});
 
 	it('866 | TC3: Validar boton click izquierdo', () => {
-		cy.get('#86yAK').should('be.visible').click();
-		cy.get('#rightClickMessage').should('have.text', 'You have done a dynamic click');
+		cy.get('[class$="btn-primary"]').eq(2).should('be.visible').click();
+		cy.get('#dynamicClickMessage').should('have.text', 'You have done a dynamic click');
 	});
 });
