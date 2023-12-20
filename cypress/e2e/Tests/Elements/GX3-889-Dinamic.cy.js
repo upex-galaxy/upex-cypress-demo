@@ -1,5 +1,5 @@
 import { Dinamico } from '@pages/Elements/GX3-889-Dinamic';
-describe('US GX3-888 | TS: ToolsQA | Elements | Dynamic Properties', () => {
+describe('US GX3-889 | TS: ToolsQA | Elements | Dynamic Properties', () => {
 	beforeEach('Estar en la pagina de demoqa', () => {
 		cy.visit('https://demoqa.com/dynamic-properties');
 	});
