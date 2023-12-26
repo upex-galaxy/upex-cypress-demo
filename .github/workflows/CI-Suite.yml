@@ -56,8 +56,8 @@ jobs:
                   browser: electron
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
                       yarn file cypress/e2e/Tests/Widgets/GX3-1005-DropdownMenu.cy.js
-
-            - name: ✅Import Test Results to Xray
+           
+           - name: ✅Import Test Results to Xray
               if: always()
               uses: mikepenz/xray-action@v2
               with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
