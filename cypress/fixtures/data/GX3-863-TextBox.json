@@ -1,0 +1,46 @@
+{
+    "FullName": {
+        "input": "[type='text']",
+        "data": {
+            "filled": "Andre",
+            "empty": ""
+        }
+    },
+    "CurrentAddress": {
+        "input": "#currentAddress",
+        "data": {
+            "filled": "constitución 195",
+            "empty": ""
+        }
+    },
+    "PermanentAddress": {
+        "input": "#permanentAddress",
+        "data": {
+            "filled": "Anibal Pinto 1270",
+            "empty": ""
+        }
+    },
+    "Email": {
+        "input": "[type='email']",
+        "data": {
+            "valid": "castm@gmail.com",
+            "invalid": {
+                "invalidEmail1": "castmgmail.com",
+                "invalidEmail2": "@gmail.com",
+                "invalidEmail3": "castm@.com",
+                "invalidEmail4": "castm@gmailcom",
+                "invalidEmail": "castm@gmail.c"
+            }
+        }
+    },
+    "SubmitButton": ".btn.btn-primary",
+    "Submitted": {
+        "output": "#output",
+        "data": {
+            "FullName": "#name",
+            "Email": "#email",
+            "CurrentAddress": "#currentAddress.mb-1",
+            "PermanentAddress": "#permanentAddress.mb-1"
+        }
+    }
+}
