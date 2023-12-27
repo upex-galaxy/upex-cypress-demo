@@ -8,42 +8,42 @@ describe('GX3-798 | TS: ToolsQA | Elements | Text Box', () => {
 	//casos
 	it('799|TC1: Validar que se realiza el envio exitoso cuando los datos son ingresados correctamente', () => {
 		//constantes
-		const j_UserName = 'Janetzi';
-		const j_UserEmails = 'janetzi@gmail.com';
-		const j_CurrentAddress = 'Direccion principal';
-		const j_PermanentAddress = ' Direccion secundaria';
+		const jUserName = 'Janetzi';
+		const jUserEmails = 'janetzi@gmail.com';
+		const jCurrentAddress = 'Direccion principal';
+		const jPermanentAddress = 'Direccion secundaria';
 		//steps
-		cy.get('input#userName').type(j_UserName);
-		cy.get('input#userEmail').type(j_UserEmails);
-		cy.get('textarea#currentAddress').type(j_CurrentAddress);
-		cy.get('textarea#permanentAddress').type(j_PermanentAddress);
+		cy.get('input#userName').type(jUserName);
+		cy.get('input#userEmail').type(jUserEmails);
+		cy.get('textarea#currentAddress').type(jCurrentAddress);
+		cy.get('textarea#permanentAddress').type(jPermanentAddress);
 		cy.get('#submit').click();
 
 		//Assertion
-		cy.get('p#name').should('contains.text', j_UserName);
-		cy.get('p#email').should('contains.text', j_UserEmails);
-		cy.get('p#currentAddress').should('contains.text', j_CurrentAddress);
-		cy.get('p#permanentAddress').should('contains.text', j_PermanentAddress);
+		cy.get('p#name').should('contains.text', jUserName);
+		cy.get('p#email').should('contains.text', jUserEmails);
+		cy.get('p#currentAddress').should('contains.text', jCurrentAddress);
+		cy.get('p#permanentAddress').should('contains.text', jPermanentAddress);
 	});
 
 	it('799|TC2: Validar que se realiza el envio exitoso cuando  solo el campo emails tiene un valor valido el resto de los campos es vacio', () => {
-		const j_UserEmails_tc2 = 'janetzi@gmail.com';
+		const jEmail02 = 'janetzi@gmail.com';
 
 		cy.get('input#userName').should('be.empty');
-		cy.get('input#userEmail').type(j_UserEmails_tc2);
+		cy.get('input#userEmail').type(jEmail02);
 		cy.get('textarea#currentAddress').should('be.empty');
 		cy.get('textarea#permanentAddress').should('be.empty');
 		cy.get('#submit').click();
 
 		//Assertion
-		cy.get('p#email').should('contains.text', j_UserEmails_tc2);
+		cy.get('p#email').should('contains.text', jEmail02);
 	});
 
 	it('799|TC3: Validar que el envio es fallido cuando el campo email no contiene @.', () => {
 		//const
-		const j_UserEmails_tc3 = 'janetzigmail.com';
+		const jEmail03 = 'janetzigmail.com';
 		//steps
-		cy.get('input#userEmail').type(j_UserEmails_tc3);
+		cy.get('input#userEmail').type(jEmail03);
 		cy.get('#submit').click();
 
 		//Assertion
@@ -51,9 +51,9 @@ describe('GX3-798 | TS: ToolsQA | Elements | Text Box', () => {
 	});
 
 	it('799|TC4: Validar que el envio es fallido cuando el campo email No contiene (mínimo) 1 carácter alfanumérico antes de @', () => {
-		const j_UserEmails_tc4 = 'janetzi@';
+		const jEmail04 = 'janetzi@';
 		//steps
-		cy.get('input#userEmail').type(j_UserEmails_tc4);
+		cy.get('input#userEmail').type(jEmail04);
 		cy.get('#submit').click();
 
 		//Assertion
@@ -61,9 +61,9 @@ describe('GX3-798 | TS: ToolsQA | Elements | Text Box', () => {
 	});
 
 	it('799|TC5: Validar que el envio es fallido cuando el campo email No contiene (mínimo) 1 carácter alfanumérico después de @', () => {
-		const j_UserEmails_tc5 = '@gmail.com';
+		const jEmail05 = '@gmail.com';
 		//steps
-		cy.get('input#userEmail').type(j_UserEmails_tc5);
+		cy.get('input#userEmail').type(jEmail05);
 		cy.get('#submit').click();
 
 		//Assertion
@@ -71,9 +71,9 @@ describe('GX3-798 | TS: ToolsQA | Elements | Text Box', () => {
 	});
 
 	it('799|TC6: Validar que el envio es fallido cuando el campo email No contiene "." después: 1 carácter alfanumérico después de @', () => {
-		const j_UserEmails_tc6 = '@gmailcom';
+		const jEmail06 = '@gmailcom';
 		//steps
-		cy.get('input#userEmail').type(j_UserEmails_tc6);
+		cy.get('input#userEmail').type(jEmail06);
 		cy.get('#submit').click();
 
 		//Assertion
@@ -81,9 +81,9 @@ describe('GX3-798 | TS: ToolsQA | Elements | Text Box', () => {
 	});
 
 	it('799|TC7: Validar que el envio es fallido cuando el campo email No contiene (mínimo) 2 caracteres alfanuméricos después de .', () => {
-		const j_UserEmails_tc7 = '.com';
+		const jEmail07 = '.com';
 		//steps
-		cy.get('input#userEmail').type(j_UserEmails_tc7);
+		cy.get('input#userEmail').type(jEmail07);
 		cy.get('#submit').click();
 
 		//Assertion
