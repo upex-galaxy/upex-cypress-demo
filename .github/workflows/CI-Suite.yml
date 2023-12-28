@@ -66,7 +66,7 @@ jobs:
                   testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
                   testExecKey: 'GX3-805' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
-                  projectKey: 'GX3' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
+                  projectKey: 'GX3' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO .
 
             - name: 🔔Slack Notification of Done
               if: always()
