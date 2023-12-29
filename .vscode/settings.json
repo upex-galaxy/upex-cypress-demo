@@ -1,6 +1,6 @@
 {
 	"workbench.settings.editor": "json",
-	"workbench.colorTheme": "freeCodeCamp Dark Theme",
+	"workbench.colorTheme": "Andromeda Italic",
 	"workbench.iconTheme": "vscode-icons",
 	"cSpell.language": "en,es",
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
@@ -67,9 +67,7 @@
 	"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
 	"cucumberautocomplete.stepRegExSymbol": "'",
 	"git.enableSmartCommit": true,
-	"githubPullRequests.ignoredPullRequestBranches": [
-		"main"
-	],
+	"githubPullRequests.ignoredPullRequestBranches": ["main"],
 	"workbench.colorCustomizations": {
 		"activityBar.activeBackground": "#93e6fc",
 		"activityBar.background": "#93e6fc",
@@ -88,6 +86,5 @@
 		"titleBar.activeForeground": "#15202b",
 		"titleBar.inactiveBackground": "#61dafb99",
 		"titleBar.inactiveForeground": "#15202b99"
-	},
-	"peacock.color": "#61dafb"
+	}
 }
