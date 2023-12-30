@@ -7,11 +7,7 @@ describe('🧪GX3-962 | TS: ⚡️ToolsQA | Widgets | Dropdown - Select Menu', (
 	});
 
 	it('962 | TC1: Validar que elemento aleatorio seleccionado en “Select Value” se muestre en input y se cierre menú', () => {
-		cy.get('#withOptGroup').click();
-		cy.get('.css-1s9izoc').children()
-			.then(cy.log);
-			// .then(n => Cypress._.random(0, n - 1))
-			// .then(cy.log);
+		
 	});
 	
 
