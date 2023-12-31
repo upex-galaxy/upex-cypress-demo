@@ -1,3 +1,5 @@
+import { removeLogs } from '@helper/RemoveLogs';
+
 describe('GX3-928 | TX: ⚡️ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	beforeEach('Acceso a la pagina', () => {
 		cy.visit('/text-box');
