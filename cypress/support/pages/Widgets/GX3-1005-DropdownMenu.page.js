@@ -1,10 +1,10 @@
 class Dropdown {
 	get = {
 		selectorValue: () => cy.get('#withOptGroup'),
-		selectorValueList: () => cy.get('.css-11unzgr'),
+		selectorValueList: () => cy.get('[id*="react-select-2-option"]'),
 		selectorValueOption1: () => cy.get('#react-select-2-option-0-0'),
 		selectorOne: () => cy.get('#selectOne'),
-		selectorOneList: () => cy.get('.css-1s9izoc'),
+		selectorOneList: () => cy.get('[id*="react-select-3-option"]'),
 		selectorOneOption0: () => cy.get('#react-select-3-option-0-0'),
 		selectorOldMenu: () => cy.get('#oldSelectMenu'),
 		indicadorMultiMenu: () => cy.get('.css-tlfecz-indicatorContainer'),
@@ -14,21 +14,17 @@ class Dropdown {
 		selectorMultiMenu: () => cy.get('.css-1hwfws3'),
 		selectorStandard: () => cy.get('#cars'),
 	};
-	ClickSelectorValue() {
+	ClickSelectorValueDropDown() {
 		this.get.selectorValue().click();
-		return this.get.selectorValueList();
 	}
-	ClickSelectorValue1() {
-		this.get.selectorValueOption1().click();
-		return this.get.selectorValue();
+	SelectValueListRandom(num) {
+		this.get.selectorValueList().eq(num).click();
 	}
-	ValidarSelectorList() {
+	ClickSelectOne() {
 		this.get.selectorOne().click();
-		return this.get.selectorOneList();
 	}
-	SelectOneOption() {
-		this.get.selectorOneOption0().click();
-		return this.get.selectorOne();
+	SelectOneOptionRandom(num) {
+		this.get.selectorOneList().eq(num).click();
 	}
 	SelectOldMenu() {
 		return this.get.selectorOldMenu().select('Green');
@@ -46,4 +42,4 @@ class Dropdown {
 		return this.get.selectorStandard().select(['Volvo', 'Saab', 'Opel']);
 	}
 }
-export const DropDown = new Dropdown();
+export const DropDownPage = new Dropdown();
