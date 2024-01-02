@@ -1,4 +1,4 @@
-import { removeLogs } from '@helper/RemoveLogs';
+
 
 describe('GX3-928 | TX: ⚡️ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	beforeEach('Acceso a la pagina', () => {
@@ -35,7 +35,7 @@ describe('GX3-928 | TX: ⚡️ToolsQA | Elements | Text Box: Fill form and Submi
 		});
 	});
     
-	it('929 | TC3: Validar ingresar mail sin @ ', () => {
+	it('929 | TC3: Validar campo mail ingresando sin @ ', () => {
 		cy.fixture('data/GX3-928-TextBox').then(ok => {
 			cy.get(ok.Email.input).type(ok.Email.data.invalido1);
 
@@ -45,7 +45,7 @@ describe('GX3-928 | TX: ⚡️ToolsQA | Elements | Text Box: Fill form and Submi
 		});
 	});
     
-	it('929 | TC4: Validar ingresar sin ningún dígito alfanumérico antes del símbolo @ ', () => {
+	it('929 | TC4: Validar campo mail ingresando sin ningún dígito alfanumérico antes del símbolo @ ', () => {
 		cy.fixture('data/GX3-928-TextBox').then(ok => {
 			cy.get(ok.FullName.input).type(ok.FullName.data.valido);
 			cy.get(ok.Email.input).type(ok.Email.data.invalido2);
@@ -56,7 +56,7 @@ describe('GX3-928 | TX: ⚡️ToolsQA | Elements | Text Box: Fill form and Submi
 		});
 	});
     
-	it('929 | TC5: Validar ingresar sin ningún dígito alfanumérico después del símbolo @ ', () => {
+	it('929 | TC5: Validar campo mail ingresando sin ningún dígito alfanumérico después del símbolo @ ', () => {
 		cy.fixture('data/GX3-928-TextBox').then(ok => {
 			cy.get(ok.FullName.input).type(ok.FullName.data.valido);
 			cy.get(ok.Email.input).type(ok.Email.data.invalido3);
@@ -68,7 +68,7 @@ describe('GX3-928 | TX: ⚡️ToolsQA | Elements | Text Box: Fill form and Submi
 		});
 	});
     
-	it('929 | TC6: Validar ingresar con 1 dígito alfanumérico después del punto (.) ', () => {
+	it('929 | TC6: Validar campo mail ingresando con 1 dígito alfanumérico después del punto (.) ', () => {
 		cy.fixture('data/GX3-928-TextBox').then(ok => {
 			cy.get(ok.FullName.input).type(ok.FullName.data.valido);
 			cy.get(ok.Email.input).type(ok.Email.data.invalido5);
@@ -79,7 +79,7 @@ describe('GX3-928 | TX: ⚡️ToolsQA | Elements | Text Box: Fill form and Submi
 		});
 	});
     
-	it('929 | TC7: Validar ingresar sin punto(.) en el mail', () => {
+	it('929 | TC7: Validar campo email ingresando sin punto(.) en el mail', () => {
 		cy.fixture('data/GX3-928-TextBox').then(ok => {
 			cy.get(ok.FullName.input).type(ok.FullName.data.valido);
 			cy.get(ok.Email.input).type(ok.Email.data.invalido4);
