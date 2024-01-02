@@ -14,5 +14,16 @@
 			"value1": "A root option",
 			"value2": "Another root option"
 		}
+	},
+
+	"selectOne": {
+		"title": {
+			"option1": "Dr.",
+			"option2": "Mr.",
+			"option3": "Mrs.",
+			"option4": "Ms.",
+			"option5": "Prof.",
+			"option6": "Other"
+		}
 	}
 }
