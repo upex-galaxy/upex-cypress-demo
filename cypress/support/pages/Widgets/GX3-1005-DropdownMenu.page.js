@@ -8,7 +8,7 @@ class Dropdown {
 		selectorOneOption0: () => cy.get('#react-select-3-option-0-0'),
 		selectorOldMenu: () => cy.get('#oldSelectMenu'),
 		indicadorMultiMenu: () => cy.get('.css-tlfecz-indicatorContainer'),
-		selectorMultiMenuList: () => cy.get('.css-26l3qy-menu'),
+		selectorMultiMenuList: () => cy.get('[id*="react-select-4-option"]'),
 		selectorMultiMenu1: () => cy.get('#react-select-4-option-1'),
 		selectorMultimenu2: () => cy.get('#react-select-4-option-2'),
 		selectorMultiMenu: () => cy.get('.css-1hwfws3'),
@@ -33,10 +33,8 @@ class Dropdown {
 		this.get.indicadorMultiMenu().eq(2).click();
 		return this.get.selectorMultiMenuList();
 	}
-	SelectMultiMenu() {
-		this.get.selectorMultiMenu1().click();
-		this.get.selectorMultimenu2().click();
-		return this.get.selectorMultiMenu().eq(2);
+	SelectMultiMenu(num) {
+		this.get.selectorMultiMenuList().eq(num).click();
 	}
 	SelectMenuStandard() {
 		return this.get.selectorStandard().select(['Volvo', 'Saab', 'Opel']);

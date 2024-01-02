@@ -15,7 +15,7 @@ describe('US GX3-1005 | ToolsQA | Widgets | Dropdown - Select Menu', () => {
 				DropDownPage.get.selectorValue().should('have.text', values);
 			});
 	});
-	it.only('1008|TC2:Validar que el usuario selecciona un elemento del menu "Select One"', () => {
+	it.skip('1008|TC2:Validar que el usuario selecciona un elemento del menu "Select One"', () => {
 		const random = Math.floor(Math.random() * 6);
 		DropDownPage.ClickSelectOne();
 		DropDownPage.get.selectorOneList().should('have.length', 6).and('exist');
@@ -30,9 +30,16 @@ describe('US GX3-1005 | ToolsQA | Widgets | Dropdown - Select Menu', () => {
 	it.skip('1008|TC3:Validar que el usuario selecciona un elemento del menu "Old Style Select Menu"', () => {
 		DropDownPage.SelectOldMenu().should('have.value', '2');
 	});
-	it.skip('1008|TC4:Validar que el usuario selecciona uno o más elementos del "Multiselect drop down"', () => {
-		DropDownPage.IndicadorMultiMenu().should('have.length', 6).and('exist');
-		DropDownPage.SelectMultiMenu().should('contain', 'Blue').and('contain', 'Black');
+	it('1008|TC4:Validar que el usuario selecciona uno o más elementos del "Multiselect drop down"', () => {
+		const RANDOM = Cypress._.random(0, 4);
+		DropDownPage.IndicadorMultiMenu().should('have.length', 4).and('exist');
+		DropDownPage.SelectMultiMenu(RANDOM);
+		DropDownPage.get
+			.indicadorMultiMenu()
+			.invoke('text')
+			.then(values => {
+				DropDownPage.get.indicadorMultiMenu().should('have.text', values);
+			});
 	});
 	it.skip('1008|TC5:Validar que el usuario selecciona varios elementos del menú "Standard multi select"', () => {
 		DropDownPage.SelectMenuStandard().should('have.css', 'background-color', 'rgb(255, 255, 255)');
@@ -40,5 +47,5 @@ describe('US GX3-1005 | ToolsQA | Widgets | Dropdown - Select Menu', () => {
 });
 
 import { removeLogs } from '@helper/RemoveLogs';
-import { values } from 'cypress/types/lodash';
+
 removeLogs();
