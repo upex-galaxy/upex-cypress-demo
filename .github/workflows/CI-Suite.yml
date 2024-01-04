@@ -55,7 +55,7 @@ jobs:
               with:
                   browser: electron
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                      yarn file cypress\e2e\Tests\DemoQA\GX3-1107-Buttons.cy.js
+                      yarn file cypress/e2e/Tests/DemoQA/GX3-1107-Buttons.cy.js
 
             - name: ✅Import Test Results to Xray
               if: always()
