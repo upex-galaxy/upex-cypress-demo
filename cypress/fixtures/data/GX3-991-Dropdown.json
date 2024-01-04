@@ -1,0 +1,23 @@
+{
+    "SelectValue": {
+        "input": "#withOptGroup",
+        "data": {
+            "exacta": "A root option",
+            "parcial": "Grou"
+        }
+    },
+    "SelectOne": {
+        "input": "#selectOne",
+        "data": {
+            "exacta": "Mr.",
+            "parcial": "r"
+        }
+    },
+    "MultiSelect": {
+        "input": ".css-2b097c-container",
+        "data": {
+            "exacta": "Blue",
+            "parcial": "e"
+        }
+    }
+}
