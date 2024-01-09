@@ -19,7 +19,7 @@ describe('US GX3-1005 | ToolsQA | Widgets | Dropdown - Select Menu', () => {
 		const random = Math.floor(Math.random() * 6);
 		DropDownPage.ClickSelectOne();
 		DropDownPage.get.selectorOneList().should('have.length', 6).and('exist');
-		DropDownPage.SelectOneOptionRandom(random);
+		DropDownPage.ClickSelectOneOptionRandom(random);
 		DropDownPage.get
 			.selectorOne()
 			.invoke('text')
@@ -32,8 +32,8 @@ describe('US GX3-1005 | ToolsQA | Widgets | Dropdown - Select Menu', () => {
 	});
 	it('1008|TC4:Validar que el usuario selecciona uno o más elementos del "Multiselect drop down"', () => {
 		const RANDOM = Cypress._.random(0, 4);
-		DropDownPage.IndicadorMultiMenu().should('have.length', 4).and('exist');
-		DropDownPage.SelectMultiMenu(RANDOM);
+		DropDownPage.ClickIndicadorMultiMenu().should('have.length', 4).and('exist');
+		DropDownPage.ClickSelectMultiMenu(RANDOM);
 		DropDownPage.get
 			.indicadorMultiMenu()
 			.invoke('text')

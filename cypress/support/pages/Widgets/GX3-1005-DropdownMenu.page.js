@@ -23,17 +23,17 @@ class Dropdown {
 	ClickSelectOne() {
 		this.get.selectorOne().click();
 	}
-	SelectOneOptionRandom(num) {
+	ClickSelectOneOptionRandom(num) {
 		this.get.selectorOneList().eq(num).click();
 	}
 	SelectOldMenu() {
 		return this.get.selectorOldMenu().select('Green');
 	}
-	IndicadorMultiMenu() {
+	ClickIndicadorMultiMenu() {
 		this.get.indicadorMultiMenu().eq(2).click();
 		return this.get.selectorMultiMenuList();
 	}
-	SelectMultiMenu(num) {
+	ClickSelectMultiMenu(num) {
 		this.get.selectorMultiMenuList().eq(num).click();
 	}
 	SelectMenuStandard() {
