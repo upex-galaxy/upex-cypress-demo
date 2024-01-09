@@ -1,4 +1,4 @@
-import the from '@data/GX-40435-TextBox.json';
+import the from '@data/GX3-798-Textbox-fill-form-and-submit.json';
 
 describe('TS: ✅ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	beforeEach('Precondición: Usuario debe situarse en el formulario', () => {

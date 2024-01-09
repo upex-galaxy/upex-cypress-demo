@@ -1,0 +1,19 @@
+{
+	"Name": {
+		"inputName": "#userName",
+		"data": "Janetzi"
+	},
+	"Email": {
+		"inputEmail": "#userEmail",
+		"Data": {
+			"ValidEmail": "janetzi.jackiewicz@gmail.com",
+			"InvalidEmail": {
+				"InvalidEmail1": "janetzigmail.com'",
+				"InvalidEmail2": "janetzi@",
+				"InvalidEmail3": "@gmail.com",
+				"InvalidEmail4": "@gmailcom",
+				"InvalidEmail5": ".com"
+			}
+		}
+	}
+}
