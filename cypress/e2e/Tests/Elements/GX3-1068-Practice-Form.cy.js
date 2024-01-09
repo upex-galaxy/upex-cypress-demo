@@ -4,9 +4,8 @@ describe('GX3-1067 | TS: ToolsQA | Forms | Practice Form', () => {
 		cy.visit('/automation-practice-form');
 		cy.url().should('contain', 'automation-practice-form');
 	});
-    
+
 	it('929 | TC1: Validar ingresar data válida en los campos', () => {
-		
 		cy.get('#firstName').type(faker.name.firstName());
 		cy.get('#lastName').type(faker.name.lastName());
 		cy.get('#userEmail').type(faker.internet.email());
@@ -14,7 +13,9 @@ describe('GX3-1067 | TS: ToolsQA | Forms | Practice Form', () => {
 		cy.get('[for="hobbies-checkbox-1"]').click();
 		//
 		cy.get('#userNumber').type(faker.phone.number());
-		cy.get('#dateOfBirthInput').type(faker.date.birthdate());
-			
-	});	
+		cy.get('#dateOfBirthInput').click();
+		cy.xpath('(//div[@aria-label="Choose Sunday, January 14th, 2024"])[1]').click();
+		cy.get('#subjectsContainer').type('información');
+		
+	});
 });
