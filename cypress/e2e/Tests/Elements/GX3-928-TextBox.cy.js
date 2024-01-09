@@ -88,6 +88,7 @@ describe('GX3-928 | TX: ⚡️ToolsQA | Elements | Text Box: Fill form and Submi
 			cy.get(ok.SubmitButton).click();
 			cy.get('#name').should('not.exist');
 			cy.get(ok.Email.input).should('have.class', 'mr-sm-2 field-error form-control');
+			//
 		});
 	});
 });
