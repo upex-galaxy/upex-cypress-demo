@@ -1,0 +1,46 @@
+{
+	"FullName": {
+		"input": "[type='text']",
+		"data": {
+			"filled": "Jane Doe",
+			"empty": ""
+		}
+	},
+	"CurrentAddress": {
+		"input": "#currentAddress",
+		"data": {
+			"filled": "Calle 10 de Agosto y Sucre",
+			"empty": ""
+		}
+	},
+	"PermanentAddress": {
+		"input": "#permanentAddress",
+		"data": {
+			"filled": "Calle Diego Portales 815-37",
+			"empty": ""
+		}
+	},
+	"Email": {
+		"input": "[type='email']",
+		"data": {
+			"valid": "prueba@gmail.com",
+			"invalid": {
+				"invalidEmail1": "pruebagmail.com",
+				"invalidEmail2": "@gmail.com",
+				"invalidEmail3": "prueba@.com",
+				"invalidEmail4": "prueba@gmailcom",
+				"invalidEmail": "prueba@gmail.c"
+			}
+		}
+	},
+	"SubmitButton": ".btn.btn-primary",
+	"Submitted": {
+		"output": "#output",
+		"data": {
+			"FullName": "#name",
+			"Email": "#email",
+			"CurrentAddress": "#currentAddress.mb-1",
+			"PermanentAddress": "#permanentAddress.mb-1"
+		}
+	}
+}
