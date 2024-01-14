@@ -1,0 +1,41 @@
+{
+	"recommendations": [
+		//! Themes:
+		"vscode-icons-team.vscode-icons",
+		"PKief.material-icon-theme",
+		"EliverLara.andromeda",
+		"johnpapa.winteriscoming",
+		"RobbOwen.synthwave-vscode",
+		//! Helper:
+		"leizongmin.node-module-intellisense",
+		"christian-kohler.npm-intellisense",
+		"christian-kohler.path-intellisense",
+		"VisualStudioExptTeam.vscodeintellicode",
+		"streetsidesoftware.code-spell-checker",
+		"streetsidesoftware.code-spell-checker-spanish",
+		"aaron-bond.better-comments",
+		"rssowl.copy-relative-path-posix",
+		"usernamehw.errorlens",
+		"kisstkondoros.vscode-gutter-preview",
+		"mrrefactoring.polacode-fixed-edition",
+		"formulahendry.code-runner",
+		"yoavbls.pretty-ts-errors",
+		//! Formatters:
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
+		"rvest.vs-code-prettier-eslint",
+		"alexkrechik.cucumberautocomplete",
+		//! Git Controls:
+		"mhutchie.git-graph",
+		"donjayamanne.githistory",
+		"eamodio.gitlens",
+		//! General Frameworks:
+		"CucumberOpen.cucumber-official",
+		"ms-vscode.vscode-typescript-next",
+		"xabikos.JavaScriptSnippets",
+		//! Project main Framework Extensions:
+		"Shelex.vscode-cy-helper",
+		"JosefBiehler.cypress-fixture-intellisense",
+		"ryansong-cy-snippets.cy-snippets"
+	]
+}

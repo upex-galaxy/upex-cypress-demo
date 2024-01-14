@@ -1,0 +1,79 @@
+#* 🧙🏻‍♂️BIENVENIDO A LOS PIPELINES DE CONTINUOUS INTEGRATION DE "ARI - Hija de Aurora"!tu ID del TX
+#* 🤖Este Pipeline de CI se activa al PUSHEAR, y consiste en ejecutar los tests de una US e importar los resultados a Jira!🚀
+#* 👩🏻‍🔬Para utilizar este Pipeline de Ari, sigue los siguientes pasos:
+#todo 1ro: debes modificar el script: "npm run file" + tu archivo de Prueba Ejecutable (ver ejemplo en este archivo)
+#todo 2do: debes modificar la propiedad: "testExecKey:" + tu ID del TX de Jira para importar automáticamente el resultado.
+#todo 3ro: guarda los cambios en el repositorio local (git add + git commit) y envíalos al Repo Remoto (git push)
+#todo Expected Result: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí.
+
+name: 🤖CI run SanityTest Execution🧪
+run-name: ${{github.actor}}👨🏻‍🔬 ran SanityTest in ${{github.ref_name}}
+
+on:
+    push:
+        branches-ignore:
+            - main
+            - QA
+
+jobs:
+    SanityTest:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 💻Checkout
+              uses: actions/checkout@v3
+
+            - name: 💿Install Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - name: 💿Yarn Setup
+              uses: DerYeger/yarn-setup-action@master
+              with:
+                  node-version: 16
+
+            - name: 🧬Install All Dependencies
+              run: |
+                  yarn
+                  yarn cypress cache list
+
+            - name: 💾Download Cucumber-Formatter
+              uses: suisei-cn/actions-download-file@v1.3.0
+              with:
+                  url: '[Linux-cucumber-formatter](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-linux-amd64)'
+                  target: cucumber-formatter/
+                  auto-match: true
+
+            - name: 🔧Install Cucumber-Formatter
+              run: |
+                  mv cucumber-formatter/cucumber-json-formatter-linux-amd64 cucumber-formatter/cucumber-json-formatter
+                  chmod +x cucumber-formatter/cucumber-json-formatter
+
+            - name: 🧪Cypress Run Test Coverage
+              uses: cypress-io/github-action@v4
+              with:
+                  browser: electron
+                  command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
+                      yarn file cypress/e2e/Tests/How-to/API-testing/exampleAPI.cy.js
+
+            # - name: ✅Import Test Results to Xray
+            #   if: always()
+            #   uses: mikepenz/xray-action@v2
+            #   with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
+            #       username: ${{secrets.XRAY_CLIENT_ID}}
+            #       password: ${{secrets.XRAY_CLIENT_SECRET}}
+            #       testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
+            #       testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
+            #       testExecKey: 'GX-40166' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+            #       projectKey: 'GX2' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
+
+            # - name: 🔔Slack Notification of Done
+            #   if: always()
+            #   uses: rtCamp/action-slack-notify@v2.2.0
+            #   env:
+            #       SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+            #       SLACK_USERNAME: Ari✨
+            #       SLACK_MESSAGE: ':test_tube: User Story Test Execution is Done and updated in Jira :rocket:'
+            #       SLACK_COLOR: ${{ job.status }}
+            #       SLACK_ICON: https://i.imgur.com/q9kvQCp_d.webp?maxwidth=760&fidelity=grand

@@ -1,0 +1,73 @@
+{
+	"workbench.settings.editor": "json",
+	"workbench.colorTheme": "Andromeda Italic",
+	"workbench.iconTheme": "vscode-icons",
+	"cSpell.language": "en,es",
+	"terminal.integrated.defaultProfile.windows": "Git Bash",
+	"[javascript]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"[Typescript]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"[feature]": {
+		"editor.defaultFormatter": "alexkrechik.cucumberautocomplete"
+	},
+	"files.associations": {
+		"*.feature": "feature"
+	},
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+	"editor.quickSuggestions": {
+		"comments": false,
+		"strings": true,
+		"other": true
+	},
+	"editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+	"editor.formatOnSaveMode": "file", // required to format on save
+	"files.autoSave": "onFocusChange", // optional but recommended
+	"vs-code-prettier-eslint.prettierLast": true, // set as "true" to run 'prettier' last not first
+	"editor.formatOnType": true,
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
+	"editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+	"editor.tabCompletion": "on",
+	"editor.lineHeight": 20,
+	"editor.cursorBlinking": "expand",
+	"eslint.validate": ["typescript", "javascript", "ts", "js"],
+	"eslint.format.enable": true,
+	"eslint.codeAction.showDocumentation": {
+		"enable": true
+	},
+	"cSpell.enableFiletypes": ["cucumber"],
+	"cSpell.autoFormatConfigFile": true,
+	"cucumber.features": ["*/**/.feature"],
+	"cucumber.glue": ["*/**/.ts", "*/**/.js"],
+	"cypressHelper.menuItems": {
+		"OpenCypress": false,
+		"RunCypress": false,
+		"GenerateCustomCommandTypes": true,
+		"GoToCustomCommand": false,
+		"FindCustomCommandReferences": true,
+		"FindStepDefinitionReferences": true,
+		"SchemaGenerator": false,
+		"ParseHAR": false,
+		"mockAutocomplete": false
+	},
+	"cucumberautocomplete.strictGherkinCompletion": true,
+	"cucumberautocomplete.strictGherkinValidation": false,
+	"cucumberautocomplete.customParameters": [
+		{
+			"parameter": "{ab}",
+			"value": "(a|b)"
+		}
+	],
+	"cucumberautocomplete.skipDocStringsFormat": true,
+	"cucumberautocomplete.formatConfOverride": {
+		"But": "relative"
+	},
+	"cucumberautocomplete.onTypeFormat": true,
+	"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
+	"cucumberautocomplete.stepRegExSymbol": "'",
+	"git.enableSmartCommit": true
+}

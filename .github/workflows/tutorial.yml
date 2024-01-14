@@ -1,0 +1,69 @@
+#!ESTE ARCHIVO ES UN TEMPLATE, NO CAMBIARLO EN ABSOLUTO.
+name: 🧪Example Test in CI Pipeline with Cypress
+run-name: ${{github.actor}}👨🏻‍🔬 ran Test in ${{github.ref_name}}
+
+# on:
+#     push:
+#         branches-ignore: [main, QA]
+#*Esto indica que se ejecutará con PUSH o MERGE en cualquier rama que no sea 'main' ni 'QA'
+
+on: [workflow_dispatch] #Esta opción es  para este Tutorial, para que no se ejecute en CI.
+
+jobs:
+    #* Este es un Nombre de este Job, puedes dejarlo como está.
+    TestSuite:
+        #* Este parámetro indica que se correrá en un Sistema Operativo. No cambiar.
+        runs-on: ubuntu-latest
+
+        #todo: Aquí a continuación vamos a definir qué vamos a correr de Postman:
+        steps:
+            #* Este paso, copia y pega literalmente el repo que tenemos.
+            - name: 📘Checkout Repo
+              uses: actions/checkout@v3
+              #* el Name es opcional, e indica el nombre del Step. Uses es la dependencia.
+
+            - name: 📦Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: 16
+              #* El with se usa para indicar qué parámetro se usa con la dependencia.
+              #* Considera que el with dependerá del uso de la dependencia.
+
+            - name: 💾Installing Dependencies
+              run: |
+                  npm ci
+                  npm list
+              #* El CI en npm es buena práctica para instalar dependencias en lugar de npm i, y list es para listar y verlas.
+
+              #* Esta dependencia de CI es exclusiva de Cypress que nos permite ejecutar sin necesidad de hacer el build.
+              #! AQUÍ DEBES MODIFICAR el Test Suite a ejecutar.
+              #todo: Agrega el tu path de archivo cypress en el npm run file:
+            - name: 🧪Cypress Run Test Coverage in Chrome
+              uses: cypress-io/github-action@v4
+              with:
+                  browser: chrome
+                  command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
+                      npm run file cypress/e2e/Tests/Elements/GX-10497-Buttons.cy.js
+
+            #* Esto es para guardar el reporte previamente generado y colocarlo en Github.
+            - name: 📊Upload Artifact ☕Mochawesome HTML Report
+              if: always()
+              uses: actions/upload-artifact@v3
+              with:
+                  name: mochaTest-report
+                  path: mochawesome-report
+            #* if: always() es un comando YML condicional: Si pasa o no el paso anterior, corre este Paso.
+
+            # #todo: IMPORTING JIRA...
+            # - name: ✅Import Test Results to Xray
+            #   if: always()
+            #   uses: mikepenz/xray-action@v2
+            #   with: #! EDITAR AQUÍ EL TEST EXECUTION (TX) DE JIRA DONDE SE CARGARÁN LOS TESTS:
+            #       username: ${{secrets.XRAY_CLIENT_ID}}
+            #       password: ${{secrets.XRAY_CLIENT_SECRET}}
+            #       testFormat: 'junit'
+            #       testPaths: 'reports/test-results.xml'
+            #       #todo: CAMBIA el TX por tu propio TX de tu tarea.
+            #       testExecKey: 'GX-1'
+            #       #todo: CAMBIA el ID del Proyecto del que pertenece tu tarea.
+            #       projectKey: 'GX'

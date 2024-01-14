@@ -1,0 +1,122 @@
+# 🧙🏻‍♂️BIENVENIDO A LOS PIPELINES DE CONTINUOUS INTEGRATION DE "ARI - Hija de Aurora"!
+# 🤖Este Pipeline de CI se activa al hacer MERGE a la rama "QA" o "MAIN",
+# 🧪Consiste en ejecutar TODOS los tests del Repo e importar los resultados a Jira!🚀
+# 👩🏻‍🔬Este Pipeline de CI NO DEBE EDITARSE sin permiso del QA Lead.
+
+name: 🤖CI run Regression in QA🧪
+run-name: ${{github.actor}}👨🏻‍🔬 run Regression in ${{github.ref_name}}
+
+on:
+    push:
+        branches:
+            - QA
+
+jobs:
+    RegressionTest:
+        name: regression
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 💻Checkout
+              uses: actions/checkout@v3
+
+            - name: 💿Install Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - name: 💿Yarn Setup
+              uses: DerYeger/yarn-setup-action@master
+              with:
+                  node-version: 16
+
+            - name: 🧬Install All Dependencies
+              run: |
+                  yarn
+                  yarn cypress cache list
+
+            - name: 🧪Cypress E2E Regression Test in Electron
+              uses: cypress-io/github-action@v4
+              with:
+                  browser: electron
+                  command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
+                      yarn cypress run
+
+            - name: 📬Generate XML Regression Report
+              if: always()
+              run: |
+                  yarn report:xml
+
+            # - name: ✅Import Test Results to Xray
+            #   if: always()
+            #   uses: mikepenz/xray-action@v2
+            #   with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
+            #       username: ${{secrets.XRAY_CLIENT_ID}}
+            #       password: ${{secrets.XRAY_CLIENT_SECRET}}
+            #       testFormat: 'junit'
+            #       testPaths: 'reports/regression-report.xml'
+            #       testExecKey: 'GX-3704' #todo: ToolsQA Regression Test Plan TX
+            #       projectKey: 'GX' #todo: UPEX LEVEL 1
+
+            - name: 📬Generate Allure Regression Report
+              if: always()
+              run: |
+                  yarn allure:ci
+
+            - name: 📊Upload Artifact Allure
+              if: always()
+              uses: actions/upload-artifact@v3
+              with:
+                  name: regression-allure-report
+                  path: reports/allure-report
+
+            # - name: 🔔Slack Notification of Done
+            #   if: always()
+            #   uses: rtCamp/action-slack-notify@v2.2.0
+            #   env:
+            #       SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+            #       SLACK_USERNAME: Ari✨
+            #       SLACK_MESSAGE: ':test_tube:TESTS RESULTS from ${{github.job}}:rocket:'
+            #       SLACK_COLOR: ${{ job.status }}
+            #       SLACK_ICON: https://i.imgur.com/q9kvQCp_d.webp?maxwidth=760&fidelity=grand
+
+    Create-PullRequest:
+        needs: [RegressionTest]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Create Pull Request
+              uses: actions/github-script@v6
+              with:
+                  script: |
+                      const { repo, owner } = context.repo;
+                      const result = await github.rest.pulls.create({
+                      title: '✅[QA REGRESSION PASSED]: Ready to Merge into MAIN',
+                      owner,
+                      repo,
+                      head: '${{ github.ref_name }}',
+                      base: 'main',
+                      body: [
+                          'Update branch by Automation Pipeline',
+                          '- (CI) Build Test Execution is Done✅',
+                          '- (CI) Integration-Regression Report is Done✅',
+                          '- (TestResults) No Conflicts in Repo Branch QA✅ '
+                      ].join('\n')
+                      });
+                      github.rest.issues.addLabels({
+                      owner,
+                      repo,
+                      issue_number: result.data.number,
+                      labels: ['autoPullRequest']
+                      });
+
+    AutoMerge-into-Main:
+        needs: [Create-PullRequest]
+        runs-on: ubuntu-latest
+        steps:
+            - name: 🧬Merge QA -> MAIN
+              uses: devmasx/merge-branch@master
+              with:
+                  type: now
+                  label_name: 'autoPullRequest'
+                  target_branch: 'main' #ESTE ES LA RAMA PRINCIPAL DEL REPOSITORIO PRESENTE
+                  github_token: ${{ github.token }}
