@@ -17,9 +17,9 @@
 		"rssowl.copy-relative-path-posix",
 		"usernamehw.errorlens",
 		"kisstkondoros.vscode-gutter-preview",
-		"mrrefactoring.polacode-fixed-edition",
 		"formulahendry.code-runner",
 		"yoavbls.pretty-ts-errors",
+		"adpyke.codesnap",
 		//! Formatters:
 		"dbaeumer.vscode-eslint",
 		"esbenp.prettier-vscode",
