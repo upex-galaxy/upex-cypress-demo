@@ -8,12 +8,10 @@ describe('GX3-1217 | ToolsQA | Elements | Upload and Download', () => {
 		Down.downloadButton();
 		cy.readFile('cypress/downloads/sampleFile.jpeg').should('exist');
 	});
-	it.only('GX3-1218 | TC2: Validar poder subir un archivo al seleccionar el Botón "Select a file".', () => {
+	it('GX3-1218 | TC2: Validar poder subir un archivo al seleccionar el Botón "Select a file".', () => {
 		load.loadFile();
 		cy.get('#uploadFile').selectFile('cypress/fixtures/images/upexgalaxy.gif');
-		
 	});
-
 });
 import { removeLogs } from '@helper/RemoveLogs';
 removeLogs();	

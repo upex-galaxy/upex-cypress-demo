@@ -5,7 +5,6 @@ class Download{
 	downloadButton() {
 		this.get.downloadButton().click();
 	}
-	
 }
 class LoadAFile{
 	get = {
