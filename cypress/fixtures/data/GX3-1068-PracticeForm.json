@@ -1,0 +1,21 @@
+{
+"input":{
+    "name": "#firstName",
+    "lastname": "#lastName"
+
+},
+"button":{
+"radio":"div[class*='custom-control-inline']"
+} ,
+
+
+"email":{
+    "invalido1": "laysecagmail.com",
+    "invalido2":"@gmail.com",
+    "invalido3": "layseca@gmailcom",
+    "invalido4": "layseca@gmail.c"
+    
+}
+
+
+}
