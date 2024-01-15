@@ -8,6 +8,5 @@
 	"trailingComma": "es5",
 	"bracketSameLine": true,
 	"proseWrap": "always",
-	"printWidth": 150,
-	"embeddedLanguageFormatting": "auto"
+	"printWidth": 150
 }

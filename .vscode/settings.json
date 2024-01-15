@@ -28,7 +28,7 @@
 	"files.autoSave": "onFocusChange", // optional but recommended
 	"vs-code-prettier-eslint.prettierLast": true, // set as "true" to run 'prettier' last not first
 	"editor.formatOnType": true,
-	"editor.formatOnPaste": true,
+	"editor.formatOnPaste": false,
 	"editor.formatOnSave": true,
 	"editor.bracketPairColorization.independentColorPoolPerBracketType": true,
 	"editor.tabCompletion": "on",
