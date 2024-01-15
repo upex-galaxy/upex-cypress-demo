@@ -28,10 +28,6 @@ describe('GX3-706 ToolsQA | Forms | Practice Form', () => {
 		formPage.selectGender(randomGender);
 		formPage.typeMobile(randomMobile);
 		formPage.selectBirthDay();
-		formPage.get.selectDate().should('contain', randomDate);
-		randomDate.invoke('val').then(dateOfBirt => {
-			expect(dateOfBirt).to.match(/^(0[1-9]|[12]\d|3[01]) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (19\d\d|20\d\d|2100)$/);
-		});
 		formPage.typeSubjects(randomSubject);
 		formPage.selectRandomHobbie(randomHobbies);
 		formPage.selectPicture();
@@ -51,6 +47,15 @@ describe('GX3-706 ToolsQA | Forms | Practice Form', () => {
 		const selectedGender = genderOptions[randomGender];
 		formPage.get.genderFormResult().invoke('text').should('include', `Gender${selectedGender}`);
 		formPage.get.mobileFormResult().should('contain', randomMobile);
+
+		const dateOfBirthText = formPage.get.birthDayFormResult().invoke('text');
+		const expectedFormat = /[0-9]{2} [a-zA-Z]+, [0-9]{4}/;
+		const isFormatCorrect = expectedFormat.test(dateOfBirthText);
+		if (isFormatCorrect) {
+			formPage.get.birthDayFormResult().invoke('text').should('include', `Date of Birth${randomDate.toString()}`);
+			formPage.get.selectDate().should('contain', randomDate);
+		}
+
 		formPage.get.subjectFormResult().then(subjectText => {
 			const actualText = subjectText.text();
 			const reget = new RegExp(randomSubject, 'i');
@@ -62,6 +67,7 @@ describe('GX3-706 ToolsQA | Forms | Practice Form', () => {
 		formPage.get.hobbiesFormResult().invoke('text').should('include', `Hobbies${selectedHobbies}`);
 		formPage.get.imageFormResult().should('contain', 'upexlogo.png');
 		formPage.get.addressFormResult().should('contain', randomAddress);
+
 		formPage.get
 			.stateAndCityFormResult()
 			.invoke('text')

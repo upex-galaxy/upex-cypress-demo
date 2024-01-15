@@ -30,6 +30,7 @@ class Formulario {
 		mailFormResult: () => cy.get('tr').eq(2),
 		genderFormResult: () => cy.get('tr').eq(3),
 		mobileFormResult: () => cy.get('tr').eq(4),
+		birthDayFormResult: () => cy.get('tr').eq(5),
 		subjectFormResult: () => cy.get('tr').eq(6),
 		hobbiesFormResult: () => cy.get('tr').eq(7),
 		imageFormResult: () => cy.get('tr').eq(8),
@@ -62,13 +63,9 @@ class Formulario {
 
 	selectRandomYear() {
 		this.get.selectYear().then(selectYearOptions => {
-			if (selectYearOptions.length > 0) {
-				const randomYear = Cypress._.random(0, selectYearOptions.length - 1);
-				cy.wrap(selectYearOptions.eq(randomYear))
-					.invoke('text')
-					.then(selectedYear => {
-						this.get.selectYear().select(selectedYear);
-					});
+			if (selectYearOptions.length > 1900) {
+				const randomYear = Cypress._.random(1900, selectYearOptions.length - 2024);
+				this.get.selectYear().select(randomYear.toString());
 			}
 		});
 	}
