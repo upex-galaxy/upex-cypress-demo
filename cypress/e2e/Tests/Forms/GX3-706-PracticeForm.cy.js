@@ -13,26 +13,25 @@ describe('GX3-706 ToolsQA | Forms | Practice Form', () => {
 		const ramdomEmail = faker.internet.email();
 		const randomGender = Cypress._.random(0, 2);
 		const randomMobile = faker.datatype.number({ min: 1000000000, max: 9999999999 });
-		const randomDate = faker.date.between('1980-01-01', '2005-01-01');
 		const randomSubject = faker.random.alpha({ count: 1, casing: 'lower', bannedChars: ['f', 'j', 'k', 'ñ', 'q', 'w', 'x', 'z'] });
 		const randomHobbies = faker.datatype.number({ min: 3, max: 5 });
+		const randomDate = formPage.get.selectDate();
 		const randomAddress = faker.address.streetAddress();
 		const randomState = Cypress._.random(0, 3);
 		const randomCity = Cypress._.random();
+		const randomSelectState = formPage.selectRandomState(randomState);
+		const randomSelectCity = formPage.selectRandomCity(randomCity);
 
 		formPage.typeFirstName(randomFirstName);
 		formPage.typeLastName(randomLastName);
 		formPage.typeEmail(ramdomEmail);
 		formPage.selectGender(randomGender);
 		formPage.typeMobile(randomMobile);
-		formPage.selectBirthDay(randomDate);
-		formPage.get
-			.selectDate()
-			.click()
-			.then(t => {
-				cy.wrap(t).get('.react-datepicker').should('be.visible');
-				cy.wrap(t).get('.react-datepicker').click();
-			});
+		formPage.selectBirthDay();
+		formPage.get.selectDate().should('contain', randomDate);
+		randomDate.invoke('val').then(dateOfBirt => {
+			expect(dateOfBirt).to.match(/^(0[1-9]|[12]\d|3[01]) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (19\d\d|20\d\d|2100)$/);
+		});
 		formPage.typeSubjects(randomSubject);
 		formPage.selectRandomHobbie(randomHobbies);
 		formPage.selectPicture();
@@ -45,28 +44,27 @@ describe('GX3-706 ToolsQA | Forms | Practice Form', () => {
 		const expectedMessage = 'Thanks for submitting the form';
 		formPage.get.completeFormMessage().should('have.text', expectedMessage);
 		formPage.get.completeForm().should('be.visible');
-		cy.get('tr').eq(1).should('contain', randomFirstName);
-		cy.get('tr').eq(1).should('contain', randomLastName);
-		cy.get('tr').eq(2).should('contain', ramdomEmail);
+		formPage.get.firstNameFormResult().should('contain', randomFirstName);
+		formPage.get.lastNameFormResult().should('contain', randomLastName);
+		formPage.get.mailFormResult().should('contain', ramdomEmail);
 		const genderOptions = ['Male', 'Female', 'Other'];
 		const selectedGender = genderOptions[randomGender];
-		cy.get('tr').eq(3).invoke('text').should('include', `Gender${selectedGender}`);
-		cy.get('tr').eq(4).should('contain', randomMobile);
-		cy.get('tr').eq(6).should('contain', randomSubject);
+		formPage.get.genderFormResult().invoke('text').should('include', `Gender${selectedGender}`);
+		formPage.get.mobileFormResult().should('contain', randomMobile);
+		formPage.get.subjectFormResult().then(subjectText => {
+			const actualText = subjectText.text();
+			const reget = new RegExp(randomSubject, 'i');
+			expect(actualText).to.match(reget);
+		});
 		const hobbiesOptions = ['Sports', 'Reading', 'Music'];
 		expect(randomHobbies).to.be.within(3, 5);
 		const selectedHobbies = hobbiesOptions[randomHobbies - 3];
-		cy.get('tr').eq(7).invoke('text').should('include', `Hobbies${selectedHobbies}`);
-		cy.get('tr').eq(8).should('contain', 'upexlogo.png');
-		cy.get('tr').eq(9).should('contain', randomAddress);
-
-		// Validar estado y ciudad juntos
-
-		formPage.selectRandomState(randomState).then(selectedStateText => {
-			formPage.selectRandomCity(randomCity).then(selectedCityText => {
-				const expectedStateAndCity = `${selectedStateText} ${selectedCityText}`;
-				cy.get('tr').eq(10).invoke('text').should('include', `State and City${expectedStateAndCity}`);
-			});
-		});
+		formPage.get.hobbiesFormResult().invoke('text').should('include', `Hobbies${selectedHobbies}`);
+		formPage.get.imageFormResult().should('contain', 'upexlogo.png');
+		formPage.get.addressFormResult().should('contain', randomAddress);
+		formPage.get
+			.stateAndCityFormResult()
+			.invoke('text')
+			.should('include', `State and City${randomSelectState.toString()} ${randomSelectCity.toString()}`);
 	});
 });

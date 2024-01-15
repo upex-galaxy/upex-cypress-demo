@@ -1,3 +1,4 @@
+import { random } from 'cypress/types/lodash';
 import data from '../../../fixtures/data/GX3-706-PracticeForm.json';
 class Formulario {
 	get = {
@@ -7,9 +8,12 @@ class Formulario {
 		selectGender: () => cy.get('[class*="custom-radio"]'),
 		inputMobile: () => cy.get('#userNumber'),
 		selectDate: () => cy.get('#dateOfBirthInput'),
+		dateInput: () => cy.get('[class="react-datepicker-wrapper"]'),
 		selectMonth: () => cy.get('.react-datepicker__month-select'),
+		selectMonthOptions: () => cy.get('[class="react-datepicker__month-select"] option'),
 		selectYear: () => cy.get('.react-datepicker__year-select'),
-		selectDay: () => cy.get('.react-datepicker__day'),
+		selectYearOptions: () => cy.get('[class="react-datepicker__year-select"] option'),
+		selectDay: () => cy.get('[class^="react-datepicker__day react-datepicker__day"]:not([class$="outside-month"])'),
 		inputSubjects: () => cy.get('#subjectsContainer'),
 		selectSubject: () => cy.get('[id*="react-select-2-option"]'),
 		selectHobbie: () => cy.get('div[class*="custom-control-inline"]'),
@@ -22,6 +26,16 @@ class Formulario {
 		submitButton: () => cy.get('#submit'),
 		completeForm: () => cy.get('.modal-content'),
 		completeFormMessage: () => cy.get('#example-modal-sizes-title-lg'),
+		firstNameFormResult: () => cy.get('tr').eq(1),
+		lastNameFormResult: () => cy.get('tr').eq(1),
+		mailFormResult: () => cy.get('tr').eq(2),
+		genderFormResult: () => cy.get('tr').eq(3),
+		mobileFormResult: () => cy.get('tr').eq(4),
+		subjectFormResult: () => cy.get('tr').eq(6),
+		hobbiesFormResult: () => cy.get('tr').eq(7),
+		imageFormResult: () => cy.get('tr').eq(8),
+		addressFormResult: () => cy.get('tr').eq(9),
+		stateAndCityFormResult: () => cy.get('tr').eq(10),
 	};
 
 	typeFirstName(randomFirstName) {
@@ -39,9 +53,54 @@ class Formulario {
 	typeMobile(randomMobile) {
 		this.get.inputMobile().type(randomMobile);
 	}
+
 	selectBirthDay() {
-		return this.get.selectDate().invoke('val');
+		this.get.selectDate().click();
+		this.selectRandomYear();
+		this.selectRandomMonth();
+		this.selectRandomDay();
 	}
+
+	selectRandomYear() {
+		this.get.selectYear().then(selectYearOptions => {
+			if (selectYearOptions.length > 0) {
+				const randomYear = Cypress._.random(0, selectYearOptions.length - 1);
+				cy.wrap(selectYearOptions[randomYear])
+					.invoke('text')
+					.then(selectedYear => {
+						this.get.selectYear().select(selectedYear);
+					});
+			}
+		});
+	}
+
+	selectRandomMonth() {
+		const randomMonth = Cypress._.random(0, 11);
+		this.get.selectMonth().select(randomMonth.toString());
+		this.get
+			.selectMonth()
+			.invoke('text')
+			.then(selectedMonth => {
+				cy.log(selectedMonth);
+			});
+	}
+
+	selectRandomDay() {
+		this.get.selectDay().then(selectedDay => {
+			const day = selectedDay.length;
+			cy.log('day');
+			const randomDay = Cypress._.random(0, day - 1);
+			cy.log(randomDay);
+
+			cy.wrap(selectedDay.eq(randomDay))
+				.invoke('text')
+				.then(selectedDayText => {
+					cy.wrap(selectedDay.eq(randomDay)).click();
+					cy.log(selectedDayText);
+				});
+		});
+	}
+
 	typeSubjects(randomSubject) {
 		this.get.inputSubjects().type(randomSubject);
 		this.get.selectSubject().then(i => {
