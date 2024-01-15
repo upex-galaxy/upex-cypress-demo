@@ -1,4 +1,3 @@
-import { random } from 'cypress/types/lodash';
 import data from '../../../fixtures/data/GX3-706-PracticeForm.json';
 class Formulario {
 	get = {
@@ -65,7 +64,7 @@ class Formulario {
 		this.get.selectYear().then(selectYearOptions => {
 			if (selectYearOptions.length > 0) {
 				const randomYear = Cypress._.random(0, selectYearOptions.length - 1);
-				cy.wrap(selectYearOptions[randomYear])
+				cy.wrap(selectYearOptions.eq(randomYear))
 					.invoke('text')
 					.then(selectedYear => {
 						this.get.selectYear().select(selectedYear);
