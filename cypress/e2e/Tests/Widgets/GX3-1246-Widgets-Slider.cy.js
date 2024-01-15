@@ -53,7 +53,7 @@ describe('TS 1247: ToolsQA | Widgets | Slider', () => {
 		cy.get('#sliderValue').should('have.value', valorSlider);
 	});
 
-	it('TC7: Validar NO poder editar el valor del slider a través del input', () => {
+	it('1247 | TC7: Validar NO poder editar el valor del slider a través del input', () => {
 		const valorSlider = 55;
 		cy.get('#sliderValue').type(valorSlider);
 		cy.get('#sliderValue').should('not.have.value', valorSlider);
