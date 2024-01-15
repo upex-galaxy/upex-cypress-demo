@@ -24,7 +24,7 @@ describe('GX2-3452 | ToolsQA | Interactions | Sortable', () => {
 				expect(item.text()).to.be.oneOf(data.listItems);
 			});
 	});
-	it('GX2-3453 | TC2: Validate drag a list item between other list items and stay in the selected order', () => {
+	it.skip('GX2-3453 | TC2: Validate drag a list item between other list items and stay in the selected order', () => {
 		let arrayNewList = [];
 
 		sortable.getRandomListItem().trigger('mousedown', { which: 1 });

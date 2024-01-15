@@ -1,0 +1,36 @@
+{
+	"FullName": {
+		"input": "#userName",
+		"data": {
+			"valido": "francisco",
+			"vacio": ""
+		}
+	},
+	"Email": {
+		"input": "#userEmail",
+		"data": {
+			"valido": "correovalido@gmail.com",
+			"invalido1": "faltaelarroba.com",
+			"invalido2": "@inelcom",
+			"invalido3": "inelcom@",
+			"invalido4": "inelcom@elpunto",
+			"invalido5": "fran@inelcom.c",
+			"vacio": ""
+		}
+	},
+	"CurrentAddress": {
+		"input": "#currentAddress",
+		"data": {
+			"valido": "santiago",
+			"vacio": ""
+		}
+	},
+	"PermanentAddress": {
+		"input": "#permanentAddress",
+		"data": {
+			"valido": "chile",
+			"vacio": ""
+		}
+	},
+	"SubmitButton": "#submit"
+}
