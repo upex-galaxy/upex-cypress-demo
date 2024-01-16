@@ -56,8 +56,6 @@ jobs:
                   browser: electron
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
                       yarn file cypress/e2e/Tests/Widgets/GX3-1246-Widgets-Slider.cy.js
-                      yarn file cypress/e2e/Tests/Elements/GX3-1100-RadioButtons.cy.js
-
 
             - name: ✅Import Test Results to Xray
               if: always()
@@ -68,7 +66,6 @@ jobs:
                   testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
                   testExecKey: 'GX3-1253' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
-                  testExecKey: "GX3-1106" #tools-qa-elements-radio-buttons.
                   projectKey: 'GX3' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
 
             - name: 🔔Slack Notification of Done
