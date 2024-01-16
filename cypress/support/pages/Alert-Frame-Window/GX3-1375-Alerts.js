@@ -7,6 +7,31 @@ class Alerts {
 		thirthMsjButtonClickme: () => cy.get('[id="confirmResult"]'),
 		fourthMsjButtonClickme: () => cy.get('[id="promptResult"]'),
 	};
+
+	clickFirtsButtonClickMe() {
+		this.get.firtsButtonClickMe().click();
+	}
+	clickSecondButtonClickMe() {
+		this.get.secondButtonClickMe().click();
+	}
+	clickThirthButtonClickMe() {
+		this.get.thirthButtonClickMe().click();
+	}
+	clickFourthButtonClickMe() {
+		return this.get.fourthButtonClickMe().click();
+	}
+	getThirthMsjButtonClickme() {
+		return this.get.thirthMsjButtonClickme().invoke('text');
+	}
+	getFourthMsjButtonClickme() {
+		return this.get.fourthMsjButtonClickme().invoke('text');
+	}
+
+	windowAlert({ expectedMsj }) {
+		cy.on('window:alert', alert => {
+			expect(alert).to.equal(expectedMsj);
+		});
+	}
 }
 
-export const alert = new Alerts();
+export const alertPage = new Alerts();
