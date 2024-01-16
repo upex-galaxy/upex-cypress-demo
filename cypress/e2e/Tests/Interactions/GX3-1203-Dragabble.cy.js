@@ -13,7 +13,7 @@ describe('USGX3-1203 | TS:ToolsQA | Interactions | Dragabble', () => {
 			cy.get('.nav-item').not('.nav-item.nav-link.active').should('not.contain', tabText);
 		});
 	});
-	it('4011| TC1: Validar mover el botón "Drag me" de manera aleatoria', () => {
+	it('1204| TC2: Validar mover el botón "Drag me" de manera aleatoria', () => {
 		const deltaX = Cypress._.random(0, 400);
 		const deltaY = Cypress._.random(0, 400);
 		cy.log(`DeltaX: ${deltaX}`);
@@ -22,13 +22,50 @@ describe('USGX3-1203 | TS:ToolsQA | Interactions | Dragabble', () => {
 		cy.get('#dragBox').should('have.css', 'left', `${deltaX}px`);
 		cy.get('#dragBox').should('have.css', 'top', `${deltaY}px`);
 	});
-	it.only('4011 | TC2: Validar mover horizontalmente  el botón "X" de manera aleatoria.', () => {
-		const X = Cypress._.random(0, 60);
-		cy.log(X);
+	it('1204 | TC3: Validar mover horizontalmente  el botón "X" de manera aleatoria.', () => {
+		const deltaX = Cypress._.random(-30, 50);
+		const deltaY = 0;
 		cy.get('#draggableExample-tab-axisRestriction').click();
 		cy.get('#restrictedX').should('have.text', 'Only X');
-		cy.get('#restrictedX').move({ X, force: true });
-		cy.get('#restrictedX').should('have.css', 'left', `${X}px`);
+		cy.get('#restrictedX').move({ deltaX, deltaY, force: true });
+		cy.get('#restrictedX').should('have.css', 'left', `${deltaX}px`);
+	});
+	it('1204 | TC4: Validar mover horizontalmente  el botón "Y" de manera aleatoria.', () => {
+		const deltaY = Cypress._.random(-40, 200);
+		const deltaX = 0;
+		cy.get('#draggableExample-tab-axisRestriction').click();
+		cy.get('#restrictedY').should('have.text', 'Only Y');
+		cy.get('#restrictedY').move({ deltaX, deltaY, force: true });
+		cy.get('#restrictedY').should('have.css', 'top', `${deltaY}px`);
+	});
+	it('1204 | TC5: Validar que el  botón "i am contained within the box" dentro del contenedor', () => {
+		const deltaX = Cypress._.random(0, 165);
+		const deltaY = Cypress._.random(0, 106);
+
+		cy.get('#draggableExample-tab-containerRestriction').click();
+		cy.get('.draggable.ui-widget-content.ui-draggable').should('have.text', "I'm contained within the box");
+		cy.get('.draggable.ui-widget-content.ui-draggable').move({ boxX: deltaX, boxY: deltaY });
+	});
+	it('1204| TC6: Validar mover el cuadro "I will always stick to the center” de la pestaña Cursor Style”', () => {
+		const deltaX = Cypress._.random(0, 400);
+		const deltaY = Cypress._.random(0, 400);
+		cy.get('#draggableExample-tab-cursorStyle').click();
+		cy.get('#cursorCenter').move(deltaX, deltaY);
+		cy.get('#cursorCenter').should('have.css', 'cursor', 'move');
+	});
+	it.only('1204| TC7: Validar arrastrar el cuadro "My cursor is at top left” de la pestaña Cursor Style”', () => {
+		const deltaX = Cypress._.random(0, 400);
+		const deltaY = Cypress._.random(0, 400);
+		cy.get('#draggableExample-tab-cursorStyle').click();
+		cy.get('#cursorTopLeft').move(deltaX, deltaY);
+		cy.get('body').should('have.css', 'cursor', 'crosshair');
+	});
+	it('1204 | TC8: Validar arrastrar el cuadro "My cursor is at bottom” de la pestaña Cursor Style”', () => {
+		const deltaX = Cypress._.random(0, 400);
+		const deltaY = Cypress._.random(0, 400);
+		cy.get('#draggableExample-tab-cursorStyle').click();
+		cy.get('#cursorBottom').move(deltaX, deltaY);
+		cy.get('#cursorBottom').should('have.css', 'cursor', 'auto');
 	});
 });
 
