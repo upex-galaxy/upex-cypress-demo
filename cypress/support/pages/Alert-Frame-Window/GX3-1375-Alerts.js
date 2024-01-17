@@ -32,6 +32,14 @@ class Alerts {
 			expect(alert).to.equal(expectedMsj);
 		});
 	}
+
+	windowConfirm({ expectedMsj, sendOkOption }) {
+		cy.on('window:confirm', alert => {
+			expect(alert).to.equal(expectedMsj);
+			let choiceAlert = sendOkOption === 'true' ? true : false;
+			return choiceAlert;
+		});
+	}
 }
 
 export const alertPage = new Alerts();
