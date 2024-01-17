@@ -40,6 +40,18 @@ class Alerts {
 			return choiceAlert;
 		});
 	}
+
+	windowPrompt({ expectedMsj, sendValueOrOption }) {
+		cy.window().then(win => {
+			let cancelOption = false,
+				okOption = '';
+			sendValueOrOption = sendValueOrOption === 'okOption' ? okOption : sendValueOrOption;
+			sendValueOrOption = sendValueOrOption === 'cancelOption' ? cancelOption : sendValueOrOption;
+			cy.stub(win, 'prompt').returns(sendValueOrOption).as('promptStub');
+			this.clickFourthButtonClickMe();
+			cy.get('@promptStub').should('be.calledWith', expectedMsj);
+		});
+	}
 }
 
 export const alertPage = new Alerts();
