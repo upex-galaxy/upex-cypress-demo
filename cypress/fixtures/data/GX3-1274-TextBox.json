@@ -1,0 +1,15 @@
+{
+	"validCredenciales": {
+		"FullName": "Miguel Daniel",
+		"Email": "dan@gmail.com",
+		"CurrentAddress": "Huelva",
+		"PermanentAddress": "PuntaUmbria"
+	},
+	"invalidCredencialsForEmail": {
+		"Email": "dangmail.com",
+		"Email1": "@gmail.com",
+		"Email2": "daniel@",
+		"Email3": "daniel@.com",
+		"Email4": "dan@gmail.a"
+	}
+}
