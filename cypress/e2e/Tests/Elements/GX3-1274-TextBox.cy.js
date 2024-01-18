@@ -11,8 +11,12 @@ describe('GX3-1274-tools-qa-elements-text-box-fill-form-and-submit', () => {
 			cy.get('#userName-wrapper input').type(data.validCredentials.FullName);
 		});
 		cy.get('#userEmail-wrapper input').type(json.validCredentials.Email);
+		cy.get('#userEmail-wrapper input').should('have.value', json.validCredentials.Email);
+
 		cy.get('#currentAddress-wrapper textarea').type(json.validCredentials.CurrentAddress);
+		cy.get('#currentAddress-wrapper textarea').should('have.value', json.validCredentials.CurrentAddress);
 		cy.get('#permanentAddress-wrapper textarea').type(json.validCredentials.PermanentAddress);
+		cy.get('#permanentAddress-wrapper textarea').should('have.value', json.validCredentials.PermanentAddress);
 		cy.get('#submit').click();
 		//Configurar constante para agarrar texto agregado Assertions
 		cy.get('#output #name')
@@ -43,6 +47,7 @@ describe('GX3-1274-tools-qa-elements-text-box-fill-form-and-submit', () => {
 
 		for (const email of invalidEmails) {
 			cy.get('#userEmail-wrapper input').type(email);
+			cy.get('#userEmail-wrapper input').should('have.value', email);
 			cy.get('#submit').click();
 			// Esperar a que el mensaje de error esté presente
 			cy.get('.field-error').should('be.visible');
@@ -50,14 +55,20 @@ describe('GX3-1274-tools-qa-elements-text-box-fill-form-and-submit', () => {
 			cy.get('.mr-sm-2.field-error.form-control').should('have.css', 'border-color', 'rgb(255, 0, 0)');
 			//Borrar campo para seguir con la siguiente data
 			cy.get('#userEmail-wrapper input').clear();
+			//Asegurarse de que quedo limpio el campo
+			cy.get('#userEmail-wrapper input').should('be.empty');
 		}
 	});
 
 	it('GX3-1274|TC3| Validar NO poder rellenar formulario con campos vacíos', () => {
 		cy.get('#userName-wrapper input').clear();
+		cy.get('#userName-wrapper input').should('be.empty');
 		cy.get('#userEmail-wrapper input').clear();
+		cy.get('#userEmail-wrapper input').should('be.empty');
 		cy.get('#currentAddress-wrapper textarea').clear();
+		cy.get('#currentAddress-wrapper textarea').should('be.empty');
 		cy.get('#permanentAddress-wrapper textarea').clear();
+		cy.get('#permanentAddress-wrapper textarea').should('be.empty');
 		cy.get('#submit').click();
 		// Asegurarse de que no haya aparecido el cuadro de registro y que no se muestre ningún mensaje después del envío
 		cy.get('.border').should('not.exist');
