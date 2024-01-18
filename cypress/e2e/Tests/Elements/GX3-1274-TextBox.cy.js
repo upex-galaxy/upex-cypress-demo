@@ -5,7 +5,7 @@ describe('GX3-1274-tools-qa-elements-text-box-fill-form-and-submit', () => {
 	beforeEach('PRC-Visitar la pagina Demo', () => {
 		cy.visit('https://demoqa.com/text-box');
 	});
-	it.skip('GX3-1274|TC1|  Validar formulario llenando correctamente todos los campos', function () {
+	it('GX3-1274|TC1|  Validar formulario llenando correctamente todos los campos', function () {
 		//Formulario
 		cy.fixture('data/GX3-1274-TextBox').then(data => {
 			cy.get('#userName-wrapper input').type(data.validCredentials.FullName);
@@ -53,14 +53,13 @@ describe('GX3-1274-tools-qa-elements-text-box-fill-form-and-submit', () => {
 		}
 	});
 
-	it.skip('GX3-1274|TC3| Validar formulario con campos vacíos', () => {
-		cy.get('#userEmail-wrapper input').type(json.invalidCredentialsForEmail.Email1);
+	it('GX3-1274|TC3| Validar NO poder rellenar formulario con campos vacíos', () => {
+		cy.get('#userName-wrapper input').clear();
+		cy.get('#userEmail-wrapper input').clear();
+		cy.get('#currentAddress-wrapper textarea').clear();
+		cy.get('#permanentAddress-wrapper textarea').clear();
 		cy.get('#submit').click();
-		cy.get('#userEmail-wrapper input').type(json.invalidCredentialsForEmail.Email1);
-		cy.get('#submit').click();
-		cy.get('#userEmail-wrapper input').type(json.invalidCredentialsForEmail.Email2);
-		cy.get('#submit').click();
-		cy.get('#userEmail-wrapper input').type(json.invalidCredentialsForEmail.Email3);
-		cy.get('#submit').click();
+		// Asegurarse de que no haya aparecido el cuadro de registro y que no se muestre ningún mensaje después del envío
+		cy.get('.border').should('not.exist');
 	});
 });
