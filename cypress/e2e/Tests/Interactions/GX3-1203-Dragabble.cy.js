@@ -1,26 +1,24 @@
+import { dragabblePage } from '@pages/Interactions/GX3-1203-Dragabble.page';
 describe('USGX3-1203 | TS:ToolsQA | Interactions | Dragabble', () => {
 	beforeEach('El usuario se debe ubicar en la pagina de demoQA', () => {
 		cy.visit('https://demoqa.com/dragabble');
-		cy.get('#dragBox').should('exist').and('be.visible');
 	});
 	it('25131|TC1: Validar que al cambiar entre pestañas, la pestaña previamente mostrada se oculte.', () => {
-		cy.get('#draggableExample-tab-simple').should('have.length', 1);
-		cy.get('.nav-item').each($tab => {
+		dragabblePage.clickSimpleTab().should('have.length', 1);
+		dragabblePage.get.tabList().each($tab => {
 			const tabText = $tab.text();
-			cy.wrap($tab).click();
-			cy.get('.nav-item.nav-link.active').should('have.length', 1);
+			cy.wrap($tab).click().should('be.visible');
+			dragabblePage.tswitchToTab().should('have.length', 1);
 			cy.contains('.nav-item.nav-link.active', tabText).should('exist');
-			cy.get('.nav-item').not('.nav-item.nav-link.active').should('not.contain', tabText);
+			dragabblePage.get.tabList().not('.nav-item.nav-link.active').should('not.contain', tabText);
 		});
 	});
-	it('1204| TC2: Validar mover el botón "Drag me" de manera aleatoria', () => {
-		const deltaX = Cypress._.random(0, 400);
-		const deltaY = Cypress._.random(0, 400);
-		cy.log(`DeltaX: ${deltaX}`);
-		cy.log(`DeltaY: ${deltaY}`);
-		cy.get('#dragBox').move({ deltaX, deltaY, force: true });
-		cy.get('#dragBox').should('have.css', 'left', `${deltaX}px`);
-		cy.get('#dragBox').should('have.css', 'top', `${deltaY}px`);
+	it.only('1204| TC2: Validar mover el botón "Drag me" de manera aleatoria', () => {
+		const randomX = Cypress._.random(-42, 400);
+		const randomY = Cypress._.random(-14, 400);
+		dragabblePage.moveRandomBox(randomX, randomY);
+		dragabblePage.get.draBox().should('have.css', 'left', `${randomX}px`);
+		dragabblePage.get.draBox().should('have.css', 'top', `${randomY}px`);
 	});
 	it('1204 | TC3: Validar mover horizontalmente  el botón "X" de manera aleatoria.', () => {
 		const deltaX = Cypress._.random(-30, 50);
@@ -51,13 +49,15 @@ describe('USGX3-1203 | TS:ToolsQA | Interactions | Dragabble', () => {
 		const deltaY = Cypress._.random(0, 400);
 		cy.get('#draggableExample-tab-cursorStyle').click();
 		cy.get('#cursorCenter').move(deltaX, deltaY);
-		cy.get('#cursorCenter').should('have.css', 'cursor', 'move');
+		cy.get('body').should('have.css', 'cursor', 'move');
 	});
-	it.only('1204| TC7: Validar arrastrar el cuadro "My cursor is at top left” de la pestaña Cursor Style”', () => {
+	it('1204| TC7: Validar arrastrar el cuadro "My cursor is at top left” de la pestaña Cursor Style”', () => {
 		const deltaX = Cypress._.random(0, 400);
 		const deltaY = Cypress._.random(0, 400);
+
 		cy.get('#draggableExample-tab-cursorStyle').click();
-		cy.get('#cursorTopLeft').move(deltaX, deltaY);
+
+		cy.get('#cursorTopLeft').trigger('mousedown', { which: 1 }).trigger('mousemove', { clientX: deltaX, clientY: deltaY }).trigger('mouseup');
 		cy.get('body').should('have.css', 'cursor', 'crosshair');
 	});
 	it('1204 | TC8: Validar arrastrar el cuadro "My cursor is at bottom” de la pestaña Cursor Style”', () => {
