@@ -12,7 +12,6 @@ describe('GX3-1274-tools-qa-elements-text-box-fill-form-and-submit', () => {
 		});
 		cy.get('#userEmail-wrapper input').type(json.validCredentials.Email);
 		cy.get('#userEmail-wrapper input').should('have.value', json.validCredentials.Email);
-
 		cy.get('#currentAddress-wrapper textarea').type(json.validCredentials.CurrentAddress);
 		cy.get('#currentAddress-wrapper textarea').should('have.value', json.validCredentials.CurrentAddress);
 		cy.get('#permanentAddress-wrapper textarea').type(json.validCredentials.PermanentAddress);
