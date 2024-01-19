@@ -1,4 +1,4 @@
-[![🤖CI Regression in QA🧪](https://github.com/upex-galaxy/cypress-blackhole/actions/workflows/regression.yml/badge.svg)](https://github.com/upex-galaxy/cypress-blackhole/actions/workflows/regression.yml)
+[![🤖CI run Regression in QA🧪](https://github.com/upex-galaxy/cypress-blackhole/actions/workflows/regression.yml/badge.svg?branch=QA)](https://github.com/upex-galaxy/cypress-blackhole/actions/workflows/regression.yml)
 
 [![vscode-logo]][vscode-site] [![cypress-logo]][cypress-site] [![javascript-logo]][javascript-site]
 
