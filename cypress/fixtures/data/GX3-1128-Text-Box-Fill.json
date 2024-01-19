@@ -23,7 +23,8 @@
 	"Email": {
 		"input": "[type='email']",
 		"data": {
-			"valid": "prueba@gmail.com",
+			"filled": "prueba@gmail.com",
+			"empty": "",
 			"invalid": {
 				"emailOne": "pruebagmail.com",
 				"emailTwo": "@gmail.com",

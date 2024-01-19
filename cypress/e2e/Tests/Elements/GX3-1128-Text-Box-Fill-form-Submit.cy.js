@@ -41,13 +41,13 @@ describe('⚡️ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	it('GX3-1129 | TC5: Validar mostrar cadena de texto (mensaje) después de enviar todos los campos válidos del form “Full Name”, “Email”, “Current Address” and “Permanent Address”.', () => {
 		cy.fixture('data/GX3-1128-Text-Box-Fill.json').then(the => {
 			cy.get(the.FullName.input).type(the.FullName.data.filled);
-			cy.get(the.Email.input).type(the.Email.data.valid);
+			cy.get(the.Email.input).type(the.Email.data.filled);
 			cy.get(the.CurrentAddress.input).type(the.CurrentAddress.data.filled);
 			cy.get(the.PermanentAddress.input).type(the.PermanentAddress.data.filled);
 			cy.get(the.SubmitButton).click();
 			cy.get('#name').should('contain.text', the.FullName.data.filled);
 			cy.get('#currentAddress.mb-1').should('contain', the.CurrentAddress.data.filled);
-			cy.get('#email').should('contain', the.Email.data.valid);
+			cy.get('#email').should('contain', the.Email.data.filled);
 			cy.get('#permanentAddress.mb-1').should('contain', the.PermanentAddress.data.filled);
 		});
 	});
@@ -86,6 +86,22 @@ describe('⚡️ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get(the.Email.input).type(the.Email.data.invalid.emailFive);
 			cy.get(the.SubmitButton).click();
 			cy.get('.mr-sm-2.field-error.form-control').should('have.class', 'field-error');
+		});
+	});
+	//TC: validación negativa para el mensaje después de enviar campo Email.
+	it('GX3-1129 | TC11: Validar NO mostrar ningún mensaje después de enviar vacío en campo ”Email”.', () => {
+		cy.fixture('data/GX3-1128-Text-Box-Fill.json').then(the => {
+			cy.get(the.Email.input).should('contain', the.Email.data.empty);
+			cy.get('.border.col-md-12.col-sm-12').should('not.exist');
+			cy.get(the.SubmitButton).click();
+		});
+	});
+	//TC: validación positiva para el mensaje después de enviar campo Email.
+	it('GX3-1129 | TC12: Validar mostrar cadena de texto (mensaje) después de enviar el campos válido “Email“.', () => {
+		cy.fixture('data/GX3-1128-Text-Box-Fill.json').then(the => {
+			cy.get(the.Email.input).type(the.Email.data.filled);
+			cy.get(the.SubmitButton).click();
+			cy.get('#email').should('contain', the.Email.data.filled);
 		});
 	});
 });
