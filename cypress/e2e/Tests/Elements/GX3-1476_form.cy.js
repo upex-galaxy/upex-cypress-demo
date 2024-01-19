@@ -32,7 +32,7 @@ describe('GX3-1476: ToolsQA | Elements | Text Box: Fill form and Submit', () => 
 
     });
 
-    it.only('GX3-1476 | TC2: Should not be able to fill form and submit', () => {
+    it('GX3-1476 | TC2: Should not be able to fill form and submit', () => {
         cy.get('#userName-wrapper input').type(json.invalidEmailCredentials.FullName);
 		cy.get('#userEmail-wrapper input').type(json.invalidEmailCredentials.Email);
 		cy.get('#currentAddress-wrapper textarea').type(json.invalidEmailCredentials.CurrentAddress);
