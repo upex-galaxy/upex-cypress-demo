@@ -25,11 +25,11 @@
 		"data": {
 			"valid": "prueba@gmail.com",
 			"invalid": {
-				"invalidEmail1": "pruebagmail.com",
-				"invalidEmail2": "@gmail.com",
-				"invalidEmail3": "prueba@.com",
-				"invalidEmail4": "prueba@gmailcom",
-				"invalidEmail": "prueba@gmail.c"
+				"emailOne": "pruebagmail.com",
+				"emailTwo": "@gmail.com",
+				"emailThree": "prueba@.com",
+				"emailFour": "prueba@gmailcom",
+				"emailFive": "prueba@gmail.c"
 			}
 		}
 	},
