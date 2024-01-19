@@ -5,7 +5,7 @@ describe('GX3-1274-tools-qa-elements-text-box-fill-form-and-submit', () => {
 	beforeEach('PRC-Visitar la pagina Demo', () => {
 		cy.visit('https://demoqa.com/text-box');
 	});
-	it('GX3-1274|TC1|  Validar formulario llenando correctamente todos los campos', function () {
+	it('|TC1|  Validar formulario llenando correctamente todos los campos', function () {
 		//Formulario
 		cy.fixture('data/GX3-1274-TextBox').then(data => {
 			cy.get('#userName-wrapper input').type(data.validCredentials.FullName);
@@ -35,7 +35,7 @@ describe('GX3-1274-tools-qa-elements-text-box-fill-form-and-submit', () => {
 			expect(getRealValue(this.permanentAddress)).equal(json.validCredentials.PermanentAddress);
 		});
 	});
-	it('GX3-1274|TC2| Validar NO poder rellenar formulario con Email invalido', () => {
+	it('|TC2| Validar NO poder rellenar formulario con Email invalido', () => {
 		const invalidEmails = [
 			json.invalidCredentialsForEmail.Email0,
 			json.invalidCredentialsForEmail.Email1,
@@ -59,7 +59,7 @@ describe('GX3-1274-tools-qa-elements-text-box-fill-form-and-submit', () => {
 		}
 	});
 
-	it('GX3-1274|TC3| Validar NO poder rellenar formulario con campos vacíos', () => {
+	it('|TC3| Validar NO poder rellenar formulario con campos vacíos', () => {
 		cy.get('#userName-wrapper input').clear();
 		cy.get('#userName-wrapper input').should('be.empty');
 		cy.get('#userEmail-wrapper input').clear();
