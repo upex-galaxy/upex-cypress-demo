@@ -16,15 +16,5 @@
 			"@data/*": ["./cypress/fixtures/data/*"]
 		}
 	},
-	"exclude": ["node_modules"],
-	"reporterEnabled": "spec, mocha-junit-reporter, mochawesome",
-	"mochaJunitReporterReporterOptions": {
-		"mochaFile": "reports/test-results.xml",
-		"toConsole": false,
-		"outputs": true,
-		"testCaseSwitchClassnameAndName": true
-	},
-	"mochawesomeReporterReporterOptions": {
-		"mochaFile": "mochawesome.json"
-	}
+	"exclude": ["node_modules"]
 }

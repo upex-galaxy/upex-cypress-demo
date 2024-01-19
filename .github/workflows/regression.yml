@@ -58,17 +58,17 @@ jobs:
             #       testExecKey: 'GX-3704' #todo: ToolsQA Regression Test Plan TX
             #       projectKey: 'GX' #todo: UPEX LEVEL 1
 
-            - name: 📬Generate Allure Regression Report
-              if: always()
-              run: |
-                  yarn allure:ci
+            # - name: 📬Generate Allure Regression Report
+            #   if: always()
+            #   run: |
+            #       yarn allure:ci
 
-            - name: 📊Upload Artifact Allure
-              if: always()
-              uses: actions/upload-artifact@v3
-              with:
-                  name: regression-allure-report
-                  path: reports/allure-report
+            # - name: 📊Upload Artifact Allure
+            #   if: always()
+            #   uses: actions/upload-artifact@v3
+            #   with:
+            #       name: regression-allure-report
+            #       path: reports/allure-report
 
             # - name: 🔔Slack Notification of Done
             #   if: always()
