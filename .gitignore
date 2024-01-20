@@ -1,6 +1,7 @@
 node_modules/
 .env
 cypress/tests_results
+cypress/tests_reports
 mochawesome-report
 cypress/screenshots
 cypress/downloads

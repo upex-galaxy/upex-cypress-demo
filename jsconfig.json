@@ -10,7 +10,6 @@
 		"strict": true,
 		"lib": ["es5", "dom"],
 		"types": [
-			"@shelex/cypress-allure-plugin",
 			"cypress-file-upload",
 			"cypress-plugin-api",
 			"cypress-plugin-steps",

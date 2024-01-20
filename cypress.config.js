@@ -1,6 +1,5 @@
 import { defineConfig } from 'cypress';
 import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
-import allureWriter from '@shelex/cypress-allure-plugin/writer';
 import 'dotenv/config';
 
 export default defineConfig({
@@ -25,7 +24,7 @@ export default defineConfig({
 	// multi-reporters: one report.xml + mochawesome.json per file.
 	reporter: 'cypress-multi-reporters',
 	reporterOptions: {
-		configFile: 'cypress.reporter.json',
+		configFile: 'cypress.reporter.chrome.json',
 	},
 	// E2E Testing runner
 	e2e: {
@@ -38,14 +37,11 @@ export default defineConfig({
 		setupNodeEvents(on, config) {
 			// This is required for the preprocessor to be able to generate JSON reports after each run, and more,
 			on('file:preprocessor', createBundler());
-			allureWriter(on, config);
 			// Make sure to return the config object as it might have been modified by the plugin.
 			return config;
 		},
 	},
 	env: {
-		allure: true,
-		allureReuseAfterSpec: true,
-		allureResultsPath: 'reports/allure-results',
+
 	},
 });

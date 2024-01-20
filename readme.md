@@ -12,7 +12,7 @@ Cypress es el MEJOR FRAMEWORK DE AUTOMATION E2E actualmente! No hay rival! Adem�
 Cypress es un Framework de Automatización de Next Generation construido para web modernas. Esto es im simple proyecto el cual puedes usarlo para
 comenzar tu viaje por la Galaxia de la Automatización!
 
-## NUEVA ESTRUCTURA DE PROYECTO
+## ESTRUCTURA DE PROYECTO
 
 Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 
@@ -22,33 +22,15 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
     -   y la nomenclatura de archivos cambia a ser más directa:
 
     ```
-    {GX-ID}-{NombreCortoDeLaStory}
+    {GX-ID}_{NombreCortoDeLaStory}
 
-    como ejemplo: "GX-5-AgregarItemAlCart.cy.js".
+    como ejemplo: "GX3-50_shoppingCart.cy.js".
 
     ejemplo de estructura:
     /Tests
-    	├───BookStore
-    	│       GX-6309-CrearObtenerLibros.cy.js
+    	├───Checkout
+    	│       GX3-50_shoppingCart.cy.js
     ```
-
--   En cuanto a la carpeta `cucumber-tests`:
-
-    -   Tendrán una mejor distribución de archivos; por carpetas separadas: Todos los archivos `.feature` dentro de la carpeta "Gherkin" y los
-        archivos `.js` dentro de "stepDefinitions" como tiene que ser.
-
-    ```
-    * ejemplo de Estructura Cucumber:
-
-    /cucumber-test
-    	├───Gherkin
-    	│       GX-2_StoryTestSuite.feature
-    	│
-    	└───stepDefinitions
-    			GX-2_StoryTestSuite.js
-    ```
-
-    -   La Nomenclatura de éste tipo de prueba se mantiene igual al normal (la misma nomenclatura mencionada arriba).
 
 ### RESUMEN:
 
