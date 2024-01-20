@@ -12,13 +12,12 @@ on:
     - QA
 
 jobs:
-  RegressionTest:
+  RegressionTests:
     name: regression
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        containers: [1, 2, 3] #? Uses 3 parallel instances
         browser: ['chrome', 'firefox', 'edge'] #? Runs tests in 3 different browsers
 
     steps:
@@ -40,115 +39,38 @@ jobs:
         yarn
 
     - name: 🧪Cypress E2E Regression Test on ${{ matrix.browser }}
-      if: matrix.browser == 'chrome'
       uses: cypress-io/github-action@v4
       with:
-        browser: chrome
-        record: true
-        parallel: true #? Runs test in parallel using settings above
+        browser: ${{ matrix.browser }}
         command: | #!NO EDITAR. Es para correr todas las pruebas del Repo.
-          yarn regression:chrome
-      env:
-        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          yarn regression:${{ matrix.browser }}
 
-    - name: 📬Generate JUnit/Mocha Report
-      if: always() && matrix.browser == 'chrome'
+    - name: 📬Generate JUnit/Mocha Report for ${{ matrix.browser }}
+      if: always()
       run: |
-        yarn chrome:report
+        yarn ${{ matrix.browser }}:report
 
-    - name: ✅Import ${{ matrix.browser }} Test Results to Xray
-      if: always() && matrix.browser == 'chrome'
+    - name: ✅Import Test Results to Xray for ${{ matrix.browser }}
+      if: always()
       uses: mikepenz/xray-action@v2
       with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
         username: ${{secrets.XRAY_CLIENT_ID}}
         password: ${{secrets.XRAY_CLIENT_SECRET}}
         testFormat: 'junit'
-        testPaths: 'cypress/tests_results/junit/chrome_regression_report.xml'
+        testPaths: 'cypress/tests_results/junit/${{ matrix.browser }}_regression_report.xml'
         testExecKey: 'GX3-1526' #? this is the Regression Chrome Test Plan TX
         projectKey: 'GX3' #? this is the UPEX GALAXY LEVEL 
 
     - name: 📊Upload Artifact ${{ matrix.browser }} Mochawesome Report
-      if: always() && matrix.browser == 'chrome'
+      if: always()
       uses: actions/upload-artifact@v3
       with:
-        name: regression-chrome-mocha-report
-        path: cypress/tests_reports/chrome_mocha_report
-        retention-days: 15
-
-    - name: 🧪Cypress E2E Regression Test on ${{ matrix.browser }}
-      if: matrix.browser == 'firefox'
-      uses: cypress-io/github-action@v4
-      with:
-        browser: firefox
-        record: true
-        parallel: true #? Runs test in parallel using settings above
-        command: | #!NO EDITAR. Es para correr todas las pruebas del Repo.
-          yarn regression:firefox
-      env:
-        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-
-    - name: 📬Generate JUnit/Mocha Report
-      if: always() && matrix.browser == 'firefox'
-      run: |
-        yarn firefox:report
-
-    - name: ✅Import ${{ matrix.browser }} Test Results to Xray
-      if: always() && matrix.browser == 'firefox'
-      uses: mikepenz/xray-action@v2
-      with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
-        username: ${{secrets.XRAY_CLIENT_ID}}
-        password: ${{secrets.XRAY_CLIENT_SECRET}}
-        testFormat: 'junit'
-        testPaths: 'cypress/tests_results/junit/firefox_regression_report.xml'
-        testExecKey: 'GX3-1527' #? this is the Regression Firefox Test Plan TX
-        projectKey: 'GX3' #? this is the UPEX GALAXY LEVEL 
-
-    - name: 📊Upload Artifact ${{ matrix.browser }} Mochawesome Report
-      if: always() && matrix.browser == 'firefox'
-      uses: actions/upload-artifact@v3
-      with:
-        name: regression-firefox-mocha-report
-        path: cypress/tests_reports/firefox_mocha_report
-        retention-days: 15
-
-    - name: 🧪Cypress E2E Regression Test on ${{ matrix.browser }}
-      if: matrix.browser == 'edge'
-      uses: cypress-io/github-action@v4
-      with:
-        browser: edge
-        record: true
-        parallel: true #? Runs test in parallel using settings above
-        command: | #!NO EDITAR. Es para correr todas las pruebas del Repo.
-          yarn regression:edge
-      env:
-        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-
-    - name: 📬Generate JUnit/Mocha Report
-      if: always() && matrix.browser == 'edge'
-      run: |
-        yarn edge:report
-
-    - name: ✅Import ${{ matrix.browser }} Test Results to Xray
-      if: always() && matrix.browser == 'edge'
-      uses: mikepenz/xray-action@v2
-      with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
-        username: ${{secrets.XRAY_CLIENT_ID}}
-        password: ${{secrets.XRAY_CLIENT_SECRET}}
-        testFormat: 'junit'
-        testPaths: 'cypress/tests_results/junit/edge_regression-report.xml'
-        testExecKey: 'GX3-1528' #? this is the Regression Edge Test Plan TX
-        projectKey: 'GX3' #? this is the UPEX GALAXY LEVEL 
-
-    - name: 📊Upload Artifact ${{ matrix.browser }} Mochawesome Report
-      if: always() && matrix.browser == 'edge'
-      uses: actions/upload-artifact@v3
-      with:
-        name: regression-edge-mocha-report
-        path: cypress/tests_reports/edge_mocha_report
+        name: regression-${{ matrix.browser }}-mocha-report
+        path: cypress/tests_reports/${{ matrix.browser }}_mocha_report
         retention-days: 15
 
   AriSlackNotification:
-    needs: [RegressionTest]
+    needs: [RegressionTests]
     runs-on: ubuntu-latest
     steps:
     - name: 🔔Slack Notification of Done
@@ -162,7 +84,7 @@ jobs:
         SLACK_ICON: https://i.imgur.com/q9kvQCp_d.webp?maxwidth=760&fidelity=grand
 
   Create-PullRequest:
-    needs: [RegressionTest, AriSlackNotification]
+    needs: [RegressionTests, AriSlackNotification]
     runs-on: ubuntu-latest
     steps:
     - name: Create Pull Request
