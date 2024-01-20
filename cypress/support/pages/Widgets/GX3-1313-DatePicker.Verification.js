@@ -35,6 +35,35 @@ class Verification {
 			cy.wrap($option).should('have.value', expectedYears[index]);
 		});
 	}
+
+	inputDateAndTime(date) {
+		if (date == undefined) {
+			const currentDate = new Date();
+
+			let currentDateString = currentDate.toLocaleDateString('en-US', {
+				month: 'long',
+				day: 'numeric',
+				year: 'numeric',
+				hour: 'numeric',
+				minute: 'numeric',
+				hour12: true,
+			});
+
+			date = currentDateString.replace(' at', '');
+		}
+
+		cy.get('#dateAndTimePickerInput').should('have.value', date);
+	}
+
+	selectMonthTime() {
+		cy.get('#dateAndTimePickerInput').first().click();
+
+		cy.get('.react-datepicker__month-read-view--selected-month').first().click();
+
+		const currentMonth = new Date().toLocaleDateString('en-US', { month: 'long' });
+
+		cy.get('.react-datepicker__month-option--selected_month').should('contain', '✓').and('contain', currentMonth);
+	}
 }
 
 export default Verification;
