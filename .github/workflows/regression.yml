@@ -38,6 +38,7 @@ jobs:
       run: |
         yarn
 
+
     - name: 🧪Cypress E2E Regression Test on ${{ matrix.browser }}
       uses: cypress-io/github-action@v4
       with:
@@ -50,7 +51,19 @@ jobs:
       run: |
         yarn ${{ matrix.browser }}:report
 
-    - name: ✅Import Test Results to Xray for ${{ matrix.browser }}
+    - name: 📦️ Set testExecKey for Jira XRay
+      run: |
+        if [[ "${{ matrix.browser }}" == "chrome" ]]; then
+          echo "TXID=GX3-1526" >> $GITHUB_ENV
+        elif [[ "${{ matrix.browser }}" == "firefox" ]]; then
+          echo "TXID=GX3-1527" >> $GITHUB_ENV
+        elif [[ "${{ matrix.browser }}" == "edge" ]]; then
+          echo "TXID=GX3-1528" >> $GITHUB_ENV
+        fi
+    - name: 📦️ Use testExecKey
+      run: echo "The testExecKey is ${{ env.TXID }}"
+
+    - name: ✅Import Test Results to Xray Test Execution -- ${{ env.TXID }} (${{ matrix.browser }})
       if: always()
       uses: mikepenz/xray-action@v2
       with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
@@ -58,7 +71,7 @@ jobs:
         password: ${{secrets.XRAY_CLIENT_SECRET}}
         testFormat: 'junit'
         testPaths: 'cypress/tests_results/junit/${{ matrix.browser }}_regression_report.xml'
-        testExecKey: 'GX3-1526' #? this is the Regression Chrome Test Plan TX
+        testExecKey: ${{ env.TXID }} #? this is the Regression Test Plan TX
         projectKey: 'GX3' #? this is the UPEX GALAXY LEVEL 
 
     - name: 📊Upload Artifact ${{ matrix.browser }} Mochawesome Report
