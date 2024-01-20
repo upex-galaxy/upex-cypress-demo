@@ -15,13 +15,9 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands';
-import 'cypress-plugin-api';
-import 'cypress-xpath';
 import '@shelex/cypress-allure-plugin';
+import 'cypress-plugin-api';
 import 'cypress-plugin-steps';
 import { removeLogs } from '@helper/RemoveLogs';
 
 removeLogs();
-
-// Alternatively you can use CommonJS syntax:
-// require('./commands')

@@ -1,29 +1,19 @@
 import { defineConfig } from 'cypress';
 import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
-import { downloadFile } from 'cypress-downloadfile/lib/addPlugin.js';
 import allureWriter from '@shelex/cypress-allure-plugin/writer';
 import 'dotenv/config';
 
-async function setupNodeEvents(on, config) {
-	// This is required for the preprocessor to be able to generate JSON reports after each run, and more,
-	on('task', { downloadFile });
-	on('file:preprocessor', createBundler());
-	allureWriter(on, config);
-	// Make sure to return the config object as it might have been modified by the plugin.
-	return config;
-}
-
 export default defineConfig({
 	// @Ely: CYPRESS DASHBOARD PARA VER NUESTRAS EJECUCIONES EN LA WEB:
-	projectId: '',
-	viewportWidth: 1920,
-	viewportHeight: 1080,
+	projectId: '7n2zun',
+	// 1280×720 is considered to be the most suitable screen resolution for the desktop website version:
+	viewportWidth: 1280,
+	viewportHeight: 720,
 	downloadsFolder: 'cypress/downloads',
 	videosFolder: 'cypress/videos',
 	screenshotsFolder: 'cypress/screenshots',
 	screenshotOnRunFailure: true,
 	scrollBehavior: 'center',
-	// 1280×720 is considered to be the most suitable screen resolution for the desktop website version:
 	// Number of times to retry a failed test. If a number is set, tests will retry in both runMode and openMode:
 	retries: process.env.CI ? 2 : 0,
 	// Whether Cypress will record a video of the test run when running on headless:
@@ -39,11 +29,19 @@ export default defineConfig({
 	},
 	// E2E Testing runner
 	e2e: {
-		// Glob pattern to determine what test files to load:
-		specPattern: ['cypress/e2e/cucumber-test/Gherkin/*.feature', 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
-		// Use Cypress plugins:
-		setupNodeEvents,
 		baseUrl: 'https://demoqa.com',
+		// Glob pattern to determine what test files to load:
+		specPattern: [ 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}' ],
+		excludeSpecPattern: [ 'cypress/e2e/**/*.example.cy.js' ],
+		experimentalRunAllSpecs: true,
+		// Use Cypress plugins:
+		setupNodeEvents(on, config) {
+			// This is required for the preprocessor to be able to generate JSON reports after each run, and more,
+			on('file:preprocessor', createBundler());
+			allureWriter(on, config);
+			// Make sure to return the config object as it might have been modified by the plugin.
+			return config;
+		},
 	},
 	env: {
 		allure: true,

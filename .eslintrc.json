@@ -1,6 +1,6 @@
 {
 	"root": true,
-	"extends": ["plugin:cypress/recommended"],
+	"extends": ["plugin:cypress/recommended", "plugin:chai-friendly/recommended"],
 	"rules": {
 		"prefer-template": "error",
 		"curly": ["error", "all"],
@@ -50,7 +50,7 @@
 		"no-unreachable": "error",
 		"valid-typeof": "error",
 		"no-invalid-regexp": "error",
-		"no-invalid-this": "error",
+		"no-invalid-this": "off",
 		"default-case": "warn",
 		"switch-colon-spacing": "error",
 		"eqeqeq": "warn",

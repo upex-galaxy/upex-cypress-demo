@@ -1,14 +1,21 @@
 {
 	"compilerOptions": {
+		"module": "ESNext",
+		"target": "ESNext",
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"strict": true,
+		"lib": ["es5", "dom"],
 		"types": [
-			"cypress",
-			"cypress-file-upload",
-			"cypress-xpath",
-			"cypress-downloadfile",
-			"cypress-plugin-api",
 			"@shelex/cypress-allure-plugin",
-			"cypress-plugin-steps"
+			"cypress-file-upload",
+			"cypress-plugin-api",
+			"cypress-plugin-steps",
+			"cypress",
+			"node"
 		],
 		"paths": {
 			"@pages/*": ["./cypress/support/pages/*"],
@@ -16,5 +23,6 @@
 			"@data/*": ["./cypress/fixtures/data/*"]
 		}
 	},
+	"include": ["cypress.d.ts", "**/*.ts", "**/*.js", "**/*.Page.js"],
 	"exclude": ["node_modules"]
 }

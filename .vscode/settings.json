@@ -1,73 +1,87 @@
 {
-	"workbench.settings.editor": "json",
-	"workbench.colorTheme": "Andromeda Italic",
-	"workbench.iconTheme": "vscode-icons",
-	"cSpell.language": "en,es",
-	"terminal.integrated.defaultProfile.windows": "Git Bash",
-	"[javascript]": {
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    "[Typescript]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    },
+    "files.associations": {
+		"*.yml": "yaml"
 	},
-	"[Typescript]": {
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    "[yaml]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "keep",
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.defaultFormatter": "kennylong.kubernetes-yaml-formatter",
+        "editor.formatOnSave": true
+    },
+    "cypressHelper.menuItems": {
+        "FindCustomCommandReferences": true,
+        "FindStepDefinitionReferences": true,
+        "GenerateCustomCommandTypes": true,
+        "GoToCustomCommand": false,
+        "OpenCypress": false,
+        "ParseHAR": false,
+        "RunCypress": false,
+        "SchemaGenerator": false,
+        "mockAutocomplete": false
+    },
+    "editor.autoIndent": "advanced",
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+    "editor.cursorBlinking": "expand",
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "editor.formatOnType": true,
+    "editor.lineHeight": 20,
+    "editor.quickSuggestions": {
+        "comments": true,
+        "other": true,
+        "strings": true
+    },
+    "editor.tabCompletion": "on",
+    "eslint.codeAction.showDocumentation": {
+        "enable": true
+    },
+    "eslint.format.enable": true,
+    "eslint.validate": ["typescript", "javascript", "ts", "js"],
+    "explorer.fileNesting.enabled": true,
+    "files.autoSave": "onFocusChange",
+    "git.enableSmartCommit": true,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "material-icon-theme.folders.color": "#7cb342",
+	"material-icon-theme.files.associations": {
+		"jsconfig.json": "svgo",
+		"regression.yml": "test-ts",
+		"sanityTemplate.yml": "test-ts",
+		"cypress.reporter.json": "cypress",
+		"commands.js": "cypress",
+		"e2e.js": "cypress",
+		"*.cy.js": "test-jsx",
+        "*.Page.js": "3d",
 	},
-	"[feature]": {
-		"editor.defaultFormatter": "alexkrechik.cucumberautocomplete"
+	"material-icon-theme.folders.associations": {
+		"workflows": "github",
+		"support": "tools"
 	},
-	"files.associations": {
-		"*.feature": "feature"
-	},
-	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-	"editor.quickSuggestions": {
-		"comments": false,
-		"strings": true,
-		"other": true
-	},
-	"editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
-	"editor.formatOnSaveMode": "file", // required to format on save
-	"files.autoSave": "onFocusChange", // optional but recommended
-	"vs-code-prettier-eslint.prettierLast": true, // set as "true" to run 'prettier' last not first
-	"editor.formatOnType": true,
-	"editor.formatOnPaste": false,
-	"editor.formatOnSave": true,
-	"editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-	"editor.tabCompletion": "on",
-	"editor.lineHeight": 20,
-	"editor.cursorBlinking": "expand",
-	"eslint.validate": ["typescript", "javascript", "ts", "js"],
-	"eslint.format.enable": true,
-	"eslint.codeAction.showDocumentation": {
-		"enable": true
-	},
-	"cSpell.enableFiletypes": ["cucumber"],
-	"cSpell.autoFormatConfigFile": true,
-	"cucumber.features": ["*/**/.feature"],
-	"cucumber.glue": ["*/**/.ts", "*/**/.js"],
-	"cypressHelper.menuItems": {
-		"OpenCypress": false,
-		"RunCypress": false,
-		"GenerateCustomCommandTypes": true,
-		"GoToCustomCommand": false,
-		"FindCustomCommandReferences": true,
-		"FindStepDefinitionReferences": true,
-		"SchemaGenerator": false,
-		"ParseHAR": false,
-		"mockAutocomplete": false
-	},
-	"cucumberautocomplete.strictGherkinCompletion": true,
-	"cucumberautocomplete.strictGherkinValidation": false,
-	"cucumberautocomplete.customParameters": [
-		{
-			"parameter": "{ab}",
-			"value": "(a|b)"
-		}
-	],
-	"cucumberautocomplete.skipDocStringsFormat": true,
-	"cucumberautocomplete.formatConfOverride": {
-		"But": "relative"
-	},
-	"cucumberautocomplete.onTypeFormat": true,
-	"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
-	"cucumberautocomplete.stepRegExSymbol": "'",
-	"git.enableSmartCommit": true
+    "testing.alwaysRevealTestOnStateChange": true,
+    "testing.automaticallyOpenPeekViewDuringAutoRun": true,
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+    "terminal.integrated.tabs.defaultColor": "terminal.ansiGreen",
+    "terminal.integrated.tabs.defaultIcon": "source-control",
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "vs-code-prettier-eslint.prettierLast": true,
+    "workbench.colorTheme": "Dracula",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.settings.editor": "json",
+    "workbench.tree.enableStickyScroll": true,
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
