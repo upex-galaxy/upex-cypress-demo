@@ -15,7 +15,7 @@ const listA = '626e016e310d1a836fb72de8'; // ID para obtener la Lista que querem
 const key = '191a488f5f9b25380f53f34531eea047'; // Nuestra autenticación
 const token = '03d4b617f0ed756a1e74de3856627c5dcba89a366f81cc04fee1e388df60f9a7'; // la autorización
 
-describe('Ejemplo para demostrar cómo probar una API', () => {
+describe.skip('Ejemplo para demostrar cómo probar una API', () => {
 	// Recordemos siempre seguir la Documentación de la API de nuestro SUT, cada API tiene sus propios endpoints y parámetros.
 	// En este caso, usaremos la API de Trello como en el curso de Postman:
 

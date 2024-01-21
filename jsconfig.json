@@ -1,14 +1,20 @@
 {
 	"compilerOptions": {
+		"module": "ESNext",
+		"target": "ESNext",
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"strict": true,
+		"lib": ["es5", "dom"],
 		"types": [
-			"cypress",
 			"cypress-file-upload",
-			"cypress-xpath",
-			"cypress-downloadfile",
 			"cypress-plugin-api",
-			"@shelex/cypress-allure-plugin",
-			"cypress-plugin-steps"
+			"cypress-plugin-steps",
+			"cypress",
+			"node"
 		],
 		"paths": {
 			"@pages/*": ["./cypress/support/pages/*"],
@@ -16,15 +22,6 @@
 			"@data/*": ["./cypress/fixtures/data/*"]
 		}
 	},
-	"exclude": ["node_modules"],
-	"reporterEnabled": "spec, mocha-junit-reporter, mochawesome",
-	"mochaJunitReporterReporterOptions": {
-		"mochaFile": "reports/test-results.xml",
-		"toConsole": false,
-		"outputs": true,
-		"testCaseSwitchClassnameAndName": true
-	},
-	"mochawesomeReporterReporterOptions": {
-		"mochaFile": "mochawesome.json"
-	}
+	"include": ["cypress.d.ts", "**/*.ts", "**/*.js", "**/*.Page.js"],
+	"exclude": ["node_modules"]
 }

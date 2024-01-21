@@ -1,8 +1,8 @@
-[![🤖CI Regression in QA🧪](https://github.com/upex-galaxy/cypress-blackhole/actions/workflows/regression.yml/badge.svg)](https://github.com/upex-galaxy/cypress-blackhole/actions/workflows/regression.yml)
+[![🤖CI run Regression in QA🧪](https://github.com/upex-galaxy/cypress-blackhole/actions/workflows/regression.yml/badge.svg?branch=QA)](https://github.com/upex-galaxy/cypress-blackhole/actions/workflows/regression.yml)
 
 [![vscode-logo]][vscode-site] [![cypress-logo]][cypress-site] [![javascript-logo]][javascript-site]
 
-# 🧪Testing Automation - Cypress 13👨🏻‍🚀 + Cucumber
+# 🧪Testing Automation - Cypress 13👨🏻‍🚀 PRO
 
 ![UPEX's Banners (linkedin) (1)](https://user-images.githubusercontent.com/91127281/189470339-acea5782-16f1-4f06-9ce0-df54fd3ead9d.png)
 
@@ -12,7 +12,7 @@ Cypress es el MEJOR FRAMEWORK DE AUTOMATION E2E actualmente! No hay rival! Adem�
 Cypress es un Framework de Automatización de Next Generation construido para web modernas. Esto es im simple proyecto el cual puedes usarlo para
 comenzar tu viaje por la Galaxia de la Automatización!
 
-## NUEVA ESTRUCTURA DE PROYECTO
+## ESTRUCTURA DE PROYECTO
 
 Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 
@@ -22,39 +22,26 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
     -   y la nomenclatura de archivos cambia a ser más directa:
 
     ```
-    {GX-ID}-{NombreCortoDeLaStory}
+    {GX-ID}_{NombreCortoDeLaStory}
 
-    como ejemplo: "GX-5-AgregarItemAlCart.cy.js".
+    como ejemplo: "GX3-50_shoppingCart.cy.js".
 
     ejemplo de estructura:
     /Tests
-    	├───BookStore
-    	│       GX-6309-CrearObtenerLibros.cy.js
+    	├───Checkout
+    	│       GX3-50_shoppingCart.cy.js
     ```
-
--   En cuanto a la carpeta `cucumber-tests`:
-
-    -   Tendrán una mejor distribución de archivos; por carpetas separadas: Todos los archivos `.feature` dentro de la carpeta "Gherkin" y los
-        archivos `.js` dentro de "stepDefinitions" como tiene que ser.
-
-    ```
-    * ejemplo de Estructura Cucumber:
-
-    /cucumber-test
-    	├───Gherkin
-    	│       GX-2_StoryTestSuite.feature
-    	│
-    	└───stepDefinitions
-    			GX-2_StoryTestSuite.js
-    ```
-
-    -   La Nomenclatura de éste tipo de prueba se mantiene igual al normal (la misma nomenclatura mencionada arriba).
 
 ### RESUMEN:
 
 ![image](https://user-images.githubusercontent.com/91127281/209617125-ec3b7ed9-0495-4860-adba-547ed2d3a243.png)
 
 # CÓMO EMPEZAR:
+
+**Precondición**:
+- Asegúrate de usar el Gestor de Paquete "YARN" en este proyecto en lugar de npm; para un mejor rendimiento de control de dependencias.
+- Si aún no tienes instalado `yarn` en tu maquina, puedes hacerlo simplemente corriendo en la terminal: `npm i -g yarn` 
+
 
 1. **Clona el Proyecto**:
     ```
@@ -63,17 +50,17 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 
 ---
 
-2. **Instala todas las dependencias**:
+2. **Instala todas las dependencias del proyecto (incluyendo Cypress) con yarn**:
     ```
-    npm ci
+    yarn
     ```
-    - (el commando `ci` es para instalar todas las Dependencias Locked del Proyecto)
+    - (correr `yarn` así solo, es para instalar todas las Dependencias Locked del Proyecto por el yarn.lock y el package.json)
 
 ---
 
-3. **Para abrir la App de Cypress, corre el comando**:
+3. **IMPORTANTE antes de continuar, ABRE CYPRESS, para verificar sus dependencias**:
     ```
-    npm test
+    yarn test
     ```
     - también puede usar `npx cypress open` (ya que en Package.json tenemos la variable "test" como el "cypress open") para abrir Cypress.
 
@@ -81,48 +68,28 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 
 4. **Para correr pruebas y generar Reportes XML y HTML, ejecuta**:
     ```
-    npm run file */**/<filename>
+    yarn test:run <coloca_aqui_tu_path_archivo_de_prueba>
     ```
-    - donde la variable "file" es:
-      `cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --record --key {key} --spec`, cuyo
-      atajo es para que podamos correr las pruebas de un directorio que especifiquemos, usando el navegador de Chrome, generando 1 Reporte XML para
-      importar a Jira y otro para generar un hermoso html, y adicionalmente actualizar el Cypress Dashboard del Proyecto.
-
+    - cuyo script "test:run" es:
+      `cypress run --browser electron --spec`, 
+      el cual es un atajo es para que podamos correr las pruebas de un directorio que especifiquemos, usando el navegador de electron, generando 1 Reporte XML y HTML para posteriormente
+      importar a Jira con el XML y generar un hermoso Reporte en el navegador con el HTML.
 ---
 
-5. **Para generar el archivo JSON Cucumber y Reporte HTML,**
-    - _Primero Descarga el Formatter según tu OS:_
-        - [Json-Formatter for Windows](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-windows-amd64)
-        - [Json-Formatter for Linux](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-linux-amd64)
-        - [Json-Formatter for MacOs](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-darwin-amd64)
-    - _Luego mueve el archivo descargado a la carpeta `cucumber-formatter` de este proyecto en tu repositorio local_
-    - _y Sigue estas instrucciones de instalación:_ [github.com/cucumber/json-formatter](https://github.com/cucumber/json-formatter)
-    - _Modifica el archivo: `.cypress-cucumber-preprocessorrc.json`, para cambiar el nombre del formatter:_
-        - Renombra: `cucumber-json-formatter.exe` por `cucumber-json-formatter` si usas Linux o MacOs.
-    - _Luego podrás generar archivo JSON de Cucumber para Importar las Pruebas a Jira._
-    - _Para poder generar archivos HTML de Cucumber luego de correr las pruebas, Ejecuta:_
-        ```
-        npm run report:cucumber
-        ```
-        - donde la variable "report:cucumber" es igual a: `node ./cucumber-html-report.js` cuyo atajo es para generar el Reporte Cucumber index.html
-          en la carpeta `reports/cucumber-html-report` para evaluar TODOS el Resultado de Prueba Cucumber.
-
----
-
-6. **Para correr una REGRESIÓN y generar un solo Reporte HTML global, ejecuta**:
+5. **Para correr una REGRESIÓN y generar un solo Reporte HTML global, ejecuta**:
     ```
-    npm run regression:report
+    yarn test:ci:regression
     ```
-    Luego ejecuta estos comandos, uno por uno:
+    Luego ejecuta:
     ```
-    npm run report:json
-    npm run report:html
+    yarn report
     ```
     - Gracias a esto se va a generar un único Reporte mochawesome HTML para evaluar TODOS los Resultados de Prueba de la Regresión.
 
 ---
 
-7. **AHORA CON CYPRESS DASHBOARD**, puedes ver todas las ejecuciones y resultados de prueba del proyecto! Visita:
+7. **AHORA CON CYPRESS DASHBOARD**, puedes ver todas las ejecuciones y resultados de prueba del proyecto! 
+    - Este Proyecto de los Repos de UPEX Galaxy es público. Puedes visitarlo:
    [CYPRESS DASHBOARD](https://dashboard.cypress.io/projects/2pw67q/analytics/runs-over-time)
 
 ---
@@ -131,30 +98,23 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 
 ### 🚩NORMATIVAS A SEGUIR:
 
-1. Perfecta Nomenclatura del nombre de Archivo de prueba: <br> `{GX-ID}-{StoryShortName}.{extensionFile} ej: GX-50-AgregarItemsAlCart.cy.js`
-2. Archivo de Prueba dentro del directorio del Componente correspondiente, ejemplo: <br> `cypress/e2e/Tests/ComponentName/GX-1-StoryTestSuite.cy.js`.
-3. Buen diseño del Test Suite elaborado (Esto implica que se vean bien el código en general, que al menos funcione).
-4. Tener el Markdown de la US en la carpeta Test-Plan en su correspondiente carpeta Sprint, ejemplo: <br>
-   `cypress/test-plan/in-sprint/sprint-9/userStory.md`<br> Esto implica que cada vez que se trabaje en un Sprint nuevo, se debería crear la carpeta
-   correspondiente "sprint-" + número del sprint, como se muestra en el ejemplo arriba.
-5. NO usar fixture como PageObjectModel sino como Data (es decir, no agarrar elementos Web por fixtures, sino usar el Fixture para iterar Data o
-   reutilizar variables).
-    - Previamente en GX, se usaba el patrón Fixture como POM, porque era fácil de aprender, pero hoy en día las entrevistas técnicas piden PageObject
-      Model de la manera tradicional, sin usar Commands.
-6. Los "Cypress Commands" no es un uso obligatorio; pero si se quiere usar, debería aplicarse para hacer funciones de algoritmos para múltiples suites
-   o para generar precondiciones repetitivas (Background).
-
+1. **Perfecta Nomenclatura del nombre de Archivo de prueba**: <br> `{GX-ID}_{FeatureName}.{cy.js/ts}` ejemplo: `GX3-50_checkout.cy.js`. <br> 
+    **IMPORTANTE**: Realmente un archivo de prueba debería verse como `checkout.cy.js` y alojar aquí todas las US relacionadas a la feature del Checkout por cada "describe" de cypress. PERO al ser un Repo "EDUCATIVO", y tenemos muchos estudiantes trabajando en misma US, trabajamos con esta específica nomenclatura, mientras que todo lo demás es completamente realista.
+2. **Archivo de Prueba dentro del directorio del Componente correspondiente**, ejemplo: <br> `cypress/e2e/Tests/Elements/GX3-116_buttons.cy.js`.
+3. **Buen diseño del Test Suite elaborado** (Esto implica que se vean bien el código en general, que al menos funcione).
+4. **Tener el Markdown de la US** en la carpeta `coverage` en su correspondiente carpeta Sprint, ejemplo: <br>
+   `coverage/S34/GX3-1476.md`<br> Esto implica que cada vez que se trabaje en un Sprint nuevo, se debería crear la carpeta correspondiente "S" + número del sprint, como se muestra en el ejemplo arriba.
+5. **NO usar fixture como PageObjectModel** sino como Data (es decir, no agarrar elementos Web por fixtures, sino usar el Fixture para iterar Data o reutilizar variables).
+6. **Los "Cypress Commands" no es un uso obligatorio**; pero si se quiere usar, debería aplicarse para hacer funciones de algoritmos para múltiples suites o para generar precondiciones repetitivas (Background).
 7. **En caso de usar Fixtures**: Chequear que el archivo ".json" esté dentro de la carpeta correspondiente al componente, ejemplo: <br>
    `cypress/fixtures/account/example.json`.
 8. **En caso de usar PageObjectModel**: Chequear que el "Page.js" esté dentro de la carpeta "pages" en la de "support", ejemplo: <br>
-   `cypress/support/pages/example.Page.js`.
+   `cypress/support/pages/Example.Page.js`.
 9. **En caso de usar Commands**: Asegurarse de aplicarlo para crear pasos de Precondiciones o Scripts de Algoritmos complejos (NO USAR como Pasos de
    Acción, eso sería tarea para el POM).
-10. **En caso de usar el CI Pipeline**: Usar únicamente el archivo predeterminado del proyecto `sanity.yml`, y asegurarse de modificarlo correctamente
+10. **En caso de usar el CI Pipeline**: Sigue las instrucciones del archivo `sanityTemplate.yml`, para que copies el código del mismo y lo pegues en tu propio archivo yml con la terminología: `sanityTuNombre.yml` y asegurarse de modificarlo correctamente
     (Solo cambiar el Path del Test Suite y el parámetro de Importación TX para Jira) y no borrar o cambiar nada más, que funcione y pase los Checks.
-    El archivo `regression.yml` se ejecutará automaticamente cuando los cambios hayan mergeado a QA.
-11. **En caso de usar Cucumber**: Chequear que el archivo Gherkin (.feature) y los StepDefinitions (.js) estén correctamente diseñados y que la
-    Ejecución en CI funcione y pase los Checks.
+    En cambio, el archivo `regression.yml` se ejecutará automaticamente cuando los cambios hayan mergeado a QA.
 
 ---
 
