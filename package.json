@@ -42,25 +42,12 @@
 	"license": "MIT",
 	"type": "module",
 	"devDependencies": {
-<<<<<<< HEAD
-		"@4tw/cypress-drag-drop": "2.2.2",
-		"@badeball/cypress-cucumber-preprocessor": "12.2.0",
-		"@bahmutov/cypress-esbuild-preprocessor": "2.1.5",
-		"@esbuild-plugins/node-modules-polyfill": "0.1.4",
-		"@faker-js/faker": "7.6.0",
-		"@shelex/cypress-allure-plugin": "^2.40.1",
-		"@typescript-eslint/eslint-plugin": "5.53.0",
-		"@typescript-eslint/parser": "5.53.0",
-		"allure-commandline": "2.22.1",
-		"chai": "^5.0.0",
-=======
 		"@bahmutov/cypress-esbuild-preprocessor": "2.2.0",
 		"@faker-js/faker": "8.3.1",
 		"@types/node": "20.11.5",
 		"@typescript-eslint/eslint-plugin": "6.19.0",
 		"@typescript-eslint/parser": "6.19.0",
 		"cross-env": "^7.0.3",
->>>>>>> QA
 		"cypress": "13.6.1",
 		"cypress-file-upload": "5.0.8",
 		"cypress-mochawesome-reporter": "3.8.0",

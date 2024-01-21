@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="9.531" tests="3" failures="0">
+  <testsuite name="Root Suite" timestamp="2024-01-19T22:31:04" tests="0" file="cypress/e2e/Tests/Elements/GX3-1329_buttons.cy.js" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="GX3-1329: ToolsQA | Elements | Buttons" timestamp="2024-01-19T22:31:04" tests="3" time="9.500" failures="0">
+    <testcase name="TC1: Should be triggered when using Double Click" time="6.393" classname="GX3-1329: ToolsQA | Elements | Buttons TC1: Should be triggered when using Double Click">
+    </testcase>
+    <testcase name="TC2: Should be triggered when using Right Click" time="1.581" classname="GX3-1329: ToolsQA | Elements | Buttons TC2: Should be triggered when using Right Click">
+    </testcase>
+    <testcase name="TC3: Should be triggered when using Click" time="1.427" classname="GX3-1329: ToolsQA | Elements | Buttons TC3: Should be triggered when using Click">
+    </testcase>
+  </testsuite>
+</testsuites>
