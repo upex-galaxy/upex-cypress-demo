@@ -1,4 +1,8 @@
 {
+	"form": {
+		"input": "form#userForm"
+	},
+
 	"fullName": {
 		"input": "#userName",
 		"data": {
@@ -12,7 +16,7 @@
 		"data": {
 			"full": "lucia@gmail.com",
 			"empty": "",
-			"invalid@": "luciagmail.com",
+			"invalidArroba": "luciagmail.com",
 			"invalidUser": "@gmail.com",
 			"invalidDomain1": "lucia@.com",
 			"invalidDomain2": "lucia@gmail.c"
@@ -39,9 +43,9 @@
 		"input": "#submit"
 	},
 	"output": {
-		"name": "#name",
-		"email": "#email",
-		"currentAddress": "#currentAddress",
-		"permanentAddress": "#permanentAddress"
+		"name": "p#name.mb-1",
+		"email": "p#email.mb-1",
+		"currentAddress": "p#currentAddress",
+		"permanentAddress": "p#permanentAddress"
 	}
 }
