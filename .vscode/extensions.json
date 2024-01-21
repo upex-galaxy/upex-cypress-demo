@@ -6,6 +6,7 @@
 		"EliverLara.andromeda",
 		"johnpapa.winteriscoming",
 		"RobbOwen.synthwave-vscode",
+		"dracula-theme.theme-dracula",
 		//! Helper:
 		"leizongmin.node-module-intellisense",
 		"christian-kohler.npm-intellisense",
@@ -25,6 +26,7 @@
 		"esbenp.prettier-vscode",
 		"rvest.vs-code-prettier-eslint",
 		"alexkrechik.cucumberautocomplete",
+		"kennylong.kubernetes-yaml-formatter",
 		//! Git Controls:
 		"mhutchie.git-graph",
 		"donjayamanne.githistory",

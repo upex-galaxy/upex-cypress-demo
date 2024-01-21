@@ -6,11 +6,11 @@ describe('Cypress Challenge - Widgets', () => {
 		const availableColors = ['Red', 'Blue', 'White', 'Yellow', 'Black', 'Voilet'];
 		function selectRandomColor() {
 			const givenRandomOption = Cypress._.random(availableColors.length - 1);
-			cy.log('🔑 => ' + availableColors.length);
-			cy.log('💡 => ' + givenRandomOption);
+			cy.log(`🔑 => ${availableColors.length}`);
+			cy.log(`💡 => ${givenRandomOption}`);
 			const givenColor = availableColors[givenRandomOption];
 			availableColors.splice(givenRandomOption, 1);
-			cy.log('⭐️ => ' + givenColor);
+			cy.log(`⭐️ => ${givenColor}`);
 			return givenColor;
 		}
 
@@ -33,7 +33,8 @@ describe('Cypress Challenge - Widgets', () => {
 
 		//* Este codigo está elaborado con "Alias" usando el método as() en lugar de Then:
 		cy.get('.auto-complete__menu [id*=react-select]').eq(1).as('colorToSelect');
-		cy.get('@colorToSelect').click().invoke('text').as('colorName');
+		cy.get('@colorToSelect').click()
+		cy.get('@colorToSelect').invoke('text').as('colorName');
 		cy.getAutocompletedValues().then(values => expect(values).includes(this.colorName));
 
 		//* Este codigo también funciona y hace exactamente lo mismo que el de arriba pero usando Then:
