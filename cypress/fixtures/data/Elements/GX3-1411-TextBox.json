@@ -1,13 +1,8 @@
 {
-	"form": {
-		"input": "form#userForm"
-	},
-
 	"fullName": {
 		"input": "#userName",
 		"data": {
-			"full": "Lucia",
-			"empty": ""
+			"full": "Lucia"
 		}
 	},
 
@@ -15,7 +10,6 @@
 		"input": "#userEmail",
 		"data": {
 			"full": "lucia@gmail.com",
-			"empty": "",
 			"invalidArroba": "luciagmail.com",
 			"invalidUser": "@gmail.com",
 			"invalidDomain1": "lucia@.com",
@@ -26,16 +20,14 @@
 	"currentAddress": {
 		"input": "#currentAddress",
 		"data": {
-			"full": "Perú",
-			"empty": ""
+			"full": "Perú"
 		}
 	},
 
 	"permanentAddress": {
 		"input": "#permanentAddress",
 		"data": {
-			"full": "Perú",
-			"empty": ""
+			"full": "Perú"
 		}
 	},
 

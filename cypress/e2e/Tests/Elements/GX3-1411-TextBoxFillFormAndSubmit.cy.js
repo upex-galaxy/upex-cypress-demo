@@ -87,10 +87,11 @@ describe('GX3-1411: ToolsQA | Elements | Text Box: Fill form and Submit', () => 
 
 	it('1412 | TC6: Validar No registrar formulario cuando todos los campos están vacíos', () => {
 		cy.fixture('data/Elements/GX3-1411-TextBox.json').then(the => {
-			cy.get(the.fullName.input);
-			cy.get(the.email.input);
-			cy.get(the.currentAddress.input);
-			cy.get(the.permanentAddress.input);
+			//cy.get(the.form.input).submit;
+			cy.get(the.fullName.input).should('not.have.value');
+			cy.get(the.email.input).should('not.have.value');
+			cy.get(the.currentAddress.input).should('not.have.value');
+			cy.get(the.permanentAddress.input).should('not.have.value');
 			cy.get(the.submit.input).click();
 			cy.get('p').should('not.exist');
 		});
