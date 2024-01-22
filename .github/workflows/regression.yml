@@ -100,7 +100,18 @@ jobs:
     needs: [RegressionTests, AriSlackNotification]
     runs-on: ubuntu-latest
     steps:
-    - name: Create Pull Request
+
+    - name: 🧬 Check for changes
+      id: changes
+      run: |
+        git fetch origin main
+        DIFF=$(git diff --name-only origin/main)
+        if [ "$DIFF" != "" ]; then
+          echo "::set-output name=changes::true"
+        fi
+
+    - name: 📦️ Create Pull Request
+      if: steps.changes.outputs.changes == 'true'
       uses: actions/github-script@v6
       with:
         script: |
@@ -129,7 +140,7 @@ jobs:
     needs: [Create-PullRequest]
     runs-on: ubuntu-latest
     steps:
-    - name: 🧬Merge QA -> MAIN
+    - name: 🧬 Merge QA -> MAIN
       uses: devmasx/merge-branch@master
       with:
         type: now
