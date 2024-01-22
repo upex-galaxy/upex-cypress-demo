@@ -69,4 +69,4 @@ jobs:
         SLACK_USERNAME: Ari✨
         SLACK_MESSAGE: ':test_tube: BLACKHOLE Cypress Project -- Sanity Test Execution is Done and imported to Jira :rocket:'
         SLACK_COLOR: ${{ job.status }}
-        SLACK_ICON: https://i.imgur.com/q9kvQCp_d.webp?maxwidth=760&fidelity=grand
+        SLACK_ICON: https://image.cdn2.seaart.ai/2023-12-06/clo9g0h4msbc73ac2sog/99e1abc36f32945cd4bacf5ee7448e96194545f7_high.webp
