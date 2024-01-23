@@ -10,18 +10,15 @@ describe('GX3-1612 | ToolsQA | Elements | Dynamic Properties', () => {
 
 	it('GX3-1612 | TC2: Validate enabled element after 5 seconds', () => {
 		cy.get('#enableAfter').should('be.disabled');
-		cy.wait(5000);
-		cy.get('#enableAfter').should('be.enabled');
+		cy.get('#enableAfter', { timeout: 5000 }).should('be.enabled');
 	});
 
 	it('GX3-1612 | TC3: Validate text "Color Change"', () => {
 		cy.get('#colorChange').should('have.class', 'btn-primary');
-		cy.wait(5000);
-		cy.get('#colorChange').should('have.class', 'text-danger');
+		cy.get('#colorChange', { timeout: 5000 }).should('have.class', 'text-danger');
 	});
 	it('GX3-1612 | TC4: Validate element visibility after 5 seconds"', () => {
 		cy.get('#visibleAfter').should('not.exist');
-		cy.wait(5000);
-		cy.get('#visibleAfter').should('be.visible');
+		cy.get('#visibleAfter', { timeout: 5000 }).should('be.visible');
 	});
 });
