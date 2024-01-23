@@ -13,7 +13,7 @@ describe('US GX3-1653 | ToolsQA | Elements | Upload and Download', () => {
 		cy.readFile('cypress/downloads/sampleFile.jpeg').should('exist');
 	});
 
-	it('Validate Opens File Explorer, uploads a file, and displays file details', () => {
+	it('GX3-1653 | TC2: Validate Opens File Explorer, uploads a file, and displays file details', () => {
 		cy.fixture('images/upexlogo.png').then(fileContent => {
 			download.get.unploadBtn().attachFile({
 				fileContent: fileContent.toString(),
