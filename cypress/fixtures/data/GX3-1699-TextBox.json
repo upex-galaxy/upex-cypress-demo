@@ -1,9 +1,9 @@
 {
     "input": {
-        "fullName": "#userName-label",
-        "email": "#userEmail-label",
-        "currentAddress": "#currentAddress-label",
-        "permanentAddress": "permanentAddress-label"
+        "fullName": "#userName",
+        "email": "#userEmail",
+        "currentAddress": "#currentAddress",
+        "permanentAddress": "#permanentAddress"
     },
     "data":{
         "fullName": "Nela",
@@ -17,10 +17,10 @@
         "emailWithoutCharacterAfter@": "nela@.com"
     },
     "submitButton": "#submit",
-    "ouput":{
-        "name": "#name",
-        "email": "#email",
-        "currentAddress": "#currentAddress",
-        "permanentAddress": "#permanentAddress"
+    "output":{
+        "name": "p#name",
+        "email": "p#email",
+        "currentAddress": "p#currentAddress",
+        "permanentAddress": "p#permanentAddress"
     }
 }
