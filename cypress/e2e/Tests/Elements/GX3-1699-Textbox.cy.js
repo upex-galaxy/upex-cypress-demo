@@ -39,4 +39,54 @@ describe('GX3-1699 | ToolsQA | Elements | Text Box: Fill form and Submit', () =>
 			cy.get(outputSelector).should('not.exist');
 		});
 	});
+
+	it('1700 | TC3: Check that a red border is shown when the email does not contain “@”.', () => {
+		cy.get(the.input.email).type(the.data.emailWithoutAt);
+
+		// Submit form with invalid email format
+		cy.get(the.submitButton).click();
+
+		//Assertions
+		cy.get(the.input.email).should('have.class', 'field-error').and('have.css', 'border-color', 'rgb(255, 0, 0)');
+	});
+
+	it('1700 | TC4: Check that a red border is shown when the email does not contain (minimum) 1 alphanumeric character before “@”.', () => {
+		cy.get(the.input.email).type(the.data.emailWithoutCharacterBeforAt);
+
+		// Submit form with invalid email format
+		cy.get(the.submitButton).click();
+
+		//Assertions
+		cy.get(the.input.email).should('have.class', 'field-error').and('have.css', 'border-color', 'rgb(255, 0, 0)');
+	});
+
+	it('1700 | TC5: Check that a red border is shown when the email does not contain (minimum) 1 alphanumeric character after “@”.', () => {
+		cy.get(the.input.email).type(the.data.emailWithoutCharacterAfterAt);
+
+		// Submit form with invalid email format
+		cy.get(the.submitButton).click();
+
+		//Assertions
+		cy.get(the.input.email).should('have.class', 'field-error').and('have.css', 'border-color', 'rgb(255, 0, 0)');
+	});
+
+	it('1700 | TC6: Check that a red border is shown when the email does not contain “.” after: 1 alphanumeric character after “@”.', () => {
+		cy.get(the.input.email).type(the.data.emailWithoutDot);
+
+		// Submit form with invalid email format
+		cy.get(the.submitButton).click();
+
+		//Assertions
+		cy.get(the.input.email).should('have.class', 'field-error').and('have.css', 'border-color', 'rgb(255, 0, 0)');
+	});
+
+	it('1700 | TC7: Check that a red border is shown when the email does not contain (minimum) 2 alphanumeric characters after “.”', () => {
+		cy.get(the.input.email).type(the.data.emailWithOneCharacterAfterDot);
+
+		// Submit form with invalid email format
+		cy.get(the.submitButton).click();
+
+		//Assertions
+		cy.get(the.input.email).should('have.class', 'field-error').and('have.css', 'border-color', 'rgb(255, 0, 0)');
+	});
 });
