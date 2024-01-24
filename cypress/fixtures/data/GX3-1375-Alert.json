@@ -1,0 +1,9 @@
+{
+	"enpoint": "alerts",
+	"AlertMsj1": "You clicked a button",
+	"AlertMsj2": "This alert appeared after 5 seconds",
+	"AlertMsj3": "Do you confirm action?",
+	"AlertMsj4": "Please enter your name",
+	"ElementMsj1": "You selected Ok",
+	"ElementMsj2": "You selected Cancel"
+}
