@@ -1,0 +1,26 @@
+{
+    "input": {
+        "fullName": "#userName-label",
+        "email": "#userEmail-label",
+        "currentAddress": "#currentAddress-label",
+        "permanentAddress": "permanentAddress-label"
+    },
+    "data":{
+        "fullName": "Nela",
+        "validEmail": "nela@test.com",
+        "currentAddress": "Mi casita es la de la esquina",
+        "permanentAddress": "La misma que la actual",
+        "emailWithout@": "nelatest.com",
+        "emailWithoutDot": "nela@testcom",
+        "emailWithOneCharacterAfterDot": "nela@test.c",
+        "emailWithoutCharacterBefore@": "@test.com",
+        "emailWithoutCharacterAfter@": "nela@.com"
+    },
+    "submitButton": "#submit",
+    "ouput":{
+        "name": "#name",
+        "email": "#email",
+        "currentAddress": "#currentAddress",
+        "permanentAddress": "#permanentAddress"
+    }
+}
