@@ -2,6 +2,7 @@ import { selectablePage } from '@pages/Interactions/GX3-1766-Selectable.page';
 describe('ToolsQA | Interactions | Selectable', () => { 
 	const listItems = ['Cras justo odio','Dapibus ac facilisis in', 'Morbi leo risus', 'Porta ac consectetur ac'];
 	const gridItems = ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
+	
 
 	beforeEach('Go to Demo QA Web, Selectable section', () => {
 		cy.visit('https://demoqa.com/selectable');
@@ -21,12 +22,18 @@ describe('ToolsQA | Interactions | Selectable', () => {
 		const randomIndex = Math.floor(Math.random() * listItems.length);
 		const randomItem = listItems[randomIndex];
 		selectablePage.selectOneItem(randomItem, 'listContainer');
+		selectablePage.get.selectedListItem(randomItem).should('have.css', 'background-color', 'rgb(0, 123, 255)');
+
 		selectablePage.deselectOneItem(randomItem, 'listContainer');
+		selectablePage.get.selectedListItem(randomItem).should('have.css', 'background-color', 'rgb(255, 255, 255)');
 		
 	});
 	it('1766 | TC4: “Check that multiple items on "List" tab can be selected and deselected”.', () => {
 		selectablePage.selectMultipleItems('listContainer');
+		selectablePage.get.listContainer().should('have.css', 'background-color', 'rgb(0, 123, 255)');
+
 		selectablePage.deselectMultipleItems('listContainer');
+		selectablePage.get.listContainer().should('have.css', 'background-color', 'rgb(255, 255, 255)');
 	});
 	it('1766 | TC5: “Check that one item on the "Grid" tab can be selected and deselected”. ', () => {
 		selectablePage.clickGridTab();
@@ -34,12 +41,18 @@ describe('ToolsQA | Interactions | Selectable', () => {
 		const randomIndex = Math.floor(Math.random() * gridItems.length);
 		const randomItem = gridItems[randomIndex];
 		selectablePage.selectOneItem(randomItem, 'gridContainer');
+		selectablePage.get.selectedGridItem(randomItem).should('have.css', 'background-color', 'rgb(0, 123, 255)');
+
 		selectablePage.deselectOneItem(randomItem, 'gridContainer');
+		selectablePage.get.selectedGridItem(randomItem).should('have.css', 'background-color', 'rgb(255, 255, 255)');
 	});
-	it('1766 | TC6: “Check that multiple items on ‘Grid’ tab can be selected and deselected”.', () => {
+	it('1766 | TC6: “Check that multiple items on "Grid" tab can be selected and deselected”.', () => {
 		selectablePage.clickGridTab();
 		
 		selectablePage.selectMultipleItems('gridContainer');
+		selectablePage.get.gridContainer().should('have.css', 'background-color', 'rgb(0, 123, 255)');
+
 		selectablePage.deselectMultipleItems('gridContainer');
+		selectablePage.get.gridContainer().should('have.css', 'background-color', 'rgb(255, 255, 255)');
 	});
 });
