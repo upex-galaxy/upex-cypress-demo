@@ -4,8 +4,6 @@ class Selectable {
 		gridTab: () => cy.get('#demo-tab-grid'),
 		listContainer: () => cy.get('#verticalListContainer li'),
 		gridContainer: () => cy.get('#gridContainer li'),
-		selectedListItem: (randomItem) => cy.get('#verticalListContainer li').contains(randomItem),
-		selectedGridItem: (randomItem) => cy.get('#gridContainer li').contains(randomItem)
 	};
 	clickListTab(){
 		this.get.listTab().click();
