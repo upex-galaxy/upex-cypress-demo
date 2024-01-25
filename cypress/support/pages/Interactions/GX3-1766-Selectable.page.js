@@ -21,22 +21,8 @@ class Selectable {
 				}
 			});
 		});
-	}	
-	deselectOneItem(randomItem, container){
-		this.get[container]().each(li => {
-			cy.wrap(li).invoke('text').then((text) => {
-				if (text === randomItem) {
-					cy.wrap(li).click();
-				}
-			});
-		});
-	}	
+	}		
 	selectMultipleItems(container){
-		this.get[container]().each(li => {
-			cy.wrap(li).click();
-		});
-	}
-	deselectMultipleItems(container){
 		this.get[container]().each(li => {
 			cy.wrap(li).click();
 		});

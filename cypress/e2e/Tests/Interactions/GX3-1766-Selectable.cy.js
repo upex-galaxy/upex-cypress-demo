@@ -24,7 +24,7 @@ describe('ToolsQA | Interactions | Selectable', () => {
 		selectablePage.selectOneItem(randomItem, 'listContainer');
 		selectablePage.get.selectedListItem(randomItem).should('have.css', 'background-color', 'rgb(0, 123, 255)');
 
-		selectablePage.deselectOneItem(randomItem, 'listContainer');
+		selectablePage.selectOneItem(randomItem, 'listContainer');
 		selectablePage.get.selectedListItem(randomItem).should('have.css', 'background-color', 'rgb(255, 255, 255)');
 		
 	});
@@ -32,7 +32,7 @@ describe('ToolsQA | Interactions | Selectable', () => {
 		selectablePage.selectMultipleItems('listContainer');
 		selectablePage.get.listContainer().should('have.css', 'background-color', 'rgb(0, 123, 255)');
 
-		selectablePage.deselectMultipleItems('listContainer');
+		selectablePage.selectMultipleItems('listContainer');
 		selectablePage.get.listContainer().should('have.css', 'background-color', 'rgb(255, 255, 255)');
 	});
 	it('1766 | TC5: “Check that one item on the "Grid" tab can be selected and deselected”. ', () => {
@@ -43,7 +43,7 @@ describe('ToolsQA | Interactions | Selectable', () => {
 		selectablePage.selectOneItem(randomItem, 'gridContainer');
 		selectablePage.get.selectedGridItem(randomItem).should('have.css', 'background-color', 'rgb(0, 123, 255)');
 
-		selectablePage.deselectOneItem(randomItem, 'gridContainer');
+		selectablePage.selectOneItem(randomItem, 'gridContainer');
 		selectablePage.get.selectedGridItem(randomItem).should('have.css', 'background-color', 'rgb(255, 255, 255)');
 	});
 	it('1766 | TC6: “Check that multiple items on "Grid" tab can be selected and deselected”.', () => {
@@ -52,7 +52,7 @@ describe('ToolsQA | Interactions | Selectable', () => {
 		selectablePage.selectMultipleItems('gridContainer');
 		selectablePage.get.gridContainer().should('have.css', 'background-color', 'rgb(0, 123, 255)');
 
-		selectablePage.deselectMultipleItems('gridContainer');
+		selectablePage.selectMultipleItems('gridContainer');
 		selectablePage.get.gridContainer().should('have.css', 'background-color', 'rgb(255, 255, 255)');
 	});
 });
