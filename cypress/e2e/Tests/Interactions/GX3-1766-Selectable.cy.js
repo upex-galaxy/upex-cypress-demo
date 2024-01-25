@@ -11,9 +11,18 @@ describe('ToolsQA | Interactions | Selectable', () => {
 		selectablePage.get.listTab().should('be.visible').and('have.attr', 'aria-selected', 'true');
 		selectablePage.get.gridTab().should('be.visible').and('have.attr', 'aria-selected', 'false');
 	});
-	it('1766 | TC2: “Check that the "List" tab is opened by default and its content is visible”. ', () => {
+	it('1766 | TC2: “Check that the "List" tab is opened by default and its content is visible”.', () => {
 		selectablePage.get.listContainer().each((li, index) => {
 			cy.wrap(li).should('be.visible').and('have.text', listItems[index]);
 		});
+	});
+	it.only('1766 | TC3: “Check that one item on the "List" tab can be selected and deselected”.', () => {
+		// Randomly select an item from the listItems array
+		const randomIndex = Math.floor(Math.random() * listItems.length);
+		const randomItem = listItems[randomIndex];
+		selectablePage.selectOneListItem(randomItem);
+		selectablePage.itemIsSelected(randomItem);
+		selectablePage.selectOneListItem(randomItem);
+		selectablePage.itemIsNotSelected(randomItem);
 	});
 });
