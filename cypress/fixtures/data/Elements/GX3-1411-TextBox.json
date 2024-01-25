@@ -1,0 +1,43 @@
+{
+	"fullName": {
+		"input": "#userName",
+		"data": {
+			"full": "Lucia"
+		}
+	},
+
+	"email": {
+		"input": "#userEmail",
+		"data": {
+			"full": "lucia@gmail.com",
+			"invalidArroba": "luciagmail.com",
+			"invalidUser": "@gmail.com",
+			"invalidDomain1": "lucia@.com",
+			"invalidDomain2": "lucia@gmail.c"
+		}
+	},
+
+	"currentAddress": {
+		"input": "#currentAddress",
+		"data": {
+			"full": "Perú"
+		}
+	},
+
+	"permanentAddress": {
+		"input": "#permanentAddress",
+		"data": {
+			"full": "Perú"
+		}
+	},
+
+	"submit": {
+		"input": "#submit"
+	},
+	"output": {
+		"name": "p#name.mb-1",
+		"email": "p#email.mb-1",
+		"currentAddress": "p#currentAddress",
+		"permanentAddress": "p#permanentAddress"
+	}
+}
