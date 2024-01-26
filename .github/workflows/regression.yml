@@ -27,12 +27,12 @@ jobs:
     - name: 💿Install Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: 16
+        node-version: 20
 
     - name: 💿Yarn Setup
       uses: DerYeger/yarn-setup-action@master
       with:
-        node-version: 16
+        node-version: 20
 
     - name: 🧬Install All Dependencies
       run: |
