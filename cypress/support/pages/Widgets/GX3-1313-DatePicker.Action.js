@@ -5,6 +5,21 @@ class Action {
 		cy.get(input).click();
 	}
 
+	get = {
+		DatePickerYearAndDateYearList: () => cy.get('.react-datepicker__year-dropdown'),
+		DatePickerYearAndDateYearListOption: () => cy.get('.react-datepicker__year-option'),
+		DatePickerYearAndDateYearListPreviousButton: () => cy.get('.react-datepicker__navigation--years-previous'),
+		DatePickerYearAndDateYearListUpcomingButton: () => cy.get('.react-datepicker__navigation--years-upcoming'),
+		DatePickerCurrentMonth: () => cy.get('.react-datepicker__current-month'),
+		DatePickerNexMonth: () => cy.get('[aria-label="Next Month"]'),
+		DatePicketPreviousMonth: () => cy.get('[aria-label="Previous Month"]'),
+		DatePickerMonthYearInputYearSelect: () => cy.get('.react-datepicker__year-select'),
+		DatePickerMonthYearInputMonthSelect: () => cy.get('.react-datepicker__month-select'),
+		DatePickerDateAndTimePickerInputYearSelect: () => cy.get('.react-datepicker__year-read-view--selected-year'),
+		DatePickerDateAndTimePickerInputMonthSelect: () => cy.get('.react-datepicker__month-read-view--selected-month'),
+		DatepickerTimerListItem: () => cy.get('.react-datepicker__time-list-item'),
+	};
+
 	getOrdinalSuffix(day) {
 		if (day >= 11 && day <= 13) {
 			return 'th';
@@ -26,8 +41,8 @@ class Action {
 		let yearArray = [];
 		let math = false;
 
-		cy.get('.react-datepicker__year-dropdown').within(() => {
-			cy.get('.react-datepicker__year-option').each($elemento => {
+		this.get.DatePickerYearAndDateYearList().within(() => {
+			this.get.DatePickerYearAndDateYearListOption().each($elemento => {
 				let yearText = $elemento.text().replace().replace('✓', '').trim();
 
 				if (/^\d{4}$/.test(yearText)) {
@@ -46,19 +61,19 @@ class Action {
 
 			switch (true) {
 				case math:
-					cy.get('.react-datepicker__year-option').contains(year).click();
+					this.get.DatePickerYearAndDateYearListOption().contains(year).click();
 					break;
 
 				case yearArray[5] > year:
 					for (var index = 0; index < 10; index++) {
-						this.clic('.react-datepicker__navigation--years-previous');
+						this.get.DatePickerYearAndDateYearListPreviousButton().click();
 					}
 					this.navigateYears(year);
 					break;
 
 				case yearArray[5] < year:
 					for (let index = 0; index < 10; index++) {
-						this.clic('.react-datepicker__navigation--years-upcoming');
+						this.get.DatePickerYearAndDateYearListUpcomingButton().click();
 					}
 					this.navigateYears(year);
 					break;
@@ -69,20 +84,22 @@ class Action {
 	navigateMonths(comparisonDate) {
 		let currentDate;
 
-		cy.get('.react-datepicker__current-month')
+		this.get
+			.DatePickerCurrentMonth()
 			.invoke('text')
 			.then(text => {
 				currentDate = new Date(text);
 			});
 
-		cy.get('.react-datepicker__current-month')
+		this.get
+			.DatePickerCurrentMonth()
 			.should('be.visible')
 			.then(() => {
 				if (currentDate.getTime() !== comparisonDate.getTime()) {
 					if (currentDate < comparisonDate) {
-						cy.get('[aria-label="Next Month"]').should('be.visible').click();
+						this.get.DatePickerNexMonth().should('be.visible').click();
 					} else {
-						cy.get('[aria-label="Previous Month"]').should('be.visible').click();
+						this.get.DatePicketPreviousMonth().should('be.visible').click();
 					}
 				}
 
@@ -102,12 +119,12 @@ class Action {
 			this.navigateMonths(comparisonDate);
 		} else {
 			if (input == '#datePickerMonthYearInput') {
-				cy.get('.react-datepicker__year-select').should('be.visible').select(dateGenerator.year);
-				cy.get('.react-datepicker__month-select').should('be.visible').select(dateGenerator.monthSlice);
+				this.get.DatePickerMonthYearInputYearSelect().should('be.visible').select(dateGenerator.year);
+				this.get.DatePickerMonthYearInputMonthSelect().should('be.visible').select(dateGenerator.monthSlice);
 			} else {
-				this.clic('.react-datepicker__month-read-view--selected-month');
+				this.get.DatePickerDateAndTimePickerInputMonthSelect().click();
 				cy.contains('.react-datepicker__month-option', dateGenerator.monthSlice).should('be.visible').click();
-				this.clic('.react-datepicker__year-read-view--selected-year');
+				this.get.DatePickerDateAndTimePickerInputYearSelect().click();
 				this.navigateYears(dateGenerator.year);
 			}
 		}
@@ -122,7 +139,7 @@ class Action {
 		if (input == '#datePickerMonthYearInput') {
 			return `${dateGenerator.monthNumber}/${dateGenerator.day}/${dateGenerator.year}`;
 		} else {
-			cy.get('.react-datepicker__time-list-item').contains(dateGenerator.time24h).first().click();
+			this.get.DatepickerTimerListItem().contains(dateGenerator.time24h).first().click();
 			return `${dateGenerator.month} ${parseInt(dateGenerator.day)}, ${dateGenerator.year} ${dateGenerator.time12h}`;
 		}
 	}
