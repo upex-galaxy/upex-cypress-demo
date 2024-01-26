@@ -43,7 +43,7 @@ jobs:
       with:
         browser: chrome
         command: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-          yarn test:chrome cypress/e2e/Tests/Elements/GX3-1321_form.cy.js
+          yarn test:chrome cypress/e2e/Tests/Checkout/GX3-1870_spaceCheckout.cy.ts
 
     - name: 📬Generate JUnit/Mocha Report
       if: always()
