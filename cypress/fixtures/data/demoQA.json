@@ -1,0 +1,14 @@
+{
+   "ValidCredentials": {
+        "Fullname": "Wendy Sierra",
+        "Email": "wendy@gmail.com",
+        "CurrentAddress": "Dosquebradas",
+        "PermanentAddress": "Pereira"
+    },
+   "InvalidEmailCredentials": {
+        "Fullname": "Wendy Sierra",
+        "Email": "w@s.",
+        "CurrentAddress": "Dosquebradas",
+        "PermanentAddress": "Pereira"
+   }
+}

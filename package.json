@@ -5,7 +5,6 @@
 	"main": "index.js",
 	"homepage": "https://github.com/upex-galaxy/cypress-blackhole#readme",
 	"scripts": {
-		"env:e": "cross-env REPORTER_EDG='--browser edge --reporter cypress-multi-reporters --reporter-options configFile=cypress.reporter.edge.json'",
 		"test": "cypress open",
 		"test:run": "cypress run --browser electron --spec",
 		"test:chrome": "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=cypress.reporter.chrome.json --spec",
@@ -15,8 +14,8 @@
 		"regression:chrome": "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=cypress.reporter.chrome.json",
 		"regression:firefox": "cypress run --browser firefox --reporter cypress-multi-reporters --reporter-options configFile=cypress.reporter.firefox.json",
 		"regression:edge": "cypress run --browser edge --reporter cypress-multi-reporters --reporter-options configFile=cypress.reporter.edge.json",
-		"junit:rm:report": "rm cypress/tests_results/junit/* || true",
-		"mocha:rm:report": "rm cypress/tests_results/mocha/* || true",
+		"junit:rm:report": "rm -rf cypress/tests_results/junit/* || true",
+		"mocha:rm:report": "rm -rf cypress/tests_results/mocha/* || true",
 		"clean:reports": "npm run junit:rm:report && npm run mocha:rm:report",
 		"merge:junit:c:report": "jrm cypress/tests_results/junit/chrome_regression_report.xml \"cypress/tests_results/junit/chrome/*.xml\"",
 		"merge:json:c:report": "mochawesome-merge \"cypress/tests_results/mocha/chrome/*.json\" > \"cypress/tests_results/chrome_regression_mocha.json\"",
@@ -42,6 +41,7 @@
 	"license": "MIT",
 	"type": "module",
 	"devDependencies": {
+		"@babel/eslint-parser": "^7.23.9",
 		"@bahmutov/cypress-esbuild-preprocessor": "2.2.0",
 		"@faker-js/faker": "8.3.1",
 		"@types/node": "20.11.5",

@@ -16,12 +16,13 @@
 			"cypress",
 			"node"
 		],
+		"baseUrl": ".",
 		"paths": {
 			"@pages/*": ["./cypress/support/pages/*"],
 			"@helper/*": ["./cypress/support/helper/*"],
 			"@data/*": ["./cypress/fixtures/data/*"]
 		}
 	},
-	"include": ["cypress.d.ts", "**/*.ts", "**/*.js", "**/*.Page.js"],
-	"exclude": ["node_modules"]
+	"include": ["./cypress.config.ts", "./cypress.d.ts", "**/*.ts", "**/*.Page.ts"],
+	"exclude": ["./node_modules", "**/*.js"]
 }
