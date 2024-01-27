@@ -6,6 +6,4 @@ mochawesome-report
 cypress/screenshots
 cypress/downloads
 cypress/videos
-package-lock.json
-yarn.lock
 yarn-error.log
