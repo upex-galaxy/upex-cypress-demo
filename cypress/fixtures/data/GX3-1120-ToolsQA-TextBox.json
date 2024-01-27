@@ -1,0 +1,45 @@
+{
+	"FullName": {
+		"input": "[type='text']",
+		"data": {
+			"valida": "Jhoanna Francia",
+			"invalida": ""
+		}
+	},
+	"Email": {
+		"input": "[type='email']",
+		"data": {
+			"valida": "Francia@gmail.com",
+			"BadEmail1": "@gmail.com",
+			"BadEmail2": "Francia@.com",
+			"BadEmail3": "Francia@gmailcom",
+			"BadEmail4": "Franciagmail.com",
+			"BadEmail5": "Francia@gmail.c"
+		}
+	},
+	"Cadress": {
+		"input": "#currentAddress",
+		"data": {
+			"valida": "Av Libertador 1234",
+			"invalida": ""
+		}
+	},
+	"Padrees": {
+		"input": "#permanentAddress",
+		"data": {
+			"valida": "Av Alvarez Thomas 1234",
+			"invalida": ""
+		}
+	},
+	"Submit": ".btn.btn-primary",
+	"mensaje": {
+		"input": "#output",
+		"data": {
+			"FullName": "#name",
+			"Email": "#email",
+			"CurrentAddress": "#currentAddress.mb-1",
+			"PermanentAddress": "#permanentAddress.mb-1"
+		}
+	},
+	"Error": ".mr-sm-2.field-error.form-control"
+}
