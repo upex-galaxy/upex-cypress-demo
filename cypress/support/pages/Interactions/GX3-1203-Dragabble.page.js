@@ -9,7 +9,7 @@ class DragabblePage {
 		restrictedY: () => cy.get('#restrictedY'),
 		tabcontainerRestriction: () => cy.get('#draggableExample-tab-containerRestriction'),
 		textcontainedBox: () => cy.get('.draggable.ui-widget-content.ui-draggable'),
-		textcontainedParent: () => cy.get('.ui-widget-header.ui-draggable.ui-draggable-'),
+		textcontainedParent: () => cy.get('.ui-widget-header.ui-draggable.ui-draggable-handle'),
 		tabCursorStyle: () => cy.get('#draggableExample-tab-cursorStyle'),
 		cursorCenter: () => cy.get('#cursorCenter'),
 		cursorTopLeft: () => cy.get('#cursorTopLeft'),
@@ -25,21 +25,21 @@ class DragabblePage {
 		return this.get.draBox().move({ deltaX, deltaY, force: true });
 	}
 	clicktabaxisRestriction() {
-		return this.get.tabAxisRestriction().click();
+		this.get.tabAxisRestriction().click();
 	}
 	moveRamdomOnlyX(deltaX, deltaY) {
 		this.get.restrictedX().move({ deltaX, deltaY, force: true });
 	}
-	moveRamdomOnlyY(deltaX, deltaY) {
-		this.get.restrictedY().move({ deltaX, deltaY, force: true });
+	moveRamdomOnlyY(deltaY, deltaX) {
+		this.get.restrictedY().move({ deltaY, deltaX, force: true });
 	}
-	bottomAxisRestriction() {
+	clicktabcontainerRestriction() {
 		this.get.tabcontainerRestriction().click();
 	}
-	moveRandomBox(deltaX, deltaY) {
+	moveTextBox(deltaX, deltaY) {
 		this.get.textcontainedBox().move({ deltaX, deltaY, force: true });
 	}
-	moveRandomParent(deltaX, deltaY) {
+	moveTextParent(deltaX, deltaY) {
 		this.get.textcontainedParent().move({ deltaX, deltaY, force: true });
 	}
 	clickCursorStyle() {
