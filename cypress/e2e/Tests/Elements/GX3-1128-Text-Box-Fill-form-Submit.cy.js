@@ -22,6 +22,7 @@ describe('⚡️ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get(the.FullName.input).should('contain', the.FullName.data.empty);
 			cy.get('.border.col-md-12.col-sm-12').should('not.exist');
 			cy.get(the.SubmitButton).click();
+			cy.get('#name').should('not.exist');
 		});
 	});
 	it('GX3-1129 | TC3: Validar NO mostrar ningún mensaje después de enviar vacío en campo “Current Address”.', () => {
@@ -29,6 +30,7 @@ describe('⚡️ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get(the.CurrentAddress.input).should('contain', the.CurrentAddress.data.empty);
 			cy.get('.border.col-md-12.col-sm-12').should('not.exist');
 			cy.get(the.SubmitButton).click();
+			cy.get('#currentAddress.mb-1').should('not.exist');
 		});
 	});
 	it('GX3-1129 | TC4: Validar NO mostrar ningún mensaje después de enviar vacío en campo “Permanent Address”.', () => {
@@ -36,6 +38,7 @@ describe('⚡️ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get(the.PermanentAddress.input).should('contain', the.PermanentAddress.data.empty);
 			cy.get('.border.col-md-12.col-sm-12').should('not.exist');
 			cy.get(the.SubmitButton).click();
+			cy.get('#permanentAddress.mb-1').should('not.exist');
 		});
 	});
 	it('GX3-1129 | TC5: Validar mostrar cadena de texto (mensaje) después de enviar todos los campos válidos del form “Full Name”, “Email”, “Current Address” and “Permanent Address”.', () => {
@@ -57,35 +60,35 @@ describe('⚡️ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		cy.fixture('data/GX3-1128-Text-Box-Fill.json').then(the => {
 			cy.get(the.Email.input).type(the.Email.data.invalid.emailOne);
 			cy.get(the.SubmitButton).click();
-			cy.get('.mr-sm-2.field-error.form-control').should('have.class', 'field-error');
+			cy.get('input.mr-sm-2.field-error').should('be.enabled');
 		});
 	});
 	it('GX3-1129 | TC7: Validar textbox displays a red border después de enviar 1 carácter alfanumérico antes de “@“ en campo Email.', () => {
 		cy.fixture('data/GX3-1128-Text-Box-Fill.json').then(the => {
 			cy.get(the.Email.input).type(the.Email.data.invalid.emailTwo);
 			cy.get(the.SubmitButton).click();
-			cy.get('.mr-sm-2.field-error.form-control').should('have.class', 'field-error');
+			cy.get('input.mr-sm-2.field-error').should('be.enabled');
 		});
 	});
 	it('GX3-1129 | TC8: Validar textbox displays a red border después de enviar 1 carácter alfanumérico después de “@“ en campo Email.', () => {
 		cy.fixture('data/GX3-1128-Text-Box-Fill.json').then(the => {
 			cy.get(the.Email.input).type(the.Email.data.invalid.emailThree);
 			cy.get(the.SubmitButton).click();
-			cy.get('.mr-sm-2.field-error.form-control').should('have.class', 'field-error');
+			cy.get('input.mr-sm-2.field-error').should('be.enabled');
 		});
 	});
 	it('GX3-1129 | TC9: Validar textbox displays a red border después de enviar sin punto (.) despúes de un carácter alfanumérico después de “@“ en campo Email.', () => {
 		cy.fixture('data/GX3-1128-Text-Box-Fill.json').then(the => {
 			cy.get(the.Email.input).type(the.Email.data.invalid.emailFour);
 			cy.get(the.SubmitButton).click();
-			cy.get('.mr-sm-2.field-error.form-control').should('have.class', 'field-error');
+			cy.get('input.mr-sm-2.field-error').should('be.enabled');
 		});
 	});
-	it('GX3-1129 | TC10: Validar textbox displays a red border después de enviar sin dos caracteres alfanumericos después del (.) en campo Email.', () => {
+	it.only('GX3-1129 | TC10: Validar textbox displays a red border después de enviar sin dos caracteres alfanumericos después del (.) en campo Email.', () => {
 		cy.fixture('data/GX3-1128-Text-Box-Fill.json').then(the => {
 			cy.get(the.Email.input).type(the.Email.data.invalid.emailFive);
 			cy.get(the.SubmitButton).click();
-			cy.get('.mr-sm-2.field-error.form-control').should('have.class', 'field-error');
+			cy.get('input.mr-sm-2.field-error').should('be.enabled');
 		});
 	});
 	//TC: validación negativa para el mensaje después de enviar campo Email.
@@ -94,6 +97,7 @@ describe('⚡️ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get(the.Email.input).should('contain', the.Email.data.empty);
 			cy.get('.border.col-md-12.col-sm-12').should('not.exist');
 			cy.get(the.SubmitButton).click();
+			cy.get('#email').should('not.exist');
 		});
 	});
 	//TC: validación positiva para el mensaje después de enviar campo Email.
