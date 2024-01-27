@@ -1,4 +1,4 @@
-#!ESTE ARCHIVO ES UN TEMPLATE, NO CAMBIARLO EN ABSOLUTO.
+#!ESTE ARCHIVO ES UN TUTORIAL, NO CAMBIARLO EN ABSOLUTO. USAR PARA APRENDER A CREAR UN ARCHIVO DE CI.
 name: 🧪Example Test in CI Pipeline with Cypress
 run-name: ${{github.actor}}👨🏻‍🔬 ran Test in ${{github.ref_name}}
 

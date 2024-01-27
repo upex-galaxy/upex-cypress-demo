@@ -1,6 +1,6 @@
 [![🤖CI run Regression in QA🧪](https://github.com/upex-galaxy/cypress-blackhole/actions/workflows/regression.yml/badge.svg?branch=QA)](https://github.com/upex-galaxy/cypress-blackhole/actions/workflows/regression.yml)
 
-[![vscode-logo]][vscode-site] [![cypress-logo]][cypress-site] [![javascript-logo]][javascript-site]
+[![vscode-logo]][vscode-site] [![cypress-logo]][cypress-site] [![typescript-logo]][javascript-site]
 
 # 🧪Testing Automation - Cypress 13👨🏻‍🚀 PRO
 
@@ -98,9 +98,9 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 
 ### 🚩NORMATIVAS A SEGUIR:
 
-1. **Perfecta Nomenclatura del nombre de Archivo de prueba**: <br> `{GX-ID}_{FeatureName}.{cy.js/ts}` ejemplo: `GX3-50_checkout.cy.js`. <br> 
-    **IMPORTANTE**: Realmente un archivo de prueba debería verse como `checkout.cy.js` y alojar aquí todas las US relacionadas a la feature del Checkout por cada "describe" de cypress. PERO al ser un Repo "EDUCATIVO", y tenemos muchos estudiantes trabajando en misma US, trabajamos con esta específica nomenclatura, mientras que todo lo demás es completamente realista.
-2. **Archivo de Prueba dentro del directorio del Componente correspondiente**, ejemplo: <br> `cypress/e2e/Tests/Elements/GX3-116_buttons.cy.js`.
+1. **Perfecta Nomenclatura del nombre de Archivo de prueba**: <br> `{GX-ID}_{FeatureName}.{cy.js/ts}` ejemplo: `GX3-50_checkout.cy.ts`. <br> 
+    **IMPORTANTE**: Realmente un archivo de prueba debería verse como `checkout.cy.ts` y alojar aquí todas las US relacionadas a la feature del Checkout por cada "describe" de cypress. PERO al ser un Repo "EDUCATIVO", y tenemos muchos estudiantes trabajando en misma US, trabajamos con esta específica nomenclatura, mientras que todo lo demás es completamente realista.
+2. **Archivo de Prueba dentro del directorio del Componente correspondiente**, ejemplo: <br> `cypress/e2e/Tests/Elements/GX3-116_buttons.cy.ts`.
 3. **Buen diseño del Test Suite elaborado** (Esto implica que se vean bien el código en general, que al menos funcione).
 4. **Tener el Markdown de la US** en la carpeta `coverage` en su correspondiente carpeta Sprint, ejemplo: <br>
    `coverage/S34/GX3-1476.md`<br> Esto implica que cada vez que se trabaje en un Sprint nuevo, se debería crear la carpeta correspondiente "S" + número del sprint, como se muestra en el ejemplo arriba.
@@ -109,7 +109,7 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 7. **En caso de usar Fixtures**: Chequear que el archivo ".json" esté dentro de la carpeta correspondiente al componente, ejemplo: <br>
    `cypress/fixtures/account/example.json`.
 8. **En caso de usar PageObjectModel**: Chequear que el "Page.js" esté dentro de la carpeta "pages" en la de "support", ejemplo: <br>
-   `cypress/support/pages/Example.Page.js`.
+   `cypress/support/pages/Example.Page.ts`.
 9. **En caso de usar Commands**: Asegurarse de aplicarlo para crear pasos de Precondiciones o Scripts de Algoritmos complejos (NO USAR como Pasos de
    Acción, eso sería tarea para el POM).
 10. **En caso de usar el CI Pipeline**: Sigue las instrucciones del archivo `sanityTemplate.yml`, para que copies el código del mismo y lo pegues en tu propio archivo yml con la terminología: `sanityTuNombre.yml` y asegurarse de modificarlo correctamente
@@ -232,5 +232,5 @@ Suscríbete a un Sprint y trabaja como un QA Automation Engineer!
 [vscode-site]: https://code.visualstudio.com/
 [cypress-logo]: https://img.shields.io/badge/Cypress-black?logo=cypress&style=for-the-badge
 [cypress-site]: https://www.cypress.io
-[javascript-logo]: https://img.shields.io/badge/JavaScript-black?logo=javascript&style=for-the-badge
-[javascript-site]: https://www.javascript.com/
+[typescript-logo]: https://img.shields.io/badge/TypeScript-black?logo=typescript&style=for-the-badge
+[typescript-site]: https://www.typescriptlang.org/

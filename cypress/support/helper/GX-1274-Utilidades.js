@@ -3,7 +3,3 @@ export function getRealValue(value) {
 	const valorReal = valores[1].trim();
 	return valorReal;
 }
-
-export function parseCurrencyNum(priceString) {
-	return parseFloat(priceString.replace('$', '').replace(',', ''))
-}
