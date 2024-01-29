@@ -6,3 +6,4 @@ mochawesome-report
 cypress/screenshots
 cypress/downloads
 cypress/videos
+yarn-error.log

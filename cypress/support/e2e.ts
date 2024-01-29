@@ -17,6 +17,3 @@
 import './commands';
 import 'cypress-plugin-api';
 import 'cypress-plugin-steps';
-import { removeLogs } from '@helper/RemoveLogs';
-
-removeLogs();
