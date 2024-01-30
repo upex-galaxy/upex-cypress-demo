@@ -34,10 +34,8 @@ describe('GX3-1760 - SpaceBeyond | Account | Log-In and Log-Out', () => {
         login.clicksubmitBtn();
         login.clickNavBtn();
         login.clickLogOut();
-       
-      
 
-          
+        login.get.loginBtn().should('have.text', 'Log in') 
     });
 
 
