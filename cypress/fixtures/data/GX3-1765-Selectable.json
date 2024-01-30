@@ -1,0 +1,13 @@
+{
+	"whiteColor": "rgb(255, 255, 255)",
+	"blueColor": "rgb(0, 123, 255)",
+	"visible": "true",
+	"notVisible": "false",
+	"selectableEndpoint": "selectable",
+	"list": ["Cras justo odio", "Dapibus ac facilisis in", "Morbi leo risus", "Porta ac consectetur ac"],
+	"grid": ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"],
+	"listContainer": "listContainer",
+	"gridContainer": "gridContainer",
+	"listTab": "listTab",
+	"gridTab": "gridTab"
+}
