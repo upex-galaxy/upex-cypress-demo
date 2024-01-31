@@ -15,7 +15,7 @@ describe('US GX3-1983 | ToolsQA | Elements | Buttons', () => {
 		cy.get('.btn.btn-primary').eq(2).click();
 		cy.get('#dynamicClickMessage').should('have.text', 'You have done a dynamic click').and('be.visible');
 	});
-	it.only('1983 | TC4: Validar al hacer click izquierdo en botón derecho que NO realice ninguna acción.', () => {
+	it('1983 | TC4: Validar al hacer click izquierdo en botón derecho que NO realice ninguna acción.', () => {
 		cy.get('#rightClickBtn').click();
 		cy.get('#rightClickMessage').should('not.exist');
 	});
