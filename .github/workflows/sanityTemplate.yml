@@ -15,6 +15,8 @@ run-name: ${{github.actor}}👨🏻‍🔬 ran SanityTest in ${{github.ref_name}
 on:
   push:
     branches: ['TuBranchAqui'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+  workflow_dispatch:
+
 
 jobs:
   SanityTest:
@@ -22,10 +24,10 @@ jobs:
 
     steps:
     - name: 💻Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: 💿Install Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: 20
 
@@ -52,7 +54,7 @@ jobs:
 
     - name: ✅Import Test Results to Xray
       if: always()
-      uses: mikepenz/xray-action@v2
+      uses: mikepenz/xray-action@v3
       with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
         username: ${{secrets.XRAY_CLIENT_ID}}
         password: ${{secrets.XRAY_CLIENT_SECRET}}
@@ -61,12 +63,20 @@ jobs:
         testExecKey: 'GX3-1328' #todo: EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
         projectKey: 'GX3' #todo: EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
 
+    - name: 📊Upload Artifact Mochawesome Report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: sanity-mocha-report
+        path: cypress/tests_reports/chrome_mocha_report
+        retention-days: 15
+
     - name: 🔔Slack Notification of Done
       if: always()
-      uses: rtCamp/action-slack-notify@v2.2.0
+      uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_USERNAME: Ari✨
-        SLACK_MESSAGE: ':test_tube: BLACKHOLE Cypress Project -- Sanity Test Execution is Done and imported to Jira :rocket:'
+        SLACK_MESSAGE: ':test_tube: CYPRESS-BLACKHOLE: Sanity Test Execution is Done and imported to Jira :rocket:'
         SLACK_COLOR: ${{ job.status }}
         SLACK_ICON: https://image.cdn2.seaart.ai/2023-12-06/clo9g0h4msbc73ac2sog/99e1abc36f32945cd4bacf5ee7448e96194545f7_high.webp
