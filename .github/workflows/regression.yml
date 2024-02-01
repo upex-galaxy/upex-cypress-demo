@@ -84,6 +84,7 @@ jobs:
 
   Ari-Slack-Notification:
     needs: [RegressionTesting]
+    if: always()
     runs-on: ubuntu-latest
     steps:
     - name: 🔔Slack Notification of Done
