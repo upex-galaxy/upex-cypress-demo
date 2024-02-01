@@ -6,4 +6,5 @@ mochawesome-report
 cypress/screenshots
 cypress/downloads
 cypress/videos
+.DS_Store
 yarn-error.log
