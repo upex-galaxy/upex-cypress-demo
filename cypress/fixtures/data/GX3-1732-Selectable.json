@@ -1,0 +1,14 @@
+{
+	"list": {
+		"tab": "demo-tab-list",
+		"active": "true",
+		"inactive": "false",
+		"items": ["Cras justo odio", "Dapibus ac facilisis in", "Morbi leo risus", "Porta ac consectetur ac"]
+	},
+	"grid": {
+		"tab": "demo-tab-grid",
+		"active": "true",
+		"inactive": "false",
+		"items": ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"]
+	}
+}
