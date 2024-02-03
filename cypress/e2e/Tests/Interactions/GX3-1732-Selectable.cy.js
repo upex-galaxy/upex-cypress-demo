@@ -10,9 +10,21 @@ describe('GX3-1732: ToolsQA | Interactions | Selectable', () => {
 		selectable.getElement(element, elementType).should('have.attr', 'aria-selected', status);
 	};
 
-	const statusContentTab = (element, elementType, classAttribute) => {
+	const statusMultipleContentTab = (element, elementType, classAttribute) => {
 		selectable.getElement(element, elementType).each($li => {
 			cy.wrap($li).should(classAttribute, 'active');
+		});
+	};
+
+	const statusOnlyContentTab = (element, elementType, classAttribute, itemRamdom) => {
+		selectable.getElement(element, elementType).each($li => {
+			cy.wrap($li)
+				.invoke('text')
+				.then(text => {
+					if (text === itemRamdom) {
+						cy.wrap($li).should(classAttribute, 'active');
+					}
+				});
 		});
 	};
 
@@ -40,22 +52,26 @@ describe('GX3-1732: ToolsQA | Interactions | Selectable', () => {
 	});
 
 	it('1733 | TC3: Validar que ningún elemento de pestaña "List" este seleccionado', () => {
-		statusContentTab(data.list.content, 'CONTENT', 'not.have.class');
+		statusMultipleContentTab(data.list.content, 'CONTENT', 'not.have.class');
 	});
 
 	it('1733 | TC4: Validar seleccionar y deseleccionar un elemento de la pestaña "List"', () => {
 		const ramdomItem = selectable.getRamdonItem(data.list.items);
 		selectable.selectOneItemTab(data.list.content, ramdomItem);
+		statusOnlyContentTab(data.list.content, 'CONTENT', 'have.class', ramdomItem);
 		checkColorAndFontOneItem(data.list.content, 'CONTENT', ramdomItem, data.blue, data.White);
 		selectable.selectOneItemTab(data.list.content, ramdomItem);
+		statusOnlyContentTab(data.list.content, 'CONTENT', 'not.have.class', ramdomItem);
 		checkColorAndFontOneItem(data.list.content, 'CONTENT', ramdomItem, data.White, data.black);
 	});
 
 	it('1733 | TC5: Validar seleccionar y deseleccionar varios elementos de la pestaña "List"', () => {
 		selectable.selectMultipleItemTab(data.list.content);
 		checkColorAndFontMultipleItem(data.list.content, 'CONTENT', data.blue, data.White);
+		statusMultipleContentTab(data.list.content, 'CONTENT', 'have.class');
 		selectable.selectMultipleItemTab(data.list.content);
 		checkColorAndFontMultipleItem(data.list.content, 'CONTENT', data.White, data.black);
+		statusMultipleContentTab(data.list.content, 'CONTENT', 'not.have.class');
 	});
 
 	it('1733 | TC6: Validar seleccionar y visualizar la pestana "Gird"', () => {
@@ -66,23 +82,27 @@ describe('GX3-1732: ToolsQA | Interactions | Selectable', () => {
 
 	it('1733 | TC7: Validar que ningún elemento de la pestaña "Gird" este seleccionado', () => {
 		selectable.clickTab(data.grid.tab);
-		statusContentTab(data.grid.content, 'CONTENT', 'not.have.class');
+		statusMultipleContentTab(data.grid.content, 'CONTENT', 'not.have.class');
 	});
 
 	it('1733 | TC8: Validar seleccionar y deseleccionar un elemento de la pestaña "Gird"', () => {
 		selectable.clickTab(data.grid.tab);
 		const ramdomItem = selectable.getRamdonItem(data.grid.items);
 		selectable.selectOneItemTab(data.grid.content, ramdomItem);
+		statusOnlyContentTab(data.grid.content, 'CONTENT', 'have.class', ramdomItem);
 		checkColorAndFontOneItem(data.grid.content, 'CONTENT', ramdomItem, data.blue, data.White);
 		selectable.selectOneItemTab(data.grid.content, ramdomItem);
+		statusOnlyContentTab(data.grid.content, 'CONTENT', 'not.have.class', ramdomItem);
 		checkColorAndFontOneItem(data.grid.content, 'CONTENT', ramdomItem, data.White, data.black);
 	});
 
 	it('1733 | TC9: Validar seleccionar y deseleccionar varios elementos de la pestaña "Gird"', () => {
 		selectable.clickTab(data.grid.tab);
 		selectable.selectMultipleItemTab(data.grid.content);
+		statusMultipleContentTab(data.grid.content, 'CONTENT', 'have.class');
 		checkColorAndFontMultipleItem(data.grid.content, 'CONTENT', data.blue, data.White);
 		selectable.selectMultipleItemTab(data.grid.content);
+		statusMultipleContentTab(data.grid.content, 'CONTENT', 'not.have.class');
 		checkColorAndFontMultipleItem(data.grid.content, 'CONTENT', data.White, data.black);
 	});
 });
