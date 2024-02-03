@@ -8,15 +8,23 @@ class Selectable {
 		return elementType === 'TAB' ? this.get.getTabId(idElement) : this.get.getContainTabId(idElement);
 	}
 
-	clickTab(idElement, elementType) {
-		return elementType === 'TAB' ? this.get.getTabId(idElement).click() : this.get.getContainTabId(idElement).click();
+	clickTab(idElement) {
+		this.get.getTabId(idElement).click();
 	}
 
-	selectOneItemTab(idElement, randomLi) {
+	getRamdonItem(list) {
+		return list[Math.floor(Math.random() * list.length)];
+	}
+
+	selectOneItemTab(idElement, randomItem) {
 		this.get.getContainTabId(idElement).each($li => {
-			if ($li.someMethod() === randomLi) {
-				cy.wrap($li).click();
-			}
+			cy.wrap($li)
+				.invoke('text')
+				.then(text => {
+					if (text === randomItem) {
+						cy.wrap($li).click();
+					}
+				});
 		});
 	}
 
