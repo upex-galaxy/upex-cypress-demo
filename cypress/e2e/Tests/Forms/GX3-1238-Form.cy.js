@@ -3,7 +3,7 @@ import VerifyTable from '@pages/Forms/GX3-1238-verifyTable';
 import FormAction from '@pages/Forms/GX3-1238-formActions';
 
 describe('TS 🧪GX3-1238 | TS: ⚡️ToolsQA | Forms | Practice Form', () => {
-	beforeEach('acceder a la pagina https://demoqa.com/automation-practice-form', () => {
+	beforeEach('acceder a la pagina web https://demoqa.com/automation-practice-form', () => {
 		cy.visit('https://demoqa.com/automation-practice-form');
 	});
 	it('1239 | TC01: Verificar poder enviar formulario con todos los campos exitosamente.', () => {
