@@ -1,4 +1,3 @@
-import DateGenerator from '@pages/Widgets/GX3-1313-DataPicker.GeneratorDate';
 import Action from '@pages/Widgets/GX3-1313-DatePicker.Action';
 import Verification from '@pages/Widgets/GX3-1313-DatePicker.Verification';
 import months from '@data/GX3-1313-DataPicker';
