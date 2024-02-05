@@ -1,4 +1,4 @@
-
+[![🧪Pipeline Regression in QA](https://github.com/upex-galaxy/upex-cypress-demo/actions/workflows/regression.yml/badge.svg)](https://github.com/upex-galaxy/upex-cypress-demo/actions/workflows/regression.yml)
 
 [![vscode-logo]][vscode-site] [![cypress-logo]][cypress-site] [![javascript-logo]][javascript-site] [![typescript-logo]][typescript-site]
 
