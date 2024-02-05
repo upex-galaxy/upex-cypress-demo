@@ -7,14 +7,14 @@ describe('', () => {
 		cy.url().should('contain', 'checkbox');
 	});
 
-	it('2064 |TC01 Expand all and collapse all', () => {
+	it('2084 |TC01 Expand all and collapse all', () => {
 		cy.get('[title="Expand all"]').click();
 		cy.get('[for^="tree-node"]').should('have.length', 17);
 		cy.get('[title="Collapse all"]').click();
 		cy.get('[for^="tree-node"]').should('have.length', 1);
 	});
 
-	it('2064 |TC02 Check random and compare with display result', () => {
+	it('2084 |TC02 Check random and compare with display result', () => {
 		cy.get('[for^="tree-node"]').should('have.length', 1);
 		cy.get('[title="Expand all"]').click();
 		cy.get('[for^="tree-node"]')
