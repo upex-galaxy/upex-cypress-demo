@@ -2,7 +2,7 @@
 #? 🤖Este Pipeline de CI se activa al hacer MERGE a la rama "QA" o "MAIN",
 #? 🧪Consiste en ejecutar TODOS los tests del Repo e importar los resultados a Jira!🚀
 #! 👩🏻‍🔬Este Pipeline de CI NO DEBE EDITARSE sin permiso del QA Lead.
-name: 🤖CI run Regression in QA🧪
+name: 🧪Pipeline Regression in QA
 run-name: ${{github.actor}}👨🏻‍🔬 run Regression in ${{github.ref_name}}
 
 on:
@@ -87,13 +87,19 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
     steps:
+    - name: 🔔Check if SLACK_WEBHOOK is Defined
+      run: |
+        if [[ -z "${{ secrets.SLACK_WEBHOOK }}" ]]; then
+          echo "SLACK_WEBHOOK is not set. Please set it in the repository secrets to enable Slack notifications."
+        fi
+
     - name: 🔔Slack Notification of Done
-      if: always()
+      if: env.SLACK_WEBHOOK != ''
       uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_USERNAME: Ari✨
-        SLACK_MESSAGE: ':test_tube: CYPRESS-BLACKHOLE: REGRESSION RESULTS IMPORTED TO JIRA :rocket:'
+        SLACK_MESSAGE: ':test_tube: CYPRESS: REGRESSION RESULTS IMPORTED TO JIRA :rocket:'
         SLACK_COLOR: ${{ job.status }}
         SLACK_ICON: https://image.cdn2.seaart.ai/2023-12-06/clo9g0h4msbc73ac2sog/99e1abc36f32945cd4bacf5ee7448e96194545f7_high.webp
 

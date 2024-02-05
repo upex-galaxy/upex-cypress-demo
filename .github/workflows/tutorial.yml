@@ -1,13 +1,15 @@
-#!ESTE ARCHIVO ES UN TUTORIAL, NO CAMBIARLO EN ABSOLUTO. USAR PARA APRENDER A CREAR UN ARCHIVO DE CI.
+#!ESTE ARCHIVO ES UN TUTORIAL, NO CAMBIARLO EN ABSOLUTO. 
+#! Si Quieres crear tu propio archivo YML, usa el sanityTemplate.yml para copiar y pegar en tu propio archivo yml...
+#! Para crear tu propio archivo yml, usa tu nombre como SUFIJO del nombre del archivo; ejemplo: sanity-ely.yml
 name: 🧪Example Test in CI Pipeline with Cypress
-run-name: ${{github.actor}}👨🏻‍🔬 ran Test in ${{github.ref_name}}
+run-name: ${{github.actor}}👨🏻‍🔬 triggered Test in ${{github.ref_name}}
 
 # on:
 #     push:
 #         branches-ignore: [main, QA]
 #*Esto indica que se ejecutará con PUSH o MERGE en cualquier rama que no sea 'main' ni 'QA'
 
-on: [workflow_dispatch] #Esta opción es  para este Tutorial, para que no se ejecute en CI.
+on: [workflow_dispatch] #Esta opción es para este Tutorial, para que no se ejecute en CI.
 
 jobs:
   #* Este es un Nombre de este Job, puedes dejarlo como está.

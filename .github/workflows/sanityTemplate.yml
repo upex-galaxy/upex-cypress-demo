@@ -9,8 +9,8 @@
 #todo: 7 -> Listo! Guarda los cambios (git add + git commit) y pushea (git push) para ejectutar este Pipeline!
 #*Resultado: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí.
 
-name: 🤖CI run SanityTest Execution🧪
-run-name: ${{github.actor}}👨🏻‍🔬 ran SanityTest in ${{github.ref_name}}
+name: 🧪Pipeline SanityTest Execution🧪
+run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 
 on:
   push:
@@ -71,12 +71,18 @@ jobs:
         path: cypress/tests_reports/chrome_mocha_report
         retention-days: 15
 
+    - name: 🔔Check if SLACK_WEBHOOK is Defined
+      run: |
+        if [[ -z "${{ secrets.SLACK_WEBHOOK }}" ]]; then
+          echo "SLACK_WEBHOOK is not set. Please set it in the repository secrets to enable Slack notifications."
+        fi
+
     - name: 🔔Slack Notification of Done
-      if: always()
+      if: env.SLACK_WEBHOOK != ''
       uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_USERNAME: Ari✨
-        SLACK_MESSAGE: ':test_tube: CYPRESS-BLACKHOLE: Sanity Test Execution is Done and imported to Jira :rocket:'
+        SLACK_MESSAGE: ':test_tube: CYPRESS: Sanity Test Execution is Done and imported to Jira :rocket:'
         SLACK_COLOR: ${{ job.status }}
         SLACK_ICON: https://image.cdn2.seaart.ai/2023-12-06/clo9g0h4msbc73ac2sog/99e1abc36f32945cd4bacf5ee7448e96194545f7_high.webp
