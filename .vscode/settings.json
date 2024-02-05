@@ -31,11 +31,19 @@
     "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
     "editor.cursorBlinking": "expand",
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
-    "editor.formatOnPaste": false,
-    "editor.formatOnSave": true,
-    "editor.formatOnSaveMode": "file",
-    "editor.formatOnType": true,
+    "editor.formatOnPaste": false, // required 
+	"editor.formatOnType": false, // required
+	"editor.formatOnSave": true, // optional 
+	"editor.formatOnSaveMode": "file", // required to format on save
+	"vs-code-prettier-eslint.prettierLast": false, // set as "true" to run 'prettier' last not first
     "editor.lineHeight": 20,
+    "editor.defaultColorDecorators": true,
+	"editor.insertSpaces": false,
+	"editor.tabSize": 4,
+    "editor.detectIndentation": true,
+    "editor.codeActionsOnSave": {
+		"source.fixAll": "explicit"
+	},
     "editor.quickSuggestions": {
         "comments": true,
         "other": true,
@@ -55,6 +63,7 @@
     "material-icon-theme.folders.color": "#7cb342",
 	"material-icon-theme.files.associations": {
 		"tsconfig.json": "svgo",
+		"tsconfig.eslint.json": "eslint",
 		"regression.yml": "test-ts",
 		"sanityTemplate.yml": "test-ts",
 		"cypress.reporter.chrome.json": "auto",
@@ -81,8 +90,7 @@
     "terminal.integrated.tabs.defaultIcon": "source-control",
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
     "typescript.updateImportsOnFileMove.enabled": "always",
-    "vs-code-prettier-eslint.prettierLast": true,
-    "workbench.colorTheme": "Dracula",
+    "workbench.colorTheme": "One Dark Pro Darker",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.settings.editor": "json",
     "workbench.tree.enableStickyScroll": true,

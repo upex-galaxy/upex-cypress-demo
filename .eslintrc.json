@@ -1,12 +1,19 @@
 {
-	"root": true,
 	"extends": ["plugin:cypress/recommended", "plugin:chai-friendly/recommended"],
+	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
 	    "parser": "@babel/eslint-parser",
-		"requireConfigFile": false,
 		"ecmaVersion": "latest",
-		"sourceType": "module"
+		"sourceType": "module",
+		"project": "tsconfig.eslint.json"
 	},
+	"ignorePatterns": [
+		"cypress/tests_reports/**/*.js", 
+		"cypress/tests_results/**/*.js",
+		"cypress/tests_reports/**/*.ts", 
+		"cypress/tests_results/**/*.ts"
+	],
+	"plugins": ["cypress", "chai-friendly", "@typescript-eslint", "only-warn", "prettier"],
 	"rules": {
 		"prefer-template": "error",
 		"curly": ["error", "all"],
@@ -68,9 +75,9 @@
 		"no-negated-condition": "warn",
 		"no-const-assign": "error",
 		"no-unneeded-ternary": "warn",
-		"no-useless-computed-key": "error"
+		"no-useless-computed-key": "error",
+		"cypress/unsafe-to-chain-command": "off"
 	},
-	"plugins": ["cypress", "chai-friendly"],
 	"globals": {
 		"cy": true,
 		"Cypress": true

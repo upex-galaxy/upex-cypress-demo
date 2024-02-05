@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    ".eslintrc.json", // ESLint's config must be included
+    "cypress/**/*.ts", // TypeScript files
+    "cypress/**/*.js", // JavaScript files
+    "cypress.config.ts", // Cypress config file
+    "cypress.d.ts", // Cypress type definitions
+  ],
+  "exclude": [
+    "node_modules", // Exclude node_modules
+  ]
+}

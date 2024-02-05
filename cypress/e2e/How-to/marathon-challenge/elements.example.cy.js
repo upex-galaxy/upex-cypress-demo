@@ -53,12 +53,12 @@ describe('Challenge Elements', () => {
 		cy.get('#result .text-success') // 11
 			.each(element => {
 				successTexts.push(element.text());
-			})
-			.then(() => {
-				const checkedLabels = labels.map(text => text.toLowerCase().replace(' ', '').replace('.doc', ''));
-				const displayedTexts = successTexts.map(text => text.toLowerCase());
-				expect(displayedTexts).deep.equal(checkedLabels);
 			});
+		cy.then(() => {
+			const checkedLabels = labels.map(text => text.toLowerCase().replace(' ', '').replace('.doc', ''));
+			const displayedTexts = successTexts.map(text => text.toLowerCase());
+			expect(displayedTexts).deep.equal(checkedLabels);
+		});
 	});
 
 	it('RADIOBUTTON - TC3: Should check radio buttons', () => {
@@ -105,7 +105,6 @@ describe('Challenge Elements', () => {
 
 		cy.get('#enableAfter').should('not.be.enabled');
 		cy.get('#visibleAfter').should('not.exist');
-		cy.wait(5000);
 		cy.get('#colorChange').should('have.css', 'color', 'rgb(220, 53, 69)');
 		cy.get('#enableAfter').should('be.enabled');
 		cy.get('#visibleAfter').should('be.visible');
@@ -119,9 +118,9 @@ describe('Challenge Elements', () => {
 			.then(name => {
 				cy.log(name);
 				cy.get('#downloadButton').click();
-				cy.readFile('cypress/downloads/' + name).should('exist');
+				cy.readFile(`cypress/downloads/${name}`).should('exist');
 
-				cy.get('#uploadFile').selectFile('cypress/downloads/' + name);
+				cy.get('#uploadFile').selectFile(`cypress/downloads/${name}`);
 
 				cy.get('#uploadedFilePath').should('contain.text', name);
 			});

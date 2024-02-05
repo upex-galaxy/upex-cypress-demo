@@ -1,7 +1,6 @@
 {
-    "validAccount": {
-        "username": "Andrea14",
-        "password": "123456"
-    }
-    
+	"validAccount": {
+		"username": "Andrea14",
+		"password": "123456"
+	}
 }

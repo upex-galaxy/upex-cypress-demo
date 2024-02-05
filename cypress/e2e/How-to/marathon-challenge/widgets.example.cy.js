@@ -33,7 +33,7 @@ describe('Cypress Challenge - Widgets', () => {
 
 		//* Este codigo está elaborado con "Alias" usando el método as() en lugar de Then:
 		cy.get('.auto-complete__menu [id*=react-select]').eq(1).as('colorToSelect');
-		cy.get('@colorToSelect').click()
+		cy.get('@colorToSelect').click();
 		cy.get('@colorToSelect').invoke('text').as('colorName');
 		cy.getAutocompletedValues().then(values => expect(values).includes(this.colorName));
 

@@ -26,7 +26,7 @@ describe.skip('Ejemplo para demostrar cómo probar una API', () => {
 		cy.api({
 			method: 'GET',
 			// el REQUEST URL es "https://api.trello.com/1/lists/{idList}?key={key}&token={token}"
-			url: 'https://api.trello.com/1/lists/' + listA, // aquí concatenamos el Endpoint con el Path-Parameter
+			url: `https://api.trello.com/1/lists/${listA}`, // aquí concatenamos el Endpoint con el Path-Parameter
 			qs: {
 				//QS significa "Query Parameters", aquí colocamos todo lo que va justo después del "?" (signo de parámetro)
 				key: key,
@@ -60,7 +60,7 @@ describe.skip('Ejemplo para demostrar cómo probar una API', () => {
 		// La variable Global: "cardID" ya fue declarada y se le agregó un valor (el ID de la card que creamos en el Step anterior)
 		cy.api({
 			method: 'PUT',
-			url: 'https://api.trello.com/1/cards/' + cardID, // aquí estamos llamando la variable global "cardID" que mencionamos.
+			url: `https://api.trello.com/1/cards/${cardID}`, // aquí estamos llamando la variable global "cardID" que mencionamos.
 			qs: {
 				//QS significa "Query Parameters", aquí colocamos todo lo que va justo después del "?" (signo de parámetro)
 				key: key,
@@ -98,7 +98,7 @@ describe.skip('Ejemplo para demostrar cómo probar una API', () => {
 
 		cy.api({
 			method: 'DELETE',
-			url: 'https://api.trello.com/1/cards/' + cardID, // aquí estamos llamando la variable global "cardID" que mencionamos.
+			url: `https://api.trello.com/1/cards/${cardID}`, // aquí estamos llamando la variable global "cardID" que mencionamos.
 			qs: {
 				//QS significa "Query Parameters", aquí colocamos todo lo que va justo después del "?" (signo de parámetro)
 				key: key,

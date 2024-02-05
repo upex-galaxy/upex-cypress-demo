@@ -5,5 +5,5 @@ export function getRealValue(value) {
 }
 
 export function parseCurrencyNum(priceString) {
-	return parseFloat(priceString.replace('$', '').replace(',', ''))
+	return parseFloat(priceString.replace('$', '').replace(',', ''));
 }

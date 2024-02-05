@@ -1,12 +1,13 @@
 {
 	"recommendations": [
 		//! Themes:
-		"vscode-icons-team.vscode-icons",
+		"miguelsolorio.fluent-icons",
 		"PKief.material-icon-theme",
 		"EliverLara.andromeda",
 		"johnpapa.winteriscoming",
 		"RobbOwen.synthwave-vscode",
 		"dracula-theme.theme-dracula",
+		"zhuangtongfa.material-theme",
 		//! Helper:
 		"leizongmin.node-module-intellisense",
 		"christian-kohler.npm-intellisense",

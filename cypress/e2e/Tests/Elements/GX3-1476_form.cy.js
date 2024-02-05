@@ -24,7 +24,7 @@ describe('GX3-1476: ToolsQA | Elements | Text Box: Fill form and Submit', () => 
 		cy.get('#output #currentAddress').invoke('text').as('currentAddress');
 		cy.get('#output #permanentAddress').invoke('text').as('permanentAddress');
 		//Assertions
-		cy.then( ()=> {
+		cy.then(() => {
 			expect(getRealValue(this.name)).equal(json.validCredentials.FullName);
 			expect(getRealValue(this.email)).equal(json.validCredentials.Email);
 			expect(getRealValue(this.currentAddress)).equal(json.validCredentials.CurrentAddress);
