@@ -1,6 +1,6 @@
-[![🤖CI run Regression in QA🧪](https://github.com/upex-galaxy/cypress-blackhole/actions/workflows/regression.yml/badge.svg?branch=QA)](https://github.com/upex-galaxy/cypress-blackhole/actions/workflows/regression.yml)
 
-[![vscode-logo]][vscode-site] [![cypress-logo]][cypress-site] [![typescript-logo]][javascript-site]
+
+[![vscode-logo]][vscode-site] [![cypress-logo]][cypress-site] [![javascript-logo]][javascript-site] [![typescript-logo]][typescript-site]
 
 # 🧪Testing Automation - Cypress 13👨🏻‍🚀 PRO
 
@@ -120,96 +120,58 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 
 # 🚩NIVELES DE TESTER QA en UPEX Galaxy:
 
-El programa **UPEX Galaxy** está diseñado para guiar a los Testers a través de 2 Etapas (Career Paths). Cada Etapa conlleva ciertos **NIVELES** que el
-Tester debe alcanzar para llegar a su mayor **SENIORITY**:
+El programa **UPEX Galaxy** está diseñado para guiar a los Testers a través de "Niveles Estelares" de Galaxy. Cada Nivel conlleva ciertas **Prácticas** que el Tester debe dominar para reconocer el recorrido que lleva y hasta dónde puede llegar para alcanzar a su mayor **SENIORITY**.
+Comenzando con los Niveles L1 y L2 que son de un Tester Manual (QA Engineer sin herramientas de Automatización), luego sigue los Niveles L3, L4 y L5 para QA Automation Engineer, los cales son:
 
-## QA Engineer (Pruebas Manuales)
+## ✅ Nivel L3
+En este nivel, el Tester es capaz de realizar tareas de pruebas de performance, automatizar pruebas UI de historias implementadas o diseñar nuevas Historias de Usuario como Analista Funcional, además del nivel anterior.
 
-Capacidad de realizar análisis, planificación, ejecución y gestión de:
+### Prácticas:
+- Diseña y ajusta casos de prueba complejos basados en cambios de requisitos.
+- Identifica y reporta problemas de rendimiento utilizando herramientas básicas.
+- Realiza pruebas exploratorias avanzadas e identificar áreas no cubiertas.
+- Gestiona los Planes de Prueba (Cobertura, Regresión, Sanity, Smoke) de manera efectiva.
+- Ofrece guía y mentoría a Testers de niveles inferiores (Capacidad de ser Tutor).
+- Tiene una comprensión básica sobre automatización de pruebas.
+- Maneja el flujo de QA Automation completo de trabajo ordinario.
+- Realiza pruebas Frontend con datos sin iteración (hardcodeados).
+- Implementa el modelo Page-Object-Model a nivel básico.
+- Tiene Habilidades básicas de GIT (control de versionado de código).
 
--   Pruebas Manuales de UI
--   Bases de Datos
--   API Testing
+> A partir de L3, se abre el segundo camino de UPEX Galaxy, que se centra en especializarse en pruebas automatizadas de cualquier especialidad como "QA Automation Engineer". A partir de aquí se abre su camino hacia el L4.
 
-### 🧪L1
+## 🛡️ El 2do camino: Especialización como “QA Automation Engineer” (Pruebas Automatizadas)
+Capacidad de analizar, planificar, ejecutar y gestionar:
+- Pruebas Automatizadas de E2E
+- Pruebas Automatizadas de Integration Testing
+- Pruebas Automatizadas de Performance.
+- Etc.
 
-Capaz de realizar tareas (US) sencillas de frontend sin mucha complejidad.
+## 🐲 NIVELES:
 
-##### Prácticas:
+### ✅ Nivel L4
+Capaz de realizar tareas de Deuda Técnica (TD) para Automatizar pruebas complejas de historias implementadas y pruebas de Integración. Además de lo anterior también posee habilidades adicionales.
 
--   Entiende y puede seguir guías y protocolos de prueba previamente definidos.
--   Identifica errores obvios en la interfaz y reporta con claridad.
--   Familiarizado con herramientas básicas de testing y reporting.
--   Capaz de realizar pruebas de regresión siguiendo casos de prueba definidos.
+#### Prácticas:
+- Resuelve problemas y conflictos de pruebas (Debugging).
+- Realiza pruebas E2E con datos en iteración (Parametrizadas).
+- Escribe código con excelentes prácticas y principios (POM, "DRY", etc.).
+- Escribe scripts de prueba con estructura de datos, condicionales, bucles, etc.
+- Entiende y ejecuta Pipelines de Regresión en Continuous Integration (CI).
+- Escribe scripts de prueba para intercepción y assertions de API Testing.
+- Puede ser Tutor de Tester L1, L2 y L3.
 
-### 🧪L2
-
-Capaz de realizar tareas (US) avanzadas de frontend y también tareas de Backend (Pruebas de Bases de Datos y Pruebas de API).
-
-##### Prácticas:
-
--   Realiza pruebas exploratorias identificando puntos críticos en las aplicaciones.
--   Puede diseñar casos de prueba simples basados en requisitos.
--   Familiarizado con SQL básico para realizar pruebas en Bases de Datos.
--   Inicia pruebas básicas en APIs usando herramientas como Postman o similares.
--   Entiende la importancia de ciclos de vida de defectos y los gestiona correctamente.
-
-### 🧪L3
-
-Capaz de realizar tareas (US) de performance y/o diseñar nuevas Historias de Usuario.
-
-##### Prácticas:
-
--   Diseña y ajusta casos de prueba complejos basados en cambios de requisitos.
--   Identifica y reporta problemas de rendimiento usando herramientas básicas.
--   Realiza pruebas exploratorias avanzadas e identifica áreas no cubiertas.
--   Gestiona los Planes de Prueba (Cobertura, Regresión, Sanity, Smoke) de manera efectiva.
--   Ofrece guía y mentoría a testers de niveles inferiores (Capacidad de ser Tutor).
--   Tiene una comprensión básica sobre automatización de pruebas.
-
-## QA Automation Engineer (Pruebas Automatizadas)
-
-Capacidad de realizar análisis, planificación, ejecución y gestión de:
-
--   Pruebas Automatizadas de E2E
--   Integration Testing (Aplicando para cualquiera de los Frameworks de automatización de Browsers/Apps)
-
-### 🧪L3
-
-Capaz de realizar tareas (TechDept) para Automatizar pruebas UI de historias implementadas.
-
-##### Prácticas:
-
--   Capaz de manejar el flujo completo de trabajo ordinario.
--   Capaz de realizar pruebas Frontend con data sin iteración (hardcodeada).
--   Capaz de realizar Page-Object-Model básico.
--   Capaz de realizar controles de versionado de código (conocimiento básico en GIT).
-
-### 🧪L4
-
-Capaz de realizar tareas (TD) para Automatizar pruebas complejas y de integración de historias implementadas.
-
-##### Prácticas:
-
--   Capacidad de resolución de problemas y conflictos de pruebas (Debugging).
--   Capaz de realizar pruebas E2E con data en iteración (Parametrizadas).
--   Capaz de escribir código con Excelentes prácticas y principios (POM, “DRY”, etc.).
--   Capaz de escribir scripts de prueba con Estructura de Datos, condicionales, bucles, etc.
--   Capaz de entender y ejecutar Pipelines de Regresión en Continuous Integration (CI).
--   Capaz de escribir scripts de prueba para intercepción y assertions de API Testing.
-
-### 🧪L5
-
+### ✅ Nivel L5
 Capaz de realizar cualquier tarea (TD) de Automatización y gestionar los Planes de Prueba.
 
-##### Prácticas:
-
--   Capacidad de resolución de conflictos de GIT con facilidad.
--   Capacidad de resolución de problemas de ambientes y errores de config del Repo.
--   Capaz de realizar Planes de Prueba generales y para Automatización de pruebas.
--   Capaz de planificar, armar y hacer funcionar los Repositorios de Automatización de Prueba.
--   Capaz de configurar integraciones de aplicaciones de Reporte de Prueba con el Repo.
--   Capaz de realizar pruebas automatizadas de Performance (con ciertas herramientas).
+#### Prácticas:
+- Resuelve conflictos de GIT con facilidad.
+- Resuelve problemas de ambientes y errores de configuración del Repositorio.
+- Realiza Planes de Prueba generales y para Automatización de pruebas.
+- Planifica, arma y hace funcionar los Repositorios de Automatización de Prueba.
+- Configura integraciones de aplicaciones de Reporte de Prueba con el Repositorio.
+- Realiza pruebas automatizadas de rendimiento (con ciertas herramientas).
+- Puede ser Tutor de cualquier nivel de Tester, incluso de otro L5.
 
 ---
 
@@ -232,5 +194,7 @@ Suscríbete a un Sprint y trabaja como un QA Automation Engineer!
 [vscode-site]: https://code.visualstudio.com/
 [cypress-logo]: https://img.shields.io/badge/Cypress-black?logo=cypress&style=for-the-badge
 [cypress-site]: https://www.cypress.io
+[javascript-logo]: https://img.shields.io/badge/JavaScript-black?logo=javascript&style=for-the-badge
+[javascript-site]: https://www.javascript.com/
 [typescript-logo]: https://img.shields.io/badge/TypeScript-black?logo=typescript&style=for-the-badge
 [typescript-site]: https://www.typescriptlang.org/

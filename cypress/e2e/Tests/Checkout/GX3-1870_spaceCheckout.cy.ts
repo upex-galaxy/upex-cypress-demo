@@ -6,7 +6,7 @@ describe('GX3-1870: SpaceBeyond | Booking | Book a Destination in Checkout', () 
 		cy.visit('https://demo.testim.io');
 		cy.contains('Log in').click();
 
-		cy.page().then(({ spaceLoginPage, spaceProductPage }) => {
+		cy.page().then(({ spaceLoginPage }) => {
 			spaceLoginPage.enterUsername('Admin');
 			spaceLoginPage.enterPassword('admin123');
 			spaceLoginPage.submitLogin();

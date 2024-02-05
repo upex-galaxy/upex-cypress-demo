@@ -1,4 +1,4 @@
-import { SpaceCheckoutPage } from "@pages/SpaceCheckoutPage"
+import { SpaceCheckoutPage } from "@pages/SpaceCheckout.Page"
 import { SpaceLoginPage } from "@pages/SpaceLogin.Page"
 import { SpaceDestinationPage } from "@pages/SpaceProduct.Page"
 declare global {
