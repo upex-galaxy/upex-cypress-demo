@@ -3,7 +3,7 @@
 #? 🧪Consiste en ejecutar TODOS los tests del Repo e importar los resultados a Jira!🚀
 #! 👩🏻‍🔬Este Pipeline de CI NO DEBE EDITARSE sin permiso del QA Lead.
 name: 🧪Pipeline Regression in QA
-run-name: ${{github.actor}}👨🏻‍🔬 run Regression in ${{github.ref_name}}
+run-name: ${{github.actor}}👨🏻‍🔬 triggered Regression in ${{github.ref_name}}
 
 on:
   push:

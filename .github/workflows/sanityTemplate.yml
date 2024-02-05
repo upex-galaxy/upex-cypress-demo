@@ -9,7 +9,7 @@
 #todo: 7 -> Listo! Guarda los cambios (git add + git commit) y pushea (git push) para ejectutar este Pipeline!
 #*Resultado: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí.
 
-name: 🧪Pipeline SanityTest Execution🧪
+name: 🧪Pipeline SanityTest
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 
 on:
