@@ -16,7 +16,12 @@
 	"plugins": ["cypress", "chai-friendly", "@typescript-eslint", "only-warn", "prettier"],
 	"rules": {
 		"prefer-template": "error",
+		"indent": ["warn", "tab", { "SwitchCase": 1 }],
+		"semi": ["warn", "always"],
+		"quotes":["warn", "single"],
 		"curly": ["error", "all"],
+		"space-before-blocks": "warn",
+		"arrow-spacing": "warn",
 		"no-restricted-globals": "off",
 		"no-restricted-syntax": ["error", "DebuggerStatement", "LabeledStatement", "WithStatement"],
 		"import/prefer-default-export": "off",
