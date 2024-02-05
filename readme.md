@@ -63,6 +63,7 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
     yarn test
     ```
     - también puede usar `npx cypress open` (ya que en Package.json tenemos la variable "test" como el "cypress open") para abrir Cypress.
+    - También puedes ejecutar test:chrome, test:firefox, etc... Para más info de los scripts, mira package.json
 
 ---
 
@@ -78,13 +79,16 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 
 5. **Para correr una REGRESIÓN y generar un solo Reporte HTML global, ejecuta**:
     ```
-    yarn test:ci:regression
+    clean:reports
+    ```
+    yarn regression:chrome
     ```
     Luego ejecuta:
     ```
-    yarn report
+    yarn chrome:report
     ```
     - Gracias a esto se va a generar un único Reporte mochawesome HTML para evaluar TODOS los Resultados de Prueba de la Regresión.
+    - También puedes ejecutar regression:firefox, regression:edge, etc... Para más info de los scripts, mira package.json
 
 ---
 
