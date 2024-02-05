@@ -34,7 +34,7 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 
 ### RESUMEN:
 
-![image](https://user-images.githubusercontent.com/91127281/209617125-ec3b7ed9-0495-4860-adba-547ed2d3a243.png)
+![image](https://github.com/upex-galaxy/upex-cypress-demo/assets/91127281/1e4f45e8-f0b6-4b72-b213-8a5c54afbc4f)
 
 # CÓMO EMPEZAR:
 
@@ -45,7 +45,7 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 
 1. **Clona el Proyecto**:
     ```
-    git clone https://github.com/upex-galaxy/L1-cypex-demo.git
+    git clone https://github.com/upex-galaxy/upex-cypress-demo.git
     ```
 
 ---
@@ -71,8 +71,7 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
     ```
     yarn test:run <coloca_aqui_tu_path_archivo_de_prueba>
     ```
-    - cuyo script "test:run" es:
-      `cypress run --browser electron --spec`, 
+    - cuyo script "test:run" es: `cypress run --browser electron --spec`, 
       el cual es un atajo es para que podamos correr las pruebas de un directorio que especifiquemos, usando el navegador de electron, generando 1 Reporte XML y HTML para posteriormente
       importar a Jira con el XML y generar un hermoso Reporte en el navegador con el HTML.
 ---
@@ -81,9 +80,11 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
     ```
     clean:reports
     ```
+    ```
     yarn regression:chrome
     ```
-    Luego ejecuta:
+    
+    Y Luego ejecuta:
     ```
     yarn chrome:report
     ```
