@@ -55,6 +55,7 @@ jobs:
       run: |
         if [[ -z "${{ secrets.XRAY_CLIENT_ID }}" ]]; then
           echo "XRAY_CLIENT_ID is not set. Please set it in the repository secrets to enable Slack notifications."
+        fi
         if [[ -z "${{ secrets.XRAY_CLIENT_SECRET }}" ]]; then
           echo "XRAY_CLIENT_SECRET is not set. Please set it in the repository secrets to enable Slack notifications."
         fi
