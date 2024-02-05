@@ -14,7 +14,7 @@ describe('', () => {
 		cy.get('[for^="tree-node"]').should('have.length', 1);
 	});
 
-	it.only('2064 |TC02 Check random and compare with display result', () => {
+	it('2064 |TC02 Check random and compare with display result', () => {
 		cy.get('[for^="tree-node"]').should('have.length', 1);
 		cy.get('[title="Expand all"]').click();
 		cy.get('[for^="tree-node"]')
