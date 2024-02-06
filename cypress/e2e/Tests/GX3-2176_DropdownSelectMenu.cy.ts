@@ -1,0 +1,11 @@
+
+describe('GX3-2176_⚡️ToolsQA | Widgets | Dropdown - Select Menu ',() => {
+	beforeEach('Prc: Usuario debe ingresar a la pagina para hacer pruebas',() => {
+	    cy.visit('/select-menu');
+	});
+	it('2176| TC1: Validar poder seleccionar un elemento de la lista desplegable de "Select Value" ', () => {;
+		cy.get('#withOptGroup').click();
+		cy.get('#react-select-2-option-0-0').click();
+		cy.contains('Group 1, option 1');
+	});
+});
