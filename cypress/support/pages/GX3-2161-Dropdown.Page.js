@@ -1,15 +1,17 @@
 class Dropdown {
 	get = {
 		selectValueDropdown : () => cy.get('#withOptGroup'),
-		optionsSelectValue: () => cy.get('[id*=react-select][id*=option]'),
+		options: () => cy.get('[id*=react-select][id*=option]'),
 		inputSelectValue: () => cy.get('[class$="singleValue"]'),
+		inputMultiselect: () => cy.get('[class$="multiValue"]'),
 		selectOneDropdown : () => cy.get('#selectOne'),
 		selectOldStyleDropdown : () => cy.get('#oldSelectMenu'),
+		multiselectDropdown : () => cy.get('[class$="placeholder"]').contains('Select...')
 	};
 	getRandomValue(){
-		return this.get.optionsSelectValue().its('length').then(optionsCount => {
+		return this.get.options().its('length').then(optionsCount => {
 			const randomOption = Math.floor(Math.random() * optionsCount);
-			return this.get.optionsSelectValue().eq(randomOption).click();
+			return this.get.options().eq(randomOption).click();
 		});
 	}
 	getSelectValue(){
@@ -27,6 +29,10 @@ class Dropdown {
 
 			return cy.wrap($select).select(randomOption).invoke('val');
 		});
+	}
+	getOneMultiSelect(){
+		this.get.multiselectDropdown().click();
+		return this.getRandomValue();
 	}
 }
 export const dropdownPage = new Dropdown();
