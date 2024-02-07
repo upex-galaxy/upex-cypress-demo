@@ -78,7 +78,7 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 
 5. **Para correr una REGRESIÓN y generar un solo Reporte HTML global, ejecuta**:
     ```
-    clean:reports
+    yarn clean:reports
     ```
     ```
     yarn regression:chrome
