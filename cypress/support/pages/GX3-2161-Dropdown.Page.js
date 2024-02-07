@@ -6,7 +6,8 @@ class Dropdown {
 		inputMultiselect: () => cy.get('[class$="multiValue"]'),
 		selectOneDropdown : () => cy.get('#selectOne'),
 		selectOldStyleDropdown : () => cy.get('#oldSelectMenu'),
-		multiselectDropdown : () => cy.get('[class$="placeholder"]').contains('Select...')
+		multiselectDropdown : () => cy.get('[class$="placeholder"]').contains('Select...'),
+		closeMultiSelectOption : () => cy.get('.css-xb97g8')
 	};
 	getRandomValue(){
 		return this.get.options().its('length').then(optionsCount => {
@@ -32,7 +33,9 @@ class Dropdown {
 	}
 	getOneMultiSelect(){
 		this.get.multiselectDropdown().click();
-		return this.getRandomValue();
+		const option = this.getRandomValue();
+		this.get.closeMultiSelectOption().click();
+		return option;
 	}
 	getAllMultiSelect() {
 		let texts = [];
