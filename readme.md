@@ -1,4 +1,4 @@
-[![🧪Pipeline Regression in QA](https://github.com/upex-galaxy/upex-cypress-demo/actions/workflows/regression.yml/badge.svg)](https://github.com/upex-galaxy/upex-cypress-demo/actions/workflows/regression.yml)
+[![🧪Pipeline Regression in QA](https://github.com/upex-galaxy/cypress-gx/actions/workflows/regression.yml/badge.svg)](https://github.com/upex-galaxy/cypress-gx/actions/workflows/regression.yml)
 
 [![vscode-logo]][vscode-site] [![cypress-logo]][cypress-site] [![javascript-logo]][javascript-site] [![typescript-logo]][typescript-site]
 
@@ -45,7 +45,7 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 
 1. **Clona el Proyecto**:
     ```
-    git clone https://github.com/upex-galaxy/upex-cypress-demo.git
+    git clone https://github.com/upex-galaxy/cypress-gx.git
     ```
 
 ---
@@ -78,7 +78,7 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 
 5. **Para correr una REGRESIÓN y generar un solo Reporte HTML global, ejecuta**:
     ```
-    clean:reports
+    yarn clean:reports
     ```
     ```
     yarn regression:chrome
