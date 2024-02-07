@@ -28,4 +28,14 @@ describe('GX3-2176_⚡️ToolsQA | Widgets | Dropdown - Select Menu ',() => {
 		cy.contains('Black');
 		cy.contains('Red');
 	});
+	it('2176| TC5: Validar poder seleccionar varios elementos del menú "Standard multi select" ', () => {;
+		cy.get('#cars').select('Volvo');
+		cy.get('#cars').select('Saab');
+		cy.get('#cars').select('Opel');
+		cy.get('#cars').select('Audi');
+		cy.contains('Volvo');
+		cy.contains('Saab');
+		cy.contains('Opel');
+		cy.contains('Audi');
+	});
 });
