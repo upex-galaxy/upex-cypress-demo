@@ -1,0 +1,17 @@
+{
+	"list": {
+		"tab": "demo-tab-list",
+		"content": "verticalListContainer",
+		"items": ["Cras justo odio", "Dapibus ac facilisis in", "Morbi leo risus", "Porta ac consectetur ac"]
+	},
+	"grid": {
+		"tab": "demo-tab-grid",
+		"content": "gridContainer",
+		"items": ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"]
+	},
+	"true": "true",
+	"false": "false",
+	"black": "rgb(73, 80, 87)",
+	"White": "rgb(255, 255, 255)",
+	"blue": "rgb(0, 123, 255)"
+}
