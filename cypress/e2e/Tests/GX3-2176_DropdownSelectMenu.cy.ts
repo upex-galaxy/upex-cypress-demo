@@ -17,4 +17,15 @@ describe('GX3-2176_⚡️ToolsQA | Widgets | Dropdown - Select Menu ',() => {
 		cy.get('#oldSelectMenu').select('Red');
 		cy.contains('Red');
 	});
+	it('2176| TC4: Validar poder seleccionar uno o mas elementos del "Multiselect drop down" ', () => {;
+		cy.get('.css-1wa3eu0-placeholder').eq(2).click();
+		cy.get('#react-select-4-option-0').click();
+		cy.get('#react-select-4-option-1').click();
+		cy.get('#react-select-4-option-2').click();
+		cy.get('#react-select-4-option-3').click();
+		cy.contains('Green');
+		cy.contains('Blue');
+		cy.contains('Black');
+		cy.contains('Red');
+	});
 });
