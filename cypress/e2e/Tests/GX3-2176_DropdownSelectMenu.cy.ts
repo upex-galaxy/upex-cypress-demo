@@ -13,4 +13,8 @@ describe('GX3-2176_⚡️ToolsQA | Widgets | Dropdown - Select Menu ',() => {
 		cy.get('#react-select-3-option-0-2').click();
 		cy.contains('Mrs.');
 	});
+	it('2176| TC3: Validar poder seleccionar un color de la lista desplegable de "Old Style Select Menu" ', () => {;
+		cy.get('#oldSelectMenu').select('Red');
+		cy.contains('Red');
+	});
 });
