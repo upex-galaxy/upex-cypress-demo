@@ -34,5 +34,17 @@ class Dropdown {
 		this.get.multiselectDropdown().click();
 		return this.getRandomValue();
 	}
+	getAllMultiSelect() {
+		let texts = [];
+		this.get.multiselectDropdown().click();
+		return this.get.options().then($options => {
+			$options.each((index,option) => {
+				cy.wrap(option).click().invoke('text').then(text => {
+					texts.push(text);
+				});
+			});
+			return cy.wrap(texts);
+		});
+	}
 }
 export const dropdownPage = new Dropdown();

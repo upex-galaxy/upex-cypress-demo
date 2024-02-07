@@ -18,9 +18,16 @@ describe('ToolsQA | Widgets | Dropdown - Select Menu', () => {
 			dropdownPage.get.selectOldStyleDropdown().invoke('val').should('equal', randomOption);
 		});
 	});
-	it.only('2162 | TC4: Check that the user can select one element from the “Multiselect” dropdown.', () => {
+	it('2162 | TC4: Check that the user can select one element from the “Multiselect” dropdown.', () => {
 		dropdownPage.getOneMultiSelect().invoke('text').then(option => {
 			dropdownPage.get.inputMultiselect().invoke('text').should('eq', option);
+		});
+	});
+	it('2162 | TC5: Check that the user can select all elements from the “Multiselect” dropdown.', () => {
+		dropdownPage.getAllMultiSelect().then((option) => {
+			dropdownPage.get.inputMultiselect().each((elem, index) => {
+				cy.wrap(elem).invoke('text').should('eq', option[index]);
+			});
 		});
 	});
 });
