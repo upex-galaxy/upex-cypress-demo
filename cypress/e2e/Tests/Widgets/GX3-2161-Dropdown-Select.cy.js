@@ -8,9 +8,14 @@ describe('ToolsQA | Widgets | Dropdown - Select Menu', () => {
 			dropdownPage.get.inputSelectValue().invoke('text').should('eq', option);
 		});
 	});
-	it('* 2162 | TC2: Check that the user can select one element from the “Select One” dropdown.', () => {
+	it('2162 | TC2: Check that the user can select one element from the “Select One” dropdown.', () => {
 		dropdownPage.getSelectOne().invoke('text').then(option => {
 			dropdownPage.get.inputSelectValue().invoke('text').should('eq', option);
+		});
+	});
+	it.only('2162 | TC3: Check that the user can select one element from the “Old Style Select Menu” dropdown.', () => {
+		dropdownPage.getOldStyle().then(randomOption => {
+			dropdownPage.get.selectOldStyleDropdown().invoke('val').should('equal', randomOption);
 		});
 	});
 });

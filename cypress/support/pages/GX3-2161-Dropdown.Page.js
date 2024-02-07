@@ -4,6 +4,7 @@ class Dropdown {
 		optionsSelectValue: () => cy.get('[id*=react-select][id*=option]'),
 		inputSelectValue: () => cy.get('[class$="singleValue"]'),
 		selectOneDropdown : () => cy.get('#selectOne'),
+		selectOldStyleDropdown : () => cy.get('#oldSelectMenu'),
 	};
 	getRandomValue(){
 		return this.get.optionsSelectValue().its('length').then(optionsCount => {
@@ -19,6 +20,13 @@ class Dropdown {
 		this.get.selectOneDropdown().click();
 		return this.getRandomValue();
 	}
+	getOldStyle(){
+		return this.get.selectOldStyleDropdown().then($select => {
+			const optionsCount = $select.find('option').length;
+			const randomOption = Math.floor(Math.random() * optionsCount);
 
+			return cy.wrap($select).select(randomOption).invoke('val');
+		});
+	}
 }
 export const dropdownPage = new Dropdown();
