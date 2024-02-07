@@ -17,6 +17,8 @@
 	"rules": {
 		"prefer-template": "error",
 		"curly": ["error", "all"],
+		"space-before-blocks": "warn",
+		"arrow-spacing": "warn",
 		"no-restricted-globals": "off",
 		"no-restricted-syntax": ["error", "DebuggerStatement", "LabeledStatement", "WithStatement"],
 		"import/prefer-default-export": "off",
