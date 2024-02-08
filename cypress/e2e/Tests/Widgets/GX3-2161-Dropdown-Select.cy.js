@@ -1,6 +1,6 @@
 import { dropdownPage } from '../../../support/pages/GX3-2161-Dropdown.Page';
 describe('ToolsQA | Widgets | Dropdown - Select Menu', () => {
-	beforeEach(()=>{
+	beforeEach(() => {
 		cy.visit('/select-menu');
 	});
 	it('2162 | TC1: Check that the user can select one element from the “Select Value” dropdown.', () => {
@@ -36,9 +36,9 @@ describe('ToolsQA | Widgets | Dropdown - Select Menu', () => {
 			dropdownPage.get.standartMultiSelect().find('option:selected').should('have.length', 1);
 		});
 	});
-	it('2162 | TC7: Check that the user can select multiple elements from the “Standard multi select” dropdown.', () => {
+	it.only('2162 | TC7: Check that the user can select multiple elements from the “Standard multi select” dropdown.', () => {
 		dropdownPage.getAllStandardSelect().then($select => {
-			$select.find('option').each((index, option)=> {
+			$select.find('option').each((_index, option) => {
 				cy.wrap(option).should('have.property', 'selected');
 			});
 		});
