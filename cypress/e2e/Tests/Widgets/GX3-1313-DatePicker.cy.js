@@ -1,6 +1,6 @@
-import Action from '@pages/GX3-DataPicker-Action';
-import Verification from '@pages/GX3-1313-DatePicker.Verification';
-import months from '@data/GX3-1313-DataPicker';
+import Action from '../../../support/pages/GX3-1313-DatePicker.Action';
+import Verification from '../../../support/pages/GX3-1313-DatePicker.Verification';
+import months from '../../../fixtures/data/Widgets/GX3-1313-DataPicker.json';
 
 describe('GX3-1313 | TS: ⚡️ToolsQA | Widgets | Date Picker', () => {
 	beforeEach('acceder a la pagina https://demoqa.com/automation-practice-form', () => {
