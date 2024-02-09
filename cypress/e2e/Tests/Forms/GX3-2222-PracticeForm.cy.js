@@ -31,8 +31,12 @@ describe('ToolsQA | Widgets | Dropdown - Select Menu', () => {
 		// 	});
 		// });
 		// formPage.selectFile();
-		// formPage.selectState();
-		// formPage.selectCity();
+		formPage.selectState(formPage.get.stateAndCityOptions).invoke('text').then(text => {
+			cy.log(text);
+		});
+		formPage.selectCity(formPage.get.stateAndCityOptions).invoke('text').then(text => {
+			cy.log(text);
+		});
 	});
 
 });

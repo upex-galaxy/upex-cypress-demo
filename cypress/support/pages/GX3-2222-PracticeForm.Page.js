@@ -23,10 +23,10 @@ class Form {
 		this.get.subjects().type(subjects);
 		this.get.currentAddress().clear().type(address);
 	}
-	selectRandomOption(genderOrHobbie) {
-		return genderOrHobbie().its('length').then(optionsCount => {
+	selectRandomOption(option) {
+		return option().its('length').then(optionsCount => {
 			const randomOption = Math.floor(Math.random() * optionsCount);
-			return genderOrHobbie().eq(randomOption).click();
+			return option().eq(randomOption).click({ force: true });
 		});
 	}
 	selectAllHobbies() {
@@ -39,19 +39,14 @@ class Form {
 	selectFile() {
 		this.get.uploadFile().selectFile('cypress/fixtures/images/upexlogo.png');
 	}
-	selectState() {
+
+	selectState(option) {
 		this.get.state().click();
-		this.get.stateAndCityOptions().its('length').then(optionsCount => {
-			const randomOption = Math.floor(Math.random() * optionsCount);
-			return this.get.stateAndCityOptions().eq(randomOption).click({force:true});
-		});
+		return this.selectRandomOption(option);
 	}
-	selectCity() {
+	selectCity(option) {
 		this.get.city().click();
-		this.get.stateAndCityOptions().its('length').then(optionsCount => {
-			const randomOption = Math.floor(Math.random() * optionsCount);
-			return this.get.stateAndCityOptions().eq(randomOption).click({force:true});
-		});
+		return this.selectRandomOption(option);
 	}
 	submitForm() {
 		this.get.submitButton().click({force:true});
