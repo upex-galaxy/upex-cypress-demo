@@ -23,16 +23,10 @@ class Form {
 		this.get.subjects().type(subjects);
 		this.get.currentAddress().clear().type(address);
 	}
-	selectGender() {
-		return this.get.gender().its('length').then(optionsCount => {
+	selectRandomOption(genderOrHobbie) {
+		return genderOrHobbie().its('length').then(optionsCount => {
 			const randomOption = Math.floor(Math.random() * optionsCount);
-			return this.get.gender().eq(randomOption).click();
-		});
-	}
-	selectOneHobbie() {
-		return this.get.hobbies().its('length').then(optionsCount => {
-			const randomOption = Math.floor(Math.random() * optionsCount);
-			return this.get.hobbies().eq(randomOption).click();
+			return genderOrHobbie().eq(randomOption).click();
 		});
 	}
 	selectAllHobbies() {
