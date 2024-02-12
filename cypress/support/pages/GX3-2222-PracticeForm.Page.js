@@ -9,6 +9,7 @@ class Form {
 		yearSelector : () => cy.get('.react-datepicker__year-select'),
 		validDaysSelector : () => cy.get('.react-datepicker__week > div:not(.react-datepicker__day--outside-month)'),
 		subjects : () => cy.get('#subjectsContainer'),
+		subjectInput : () => cy.get('.subjects-auto-complete__value-container'),
 		currentAddress : () => cy.get('#currentAddress'),
 		gender : () => cy.get('.custom-radio > input'),
 		hobbies : () => cy.get('.custom-checkbox > input'),
@@ -25,8 +26,13 @@ class Form {
 		this.get.lastName().type(lastName);
 		this.get.email().type(email);
 		this.get.mobile().type(mobile);
-		this.get.subjects().type(subjects);
+		this.get.subjects().type(`${subjects}{enter}`);
 		this.get.currentAddress().type(address);
+	}
+	readSubject() {
+		return this.get.subjects().then(subject => {
+			return cy.wrap(subject).invoke('text');
+		});
 	}
 	selectRandomOption(option) {
 		return option().its('length').then(optionsCount => {
@@ -36,6 +42,13 @@ class Form {
 				return cy.wrap({index: randomOption, value: text});
 			});
 		});
+	}
+	getTodayDate() {
+		const today = new Date();
+		const day = today.getDate().toString().padStart(2, '0');
+		const month = today.toLocaleString('en-GB', { month: 'short' });
+		const year = today.getFullYear();
+		return `${day} ${month} ${year}`;
 	}
 	selectRandomDateOfBirth() {
 		this.get.calendar().click();
