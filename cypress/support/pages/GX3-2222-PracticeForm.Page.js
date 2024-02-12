@@ -8,64 +8,81 @@ class Form {
 		monthSelector : () => cy.get('.react-datepicker__month-select'),
 		yearSelector : () => cy.get('.react-datepicker__year-select'),
 		validDaysSelector : () => cy.get('.react-datepicker__week > div:not(.react-datepicker__day--outside-month)'),
-		subjects : () => cy.get('#subjectsInput'),
+		subjects : () => cy.get('#subjectsContainer'),
 		currentAddress : () => cy.get('#currentAddress'),
-		gender : () => cy.get('.custom-radio'),
-		hobbies : () => cy.get('.custom-checkbox'),
+		gender : () => cy.get('.custom-radio > input'),
+		hobbies : () => cy.get('.custom-checkbox > input'),
 		uploadFile : () => cy.get('#uploadPicture'),
 		state : () => cy.get('#state'),
 		city : () => cy.get('#city'),
 		stateAndCityOptions : () => cy.get('[class$=option]'),
+		selectedStateOrCity : () => cy.get('[class$=singleValue'),
 		submitButton : () => cy.get('#submit'),
 	};
 
 	completeInputs(firstName, lastName, email, mobile, subjects, address) {
-		this.get.firstName().clear().type(firstName);
-		this.get.lastName().clear().type(lastName);
-		this.get.email().clear().type(email);
-		this.get.mobile().clear().type(mobile);
+		this.get.firstName().type(firstName);
+		this.get.lastName().type(lastName);
+		this.get.email().type(email);
+		this.get.mobile().type(mobile);
 		this.get.subjects().type(subjects);
-		this.get.currentAddress().clear().type(address);
+		this.get.currentAddress().type(address);
 	}
 	selectRandomOption(option) {
 		return option().its('length').then(optionsCount => {
 			const randomOption = Math.floor(Math.random() * optionsCount);
-			return option().eq(randomOption).click({ force: true });
-		});
-	}
-	selectAllHobbies() {
-		return this.get.hobbies().then($options => {
-			$options.each((index,hobbie) => {
-				cy.wrap(hobbie).click();
+			return option().eq(randomOption).invoke('text').then(text => {
+				option().eq(randomOption).click({ force: true });
+				return cy.wrap({index: randomOption, value: text});
 			});
 		});
 	}
-	getRandomDateOfBirth() {
+	selectRandomDateOfBirth() {
 		this.get.calendar().click();
-		this.getMonth();
-		this.getYear();
-		this.getDay();
+		return this.selectRandomMonth().then(month => {
+			return this.selectRandomYear().then(year => {
+				return this.selectRandomDay().then(day => {
+					const formattedDate = `${day} ${month} ${year}`;
+					return formattedDate;
+				});
+			});
+		});
 	}
-	getMonth() {
+	selectRandomMonth() {
 		return this.get.monthSelector().then($selectMonth => {
 			const optionsCount = $selectMonth.find('option').length;
 			const randomOption = Math.floor(Math.random() * optionsCount);
-			return cy.wrap($selectMonth).select(randomOption);
+			cy.wrap($selectMonth).select(randomOption).then(() => {
+				const fullMonthName = $selectMonth.find('option:selected').text();
+				const selectedMonthName = fullMonthName.substring(0, 3);
+				return selectedMonthName;
+			});
+
 		});
 	}
-	getYear() {
+	selectRandomYear() {
 		const currentYear = new Date().getFullYear();
 		return this.get.yearSelector().then($selectYear => {
 			const arrayOfYears = $selectYear.find('option').toArray();
 			const validYears = arrayOfYears.filter(years => parseInt(years.text) <= currentYear);
 			const randomOption = Math.floor(Math.random() * validYears.length);
-			return cy.wrap($selectYear).select(randomOption);
+			return cy.wrap($selectYear).select(validYears[randomOption].value).then(() => {
+				const selectedYearValue = validYears[randomOption].text;
+				return selectedYearValue;
+			});
 		});
 	}
-	getDay() {
-		return this.get.validDaysSelector().its('length').then(optionsCount => {
+	selectRandomDay() {
+		return this.get.validDaysSelector().then($days => {
+			const optionsCount = $days.length;
 			const randomOption = Math.floor(Math.random() * optionsCount);
-			return this.get.validDaysSelector().eq(randomOption).click();
+			return cy.wrap($days).eq(randomOption).invoke('text').then(dayText => {
+				return cy.wrap($days).eq(randomOption).click().then(() => {
+					const dayNumber = parseInt(dayText, 10);
+					const formattedDayText = dayNumber < 10 ? `0${dayNumber.toString()}` : dayText;
+					return formattedDayText;
+				});
+			});
 		});
 	}
 	selectFile() {
