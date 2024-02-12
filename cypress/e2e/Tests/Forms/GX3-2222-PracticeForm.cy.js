@@ -17,12 +17,12 @@ describe('ToolsQA | Widgets | Dropdown - Select Menu', () => {
 	it('2223 | TC1: Check that Faker is working correcly', () => {
 
 		// formPage.completeInputs(data.firstName, data.lastname, data.email,data.phoneNUmer,data.subjects,data.email);
-		formPage.selectRandomOption(formPage.get.gender).invoke('text').then(text => {
-			cy.log(text);
-		});
-		formPage.selectRandomOption(formPage.get.hobbies).invoke('text').then(text => {
-			cy.log(text);
-		});
+		// formPage.selectRandomOption(formPage.get.gender).invoke('text').then(text => {
+		// 	cy.log(text);
+		// });
+		// formPage.selectRandomOption(formPage.get.hobbies).invoke('text').then(text => {
+		// 	cy.log(text);
+		// });
 		// formPage.selectAllHobbies().then($options => {
 		// 	$options.each((index,hobbie) => {
 		// 		cy.wrap(hobbie).invoke('text').then(text => {
@@ -31,12 +31,14 @@ describe('ToolsQA | Widgets | Dropdown - Select Menu', () => {
 		// 	});
 		// });
 		// formPage.selectFile();
-		formPage.selectState(formPage.get.stateAndCityOptions).invoke('text').then(text => {
-			cy.log(text);
-		});
-		formPage.selectCity(formPage.get.stateAndCityOptions).invoke('text').then(text => {
-			cy.log(text);
-		});
+		// formPage.selectState(formPage.get.stateAndCityOptions).invoke('text').then(text => {
+		// 	cy.log(text);
+		// });
+		// formPage.selectCity(formPage.get.stateAndCityOptions).invoke('text').then(text => {
+		// 	cy.log(text);
+		// });
+
+		formPage.getRandomDateOfBirth();
 	});
 
 });
