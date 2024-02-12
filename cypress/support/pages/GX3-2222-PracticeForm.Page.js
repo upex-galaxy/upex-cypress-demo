@@ -19,6 +19,7 @@ class Form {
 		stateAndCityOptions : () => cy.get('[class$=option]'),
 		selectedStateOrCity : () => cy.get('[class$=singleValue'),
 		submitButton : () => cy.get('#submit'),
+		modalHeader : () => cy.get('.modal-header'),
 	};
 
 	completeInputs(firstName, lastName, email, mobile, subjects, address) {

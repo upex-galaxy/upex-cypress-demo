@@ -57,6 +57,11 @@ describe('ToolsQA | Widgets | Dropdown - Select Menu', () => {
 		formPage.selectCity(formPage.get.stateAndCityOptions).then(data => {
 			formPage.get.selectedStateOrCity().eq(1).invoke('text').should('contain', data.value);
 		});
+
+		//submit Form
+		formPage.submitForm();
+		formPage.get.modalHeader().should('be.visible').and('have.text', 'Thanks for submitting the form');
+
 	});
 
 });
