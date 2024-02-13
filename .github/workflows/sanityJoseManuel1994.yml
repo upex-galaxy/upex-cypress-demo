@@ -43,7 +43,7 @@ jobs:
       with:
         browser: chrome
         command: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-          bun run test:chrome cypress\e2e\Elements\GX3-1707-CheckBox.cy.js
+          bun run test:chrome cypress/e2e/Elements/GX3-1707-CheckBox.cy.js
 
     - name: 📬Generate JUnit/Mocha Report
       if: always()
