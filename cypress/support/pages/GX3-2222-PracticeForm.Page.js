@@ -9,7 +9,6 @@ class Form {
 		yearSelector : () => cy.get('.react-datepicker__year-select'),
 		validDaysSelector : () => cy.get('.react-datepicker__week > div:not(.react-datepicker__day--outside-month)'),
 		subjects : () => cy.get('#subjectsContainer'),
-		subjectInput : () => cy.get('.subjects-auto-complete__value-container'),
 		currentAddress : () => cy.get('#currentAddress'),
 		gender : () => cy.get('.custom-radio > input'),
 		hobbies : () => cy.get('.custom-checkbox > input'),
