@@ -6,8 +6,8 @@ export default defineConfig({
 	// @Ely: CYPRESS DASHBOARD PARA VER NUESTRAS EJECUCIONES EN LA WEB:
 	projectId: '7n2zun',
 	// 1280×720 is considered to be the most suitable screen resolution for the desktop website version:
-	viewportWidth: 1280,
-	viewportHeight: 720,
+	viewportWidth: 1920,
+	viewportHeight: 1080,
 	downloadsFolder: 'cypress/downloads',
 	videosFolder: 'cypress/videos',
 	screenshotsFolder: 'cypress/screenshots',
