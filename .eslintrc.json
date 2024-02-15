@@ -17,6 +17,8 @@
 	"rules": {
 		"prefer-template": "error",
 		"curly": ["error", "all"],
+		"space-before-blocks": "warn",
+		"arrow-spacing": "warn",
 		"no-restricted-globals": "off",
 		"no-restricted-syntax": ["error", "DebuggerStatement", "LabeledStatement", "WithStatement"],
 		"import/prefer-default-export": "off",
@@ -79,7 +81,11 @@
 		"no-const-assign": "error",
 		"no-unneeded-ternary": "warn",
 		"no-useless-computed-key": "error",
-		"cypress/unsafe-to-chain-command": "off"
+		"cypress/unsafe-to-chain-command": "off",
+		"@typescript-eslint/no-unsafe-assignment": ["warn"],
+		"@typescript-eslint/no-unsafe-argument": ["warn"],
+		"@typescript-eslint/naming-convention": ["warn"],
+		"@typescript-eslint/consistent-type-imports": "error"
 	},
 	"globals": {
 		"cy": true,
