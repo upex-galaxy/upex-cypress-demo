@@ -1,13 +1,14 @@
 {
 	"compilerOptions": {
-		"module": "ESNext",
-		"target": "ESNext",
 		"allowJs": true,
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
+		"module": "ESNext",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"strict": true,
+		"target": "ESNext",
+		"verbatimModuleSyntax": true,
 		"lib": ["es5", "dom"],
 		"types": [
 			"cypress-file-upload",
