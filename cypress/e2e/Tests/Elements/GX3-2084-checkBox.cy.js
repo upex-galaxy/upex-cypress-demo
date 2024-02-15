@@ -37,7 +37,7 @@ describe('', () => {
 		
 
 		const successTexts = [];
-		checkboxPage.get.checkBoxesSelected().each(element=>{
+		checkboxPage.get.textSuccess().each(element=>{
 			successTexts.push(element.text());
 		}).then(()=>{
 			const checkLabels = labels.map(text=> text.toLowerCase().replace(' ','').replace('.doc',''));
