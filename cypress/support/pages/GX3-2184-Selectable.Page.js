@@ -11,6 +11,7 @@ class Selectable {
 		this.get.buttongrid().click();
 	}
 	selectButton(gridList, num) {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		this.get.arrayElements(gridList).eq(num).click();
 	}
 }
