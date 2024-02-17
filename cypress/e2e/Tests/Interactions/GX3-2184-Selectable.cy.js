@@ -1,56 +1,49 @@
-import { selectablePage } from "../../../support/pages/GX3-2184-Selectable.Page";
+import { selectablePage } from '../../../support/pages/GX3-2184-Selectable.Page';
 
-describe("ToolsQA | Interactions | Selectable", () =>{
+describe('ToolsQA | Interactions | Selectable', () => {
+	beforeEach(() => {
+		cy.visit('/selectable');
+		cy.url().should('include', 'selectable');
+	});
+	it('2185 | TC1: Validar seleccionar los elementos de List', () => {
+		selectablePage.get.buttongrid().should('not.have.class', 'active');
+		selectablePage.getArrayElementsCount('list').then(valueArray => {
+			for (let i = 0; i < valueArray; i++) {
+				selectablePage.selectButton('list', i);
+				selectablePage.get.arrayElements('list').eq(i).should('have.class', 'active');
+			}
+		});
+	});
+	it('2185 | TC2: Validar deseleccionar los elementos de List', () => {
+		selectablePage.get.buttongrid().should('not.have.class', 'active');
 
-const baseUrl = "https://demoqa.com/selectable";
-
-	beforeEach(() =>{
-		cy.visit(baseUrl)
-		cy.url().should("include", "selectable")
-
-
-	})
-	it("2185 | TC1: Validar seleccionar los elementos de List", ()=>{
-		selectablePage.clickList()
-		selectablePage.get.buttonlist().should("have.class", "active")
-		const numberOfElements = 1;
-		for (let i = 0; i < numberOfElements; i++){
-			selectablePage.selectAllList(i);
-			selectablePage.get.listOne().should("have.class", "active");
-			cy.wait(1000);
+		for (let repetition = 1; repetition <= 2; repetition++) {
+			selectablePage.getArrayElementsCount('list').then(valueArray => {
+				for (let i = 0; i < valueArray; i++) {
+					selectablePage.selectButton('list', i);
+				}
+			});
 		}
 	});
-	it("2185 | TC2: Validar deseleccionar los elementos de List", ()=>{
-	selectablePage.clickList()
-		
-		const numberOfElements = 2;
-		for (let i = 0; i < numberOfElements; i++){
-			selectablePage.selectAllList(i);
-			cy.wait(1000);
-
+	it('2185 | TC3: Validar seleccionar los elementos de Grid.', () => {
+		selectablePage.clickGrid();
+		selectablePage.get.buttongrid().should('have.class', 'active');
+		selectablePage.getArrayElementsCount('grid').then(valueArray => {
+			for (let i = 0; i < valueArray; i++) {
+				selectablePage.selectButton('grid', i);
+				selectablePage.get.arrayElements('grid').eq(i).should('have.class', 'active');
+			}
+		});
+	});
+	it('2185 | TC4: Validar deseleccionar los elementos de Grid.', () => {
+		selectablePage.clickGrid();
+		selectablePage.get.buttongrid().should('have.class', 'active');
+		for (let repetition = 1; repetition <= 2; repetition++) {
+			selectablePage.getArrayElementsCount('grid').then(valueArray => {
+				for (let i = 0; i < valueArray; i++) {
+					selectablePage.selectButton('grid', i);
+				}
+			});
 		}
 	});
-	it("2185 | TC3: Validar seleccionar los elementos de Grid.", ()=>{
-		selectablePage.clickGrid()
-		selectablePage.get.buttongrid().should("have.class", "active")
-		const numberOfElements = 1;
-		for (let i = 0; i < numberOfElements; i++) {
-      	selectablePage.selectAllGrid(i);
-		selectablePage.get.gridOne().should("have.class", "active");
-        cy.wait(1000);
-    }		
-	});		
-	it("2185 | TC4: Validar deseleccionar los elementos de Grid.", ()=>{
-		selectablePage.clickGrid()
-		const numberOfElements = 2;
-		for (let i = 0; i < numberOfElements; i++) {
-      	selectablePage.selectAllGrid(i);
-		cy.wait(1000);
-      
-    }
-		
-	});	
-	
-	
-
-})
+});
