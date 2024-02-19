@@ -1,9 +1,7 @@
-describe('GX3-2134-⚡️-tools-qa-elements-buttons',() =>
-{
-	beforeEach('Precondicion:El usuario debe estar situado en la pagina DEMOQA', () =>
-	{
+describe('GX3-2134-⚡️-tools-qa-elements-buttons', () => {
+	beforeEach('Precondicion:El usuario debe estar situado en la pagina DEMOQA', () => {
 		cy.visit('https://demoqa.com/buttons');
-		cy.url().should('contains','buttons');
+		cy.url().should('contains', 'buttons');
 	});
 	it('GX3-2133| TC1: Usuario clickea click me button', () => {
 		cy.get('[type="button"]').eq(3).click();

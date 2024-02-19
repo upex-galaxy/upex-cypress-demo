@@ -34,10 +34,7 @@ describe('2141 | ToolsQA | Forms | Practice Form', () => {
 		practiceForm.clickBtnSubmit();
 
 		// Assertions TABLE
-		practiceForm
-			.tableTd()
-			.eq(1)
-			.should('have.text', name + ' ' + lastname);
+		practiceForm.tableTd().eq(1).should('have.text', `${name} ${lastname}`);
 		practiceForm.tableTd().eq(3).should('have.text', email);
 		practiceForm.tableTd().eq(5).should('contain.text', getGenderString(randomNumber));
 		practiceForm.tableTd().eq(7).should('contain', number);

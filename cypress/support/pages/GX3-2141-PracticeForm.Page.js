@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 class PracticeForm {
 	constructor() {
 		this.nameInput = () => cy.get('input#firstName');
