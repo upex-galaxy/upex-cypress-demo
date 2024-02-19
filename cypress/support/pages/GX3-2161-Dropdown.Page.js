@@ -1,23 +1,27 @@
 class Dropdown {
 	get = {
-		selectValueDropdown : () => cy.get('#withOptGroup'),
+		selectValueDropdown: () => cy.get('#withOptGroup'),
 		options: () => cy.get('[id*=react-select][id*=option]'),
 		inputSelectValue: () => cy.get('[class$="singleValue"]'),
 		inputMultiselect: () => cy.get('[class$="multiValue"]'),
-		selectOneDropdown : () => cy.get('#selectOne'),
-		selectOldStyleDropdown : () => cy.get('#oldSelectMenu'),
-		multiselectDropdown : () => cy.get('[class$="placeholder"]').contains('Select...'),
-		closeMultiSelectOption : () => cy.get('.css-xb97g8'),
-		standartMultiSelect : () => cy.get('#cars')
+		selectOneDropdown: () => cy.get('#selectOne'),
+		selectOldStyleDropdown: () => cy.get('#oldSelectMenu'),
+		multiselectDropdown: () => cy.get('[class$="placeholder"]').contains('Select...'),
+		closeMultiSelectOption: () => cy.get('.css-xb97g8'),
+		standartMultiSelect: () => cy.get('#cars'),
 	};
 	getRandomValue() {
-		return this.get.options().its('length').then(optionsCount => {
-			const randomOption = Math.floor(Math.random() * optionsCount);
-			return this.get.options().eq(randomOption).click().invoke('text');
-		});
+		return this.get
+			.options()
+			.its('length')
+			.then(optionsCount => {
+				const randomOption = Math.floor(Math.random() * optionsCount);
+				return this.get.options().eq(randomOption).click().invoke('text');
+			});
 	}
 	getRandomSelect(dropdown) {
 		return dropdown().then($select => {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			const optionsCount = $select.find('option').length;
 			const randomOption = Math.floor(Math.random() * optionsCount);
 			cy.log(randomOption);
@@ -42,10 +46,13 @@ class Dropdown {
 		let texts = [];
 		this.get.multiselectDropdown().click();
 		return this.get.options().then($options => {
-			$options.each((index,option) => {
-				cy.wrap(option).click().invoke('text').then(text => {
-					texts.push(text);
-				});
+			$options.each((index, option) => {
+				cy.wrap(option)
+					.click()
+					.invoke('text')
+					.then(text => {
+						texts.push(text);
+					});
 			});
 			return cy.wrap(texts);
 		});
@@ -53,9 +60,9 @@ class Dropdown {
 	getAllStandardSelect() {
 		let texts = [];
 		return this.get.standartMultiSelect().then($select => {
-			$select.find('option').each((index,element) => {
+			$select.find('option').each((index, element) => {
 				const text = Cypress.$(element).text();
-            	texts.push(text);
+				texts.push(text);
 			});
 			return cy.wrap($select).select(texts);
 		});

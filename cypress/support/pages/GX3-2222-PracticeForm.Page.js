@@ -1,24 +1,26 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 class Form {
 	get = {
-		firstName : () => cy.get('#firstName'),
-		lastName : () => cy.get('#lastName'),
-		email : () => cy.get('#userEmail'),
-		mobile : () => cy.get('#userNumber'),
-		calendar : () => cy.get('#dateOfBirthInput'),
-		monthSelector : () => cy.get('.react-datepicker__month-select'),
-		yearSelector : () => cy.get('.react-datepicker__year-select'),
-		validDaysSelector : () => cy.get('.react-datepicker__week > div:not(.react-datepicker__day--outside-month)'),
-		subjects : () => cy.get('#subjectsContainer'),
-		currentAddress : () => cy.get('#currentAddress'),
-		gender : () => cy.get('.custom-radio > input'),
-		hobbies : () => cy.get('.custom-checkbox > input'),
-		uploadFile : () => cy.get('#uploadPicture'),
-		state : () => cy.get('#state'),
-		city : () => cy.get('#city'),
-		stateAndCityOptions : () => cy.get('[class$=option]'),
-		selectedStateOrCity : () => cy.get('[class$=singleValue'),
-		submitButton : () => cy.get('#submit'),
-		modalHeader : () => cy.get('.modal-header'),
+		firstName: () => cy.get('#firstName'),
+		lastName: () => cy.get('#lastName'),
+		email: () => cy.get('#userEmail'),
+		mobile: () => cy.get('#userNumber'),
+		calendar: () => cy.get('#dateOfBirthInput'),
+		monthSelector: () => cy.get('.react-datepicker__month-select'),
+		yearSelector: () => cy.get('.react-datepicker__year-select'),
+		validDaysSelector: () => cy.get('.react-datepicker__week > div:not(.react-datepicker__day--outside-month)'),
+		subjects: () => cy.get('#subjectsContainer'),
+		currentAddress: () => cy.get('#currentAddress'),
+		gender: () => cy.get('.custom-radio > input'),
+		hobbies: () => cy.get('.custom-checkbox > input'),
+		uploadFile: () => cy.get('#uploadPicture'),
+		state: () => cy.get('#state'),
+		city: () => cy.get('#city'),
+		stateAndCityOptions: () => cy.get('[class$=option]'),
+		selectedStateOrCity: () => cy.get('[class$=singleValue'),
+		submitButton: () => cy.get('#submit'),
+		modalHeader: () => cy.get('.modal-header'),
 	};
 
 	completeInputs(firstName, lastName, email, mobile, subjects, address) {
@@ -35,13 +37,18 @@ class Form {
 		});
 	}
 	selectRandomOption(option) {
-		return option().its('length').then(optionsCount => {
-			const randomOption = Math.floor(Math.random() * optionsCount);
-			return option().eq(randomOption).invoke('text').then(text => {
-				option().eq(randomOption).click({ force: true });
-				return cy.wrap({index: randomOption, value: text});
+		return option()
+			.its('length')
+			.then(optionsCount => {
+				const randomOption = Math.floor(Math.random() * optionsCount);
+				return option()
+					.eq(randomOption)
+					.invoke('text')
+					.then(text => {
+						option().eq(randomOption).click({ force: true });
+						return cy.wrap({ index: randomOption, value: text });
+					});
 			});
-		});
 	}
 	getTodayDate() {
 		const today = new Date();
@@ -65,12 +72,13 @@ class Form {
 		return this.get.monthSelector().then($selectMonth => {
 			const optionsCount = $selectMonth.find('option').length;
 			const randomOption = Math.floor(Math.random() * optionsCount);
-			cy.wrap($selectMonth).select(randomOption).then(() => {
-				const fullMonthName = $selectMonth.find('option:selected').text();
-				const selectedMonthName = fullMonthName.substring(0, 3);
-				return selectedMonthName;
-			});
-
+			cy.wrap($selectMonth)
+				.select(randomOption)
+				.then(() => {
+					const fullMonthName = $selectMonth.find('option:selected').text();
+					const selectedMonthName = fullMonthName.substring(0, 3);
+					return selectedMonthName;
+				});
 		});
 	}
 	selectRandomYear() {
@@ -79,23 +87,34 @@ class Form {
 			const arrayOfYears = $selectYear.find('option').toArray();
 			const validYears = arrayOfYears.filter(years => parseInt(years.text) <= currentYear);
 			const randomOption = Math.floor(Math.random() * validYears.length);
-			return cy.wrap($selectYear).select(validYears[randomOption].value).then(() => {
-				const selectedYearValue = validYears[randomOption].text;
-				return selectedYearValue;
-			});
+			return cy
+				.wrap($selectYear)
+				.select(validYears[randomOption].value)
+				.then(() => {
+					const selectedYearValue = validYears[randomOption].text;
+					return selectedYearValue;
+				});
 		});
 	}
 	selectRandomDay() {
 		return this.get.validDaysSelector().then($days => {
 			const optionsCount = $days.length;
 			const randomOption = Math.floor(Math.random() * optionsCount);
-			return cy.wrap($days).eq(randomOption).invoke('text').then(dayText => {
-				return cy.wrap($days).eq(randomOption).click().then(() => {
-					const dayNumber = parseInt(dayText, 10);
-					const formattedDayText = dayNumber < 10 ? `0${dayNumber.toString()}` : dayText;
-					return formattedDayText;
+			return cy
+				.wrap($days)
+				.eq(randomOption)
+				.invoke('text')
+				.then(dayText => {
+					return cy
+						.wrap($days)
+						.eq(randomOption)
+						.click()
+						.then(() => {
+							const dayNumber = parseInt(dayText, 10);
+							const formattedDayText = dayNumber < 10 ? `0${dayNumber.toString()}` : dayText;
+							return formattedDayText;
+						});
 				});
-			});
 		});
 	}
 	selectFile() {
@@ -110,9 +129,7 @@ class Form {
 		return this.selectRandomOption(option);
 	}
 	submitForm() {
-		this.get.submitButton().click({force:true});
+		this.get.submitButton().click({ force: true });
 	}
-
-
 }
 export const formPage = new Form();

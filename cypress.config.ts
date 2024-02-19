@@ -4,7 +4,8 @@ import 'dotenv/config';
 
 export default defineConfig({
 	// @Ely: CYPRESS DASHBOARD PARA VER NUESTRAS EJECUCIONES EN LA WEB:
-	projectId: '7n2zun',
+	projectId: '2pw67q', //? ID del proyecto CYPRESS-DEMO-CLOUD. Record Key para usar: "b6bde345-a36c-4fab-ad8c-cddc065d2cba"
+	// @Ely: Link para ver el proyecto Cloud: https://cloud.cypress.io/projects/2pw67q/analytics/runs-over-time
 	// 1280×720 is considered to be the most suitable screen resolution for the desktop website version:
 	viewportWidth: 1920,
 	viewportHeight: 1080,
@@ -32,7 +33,6 @@ export default defineConfig({
 		// Glob pattern to determine what test files to load:
 		specPattern: [ 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}' ],
 		excludeSpecPattern: [ 'cypress/e2e/**/*.example.cy.js' ],
-		experimentalRunAllSpecs: true,
 		// Use Cypress plugins:
 		setupNodeEvents(on, config) {
 			// This is required for the preprocessor to be able to generate JSON reports after each run, and more,

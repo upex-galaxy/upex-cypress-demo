@@ -10,13 +10,12 @@
 		"input": "#userEmail",
 		"data": {
 			"valid": "textBox2049@gmail.com",
-            "invalid": "",
+			"invalid": "",
 			"emailTc03": "textBox2049gmail.com",
 			"emailTc04": "@gmail.com",
 			"emailTc05": "textBox2049@",
 			"emailTc06": "textBox2049@gmail.2",
 			"emailTc07": "textBox2049@.com"
-            
 		}
 	},
 	"currentAddress": {

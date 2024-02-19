@@ -53,6 +53,7 @@ describe.skip('Ejemplo para demostrar cómo probar una API', () => {
 			expect(response).to.be.an('object');
 			expect(response.status).to.eql(200);
 			expect(response.body.name).to.eql('Card creada desde Cypress XD');
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			cardID = response.body.id;
 		});
 	});
