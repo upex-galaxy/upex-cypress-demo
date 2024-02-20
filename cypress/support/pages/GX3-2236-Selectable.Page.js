@@ -34,7 +34,7 @@ class selectableJj {
 	};
 
 	seleccionarUnoGrid() {
-		this.get.itemsGrid().eq(9).click();
+		this.get.itemsGrid().eq(4).click();
 	};
 
 	destidarUnoGrid() {
@@ -45,6 +45,7 @@ class selectableJj {
 		this.get.itemsGrid().eq(5).click();
 		this.get.itemsGrid().eq(6).click();
 	};
+
 	destildarMultiplesGrid() {
 		this.get.itemsGrid().eq(5).click();
 		this.get.itemsGrid().eq(6).click();

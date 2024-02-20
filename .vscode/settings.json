@@ -96,5 +96,14 @@
     "workbench.tree.enableStickyScroll": true,
     "[github-actions-workflow]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "cSpell.words": [
+        "bloque",
+        "destidar",
+        "destildar",
+        "elemento",
+        "Lista",
+        "pagina",
+        "seleccionar"
+    ]
 }
