@@ -41,7 +41,7 @@
 	"license": "MIT",
 	"type": "module",
 	"devDependencies": {
-		"@4tw/cypress-drag-drop": "2.2.5",
+		"@4tw/cypress-drag-drop": "^2.2.5",
 		"@babel/core": "7.23.9",
 		"@babel/eslint-parser": "7.23.9",
 		"@bahmutov/cypress-esbuild-preprocessor": "2.2.0",
