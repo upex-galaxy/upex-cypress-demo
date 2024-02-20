@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 describe('2049 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	beforeEach('Precondicion: El usuario debe estar situado en la pagina DEMOQA', () => {
 		cy.visit('https://demoqa.com/text-box');
 		cy.url().should('contain', 'text-box');
-
 	});
 	it('2049 | TC1 | Usuario completa los campos correctamente', () => {
 		cy.fixture('data/Elements/GX3-2049-textBox').then(the => {
@@ -15,7 +15,6 @@ describe('2049 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get('#email').should('contain.text', the.useremail.data.valid);
 			cy.get('#output #currentAddress').should('contain.text', the.currentAddress.data.valid);
 			cy.get('#output #permanentAddress').should('contain.text', the.permanentAdress.data.valid);
-
 		});
 	});
 	it('2049 | TC2 | Validar NO poder enviar el formulario con datos vacíos.', () => {
@@ -35,8 +34,8 @@ describe('2049 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		cy.fixture('data/Elements/GX3-2049-textBox').then(the => {
 			cy.get(the.username.input).type(the.username.data.valid);
 			cy.get(the.useremail.input).type(the.useremail.data.emailTc03);
-			cy.get(the.currentAddress.input).type(the.currentAddress.data.valid);;
-			cy.get(the.permanentAdress.input).type(the.permanentAdress.data.valid);;
+			cy.get(the.currentAddress.input).type(the.currentAddress.data.valid);
+			cy.get(the.permanentAdress.input).type(the.permanentAdress.data.valid);
 			cy.get(the.botonSubmit).click();
 			cy.get(the.useremail.input).should('have.class', 'field-error').and('have.css', 'border', '1px solid rgb(255, 0, 0)');
 		});

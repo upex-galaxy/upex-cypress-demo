@@ -5,7 +5,7 @@ class Verification {
 		dateAndTimePickerSelectMonth: () => cy.get('.react-datepicker__month-read-view--selected-month'),
 	};
 
-	async inputDate(date) {
+	inputDate(date) {
 		if (date === undefined) {
 			const today = new Date();
 			const month = (today.getMonth() + 1).toString().padStart(2, '0');
@@ -24,7 +24,7 @@ class Verification {
 		return expectedYears;
 	}
 
-	async inputDateAndTime(date) {
+	inputDateAndTime(date) {
 		if (date === undefined) {
 			const currentDate = new Date();
 

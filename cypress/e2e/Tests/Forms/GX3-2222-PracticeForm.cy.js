@@ -1,14 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { faker } from '@faker-js/faker';
 import { formPage } from '../../../support/pages/GX3-2222-PracticeForm.Page';
 
 describe('ToolsQA | Forms | Practice Form', () => {
 	const data = {
-		firstName : faker.person.firstName(),
-		lastname : faker.person.lastName(),
-		email : faker.internet.email(),
-		phoneNUmer : faker.string.numeric(10),
-		subjects : faker.string.alpha({count:1, bannedChars: ['x', 'y', 'q', 'j', 'f', 'w', 'z'] }),
-		address : faker.location.streetAddress(true),
+		firstName: faker.person.firstName(),
+		lastname: faker.person.lastName(),
+		email: faker.internet.email(),
+		phoneNUmer: faker.string.numeric(10),
+		subjects: faker.string.alpha({ count: 1, bannedChars: ['x', 'y', 'q', 'j', 'f', 'w', 'z'] }),
+		address: faker.location.streetAddress(true),
 	};
 	beforeEach(() => {
 		cy.visit('/automation-practice-form');
@@ -16,7 +17,7 @@ describe('ToolsQA | Forms | Practice Form', () => {
 	});
 	it('2223 | TC1: Check that the user can fill in the form with correct data', () => {
 		//Type inputs
-		formPage.completeInputs(data.firstName, data.lastname, data.email,data.phoneNUmer,data.subjects, data.address);
+		formPage.completeInputs(data.firstName, data.lastname, data.email, data.phoneNUmer, data.subjects, data.address);
 		formPage.get.firstName().should('have.value', data.firstName);
 		formPage.get.lastName().should('have.value', data.lastname);
 		formPage.get.email().should('have.value', data.email);
@@ -61,7 +62,5 @@ describe('ToolsQA | Forms | Practice Form', () => {
 		//submit Form
 		formPage.submitForm();
 		formPage.get.modalHeader().should('be.visible').and('have.text', 'Thanks for submitting the form');
-
 	});
-
 });
