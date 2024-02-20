@@ -1,53 +1,54 @@
-class selectableJJ {
+class selectableJj {
 	//constructor
 	get = {
-		BloqueList: () => cy.get('#demo-tab-list'),
-		BloqueGrid: () => cy.get('#demo-tab-grid'),
+		bloqueList: () => cy.get('#demo-tab-list'),
+		bloqueGrid: () => cy.get('#demo-tab-grid'),
 		itemsList: () => cy.get('#verticalListContainer li'),
 		itemsGrid: () => cy.get('.list-group-item.list-group-item-action'),
 	};
 
-	ClickBloqueList() {
-		this.get.BloqueList().click;
-	}
+	seleccionarLista() {
+		this.get.bloqueList().click();
+	};
 
-	ClickItemList() {
+	seleccionarUnoLista() {
 		this.get.itemsList().eq(1).click();
-	}
+	};
 
-	UnClickItemList() {
+	destildarUnoLista() {
 		this.get.itemsList().eq(3).click();
-	}
+	};
 
-	SeleccionarMultipleItemsList() {
-		this.get.itemsList().eq(1).click();
-		this.get.itemsList().eq(3).click();
-	}
-
-	DestidarMultipleItemsList() {
+	seleccionarMultipleLista() {
 		this.get.itemsList().eq(1).click();
 		this.get.itemsList().eq(3).click();
 	}
-	clickBloqueGrid() {
-		this.get.BloqueGrid().click();
-	}
 
-	clickItemGrid() {
+	destildarMultipleLista() {
+		this.get.itemsList().eq(1).click();
+		this.get.itemsList().eq(3).click();
+	};
+
+	seleccionarGrid() {
+		this.get.bloqueGrid().click();
+	};
+
+	seleccionarUnoGrid() {
 		this.get.itemsGrid().eq(9).click();
-	}
+	};
 
-	destidarItemGrid() {
+	destidarUnoGrid() {
 		this.get.itemsGrid().eq(4).click();
-	}
+	};
 
-	selecMultiplesItemsGrid() {
+	seleccionarMultiplesGrid() {
 		this.get.itemsGrid().eq(5).click();
 		this.get.itemsGrid().eq(6).click();
-	}
-	destildarMultiplesItemsgrid() {
+	};
+	destildarMultiplesGrid() {
 		this.get.itemsGrid().eq(5).click();
 		this.get.itemsGrid().eq(6).click();
-	}
+	};
 }
 
-export const selectableNew = new selectableJJ();
+export const selectableNew = new selectableJj();
