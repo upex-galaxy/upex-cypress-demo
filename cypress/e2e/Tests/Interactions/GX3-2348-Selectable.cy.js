@@ -36,20 +36,20 @@ describe('ToolsQA | Interactions | Selectable',()=>{
 
 		
 	it('23551 | TC01 validate Select all element by GRID',()=>{
-		activeElements('grid')
+		activeElements('grid');
 	})
 	
 	it('23551 | TC02 validate Select all element by List',()=>{
-		activeElements('list')
+		activeElements('list');
 	})
 
 
 	it('23551 | TC03 validate desselect all element by List',()=>{
-		disableElements('list')
+		disableElements('list');
 	})
 
 
 	it('23551 | TC04 validate desselect all element by GRID',()=>{
-		disableElements('grid')
+		disableElements('grid');
 	})
 })
