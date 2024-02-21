@@ -1,4 +1,4 @@
-import {dragabblePage} from '../../../support/pages/GX3-2318-Dragabble.Page';
+import { dragabblePage } from '../../../support/pages/GX3-2318-Dragabble.Page';
 
 describe('2318 | Interactions | Dragabble', () => {
 
@@ -33,7 +33,7 @@ describe('2318 | Interactions | Dragabble', () => {
 		dragabblePage.get.dragBox().should('be.visible');
 	});
 
-	it.only('2319 | TC04: Validar que el área "Drag me" puede arrastrarse en cualquier dirección', () => {
+	it('2319 | TC04: Validar que el área "Drag me" puede arrastrarse en cualquier dirección', () => {
 		dragabblePage.get.tabs();
 		dragabblePage.get.dragBox().should('have.css', 'left', `${0}px`).and('be.visible');
 		dragabblePage.get.dragBox().should('have.css', 'top', `${0}px`);
@@ -42,56 +42,96 @@ describe('2318 | Interactions | Dragabble', () => {
 		const Y = Cypress._.random(0, 600);
 		cy.log(X, Y);
 		dragabblePage.moveDragBox(X, Y);
-		//dragabblePage.get.dragBox().should('be.visible');
-		//dragabblePage.get.dragBox().should('have.css', 'left', `${X}px`);
-		//dragabblePage.get.dragBox().should('have.css', 'top', `${Y}px`);
-
-
+		dragabblePage.get.dragBox().should('have.css', 'left', `${X}px`);
+		dragabblePage.get.dragBox().should('have.css', 'top', `${Y}px`);
 
 	});
 
-	it('2319 | TC05: Confirmar que el área "Sólo X" es visible y solo se puede arrastrar en el eje X', () => {
-		// Aquí irían tus pasos de prueba y aserciones específicas
-		expect(1).to.equal(1);
+	it('2319 | TC05: Validar que el área "Sólo X" es visible y solo se puede arrastrar en el eje X', () => {
+		dragabblePage.get.tabs();
+		dragabblePage.selectTabAxis();
+		dragabblePage.get.tabAxis();
+		dragabblePage.get.onlyX().should('have.css' , 'left', `${0}px` ).and('be.visible');
+
+		const X = Cypress._.random(0, 600);
+		cy.log(X);
+		dragabblePage.moveOnlyX(X);
+		dragabblePage.get.onlyX().should('have.css', 'left', `${X}px`).and('be.visible');
 	});
 
-	it('2319 | TC06: Confirmar que el área "Sólo Y" es visible y solo se puede arrastrar en el eje Y', () => {
-		// Aquí irían tus pasos de prueba y aserciones específicas
-		expect(1).to.equal(1);
+	it('2319 | TC06: Validar que el área "Sólo Y" es visible y solo se puede arrastrar en el eje Y', () => {
+		dragabblePage.get.tabs();
+		dragabblePage.selectTabAxis();
+		dragabblePage.get.tabAxis();
+		dragabblePage.get.onlyY().should('have.css' , 'top', `${0}px` ).and('be.visible');
+
+		const Y = Cypress._.random(0, 600);
+		cy.log(Y);
+		dragabblePage.moveOnlyY(Y);
+		dragabblePage.get.onlyY().should('have.css', 'top', `${Y}px`).and('be.visible');
 	});
 
-	it('2319 | TC07: Verificar que el recuadro con el texto "Estoy contenido dentro del recuadro" está visible y no puede arrastrarse fuera del área delimitada de acción', () => {
-		// Aquí irían tus pasos de prueba y aserciones específicas
-		expect(1).to.equal(1);
+	it('2319 | TC07: Validar que el recuadro con el texto "I` m contained within the box" está visible y se pueda arrastrar dentro del área delimitada de acción', () => {
+		dragabblePage.selectTabContainer();
+		dragabblePage.get.containedBox().should('have.css', 'left', `${0}px`).and('be.visible');
+		dragabblePage.get.containedBox().should('have.css', 'top', `${0}px`);
+
+		const X = Cypress._.random(0, 398);
+		const Y = Cypress._.random(0, 107);
+		cy.log(X, Y);
+		dragabblePage.moveContainedBox(X, Y);
+		dragabblePage.get.containedBox().should('have.css', 'left', `${X}px`);
+		dragabblePage.get.containedBox().should('have.css', 'top', `${Y}px`);
+
 	});
 
-	it('2319 | TC08: Confirmar que la caja delimitada con el texto "Estoy contenido dentro de mi padre" no puede arrastrarse fuera del área delimitada de acción', () => {
-		// Aquí irían tus pasos de prueba y aserciones específicas
-		expect(1).to.equal(1);
+	it('2319 | TC08: Validar que la caja delimitada con el texto "I` m contained within my parent" se pueda arrastrar dentro del área delimitada de acción', () => {
+		dragabblePage.selectTabContainer();
+		dragabblePage.get.containedMyParent().should('have.css', 'left', `${0}px`).and('be.visible');
+		dragabblePage.get.containedMyParent().should('have.css', 'top', `${0}px`);
+
+		const X = Cypress._.random(0, 14);
+		const Y = Cypress._.random(-1, 87);
+		cy.log(X, Y);
+		dragabblePage.moveContainedMyParent(X, Y);
 	});
 
-	it('2319 | TC09: Confirmar que aparece un icono de cursor en los cuadros al pasar el ratón por encima', () => {
-		// Aquí irían tus pasos de prueba y aserciones específicas
-		expect(1).to.equal(1);
+	it.only('2319 | TC09: Validar que, al arrastrar la casilla "Siempre me ceñiré al centro", el cursor se adhiere al centro de la caja', () => {
+		dragabblePage.selectTabCursorStyle();
+		dragabblePage.get.cursorCenter().should('have.css', 'left', `${0}px`).and('be.visible');
+		dragabblePage.get.cursorCenter().should('have.css', 'top', `${0}px`);
+
+		const X = Cypress._.random(0, 600);
+		const Y = Cypress._.random(0, 600);
+		cy.log(X, Y);
+		dragabblePage.moveCursorCenter(X, Y);
+		dragabblePage.get.body().should('have.css', 'cursor', 'move');
 	});
 
-	it('2319 | TC10: Verificar que, al arrastrar la casilla "Siempre me ceñiré al centro", el cursor se adhiere al centro de la caja', () => {
-		// Aquí irían tus pasos de prueba y aserciones específicas
-		expect(1).to.equal(1);
+	it.only('2319 | TC10: Validar que, al arrastrar la casilla "Mi cursor está arriba a la izquierda", el cursor se adhiere a la parte superior izquierda de la caja.', () => {
+		dragabblePage.selectTabCursorStyle();
+		dragabblePage.get.cursorLeft().should('have.css', 'left', `${0}px`).and('be.visible');
+		dragabblePage.get.cursorLeft().should('have.css', 'top', `${0}px`);
+
+		const X = Cypress._.random(0, 600);
+		const Y = Cypress._.random(0, 600);
+		cy.log(X, Y);
+		dragabblePage.moveCursorLeft(X, Y);
+		dragabblePage.get.body().should('have.css', 'cursor', 'crosshair');
 	});
 
-	it('2319 | TC11: Confirmar que, al arrastrar la casilla "Mi cursor está arriba a la izquierda", el cursor se adhiere a la parte superior izquierda de la caja con el icono cambiando a "+"', () => {
-		// Aquí irían tus pasos de prueba y aserciones específicas
-		expect(1).to.equal(1);
+	it.only('2319 | TC11: Validar que, al arrastrar la casilla "Mi cursor está abajo", el cursor se adhiere al centro inferior de la caja.', () => {
+		dragabblePage.selectTabCursorStyle();
+		dragabblePage.get.cursorBottom().should('have.css', 'left', `${0}px`).and('be.visible');
+		dragabblePage.get.cursorBottom().should('have.css', 'top', `${0}px`);
+
+		const X = Cypress._.random(0, 600);
+		const Y = Cypress._.random(0, 600);
+		cy.log(X, Y);
+		dragabblePage.moveCursorBottom(X, Y);
+		dragabblePage.get.body().should('have.css', 'cursor', 'auto');
+		//dragabblePage.get.cursorBottom().should('have.css', 'left').and('eq', `${X}px`);
+    	//dragabblePage.get.cursorBottom().should('have.css', 'top').and('eq', `${Y}px`);
 	});
-
-	it('2319 | TC12: Verificar que, al arrastrar la casilla "Mi cursor está abajo", el cursor se adhiere al centro inferior de la caja con el icono volviendo al icono por defecto', () => {
-		// Aquí irían tus pasos de prueba y aserciones específicas
-		expect(1).to.equal(1);
-	});
-
-
-
-
 
 } );
