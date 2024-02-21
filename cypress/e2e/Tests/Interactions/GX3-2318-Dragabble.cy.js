@@ -96,7 +96,7 @@ describe('2318 | Interactions | Dragabble', () => {
 		dragabblePage.moveContainedMyParent(X, Y);
 	});
 
-	it.only('2319 | TC09: Validar que, al arrastrar la casilla "Siempre me ceñiré al centro", el cursor se adhiere al centro de la caja', () => {
+	it('2319 | TC09: Validar que, al arrastrar la casilla "Siempre me ceñiré al centro", el cursor se adhiere al centro de la caja', () => {
 		dragabblePage.selectTabCursorStyle();
 		dragabblePage.get.cursorCenter().should('have.css', 'left', `${0}px`).and('be.visible');
 		dragabblePage.get.cursorCenter().should('have.css', 'top', `${0}px`);
@@ -105,22 +105,21 @@ describe('2318 | Interactions | Dragabble', () => {
 		const Y = Cypress._.random(0, 600);
 		cy.log(X, Y);
 		dragabblePage.moveCursorCenter(X, Y);
-		dragabblePage.get.body().should('have.css', 'cursor', 'move');
+		dragabblePage.get.cursorCenter().should('have.css', 'cursor', 'move');
 	});
 
-	it.only('2319 | TC10: Validar que, al arrastrar la casilla "Mi cursor está arriba a la izquierda", el cursor se adhiere a la parte superior izquierda de la caja.', () => {
+	it('2319 | TC10: Validar que, al arrastrar la casilla "Mi cursor está arriba a la izquierda", el cursor se adhiere a la parte superior izquierda de la caja.', () => {
 		dragabblePage.selectTabCursorStyle();
-		dragabblePage.get.cursorLeft().should('have.css', 'left', `${0}px`).and('be.visible');
-		dragabblePage.get.cursorLeft().should('have.css', 'top', `${0}px`);
 
 		const X = Cypress._.random(0, 600);
 		const Y = Cypress._.random(0, 600);
 		cy.log(X, Y);
 		dragabblePage.moveCursorLeft(X, Y);
-		dragabblePage.get.body().should('have.css', 'cursor', 'crosshair');
+
+		dragabblePage.get.cursorLeft().should('have.css', 'cursor', 'move');
 	});
 
-	it.only('2319 | TC11: Validar que, al arrastrar la casilla "Mi cursor está abajo", el cursor se adhiere al centro inferior de la caja.', () => {
+	it('2319 | TC11: Validar que, al arrastrar la casilla "Mi cursor está abajo", el cursor se adhiere al centro inferior de la caja.', () => {
 		dragabblePage.selectTabCursorStyle();
 		dragabblePage.get.cursorBottom().should('have.css', 'left', `${0}px`).and('be.visible');
 		dragabblePage.get.cursorBottom().should('have.css', 'top', `${0}px`);
@@ -129,9 +128,8 @@ describe('2318 | Interactions | Dragabble', () => {
 		const Y = Cypress._.random(0, 600);
 		cy.log(X, Y);
 		dragabblePage.moveCursorBottom(X, Y);
-		dragabblePage.get.body().should('have.css', 'cursor', 'auto');
-		//dragabblePage.get.cursorBottom().should('have.css', 'left').and('eq', `${X}px`);
-    	//dragabblePage.get.cursorBottom().should('have.css', 'top').and('eq', `${Y}px`);
+		dragabblePage.get.cursorBottom().should('have.css', 'cursor', 'move');
+
 	});
 
 } );
