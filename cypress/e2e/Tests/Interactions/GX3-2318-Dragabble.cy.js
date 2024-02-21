@@ -22,7 +22,7 @@ describe('2318 | Interactions | Dragabble', () => {
 		dragabblePage.get.tabs();
 		dragabblePage.selectTabAxis();
 		dragabblePage.get.tabAxis().should('contain.text', 'Axis Restricted');
-		dragabblePage.selectTabContianer();
+		dragabblePage.selectTabContainer();
 		dragabblePage.get.tabContainer().should('contain.text', 'Container Restricted');
 		dragabblePage.selectTabCursorStyle();
 		dragabblePage.get.tabCursorStyle().should('contain.text', 'Cursor Style');
