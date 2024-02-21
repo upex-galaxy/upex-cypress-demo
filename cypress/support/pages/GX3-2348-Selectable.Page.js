@@ -1,28 +1,24 @@
 class Selectable {
-	get={
-		endpoint:()=> cy.get('https://demoqa.com/selectable'),
-		listBtn:() => cy.get('#demo-tab-list'),
-		listLi :() => cy.get('#verticalListContainer li'),
+	get = {
+		arrayElements: gridList=> cy.get(`#demo-tabpane-${gridList} li`),
+		GridBtn:() => cy.get('#demo-tab-grid'),
+	};
 
-		gridBtn :() => cy.get('#demo-tab-grid'),
-		gridLi: ()=> cy.get ('#gridContainer li')
+
+	getNumberArray(gridList){
+		return this.get.arrayElements(gridList).then(elements =>{
+			const valueArray = elements.length;
+			return valueArray;
+		})
 	}
 
-	clickListBtn(){
-		this.get.listBtn().click();
-	}
-	
-	clickListLi(){
-		this.get.listLi().click({ multiple: true });
+	clickTabGrid(){
+		this.get.GridBtn().click();
 	}
 
-	clickGridBtn(){
-		this.get.gridBtn().click();
+	selectAllButtons(gridList, num){
+		this.get.arrayElements(gridList).eq(num).click()
 	}
+};
 
-	clickGridLi(){
-		this.get.gridLi().click({ multiple: true });
-	}
-}
-
-export const selectablePage = new Selectable
+export const selectablePage = new Selectable;
