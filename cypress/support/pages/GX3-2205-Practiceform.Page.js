@@ -2,7 +2,7 @@ class Practiceform {
 	get = {
 		firtname : () => cy.get('#firstName'),
 		lastname : () => cy.get('#lastName'),
-		email : () => cy.get('#userEmail'),
+		dataemail : () => cy.get('#userEmail'),
 		gender : () => cy.get('[name="gender"]'),
 		labelbutton : () => cy.get(`label[for="${labelForButton}"]`),
 		numberMobile : () => cy.get('#userNumber'),
@@ -19,7 +19,7 @@ class Practiceform {
 	inputscomplete(firstName, lastName, email, number, currentaddress) {
 		this.get.firtname().type(name);
 		this.get.lastname().type(lastname);
-		this,get.email().type(email);
+		this.get.dataemail().type(email);
 		this.get.numberMobile().type(number);
 		this.get.currentaddress().type(address);
 	}
@@ -28,7 +28,6 @@ class Practiceform {
 			const randomIndex = Cypress._.random(0, 2);
 			 const labelForButton = $buttons[randomIndex].id;
 			 this.get.labelbutton().click();
-
 		});
 	}
 	subjectsInput() {
