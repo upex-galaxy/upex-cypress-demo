@@ -14,7 +14,7 @@ run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref
 
 on:
   push:
-    branches: ['GX3-2205-Practiceform'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+    branches: ['GX3-2205-⚡️-tools-qa-forms-practice-form'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
   workflow_dispatch:
 
 
