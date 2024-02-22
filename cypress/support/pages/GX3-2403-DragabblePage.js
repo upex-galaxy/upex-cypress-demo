@@ -21,12 +21,17 @@ class Dragabble {
 	MIN = -30;
 	MAX = 300;
 
+	selectSimpleTab() {
+		this.elements.simpleTabClick().click();
+	}
+
 	dragBoxInRandomDirection() {
 		//permite generar varios movimientos aleatorio
 		for (let i = 0; i < 2; i++) {
 			const randomX = Cypress._.random(this.MIN,this.MAX);
 			const randomY = Cypress._.random(this.MIN,this.MAX);
 			this.elements.dragmeBoxClick().move({ deltaX: randomX, deltaY: randomY },{ force: true });
+			//this.elements.dragmeBoxClick().drag({ deltaX: randomX, deltaY: randomY },{ force: true });
 		}
 	}
 
@@ -40,6 +45,7 @@ class Dragabble {
 			for (let i = 0; i < 2; i++) {
 				const randomX = Cypress._.random(this.MIN, this.MAX);
 				this.elements.restrictedXBox().move({ deltaX: randomX, deltaY: initialCoords.top },{ force: true });
+
 			}
 		});
 	}
