@@ -15,7 +15,8 @@
 			"cypress-plugin-api",
 			"cypress-plugin-steps",
 			"cypress",
-			"node"
+			"node",
+			"@4tw/cypress-drag-drop",
 		],
 		"baseUrl": ".",
 		"paths": {
