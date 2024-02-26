@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { formPage } from 'cypress\support\pages\GX3-2449-PracticeForm.Page.js';
+import { formPage } from '@pages/GX3-2449-PracticeForm.Page.js';
 
 describe('GX3-2449 ToolsQA | Forms | Practice Form', () => {
 	beforeEach('PCR: Usuario debe situarse en el web de Demo QA', () => {
@@ -13,10 +13,10 @@ describe('GX3-2449 ToolsQA | Forms | Practice Form', () => {
 		const ramdomEmail = faker.internet.email();
 		const randomGender = Cypress._.random(0, 2);
 		const randomMobile = faker.datatype.number({ min: 1000000000, max: 9999999999 });
-		const randomSubject = faker.randomSubject.alpha({ count: 1, casing: 'lower', bannedChars: ['f', 'j', 'k', 'ñ', 'q', 'w', 'x', 'z'] });
+		const randomSubject = faker.random.alpha({ count: 1, casing: 'lower', bannedChars: ['f', 'j', 'k', 'ñ', 'q', 'w', 'x', 'z'] });
 		const randomHobbies = faker.datatype.number({ min: 3, max: 5 });
 		const randomDate = formPage.get.selectDate();
-		const randomAddress = faker.address.streetAddress();
+		const randomAddress = faker.location.streetAddress();
 		const randomState = Cypress._.random(0, 3);
 		const randomCity = Cypress._.random();
 		const randomSelectState = formPage.selectRandomState(randomState);

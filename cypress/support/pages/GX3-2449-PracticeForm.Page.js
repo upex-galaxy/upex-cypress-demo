@@ -1,4 +1,4 @@
-import data from '@data\Forms\GX3-2449-PracticeForm.json';
+import data from 'cypress/fixtures/data/Forms/GX3-2449-PracticeForm.json';
 class Formulario {
 	get = {
 		inputFirstName: () => cy.get('#firstName'),
