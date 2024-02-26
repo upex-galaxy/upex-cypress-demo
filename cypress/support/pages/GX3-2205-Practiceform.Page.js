@@ -1,7 +1,7 @@
 class Practiceform {
 	get = {
 		firtname : () => cy.get('#firstName'),
-		lastname : () => cy.get('#lastName'),
+		lastName : () => cy.get('#lastName'),
 		dataemail : () => cy.get('#userEmail'),
 		gender : () => cy.get('[name="gender"]'),
 		labelbutton : () => cy.get(`label[for="${labelForButton}"]`),
@@ -15,19 +15,21 @@ class Practiceform {
 		containerIndacator: () => cy.get('.css-tlfecz-indicatorContainer'),
 		menurandom: () => cy.get('.css-11unzgr'),
 		submit : () => cy.get('#submit'),
+		state : () => cy.get('#state'),
+
 	};
-	inputscomplete(firstName, lastName, email, number, currentaddress) {
+	inputscomplete(name, lastName, email, number, address) {
 		this.get.firtname().type(name);
-		this.get.lastname().type(lastname);
+		this.get.lastName().type(lastName);
 		this.get.dataemail().type(email);
 		this.get.numberMobile().type(number);
-		this.get.currentaddress().type(address);
+		return this.get.currentaddress().type(address);
 	}
 	genderSelect() {
 		this.get.gender().then($buttons => {
 			const randomIndex = Cypress._.random(0, 2);
-			 const labelForButton = $buttons[randomIndex].id;
-			 this.get.labelbutton().click();
+			const labelForButton = $buttons[randomIndex].id;
+			this.get.labelbutton().click();
 		});
 	}
 	subjectsInput() {
@@ -48,9 +50,11 @@ class Practiceform {
 	}
 	stateRandom() {
 		this.get.containerIndacator.eq(1).click();
-		const randomMenu = Cypress._.random(0, 4);
-		this.get.menurandom().click();
-		this.get.containerIndacator.eq(1).click();
+		const randomStateIndex = Cypress._.random(0, 4);
+		const menuState = ['NCR','Uttar Pradesh','Haryana','Rajasthan'];
+		const randomState = menuState[randomStateIndex];
+		this.get.menurandom().contains(randomState).click();
+
 	}
 	cityRandom() {
 		this.get.menurandom().each($city => {

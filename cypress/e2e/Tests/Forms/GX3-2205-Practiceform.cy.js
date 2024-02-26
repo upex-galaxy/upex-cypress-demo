@@ -1,3 +1,4 @@
+import { formpractice } from '../../../support/pages/GX3-2205-Practiceform.Page';
 import { faker } from '@faker-js/faker';
 describe('2205 | ToolsQA | Forms | Practice Form', () => {
 	beforeEach('', () => {
@@ -6,7 +7,7 @@ describe('2205 | ToolsQA | Forms | Practice Form', () => {
 	});
 	it('2084 |TC01 Validar rellenar el formulario con datos validos', () => {
 		const name = faker.person.firstName();
-		const lastname = faker.person.lastName();
+		const lastName = faker.person.lastName();
 		const email = faker.internet.email();
 		const number = faker.string.numeric(10);
 		const month = faker.date.month();
@@ -15,42 +16,26 @@ describe('2205 | ToolsQA | Forms | Practice Form', () => {
 		const date = `${year}-${month}-${day}`;
 		const subjects = ['English', 'History', 'Hindi'];
 		const address = faker.location.streetAddress();
-		cy.get('#firstName').type(name).should('have.value', name); // firstName
 
-		cy.get('#lastName').type(lastname).should('have.value', lastname); // lastname
+		formpractice.inputscomplete( name, lastName, email, number, address);
+		formpractice.get.firtname().should('have.value', name);
+		formpractice.get.lastName().should('have.value', lastName);
+		formpractice.get.dataemail().should('have.value', email);
+		formpractice.get.numberMobile().should('have.value', number);
+		formpractice.get.currentaddress().should('have.value', address);
 
-		cy.get('#userEmail').type(email).should('have.value', email); // email
+		formpractice.genderSelect();
 
-		cy.get('[name="gender"]').then($buttons => {
-			const randomIndex = Cypress._.random(0, 2);
-			 const labelForButton = $buttons[randomIndex].id;
-			cy.get(`label[for="${labelForButton}"]`).click(); // genero
-		});
-		cy.get('#userNumber').type(number).should('have.value', number); // numero telefonico
+		formpractice.subjectsInput();
 
-		cy.get('#dateOfBirthInput').type(date); // fecha
+		formpractice.hobbiesCheckbox();
+		formpractice.get.hobbies().should('be.checked');
 
-		cy.wrap(subjects).each(subject => {
-			cy.get('#subjectsContainer').type(subject);
-			cy.get('.subjects-auto-complete__menu').within(() => {
-				cy.contains(subject).click();// subject
-			});
-	    });
-		cy.get('input[type="checkbox"]').each($checkbox => {
-			cy.wrap($checkbox).check({ force: true }); // hobbies
-		});
-		cy.get('#currentAddress').type(address); // address
+		formpractice.pictureSelect();
+		formpractice.get.picture().should('contain.value', 'upexgalaxy.gif');
 
-		cy.get('#uploadPicture').selectFile('cypress/fixtures/images/upexgalaxy.gif'); // picture
+		formpractice.stateRandom();
+		formpractice.get.state().invoke('text').should('include', randomState);
 
-		cy.get('.css-tlfecz-indicatorContainer').eq(1).click();
-		const randomMenu = Cypress._.random(0, 4); // state
-		cy.get('.css-11unzgr').click(randomMenu);
-		cy.get('.css-tlfecz-indicatorContainer').eq(1).click(); // city
-
-		cy.get('.css-11unzgr').each($city => {
-			cy.wrap($city).click();
-		});
-		cy.get('#submit').click(); // submit
 	});
 });
