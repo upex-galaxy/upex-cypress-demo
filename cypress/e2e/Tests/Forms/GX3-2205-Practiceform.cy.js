@@ -26,6 +26,8 @@ describe('2205 | ToolsQA | Forms | Practice Form', () => {
 
 		formpractice.genderSelect();
 
+		formpractice.selectDatebirth(date);
+
 		formpractice.subjectsInput();
 
 		formpractice.hobbiesCheckbox();

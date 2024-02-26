@@ -32,6 +32,9 @@ class Practiceform {
 			this.get.labelbutton().click();
 		});
 	}
+	selectDatebirth() {
+		this.get.birth().type(date);
+	}
 	subjectsInput() {
 		cy.wrap(subjects).each(subject => {
 			this.get.subjectscontainer().type(subject);
