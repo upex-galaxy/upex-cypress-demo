@@ -16,6 +16,7 @@ class Practiceform {
 		menurandom: () => cy.get('.css-11unzgr'),
 		submit : () => cy.get('#submit'),
 		state : () => cy.get('#state'),
+		modalcontent: () => cy.get('.modal-content'),
 
 	};
 	inputscomplete(name, lastName, email, number, address) {

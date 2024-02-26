@@ -39,5 +39,8 @@ describe('2205 | ToolsQA | Forms | Practice Form', () => {
 		formpractice.stateRandom();
 		formpractice.get.state().invoke('text').should('include', randomState);
 
+		formpractice.clickSubmit();
+		formpractice.get.modalcontent().should('be.visible').and('have.text', 'Thanks for submitting the form');
+
 	});
 });
