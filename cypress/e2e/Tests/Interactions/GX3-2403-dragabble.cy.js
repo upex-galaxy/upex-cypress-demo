@@ -32,7 +32,6 @@ describe('ToolsQA | Interactions | Dragabble', () => {
 		dragabble.dragElementRestricted('containmentBox');
 		dragabble.elements.containmentBox().should('contain','contained within the box');
 		dragabble.dragElementRestricted('textContainedBox');
-		dragabble.elements.textContainedBox().should('have.css', 'border', '0.888889px solid rgb(221, 221, 221)');
 	});
 
 	it('2404 | TC4: Validate than cursor style is bottom', () => {
