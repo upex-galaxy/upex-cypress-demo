@@ -39,19 +39,30 @@ class Formulario {
 	};
 
 	typeFirstName(randomFirstName) {
-		randomFirstName && this.get.inputFirstName().type(randomFirstName);
+		if (typeof randomFirstName === 'string') {
+			this.get.inputFirstName().type(randomFirstName);
+		}
 	}
 	typeLastName(randomLastName) {
-		randomLastName && this.get.inputLastName().type(randomLastName);
+		if (typeof randomLastName === 'string') {
+			this.get.inputLastName().type(randomLastName);
+		}
 	}
 	typeEmail(ramdomEmail) {
-		ramdomEmail && this.get.inputMail().type(ramdomEmail);
+		if (typeof ramdomEmail === 'string') {
+			this.get.inputMail().type(ramdomEmail);
+		}
 	}
 	selectGender(randomGender) {
-		this.get.selectGender().eq(randomGender).click();
+		if (typeof randomGender === 'number') {
+			this.get.selectGender().eq(randomGender).click();
+		}
 	}
+
 	typeMobile(randomMobile) {
-		this.get.inputMobile().type(randomMobile);
+		if (typeof randomMobile === 'number') {
+			this.get.inputMobile().type(randomMobile);
+		}
 	}
 
 	selectBirthDay() {
@@ -98,50 +109,63 @@ class Formulario {
 	}
 
 	typeSubjects(randomSubject) {
-		this.get.inputSubjects().type(randomSubject);
-		this.get.selectSubject().then(i => {
-			const r = Cypress._.random(0, i.length - 1);
-			cy.wrap(i).eq(r).click();
-		});
+		if (typeof randomSubject === 'string') {
+			this.get.inputSubjects().type(randomSubject);
+			this.get.selectSubject().then(i => {
+				const r = Cypress._.random(0, i.length - 1);
+				cy.wrap(i).eq(r).click();
+			});
+		}
 	}
 	selectRandomSubjects(randomSelectSubject) {
-		randomSelectSubject && this.get.selectSubject().click();
+		if (randomSelectSubject) {
+			this.get.selectSubject().click();
+		}
 	}
 	selectRandomGender(randomOneSubject) {
-		randomOneSubject && this.get.selectGender().type(randomOneSubject).click();
+		if (typeof randomOneSubject === 'string') {
+			this.get.selectGender().type(randomOneSubject).click();
+		}
 	}
+
 	selectRandomHobbie(randomHobbies) {
-		this.get.selectHobbie().eq(randomHobbies).click();
+		if (typeof randomHobbies === 'number') {
+			this.get.selectHobbie().eq(randomHobbies).click();
+		}
 	}
+
 	selectPicture() {
 		this.get.inputPicture().click();
 		this.get.inputPicture().selectFile(data.picture.file);
 	}
 	typeAdress(randomAddress) {
-		randomAddress && this.get.inputAddress().type(randomAddress);
+		if (typeof randomAddress === 'string') {
+			this.get.inputAddress().type(randomAddress);
+		}
 	}
+
 	selectRandomState(randomState) {
 		this.get.selectState().click();
-		const selectedStateText = cy
-			.get(`#react-select-3-option-${ randomState}`)
+		cy.get(`#react-select-3-option-${ randomState}`)
 			.invoke('text')
-			.then(text => text.trim());
-		cy.get(`#react-select-3-option-${ randomState}`).click({ force: true });
-		return selectedStateText;
+			.then(selectedStateText => {
+				cy.get(`#react-select-3-option-${randomState}`).click({ force: true });
+				return selectedStateText.trim();
+			});
 	}
 
 	selectRandomCity(randomCity) {
 		this.get.selectCity().click();
-		const selectedCityText = cy
-			.get(`#react-select-4-option-${ randomCity}`)
+		cy.get(`#react-select-4-option-${ randomCity}`)
 			.invoke('text')
-			.then(text => text.trim());
-		cy.get(`#react-select-4-option-${ randomCity}`).click({ force: true });
-		return selectedCityText;
+			.then(selectedCityText => {
+				cy.get(`#react-select-4-option-${ randomCity}`).click({ force: true });
+				return selectedCityText.trim();
+			});
 	}
 
 	getStateAndCityText(randomSelectState, randomSelectCity) {
-		return `State and City${randomSelectState.toString()} ${randomSelectCity.toString()}`;
+		return `State and City${randomSelectState.trim()} ${randomSelectCity.trim()}`;
 	}
 
 	selectSubmit() {
