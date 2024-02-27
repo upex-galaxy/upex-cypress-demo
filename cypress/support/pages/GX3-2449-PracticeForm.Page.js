@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable cypress/no-assigning-return-values */
+
 import data from 'cypress/fixtures/data/Forms/GX3-2449-PracticeForm.json';
 class Formulario {
 	get = {
@@ -146,28 +149,50 @@ class Formulario {
 
 	selectRandomState(randomState) {
 		this.get.selectState().click();
-		cy.get(`#react-select-3-option-${ randomState}`)
+		const selectedStateText = cy
+			.get(`#react-select-3-option-${ randomState}`)
 			.invoke('text')
-			.then(selectedStateText => {
-				cy.get(`#react-select-3-option-${randomState}`).click({ force: true });
-				return selectedStateText.trim();
-			});
+			.then(text => text.trim());
+		cy.get(`#react-select-3-option-${randomState}`).click({ force: true });
+		return selectedStateText;
+
 	}
 
 	selectRandomCity(randomCity) {
 		this.get.selectCity().click();
-		cy.get(`#react-select-4-option-${ randomCity}`)
+		const selectedCityText = cy
+			.get(`#react-select-4-option-${ randomCity}`)
 			.invoke('text')
-			.then(selectedCityText => {
-				cy.get(`#react-select-4-option-${ randomCity}`).click({ force: true });
-				return selectedCityText.trim();
+			.then(text => text.trim());
+		cy.get(`#react-select-4-option-${ randomCity}`).click({ force: true });
+		return selectedCityText.toString();
+	}
+
+	selectStateAndCity() {
+		return new Promise(resolve => {
+			let state = '';
+			let city = '';
+			this.get.stateDropdown().click();
+			this.get.stateDropdownContainer().then(states => {
+				const randomState = Cypress._.random(0, states.length - 1);
+				cy.wrap(states).eq(randomState).invoke('text').then(stateText => {
+					cy.log('$(stateText)');
+					state = stateText;
+				});
+				cy.wrap(states).eq(randomState).click();
 			});
+			this.get.cityDropdown().click();
+			this.get.cityDropdownContainer().then(cities => {
+				const randomCity = Cypress._.random(0, cities.length - 1);
+				cy.wrap(cities).eq(randomCity).invoke('text').then(cityText => {
+					cy.log('$(cityText)');
+					city = cityText;
+				});
+				cy.wrap(cities).eq(randomCity).click();
+				resolve({ state,city });
+			});
+		});
 	}
-
-	getStateAndCityText(randomSelectState, randomSelectCity) {
-		return `State and City${randomSelectState.trim()} ${randomSelectCity.trim()}`;
-	}
-
 	selectSubmit() {
 		this.get.submitButton().click();
 	}

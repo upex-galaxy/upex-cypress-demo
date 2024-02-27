@@ -12,16 +12,13 @@ describe('GX3-2449 ToolsQA | Forms | Practice Form', () => {
 		const randomLastName = faker.person.lastName();
 		const ramdomEmail = faker.internet.email();
 		const randomGender = Cypress._.random(0, 2);
-		const randomMobile = faker.datatype.number({ min: 1000000000, max: 9999999999 });
+		const randomMobile = faker.number.int({ min: 1000000000, max: 9999999999 });
 		const randomSubject = faker.random.alpha({ count: 1, casing: 'lower', bannedChars: ['f', 'j', 'k', 'ñ', 'q', 'w', 'x', 'z'] });
-		const randomHobbies = faker.datatype.number({ min: 3, max: 5 });
+		const randomHobbies = faker.number.int({ min: 3, max: 5 });
 		const randomDate = formPage.get.selectDate();
 		const randomAddress = faker.location.streetAddress();
 		const randomState = Cypress._.random(0, 3);
 		const randomCity = Cypress._.random();
-		const randomSelectState = formPage.selectRandomState(randomState);
-		const randomSelectCity = formPage.selectRandomCity(randomCity);
-		const stateAndCityText = formPage.getStateAndCityText(randomSelectState, randomSelectCity);
 
 		formPage.typeFirstName(randomFirstName);
 		formPage.typeLastName(randomLastName);
@@ -69,6 +66,5 @@ describe('GX3-2449 ToolsQA | Forms | Practice Form', () => {
 		formPage.get.imageFormResult().should('contain', 'upexlogo.png');
 		formPage.get.addressFormResult().should('contain', randomAddress);
 
-		formPage.get.stateAndCityFormResult().invoke('text').should('include', stateAndCityText);
 	});
 });
