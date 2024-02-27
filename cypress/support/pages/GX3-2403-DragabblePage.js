@@ -1,11 +1,14 @@
 class Dragabble {
 	elements = {
+		tabNameSelect: tabNameSelect => cy.get(`#draggableExample-tab-${tabNameSelect}`),
 		simpleTabClick: () => cy.get ('#draggableExample-tab-simple'),
 		axisRestrictedTabClick: () => cy.get('#draggableExample-tab-axisRestriction'),
 		containerRestrictedTabClick: () => cy.get('#draggableExample-tab-containerRestriction'),
 		cursorStyleTabClick: () => cy.get('#draggableExample-tab-cursorStyle'),
+		statusActive: () => cy.get('.nav-item nav-link active'),
 
 		dragmeBoxClick: () => cy.get('#dragBox'),
+		axisBox:name => cy.get(`#restricted${name}`),
 		dragabbleAreaSelect: () => cy.get('#draggableExample-tabpane-axisRestriction'),
 		restrictedXBox: () => cy.get('#restrictedX'),
 		restrictedYBox: () => cy.get('#restrictedY'),
@@ -13,102 +16,88 @@ class Dragabble {
 		containmentBox: () => cy.get('#containmentWrapper'),
 		dragContainedBox: () => cy.get('#containmentWrapper .draggable'),
 		textContainedBox: () => cy.get('[class="draggable ui-widget-content m-3"]'),
-		dragContainedParent: () => cy.get('[class="ui-widget-header.ui-draggable.ui-draggable-handle"'),
+		dragContainedParent: () => cy.get('.ui-widget-header.ui-draggable.ui-draggable-handle'),
 		cursorCenterSelect: () => cy.get('#cursorCenter'),
 		cursorTopLeftSelect: () => cy.get('#cursorTopLeft'),
 		cursorBottomSelect: () => cy.get ('#cursorBottom'),
 	};
+
 	MIN = -30;
 	MAX = 300;
-
-	selectSimpleTab() {
-		this.elements.simpleTabClick().click();
+	randomValue() {
+		const randomX = Cypress._.random(this.MIN,this.MAX);
+		const randomY = Cypress._.random(this.MIN,this.MAX);
+		return{
+			valueX: randomX,
+			valueY: randomY
+		};
 	}
 
-	dragBoxInRandomDirection() {
-		//permite generar varios movimientos aleatorio
-		for (let i = 0; i < 2; i++) {
-			const randomX = Cypress._.random(this.MIN,this.MAX);
-			const randomY = Cypress._.random(this.MIN,this.MAX);
-			this.elements.dragmeBoxClick().move({ deltaX: randomX, deltaY: randomY },{ force: true });
-			//this.elements.dragmeBoxClick().drag({ deltaX: randomX, deltaY: randomY },{ force: true });
-		}
+	selectTab(tabNameSelect) {
+		this.elements.tabNameSelect(tabNameSelect).click();
 	}
 
-	selectAxisRestrictedTab() {
-		this.elements.axisRestrictedTabClick().click();
-	}
-
-	draggableBoxRestrictedToXAxi() {
-		this.elements.restrictedXBox().then(($box) => {
+	dragBoxInRandomDirection(elementSelector) {
+		const randomData= this.randomValue;
+		this.elements[elementSelector]().then(($box) => {
 			const initialCoords = $box[0].getBoundingClientRect();
-			for (let i = 0; i < 2; i++) {
-				const randomX = Cypress._.random(this.MIN, this.MAX);
-				this.elements.restrictedXBox().move({ deltaX: randomX, deltaY: initialCoords.top },{ force: true });
-
-			}
+			this.elements[elementSelector]().move({ deltaX: randomData.valueX, deltaY: randomData.valueY },{ force: true });
+			const endCoords = $box[0].getBoundingClientRect();
+			//expect(initialCoords).not.equal(endCoords);
+			return cy.wrap({ initialCoords,endCoords } );
 		});
 	}
 
-	draggableBoxRestrictedToYAxi() {
-		this.elements.restrictedYBox().then(($box) => {
+	dragabbleBoxRestrictedToAxis(elementSelector, axis) {
+		// Selecciona el elemento y obtiene coordenadas iniciales
+		this.elements[elementSelector]().then(($box) => {
+			const randomData = this.randomValue();
 			const initialCoords = $box[0].getBoundingClientRect();
-			for (let i = 0; i < 3; i++) {
-				const randomY = Cypress._.random(this.MIN, this.MAX);
-				this.elements.restrictedYBox().move({ deltaX: initialCoords.left, deltaY: randomY, },{ force: true });
+			let moveCoords;
+			if (axis === 'X') {
+				moveCoords = { deltaX: randomData.valueX, deltaY: initialCoords.top };
+			} else if (axis === 'Y') {
+				moveCoords = { deltaX: initialCoords.left, deltaY: randomData.valueY };
+			} else {
+				cy.log('El eje especificado no es válido.');
+				return;
 			}
+			// Mueve el elemento con las coordenadas determinadas
+			this.elements[elementSelector]().move(moveCoords, { force: true });
 		});
 	}
 
-	selectContainerRestrictedTab() {
-		this.elements.containerRestrictedTabClick().click();
-	}
-
-	containerBoxRestricted() {
-		this.elements.containmentBox().then(($wrapper) => {
+	dragElementRestricted(elementSelector) {
+		this.elements[elementSelector]().then(($wrapper) => {
 			const containerCoords = $wrapper[0].getBoundingClientRect();
 			const minX = containerCoords.left;
 			const maxX = containerCoords.width;
 			const minY = containerCoords.top;
 			const maxY = containerCoords.height;
-			const randomX = Cypress._.random(minX, maxX);
-			const randomY = Cypress._.random(minY, maxY);
-			this.elements.dragContainedBox().move({ deltaX: randomX, deltaY: randomY }, { force: true });
-		});
-	}
 
-	containerTextRestricted() {
-		this.elements.textContainedBox().then(($wrapper) => {
-			const containerCoords = $wrapper[0].getBoundingClientRect();
-			const minX = containerCoords.left;
-			const maxX = containerCoords.width;
-			const minY = containerCoords.top;
-			const maxY = containerCoords.height;
 			const randomX = Cypress._.random(minX, maxX);
 			const randomY = Cypress._.random(minY, maxY);
-			this.elements.dragContainedParent().move({ deltaX: randomX, deltaY: randomY },{ force: true });
+			if (elementSelector === 'containmentBox') {
+				this.elements.dragContainedBox().move({ deltaX: randomX, deltaY: randomY }, { force: true });
+			} else {
+				this.elements.dragContainedParent().move({ deltaX: randomX, deltaY: randomY }, { force: true });
+			}
 		});
 	}
 
 	centerCursorStyle() {
 		this.elements.cursorCenterSelect().then(($wrapper) => {
+			const randomData = this.randomValue();
 			//obtengo la ubicación inicial del mouse
 			const coordsInicial = $wrapper[ 0 ].getBoundingClientRect();
 			const mousePos = { x: coordsInicial .left + (coordsInicial .width / 2), y: coordsInicial .top + (coordsInicial .height / 2) };
 			//muevo elemento
-			const randomX = Cypress._.random(this.MIN, this.MAX);
-			const randomY = Cypress._.random(this.MIN, this.MAX);
-			this.elements.cursorCenterSelect().move({ deltaX: randomX, deltaY: randomY },{ force:true });
+			this.elements.cursorCenterSelect().move({ deltaX: randomData.valueX, deltaY: randomData.valueY },{ force:true });
 			//obtengo coordFinal y valido que el mouse este ubicado en el centro
 			const coordsFinal = $wrapper[ 0 ].getBoundingClientRect();
 			const mousePos2 = { x: coordsFinal.left + (coordsFinal.width / 2), y: coordsFinal.top + (coordsFinal.height / 2) };
 			expect(mousePos).to.deep.equal(mousePos2);
 		});
-	}
-	bottomCursorStyle() {
-		const randomX = Cypress._.random(this.MIN, this.MAX);
-		const randomY = Cypress._.random(this.MIN, this.MAX);
-		this.elements.cursorBottomSelect().move({ deltaX: randomX, deltaY: randomY },{ force:true });
 	}
 }
 export const dragabble= new Dragabble();
