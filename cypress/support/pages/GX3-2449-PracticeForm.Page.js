@@ -169,11 +169,14 @@ class Formulario {
 		return selectedCityText.toString();
 	}
 
-	getStateAndCityText(randomState, randomCity) {
-		return cy.get('selectedStateText').then(selectedStateText => {
-			return cy.get('selectedCityText').then(selectedCityText => {
-				return `State and City: ${selectedStateText.trim()} ${selectedCityText.trim()}`;
-			});
+	getStateAndCityText() {
+		const selector = '.css-1uccc91-singleValue';
+
+		return cy.get(selector).then($selectedElements => {
+			const stateText = $selectedElements.eq(0).text().trim();
+			const cityText = $selectedElements.eq(1).text().trim();
+			const validation = `State and City${stateText} ${cityText}`;
+			return validation;
 		});
 	}
 

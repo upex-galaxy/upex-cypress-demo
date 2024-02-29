@@ -65,6 +65,10 @@ describe('GX3-2449 ToolsQA | Forms | Practice Form', () => {
 		formPage.get.hobbiesFormResult().invoke('text').should('include', `Hobbies${selectedHobbies}`);
 		formPage.get.imageFormResult().should('contain', 'upexlogo.png');
 		formPage.get.addressFormResult().should('contain', randomAddress);
-		formPage.get.stateAndCityFormResult().invoke('text').should('contain', `State and City: ${selectedStateText.trim()} ${selectedCityText.trim()}`);
+		formPage.get.stateAndCityFormResult().invoke('text').then(resultTest => {
+			formPage.getStateAndCityText().then(stateCity => {
+				expect(resultTest).equal(stateCity);
+			});
+		});
 	});
 });
