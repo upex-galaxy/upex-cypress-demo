@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable no-unused-vars */
 /* eslint-disable cypress/no-assigning-return-values */
 
@@ -168,31 +169,14 @@ class Formulario {
 		return selectedCityText.toString();
 	}
 
-	selectStateAndCity() {
-		return new Promise(resolve => {
-			let state = '';
-			let city = '';
-			this.get.stateDropdown().click();
-			this.get.stateDropdownContainer().then(states => {
-				const randomState = Cypress._.random(0, states.length - 1);
-				cy.wrap(states).eq(randomState).invoke('text').then(stateText => {
-					cy.log('$(stateText)');
-					state = stateText;
-				});
-				cy.wrap(states).eq(randomState).click();
-			});
-			this.get.cityDropdown().click();
-			this.get.cityDropdownContainer().then(cities => {
-				const randomCity = Cypress._.random(0, cities.length - 1);
-				cy.wrap(cities).eq(randomCity).invoke('text').then(cityText => {
-					cy.log('$(cityText)');
-					city = cityText;
-				});
-				cy.wrap(cities).eq(randomCity).click();
-				resolve({ state,city });
+	getStateAndCityText(randomState, randomCity) {
+		return cy.get('selectedStateText').then(selectedStateText => {
+			return cy.get('selectedCityText').then(selectedCityText => {
+				return `State and City: ${selectedStateText.trim()} ${selectedCityText.trim()}`;
 			});
 		});
 	}
+
 	selectSubmit() {
 		this.get.submitButton().click();
 	}
