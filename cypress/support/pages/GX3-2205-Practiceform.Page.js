@@ -54,12 +54,17 @@ class Practiceform {
 		});
 	}
 	autoCompleteSubject(value) {
-	    this.get.subjectContainer().type(value);
-		this.get.subjectAutoCompleteMenu().then(arraySubject => {
-			const randomSelectSubject = Cypress._.random(0, arraySubject.length -1);
-			cy.wrap(arraySubject).eq(randomSelectSubject).click();
+		return new Promise((resolve) => {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+			this.get.subjectContainer().type(value);
+			this.get.subjectAutoCompleteMenu().then(arraySubject => {
+				const randomSelectSubject = Cypress._.random(0, arraySubject.length -1);
+				cy.wrap(arraySubject).eq(randomSelectSubject).invoke('text').then(text => {
+					cy.wrap(arraySubject).eq(randomSelectSubject).click();
+					resolve(text);
+				});
+			});
 		});
-
 	}
 	hobbiesCheckbox() {
 		this.get.hobbiesContainer().then(() => {

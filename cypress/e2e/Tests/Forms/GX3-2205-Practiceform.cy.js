@@ -11,7 +11,7 @@ describe('2205 | ToolsQA | Forms | Practice Form', () => {
 		const email = faker.internet.email();
 		const number = faker.string.numeric(10);
 		const address = faker.location.streetAddress();
-		const randomLetter = faker.random.alpha();
+		const randomLetter = faker.random.alpha({ bannedChars: ['x', 'k', 'q', 'j', 'f', 'w', 'z'] });
 
 		formpractice.inputsComplete( name, lastName, email, number, address);
 		formpractice.get.firtName().should('have.value', name);
@@ -25,9 +25,11 @@ describe('2205 | ToolsQA | Forms | Practice Form', () => {
 
 		formpractice.selectRandomDate();
 
-		formpractice.autoCompleteSubject(randomLetter);
-		formpractice.get.subjectAutoCompleteMenu().then(dataSubject => {
-			formpractice.get.subjectContainer().invoke('text').should('contain', dataSubject);
+		formpractice.autoCompleteSubject(randomLetter).then(textElement => {
+			formpractice.get.subjectContainer().invoke('text').then(textSelectedElement => {
+				expect(textSelectedElement).to.include(textElement);
+				cy.wrap(textSelectedElement).should('include', textElement);
+			});
 		});
 
 		formpractice.hobbiesCheckbox();
