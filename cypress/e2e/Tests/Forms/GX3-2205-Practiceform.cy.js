@@ -11,15 +11,36 @@ describe('2205 | ToolsQA | Forms | Practice Form', () => {
 		const email = faker.internet.email();
 		const number = faker.string.numeric(10);
 		const address = faker.location.streetAddress();
+		const randomLetter = faker.random.alpha();
 
-		formpractice.inputscomplete( name, lastName, email, number, address);
-		formpractice.get.firtname().should('have.value', name);
+		formpractice.inputsComplete( name, lastName, email, number, address);
+		formpractice.get.firtName().should('have.value', name);
 		formpractice.get.lastName().should('have.value', lastName);
-		formpractice.get.dataemail().should('have.value', email);
+		formpractice.get.dataEmail().should('have.value', email);
 		formpractice.get.numberMobile().should('have.value', number);
-		formpractice.get.currentaddress().should('have.value', address);
+		formpractice.get.currentAddress().should('have.value', address);
 
 		formpractice.genderSelect();
+		formpractice.get.genderName().should('be.checked');
+
+		formpractice.selectRandomDate();
+
+		formpractice.autoCompleteSubject(randomLetter);
+		formpractice.get.subjectAutoCompleteMenu().then(dataSubject => {
+			formpractice.get.subjectContainer().invoke('text').should('contain', dataSubject);
+		});
+
+		formpractice.hobbiesCheckbox();
+		formpractice.get.hobbiesName().should('be.checked');
+
+		formpractice.selectFile();
+		formpractice.get.uploadPicture().should('contain.value', 'upexgalaxy.gif');
+
+		formpractice.selectState();
+
+		formpractice.selectCity();
+
+		formpractice.clickButtonSubmit();
 
 	});
 });
