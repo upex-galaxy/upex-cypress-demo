@@ -25,14 +25,14 @@ describe('GX3-2469 | ToolsQA | Interactions | Droppable ',()=>{
 
 	})
 
-	it('2469| TC003 move "Drag me" to "Outer droppable (not greedy)"',()=>{
+	it('2469| TC03 move "Drag me" to "Outer droppable (not greedy)" in tab "Prevent Propogation"',()=>{
 		droppablePage.clickOnProptab()
 		droppablePage.get.dragMe().trigger('mousedown', {which:1},{force: true})
 		droppablePage.get.textOuterDroppable().trigger('mousemove',{ force: true }).trigger('mouseup', {force: true});
 		droppablePage.get.outerNotGreedy().should('have.text','Dropped!Inner droppable (not greedy)').and('have.css', 'background-color','rgb(70, 130, 180)');
 	})
 
-	it('2469| TC004 move "Drag me" to "Inner droppable (not greedy)"',()=>{
+	it('2469| TC04 move "Drag me" to "Inner droppable (not greedy)" in tab "Prevent Propogation"',()=>{
 		droppablePage.clickOnProptab()
 		droppablePage.get.dragMe().trigger('mousedown', {which:1},{force: true})
 		droppablePage.get.innerNotGreedy().trigger('mousemove',{ force: true }).trigger('mouseup', {force: true});
@@ -40,18 +40,43 @@ describe('GX3-2469 | ToolsQA | Interactions | Droppable ',()=>{
 		droppablePage.get.outerNotGreedy().should('have.text','Dropped!Dropped!').and('have.css', 'background-color','rgb(70, 130, 180)');
 	})
 
-	it('2469| TC005 move "Drag me" to "Outer droppable (greedy)"',()=>{
+	it('2469| TC05 move "Drag me" to "Outer droppable (greedy)" in tab "Prevent Propogation"',()=>{
 		droppablePage.clickOnProptab()
 		droppablePage.get.dragMe().trigger('mousedown', {which:1},{force: true})
 		droppablePage.get.textOuterDroppableGreedy().trigger('mousemove',{ force: true }).trigger('mouseup', {force: true});
 		droppablePage.get.outerGreedy().should('have.text','Dropped!Inner droppable (greedy)').and('have.css', 'background-color','rgb(70, 130, 180)')
 	})
 
-	it('2469| TC006 move "Drag me" to "Inner droppable (greedy)"',()=>{
+	it('2469| TC06 move "Drag me" to "Inner droppable (greedy)" in tab "Prevent Propogation"',()=>{
 		droppablePage.clickOnProptab()
 		droppablePage.get.dragMe().trigger('mousedown', {which:1},{force: true})
 		droppablePage.get.innerGreedy().trigger('mousemove',{ force: true }).trigger('mouseup', {force: true});
 		droppablePage.get.innerGreedy().should('have.text','Dropped!').and('have.css', 'background-color','rgb(70, 130, 180)');
 	})
+
+	it('2469| TC07 move "will revert" box to "Drop Here" box on Revert tab',()=>{
+		droppablePage.clickOnDragTab()
+		let initialPosition;
+		cy.get('#revertable').then(($element) => {	
+   			 // Obtiene las coordenadas iniciales
+    		initialPosition = $element.position();
+ 		});
+
+		droppablePage.get.revertBox().trigger('mousedown', {which:1},{force: true})
+		droppablePage.get.dropHereBox().trigger('mousemove',{ force: true }).trigger('mouseup', {force: true});
+		droppablePage.get.dropHereBox().should('have.text','Dropped!').and('have.css', 'background-color','rgb(70, 130, 180)');
+
+		cy.wait(1000)
+		cy.get('#revertable').then(($element) => {
+			const newPosition = $element.position();
+			expect(newPosition).to.deep.equal(initialPosition);
+  		});	
+	})
 	
+	it('2469| TC08 move "Not revert" box to "Drop Here" box on Revert tab',()=>{
+		droppablePage.clickOnDragTab()
+		droppablePage.get.norRevertBox().trigger('mousedown', {which:1},{force: true})
+		droppablePage.get.dropHereBox().trigger('mousemove',{ force: true }).trigger('mouseup', {force: true});
+		droppablePage.get.dropHereBox().should('have.text','Dropped!').and('have.css', 'background-color','rgb(70, 130, 180)');
+	})
 })
