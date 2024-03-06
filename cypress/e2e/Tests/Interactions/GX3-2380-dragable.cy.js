@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { dragablePage } from '../../../support/pages/GX3-2380-dragable.page';
+import data from '../../../fixtures/data/Interactions/GX3-2380-dragable.json';
 
 const moveElementRestricted = (container, negativePath) => {
 	const response = dragablePage.moveDragInWrapper(container, negativePath);
@@ -48,51 +49,51 @@ describe('ToolsQA | Interactions | Dragabble', () => {
 		cy.url().should('include', 'dragabble');
 	});
 	it('2380 | TC01 validar poder desplazar horizontalmente el div "Drag me" exitosamente', () => {
-		moveElement('#dragBox', 'horizontal');
+		moveElement(data.element.dragBox, data.orientation.horizontal);
 	});
 	it('2380 | TC02 validar poder desplazar verticalmente el div "Drag me" exitosamente', () => {
-		moveElement('#dragBox', 'vertical');
+		moveElement(data.element.dragBox, data.orientation.vertical);
 	});
 	it('2380 | TC03 validar poder desplazar horizontalmente el div "Only X" exitosamente', () => {
-		moveElement('#restrictedX', 'horizontal', 'axisRestriction');
+		moveElement(data.element.restrictedX, data.orientation.horizontal, data.tab.axisRestriction);
 	});
 	it('2380 | TC04 validar no poder desplazar verticalmente el div "Only X"', () => {
-		moveElement('#restrictedX', 'vertical', 'axisRestriction', 1);
+		moveElement(data.element.restrictedX, data.orientation.vertical, data.tab.axisRestriction, data.path.negative);
 	});
 	it('2380 | TC05 validar no poder desplazar horizontalmente el div "Only Y"', () => {
-		moveElement('#restrictedY', 'horizontal', 'axisRestriction', 1);
+		moveElement(data.element.restrictedY, data.orientation.horizontal, data.tab.axisRestriction, data.path.negative);
 	});
 	it('2380 | TC06 validar poder desplazar verticalmente el div "Only Y" exitosamente', () => {
-		moveElement('#restrictedY', 'vertical', 'axisRestriction');
+		moveElement(data.element.restrictedY, data.orientation.vertical, data.tab.axisRestriction);
 	});
 	it('2380 | TC07 validar poder desplazar el div "I´m contained within the box" dentro del área delimitada exitosamente', () => {
-		moveElementRestricted('#containmentWrapper', 0);
+		moveElementRestricted(data.element.containmentWrapper, data.path.happy);
 	});
 	it('2380 | TC08 validar no poder desplazar el div "I´m contained within the box" fuera del área delimitada', () => {
-		moveElementRestricted('#containmentWrapper', 1);
+		moveElementRestricted(data.element.containmentWrapper, data.path.negative);
 	});
 	it('2380 | TC09 validar poder desplazar el texto "I´m contained within my parent" dentro del área delimitada exitosamente', () => {
-		moveElementRestricted('.draggable.ui-widget-content.m-3', 0);
+		moveElementRestricted(data.element.containerText, data.path.happy);
 	});
 	it('2380 | TC10 validar no poder desplazar el texto "I´m contained within my parent" fuera del área delimitada', () => {
-		moveElementRestricted('.draggable.ui-widget-content.m-3', 1);
+		moveElementRestricted(data.element.containerText, data.path.negative);
 	});
 	it('2380 | TC11 validar poder desplazar horizontalmente el div "I will always stick to the center" exitosamente', () => {
-		moveElement('#cursorCenter', 'horizontal', 'cursorStyle');
+		moveElement(data.element.cursorCenter, data.orientation.horizontal, data.tab.cursorStyle);
 	});
 	it('2380 | TC12 validar poder desplazar verticalmente el div "I will always stick to the center" exitosamente', () => {
-		moveElement('#cursorCenter', 'vertical', 'cursorStyle');
+		moveElement(data.element.cursorCenter, data.orientation.vertical, data.tab.cursorStyle);
 	});
 	it('2380 | TC13 validar poder desplazar horizontalmente el div "My cursor is at top left" exitosamente', () => {
-		moveElement('#cursorTopLeft', 'horizontal', 'cursorStyle');
+		moveElement(data.element.cursorTopLeft, data.orientation.horizontal, data.tab.cursorStyle);
 	});
 	it('2380 | TC14 validar poder desplazar verticalmente el div "My cursor is at top left" exitosamente', () => {
-		moveElement('#cursorTopLeft', 'vertical', 'cursorStyle');
+		moveElement(data.element.cursorTopLeft, data.orientation.vertical, data.tab.cursorStyle);
 	});
 	it('2380 | TC15 validar poder desplazar horizontalmente el div "My cursor is at bottom" exitosamente', () => {
-		moveElement('#cursorBottom', 'horizontal', 'cursorStyle');
+		moveElement(data.element.cursorBottom, data.orientation.horizontal, data.tab.cursorStyle);
 	});
 	it('2380 | TC16 validar poder desplazar verticalmente el div "My cursor is at bottom" exitosamente', () => {
-		moveElement('#cursorBottom', 'vertical', 'cursorStyle');
+		moveElement(data.element.cursorBottom, data.orientation.vertical, data.tab.cursorStyle);
 	});
 });

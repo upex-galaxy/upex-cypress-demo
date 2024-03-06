@@ -6,6 +6,8 @@ class DragablePage {
 		containerWrapper: (container) => cy.get(container),
 		dragable: selector => cy.get(selector),
 		selectTab: (tab) => cy.get(`#draggableExample-tab-${tab}`, { timeout:3000 }),
+		findWrapper: ($wrapper) => $wrapper.find('.draggable')[0],
+		findText: ($wrapper) => $wrapper.find('.ui-widget-header.ui-draggable.ui-draggable-handle')[0]
 	};
 
 	clickOnTabSelected(tab) {
@@ -52,9 +54,9 @@ class DragablePage {
 			let draggableElement;
 			const containmentWrapper = $wrapper[0];
 			if(container === '#containmentWrapper') {
-				draggableElement = $wrapper.find('.draggable')[0];
+				draggableElement = this.get.findWrapper($wrapper);
 			}else{
-				draggableElement = $wrapper.find('.ui-widget-header.ui-draggable.ui-draggable-handle')[0];
+				draggableElement = this.get.findText($wrapper);
 			}
 			const containmentRect = containmentWrapper.getBoundingClientRect();
 			const draggableRect = draggableElement.getBoundingClientRect();
