@@ -38,11 +38,21 @@ describe('2205 | ToolsQA | Forms | Practice Form', () => {
 		formpractice.selectFile();
 		formpractice.get.uploadPicture().should('contain.value', 'upexgalaxy.gif');
 
-		formpractice.selectState();
+		formpractice.selectState().then(textSTate => {
+			formpractice.get.state().invoke('text').then(textSelectedState => {
+				cy.wrap(textSelectedState).should('include', textSTate);
+			});
+		});
 
-		formpractice.selectCity();
+		formpractice.selectCity().then(textCIty => {
+			formpractice.get.city().invoke('text').then(textSelectCity => {
+				cy.wrap(textSelectCity).should('include', textCIty);
+			});
+		});
 
 		formpractice.clickButtonSubmit();
-
+		formpractice.get.tableTd().eq(1).should('have.text', `${name} ${lastName}`);
+		formpractice.get.tableTd().eq(3).should('have.text', email);
+		formpractice.get.tableTd().eq(7).should('contain', number);
 	});
 });

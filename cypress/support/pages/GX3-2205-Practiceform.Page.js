@@ -23,6 +23,7 @@ class Practiceform {
 		city : () => cy.get('#city'),
 		cityOption : () => cy.get('[id^="react-select-4-option"]'),
 		submitButton : () => cy.get('#submit'),
+		tableTd : () => cy.get('tbody tr td'),
 
 	};
 	inputsComplete(name, lastName, email, number, address) {
@@ -77,20 +78,28 @@ class Practiceform {
 		this.get.uploadPicture().selectFile('cypress/fixtures/images/upexgalaxy.gif');
 	}
 	selectState() {
-		this.get.state().click();
-		this.get.stateOption().then(arrayState => {
-			const randomState = Cypress._.random(0, arrayState.length -1);
-			cy.wrap(arrayState).eq(randomState).click();
-		}
-		);
+	  return new Promise((resolve) => {
+		  this.get.state().click();
+		  this.get.stateOption().then(arrayState => {
+			  const randomState = Cypress._.random(0, arrayState.length -1);
+			  cy.wrap(arrayState).eq(randomState).invoke('text').then(text => {
+					cy.wrap(arrayState).eq(randomState).click();
+					resolve(text);
+			   });
+		    });
+	    });
 	}
 	selectCity() {
-		this.get.city().click();
-		this.get.cityOption().then(arrayCity => {
-			const randomCity = Cypress._.random(0, arrayCity.length -1);
-			cy.wrap(arrayCity).eq(randomCity).click();
-		}
-		);
+	  return new Promise((resolve) => {
+		 this.get.city().click();
+		 this.get.cityOption().then(arrayCity => {
+			 const randomCity = Cypress._.random(0, arrayCity.length -1);
+			 cy.wrap(arrayCity).eq(randomCity).invoke('text').then(text => {
+					cy.wrap(arrayCity).eq(randomCity).click();
+					resolve(text);
+			    });
+	        });
+		});
 	}
 	clickButtonSubmit() {
 		this.get.submitButton().click();
