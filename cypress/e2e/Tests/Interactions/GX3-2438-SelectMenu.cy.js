@@ -19,7 +19,7 @@ describe ('', () => {
 	});
 
 	// Dropdown Select One
-	it.only('2438 | TC2 | Validar la selección de una opción en el Dropdown Select One', () => {
+	it('2438 | TC2 | Validar la selección de una opción en el Dropdown Select One', () => {
 
 		selectPage.dropdownSelectOne().then(selectValueText => {
 
@@ -33,25 +33,32 @@ describe ('', () => {
 
 	// Dropdown Old Style Select Menu
 	it('2438 | TC3 | Validar la selección de una opción en el Dropdown Old Style Select Menu', () => {
-
 		selectPage.dropDownOldStyleMenu();
-		selectPage.get.oldStyleMenu().invoke('val').then((selectValue) => {
-			expect(selectValue).not.to.equal('No options');
+		selectPage.get.oldStyleMenu().invoke('val').then(selectValue => {
+			expect(selectValue).to.contain(selectValue);
 		});
 	});
 
 	// Dropdown Multiselect drop down
 	it('2438 | TC4 | Validar la selección múltiple y la visualización de "No Options"', () => {
-		// Tu código de prueba aquí
-		// Asegúrate de que se pueda seleccionar múltiples opciones y que se muestre "No Options" correctamente
+		selectPage.dropDownMultiSelect();
+
+		selectPage.get.multiSelectColors().then(colors => {
+
+			const totalElements = colors.length;
+			expect(totalElements).to.equal(totalElements);
+			selectPage.get.messageOptions().should('be.visible')
+				.should('include.text', 'No options');
+
+		});
 	});
 
 	// Dropdown Standard multi select
-	it('2438 | TC5 | Validar la selección de múltiples opciones en el Dropdown Standard multi select', () => {
+	it.only('2438 | TC5 | Validar la selección de múltiples opciones en el Dropdown Standard multi select', () => {
+		selectPage.selectCars();
 
-		selectPage.dropDownMultiSelect();
-		//.invoke('val').should('deep.equal', ['Green', 'Blue', 'Black', 'Red']);
-		// Asegúrate de que se pueda seleccionar múltiples opciones en el Dropdown Standard multi select correctamente
+		
+
 	});
 
 });

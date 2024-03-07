@@ -2,18 +2,21 @@
 class Select {
 	get = {
 		selectValue: () => cy.get('#withOptGroup'),
-		selectOptions: () => cy.get('[id^="react-select-2-option"]'),
+		// selectOptions: () => cy.get('[id^="react-select-2-option"]'),
 		selectOne: () => cy.get('#selectOne'),
-		selectOneOptions: () => cy.get('[id^="react-select-3-option-0-"]'),
+		// selectOneOptions: () => cy.get('[id^="react-select-3-option-0-"]'),
 		oldStyleMenu: () => cy.get('select#oldSelectMenu'),
-		multiSelect: () => cy.get('.css-tlfecz-indicatorContainer').eq(2),
-
+		multiSelect: () => cy.get('[class=" css-1wa3eu0-placeholder"]').eq(2),
+		multiSelectColors: () => cy.get('[class="css-1rhbuit-multiValue"]'),
+		containerDropdown: valueDropdown => cy.get(`[id^="react-select-${valueDropdown}-option-"]`),
+		messageOptions: () => cy.get('[class=" css-1gl4k7y"]'),
+		multiSelecCars: () => cy.get('[id="cars"]'),
 	};
 
 	//TC1
 	dropdownSelectValue() {
 		this.get.selectValue().click();
-		this.get.selectOptions().then(arrayValues => {
+		this.get.containerDropdown(2).then(arrayValues => {
 			const num = Cypress._.random(0, arrayValues.length -1);
 			const textValue = arrayValues[num].innerText;
 			Cypress.env('textValue', textValue);
@@ -25,10 +28,9 @@ class Select {
 	dropdownSelectOne() {
 		return new Promise (resolve => {
 			this.get.selectOne().click();
-			this.get.selectOneOptions().then(arrayValues => {
+			this.get.containerDropdown(3).then(arrayValues => {
 				const num = Cypress._.random(0, arrayValues.length -1);
 				const textValue = arrayValues[num].innerText;
-				//Cypress.env('textValue', textValue);
 				cy.wrap(arrayValues).eq(num).click();
 				resolve(textValue);
 			});
@@ -38,11 +40,10 @@ class Select {
 
 	//TC3
 	dropDownOldStyle() {
-		this.get.oldStyleMenu().click();
+		this.get.oldStyleMenu().select();
 	}
 
 	dropDownOldStyleMenu() {
-
 		this.get.oldStyleMenu().then((select) => {
 			// Obtén todas las opciones disponibles
 			const options = select.find('option');
@@ -55,10 +56,34 @@ class Select {
 		});
 	}
 
-	//TC5
+	//TC4
 	dropDownMultiSelect() {
-		this.get.multiSelect();
+
+		this.get.multiSelect().click();
+		this.get.containerDropdown(4).then(colors => {
+			cy.wrap(colors).each(element => {
+				cy.wrap(element).click();
+
+			});
+		});
+
 	}
+
+	//TC5
+	selectCars() {
+		 this.get.multiSelecCars().then(cars => {
+			cy.wrap(cars).each(element => {
+				const valueCars = Cypress._.random(0, cars.length - 1);
+				cy.wrap(element).select(valueCars);
+			});
+		});
+	}
+
+	// selectCars() {
+
+	// 	this.get.multiSelecCars();
+
+	// }
 
 }
 
