@@ -1,16 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 class Select {
 	get = {
 		selectValue: () => cy.get('#withOptGroup'),
-		// selectOptions: () => cy.get('[id^="react-select-2-option"]'),
 		selectOne: () => cy.get('#selectOne'),
-		// selectOneOptions: () => cy.get('[id^="react-select-3-option-0-"]'),
 		oldStyleMenu: () => cy.get('select#oldSelectMenu'),
 		multiSelect: () => cy.get('[class=" css-1wa3eu0-placeholder"]').eq(2),
 		multiSelectColors: () => cy.get('[class="css-1rhbuit-multiValue"]'),
 		containerDropdown: valueDropdown => cy.get(`[id^="react-select-${valueDropdown}-option-"]`),
 		messageOptions: () => cy.get('[class=" css-1gl4k7y"]'),
-		multiSelecCars: () => cy.get('[id="cars"]'),
+		multiSelectCars: () => cy.get('[id="cars"]'),
 	};
 
 	//TC1
@@ -45,13 +44,11 @@ class Select {
 
 	dropDownOldStyleMenu() {
 		this.get.oldStyleMenu().then((select) => {
-			// Obtén todas las opciones disponibles
+
 			const options = select.find('option');
 
-			// Selecciona un índice al azar
 			const randomIndex = Cypress._.random(0, options.length - 1);
 
-			// Dispara el evento de cambio de selección para la opción aleatoria
 			select.val(options.eq(randomIndex).val()).trigger('change');
 		});
 	}
@@ -71,19 +68,8 @@ class Select {
 
 	//TC5
 	selectCars() {
-		 this.get.multiSelecCars().then(cars => {
-			cy.wrap(cars).each(element => {
-				const valueCars = Cypress._.random(0, cars.length - 1);
-				cy.wrap(element).select(valueCars);
-			});
-		});
+		this.get.multiSelectCars().select([2, 1, 0]);
 	}
-
-	// selectCars() {
-
-	// 	this.get.multiSelecCars();
-
-	// }
 
 }
 
