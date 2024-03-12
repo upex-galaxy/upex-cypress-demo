@@ -5,20 +5,19 @@ describe('GX3-2367 | TS: ⚡️ToolsQA | Elements | Radio Buttons', () => {
 	});
 
 	it('US2367 | TC1: Validar  poder presionar el botón YES', () => {
-		cy.get('[for=\'yesRadio\']')
+		cy.get('[for="yesRadio"]')
 			.click();
-		cy.get('.text-sucess').should('have.text', 'Yes');
+		cy.get('.text-success').should('have.text', 'Yes');
 	});
 
 	it('US2367 | TC2: Validar  poder presionar el botón Impressive', () => {
-		cy.get('[for=\'impressiveRadio\']')
+		cy.get('[for="impressiveRadio"]')
 			.click();
 		cy.get('.text-success').should('have.text', 'Impressive');
 	});
 
 	it('US2367 | TC3: Validar no poder presionar el botón No', () => {
-		cy.get('[for=\'noRadio\']');
-		getRadio('No').should('be.disabled');
+		cy.get('[for="noRadio"]').should('have.class','disabled');
+		cy.get('#noRadio').should('be.disabled').and('have.class','disabled');
 	});
-
 });
