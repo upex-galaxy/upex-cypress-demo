@@ -14,7 +14,7 @@ run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref
 
 on:
   push:
-    branches: ['GX3-2367-⚡️-tools-qa-elements-radio-buttons'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+    branches: ['GX3-2367-⚡%EF%B8%8F-tools-qa-elements-radio-buttons'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
   workflow_dispatch:
 
 
