@@ -28,17 +28,17 @@ describe('GX3-2592 | TS: ToolsQA | Elements | Radio Buttons', () => {
 		});
 	});
 
-	it('GX3-2592 | TC5: Validar que cuando se seleccione el RB "Yes" el mensaje es "Yes"', async () => {
+	it('GX3-2592 | TC5: Validar que cuando se seleccione el RB "Yes" el mensaje es "You have selected Yes"', async () => {
 		cy.get('label[for="yesRadio"]').click();
 		cy.get('span.text-success').should('have.text', 'Yes');
 	});
 
-	it('GX3-2592 | TC6: Validar que cuando se seleccione el RB "Impressive" el mensaje es "Impressive"', async () => {
+	it('GX3-2592 | TC6: Validar que cuando se seleccione el RB "Impressive" el mensaje es "You have selected Impressive"', async () => {
 		cy.get('input[type="radio"][id="impressiveRadio"]').click();
 		cy.get('span.text-success').should('have.text', 'Impressive');
 	});
 
-	it('GX3-2592 | TC7: Validar que cuando se seleccione el RB "No" el mensaje es "No"', async () => {
+	it('GX3-2592 | TC7: Validar que el RB "No" no es seleccionable', async () => {
 		cy.get('input[type="radio"][id="noRadio"]').should('be.disabled');
 	});
 });
