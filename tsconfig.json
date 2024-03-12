@@ -25,6 +25,6 @@
 			"@data/*": ["./cypress/fixtures/data/*"]
 		}
 	},
-	"include": ["./cypress.config.ts", "./cypress.d.ts", "**/*.ts", "**/*.Page.ts", "cypress/e2e/Tests/Elements/GX3-2592-Radio-Buttons.cy.js"],
+	"include": ["./cypress.config.ts", "./cypress.d.ts", "**/*.ts", "**/*.Page.ts"],
 	"exclude": ["./node_modules", "**/*.js"]
 }
