@@ -1,0 +1,45 @@
+{
+	"element": {
+		"DragMe": "#draggable",
+		"DropHere": "#droppable.drop-box.ui-droppable",
+		"out": "#droppableContainer",
+		"acceptable": "#acceptable",
+		"notAcceptable": "#notAcceptable",
+		"DragMePrevent": "#dragBox",
+		"notGreedyDropBox": "#notGreedyDropBox",
+		"notGreedyInnerDropBox": "#notGreedyInnerDropBox",
+		"greedyDropBox": "#greedyDropBox",
+		"greedyDropBoxInner": "#greedyDropBoxInner"
+	},
+	"text":{
+		"Dropped": "Dropped!",
+		"DropHere": "Drop here",
+		"notGreedyDropBox": "Outer droppable",
+		"notGreedyInnerDropBox": "Inner droppable (not greedy)",
+		"greedyDropBox": "Outer droppable",
+		"greedyDropBoxInner": "Inner droppable (greedy)"
+	},
+	"class":{
+		"Dropped": "ui-state-highlight"
+	},
+	"path": {
+		"happy": "happy",
+		"noHappy": "noHappy",
+		"inner": "inner",
+		"out": "out",
+		"notGreedyDropBox": "notGreedyDropBox",
+		"notGreedyInnerDropBox": "notGreedyInnerDropBox",
+		"greedyDropBox": "greedyDropBox",
+		"greedyDropBoxInner": "greedyDropBoxInner"
+
+	},
+	"tab": {
+		"accept": "accept",
+		"preventPropogation": "preventPropogation"
+	},
+	"index": {
+		"i0": 0,
+		"i1": 1,
+		"i2": 2
+	}
+}
