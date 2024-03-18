@@ -3,7 +3,7 @@ import data from 'cypress/fixtures/data/Interactions/GX3-2608-droppable.json';
 
 function drop(dragabble, droppable, index, path, tab) {
 	droppablePage.drop(dragabble, droppable, index, tab);
-	cy.get('@droppable').then(droppableElement => {
+	cy.get(data.alias.droppable).then(droppableElement => {
 		if(path === data.path.inner) {
 			cy.wrap(droppableElement).should('contain', data.text.Dropped);
 			cy.wrap(droppableElement).should('have.class', data.class.Dropped);
@@ -14,49 +14,13 @@ function drop(dragabble, droppable, index, path, tab) {
 	});
 }
 
-function validateNotGreedyDropBox(path) {
-	cy.get('@notGreedyDropBox').then(droppableElement => {
+function validateDropBox(element, text, path) {
+	cy.get(element).then(droppableElement => {
 		if (path === 'happy') {
 			cy.wrap(droppableElement).should('contain', data.text.Dropped);
 			cy.wrap(droppableElement).should('have.class', data.class.Dropped);
 		}else{
-			cy.wrap(droppableElement).should('contain', data.text.notGreedyDropBox);
-			cy.wrap(droppableElement).should('not.have.class', data.class.Dropped);
-		}
-	});
-}
-
-function validateNotGreedyInner(path) {
-	cy.get('@notGreedyInnerDropBox').then(droppableElement => {
-		if (path === 'happy') {
-			cy.wrap(droppableElement).should('contain', data.text.Dropped);
-			cy.wrap(droppableElement).should('have.class', data.class.Dropped);
-		}else{
-			cy.wrap(droppableElement).should('contain', data.text.notGreedyInnerDropBox);
-			cy.wrap(droppableElement).should('not.have.class', data.class.Dropped);
-		}
-	});
-}
-
-function validateGreedyDropBox(path) {
-	cy.get('@greedyDropBox').then(droppableElement => {
-		if (path === 'happy') {
-			cy.wrap(droppableElement).should('contain', data.text.Dropped);
-			cy.wrap(droppableElement).should('have.class', data.class.Dropped);
-		}else{
-			cy.wrap(droppableElement).should('contain', data.text.greedyDropBox);
-			cy.wrap(droppableElement).should('not.have.class', data.class.Dropped);
-		}
-	});
-}
-
-function validateGreedyDropBoxInner(path) {
-	cy.get('@greedyDropBoxInner').then(droppableElement => {
-		if (path === 'happy') {
-			cy.wrap(droppableElement).should('contain', data.text.Dropped);
-			cy.wrap(droppableElement).should('have.class', data.class.Dropped);
-		}else{
-			cy.wrap(droppableElement).should('contain', data.text.greedyDropBoxInner);
+			cy.wrap(droppableElement).should('contain', text);
 			cy.wrap(droppableElement).should('not.have.class', data.class.Dropped);
 		}
 	});
@@ -65,34 +29,34 @@ function validateGreedyDropBoxInner(path) {
 function dropPrevent(tab, path) {
 	droppablePage.dropPrevent(tab, data.element.DragMePrevent, data.element.notGreedyDropBox, data.element.notGreedyInnerDropBox, data.element.greedyDropBox, data.element.greedyDropBoxInner, data.element.out, path);
 	if(path === data.path.notGreedyDropBox) {
-		validateNotGreedyDropBox(data.path.happy);
-		validateNotGreedyInner();
-		validateGreedyDropBox();
-		validateGreedyDropBoxInner();
+		validateDropBox(data.alias.notGreedyDropBox , data.text.notGreedyDropBox, data.path.happy);
+		validateDropBox(data.alias.notGreedyInnerDropBox , data.text.notGreedyInnerDropBox);
+		validateDropBox(data.alias.greedyDropBox , data.text.greedyDropBox);
+		validateDropBox(data.alias.greedyDropBoxInner , data.text.greedyDropBoxInner);
 	}
 	if(path === data.path.notGreedyInnerDropBox) {
-		validateNotGreedyDropBox(data.path.happy);
-		validateNotGreedyInner(data.path.happy);
-		validateGreedyDropBox();
-		validateGreedyDropBoxInner();
+		validateDropBox(data.alias.notGreedyDropBox , data.text.notGreedyDropBox, data.path.happy);
+		validateDropBox(data.alias.notGreedyInnerDropBox , data.text.notGreedyInnerDropBox, data.path.happy);
+		validateDropBox(data.alias.greedyDropBox , data.text.greedyDropBox);
+		validateDropBox(data.alias.greedyDropBoxInner , data.text.greedyDropBoxInner);
 	}
 	if(path === data.path.greedyDropBox) {
-		validateNotGreedyDropBox();
-		validateNotGreedyInner();
-		validateGreedyDropBox(data.path.happy);
-		validateGreedyDropBoxInner();
+		validateDropBox(data.alias.notGreedyDropBox , data.text.notGreedyDropBox);
+		validateDropBox(data.alias.notGreedyInnerDropBox , data.text.notGreedyInnerDropBox);
+		validateDropBox(data.alias.greedyDropBox , data.text.greedyDropBox, data.path.happy);
+		validateDropBox(data.alias.greedyDropBoxInner , data.text.greedyDropBoxInner);
 	}
 	if(path === data.path.greedyDropBoxInner) {
-		validateNotGreedyDropBox();
-		validateNotGreedyInner();
-		validateGreedyDropBox();
-		validateGreedyDropBoxInner(data.path.happy);
+		validateDropBox(data.alias.notGreedyDropBox , data.text.notGreedyDropBox);
+		validateDropBox(data.alias.notGreedyInnerDropBox , data.text.notGreedyInnerDropBox);
+		validateDropBox(data.alias.greedyDropBox , data.text.greedyDropBox);
+		validateDropBox(data.alias.greedyDropBoxInner , data.text.greedyDropBoxInner, data.path.happy);
 	}
 	if(path === data.path.out) {
-		validateNotGreedyDropBox();
-		validateNotGreedyInner();
-		validateGreedyDropBox();
-		validateGreedyDropBoxInner();
+		validateDropBox(data.alias.notGreedyDropBox , data.text.notGreedyDropBox);
+		validateDropBox(data.alias.notGreedyInnerDropBox , data.text.notGreedyInnerDropBox);
+		validateDropBox(data.alias.greedyDropBox , data.text.greedyDropBox);
+		validateDropBox(data.alias.greedyDropBoxInner , data.text.greedyDropBoxInner);
 	}
 }
 
@@ -132,5 +96,17 @@ describe('ToolsQA | Interactions | Droppable', () => {
 	});
 	it('2609 | TC11 Validar poder desplazar "Drag me" dentro de "fuera de los dropables" exitosamente.', () => {
 		dropPrevent(data.tab.preventPropogation, data.path.out);
+	});
+	it('2609 | TC12 Validar poder desplazar "Will Revert" dentro de "Drop here" here exitosamente.', () => {
+		drop(data.element.revertable, data.element.DropHere, data.index.i2, data.path.inner, data.tab.revertable);
+	});
+	it('2609 | TC13 Validar poder desplazar "Will Revert" fuera de "Drop here" here exitosamente.', () => {
+		drop(data.element.revertable, data.element.out, data.index.i2, data.path.out, data.tab.revertable);
+	});
+	it('2609 | TC14 Validar poder desplazar "Not Revert" dentro de "Drop here" here exitosamente.', () => {
+		drop(data.element.notRevertable, data.element.DropHere, data.index.i2, data.path.inner, data.tab.revertable);
+	});
+	it('2609 | TC14 Validar poder desplazar "Not Revert" fuera de "Drop here" here exitosamente.', () => {
+		drop(data.element.notRevertable, data.element.out, data.index.i2, data.path.out, data.tab.revertable);
 	});
 });

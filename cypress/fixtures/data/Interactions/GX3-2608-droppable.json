@@ -9,7 +9,9 @@
 		"notGreedyDropBox": "#notGreedyDropBox",
 		"notGreedyInnerDropBox": "#notGreedyInnerDropBox",
 		"greedyDropBox": "#greedyDropBox",
-		"greedyDropBoxInner": "#greedyDropBoxInner"
+		"greedyDropBoxInner": "#greedyDropBoxInner",
+		"revertable": "#revertable",
+		"notRevertable": "#notRevertable"
 	},
 	"text":{
 		"Dropped": "Dropped!",
@@ -35,11 +37,19 @@
 	},
 	"tab": {
 		"accept": "accept",
-		"preventPropogation": "preventPropogation"
+		"preventPropogation": "preventPropogation",
+		"revertable": "revertable"
 	},
 	"index": {
 		"i0": 0,
 		"i1": 1,
 		"i2": 2
+	},
+	"alias": {
+		"notGreedyDropBox": "@notGreedyDropBox",
+		"notGreedyInnerDropBox": "@notGreedyInnerDropBox",
+		"greedyDropBox": "@greedyDropBox",
+		"greedyDropBoxInner": "@greedyDropBoxInner",
+		"droppable": "@droppable"
 	}
 }
