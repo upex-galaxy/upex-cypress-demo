@@ -85,6 +85,24 @@ class DatePicker {
 			});
 		});
 	}
+	verifyMonthNavigation(direction) {
+		this.get.datePickerInput().click();
+		this.selectRandomDate();
+		this.get.datePickerInput().click();
+		cy.get('@selectedMonth').then(({ randomMonthIndex, monthNamesArray }) => {
+			if (direction === 'previous') {
+				this.get.previousMonth().click();
+				const expectedPreviousMonthIndex = randomMonthIndex === 0 ? 11 : randomMonthIndex - 1;
+				const expectedPreviousMonthName = monthNamesArray[expectedPreviousMonthIndex];
+				this.get.dateHeader().invoke('text').should('include', expectedPreviousMonthName);
+			} else if (direction === 'next') {
+				this.get.nextMonth().click();
+				const expectedNextMonthIndex = randomMonthIndex === 11 ? 0 : randomMonthIndex + 1;
+				const expectedNextMonthName = monthNamesArray[expectedNextMonthIndex];
+				this.get.dateHeader().invoke('text').should('include', expectedNextMonthName);
+			}
+		});
+	}
 
 }
 export const DatePickerPage = new DatePicker();

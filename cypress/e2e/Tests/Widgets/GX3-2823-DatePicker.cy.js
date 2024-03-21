@@ -21,29 +21,10 @@ describe('ToolsQA | Widgets | Date Picker', () => {
 		});
 	});
 	it('2823 | TC4: Check that the left arrow shows the previous month', () => {
-		DatePickerPage.get.datePickerInput().click();
-		DatePickerPage.selectRandomDate();
-		DatePickerPage.get.datePickerInput().click();
-		cy.get('@selectedMonth').then(({ randomMonthIndex, monthNamesArray }) => {
-			DatePickerPage.get.previousMonth().click();
-
-			const expectedPreviousMonthIndex = randomMonthIndex === 0 ? 12 : randomMonthIndex - 1;
-			const expectedPreviousMonthName = monthNamesArray[expectedPreviousMonthIndex];
-
-			DatePickerPage.get.dateHeader().invoke('text').should('include', expectedPreviousMonthName);
-		});
+		DatePickerPage.verifyMonthNavigation('previous');
 	});
-	it.only('2823 | TC5: Check that the right arrow shows the next month', () => {
-		DatePickerPage.get.datePickerInput().click();
-		DatePickerPage.selectRandomDate();
-		DatePickerPage.get.datePickerInput().click();
-		cy.get('@selectedMonth').then(({ randomMonthIndex, monthNamesArray }) => {
-			DatePickerPage.get.nextMonth().click();
-
-			const expectedNextMonthIndex = randomMonthIndex === 11 ? 0 : randomMonthIndex + 1;
-			const expectedNextMonthName = monthNamesArray[expectedNextMonthIndex];
-
-			DatePickerPage.get.dateHeader().invoke('text').should('include', expectedNextMonthName);
-		});
+	it('2823 | TC5: Check that the right arrow shows the next month', () => {
+		DatePickerPage.verifyMonthNavigation('next');
 	});
+
 });
