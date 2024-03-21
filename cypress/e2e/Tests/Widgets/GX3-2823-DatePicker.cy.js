@@ -27,10 +27,23 @@ describe('ToolsQA | Widgets | Date Picker', () => {
 		cy.get('@selectedMonth').then(({ randomMonthIndex, monthNamesArray }) => {
 			DatePickerPage.get.previousMonth().click();
 
-			const expectedPreviousMonthIndex = randomMonthIndex === 0 ? monthNamesArray.length - 1 : randomMonthIndex - 1;
+			const expectedPreviousMonthIndex = randomMonthIndex === 0 ? 12 : randomMonthIndex - 1;
 			const expectedPreviousMonthName = monthNamesArray[expectedPreviousMonthIndex];
 
 			DatePickerPage.get.dateHeader().invoke('text').should('include', expectedPreviousMonthName);
+		});
+	});
+	it.only('2823 | TC5: Check that the right arrow shows the next month', () => {
+		DatePickerPage.get.datePickerInput().click();
+		DatePickerPage.selectRandomDate();
+		DatePickerPage.get.datePickerInput().click();
+		cy.get('@selectedMonth').then(({ randomMonthIndex, monthNamesArray }) => {
+			DatePickerPage.get.nextMonth().click();
+
+			const expectedNextMonthIndex = randomMonthIndex === 11 ? 0 : randomMonthIndex + 1;
+			const expectedNextMonthName = monthNamesArray[expectedNextMonthIndex];
+
+			DatePickerPage.get.dateHeader().invoke('text').should('include', expectedNextMonthName);
 		});
 	});
 });
