@@ -26,5 +26,10 @@ describe('ToolsQA | Widgets | Date Picker', () => {
 	it('2823 | TC5: Check that the right arrow shows the next month', () => {
 		DatePickerPage.verifyMonthNavigation('next');
 	});
-
+	it('2823 | TC6: Check that the user can type in a date', () => {
+		DatePickerPage.get.datePickerInput().clear().should('be.visible').and('be.empty');
+		let randomDate = DatePickerPage.generateRandomDate();
+		DatePickerPage.get.datePickerInput().type(randomDate).type('{enter}');
+		DatePickerPage.get.datePickerInput().invoke('val').should('equal',randomDate);
+	});
 });

@@ -40,6 +40,23 @@ class DatePicker {
 
 		return formattedDateTime;
 	}
+	generateRandomDate() {
+		const startYear = 1900;
+		const endYear = 2100;
+		// Generate a random year within the range [startYear, endYear]
+		const year = Math.floor(Math.random() * (endYear - startYear + 1)) + startYear;
+
+		// Generate a random month (1 to 12)
+		const month = Math.floor(Math.random() * 12) + 1;
+
+		// Generate a random day (1 to 28 to simplify and ensure a valid date)
+		const day = Math.floor(Math.random() * 28) + 1;
+
+		// Format the date into MM/DD/YYYY
+		const formattedDate = `${month.toString().padStart(2, '0')}/${day.toString().padStart(2, '0')}/${year}`;
+
+		return formattedDate;
+	}
 	selectRandomMonth() {
 		this.get.monthSelector().then($months => {
 			const monthNamesArray = $months.find('option').map((index, option) => Cypress.$(option).text()).get();
@@ -55,6 +72,7 @@ class DatePicker {
 		this.get.yearSelector().then($years => {
 			const yearCount = $years.find('option').length;
 			const randomYear = Math.floor(Math.random() * yearCount);
+
 			cy.wrap($years).select(randomYear).then(() => {
 				const year = $years.find('option:selected').val();
 				cy.wrap(year).as('selectedYear');
