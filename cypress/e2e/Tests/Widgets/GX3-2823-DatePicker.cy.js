@@ -36,7 +36,7 @@ describe('ToolsQA | Widgets | Date Picker', () => {
 		DatePickerPage.getSelectDate.datePickerInput().type(randomDate).type('{enter}');
 		DatePickerPage.getSelectDate.datePickerInput().invoke('val').should('equal',randomDate);
 	});
-	it.only('2823 | TC7: Check that a random date and time can be selected', () => {
+	it('2823 | TC7: Check that a random date and time can be selected', () => {
 		DatePickerPage.getDateAndTime.dateAndTimePickerInput().click();
 		DatePickerPage.selectRandomDateAndTime();
 		cy.get('@formattedDateAndTime').then((formattedDateAndTime) => {

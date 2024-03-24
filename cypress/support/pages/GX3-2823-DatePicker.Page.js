@@ -148,7 +148,7 @@ class DatePicker {
 			const randomMonthIndex = Cypress._.random(0, $months.length - 1);
 			this.getDateAndTime.monthOptions().eq(randomMonthIndex).click().invoke('text').then(monthName => {
 				const cleanedMonthName = monthName.replace('✓', '');
-				cy.wrap({ cleanedMonthName, randomMonthIndex }).as('selectedMonth');
+				cy.wrap({ cleanedMonthName, randomMonthIndex }).as('selectedMonthDropdown');
 			});
 		});
 	}
@@ -158,7 +158,7 @@ class DatePicker {
 			const randomYearIndex = Cypress._.random(1, $years.length - 2);
 			const randomYear = this.getDateAndTime.yearOptions().eq(randomYearIndex);
 			randomYear.click().invoke('text').then(yearText => {
-				cy.wrap({ yearText, randomYearIndex }).as('selectedYear');
+				cy.wrap({ yearText, randomYearIndex }).as('selectedYearDropdown');
 			});
 		});
 	}
@@ -176,9 +176,9 @@ class DatePicker {
 		this.selectRandomYearDropdown();
 		this.selectRandomDay();
 		this.selectRandomTime();
-		cy.get('@selectedMonth').then(({ cleanedMonthName }) => {
+		cy.get('@selectedMonthDropdown').then(({ cleanedMonthName }) => {
 			cy.get('@selectedDay').then(( selectedDayText ) => {
-				cy.get('@selectedYear').then(({ yearText }) => {
+				cy.get('@selectedYearDropdown').then(({ yearText }) => {
 					cy.get('@selectedTime').then(({ randomTime }) => {
 						const formattedTime = this.formatTimeTo12Hours(randomTime);
 						// Format: March 24, 2024 2:13 PM
