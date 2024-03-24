@@ -91,9 +91,16 @@ class DatePicker {
 		this.getSelectDate.daySelector().then($days => {
 			const dayCount = $days.length;
 			const randomDay = Math.floor(Math.random() * dayCount);
-			const selectedDay = $days.eq(randomDay).text();
-			cy.wrap($days).eq(randomDay).click();
-			cy.wrap(selectedDay).as('selectedDay');
+			const selectedDay = $days.eq(randomDay);
+
+			cy.wrap(selectedDay).invoke('text').then(selectedDayText => {
+				// Log and wrap the trimmed text
+				cy.log(selectedDayText);
+				cy.wrap(selectedDayText).as('selectedDay');
+
+				// Click the day element. This should not issue a deprecation warning if used correctly.
+				cy.wrap(selectedDay).click();
+			});
 		});
 	}
 	selectRandomDate() {
@@ -140,8 +147,8 @@ class DatePicker {
 		this.getDateAndTime.monthOptions().then($months => {
 			const randomMonthIndex = Cypress._.random(0, $months.length - 1);
 			this.getDateAndTime.monthOptions().eq(randomMonthIndex).click().invoke('text').then(monthName => {
-				cy.log(monthName, randomMonthIndex);
-				cy.wrap({ monthName, randomMonthIndex }).as('selectedMonth');
+				const cleanedMonthName = monthName.replace('✓', '');
+				cy.wrap({ cleanedMonthName, randomMonthIndex }).as('selectedMonth');
 			});
 		});
 	}
@@ -163,6 +170,37 @@ class DatePicker {
 				cy.wrap({ randomTime }).as('selectedTime');
 			});
 		});
+	}
+	selectRandomDateAndTime() {
+		this.selectRandomMonthDropdown();
+		this.selectRandomYearDropdown();
+		this.selectRandomDay();
+		this.selectRandomTime();
+		cy.get('@selectedMonth').then(({ cleanedMonthName }) => {
+			cy.get('@selectedDay').then(( selectedDayText ) => {
+				cy.get('@selectedYear').then(({ yearText }) => {
+					cy.get('@selectedTime').then(({ randomTime }) => {
+						const formattedTime = this.formatTimeTo12Hours(randomTime);
+						// Format: March 24, 2024 2:13 PM
+						const formattedDateAndTime = `${cleanedMonthName} ${selectedDayText}, ${yearText} ${formattedTime}`;
+						cy.log(formattedDateAndTime);
+						cy.wrap( formattedDateAndTime ).as('formattedDateAndTime');
+					});
+				});
+			});
+		});
+	}
+	formatTimeTo12Hours(timeString) {
+		// Split the time string into hours and minutes
+		const [hours24, minutes] = timeString.split(':');
+		// Convert hours part to number
+		const hours = parseInt(hours24, 10);
+		// Determine AM or PM
+		const ampm = hours >= 12 ? 'PM' : 'AM';
+		// Convert 24-hour time to 12-hour format
+		const hours12 = hours % 12 || 12; // Converts "0" to "12"
+
+		return `${hours12}:${minutes} ${ampm}`;
 	}
 }
 export const DatePickerPage = new DatePicker();

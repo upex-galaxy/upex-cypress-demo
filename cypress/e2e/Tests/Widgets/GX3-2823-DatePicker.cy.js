@@ -38,14 +38,9 @@ describe('ToolsQA | Widgets | Date Picker', () => {
 	});
 	it.only('2823 | TC7: Check that a random date and time can be selected', () => {
 		DatePickerPage.getDateAndTime.dateAndTimePickerInput().click();
-		DatePickerPage.selectRandomMonthDropdown();
-		DatePickerPage.selectRandomYearDropdown();
-		DatePickerPage.selectRandomDay();
-		DatePickerPage.selectRandomTime();
-		// cy.get('@formattedDates').then(({ dateFormat, monthAndYearFormat }) => {
-		// 	DatePickerPage.getSelectDateAndTime.datePickerInput().invoke('val').should('equal', dateFormat);
-		// 	DatePickerPage.getSelectDateAndTime.datePickerInput().click();
-		// 	DatePickerPage.getSelectDateAndTime.dateHeader().invoke('text').should('equal', monthAndYearFormat);
-		// });
+		DatePickerPage.selectRandomDateAndTime();
+		cy.get('@formattedDateAndTime').then((formattedDateAndTime) => {
+			DatePickerPage.getDateAndTime.dateAndTimePickerInput().invoke('val').should('equal', formattedDateAndTime);
+		});
 	});
 });
