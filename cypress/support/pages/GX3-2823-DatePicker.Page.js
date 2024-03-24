@@ -16,6 +16,7 @@ class DatePicker {
 		monthOptions: () => cy.get('.react-datepicker__month-dropdown > div'),
 		selectedMonth: () => cy.get('.react-datepicker__month-option--selected'),
 		yearDropdown: () => cy.get('.react-datepicker__year-read-view'),
+		selectedYear: () => cy.get('.react-datepicker__year-option--selected_year'),
 		yearOptions: () => cy.get('[class$="year-option"]'),
 		timeOptions: () => cy.get('.react-datepicker__time-list > li'),
 		selectedTime: () => cy.get('.react-datepicker__time-list-item--selected')
@@ -124,14 +125,11 @@ class DatePicker {
 			});
 		});
 	}
-	verifyMonthNavigation(direction) {
-		this.getSelectDate.datePickerInput().click();
-		this.selectRandomDate();
-		this.getSelectDate.datePickerInput().click();
+	verifyMonthNavigation(direction, alias) {
 		return new Promise(resolve => {
 			let expectedPreviousMonthName;
 			let expectedNextMonthName;
-			cy.get('@selectedMonth').then(({ randomMonthIndex, monthNamesArray }) => {
+			cy.get(alias).then(({ randomMonthIndex, monthNamesArray }) => {
 				if (direction === 'previous') {
 					this.getSelectDate.previousMonth().click();
 					const expectedPreviousMonthIndex = randomMonthIndex === 0 ? 11 : randomMonthIndex - 1;
@@ -148,10 +146,16 @@ class DatePicker {
 	selectRandomMonthDropdown() {
 		this.getDateAndTime.monthDropdown().click();
 		this.getDateAndTime.monthOptions().then($months => {
+			let monthNamesArray = [];
+			$months.each((index, option) => {
+				const monthName = Cypress.$(option).text().replace('✓', '');
+				monthNamesArray.push(monthName);
+			});
+
 			const randomMonthIndex = Cypress._.random(0, $months.length - 1);
 			this.getDateAndTime.monthOptions().eq(randomMonthIndex).click().invoke('text').then(monthName => {
 				const cleanedMonthName = monthName.replace('✓', '');
-				cy.wrap({ cleanedMonthName, randomMonthIndex }).as('selectedMonthDropdown');
+				cy.wrap({ cleanedMonthName, randomMonthIndex, monthNamesArray }).as('selectedMonthDropdown');
 			});
 		});
 	}

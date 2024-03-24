@@ -25,12 +25,18 @@ describe('ToolsQA | Widgets | Date Picker', () => {
 		});
 	});
 	it('2823 | TC4: Check that the left arrow shows the previous month', () => {
-		DatePickerPage.verifyMonthNavigation('previous').then( ({ expectedPreviousMonthName }) => {
+		DatePickerPage.getSelectDate.datePickerInput().click();
+		DatePickerPage.selectRandomDate();
+		DatePickerPage.getSelectDate.datePickerInput().click();
+		DatePickerPage.verifyMonthNavigation('previous', '@selectedMonth').then( ({ expectedPreviousMonthName }) => {
 			DatePickerPage.getSelectDate.dateHeader().invoke('text').should('include', expectedPreviousMonthName);
 		});
 	});
 	it('2823 | TC5: Check that the right arrow shows the next month', () => {
-		DatePickerPage.verifyMonthNavigation('next').then( ({ expectedNextMonthName }) => {
+		DatePickerPage.getSelectDate.datePickerInput().click();
+		DatePickerPage.selectRandomDate();
+		DatePickerPage.getSelectDate.datePickerInput().click();
+		DatePickerPage.verifyMonthNavigation('next','@selectedMonth').then( ({ expectedNextMonthName }) => {
 			DatePickerPage.getSelectDate.dateHeader().invoke('text').should('include', expectedNextMonthName);
 		});;
 	});
@@ -52,7 +58,23 @@ describe('ToolsQA | Widgets | Date Picker', () => {
 			});
 			DatePickerPage.getDateAndTime.monthDropdown().click();
 			DatePickerPage.getDateAndTime.selectedMonth().should('contain', '✓');
+			DatePickerPage.getDateAndTime.dateAndTimePickerInput().click();
+			DatePickerPage.getDateAndTime.yearDropdown().click();
+			DatePickerPage.getDateAndTime.selectedYear().should('contain', '✓');
 		});
-
+	});
+	it('2823 | TC8: Check that the right arrow shows the previous month', () => {
+		DatePickerPage.getDateAndTime.dateAndTimePickerInput().click();
+		DatePickerPage.selectRandomMonthDropdown();
+		DatePickerPage.verifyMonthNavigation('next', '@selectedMonthDropdown').then( ({ expectedNextMonthName }) => {
+			DatePickerPage.getSelectDate.dateHeader().invoke('text').should('include', expectedNextMonthName);
+		});
+	});
+	it('2823 | TC9: Check that the left arrow shows the previous month', () => {
+		DatePickerPage.getDateAndTime.dateAndTimePickerInput().click();
+		DatePickerPage.selectRandomMonthDropdown();
+		DatePickerPage.verifyMonthNavigation('previous', '@selectedMonthDropdown').then( ({ expectedPreviousMonthName }) => {
+			DatePickerPage.getSelectDate.dateHeader().invoke('text').should('include', expectedPreviousMonthName);
+		});
 	});
 });
