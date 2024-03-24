@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 class DatePicker {
-	getSelectDateAndTime = {
+	getSelectDate = {
 		datePickerInput: () => cy.get('#datePickerMonthYearInput'),
 		monthSelector: () => cy.get('.react-datepicker__month-select'),
 		yearSelector: () => cy.get('.react-datepicker__year-select'),
@@ -11,9 +11,11 @@ class DatePicker {
 	};
 	getDateAndTime = {
 		dateAndTimePickerInput: () => cy.get('#dateAndTimePickerInput'),
-		monthSelector: () => cy.get('.react-datepicker__month-dropdown'),
-		// yearSelector: () => cy.get('.react-datepicker__year-select'),
-		// daySelector: () => cy.get('.react-datepicker__week > div:not(.react-datepicker__day--outside-month)'),
+		monthDropdown: () => cy.get('.react-datepicker__month-read-view'),
+		monthOptions: () => cy.get('.react-datepicker__month-dropdown > div'),
+		yearDropdown: () => cy.get('.react-datepicker__year-read-view'),
+		yearOptions: () => cy.get('[class$="year-option"]'),
+		timeOptions: () => cy.get('.react-datepicker__time-list > li'),
 	};
 	getFormattedDateIntl() {
 		const now = new Date();
@@ -64,7 +66,7 @@ class DatePicker {
 		return formattedDate;
 	}
 	selectRandomMonth() {
-		this.getSelectDateAndTime.monthSelector().then($months => {
+		this.getSelectDate.monthSelector().then($months => {
 			const monthNamesArray = $months.find('option').map((index, option) => Cypress.$(option).text()).get();
 			const randomMonthIndex = Math.floor(Math.random() * monthNamesArray.length);
 			cy.wrap($months).select(randomMonthIndex).then(() => {
@@ -75,7 +77,7 @@ class DatePicker {
 		});
 	}
 	selectRandomYear() {
-		this.getSelectDateAndTime.yearSelector().then($years => {
+		this.getSelectDate.yearSelector().then($years => {
 			const yearCount = $years.find('option').length;
 			const randomYear = Math.floor(Math.random() * yearCount);
 
@@ -86,7 +88,7 @@ class DatePicker {
 		});
 	}
 	selectRandomDay() {
-		this.getSelectDateAndTime.daySelector().then($days => {
+		this.getSelectDate.daySelector().then($days => {
 			const dayCount = $days.length;
 			const randomDay = Math.floor(Math.random() * dayCount);
 			const selectedDay = $days.eq(randomDay).text();
@@ -113,19 +115,19 @@ class DatePicker {
 		});
 	}
 	verifyMonthNavigation(direction) {
-		this.getSelectDateAndTime.datePickerInput().click();
+		this.getSelectDate.datePickerInput().click();
 		this.selectRandomDate();
-		this.getSelectDateAndTime.datePickerInput().click();
+		this.getSelectDate.datePickerInput().click();
 		return new Promise(resolve => {
 			let expectedPreviousMonthName;
 			let expectedNextMonthName;
 			cy.get('@selectedMonth').then(({ randomMonthIndex, monthNamesArray }) => {
 				if (direction === 'previous') {
-					this.getSelectDateAndTime.previousMonth().click();
+					this.getSelectDate.previousMonth().click();
 					const expectedPreviousMonthIndex = randomMonthIndex === 0 ? 11 : randomMonthIndex - 1;
 					expectedPreviousMonthName = monthNamesArray[expectedPreviousMonthIndex];
 				} else if (direction === 'next') {
-					this.getSelectDateAndTime.nextMonth().click();
+					this.getSelectDate.nextMonth().click();
 					const expectedNextMonthIndex = randomMonthIndex === 11 ? 0 : randomMonthIndex + 1;
 					expectedNextMonthName = monthNamesArray[expectedNextMonthIndex];
 				}
@@ -133,6 +135,34 @@ class DatePicker {
 			});
 		});
 	}
-
+	selectRandomMonthDropdown() {
+		this.getDateAndTime.monthDropdown().click();
+		this.getDateAndTime.monthOptions().then($months => {
+			const randomMonthIndex = Cypress._.random(0, $months.length - 1);
+			this.getDateAndTime.monthOptions().eq(randomMonthIndex).click().invoke('text').then(monthName => {
+				cy.log(monthName, randomMonthIndex);
+				cy.wrap({ monthName, randomMonthIndex }).as('selectedMonth');
+			});
+		});
+	}
+	selectRandomYearDropdown() {
+		this.getDateAndTime.yearDropdown().click();
+		this.getDateAndTime.yearOptions().then($years => {
+			const randomYearIndex = Cypress._.random(1, $years.length - 2);
+			const randomYear = this.getDateAndTime.yearOptions().eq(randomYearIndex);
+			randomYear.click().invoke('text').then(yearText => {
+				cy.wrap({ yearText, randomYearIndex }).as('selectedYear');
+			});
+		});
+	}
+	selectRandomTime() {
+		this.getDateAndTime.timeOptions().then($times => {
+			const randomTime = Cypress._.random(0, $times.length - 1);
+			const selectedTime = this.getDateAndTime.timeOptions().eq(randomTime);
+			selectedTime.click().invoke('text').then(randomTime => {
+				cy.wrap({ randomTime }).as('selectedTime');
+			});
+		});
+	}
 }
 export const DatePickerPage = new DatePicker();
