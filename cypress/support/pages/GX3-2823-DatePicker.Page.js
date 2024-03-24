@@ -1,13 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 class DatePicker {
-	get = {
+	getSelectDateAndTime = {
 		datePickerInput: () => cy.get('#datePickerMonthYearInput'),
-		dateAndTimePickerInput: () => cy.get('#dateAndTimePickerInput'),
 		monthSelector: () => cy.get('.react-datepicker__month-select'),
 		yearSelector: () => cy.get('.react-datepicker__year-select'),
 		daySelector: () => cy.get('.react-datepicker__week > div:not(.react-datepicker__day--outside-month)'),
 		dateHeader : () => cy.get('.react-datepicker__current-month'),
 		previousMonth : () => cy.get('.react-datepicker__navigation--previous'),
 		nextMonth : () => cy.get('.react-datepicker__navigation--next')
+	};
+	getDateAndTime = {
+		dateAndTimePickerInput: () => cy.get('#dateAndTimePickerInput'),
+		monthSelector: () => cy.get('.react-datepicker__month-dropdown'),
+		// yearSelector: () => cy.get('.react-datepicker__year-select'),
+		// daySelector: () => cy.get('.react-datepicker__week > div:not(.react-datepicker__day--outside-month)'),
 	};
 	getFormattedDateIntl() {
 		const now = new Date();
@@ -58,7 +64,7 @@ class DatePicker {
 		return formattedDate;
 	}
 	selectRandomMonth() {
-		this.get.monthSelector().then($months => {
+		this.getSelectDateAndTime.monthSelector().then($months => {
 			const monthNamesArray = $months.find('option').map((index, option) => Cypress.$(option).text()).get();
 			const randomMonthIndex = Math.floor(Math.random() * monthNamesArray.length);
 			cy.wrap($months).select(randomMonthIndex).then(() => {
@@ -69,7 +75,7 @@ class DatePicker {
 		});
 	}
 	selectRandomYear() {
-		this.get.yearSelector().then($years => {
+		this.getSelectDateAndTime.yearSelector().then($years => {
 			const yearCount = $years.find('option').length;
 			const randomYear = Math.floor(Math.random() * yearCount);
 
@@ -80,10 +86,11 @@ class DatePicker {
 		});
 	}
 	selectRandomDay() {
-		this.get.daySelector().then($days => {
+		this.getSelectDateAndTime.daySelector().then($days => {
 			const dayCount = $days.length;
 			const randomDay = Math.floor(Math.random() * dayCount);
-			const selectedDay = $days.eq(randomDay).click().text();
+			const selectedDay = $days.eq(randomDay).text();
+			cy.wrap($days).eq(randomDay).click();
 			cy.wrap(selectedDay).as('selectedDay');
 		});
 	}
@@ -94,31 +101,36 @@ class DatePicker {
 			this.selectRandomDay();
 			cy.get('@selectedDay').then((selectedDay) => {
 				cy.get('@selectedYear').then((selectedYear) => {
-					const formattedDate1 = `${monthValue.toString().padStart(2, '0')}/${selectedDay.padStart(2, '0')}/${selectedYear}`;
+					// Format: 03/22/20204
+					const dateFormat = `${monthValue.toString().padStart(2, '0')}/${selectedDay.padStart(2, '0')}/${selectedYear}`;
 					cy.get('@selectedMonth').then(({ monthName }) => {
-						const formattedDate2 = `${monthName} ${selectedYear}`;
-						cy.wrap({ formattedDate1, formattedDate2 }).as('formattedDates');
+						 // Format: March 2024
+						const monthAndYearFormat = `${monthName} ${selectedYear}`;
+						cy.wrap({ dateFormat, monthAndYearFormat }).as('formattedDates');
 					});
 				});
 			});
 		});
 	}
 	verifyMonthNavigation(direction) {
-		this.get.datePickerInput().click();
+		this.getSelectDateAndTime.datePickerInput().click();
 		this.selectRandomDate();
-		this.get.datePickerInput().click();
-		cy.get('@selectedMonth').then(({ randomMonthIndex, monthNamesArray }) => {
-			if (direction === 'previous') {
-				this.get.previousMonth().click();
-				const expectedPreviousMonthIndex = randomMonthIndex === 0 ? 11 : randomMonthIndex - 1;
-				const expectedPreviousMonthName = monthNamesArray[expectedPreviousMonthIndex];
-				this.get.dateHeader().invoke('text').should('include', expectedPreviousMonthName);
-			} else if (direction === 'next') {
-				this.get.nextMonth().click();
-				const expectedNextMonthIndex = randomMonthIndex === 11 ? 0 : randomMonthIndex + 1;
-				const expectedNextMonthName = monthNamesArray[expectedNextMonthIndex];
-				this.get.dateHeader().invoke('text').should('include', expectedNextMonthName);
-			}
+		this.getSelectDateAndTime.datePickerInput().click();
+		return new Promise(resolve => {
+			let expectedPreviousMonthName;
+			let expectedNextMonthName;
+			cy.get('@selectedMonth').then(({ randomMonthIndex, monthNamesArray }) => {
+				if (direction === 'previous') {
+					this.getSelectDateAndTime.previousMonth().click();
+					const expectedPreviousMonthIndex = randomMonthIndex === 0 ? 11 : randomMonthIndex - 1;
+					expectedPreviousMonthName = monthNamesArray[expectedPreviousMonthIndex];
+				} else if (direction === 'next') {
+					this.getSelectDateAndTime.nextMonth().click();
+					const expectedNextMonthIndex = randomMonthIndex === 11 ? 0 : randomMonthIndex + 1;
+					expectedNextMonthName = monthNamesArray[expectedNextMonthIndex];
+				}
+				resolve({ expectedPreviousMonthName, expectedNextMonthName });
+			});
 		});
 	}
 
