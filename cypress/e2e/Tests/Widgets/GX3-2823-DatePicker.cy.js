@@ -18,6 +18,10 @@ describe('ToolsQA | Widgets | Date Picker', () => {
 			DatePickerPage.getSelectDate.datePickerInput().invoke('val').should('equal', dateFormat);
 			DatePickerPage.getSelectDate.datePickerInput().click();
 			DatePickerPage.getSelectDate.dateHeader().invoke('text').should('equal', monthAndYearFormat);
+			DatePickerPage.getSelectDate.selectedDay().should($selectedDay => {
+				const bgColor = $selectedDay.css('background-color');
+				expect(bgColor).to.eq('rgb(33, 107, 165)');
+			});
 		});
 	});
 	it('2823 | TC4: Check that the left arrow shows the previous month', () => {
@@ -41,6 +45,14 @@ describe('ToolsQA | Widgets | Date Picker', () => {
 		DatePickerPage.selectRandomDateAndTime();
 		cy.get('@formattedDateAndTime').then((formattedDateAndTime) => {
 			DatePickerPage.getDateAndTime.dateAndTimePickerInput().invoke('val').should('equal', formattedDateAndTime);
+			DatePickerPage.getDateAndTime.dateAndTimePickerInput().click();
+			DatePickerPage.getDateAndTime.selectedTime().should($selectedTime => {
+				const bgColor = $selectedTime.css('background-color');
+				expect(bgColor).to.eq('rgb(33, 107, 165)');
+			});
+			DatePickerPage.getDateAndTime.monthDropdown().click();
+			DatePickerPage.getDateAndTime.selectedMonth().should('contain', '✓');
 		});
+
 	});
 });

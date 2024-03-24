@@ -5,6 +5,7 @@ class DatePicker {
 		monthSelector: () => cy.get('.react-datepicker__month-select'),
 		yearSelector: () => cy.get('.react-datepicker__year-select'),
 		daySelector: () => cy.get('.react-datepicker__week > div:not(.react-datepicker__day--outside-month)'),
+		selectedDay: () => cy.get('.react-datepicker__day--selected'),
 		dateHeader : () => cy.get('.react-datepicker__current-month'),
 		previousMonth : () => cy.get('.react-datepicker__navigation--previous'),
 		nextMonth : () => cy.get('.react-datepicker__navigation--next')
@@ -13,9 +14,11 @@ class DatePicker {
 		dateAndTimePickerInput: () => cy.get('#dateAndTimePickerInput'),
 		monthDropdown: () => cy.get('.react-datepicker__month-read-view'),
 		monthOptions: () => cy.get('.react-datepicker__month-dropdown > div'),
+		selectedMonth: () => cy.get('.react-datepicker__month-option--selected'),
 		yearDropdown: () => cy.get('.react-datepicker__year-read-view'),
 		yearOptions: () => cy.get('[class$="year-option"]'),
 		timeOptions: () => cy.get('.react-datepicker__time-list > li'),
+		selectedTime: () => cy.get('.react-datepicker__time-list-item--selected')
 	};
 	getFormattedDateIntl() {
 		const now = new Date();
