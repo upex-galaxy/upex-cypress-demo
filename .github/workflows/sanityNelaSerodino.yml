@@ -43,7 +43,7 @@ jobs:
       with:
         browser: chrome
         command: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-          bun run test:chrome cypress/e2e/Tests/Widgets/GX3-1313-DatePicker.cy.js
+          bun run test:chrome cypress/e2e/Tests/Widgets/GX3-2823-DatePicker.cy.js
 
     - name: 📬Generate JUnit/Mocha Report
       if: always()
