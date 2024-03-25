@@ -201,6 +201,7 @@ class DatePicker {
 		// Split the time string into hours and minutes
 		const [hours24, minutes] = timeString.split(':');
 		// Convert hours part to number
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		const hours = parseInt(hours24, 10);
 		// Determine AM or PM
 		const ampm = hours >= 12 ? 'PM' : 'AM';
@@ -210,4 +211,4 @@ class DatePicker {
 		return `${hours12}:${minutes} ${ampm}`;
 	}
 }
-export const DatePickerPage = new DatePicker();
+export const datePickerPage = new DatePicker();
