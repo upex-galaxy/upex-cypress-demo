@@ -21,16 +21,17 @@ class DatePicker {
 		timeOptions: () => cy.get('.react-datepicker__time-list > li'),
 		selectedTime: () => cy.get('.react-datepicker__time-list-item--selected')
 	};
+	clickOnElement(getterName, elementName) {
+		this[getterName][elementName]().click();
+	}
 	getFormattedDateIntl() {
 		const now = new Date();
 
 		const options = {
 			year: 'numeric',
-			month: '2-digit', // Ensures the month is always represented with two digits
-			day: '2-digit', // Ensures the day is always represented with two digits
+			month: '2-digit',
+			day: '2-digit',
 		};
-
-		// The 'en-US' locale typically uses slashes as separators for dates
 		return new Intl.DateTimeFormat('en-US', options).format(now);
 	}
 	getFormattedDateTimeIntl() {
@@ -44,10 +45,7 @@ class DatePicker {
 			minute: 'numeric',
 			hour12: true // Use 12-hour time format with AM/PM
 		};
-		// Generate the formatted string
 		let formattedDateTime = new Intl.DateTimeFormat('en-US', options).format(now);
-
-		// Remove the 'at' if it exists
 		formattedDateTime = formattedDateTime.replace(' at ', ' ');
 
 		return formattedDateTime;
@@ -55,16 +53,9 @@ class DatePicker {
 	generateRandomDate() {
 		const startYear = 1900;
 		const endYear = 2100;
-		// Generate a random year within the range [startYear, endYear]
 		const year = Math.floor(Math.random() * (endYear - startYear + 1)) + startYear;
-
-		// Generate a random month (1 to 12)
 		const month = Math.floor(Math.random() * 12) + 1;
-
-		// Generate a random day (1 to 28 to simplify and ensure a valid date)
 		const day = Math.floor(Math.random() * 28) + 1;
-
-		// Format the date into MM/DD/YYYY
 		const formattedDate = `${month.toString().padStart(2, '0')}/${day.toString().padStart(2, '0')}/${year}`;
 
 		return formattedDate;
@@ -98,11 +89,8 @@ class DatePicker {
 			const selectedDay = $days.eq(randomDay);
 
 			cy.wrap(selectedDay).invoke('text').then(selectedDayText => {
-				// Log and wrap the trimmed text
-				cy.log(selectedDayText);
 				cy.wrap(selectedDayText).as('selectedDay');
 
-				// Click the day element. This should not issue a deprecation warning if used correctly.
 				cy.wrap(selectedDay).click();
 			});
 		});
@@ -198,16 +186,10 @@ class DatePicker {
 		});
 	}
 	formatTimeTo12Hours(timeString) {
-		// Split the time string into hours and minutes
 		const [hours24, minutes] = timeString.split(':');
-		// Convert hours part to number
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		const hours = parseInt(hours24, 10);
-		// Determine AM or PM
 		const ampm = hours >= 12 ? 'PM' : 'AM';
-		// Convert 24-hour time to 12-hour format
-		const hours12 = hours % 12 || 12; // Converts "0" to "12"
-
+		const hours12 = hours % 12 || 12;
 		return `${hours12}:${minutes} ${ampm}`;
 	}
 }
