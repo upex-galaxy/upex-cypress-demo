@@ -12,7 +12,7 @@ class Select {
 	}
 
 	BtnSelectFile() {
-		this.get.uploadFile().selectFile('cypress/fixtures/images/sampleFile.jpeg');
+		this.get.uploadFile().selectFile('cypress/fixtures/images/upexlogo.png');
 	};
 }
 

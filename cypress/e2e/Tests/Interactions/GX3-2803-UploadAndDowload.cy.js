@@ -16,7 +16,7 @@ describe('', () => {
 	});
 	it('TC2 | Validar que se suba una imagen', () => {
 		selectPage.BtnSelectFile();
-		selectPage.get.confirmFilePath().should('be.visible');
+		selectPage.get.confirmFilePath().should('contain', 'upex');
 	});
 
 });
