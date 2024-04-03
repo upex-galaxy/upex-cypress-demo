@@ -14,7 +14,7 @@ run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref
 
 on:
   push:
-    branches: ['GX3-2737tools-qa-elements-checkbox'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+    branches: ['GX3-2965-⚡️-tools-qa-elements-text-box-fill-form-and-submit)'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
   workflow_dispatch:
 
 
@@ -43,7 +43,7 @@ jobs:
       with:
         browser: chrome
         command: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-          bun run test:chrome cypress/e2e/Tests/Elements/GX3-2737-checkBox.cy.js
+          bun run test:chrome cypress/e2e/Tests/Elements/GX3-2966-TextBox.cy.js
 
     - name: 📬Generate JUnit/Mocha Report
       if: always()
