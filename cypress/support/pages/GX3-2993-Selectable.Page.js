@@ -1,32 +1,55 @@
 
 class Selectable {
+
+  //OBTENER ELEMENTOS DE LA LISTA
   get listItems() {
     return cy.get('#verticalListContainer li');
   }
 
-  selectRandomListItem() {
-    this.listItems.then($listItems => {
-      const randomIndex = Math.floor(Math.random() * $listItems.length);
-        cy.wrap($listItems[randomIndex]).click();
-        cy.wrap($listItems[randomIndex]).should('have.class', 'active');
-        cy.wrap($listItems[randomIndex]).should('have.css', 'background-color', 'rgb(0, 123, 255)'); 
-        cy.wrap($listItems[randomIndex]).should('have.css', 'color', 'rgb(255, 255, 255)'); 
-    });
+  //OBTIENE LA CANTIDAD DE ELEMENTOS DE LA LISTA
+  getListItemCount() {
+    return this.listItems.then($listItems => $listItems.length);
   }
 
-  get gridItems() {
-        return cy.get('#gridContainer li');
-    }
+  //SELECCIONA UN ELEMENTO DE LA LISTA POR SU INDICE Y DA CLICK
+  selectListItemByIndex(index) {
+    this.listItems.eq(index).click();
+  }
 
-    selectRandomGridItem() {
-        this.gridItems.then($gridItems => {
-            const randomIndex = Math.floor(Math.random() * $gridItems.length);
-            cy.wrap($gridItems[randomIndex]).click();
-            cy.wrap($gridItems[randomIndex]).should('have.class', 'active');
-            cy.wrap($gridItems[randomIndex]).should('have.css', 'background-color', 'rgb(0, 123, 255)');
-            cy.wrap($gridItems[randomIndex]).should('have.css', 'color', 'rgb(255, 255, 255)'); 
-        });
-    } 
+  //OBTIENE UN ELEMENTO DE LA LISTA POR SU INDICE Y LO RETORNA
+  getListItemByIndex(index) {
+    return this.listItems.eq(index);
+  }
+
+  //DESELECCIONA EL ELEMENTO DE LA LISTA SELECCIONADO
+  deselectListItem() {
+    this.listItems.filter('.active').click(); 
+  }
+
+  //OBTENER ELEMENTOS DE LA TABLA
+  get gridItems() {
+    return cy.get('#gridContainer li');
+  }
+
+  //OBTIENE LA CANTIDAD DE ELEMENTOS DE LA TABLA
+  getGridItemCount() {
+    return this.gridItems.then($gridItems => $gridItems.length);
+  }
+
+  //SELECCIONA UN ELEMENTO DE LA TABLA POR SU INDICE
+  selectGridItemByIndex(index) {
+    this.gridItems.eq(index).click();
+  }
+  
+  //OBTIENE UN ELEMENTO DE LA LISTA POR SU INDICE Y LO RETORNA
+  getGridItemByIndex(index) {
+    return this.gridItems.eq(index);
+  }
+
+  //DESELECCIONA EL ELEMENTO DE LA LISTA SELECCIONADO
+  deselectGridItem() {
+    this.gridItems.filter('.active').click(); 
+  }
 }
 
 export const selectablePage = new Selectable();
