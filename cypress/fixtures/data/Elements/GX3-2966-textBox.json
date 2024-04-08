@@ -1,0 +1,39 @@
+{
+	"fullName": {
+		"input": "#userName",
+		"values": {
+			"valid": "Liliana"
+		}
+	},
+
+	"email": {
+		"input": "#userEmail",
+		"values": {
+			"validTc1": "liliana.prospel@gmail.com",
+			"validTc2": "",
+			"valisTc3": "liliana.prospelgmail.com",
+			"valisTc4": ".@gmail.com",
+			"valisTc5": "liliana.prospel@.com",
+			"valisTc6": "liliana.prospel@gmailcom",
+			"valisTc7": "liliana.prospel@gmail.c"
+		}
+	},
+
+	"currentAddress": {
+		"input": "#currentAddress",
+		"values": {
+			"valid": "Colón y Eloy Alfaro"
+		}
+	},
+
+	"permanentAddress": {
+		"input": "#permanentAddress",
+		"values": {
+			"valid": "Colón y Eloy Alfaro (Edificio amarillo)"
+		}
+	},
+
+	"dataInput": ["#userName", "#userEmail", "#currentAddress", "#permanentAddress"],
+	"dataField": ["Liliana", "liliana.prospel@gmail.com", "Colón y Eloy Alfaro", "Colón y Eloy Alfaro (Edificio amarillo)"],
+	"dataLabel": ["#name.mb-1", "#email.mb-1", "#currentAddress.mb-1", "#permanentAddress.mb-1"]
+}
