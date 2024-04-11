@@ -6,19 +6,18 @@ class Form {
 		inputName: () => cy.get('#firstName'),
 		inputLast: () => cy.get('#lastName'),
 		inputEmail: () => cy.get('#userEmail'),
-		//inputGender: valueGender => cy.get(`[for$='gender-radio-${valueGender}']`),
-		inputGender: () => cy.get('[for="gender-radio-3"]'),
+		inputGender: () => cy.get('[for*="gender-radio"]'),
 		inputNumber: () => cy.get('#userNumber'),
 		inputDate: () => cy.get('#dateOfBirthInput'),
 		inputSubject: () => cy.get('#subjectsContainer'),
-		inputHobbies: () => cy.get('[for="hobbies-checkbox-1"]'),
+		selectSubject: () => cy.get('[id*="react-select-2-option"]'),
+		inputHobbies: () => cy.get('[for*="hobbies-checkbox"]'),
 		upPicture: () => cy.get('#uploadPicture'),
-		upText: () => cy.get('#currentAddress'),
+		addText: () => cy.get('#currentAddress'),
 		state: () => cy.get('#state'),
-		//selectState: valueState => cy.get(`[id$='react-select-3-option-${valueState}']`),
-		selectState: () => cy.get('#react-select-3-option-1'),
+		selectState: () => cy.get('[id*="react-select-3-option"]'),	
 		city: () => cy.get('#city'),
-		selectCity: () => cy.get('#react-select-4-option-2'),
+		selectCity: () => cy.get('[id*="react-select-4-option"]'),
 		submit: () => cy.get('#submit'),
 		document: () => cy.get('.modal-content'),
 	};
@@ -28,32 +27,47 @@ class Form {
 		const randomLastName = faker.person.lastName();
 		const newEmail = faker.internet.email();
 		const newNumber = faker.string.numeric(10);
+		const rGender = Cypress._.random(0, 2);
+		const rHobbies = Cypress._.random(0, 2);
 
 		this.get.inputName().type(randomName);
 		this.get.inputLast().type(randomLastName);
 		this.get.inputEmail().type(newEmail);
+		this.get.inputGender().eq(rGender).click();
 		this.get.inputNumber().type(newNumber);
+		this.get.inputDate().invoke('val', '12 Feb 1995');
+		this.selectInputSubject();
+		this.get.inputHobbies().eq(rHobbies).click();
+		this.get.upPicture().selectFile('cypress/fixtures/images/upexgalaxy.gif');
+		this.get.addText().type('I live in my house');
+		this.rState();
+		this.rCity();
+		this.get.submit().click();
+
 	}
 
-	selectInputGender() {
-		this.get.inputGender().click();
-	}
-	newInputDate() {
+	selectInputSubject() {
 
-		const newDate = faker.date.birthdate();
-		this.get.inputDate().type(newDate);
+		const randomSubject = faker.string.alpha({ count: 1, casing: 'upper', exclude: ['Q','Ñ','K','J','F','X','W','Z'] });
+		if (typeof randomSubject === 'string') {
+			this.get.inputSubject().type(randomSubject);
+			this.get.selectSubject().then(i => {
+				const r = Cypress._.random(0, i.length - 1);
+				cy.wrap(i).eq(r).click();
+			});
+		}
 	}
-	selectValueState() {
+	
+	rState() {
+		const rState = Cypress._.random(0,3);
 		this.get.state().click();
-		this.get.selectState().then(arrayValues => {
-			const num = Cypress._.random(0, arrayValues.length -1);
-			const textValue = arrayValues[num].innerText;
-			Cypress.env('textValue', textValue);
-			cy.wrap(arrayValues).eq(num).click();
-		});
+		this.get.selectState().eq(rState).click();
 	}
-	selectInputHobbies() {
-		this.get.inputHobbies().click();
+
+	rCity() {
+		const rCity = Cypress._.random();
+		this.get.city().click();
+		this.get.selectCity().eq(rCity).click();
 	}
 
 }

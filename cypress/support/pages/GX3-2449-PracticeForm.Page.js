@@ -121,6 +121,7 @@ class Formulario {
 			});
 		}
 	}
+
 	selectRandomSubjects(randomSelectSubject) {
 		if (randomSelectSubject) {
 			this.get.selectSubject().click();
