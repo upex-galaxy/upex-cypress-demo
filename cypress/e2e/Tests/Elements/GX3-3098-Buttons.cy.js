@@ -21,4 +21,8 @@ describe('GX3-3098 | Elements | Radio Buttons',() => {
 		cy.get('#rightClickBtn').rightclick();
 		cy.get('#rightClickMessage').should('have.text', 'You have done a right click');
 	});
+	it('3099 | TC3: Validar el funcionamiento del botón Click Me', () => {
+		cy.get('[class*="primary"]').eq(2).click();
+		cy.get('#dynamicClickMessage').should('have.text', 'You have done a dynamic click');
+	});
 });
