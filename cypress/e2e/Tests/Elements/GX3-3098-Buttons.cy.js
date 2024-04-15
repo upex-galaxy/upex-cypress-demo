@@ -15,5 +15,6 @@ describe('GX3-3098 | Elements | Radio Buttons',() => {
 	// afterEach(); //* Despues de cada test
 	it('3099 | TC1: Validar el funcionamiento del botón Double Click Me', () => {
 		cy.get('#doubleClickBtn').dblclick();
+		cy.get('#doubleClickMessage').should('have.text', 'You have done a double click');
 	});
 });
