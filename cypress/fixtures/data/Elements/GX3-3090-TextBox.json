@@ -1,0 +1,15 @@
+{
+	"input":{
+		"fullName":"#userName",
+		"email":"#userEmail",
+		"currentAddress":"#currentAddress",
+		"permanentAddress":"#permanentAddress"
+	},
+	"data":{
+		"fullNamevalid":"diana",
+		"fullNamempty":"",
+		"emailvalid":"camila@hotmail.com",
+		"caddressvalid":"Via Laietana.Barcelona",
+		"peraddressvalid":"Calle Lagunillas 2. Mijas"
+	}
+}
