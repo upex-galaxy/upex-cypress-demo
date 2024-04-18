@@ -10,6 +10,16 @@
 		"fullNamempty":"",
 		"emailvalid":"camila@hotmail.com",
 		"caddressvalid":"Via Laietana.Barcelona",
-		"peraddressvalid":"Calle Lagunillas 2. Mijas"
+		"peraddressvalid":"Calle Lagunillas 2. Mijas",
+		"emailinvalidtc02":"@gmail.com",
+		"emailinvalidtc03":"alma@.net",
+		"emailinvalidtc04":"almudena.com",
+		"emailinvalidtc05":"dil@pegasus",
+		"emailinvalidtc06":"silvia@yahcom"
+		"emailnullTC07":"",
+		"fullnamenulltc08":"",
+		"currentaddressnulltc09":"",
+		"permanentaddressnulltc10":""
 	}
+	"SubmitButton":"[type='button']"
 }
