@@ -6,8 +6,25 @@ describe('Account TextBox', () =>
 		cy.contains('Test Box').should('be.visible');
 		cy.url().should('contain','text-box');
 	}
+	)
+}
+/*it('TCPrueba sin la fixture a ver si agarra',() =>
+	{
+	cy.get(#userName)
+		.type(Diana)
+	cy.get(#userEmail)
+		.type(camila@hotmail.com)
+	cy.get(#currentAddress)
+		.type('Via Laietana.Barcelona')
+	cy.get(the.input.permanentAddress)
+		.type(the.data.peraddressvalid)
+	cy.get("[type='button']").click()
+	}
 	);
-});
+});/*
+
+
+
 it('TC01: Registrarse exitosamente',() =>
 {
 	cy.fixture('data/Elements/GX3-3090-TextBox').then((the) =>
@@ -22,7 +39,7 @@ it('TC01: Registrarse exitosamente',() =>
 			.type(the.data.peraddressvalid);
 		cy.get(the.SubmitButton).click();
 	});
-});
+}); 
 it('TC02.No registrarse con email inválido. sin caracter delante @',() =>
 {
 	cy.fixture('data/Elements/GX3-3090-TextBox'),() =>
