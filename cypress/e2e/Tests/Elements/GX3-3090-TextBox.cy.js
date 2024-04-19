@@ -222,7 +222,7 @@ describe('Text Box ',() =>
 			//cy.get('#name').should('include.text',the.data.fullNamevalid);
 			cy.get('#name').should('contain',the.data.fullNamevalid);
 			cy.get('#email').should('contain',the.data.emailvalid);
-			cy.get('#currentAddress.mb-1').should('contain',the.data.peraddressvalid);
+			cy.get('#currentAddress.mb-1').should('contain',the.data.caddressvalid);
 			cy.get(the.PermanentAddressFinalBox).should('not.exist');
 		}
 		);
