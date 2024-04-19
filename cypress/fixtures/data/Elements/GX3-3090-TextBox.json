@@ -19,5 +19,9 @@
 	},
 	"SubmitButton":"#submit",
 	"Redborderbox":"#userEmail.mr-sm-2.field-error.form-control",
-	"PermanentAddressFinalBox":"#permanentAddress.mb-1"
+	"PermanentAddressFinalBox":"#permanentAddress.mb-1",
+
+	"inputrandom": ["#userName", "#userEmail", "#currentAddress", "#permanentAddress"],
+	"datarandom": ["Diana", "camila@hotmail.com","Calle Lagunillas 2. Mijas"],
+	"registerrandom": ["#name.mb-1", "#email.mb-1", "#currentAddress.mb-1", "#permanentAddress.mb-1"]
 }
