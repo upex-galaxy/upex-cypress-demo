@@ -22,6 +22,6 @@
 	"PermanentAddressFinalBox":"#permanentAddress.mb-1",
 
 	"inputrandom": ["#userName", "#userEmail", "#currentAddress", "#permanentAddress"],
-	"datarandom": ["Diana", "camila@hotmail.com","Calle Lagunillas 2. Mijas"],
+	"datarandom": ["Diana", "camila@hotmail.com","Barcelona","Calle Lagunillas 2. Mijas"],
 	"registerrandom": ["#name.mb-1", "#email.mb-1", "#currentAddress.mb-1", "#permanentAddress.mb-1"]
 }
