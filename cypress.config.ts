@@ -1,6 +1,7 @@
 import { defineConfig } from 'cypress';
 import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
 import 'dotenv/config';
+import registerGrepPlugin from '@cypress/grep';
 
 export default defineConfig({
 	// @Ely: CYPRESS DASHBOARD PARA VER NUESTRAS EJECUCIONES EN LA WEB:
@@ -35,6 +36,7 @@ export default defineConfig({
 		excludeSpecPattern: [ 'cypress/e2e/**/*.example.cy.js' ],
 		// Use Cypress plugins:
 		setupNodeEvents(on, config) {
+			registerGrepPlugin(config);
 			// This is required for the preprocessor to be able to generate JSON reports after each run, and more,
 			on('file:preprocessor', createBundler());
 			// Make sure to return the config object as it might have been modified by the plugin.
@@ -42,6 +44,6 @@ export default defineConfig({
 		},
 	},
 	env: {
-
+		'grep': 'Elements'
 	},
 });

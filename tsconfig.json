@@ -17,6 +17,7 @@
 			"cypress",
 			"node",
 			"@4tw/cypress-drag-drop",
+			"@cypress/grep"
 		],
 		"baseUrl": ".",
 		"paths": {
