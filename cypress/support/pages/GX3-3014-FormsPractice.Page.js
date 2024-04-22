@@ -21,7 +21,7 @@ class Form {
 		addAddress: () => cy.get('#currentAddress'),
 		state: () => cy.get('#state'),
 		selectState: () => cy.get('[id*="react-select-3-option"]'),
-		singleState: () => cy.get('[class$="singleValue"]'),
+		singleValue: () => cy.get('[class$="singleValue"]'),
 		city: () => cy.get('#city'),
 		selectCity: () => cy.get('[id*="react-select-4-option"]'),
 		submit: () => cy.get('#submit'),
@@ -32,6 +32,11 @@ class Form {
 		resultLastName: () => cy.get('tr').eq(1),
 		resultEmail: () => cy.get('tr').eq(2),
 		resultGender: () => cy.get('tr').eq(3),
+		resultMobile: () => cy.get('tr').eq(4),
+		resultPicture: () => cy.get('tr').eq(8),
+		resultHobbie: () => cy.get('tr').eq(7),
+		resultAddress: () => cy.get('tr').eq(9),
+		resultStateAndCity: () => cy.get('tr').eq(10),
 	};
 	fillInput(input, value) {
 		this.get[input]().type(value);
@@ -44,12 +49,17 @@ class Form {
 
 	}
 	selectInputSubject(randomSubject) {		
-		this.get.inputSubject().type(randomSubject);
-		this.get.selectSubject().then(i => {
-			const r = Cypress._.random(0, i.length - 1);
-			cy.wrap(i).eq(r).click();
-		});
-		
+		return new Promise(resolve => {
+
+			this.get.inputSubject().type(randomSubject);
+			this.get.selectSubject().then(i => {
+				const r = Cypress._.random(0, i.length - 1);
+				cy.wrap(i).eq(r).invoke('text').then(text => {
+					cy.wrap(i).eq(r).click();
+					return resolve(text);
+				});
+			});
+		});		
 	}
 	 selectInputDate() {
 	 	this.get.inputDate().click();
@@ -71,18 +81,22 @@ class Form {
 		const randomYear = Cypress._.random(1990, 2100);
 		this.get.inputYear().select(randomYear.toString());
 	}
-	clickOnSelectBtn(selector, value) {
-		
-		if(selector === 'selectState') {
+	clickOnSelectBtn(selector) {
+		return new Promise(resolve => {
 
-			this.get.state().click();
-
-		} else if(selector === 'selectCity') {
-
-			this.get.city().click();
-		
-		}
-		this.get[selector]().eq(value).click();
+			if(selector === 'selectState') {
+				this.get.state().click();
+			} else if(selector === 'selectCity') {
+				this.get.city().click();
+			}		
+			this.get[selector]().then(i => {
+				const value = Cypress._.random(0, i.length -1);
+				cy.wrap(i).eq(value).invoke('text').then(text => {
+					this.get[selector]().eq(value).click();
+					return resolve(text);
+				});
+			});
+		});
 
 	}
 	btnSubmit() {
