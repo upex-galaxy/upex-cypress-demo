@@ -1,1 +1,10 @@
-{prueba="nada"};
+{
+"elements":{
+	"ListTab":"#demo-tab-list",
+	"GridTab":"#demo-ta-grid",
+	"VerticalListDiv": "#verticalListContainer li",
+	"ListedItemsListTab": ".mt-2.list-group-item.list-group-item-action",
+	"ListedItemSelected": ".mt-2.list-group-item.active.list-group-item-action",
+	"HorizontalDiv": "#demo-tabpane-grid li"
+	}
+}
