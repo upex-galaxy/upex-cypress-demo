@@ -3,12 +3,18 @@ import { formPage } from '../../../support/pages/GX3-3014-FormsPractice.Page';
 import { faker } from '@faker-js/faker';
 
 describe('GX3-3014 | ToolsQA | Forms | Practice Form' , () => {
+	before(() => {
+		cy.clearAllCookies();
+		cy.clearLocalStorage();
+	});
 
 	beforeEach('PRC | Usuario debe situarse en la URL de Demo QA' , () => {
 		cy.visit('https://demoqa.com/automation-practice-form');
 		cy.url().should('contain', 'practice');
 	});
-
+	afterEach(() => {
+		cy.screenshot();
+	});
 	it('3015 | TC1 | Validar poder completar el formulario para el estudiante con valores validos', () => {
 		const randomName = faker.person.firstName('female' | 'male');
 		const randomLastName = faker.person.lastName();
@@ -48,9 +54,10 @@ describe('GX3-3014 | ToolsQA | Forms | Practice Form' , () => {
 			formPage.clickOnSelectBtn('selectCity').then(textCity => {
 				formPage.get.singleValue().first().should('have.text', textState);
 				formPage.get.singleValue().last().should('have.text', textCity);
+				Cypress.env('TextState', textState);
+				Cypress.env('TextCity', textCity);
 			});
 		});
-
 		formPage.selectInputSubject(randomSubject).then(textSubject => {
 			formPage.get.inputSubject().should('contain', textSubject);
 		});
@@ -68,6 +75,11 @@ describe('GX3-3014 | ToolsQA | Forms | Practice Form' , () => {
 		formPage.get.resultMobile().should('contain', randomNumber);
 		formPage.get.resultPicture().should('contain', 'upexgalaxy.gif');
 		formPage.get.resultAddress().should('contain', randomAddress);
+		formPage.get.resultStateAndCity().invoke('text').then(textResultStateAndCity => {
+			expect(textResultStateAndCity).to.contain(`${Cypress.env('TextState')} ${Cypress.env('TextCity')}`);
+			const cleanResultStateAndCity = textResultStateAndCity.replace('State and City', '');
+			expect(cleanResultStateAndCity).to.equal(`${Cypress.env('TextState')} ${Cypress.env('TextCity')}`);
+		});
 
 	});
 
