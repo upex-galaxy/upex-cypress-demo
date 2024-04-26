@@ -3,7 +3,7 @@ class SelectablePage {
 		tabList: () => cy.get('#demo-tab-list'),
 		tabGrid: () => cy.get('#demo-tab-grid'),
 		verticalListContainer: () => cy.get('#verticalListContainer li'),
-		ListedItemSelected: () => cy.get('.mt-2.list-group-item.active.list-group-item-action')
+		HorizontalDiv: () => cy.get('#demo-tabpane-grid li')
 	};
 
 	clickOnListTab() {
@@ -16,7 +16,7 @@ class SelectablePage {
 		this.get.tabGrid().click();
 	}
 	clickOnGridItems(value) {
-		this.get.verticalListContainer().eq(value).click();
+		this.get.HorizontalDiv().eq(value).click();
 	}
 }
 

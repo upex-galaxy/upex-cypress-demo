@@ -11,48 +11,59 @@ describe('⚡️ToolsQA | Interactions | Selectable', () => {
 	});
 
 	it('TC01. Validar que la pestaña  <List> esté seleccionada por defecto y sus listas NO están seleccionados. ',() => {
-		selectablePage.get.tabList;
-		//selectablePage.get.tabList.should('have.text','List');
+		selectablePage.get.tabList().should('have.class','active');
+		selectablePage.get.verticalListContainer().should('not.have.class','active');
 
-		cy.get(data.elements.ListTab).should('have.class','active');
-		cy.get(data.elements.VerticalListDiv).should('not.have.class','active');
-
-		cy.get(data.elements.VerticalListDiv).should('contain','Cras justo odio');
-		cy.get(data.elements.VerticalListDiv).should('contain','Dapibus ac facilisis in');
-		cy.get(data.elements.VerticalListDiv).should('contain','Morbi leo risus');
-		cy.get(data.elements.VerticalListDiv).should('contain','Porta ac consectetur ac');
+		selectablePage.get.verticalListContainer().should('contain','Cras justo odio');
+		selectablePage.get.verticalListContainer().should('contain','Dapibus ac facilisis in');
+		selectablePage.get.verticalListContainer().should('contain','Morbi leo risus');
+		selectablePage.get.verticalListContainer().should('contain','Porta ac consectetur ac');
 
 	});
 
-	it.only('TC02: Validar que un o varios elementos de la pestaña  <List>  puedan ser seleccionados y desseleccionados correctamente.',() => {
-		const RandomList = Math.floor(Math.random() * 3);
+	it('TC02: Validar que un o varios elementos de la pestaña  <List>  puedan ser seleccionados correctamente.',() => {
+		//const RandomList = Math.floor(Math.random() * 3);
+		const RandomList = Cypress._.random(0,3);
 
-		selectablePage.clickOnListedItems();
-		selectablePage.clickOnGridTab();
+		selectablePage.get.verticalListContainer().should('not.have.class','active');
+		selectablePage.clickOnListedItems(RandomList);
+		selectablePage.get.verticalListContainer().should('have.class','active');
+		selectablePage.clickOnListedItems(RandomList);
 		//cy.get('.mt-2.list-group-item.list-group-item-action').eq(RandomList).click();
 
 	});
+	it('TC03: Validar que un o varios elementos de la pestaña  <List>  puedan ser des seleccionados correctamente.',() => {
+		//const RandomList = Math.floor(Math.random() * 3);
+		const RandomList = Cypress._.random(0,3);
 
-	it('TC03. Validar poder seleccionar la pestaña  <Grid>  y sus valores sean correctos.',() => {
-		cy.get('#demo-tab-grid').click();
-		//cy.get('#gridContainer');
-		cy.get('#gridContainer').should('have.text','OneTwoThreeFourFiveSixSevenEightNine');
-
-		cy.get('.list-group-item.list-group-item-action').eq(1);
-		// cy.get('.list-group-item.list-group-item-action').eq(0).click();
-		// cy.get('.list-group-item.active.list-group-item-action').eq(0).should('exist');
+		selectablePage.clickOnListedItems(RandomList);
+		selectablePage.get.verticalListContainer().should('have.class','active');
+		selectablePage.clickOnListedItems(RandomList);
+		selectablePage.get.verticalListContainer().should('not.have.class','active');
 	});
 
 	it('TC04. Validar poder seleccionar la pestaña  <Grid>  y sus valores sean correctos.',() => {
-		cy.get('#demo-tab-grid').click();
-		//cy.get('#gridContainer');
-		cy.get('#gridContainer').should('have.text','OneTwoThreeFourFiveSixSevenEightNine');
+		selectablePage.get.tabGrid().should('not.have.class','active');
+		selectablePage.clickOnGridTab();
 
-		cy.get('.list-group-item.list-group-item-action').eq(1).should('have.css','Background-color','#f8f9fa?');
-		cy.get('.list-group-item.list-group-item-action').eq(1).should('have.css','color','#495057');
+		selectablePage.get.HorizontalDiv().should('have.text','OneTwoThreeFourFiveSixSevenEightNine');
+	});
 
-		cy.get('.list-group-item.list-group-item-action').eq(1);
-		// cy.get('.list-group-item.list-group-item-action').eq(0).click();
-		// cy.get('.list-group-item.active.list-group-item-action').eq(0).should('exist');
+	it('TC05. Validar que un elementos de la pestaña  <Grid>  pueda ser seleccionado correctamente.',() => {
+		const randomClick = Cypress._.random(0,8);
+
+		selectablePage.clickOnGridTab();
+		selectablePage.get.HorizontalDiv().should('not.have.class','active');
+		selectablePage.clickOnGridItems(randomClick);
+		selectablePage.get.HorizontalDiv().should('have.class','active');
+	});
+	it('TC06. Validar que un o varios elementos de la pestaña  <Grid>  puedan ser des-seleccionados correctamente.',() => {
+		const randomClick = Cypress._.random(0,8);
+		selectablePage.clickOnGridTab();
+		selectablePage.clickOnGridItems(randomClick);
+		selectablePage.get.HorizontalDiv().should('have.class','active');
+		selectablePage.clickOnGridItems(randomClick);
+		selectablePage.get.HorizontalDiv().should('not.have.class','active');
+
 	});
 });
