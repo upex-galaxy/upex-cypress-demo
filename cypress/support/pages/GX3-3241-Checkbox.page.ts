@@ -5,14 +5,12 @@ class Checkbox {
 		checkedElement: () => Cypress.Chainable<JQuery<HTMLElement>>;
         folders: () => Cypress.Chainable<JQuery<HTMLElement>>;
 		result: () => Cypress.Chainable<JQuery<HTMLElement>>;
-		toggleButton: () => Cypress.Chainable<JQuery<HTMLElement>>
     } = {
 			expandAll: () => cy.get('svg.rct-icon-expand-all'),
 			collapseAll: () => cy.get('svg.rct-icon-collapse-all'),
 			checkedElement: () => cy.get('[for^="tree-node"]:has(.rct-icon-check)'),
-			folders: () => cy.get('.rct-title'),
+			folders: () => cy.get('[for^="tree-node"]'),
 			result: () => cy.get('#result > .text-success'),
-			toggleButton: () => cy.get('[aria-label="Toggle"]')
 		};
 	clickExpandAll(): void {
 		this.get.expandAll().click();
@@ -20,27 +18,32 @@ class Checkbox {
 	clickCollapseAll(): void {
 		this.get.collapseAll().click();
 	}
-	fetchAndStoreFolderNames(): void {
+	fetchFoldersNames = (allSelected: boolean = true) => {
 		const names: string[] = [];
+		const selectorToFetch = allSelected ? this.get.folders() : this.get.checkedElement();
 
-		this.get.folders().each((folder) => {
-			cy.wrap(folder).invoke('text').then((text: string) => {
+		selectorToFetch.each((element) => {
+			cy.wrap(element).invoke('text').then((text: string) => {
 				let trimmedName = text.trim().toLowerCase().replace(/\s+/g, '').replace(/\.doc$/, '');
 				trimmedName = trimmedName.replace(/(?<=\w)(file)/i, 'File');
 				names.push(trimmedName);
 			});
 		}).then(() => {
-			cy.wrap(names).as('folderNames');
+			const aliasName = allSelected ? 'allFoldersNames' : 'randomFolderNames';
+			cy.wrap(names).as(aliasName);
 		});
-	}
+	};
 	getResultsNames(): void {
 		this.get.result().then(result => {
 			const names = result.map((index: number, folder: HTMLElement) => Cypress.$(folder).text()).get();
 			cy.wrap(names).as('resultNames');
 		});
 	}
-	clickToggleButton(): void {
-		this.get.toggleButton().click();
+	selectRandomCheckbox() : void {
+		this.get.folders().its('length').then(count => {
+			const randomCheckbox = Cypress._.random(count);
+			this.get.folders().eq(randomCheckbox).click();
+		});
 	}
 }
 export const checkbox = new Checkbox;
