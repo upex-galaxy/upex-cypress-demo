@@ -21,8 +21,15 @@ class Checkbox {
 		this.get.collapseAll().click();
 	}
 	fetchAndStoreFolderNames(): void {
-		this.get.folders().then(folders => {
-			const names = folders.map((index: number, folder: HTMLElement) => Cypress.$(folder).text()).get();
+		const names: string[] = [];
+
+		this.get.folders().each((folder) => {
+			cy.wrap(folder).invoke('text').then((text: string) => {
+				let trimmedName = text.trim().toLowerCase().replace(/\s+/g, '').replace(/\.doc$/, '');
+				trimmedName = trimmedName.replace(/(?<=\w)(file)/i, 'File');
+				names.push(trimmedName);
+			});
+		}).then(() => {
 			cy.wrap(names).as('folderNames');
 		});
 	}
