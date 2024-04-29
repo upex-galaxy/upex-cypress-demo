@@ -1,0 +1,8 @@
+{
+"elements":{
+	"ListTab":"#demo-tab-list",
+	"GridTab":"#demo-ta-grid",
+	"VerticalListDiv": "#verticalListContainer li",
+	"HorizontalDiv": "#demo-tabpane-grid li"
+	}
+}
