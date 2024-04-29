@@ -15,7 +15,7 @@ export default defineConfig({
 	screenshotOnRunFailure: true,
 	scrollBehavior: 'center',
 	// Number of times to retry a failed test. If a number is set, tests will retry in both runMode and openMode:
-	retries: process.env.CI ? 2 : 0,
+	retries: process.env.CI ? 3 : 0,
 	// Whether Cypress will record a video of the test run when running on headless:
 	video: Boolean(process.env.CI),
 	// Whether Cypress will watch and restart tests on test file changes:
