@@ -4,13 +4,15 @@ class Checkbox {
 		collapseAll: () => Cypress.Chainable<JQuery<HTMLElement>>;
 		checkedElement: () => Cypress.Chainable<JQuery<HTMLElement>>;
         folders: () => Cypress.Chainable<JQuery<HTMLElement>>;
-		result: () => Cypress.Chainable<JQuery<HTMLElement>>
+		result: () => Cypress.Chainable<JQuery<HTMLElement>>;
+		toggleButton: () => Cypress.Chainable<JQuery<HTMLElement>>
     } = {
 			expandAll: () => cy.get('svg.rct-icon-expand-all'),
 			collapseAll: () => cy.get('svg.rct-icon-collapse-all'),
 			checkedElement: () => cy.get('.rct-icon-check'),
 			folders: () => cy.get('.rct-title'),
-			result: () => cy.get('#result > .text-success')
+			result: () => cy.get('#result > .text-success'),
+			toggleButton: () => cy.get('[aria-label="Toggle"]')
 		};
 	clickExpandAll(): void {
 		this.get.expandAll().click();
@@ -29,6 +31,9 @@ class Checkbox {
 			const names = result.map((index: number, folder: HTMLElement) => Cypress.$(folder).text()).get();
 			cy.wrap(names).as('resultNames');
 		});
+	}
+	clickToggleButton(): void {
+		this.get.toggleButton().click();
 	}
 }
 export const checkbox = new Checkbox;

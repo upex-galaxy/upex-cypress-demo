@@ -43,4 +43,18 @@ describe('GX3-3241 | ToolsQA | Elements | Checkbox', () => {
 		cy.contains('.rct-title', 'Home').click();
 		checkbox.get.result().should('not.exist');
 	});
+	it.only('GX3-3242 | TC4: Verify that checking a mid-level parent checkbox(Desktop, Documents or Downloads) checks all its child checkboxes and parent.', () => {
+		checkbox.clickToggleButton();
+		checkbox.fetchAndStoreFolderNames();
+		cy.get<string[]>('@folderNames').then((folderNames: string[]) => {
+			const randomFolder = Math.floor(Math.random() * (folderNames.length - 1) + 1);
+			cy.contains('.rct-title', folderNames[randomFolder]).click();
+		});
+		checkbox.getResultsNames();
+		cy.get<string[]>('@resultNames').then((resultNames: string[]) => {
+			resultNames.forEach((resultName: string) => {
+				expect(successTags).to.include(resultName);
+			});
+		});
+	});
 });
