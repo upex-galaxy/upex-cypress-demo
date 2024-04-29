@@ -28,14 +28,12 @@ describe('GX3-3241 | ToolsQA | Elements | Checkbox', () => {
 		checkbox.get.result().should('have.css', 'color').and('eq', 'rgb(40, 167, 69)');
 	});
 	it('GX3-3242 | TC3: Verify that unchecking a parent checkbox(Home folder) unchecks all its child checkboxes', () => {
+		checkbox.clickExpandAll();
 		cy.contains('.rct-title', 'Home').click();
-		checkbox.getResultsNames();
-		cy.get<string[]>('@resultNames').then((resultNames: string[]) => {
-			resultNames.forEach((resultName: string) => {
-				expect(successTags).to.include(resultName);
-			});
-		});
+		checkbox.get.folders().should('have.length', 17);
+		checkbox.get.checkedElement().should('have.length', 17);
 		cy.contains('.rct-title', 'Home').click();
+		checkbox.get.checkedElement().should('not.exist');
 		checkbox.get.result().should('not.exist');
 	});
 	it('GX3-3242 | TC4: Verify that checking a mid-level parent checkbox(Desktop, Documents or Downloads) checks all its child checkboxes and parent.', () => {

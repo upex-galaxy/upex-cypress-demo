@@ -9,7 +9,7 @@ class Checkbox {
     } = {
 			expandAll: () => cy.get('svg.rct-icon-expand-all'),
 			collapseAll: () => cy.get('svg.rct-icon-collapse-all'),
-			checkedElement: () => cy.get('.rct-icon-check'),
+			checkedElement: () => cy.get('[for^="tree-node"]:has(.rct-icon-check)'),
 			folders: () => cy.get('.rct-title'),
 			result: () => cy.get('#result > .text-success'),
 			toggleButton: () => cy.get('[aria-label="Toggle"]')
