@@ -1,0 +1,11 @@
+{
+	"Elements":{
+		"downloadButton":"#downloadButton",
+		"uploadButton":"#uploadFile",
+		"uploadPathElement":"#uploadedFilePath"
+	}
+	"Data":{
+		"downloadFile":"sampleFile.jpeg",
+		"uploadPathText":"C:\fakepath\sampleFile.jpeg",
+	}
+}
