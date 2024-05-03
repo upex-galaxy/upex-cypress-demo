@@ -5,12 +5,14 @@ class Checkbox {
 		checkedElement: () => Cypress.Chainable<JQuery<HTMLElement>>;
         folders: () => Cypress.Chainable<JQuery<HTMLElement>>;
 		result: () => Cypress.Chainable<JQuery<HTMLElement>>;
+		getAlias: (alias: string) => Cypress.Chainable<string[]>;
     } = {
 			expandAll: () => cy.get('svg.rct-icon-expand-all'),
 			collapseAll: () => cy.get('svg.rct-icon-collapse-all'),
 			checkedElement: () => cy.get('[for^="tree-node"]:has(.rct-icon-check)'),
 			folders: () => cy.get('[for^="tree-node"]'),
 			result: () => cy.get('#result > .text-success'),
+			getAlias: (alias : string) => cy.get<string[]>(alias)
 		};
 	clickExpandAll(): void {
 		this.get.expandAll().click();
@@ -46,4 +48,4 @@ class Checkbox {
 		});
 	}
 }
-export const checkbox = new Checkbox;
+export const checkboxPage = new Checkbox;
