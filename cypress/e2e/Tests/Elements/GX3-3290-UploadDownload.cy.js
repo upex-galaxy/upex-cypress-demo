@@ -18,4 +18,14 @@ describe('GX3-3290 | ToolsQA | Elements | Upload and Download',() => {
 		//cy.verifyDownload('sampleFile.jpeg');
 		cy.verifyDownload('sampleFile.jpeg');
 	});
+	it.only('TC02: Validate upload files successfully',() =>
+	{
+		uploadDownload.get.downloadButton().should('have.text','download');
+		uploadDownload.clickDownload();
+
+		// cy.verifyDownload('small-file-10MB.zip');
+		//cy.verifyDownload('sampleFile.jpeg');
+		cy.verifyDownload('sampleFile.jpeg');
+	});
+
 });

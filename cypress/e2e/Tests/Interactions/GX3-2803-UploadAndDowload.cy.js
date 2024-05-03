@@ -8,15 +8,16 @@ describe('', () => {
 	});
 
 	it('TC1 | Validar que se descargue de archivo', () => {
-		selectPage.get.selectDowload().should('have.text', 'Download');
-		selectPage.BtnSelectDowload();
+		uploadDownload.get.downloadButton().should('have.text','Download');
+		uploadDownload.clickDownload();
 		cy.readFile('cypress/downloads/sampleFile.jpeg', 'binary').should((buffer) => {
 			expect(buffer.length).to.be.gt(1000);
 		});
 	});
 	it('TC2 | Validar que se suba una imagen', () => {
-		selectPage.BtnSelectFile();
-		selectPage.get.confirmFilePath().should('contain', 'upex');
+		uploadDownload.get.uploadButton().should('have.text','Seleccionar archivo');
+		uploadDownload.clickUpload();
+		uploadDownload.get.uploadPathElement().should('contain','upex');
 	});
 
 });
