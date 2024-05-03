@@ -17,8 +17,8 @@ describe('GX3-3241 | ToolsQA | Elements | Checkbox', () => {
 		cy.contains('.rct-title', 'Home').click();
 		checkboxPage.fetchFoldersNames(true);
 		checkboxPage.getResultsNames();
-		cy.get<string[]>('@resultNames').then((resultNames: string[]) => {
-			cy.get<string[]>('@allFoldersNames').then((folderNames: string[]) => {
+		checkboxPage.get.getAlias('@resultNames').then((resultNames: string[]) => {
+			checkboxPage.get.getAlias('@allFoldersNames').then((folderNames: string[]) => {
 				resultNames.forEach((resultName: string) => {
 					expect(folderNames).to.include(resultName);
 				});
@@ -40,9 +40,9 @@ describe('GX3-3241 | ToolsQA | Elements | Checkbox', () => {
 		checkboxPage.selectRandomCheckbox();
 		checkboxPage.fetchFoldersNames(false);
 		checkboxPage.getResultsNames();
-		cy.get<string[]>('@resultNames').then((resultNames: string[]) => {
-			cy.get<string[]>('@randomFolderNames').then((randomFolderNames: string[]) => {
-				resultNames.forEach((resultName: string) => {
+		checkboxPage.get.getAlias('@resultNames').then((resultNames) => {
+			checkboxPage.get.getAlias('@randomFolderNames').then((randomFolderNames) => {
+				resultNames.forEach((resultName) => {
 					expect(randomFolderNames).to.include(resultName);
 				});
 			});
