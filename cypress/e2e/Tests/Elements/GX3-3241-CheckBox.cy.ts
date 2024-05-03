@@ -1,4 +1,4 @@
-import { checkbox } from '../../../support/pages/GX3-3241-Checkbox.page';
+import { checkboxPage } from '../../../support/pages/GX3-3241-Checkbox.page';
 
 describe('GX3-3241 | ToolsQA | Elements | Checkbox', () => {
 
@@ -7,16 +7,16 @@ describe('GX3-3241 | ToolsQA | Elements | Checkbox', () => {
 		cy.url().should('contain', 'checkbox');
 	});
 	it('GX3-3242 | TC1 | Verify that the user can expand all folders and then collapse all except "Home"', () => {
-		checkbox.clickExpandAll();
-		checkbox.get.folders().should('have.length', 17);
-		checkbox.clickCollapseAll();
-		checkbox.get.folders().should('have.length', 1).and('have.text', 'Home');
+		checkboxPage.clickExpandAll();
+		checkboxPage.get.folders().should('have.length', 17);
+		checkboxPage.clickCollapseAll();
+		checkboxPage.get.folders().should('have.length', 1).and('have.text', 'Home');
 	});
 	it('GX3-3242 | TC2 | Verify that all folders are selected when the user clicks the "Home" folder', () => {
-		checkbox.clickExpandAll();
+		checkboxPage.clickExpandAll();
 		cy.contains('.rct-title', 'Home').click();
-		checkbox.fetchFoldersNames(true);
-		checkbox.getResultsNames();
+		checkboxPage.fetchFoldersNames(true);
+		checkboxPage.getResultsNames();
 		cy.get<string[]>('@resultNames').then((resultNames: string[]) => {
 			cy.get<string[]>('@allFoldersNames').then((folderNames: string[]) => {
 				resultNames.forEach((resultName: string) => {
@@ -24,22 +24,22 @@ describe('GX3-3241 | ToolsQA | Elements | Checkbox', () => {
 				});
 			});
 		});
-		checkbox.get.result().should('have.css', 'color').and('eq', 'rgb(40, 167, 69)');
+		checkboxPage.get.result().should('have.css', 'color').and('eq', 'rgb(40, 167, 69)');
 	});
 	it('GX3-3242 | TC3: Verify that unchecking a parent checkbox(Home folder) unchecks all its child checkboxes', () => {
-		checkbox.clickExpandAll();
+		checkboxPage.clickExpandAll();
 		cy.contains('.rct-title', 'Home').click();
-		checkbox.get.folders().should('have.length', 17);
-		checkbox.get.checkedElement().should('have.length', 17);
+		checkboxPage.get.folders().should('have.length', 17);
+		checkboxPage.get.checkedElement().should('have.length', 17);
 		cy.contains('.rct-title', 'Home').click();
-		checkbox.get.checkedElement().should('not.exist');
-		checkbox.get.result().should('not.exist');
+		checkboxPage.get.checkedElement().should('not.exist');
+		checkboxPage.get.result().should('not.exist');
 	});
 	it('GX3-3242 | TC4: Verify that the user can select a random checkbox', () => {
-		checkbox.clickExpandAll();
-		checkbox.selectRandomCheckbox();
-		checkbox.fetchFoldersNames(false);
-		checkbox.getResultsNames();
+		checkboxPage.clickExpandAll();
+		checkboxPage.selectRandomCheckbox();
+		checkboxPage.fetchFoldersNames(false);
+		checkboxPage.getResultsNames();
 		cy.get<string[]>('@resultNames').then((resultNames: string[]) => {
 			cy.get<string[]>('@randomFolderNames').then((randomFolderNames: string[]) => {
 				resultNames.forEach((resultName: string) => {
@@ -47,6 +47,6 @@ describe('GX3-3241 | ToolsQA | Elements | Checkbox', () => {
 				});
 			});
 		});
-		checkbox.get.result().should('have.css', 'color').and('eq', 'rgb(40, 167, 69)');
+		checkboxPage.get.result().should('have.css', 'color').and('eq', 'rgb(40, 167, 69)');
 	});
 });
