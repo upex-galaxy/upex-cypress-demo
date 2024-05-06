@@ -14,13 +14,13 @@ describe('ToolsQA | Elements | Upload and Download', () => {
 
 		cy.readFile('cypress/downloads/sampleFile.jpeg', 'binary').should((buffer) => {
 			expect(buffer.length).to.be.gt(1000);
+			expect(buffer).to.be.exist;
 		});
 
 	});
 	it.only('TC02: Validate upload files successfully',() =>
 	{
 		//uploadDownload.get.uploadButton().should('have.text','Seleccionar archivo');
-		uploadDownload.clickUpload();
 		//añadir archivo
 		uploadDownload.PathUpload();
 		uploadDownload.get.uploadPathElement().should('contain','upex');

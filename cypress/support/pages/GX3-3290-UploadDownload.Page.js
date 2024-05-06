@@ -11,7 +11,7 @@ class UploadDownload {
 		this.get.uploadButton().click();
 	}
 	PathUpload() {
-		this.get.uploadPathElement().selectFile('../../fixtures/images/upexlogo.png');
+		this.get.uploadButton().selectFile('cypress/fixtures/images/upexlogo.png');
 	}
 }
 
