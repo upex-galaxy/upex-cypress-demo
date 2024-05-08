@@ -18,12 +18,9 @@ describe('ToolsQA | Elements | Upload and Download', () => {
 		});
 
 	});
-	it.only('TC02: Validate upload files successfully',() =>
+	it('TC02: Validate upload files successfully',() =>
 	{
-		//uploadDownload.get.uploadButton().should('have.text','Seleccionar archivo');
-		//añadir archivo
 		uploadDownload.PathUpload();
 		uploadDownload.get.uploadPathElement().should('contain','upex');
 	});
-
 });
