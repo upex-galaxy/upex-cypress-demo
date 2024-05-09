@@ -14,7 +14,7 @@ run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref
 
 on:
   push:
-    branches: ['GX3-3098-elements-radio-buttons'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+    branches: ['DianaNuevoTrabajo'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
   workflow_dispatch:
 
 
@@ -43,7 +43,7 @@ jobs:
       with:
         browser: chrome
         command: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-          bun run test:chrome cypress/e2e/Tests/Elements/GX3-3098-Buttons.cy.js
+          bun run test:chrome cypress/e2e/Tests/Widgets/diana.cy.js
 
     - name: 📬Generate JUnit/Mocha Report
       if: always()
