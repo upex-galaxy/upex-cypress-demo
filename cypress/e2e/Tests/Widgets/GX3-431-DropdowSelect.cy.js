@@ -1,7 +1,14 @@
+//import { dropdown } from '../../../support/pages/GX3-431-DropdowSelect.Page';
+//import data from'../../../fixtures/data/Widgets/GX3-431-DropdowSelect.json';
+
 describe('GX3-431 ToolsQA | Widgets | Dropdown - Select Menu',() => {
-	beforeEach('Precondicion', () => {
+	beforeEach('Precondicion:Visitar la Url Select-Menu', () => {
 		cy.visit('/select-menu');
-		cy.url('contain','select-menu');
+		cy.url().should('contain','select-menu');
+	});
+	it('431-TC01 Seleccionar Valor aleatorio del Select Value Menú satisfatoriamente', () => {
+		//const randomValue = cypress._
+		cy.get('.css-1wy0on6').eq(0);
 	});
 }
 );
