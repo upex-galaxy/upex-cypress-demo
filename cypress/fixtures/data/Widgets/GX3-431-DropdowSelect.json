@@ -1,0 +1,18 @@
+¨{
+	"input":{
+		"inputSelectValue":
+		"inputSelectOne":
+		"inputOldStyleMenu":
+		"inputMultiselectMenu":
+		"inputStandardmultiselect":
+	},
+	¨{
+		"Value":{
+			"valueSelectValue":"",
+			"valueSelectOne":"",
+			"valueOldStyleMenu":"",
+			"valueMultiselectMenu":"",
+			"valueStandarmultiselect":"",
+		}
+	}
+}
