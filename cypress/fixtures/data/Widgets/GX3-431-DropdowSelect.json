@@ -8,11 +8,11 @@
 	},
 	¨{
 		"Value":{
-			"valueSelectValue":"",
-			"valueSelectOne":"",
-			"valueOldStyleMenu":"",
-			"valueMultiselectMenu":"",
-			"valueStandarmultiselect":"",
+			"valueSelectValue":"#withOptGroup",
+			"valueSelectOne":"#selectOne",
+			"valueOldStyleMenu":"#oldSelectMenu",
+			"valueMultiselectMenu":".css-2b097c-container" eq(2),
+			"valueStandarmultiselect":"#carsP",
 		}
 	}
 }
