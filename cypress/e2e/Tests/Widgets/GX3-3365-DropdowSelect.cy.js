@@ -1,4 +1,4 @@
-import { dropdown } from '../../../support/pages/GX3-431-DropdowSelect.Page';
+import { dropdown } from '../../../support/pages/GX3-3365-DropdowSelect.Page';
 import data from'../../../fixtures/data/Widgets/GX3-431-DropdowSelect.json';
 
 describe('GX3-431 ToolsQA | Widgets | Dropdown - Select Menu',() => {
