@@ -9,6 +9,7 @@ describe('GX3-431 ToolsQA | Widgets | Dropdown - Select Menu',() => {
 	it('431-TC01 Seleccionar Valor aleatorio del Select Value Menú satisfatoriamente', () => {
 		//const randomValue = Cypress._.random(0.5);
 		dropdown.clickValueMenu();
+		dropdown.
 	});
 }
 );

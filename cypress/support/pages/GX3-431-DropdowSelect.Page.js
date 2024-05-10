@@ -1,15 +1,10 @@
 class Dropdown {
 get={
-	inputSelectValue: 
-	inputSelectOne:
-	inputOldStyleMenu:
-	inputMultiselectMenu:
-	inputStandardmultiselect:
 	valueSelectValue: () = > cy.get ('#withOptGroup'),
 	valueSelectOne: () = > cy.get('#selectOne'),
 	valueOldStyleMenu: () = > cy.get('#oldSelectMenu'),
 	valueMultiselectMenu:".css-2b097c-container" eq(2),
-	valueStandarmultiselect:"#cars",
+	valueStandarmultiselect: () = > cy.get('#cars'),
 }
 clickValueMenu() {
 	this.get.valueSelectValue().click();
