@@ -1,4 +1,4 @@
-import { dropdown } from '../../../support/pages/GX3-3365-DropdowSelect.Page';
+import { dropdownPage } from '../../../support/pages/GX3-3365-DropdowSelect.Page';
 //import data from'../../../fixtures/data/Widgets/GX3-3365-DropdowSelect.json';
 
 describe('GX3-3365 ToolsQA | Widgets | Dropdown - Select Menu',() => {
@@ -8,11 +8,20 @@ describe('GX3-3365 ToolsQA | Widgets | Dropdown - Select Menu',() => {
 	});
 	it('3365-TC01 Seleccionar Valor aleatorio del Select Value Menú satisfatoriamente', () => {
 		//const randomValue = Cypress._.random(0.5);
-		dropdown.clickValueMenu();
-		cy.get('#withOptGroup [class*="menu"]');
+		//const randomValue = Math.floor(0,5);
+		//dropdownPage.clickValueMenu();
+		//dropdownPage.clickValueMenuOpen();
+		cy.get('[id*="react-select-2-option-"]').then;(arrayElements => {
+			const randomElement = Cypress._.random(0, arrayElements.lehgth -1);
+			cy.wrap(arrayElements).eq(randomElemen).click();
+		})
+	});
+		//dropdownPage.
+
+		//cy.get('#withOptGroup [class*="menu"]'); Para averiguar el id de los elementos del desplegable al abrirse.
 		 //css-yk16xz-control
-		 //dropdown.get.valueMultiselectMenu();
-		 //dropdown.clickMultiselectMenu();
+		 //dropdownPage.get.valueMultiselectMenu();
+		 //dropdownPage.clickMultiselectMenu();
 	});
 }
 );
