@@ -11,6 +11,10 @@ describe('GX3-3365 ToolsQA | Widgets | Dropdown - Select Menu',() => {
 		//const randomValue = Math.floor(0,5);
 		dropdownPage.clickValueMenu();
 		dropdownPage.clickValueMenuOpen();
+		//cy.get('select').select('Dr.').should('have.value', 'Dr.');
+
+		//cy.contains('Texto del array option').should('have.attr', 'id', '[id*="react-select-2-option-"]')
+
 		// cy.get('[id*="react-select-2-option-"]').then(arrayElements => {
 		// 	const randomElement = Cypress._.random(0, arrayElements.lehgth -1);
 		// 	cy.wrap(arrayElements).eq(randomElement).then(selectedElement => {
@@ -20,10 +24,13 @@ describe('GX3-3365 ToolsQA | Widgets | Dropdown - Select Menu',() => {
 		// 	});
 		//});
 	});
-	//dropdownPage.
 
-	//cy.get('#withOptGroup [class*="menu"]'); Para averiguar el id de los elementos del desplegable al abrirse.
-		 //css-yk16xz-control
+	it.only('3365-TC02 Seleccionar Valor aleatorio del Select One Menú satisfatoriamente', () => {
+
+		//dropdownPage.clickOneMenu();
+		//dropdownPage.clickOneMenuOpen();
+		cy.get('[tabindex="-1"]').eq(0);
 		 //dropdownPage.get.valueMultiselectMenu();
 		 //dropdownPage.clickMultiselectMenu();
+		 });
 });
