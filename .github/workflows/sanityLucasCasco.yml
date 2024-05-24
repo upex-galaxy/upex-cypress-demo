@@ -69,7 +69,7 @@ jobs:
         password: ${{secrets.XRAY_CLIENT_SECRET}}
         testFormat: 'junit' #! NO CAMBIAR
         testPaths: 'cypress/tests_results/junit/chrome_regression_report.xml' #! NO CAMBIAR
-        testExecKey: 'GX3-2355' #todo: EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+        testExecKey: 'GX3-3430' #todo: EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
         projectKey: 'GX3' #todo: EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
       env:
         XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_SECRET }}
