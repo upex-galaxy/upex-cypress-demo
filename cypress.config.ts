@@ -55,6 +55,7 @@ export default defineConfig({
 					launchOptions.args.push(`--load-extension=${pathToExtension}`);
 					if (process.env.CI) { launchOptions.args.push('--headless=new'); }
 					// eslint-disable-next-line no-console
+					console.log('✅ AdBlock extension for chrome is loaded');
 					// console.log(launchOptions.args); //? print all current args to check if the extension is being loaded
 					return launchOptions;
 				}
