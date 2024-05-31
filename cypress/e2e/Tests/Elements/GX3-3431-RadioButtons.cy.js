@@ -20,7 +20,3 @@ describe ('GX3-3432 | TS: ToolsQA | Elements | Radio Buttons', () =>
 		cy.get('label[for=\'noRadio\']').should('contain', 'No');
 	});
 });
-//Se importa la funcion
-import { removeLogs } from '@helper/RemoveLogs';
-//Se ejecuta la funcion para evitar los errores
-removeLogs();
