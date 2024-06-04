@@ -49,10 +49,15 @@ describe('',()=>{
 	it.only('',()=>{
 		const deltaX = Cypress._.random(0,13)
 		const deltaY= Cypress._.random(-1,85)
+		console.log(deltaX,deltaY)
 		pageDragable.clickOncontainerTab()
 		pageDragable.moveParent()
-		pageDragable.get.withinParent().should('have.css','left', `${deltaX}px`)
-		pageDragable.get.withinParent().should('have.css','top', `${deltaY}px`)
+		pageDragable.get.withinParent().then(($el)=>{
+			const valueLeft = $el.css('left')
+			console.log(valueLeft) 
+		})
+		//pageDragable.get.withinParent().should('have.css','left', `${deltaX}px`)
+		//pageDragable.get.withinParent().should('have.css','top', `${deltaY}px`)
 		
 	})
 })

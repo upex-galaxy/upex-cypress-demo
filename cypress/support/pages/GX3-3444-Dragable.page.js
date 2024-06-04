@@ -11,7 +11,7 @@ class PageDragable{
 
 		containerTab:()=> cy.get('[id$="tab-containerRestriction"]'),
 		withinBox:()=> cy.get('[class^="draggable"]').eq(0),
-		withinParent:()=> cy.get('[class^="draggable"]').eq(1),
+		withinParent:()=> cy.get('div span[class$="ui-draggable-handle"]'),
 		
 		styleTab:()=> cy.get('[id$="tab-cursorStyle"]')
 
@@ -44,7 +44,7 @@ class PageDragable{
 
 	
 	moveParent(X,Y){
-		this.get.withinParent().move({deltaX:X ,deltaY:Y ,force: true})
+		this.get.withinParent().move({deltaX:X ,deltaY:Y})
 	}
 }
 
