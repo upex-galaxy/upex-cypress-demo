@@ -9,7 +9,7 @@
 #todo: 7 -> Listo! Guarda los cambios (git add + git commit) y pushea (git push) para ejectutar este Pipeline!
 #*Resultado: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí.
 
-name: 🧪Pipeline SanityTest
+name: 🧪Pipeline SanityTest by
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 
 on:
@@ -103,7 +103,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: cypress/tests_reports/chrome_mocha_report
+        publish_dir: cypress/tests_reports
         # by default, this report will be deployed to branch: gh-pages
 
     - name: 🔔Slack Notification of Done
