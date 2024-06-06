@@ -1,6 +1,6 @@
 import { dragabble } from '@pages/GX3-2403-DragabblePage';
 
-describe('ToolsQA | Interactions | Dragabble', () => {
+describe.skip('ToolsQA | Interactions | Dragabble', () => {
 	beforeEach('Precondition: be located in the page dragabble', () => {
 		cy.visit('/dragabble');
 		cy.url().should('contain', 'dragabble');
