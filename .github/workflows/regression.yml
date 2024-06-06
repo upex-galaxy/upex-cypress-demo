@@ -9,9 +9,26 @@ on:
   push:
     branches:
     - QA
+  # workflow_run:
+  #   workflows: ["SmokeTest"] #? For example purposes
+  #   types:
+  #   - completed
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to run the tests'
+        required: false
+        default: 'qa'
+        type: choice
+        options:
+        - 'dev'
+        - 'qa'
+        - 'stage'
+        - 'prod'
 
 jobs:
   RegressionTesting:
+    if: ${{ github.ref == 'refs/heads/QA' || github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' }}
     name: regression
     runs-on: ubuntu-latest
     strategy:
@@ -41,6 +58,8 @@ jobs:
         browser: ${{ matrix.browser }}
         command: | #!NO EDITAR. Es para correr todas las pruebas del Repo.
           bun run regression:${{ matrix.browser }}
+      env:
+        CYPRESS_ENVIRONMENT: ${{ github.event.inputs.environment }}
 
     - name: 📬Generate JUnit/Mocha Report for ${{ matrix.browser }}
       if: always()
@@ -81,6 +100,14 @@ jobs:
         name: regression-${{ matrix.browser }}-mocha-report
         path: cypress/tests_reports/${{ matrix.browser }}_mocha_report
         retention-days: 15
+
+    - name: 🚀Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./cypress/tests_reports/${{ matrix.browser }}_mocha_report
+        # destination_dir: ${{ matrix.browser }} #? Disabled because of example
+        # by default, this report will be deployed to branch: gh-pages
 
   Ari-Slack-Notification:
     needs: [RegressionTesting]
