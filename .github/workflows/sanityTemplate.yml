@@ -103,7 +103,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: cypress/tests_reports
+        publish_dir: ./cypress/tests_reports/chrome_mocha_report
         # by default, this report will be deployed to branch: gh-pages
 
     - name: 🔔Slack Notification of Done
