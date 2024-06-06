@@ -79,7 +79,7 @@ jobs:
         fi
 
     - name: ✅Import Test Results to Xray TX -- ${{ env.TXID }} (${{ matrix.browser }})
-      if: env.XRAY_CLIENT != '' && env.XRAY_SECRET != '' #? Corre este paso si las variables de entorno están definidas
+      if: always()
       uses: mikepenz/xray-action@v3
       with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
         username: ${{ env.XRAY_CLIENT }}
@@ -102,6 +102,7 @@ jobs:
         retention-days: 15
 
     - name: 🚀Deploy to GitHub Pages
+      if: always()
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
