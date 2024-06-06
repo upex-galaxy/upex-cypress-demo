@@ -98,6 +98,14 @@ jobs:
         path: cypress/tests_reports/chrome_mocha_report
         retention-days: 15
 
+    - name: 🚀Deploy to GitHub Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: cypress/tests_reports/chrome_mocha_report
+        # by default, this report will be deployed to branch: gh-pages
+
     - name: 🔔Slack Notification of Done
       if: env.SLACK_WEBHOOK != '' #? Corre este paso si la variable de entorno está definida
       uses: rtCamp/action-slack-notify@v2
