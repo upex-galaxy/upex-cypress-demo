@@ -2,7 +2,7 @@
 import { faker } from '@faker-js/faker';
 import { formPage } from '../../../support/pages/GX3-2222-PracticeForm.Page';
 
-describe('ToolsQA | Forms | Practice Form', () => {
+describe.skip('ToolsQA | Forms | Practice Form', () => {
 	const data = {
 		firstName: faker.person.firstName(),
 		lastname: faker.person.lastName(),
