@@ -9,7 +9,6 @@ import 'cypress-file-upload';
 
 beforeEach(() => {
 	Cypress.on('uncaught:exception', () => false); // returning false here prevents Cypress from failing the test
-	cy.intercept({ resourceType: /^(xhr|fetch)$/ }, { statusCode: 200, body: { data: 'fake data' } });
 	cy.intercept({ resourceType: /xhr|fetch/ }, { log: false });
 });
 

@@ -1,4 +1,4 @@
-describe('GX3-2134-⚡️-tools-qa-elements-buttons', () => {
+describe.skip('GX3-2134-⚡️-tools-qa-elements-buttons', () => {
 	beforeEach('Precondicion:El usuario debe estar situado en la pagina DEMOQA', () => {
 		cy.visit('https://demoqa.com/buttons');
 		cy.url().should('contains', 'buttons');

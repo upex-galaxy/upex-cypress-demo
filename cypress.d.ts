@@ -3,7 +3,8 @@ import type { SpaceLoginPage } from '@pages/SpaceLogin.Page';
 import type { SpaceDestinationPage } from '@pages/SpaceProduct.Page';
 declare global {
     namespace Cypress {
-        interface Chainable$ {
+        // eslint-disable-next-line no-unused-vars
+        interface Chainable {
             /**
              * @description
              * El método page() te permite utilizar y encadenar comandos Cypress a los Page Object Models de tu proyecto, lo que facilita la interacción con las páginas de tu aplicación bajo prueba.
