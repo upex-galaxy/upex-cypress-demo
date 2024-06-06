@@ -106,7 +106,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./cypress/tests_reports/${{ matrix.browser }}_mocha_report
+        publish_dir: ./cypress/tests_reports/${{ matrix.browser }}_mocha_report/${{ matrix.browser }}_regression_mocha.html
         # destination_dir: ${{ matrix.browser }} #? Disabled because of example
         # by default, this report will be deployed to branch: gh-pages
 
