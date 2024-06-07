@@ -11,26 +11,32 @@ describe('GX3-3365 ToolsQA | Widgets | Dropdown - Select Menu',() => {
 		//const randomValue = Math.floor(0,5);
 		dropdownPage.clickValueMenu();
 		dropdownPage.clickValueMenuOpen();
-		//cy.get('select').select('Dr.').should('have.value', 'Dr.');
 
-		//cy.contains('Texto del array option').should('have.attr', 'id', '[id*="react-select-2-option-"]')
+		//then(value => {
+		//dropdownPage.clickValueMenuOpen().invoke('text').should('eq', value);
 
-		// cy.get('[id*="react-select-2-option-"]').then(arrayElements => {
-		// 	const randomElement = Cypress._.random(0, arrayElements.lehgth -1);
-		// 	cy.wrap(arrayElements).eq(randomElement).then(selectedElement => {
-		// 		cy.wrap(selectedElement).invoke('text').then(text => {
-		// 			cy.wrap(text).click();
-		// 		});
-		// 	});
-		//});
 	});
+	//cy.get('select').select('Dr.').should('have.value', 'Dr.');
 
-	it.only('3365-TC02 Seleccionar Valor aleatorio del Select One Menú satisfatoriamente', () => {
+	//cy.contains('Texto del array option').should('have.attr', 'id', '[id*="react-select-2-option-"]')
 
-		//dropdownPage.clickOneMenu();
-		//dropdownPage.clickOneMenuOpen();
-		cy.get('[tabindex="-1"]').eq(0);
+	// cy.get('[id*="react-select-2-option-"]').then(arrayElements => {
+	// 	const randomElement = Cypress._.random(0, arrayElements.lehgth -1);
+	// 	cy.wrap(arrayElements).eq(randomElement).then(selectedElement => {
+	// 		cy.wrap(selectedElement).invoke('text').then(text => {
+	// 			cy.wrap(text).click();
+	// 		});
+	// 	});
+	//});
+});
+
+it.skip('3365-TC02 Seleccionar Valor aleatorio del Select One Menú satisfatoriamente', () => {
+
+	//dropdownPage.clickOneMenu();
+	//dropdownPage.clickOneMenuOpen();
+
+	cy.get('[tabindex="-1"]').eq(0);
+
 		 //dropdownPage.get.valueMultiselectMenu();
 		 //dropdownPage.clickMultiselectMenu();
 		 });
-});
