@@ -104,6 +104,7 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./cypress/tests_reports/chrome_mocha_report
+        destination_dir: sanity
         # by default, this report will be deployed to branch: gh-pages
 
     - name: 🔔Slack Notification of Done
