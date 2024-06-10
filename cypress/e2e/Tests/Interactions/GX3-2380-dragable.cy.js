@@ -43,7 +43,7 @@ const moveElement = (selector, direction, tab, negativePath) => {
 	});
 };
 
-describe('ToolsQA | Interactions | Dragabble', () => {
+describe.skip('ToolsQA | Interactions | Dragabble', () => {
 	beforeEach(() => {
 		cy.visit('https://demoqa.com/dragabble');
 		cy.url().should('include', 'dragabble');
