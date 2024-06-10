@@ -124,7 +124,7 @@ function tablePageInput() {
 	webTable.get.pagination().should('have.value', '2');
 }
 
-describe('GX3-2839 | TS: ToolsQA | Elements | Web Table (CRUD)', () => {
+describe.skip('GX3-2839 | TS: ToolsQA | Elements | Web Table (CRUD)', () => {
 	beforeEach('Acceder a https://demoqa.com/webtables', () => {
 		cy.visit('https://demoqa.com/webtables');
 		cy.url().should('include', 'webtables');

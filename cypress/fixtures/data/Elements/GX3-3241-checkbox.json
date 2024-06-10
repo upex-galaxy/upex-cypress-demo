@@ -1,0 +1,15 @@
+{
+    "baseUrl": "https://demoqa.com/",
+    "checkoxEndpoint": "checkbox",
+	"selectorContainsText": ".rct-title",
+    "texts": {
+        "homeFolder": "Home"
+    },
+    "elementCounts": {
+        "totalFolders": 17,
+        "visibleFoldersAfterCollapse": 1
+    },
+    "colors": {
+        "textSuccess": "rgb(40, 167, 69)"
+    }
+}

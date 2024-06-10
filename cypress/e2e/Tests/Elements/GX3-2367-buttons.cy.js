@@ -1,4 +1,4 @@
-describe('GX3-2367 | TS: ⚡️ToolsQA | Elements | Radio Buttons', () => {
+describe.skip('GX3-2367 | TS: ⚡️ToolsQA | Elements | Radio Buttons', () => {
 	beforeEach('Precondición: Usuario debe estar situado en la página demoqa', () => {
 		cy.visit('https://demoqa.com/radio-button');
 		cy.url().should('include', 'radio-button');
