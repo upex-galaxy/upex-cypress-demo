@@ -9,6 +9,17 @@ import 'dotenv/config';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+type Envs = 'dev' | 'qa' | 'stage' | 'prod';
+const enviroments = {
+	dev: 'https://dev-demoqa.com',
+	qa: 'https://qa-demoqa.com',
+	stage: 'https://stage-demoqa.com',
+	prod: 'https://demoqa.com',
+};
+const cyEnv = process.env.CYPRESS_ENVIRONMENT as Envs;
+const env = process.env.CI ? cyEnv : 'prod' as Envs;
+const baseUrl = enviroments[env];
+
 export default defineConfig({
 	// @Ely: CYPRESS DASHBOARD PARA VER NUESTRAS EJECUCIONES EN LA WEB:
 	projectId: '2pw67q', //? ID del proyecto CYPRESS-DEMO-CLOUD. Record Key para usar: "b6bde345-a36c-4fab-ad8c-cddc065d2cba"
@@ -36,7 +47,7 @@ export default defineConfig({
 	},
 	// E2E Testing runner
 	e2e: {
-		baseUrl: 'https://demoqa.com',
+		baseUrl: baseUrl,
 		// Glob pattern to determine what test files to load:
 		specPattern: [ 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}' ],
 		excludeSpecPattern: [ 'cypress/e2e/**/*.example.cy.js' ],
