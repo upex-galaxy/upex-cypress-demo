@@ -20,6 +20,6 @@ describe('GX3-3651|ToolsQA | Elements | Buttons', () => {
 
 	it('3652 | TC4: Validar hacer click en el button “Double click Me” y NO se muestre el mensaje del button', () => {
 		cy.get('#doubleClickBtn').click();
-		cy.get('#doubleClickMessage').should('not.exist');
+		cy.get('p#doubleClickMessage').should('not.exist');
 	});
 });
