@@ -18,7 +18,7 @@ describe('GX3-3754| ToolsQA | Elements | Text Box: Fill form and Submit', () => 
 		cy.get('p#permanentAddress').should('contain.text', data.dataValid.permanetAddress);
 		
 	});
-	it.only('3755 | TC2: Validar No registrar correctamente cuando el campo de "Full Name" esta vacio.', () => {
+	it('3755 | TC2: Validar No registrar correctamente cuando el campo de "Full Name" esta vacio.', () => {
 		
 		cy.get('#userEmail').type(data.dataTc2.email);
 		cy.get('#currentAddress').type(data.dataTc2.currentAddress);
@@ -58,30 +58,49 @@ describe('GX3-3754| ToolsQA | Elements | Text Box: Fill form and Submit', () => 
 	});
 	it('3755 | TC5: Validar No registrar correctamente cuando el campo de "Email" esta vacío.', () => {
 		cy.get('#userName').type(data.dataTc5.fullName);
-		cy.get('#userEmail').type(data.dataTc5.email);
 		cy.get('#currentAddress').type(data.dataTc5.currentAddress);
 		cy.get('#permanentAddress').type(data.dataTc5.permanetAddress);
 		cy.get('#submit').click();
 
 		//Validacion 
+		cy.get('#name').should('not.exist');
+		cy.get('#email').should('not.exist');
+		cy.get('p#currentAddress').should('not.exist');
+		cy.get('p#permanentAddress').should('not.exist');
 		
 	});
 
-	it.skip('3755 | TC6: Validar No registrar correctamente cuando el “email” no contiene “@“', () => {
+	it('3755 | TC6: Validar No registrar correctamente cuando el “email” no contiene “@“', () => {
 		cy.get('#userName').type(data.dataTc6.fullName);
 		cy.get('#userEmail').type(data.dataTc6.email);
 		cy.get('#currentAddress').type(data.dataTc6.currentAddress);
 		cy.get('#permanentAddress').type(data.dataTc6.permanetAddress);
 		cy.get('#submit').click();
+
+		//Validacion campo useremail en error
+		cy.get('#userEmail').should('have.class','field-error');
 		//Validacion
-		cy.get('#email').should('not.exist') 
+		cy.get('#name').should('not.exist');
+		cy.get('#email').should('not.exist');
+		cy.get('p#currentAddress').should('not.exist');
+		cy.get('p#permanentAddress').should('not.exist');
+		
+		
 	});
-	it('3755 | TC7: Validar No registrar correctamente cuando el “email” no contiene “caracter alfanumerico“ despues del “@“', () => {
+	it.only('3755 | TC7: Validar No registrar correctamente cuando el “email” no contiene “caracter alfanumerico“ despues del “@“', () => {
 		cy.get('#userName').type(data.dataTc7.fullName);
 		cy.get('#userEmail').type(data.dataTc7.email);
 		cy.get('#currentAddress').type(data.dataTc7.currentAddress);
 		cy.get('#permanentAddress').type(data.dataTc7.permanetAddress);
 		cy.get('#submit').click();
+
+		//Validacion campo user email en error
+		cy.get('#userEmail').should('have.class','field-error');
+		//Validacion
+		cy.get('#name').should('not.exist');
+		cy.get('#email').should('not.exist');
+		cy.get('p#currentAddress').should('not.exist');
+		cy.get('p#permanentAddress').should('not.exist');
 	});
 	it('3755 | TC8: Validar No registrar correctamente cuando el “email” no contiene “.“ despues del “caracter alfanumerico “ despues de “@”', () => {
 		cy.get('#userName').type(data.dataTc8.fullName);
