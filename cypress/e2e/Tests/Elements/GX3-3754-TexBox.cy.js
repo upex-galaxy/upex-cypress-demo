@@ -1,7 +1,7 @@
 import data from '@data/Elements/GX3-3754-TextBox.json';
 describe('GX3-3754| ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	beforeEach('PRC: El usuario debe estar situado en la pagina Demo Qa', () => {
-		cy.visit('/text-box');
+		cy.visit('https://demoqa.com/text-box');
 		cy.url().should('include', 'text-box');
 	});
 	it('3755 | TC1: Validar registrar correctamente al ingresar los datos en el formulario.', () => {
