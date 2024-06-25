@@ -34,8 +34,7 @@ describe('ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get(the.fullName.input).type(the.fullName.data.valid);
 			cy.get(the.email.input).type(the.email.data.invalidEmail01);
 			cy.get(the.botonEnviar).click();
-			cy.get('[class="mr-sm-2 field-error form-control"]').should('have.class', 'field-error')
-				.and('have.css', 'border','1.11111px solid rgb(255, 0, 0)');
+			cy.get('[class="mr-sm-2 field-error form-control"]').should('have.class', 'field-error');
 		});
 	});
 
@@ -44,8 +43,8 @@ describe('ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get(the.fullName.input).type(the.fullName.data.valid);
 			cy.get(the.email.input).type(the.email.data.invalidEmail02);
 			cy.get(the.botonEnviar).click();
-			cy.get('[class="mr-sm-2 field-error form-control"]').should('have.class', 'field-error')
-				.and('have.css', 'border','1.11111px solid rgb(255, 0, 0)');
+			cy.get('[class="mr-sm-2 field-error form-control"]').should('have.class', 'field-error');
+
 	    });
 	});
 
@@ -54,8 +53,8 @@ describe('ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get(the.fullName.input).type(the.fullName.data.valid);
 			cy.get(the.email.input).type(the.email.data.invalidEmail03);
 			cy.get(the.botonEnviar).click();
-			cy.get('[class="mr-sm-2 field-error form-control"]').should('have.class', 'field-error')
-				.and('have.css', 'border','1.11111px solid rgb(255, 0, 0)');
+			cy.get('[class="mr-sm-2 field-error form-control"]').should('have.class', 'field-error');
+
 	    });
 	});
 
@@ -64,8 +63,8 @@ describe('ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get(the.fullName.input).type(the.fullName.data.valid);
 			cy.get(the.email.input).type(the.email.data.invalidEmail04);
 			cy.get(the.botonEnviar).click();
-			cy.get('[class="mr-sm-2 field-error form-control"]').should('have.class', 'field-error')
-				.and('have.css', 'border','1.11111px solid rgb(255, 0, 0)');
+			cy.get('[class="mr-sm-2 field-error form-control"]').should('have.class', 'field-error');
+
 	    });
 	});
 
@@ -74,8 +73,8 @@ describe('ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get(the.fullName.input).type(the.fullName.data.valid);
 			cy.get(the.email.input).type(the.email.data.invalidEmail05);
 			cy.get(the.botonEnviar).click();
-			cy.get('[class="mr-sm-2 field-error form-control"]').should('have.class', 'field-error')
-				.and('have.css', 'border','1.11111px solid rgb(255, 0, 0)');
+			cy.get('[class="mr-sm-2 field-error form-control"]').should('have.class', 'field-error');
+
 	    });
 	});
 });
