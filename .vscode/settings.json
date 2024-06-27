@@ -90,11 +90,14 @@
     "terminal.integrated.tabs.defaultIcon": "source-control",
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
     "typescript.updateImportsOnFileMove.enabled": "always",
-    "workbench.colorTheme": "One Dark Pro Darker",
+    "workbench.colorTheme": "Dracula",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.settings.editor": "json",
     "workbench.tree.enableStickyScroll": true,
     "[github-actions-workflow]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "cSpell.words": [
+        "Kenly"
+    ]
 }
