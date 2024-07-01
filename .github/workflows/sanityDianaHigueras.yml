@@ -9,14 +9,38 @@
 #todo: 7 -> Listo! Guarda los cambios (git add + git commit) y pushea (git push) para ejectutar este Pipeline!
 #*Resultado: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí.
 
-name: 🧪Pipeline SanityTest
+name: 🧪Pipeline SanityTest by
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 
 on:
   push:
     branches: ['GX3-3981-automation-space-beyond-booking-book-a-destination-in-checkout'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
   workflow_dispatch:
-
+    inputs:
+      suite:
+        description: 'Run Sanity Test Suite path'
+        required: true
+        type: string
+        default: 'cypress/e2e/Tests/Forms'
+      xray_tx:
+        description: 'Test Execution Key in Jira Xray'
+        required: true
+        type: string
+      xray_project:
+        description: 'Project Key in Jira Xray'
+        required: false
+        type: string
+        default: 'GX3'
+      environment:
+        description: 'Environment to run the tests'
+        required: false
+        default: 'qa'
+        type: choice
+        options:
+        - 'dev'
+        - 'qa'
+        - 'stage'
+        - 'prod'
 
 jobs:
   SanityTest:
@@ -43,7 +67,9 @@ jobs:
       with:
         browser: chrome
         command: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-          bun run test:chrome cypress/e2e/Tests/Checkout/GX3-3981-Booking-Checkout.cy.js
+          bun run test:chrome cypress/e2e/Tests/Checkout/GX3-3981-Booking-Checkout.cy.ts
+      env:
+        CYPRESS_ENVIRONMENT: ${{ github.event.inputs.environment }}
 
     - name: 📬Generate JUnit/Mocha Report
       if: always()
@@ -72,7 +98,16 @@ jobs:
         path: cypress/tests_reports/chrome_mocha_report
         retention-days: 15
 
+    - name: 🚀Deploy to GitHub Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./cypress/tests_reports/chrome_mocha_report
+        destination_dir: sanity
+        # by default, this report will be deployed to branch: gh-pages
     - name: 🔔Slack Notification of Done
+
       if: env.SLACK_WEBHOOK != '' #? Corre este paso si la variable de entorno está definida
       uses: rtCamp/action-slack-notify@v2
       env:
