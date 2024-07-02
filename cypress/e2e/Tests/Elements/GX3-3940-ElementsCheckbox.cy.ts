@@ -12,12 +12,20 @@ describe('GX-3 3941 | ToolsQA | Elements | Checkbox', () => {
 
 	});
 	it('3941 | TC2: Validar que el check box "Desktop" debe automarcar el interior y mostrar el mensaje de éxito',() => {
-		checkBoxPage.clickToggle();
+		checkBoxPage.clickDesktopToggle();
 		//checkBoxPage.get.verifyCommandChecked().should('have.class','rct-icon rct-icon-check');
 		cy.get('@desktopCheckboxIcon').should('have.class', 'rct-icon rct-icon-check');
 		cy.get('@noteCheckboxIcon').should('have.class', 'rct-icon rct-icon-check');
 		cy.get('@commandCheckboxIcon').should('have.class', 'rct-icon rct-icon-check');
 		checkBoxPage.get.verifyResultMessage().should('have.text','desktopnotescommands');
+	});
+	it('3941 | TC3: Validar que el check box "Documents" debe automarcar el interior y mostrar el mensaje de éxito', () => {
+		checkBoxPage.clickDocToggle();
+		cy.get('@documentsCheckboxIcon').should('have.class','rct-icon-check');
+		cy.get('@workspaceCheckboxIcon').should('have.class','rct-icon-check');
+		cy.get('@officeCheckboxIcon').should('have.class','rct-icon-check');
+		//checkBoxPage.get.verifyResultMessage().should('have.text','documents workspace office');
+
 	});
 
 });

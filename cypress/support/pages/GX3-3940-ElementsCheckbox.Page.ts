@@ -5,12 +5,16 @@ class CheckBox {
 		collapseButton: () => cy.get('[title="Collapse all"]'),
 		collapseReaction: () => cy.get('.rct-node.rct-node-parent'),
 
-		// check clickButtons
+		// TC2
 		homeToggle: () => cy.get('[title="Toggle"]'),
 		desktopLabel: () => cy.get('[for="tree-node-desktop"]'),
 		verifyNoteChecked: () => cy.get('[for="tree-node-notes"]'),
 		verifyCommandChecked: () => cy.get('[for="tree-node-commands"]'),
-		verifyResultMessage:() => cy.get('.text-success')
+		verifyResultMessage:() => cy.get('.text-success'),
+		//TC3
+		documentsLabel:() => cy.get('[for="tree-node-documents"]'),
+		verifyWorkspaceChecked:() => cy.get('[for="tree-node-workspace"]'),
+		verifyOfficeChecked: () => cy.get('[for="tree-node-office"]'),
 
 		//desktopReaction:() => cy.get('.rct-icon-check'),
 	};
@@ -23,7 +27,7 @@ class CheckBox {
 		this.get.collapseButton().click();
 	}
 
-	clickToggle() {
+	clickDesktopToggle() {
 		this.get.homeToggle().click();
 		this.get.homeToggle().children().eq(1).click();
 		this.get.desktopLabel().click();
@@ -40,6 +44,25 @@ class CheckBox {
 			cy.get('.rct-icon-check').as('commandCheckboxIcon');
 		});
 	}
+
+	clickDocToggle() {
+		this.get.homeToggle().click();
+		this.get.homeToggle().children().eq(2).click();
+		this.get.documentsLabel().click();
+
+		this.get.documentsLabel().within(() => {
+			cy.get('.rct-icon-check').as('documentsCheckboxIcon');
+		});
+
+		this.get.verifyWorkspaceChecked().within(() => {
+			cy.get('.rct-icon-check').as('workspaceCheckboxIcon');
+		});
+
+		this.get.verifyOfficeChecked().within(() => {
+			cy.get('.rct-icon-check').as('officeCheckboxIcon');
+		});
+	}
+
 }
 
 export const checkBoxPage = new CheckBox();
