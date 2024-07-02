@@ -15,8 +15,10 @@ class CheckBox {
 		documentsLabel:() => cy.get('[for="tree-node-documents"]'),
 		verifyWorkspaceChecked:() => cy.get('[for="tree-node-workspace"]'),
 		verifyOfficeChecked: () => cy.get('[for="tree-node-office"]'),
-
-		//desktopReaction:() => cy.get('.rct-icon-check'),
+		//TC4
+		downloadsLabel: () => cy.get('[for="tree-node-downloads"]'),
+		verifyWordFileChecked:() => cy.get('[for="tree-node-wordFile"]'),
+		verifyExcelFileChecked: () => cy.get('[for="tree-node-excelFile"]'),
 	};
 
 	clickExpandButton() {
@@ -60,6 +62,24 @@ class CheckBox {
 
 		this.get.verifyOfficeChecked().within(() => {
 			cy.get('.rct-icon-check').as('officeCheckboxIcon');
+		});
+	}
+
+	clickDownloadsToggle() {
+		this.get.homeToggle().click();
+		this.get.homeToggle().children().eq(3).click();
+		this.get.downloadsLabel().click();
+
+		this.get.downloadsLabel().within(() => {
+			cy.get('.rct-icon-check').as('downloadsCheckboxIcon');
+		});
+
+		this.get.verifyWordFileChecked().within(() => {
+			cy.get('.rct-icon-check').as('wordFileCheckboxIcon');
+		});
+
+		this.get.verifyExcelFileChecked().within(() => {
+			cy.get('.rct-icon-check').as('excelFileCheckboxIcon');
 		});
 	}
 
