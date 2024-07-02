@@ -11,4 +11,13 @@ describe('GX-3 3941 | ToolsQA | Elements | Checkbox', () => {
 		checkBoxPage.get.collapseReaction().should('have.class','rct-node-collapsed');
 
 	});
+	it('3941 | TC2: Validar que el check box "Desktop" debe automarcar el interior y mostrar el mensaje de éxito',() => {
+		checkBoxPage.clickToggle();
+		//checkBoxPage.get.verifyCommandChecked().should('have.class','rct-icon rct-icon-check');
+		cy.get('@desktopCheckboxIcon').should('have.class', 'rct-icon rct-icon-check');
+		cy.get('@noteCheckboxIcon').should('have.class', 'rct-icon rct-icon-check');
+		cy.get('@commandCheckboxIcon').should('have.class', 'rct-icon rct-icon-check');
+		checkBoxPage.get.verifyResultMessage().should('have.text','desktopnotescommands');
+	});
+
 });
