@@ -1,6 +1,9 @@
 class DroppableElement {
 	get = {
-		tabSimple: () => cy.get('#droppableExample-tab-simple'),
+		simpleTab: () => cy.get('#droppableExample-tab-simple'),
+		accceptTab: () => cy.get('#droppableExample-tab-accept'),
+		preventPropogationTab: () => cy.get('#droppableExample-tab-preventPropogation'),
+		revertableTab:() => cy.get('#droppableExample-tab-revertable')
 
 	};
 }
