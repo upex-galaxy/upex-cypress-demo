@@ -1,4 +1,4 @@
-import { droppablePage } from '@pages/GX3-4005-Droppable.Page';
+import { droppablePage } from '../../../support/pages/GX3-4005-Droppable.Page';
 describe('GX3 4006 | ToolsQA | Interactions | Droppable', () => {
 	beforeEach('PRC: El usuario debe estar situado en la pagina de Demo QA', () => {
 		cy.visit('https://demoqa.com/droppable');
