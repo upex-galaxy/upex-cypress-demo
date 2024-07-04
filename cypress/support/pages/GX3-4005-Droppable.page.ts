@@ -29,4 +29,4 @@ class DroppableElement {
 
 }
 
-export const droppablePage = new DroppableElement();
+export const droppaBlePage = new DroppableElement();
