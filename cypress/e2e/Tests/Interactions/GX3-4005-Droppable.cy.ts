@@ -28,6 +28,7 @@ describe('GX3 4006 | ToolsQA | Interactions | Droppable', () => {
 		droppablePage.dragdropTc1();
 		droppablePage.get.droppableAction().should('have.text','Dropped!');
 		droppablePage.get.droppableAction().should('have.class','ui-state-highlight');
+		//probando
 
 	});
 });
