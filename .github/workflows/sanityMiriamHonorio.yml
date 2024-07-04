@@ -43,7 +43,7 @@ jobs:
       with:
         browser: chrome
         command: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-          bun run test:chrome cypress/e2e/Tests/Interactions/GX3-4005-Droppable.cy.ts
+          bun run test:chrome cypress/e2e/Tests/Interactions/GX3-4005-droppable.cy.ts
 
     - name: 📬Generate JUnit/Mocha Report
       if: always()
