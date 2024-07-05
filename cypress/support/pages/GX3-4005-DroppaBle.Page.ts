@@ -8,6 +8,8 @@ class DroppableElement {
 		dragmeBox:() => cy.get('#draggable'),
 		droppableAction:() => cy.get('#droppable:first'),
 		dragcontainer: () => cy.get('#simpleDropContainer')
+		//TC4
+		//acceptableDropTc
 
 	};
 	clickAcceptTab() {
@@ -28,5 +30,4 @@ class DroppableElement {
 	}
 
 }
-
 export const droppaBlePage = new DroppableElement();

@@ -1,4 +1,4 @@
-import { droppaBlePage } from '@pages/GX3-4005-droppable.Page';
+import { droppaBlePage } from '@pages/GX3-4005-DroppaBle.Page';
 describe('GX3 4006 | ToolsQA | Interactions | Droppable', () => {
 	beforeEach('PRC: El usuario debe estar situado en la pagina de Demo QA', () => {
 		cy.visit('https://demoqa.com/droppable');
@@ -28,7 +28,10 @@ describe('GX3 4006 | ToolsQA | Interactions | Droppable', () => {
 		droppaBlePage.dragdropTc1();
 		droppaBlePage.get.droppableAction().should('have.text','Dropped!');
 		droppaBlePage.get.droppableAction().should('have.class','ui-state-highlight');
-		//probando
+
+	});
+	it.only('4006 | TC4: Validar que "Acepptable"  es arrastrado a "Drop Here" y se visualiza el Text “Dropped!” ',() => {
+		droppaBlePage.clickAcceptTab();
 
 	});
 });
