@@ -45,12 +45,39 @@ describe('GX3 4006 | ToolsQA | Interactions | Droppable', () => {
 	it('4006 | TC6: Validar que "Drag me" se arrastre a "Outer Droppable" ', () => {
 		droppaBlePage.clickPreventPropogationTab();
 		droppaBlePage.preventPropogationOuterDrop();
+		cy.get('@ppOuterDropBox').should('have.class', 'ui-state-highlight');
 		cy.get('@pLabelInNotGredyDrop').should('have.text', 'Dropped!');
 	});
 
 	it('4006 | TC7: Validar que "Drag me" se arrastre a "Inner Droppable (not greedy)" ', () => {
 		droppaBlePage.clickPreventPropogationTab();
 		droppaBlePage.preventPropogationDrop();
-		cy.get('@ppDropBox').should('have.text', 'Dropped!');
+		cy.get('@pLabelInnerNotGredyDrop').should('have.text', 'Dropped!');
+		cy.get('@ppDropBox').should('have.class', 'ui-state-highlight');
+
+	});
+
+	it('4006 | TC8: Validar que "Drag me" se arrastre a "Inner Droppable (greedy)"', () => {
+		droppaBlePage.clickPreventPropogationTab();
+		droppaBlePage.preventPropogationInnerDropGreddy();
+		cy.get('@pLabelInnerGredyDrop').should('have.text', 'Dropped!');
+		cy.get('@ppInnerGredyDropBox').should('have.class', 'ui-state-highlight');
+
+	});
+
+	it('4006 | TC9: Validar que "Will Revert" se arrastre a "Drop here" entonces el área "Will revert" regresa a su posicion inicial y se muestra el text "Dropped!"', () => {
+		droppaBlePage.clickRevertableTab();
+		droppaBlePage.revertableDrop();
+		cy.get('@revertDropBox').should('have.text', 'Dropped!');
+		cy.get('@revertDropBox').should('have.class', 'ui-state-highlight');
+
+	});
+
+	it.only('4006 | TC10: Validar que "Not Revert" se arrastre a "Drop here" entonces el área "Not revert" no se puede eliminar del area "Drop here" y  se muestra el text "Dropped"', () => {
+		droppaBlePage.clickRevertableTab();
+		droppaBlePage.notRevertDrop();
+		cy.get('@notRevertDropBox').should('have.text', 'Dropped!');
+		cy.get('@notRevertDropBox').should('have.class', 'ui-state-highlight');
+
 	});
 });
