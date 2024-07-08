@@ -73,7 +73,7 @@ describe('GX3 4006 | ToolsQA | Interactions | Droppable', () => {
 
 	});
 
-	it.only('4006 | TC10: Validar que "Not Revert" se arrastre a "Drop here" entonces el área "Not revert" no se puede eliminar del area "Drop here" y  se muestra el text "Dropped"', () => {
+	it('4006 | TC10: Validar que "Not Revert" se arrastre a "Drop here" entonces el área "Not revert" no se puede eliminar del area "Drop here" y  se muestra el text "Dropped"', () => {
 		droppaBlePage.clickRevertableTab();
 		droppaBlePage.notRevertDrop();
 		cy.get('@notRevertDropBox').should('have.text', 'Dropped!');
