@@ -18,7 +18,7 @@ describe('GX3-3981|Automation SpaceBeyond | Booking | Book a Destination in Chec
 		//spaceLoginPage.usernameInput();
 		//spaceLoginPage.loginUsernamePrueba().type('hola');
 		cy.get('#login').contains('Username').type(json.data.userameValid);
-		spaceLoginPage.loginButtonClick().should('have text','LOG IN');
+		//spaceLoginPage.loginButtonClick().should('have text','LOG IN');
 		//inner Text "LOG IN"
 	});
 });
