@@ -42,9 +42,8 @@ jobs:
       uses: cypress-io/github-action@v4
       with:
         browser: chrome
-        command: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:j
+        command: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
           bun run test:chrome cypress/e2e/Tests/Elements/GX3-4164-TextBox.cy.ts
-
 
     - name: 📬Generate JUnit/Mocha Report
       if: always()
@@ -99,3 +98,4 @@ jobs:
         SLACK_MESSAGE: ':test_tube: CYPRESS: SanityTest is Done and imported to Jira :rocket:'
         SLACK_COLOR: ${{ job.status }}
         SLACK_ICON: https://image.cdn2.seaart.ai/2023-12-06/clo9g0h4msbc73ac2sog/99e1abc36f32945cd4bacf5ee7448e96194545f7_high.webp
+
