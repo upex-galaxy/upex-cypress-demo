@@ -43,7 +43,7 @@ jobs:
       with:
         browser: chrome
         command: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:j
-          bun run test:chrome cypress/e2e/Tests/Elements/GX3-4087-Radio-Buttons.cy.ts
+          bun run test:chrome cypress/e2e/Tests/Elements/GX3-4164-TextBox.cy.ts
 
 
     - name: 📬Generate JUnit/Mocha Report
