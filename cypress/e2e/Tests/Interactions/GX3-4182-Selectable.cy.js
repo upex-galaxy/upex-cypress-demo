@@ -6,7 +6,7 @@ describe ('GX3-37623 | TS: ToolsQA | Interactions | Selectable',() =>
 		cy.visit('https://demoqa.com/selectable');
 		cy.url('https://demoqa.com/text-box').should('contain', '/selectable');
 	});
-	it('TC1: Validate select a element of the tab “List”', () =>
+	it('TC1: Validate select an element of the tab “List”', () =>
 	{
 		selectablePage.selectRandomListItem().then($selectedItem => {
 			cy.wrap($selectedItem)
@@ -14,7 +14,7 @@ describe ('GX3-37623 | TS: ToolsQA | Interactions | Selectable',() =>
 				.and('have.class', 'active');
 		});
 	});
-	it('TC2: Validate deselect a element of the tab “List"', () =>
+	it('TC2: Validate deselect an element of the tab “List"', () =>
 	{
 		selectablePage.deselectListItem().then($selectedItem => {
 			cy.wrap($selectedItem)
