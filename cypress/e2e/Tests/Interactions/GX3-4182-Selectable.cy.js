@@ -6,7 +6,7 @@ describe ('GX3-4183 | TS: ToolsQA | Interactions | Selectable',() =>
 		cy.visit('https://demoqa.com/selectable');
 		cy.url('https://demoqa.com/text-box').should('contain', '/selectable');
 	});
-	it('TC1: Validate select an element of the tab “List”', () =>
+	it('GX3-4183 | TC1: Validate select an element of the tab “List”', () =>
 	{
 		selectablePage.selectRandomListItem().then($selectedItem => {
 			cy.wrap($selectedItem)
@@ -14,7 +14,7 @@ describe ('GX3-4183 | TS: ToolsQA | Interactions | Selectable',() =>
 				.and('have.class', 'active');
 		});
 	});
-	it('TC2: Validate deselect an element of the tab “List"', () =>
+	it('GX3-4183 | TC2: Validate deselect an element of the tab “List"', () =>
 	{
 		selectablePage.deselectListItem().then($selectedItem => {
 			cy.wrap($selectedItem)
@@ -22,7 +22,7 @@ describe ('GX3-4183 | TS: ToolsQA | Interactions | Selectable',() =>
 				.and('not.have.class', 'active');
 		});
 	});
-	it('TC3: Validate select an element of the tab “Grid”', () =>
+	it('GX3-4183 | TC3: Validate select an element of the tab “Grid”', () =>
 	{
 		selectablePage.selectGridTab().then($selectedGridButton => {
 			cy.wrap($selectedGridButton)
@@ -34,7 +34,7 @@ describe ('GX3-4183 | TS: ToolsQA | Interactions | Selectable',() =>
 				.and('have.class', 'active');
 		});
 	});
-	it('TC4: Validate deselect an element of the tab “Grid”', () =>
+	it('GX3-4183 | TC4: Validate deselect an element of the tab “Grid”', () =>
 	{
 		selectablePage.deselectListItem().then($selectedItem => {
 			cy.wrap($selectedItem)
