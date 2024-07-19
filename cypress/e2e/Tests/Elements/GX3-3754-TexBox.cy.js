@@ -16,16 +16,16 @@ describe('GX3-3754| ToolsQA | Elements | Text Box: Fill form and Submit', () => 
 		cy.get('#email').should('contain.text', data.dataValid.email);
 		cy.get('p#currentAddress').should('contain.text', data.dataValid.currentAddress);
 		cy.get('p#permanentAddress').should('contain.text', data.dataValid.permanetAddress);
-		
+
 	});
 	it.skip('3755 | TC2: Validar No registrar correctamente cuando el campo de "Full Name" esta vacio.', () => {
-		
+
 		cy.get('#userEmail').type(data.dataTc2.email);
 		cy.get('#currentAddress').type(data.dataTc2.currentAddress);
 		cy.get('#permanentAddress').type(data.dataTc2.permanetAddress);
 		cy.get('#submit').click();
 
-		//Validacion 
+		//Validacion
 		cy.get('#name').should('not.exist');
 		cy.get('#email').should('not.exist');
 		cy.get('p#currentAddress').should('not.exist');
@@ -37,7 +37,7 @@ describe('GX3-3754| ToolsQA | Elements | Text Box: Fill form and Submit', () => 
 		cy.get('#userEmail').type(data.dataTc3.email);
 		cy.get('#permanentAddress').type(data.dataTc3.permanetAddress);
 		cy.get('#submit').click();
-		
+
 		//Validacion
 		cy.get('#name').should('not.exist');
 		cy.get('#email').should('not.exist');
@@ -50,7 +50,7 @@ describe('GX3-3754| ToolsQA | Elements | Text Box: Fill form and Submit', () => 
 		cy.get('#currentAddress').type(data.dataTc4.currentAddress);
 		cy.get('#submit').click();
 
-		//Validacion 
+		//Validacion
 		cy.get('#name').should('not.exist');
 		cy.get('#email').should('not.exist');
 		cy.get('p#currentAddress').should('not.exist');
@@ -62,12 +62,12 @@ describe('GX3-3754| ToolsQA | Elements | Text Box: Fill form and Submit', () => 
 		cy.get('#permanentAddress').type(data.dataTc5.permanetAddress);
 		cy.get('#submit').click();
 
-		//Validacion 
+		//Validacion
 		cy.get('#name').should('not.exist');
 		cy.get('#email').should('not.exist');
 		cy.get('p#currentAddress').should('not.exist');
 		cy.get('p#permanentAddress').should('not.exist');
-		
+
 	});
 
 	it('3755 | TC6: Validar No registrar correctamente cuando el “email” no contiene “@“', () => {
@@ -84,8 +84,7 @@ describe('GX3-3754| ToolsQA | Elements | Text Box: Fill form and Submit', () => 
 		cy.get('#email').should('not.exist');
 		cy.get('p#currentAddress').should('not.exist');
 		cy.get('p#permanentAddress').should('not.exist');
-		
-		
+
 	});
 	it('3755 | TC7: Validar No registrar correctamente cuando el “email” no contiene “caracter alfanumerico“ despues del “@“', () => {
 		cy.get('#userName').type(data.dataTc7.fullName);
