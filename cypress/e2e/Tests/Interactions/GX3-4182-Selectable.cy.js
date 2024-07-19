@@ -1,5 +1,5 @@
 import { selectablePage } from '../../../support/pages/GX3-4182-Selectable.Page';
-describe ('GX3-37623 | TS: ToolsQA | Interactions | Selectable',() =>
+describe ('GX3-4183 | TS: ToolsQA | Interactions | Selectable',() =>
 {
 	beforeEach ('User have to be positioned in the DemoQA page', () =>
 	{
