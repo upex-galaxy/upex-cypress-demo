@@ -9,7 +9,7 @@ describe('GX3-4258 | ToolsQA | Elements | Upload and Download', () => {
 		//cy.readFile('cypress/downloads/sampleFile.jpeg').should('exist');
 		cy.readFile('cypress/downloads/sampleFile.jpeg').should('have.length.greaterThan',2000);
 	});
-	it ('4259 | TC1: Validar que se pueda cargar un archivo cuando se presione el boton elegir archivo', () => {
+	it ('4259 | TC2: Validar que se pueda cargar un archivo cuando se presione el boton elegir archivo', () => {
 		upDownloadPage.subirArcxhivo();
 		upDownloadPage.get.uploadedFilePath().should('contain.text','upexlogo.png');
 	});
