@@ -25,7 +25,7 @@ describe('GX3 4288|ToolsQA | Interactions | Selectable', () => {
 			SelectablePage.get.itemsGrid().eq(randomsIndexGrid).should('have.class','active');
 		});
 	});
-	it.only('GX3-4289 | TC4: Validar que deseleccionar un elemento del Grid',() => {
+	it('GX3-4289 | TC4: Validar que deseleccionar un elemento del Grid',() => {
 		SelectablePage.clickTabGrid();
 		SelectablePage.desSeleccionarItemsGrid();
 		cy.get('@randomsGridD').then(randomsGridD => {
