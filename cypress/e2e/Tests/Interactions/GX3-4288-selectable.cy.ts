@@ -4,7 +4,8 @@ describe('GX3 4288|ToolsQA | Interactions | Selectable', () => {
 		cy.visit('https://demoqa.com/selectable');
 		cy.url().should('contain','selectable');
 	});
-	it ('GX3-4289 | TC1: Validar que se pueda seleccionar un elemento de la lista',() => {//	SelectablePage.clickRandomsItemsList();
+	it.only('GX3-4289 | TC1: Validar que se pueda seleccionar un elemento de la lista',() => {//	SelectablePage.clickRandomsItemsList();
+		SelectablePage.desSeleccionarItemsList();
 		cy.get('@indexrandoms').then(indexrandoms => {
 			cy.log(indexrandoms);
 			SelectablePage.get.itemsList().eq(indexrandoms).should('have.class','active');
