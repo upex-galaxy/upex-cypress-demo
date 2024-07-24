@@ -3,7 +3,7 @@ import { selectPage } from '../../../support/pages/GX3-2438-SelectMenu.Page';
 describe ('', () => {
 
 	beforeEach('', () => {
-		cy.visit('/select-menu');
+		cy.visit('https://demoqa.com/select-menu');
 		cy.url().should('contain', 'select');
 	});
 

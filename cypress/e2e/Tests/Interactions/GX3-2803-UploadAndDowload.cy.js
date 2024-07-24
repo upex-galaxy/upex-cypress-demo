@@ -3,7 +3,7 @@ import { selectPage } from '../../../support/pages/GX3-2803-UploadAndDowload.Pag
 describe('', () => {
 
 	beforeEach('', () => {
-		cy.visit('/upload-download');
+		cy.visit('https://demoqa.com/upload-download');
 		cy.url().should('contain','upload-download');
 	});
 

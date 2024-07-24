@@ -3,7 +3,7 @@ import { formPage } from '@pages/GX3-2449-PracticeForm.Page.js';
 
 describe('GX3-2449 ToolsQA | Forms | Practice Form', () => {
 	beforeEach('PCR: Usuario debe situarse en el web de Demo QA', () => {
-		cy.visit('/automation-practice-form');
+		cy.visit('https://demoqa.com/automation-practice-form');
 		cy.url().should('contain', 'automation-practice-form');
 	});
 
