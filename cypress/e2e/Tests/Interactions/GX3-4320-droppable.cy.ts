@@ -26,7 +26,7 @@ describe('GX3 4320 | ToolsQA | Interactions | Droppable',() => {
 		DroppablePage.get.revertableDropContainer().should('have.text','Dropped!');
 	});
 
-	it.only('4321 | TC5: Validar que "Not Revert" se arrastre a "Drop here" entonces el área "Not revert" no se puede eliminar del area "Drop here" y  se muestra el text "Dropped"', () => {
+	it('4321 | TC5: Validar que "Not Revert" se arrastre a "Drop here" entonces el área "Not revert" no se puede eliminar del area "Drop here" y  se muestra el text "Dropped"', () => {
 		DroppablePage.clickRevertableTab();
 		DroppablePage.movNotRevertableBox();
 		DroppablePage.get.revertableDropContainer().should('have.text','Dropped!');
