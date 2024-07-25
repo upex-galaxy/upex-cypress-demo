@@ -27,6 +27,15 @@ describe('GX3-4183 | TS: ToolsQA | Interactions | Selectable',() =>
 				.should('not.have.class', 'active');
 		});
 	});
+	it('GX3-4183 | TC3: Validate select an element of the tab “Grid”', () =>
+	{
+		cy.log('Starting TC3');
+		cy.get('#demo-tab-grid').click();
+		selectablePage.selectRandomGridItem().then($selectedGridItem => {
+			cy.wrap($selectedGridItem)
+				.should('have.class', 'active');
+		});
+	});
 	it('GX3-4183 | TC4: Validate deselect an element of the tab “Grid”', () =>
 	{
 		cy.log('Starting TC4');
