@@ -17,7 +17,7 @@ class Droppable {
 		revertableTab:() => cy.get('#droppableExample-tab-revertable'),
 		willRevertableBox:() => cy.get('#revertable'),
 		notRevertableBox:() => cy.get('#notRevertable'),
-		revertableDropContainer:() => cy.get('#droppableExample-tabpane-revertable #droppable')
+		revertableDropContainer:() => cy.get('#droppableExample-tabpane-revertable #droppable p')
 	};
 	//Simple
  	movDragmeBox() {

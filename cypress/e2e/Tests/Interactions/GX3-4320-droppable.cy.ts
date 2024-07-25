@@ -26,17 +26,17 @@ describe('GX3 4320 | ToolsQA | Interactions | Droppable',() => {
 		DroppablePage.get.revertableDropContainer().should('have.text','Dropped!');
 	});
 
-	it('4321 | TC5: Validar que "Not Revert" se arrastre a "Drop here" entonces el área "Not revert" no se puede eliminar del area "Drop here" y  se muestra el text "Dropped"', () => {
+	it.only('4321 | TC5: Validar que "Not Revert" se arrastre a "Drop here" entonces el área "Not revert" no se puede eliminar del area "Drop here" y  se muestra el text "Dropped"', () => {
 		DroppablePage.clickRevertableTab();
 		DroppablePage.movNotRevertableBox();
-		DroppablePage.get.acceptDropContainer().should('have.text','Dropped!');
+		DroppablePage.get.revertableDropContainer().should('have.text','Dropped!');
 	});
 	it('4321  | TC6: Validar que "Drag me" se arrastre a "Outer Droppable', () => {
 		DroppablePage.clickPreventTab();
 		DroppablePage.movDragBoxOuterDroppable();
 		DroppablePage.get.dropBoxOuter().should('have.text','Dropped!');;
 	});
-	it('321  | TC7: Validar que "Drag me" se arrastre a "Inner Droppable (not greedy)', () => {
+	it('4321  | TC7: Validar que "Drag me" se arrastre a "Inner Droppable (not greedy)', () => {
 		DroppablePage.clickPreventTab();
 		DroppablePage.movDragBoxInnerDroppableNg();
 		DroppablePage.get.innerDroppableNoGreedy().should('have.text','Dropped!');
