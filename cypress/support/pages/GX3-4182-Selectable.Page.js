@@ -25,7 +25,7 @@ class Selectable
 	selectRandomGridItem() {
 		return this.get.gridItems().then($items => {
    	 		const randomIndex = Math.floor(Math.random() * $items.length); //One grid item is randomly selected
-			return cy.wrap($items).eq(randomIndex).click({ force:true });
+			return cy.wrap($items).eq(randomIndex).click();
 		});
 	}
 	deselectGridItem() {
