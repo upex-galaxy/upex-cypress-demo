@@ -5,7 +5,7 @@ describe('GX3-3098 | Elements | Radio Buttons',() => {
 	}); //* Antes de todos los test y se ejecuta una sola vez
 
 	beforeEach(() => {
-		cy.visit('/buttons');
+		cy.visit('https://demoqa.com/buttons');
 		//! Con esta aserción vemos la URL
 		cy.url().should('contain', 'buttons');
 		//! Con esta aserción vemos el texto de la etiqueta h1

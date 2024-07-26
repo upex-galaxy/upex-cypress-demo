@@ -2,7 +2,7 @@ import { datePickerPage } from '../../../support/pages/GX3-2823-DatePicker.Page'
 
 describe('GX3-2823 | ToolsQA | Widgets | Date Picker', () => {
 	beforeEach(() => {
-		cy.visit('/date-picker');
+		cy.visit('https://demoqa.com/date-picker');
 		cy.url().should('include', 'date-picker');;
 	});
 	it('2824 | TC1: Check that the Select Date input shows today´s date', () => {
