@@ -42,7 +42,7 @@
 		"@typescript-eslint/eslint-plugin": "6.20.0",
 		"@typescript-eslint/parser": "6.20.0",
 		"cross-env": "7.0.3",
-		"cypress": "13.6.3",
+		"cypress": "13.13.1",
 		"cypress-file-upload": "5.0.8",
 		"cypress-mochawesome-reporter": "3.8.0",
 		"cypress-multi-reporters": "1.6.4",
