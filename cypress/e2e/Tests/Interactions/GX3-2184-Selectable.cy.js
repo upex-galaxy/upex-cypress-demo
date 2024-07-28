@@ -2,7 +2,7 @@ import { selectablePage } from '../../../support/pages/GX3-2184-Selectable.Page'
 
 describe('ToolsQA | Interactions | Selectable', () => {
 	beforeEach(() => {
-		cy.visit('/selectable');
+		cy.visit('https://demoqa.com/selectable');
 		cy.url().should('include', 'selectable');
 	});
 	it('2185 | TC1: Validar seleccionar los elementos de List', () => {

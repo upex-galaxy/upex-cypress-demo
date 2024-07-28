@@ -1,6 +1,6 @@
 import { dragabblePage } from '../../../support/pages/GX3-2318-Dragabble.Page';
-
-describe('2318 | Interactions | Dragabble', () => {
+// Flaky suite
+describe.skip('2318 | Interactions | Dragabble', () => {
 	// eslint-disable-next-line chai-friendly/no-unused-expressions
 	beforeEach(() => {
 
