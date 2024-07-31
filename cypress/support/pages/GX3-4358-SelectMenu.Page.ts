@@ -12,6 +12,7 @@ class SelectMenu {
 		const randomsSel =Cypress._.random(0,10);
 		cy.log('randomsSel');
 		this.get.oldStyleSelect().select('randomsSel');
+		//prueba
 	}
 }
 
