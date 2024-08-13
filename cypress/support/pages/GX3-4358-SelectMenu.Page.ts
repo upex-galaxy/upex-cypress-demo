@@ -1,16 +1,20 @@
-import { text } from 'stream/consumers';
-
 class SelectMenu {
 	get={
 		selectValue: () => cy.get('#withOptGroup'),
 		selectValueOptions:(index) => cy.get(`[id="react-select-2-option-1-${index}"]`),
 		selectValueOptionsDos:() => cy.get('[class*="option"]'),
 		selectValueText:() => this.get.selectValue().find('[class*="singleValue"]'),
+		//TC2
 		selectOne: () => cy.get('#selectOne'),
-		selectOneOptions:() => cy.get('[class*="option"]'),
-		selectOneOptionsText:() => this.get.selectOne().find('[class*="option"]'),
-		multiSelect:() => cy.get('[class=" css-1wa3eu0-placeholder"]').eq(2),
-		oldStyleSelect:() => cy.get('#oldSelectMenu')
+		selectOneOptionsDos:() => cy.get('[class*="option"]'),
+		selectOneOptionsText:() => this.get.selectOne().find('[class*="singleValue"]'),
+		//TC3
+		selectOldStyleSelect:() => cy.get('#oldSelectMenu'),
+		selectOldStyleSelectText:() => this.get.selectOldStyleSelect().find('option:selected'),
+		//TC4
+		selectMultiple:() => cy.get('[class*="placeholder"]').contains('Select...'),
+		selectMultipleOptions:() => cy.get('[class*="option"]'),
+		selectMultipleOptionsText:() => cy.get('[class="css-12jo7m5"]'),
 	};
 	//TC1---SELECT ONE
 	clickSelectValue() {
@@ -19,11 +23,10 @@ class SelectMenu {
 
 	selectRandomSelectValue() {
 		return this.get.selectValueOptionsDos().its('length').then(cantElem => {
-			const randomsIndex =Cypress._.random(0,cantElem);
+			const randomsIndex =Cypress._.random(0,cantElem-1);
 			this.get.selectValueOptionsDos().eq(randomsIndex).click();
 			this.clickSelectValue();
-			return this.get.selectValueOptionsDos().eq(randomsIndex).invoke('text').then(text => {
-
+			this.get.selectValueOptionsDos().eq(randomsIndex).invoke('text').then(text => {
 				return text;
 			});
 		});
@@ -31,31 +34,51 @@ class SelectMenu {
 
 	//TC2---SELECT ONE
 	clickSelectOne() {
-		selectMenuPage.get.selectOne().click();
+		this.get.selectOne().click();
 	};
 	selectRandomsSelectOne() {
-		return selectMenuPage.get.selectOneOptions().its('length').then(indexN => {
-			const randomsSo =Cypress._.random(0,indexN);
-			this.get.selectOneOptions().eq(randomsSo).click();
+		return this.get.selectOneOptionsDos().its('length').then(indexN => {
+			const randomsSo =Cypress._.random(0,indexN-1);
+			this.get.selectOneOptionsDos().eq(randomsSo).click();
 			this.clickSelectOne();
-			return this.get.selectOneOptions().eq(randomsSo).invoke('text').then(textSelect2 => {
+			this.get.selectOneOptionsDos().eq(randomsSo).invoke('text').then(textSelect2 => {
 				return textSelect2;
 			});
 		});
 	};
 	//TC3---SELECT OLD STYLE
 	selectOldStyleSelect() {
-		this.get.oldStyleSelect().find('option').its('length').then(cantOps => {
-			const randomsSel =Cypress._.random(0,cantOps);
-			this.get.oldStyleSelect().select(randomsSel);
-			this.get.oldStyleSelect().select(randomsSel).invoke('text').then(textselec3 => {
-				return textselec3;
+		return this.get.selectOldStyleSelect().find('option').its('length').then(cantOps => {
+			const randomsSel =Cypress._.random(0,cantOps-1);
+			this.get.selectOldStyleSelect().find('option').eq(randomsSel).invoke('text').then(textSelect3 => {
+				this.get.selectOldStyleSelect().select(randomsSel);
+				cy.wrap(textSelect3).then(textSelect31 => {
+					return textSelect31;
+				});
 			});
 		});
-		//TC4---SELECT ONE
+	}
+	//TC4---SELECT ONE
+	clickMultipleValues() {
+		this.get.selectMultiple().click();
+	}
+	selectRandomMultipleValue() {
+		this.clickMultipleValues();
+		let texto=[];
+		for (let index = 0; index < 2; index++) {
+			this.get.selectMultipleOptions().its('length').then(cantOps4 => {
+				const randomsSel4 =Cypress._.random(0,cantOps4-1);
+				this.get.selectMultipleOptions().eq(randomsSel4).click();
+				this.get.selectMultipleOptionsText().eq(index).invoke('text').then(textSelect4 => {
+					texto.push(textSelect4);
+
+				});
+
+			});
+		}
+		return cy.wrap(texto);
 
 	}
-
 }
 
 export const selectMenuPage = new SelectMenu();
