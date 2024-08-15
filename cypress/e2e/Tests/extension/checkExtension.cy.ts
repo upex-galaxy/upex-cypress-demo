@@ -9,7 +9,7 @@ describe('UX-345 | Check Extension', () => {
 		cy.get('.text-success').should('have.text', 'Yes');
 		cy.reload();
 		cy.get('input[id="yesRadio"]').check({ force: true });
-		cy.get('.text-success').should('have.text', 'Yes');
+		cy.get('.text-success').should('have.text', 'Yes'); //hola
 	});
 
 });
