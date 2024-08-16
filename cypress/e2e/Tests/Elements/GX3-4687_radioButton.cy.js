@@ -13,8 +13,6 @@ describe('GX3-4687| ToolsQA | Elements | Radio Buttons', () => {
 		cy.get('span.text-success').should('have.text', 'Impressive');
 	});
 	it('TC3:Validar no hacer click en el botón NO', () => {
-		//cy.get('label[for="noRadio"]').click();
-		//cy.get('label[for="noRadio"]').should('have.html', 'No');
 		cy.get('#noRadio').should('be.disabled');
 	});
 });
