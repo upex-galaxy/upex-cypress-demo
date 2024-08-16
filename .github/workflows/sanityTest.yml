@@ -61,10 +61,10 @@ jobs:
       MOCHA_REPORT_DIR: cypress/tests_reports/chrome_mocha_report
 
     steps:
-    - name: 💻Checkout
+    - name: 💻 Checkout
       uses: actions/checkout@v4
 
-    - name: 💿Install Node.js
+    - name: 💿 Install Node.js
       uses: actions/setup-node@v4
       with:
         node-version: 20
@@ -72,23 +72,27 @@ jobs:
     - name: 🍙 Bun Setup
       uses: oven-sh/setup-bun@v2
 
-    - name: 🧬Install All Dependencies
+    - name: 🧬 Install All Dependencies
       run: |
         bun install
 
-    - name: 🧪Cypress Run Test Coverage
+    - name: 🔎 Check Typescript Code
+      run: | #? Corre el linter de TypeScript para verificar errores de sintaxis.
+        bun run check:ts
+
+    - name: 🧪 Cypress Run Test Coverage
       uses: cypress-io/github-action@v4
       with:
         browser: chrome
         command: |
           bun run test:sanity:ci ${{ github.event.inputs.test_run }}
 
-    - name: 📬Generate JUnit/Mocha Report
+    - name: 📬 Generate JUnit/Mocha Report
       if: always()
       run: |
         bun run chrome:report
 
-    - name: ✅Import Test Results to Xray
+    - name: ✅ Import Test Results to Xray
       if: env.XRAY_CLIENT != '' && env.XRAY_SECRET != '' #? Corre este paso si la variable de entorno está definida
       uses: mikepenz/xray-action@v3
       with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
@@ -102,7 +106,7 @@ jobs:
         XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_ID }}
         XRAY_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
 
-    - name: 📊Upload Artifact Mochawesome Report
+    - name: 📊 Upload Artifact Mochawesome Report
       if: always()
       uses: actions/upload-artifact@v4
       with:
@@ -127,7 +131,7 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
     steps:
-    - name: 🔔Slack Notification
+    - name: 🔔 Slack Notification
       if: env.SLACK_WEBHOOK != '' #? will only run if the SLACK_WEBHOOK secret is provided
       uses: rtCamp/action-slack-notify@v2
       env:

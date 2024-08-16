@@ -22,13 +22,11 @@
 		"chrome:report": "npm run merge:junit:c:report && npm run merge:json:c:report && npm run gen:mocha:c:report",
 		"prettier:check": "npx prettier --check cypress",
 		"prettier:fix": "npx prettier --write cypress",
-		"lint:check": "npx eslint cypress",
-		"lint:fix": "npx eslint --fix cypress",
+		"eslint:check": "npx eslint cypress",
+		"eslint:fix": "npx eslint --fix cypress",
 		"check:ts": "tsc --noEmit"
 	},
-	"keywords": [
-		"upexgalaxy"
-	],
+	"keywords": ["upexgalaxy"],
 	"author": "Uper",
 	"license": "MIT",
 	"type": "module",

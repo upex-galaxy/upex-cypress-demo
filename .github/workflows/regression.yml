@@ -44,10 +44,10 @@ jobs:
       MOCHA_REPORT_DIR: cypress/tests_reports/${{ matrix.browser }}_mocha_report
 
     steps:
-    - name: 💻Checkout
+    - name: 💻 Checkout
       uses: actions/checkout@v4
 
-    - name: 💿Install Node.js
+    - name: 💿 Install Node.js
       uses: actions/setup-node@v4
       with:
         node-version: 20
@@ -55,18 +55,22 @@ jobs:
     - name: 🍙 Bun Setup
       uses: oven-sh/setup-bun@v2
 
-    - name: 🧬Install All Dependencies
+    - name: 🧬 Install All Dependencies
       run: |
         bun install
 
-    - name: 🧪Cypress Run Test Coverage on ${{ matrix.browser }}
+    - name: 🔎 Check Typescript Code
+      run: | #? Corre el linter de TypeScript para verificar errores de sintaxis.
+        bun run check:ts
+
+    - name: 🧪 Cypress Run Test Coverage on ${{ matrix.browser }}
       uses: cypress-io/github-action@v4
       with:
         browser: ${{ matrix.browser }}
         command: |
           bun run regression:${{ matrix.browser }}
 
-    - name: 📬Generate JUnit/Mocha Report for ${{ matrix.browser }}
+    - name: 📬 Generate JUnit/Mocha Report for ${{ matrix.browser }}
       if: always()
       run: |
         bun run ${{ matrix.browser }}:report
@@ -83,7 +87,7 @@ jobs:
           echo "TXID=GX3-1528" >> $GITHUB_OUTPUT
         fi
 
-    - name: ✅Import ${{ matrix.browser }} Test Results to Xray
+    - name: ✅ Import ${{ matrix.browser }} Test Results to Xray
       if: env.XRAY_CLIENT != '' && env.XRAY_SECRET != ''
       uses: mikepenz/xray-action@v3
       with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
@@ -98,7 +102,7 @@ jobs:
         XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_ID }}
         XRAY_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
 
-    - name: 📊Upload Artifact ${{ matrix.browser }} Mochawesome Report
+    - name: 📊 Upload Artifact ${{ matrix.browser }} Mochawesome Report
       if: always()
       uses: actions/upload-artifact@v4
       with:
@@ -123,7 +127,7 @@ jobs:
     if: always() #? will always run after the RegressionTesting job
     runs-on: ubuntu-latest
     steps:
-    - name: 🔔Slack Notification
+    - name: 🔔 Slack Notification
       if: env.SLACK_WEBHOOK != '' #? will only run if the SLACK_WEBHOOK secret is provided
       uses: rtCamp/action-slack-notify@v2
       env:
