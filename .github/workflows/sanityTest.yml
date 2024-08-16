@@ -1,6 +1,16 @@
-#* 🧙🏻‍♂️BIENVENIDO A LOS PIPELINES DE CONTINUOUS INTEGRATION DE "ARI - Hija de Aurora"!
-name: 🧪 Regression Testing Pipeline to Release
-run-name: ${{github.actor}}👨🏻‍🔬 triggered Regression in ${{github.ref_name}}
+#*🤖Este Pipeline de CI se activa al PUSHEAR o MERGEAR en ramas de tareas que no sean QA ni Main, y consiste en ejecutar los tests de una US e importar los resultados a Jira!🚀
+#*👩🏻‍🔬Para utilizar este Pipeline de Ari, sigue los siguientes pasos:
+#todo: 1 -> Crea tu propio archivo sanity.yml con tu username de GitHub, ejemplo sanity-saiotest.yml
+#todo: 2 -> Copia el contenido de este archivo yml y pégalo en tu nuevo archivo yml con tu username.
+#todo: 3 -> Modifica el trigger del Push en donde dice "TuBranchAqui", coloca tu nombre tal cual de tu rama git.
+#todo: 4 -> Modifica el archivo de prueba a ejectuar en el script del "yarn test" (ver ejemplo en este archivo)
+#todo: 5 -> Modifica la propiedad: "testExecKey" con tu ID del TX de Jira para importar automáticamente el resultado.
+#todo: 6 -> Recuerda modificar el projectKey correspondiente, si estás en L3, debe ser GX3 y así...
+#todo: 7 -> Listo! Guarda los cambios (git add + git commit) y pushea (git push) para ejectutar este Pipeline!
+#*Resultado: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí.
+
+name: 🧪 Sanity Test CI Pipeline
+run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 
 on:
   workflow_dispatch:
@@ -49,12 +59,8 @@ on:
         - GX4
 
 jobs:
-  RegressionTesting:
+  SanityTest:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        browser: ['chrome'] #? Runs tests in Chrome
     environment:
       name: ${{ github.event.inputs.environment }}
 
@@ -74,31 +80,22 @@ jobs:
       run: |
         bun install
 
-    - name: 🧪Cypress Run Test Coverage on ${{ matrix.browser }}
+    - name: 🧬Install Replay Chromium
+      run: npx replayio install
+
+    - name: 🧪Cypress Run Test Coverage
       uses: cypress-io/github-action@v4
       with:
-        browser: ${{ matrix.browser }}
+        browser: replay-chromium
         command: |
-          bun run regression:${{ matrix.browser }}
+          bun run test:sanity:ci ${{ github.event.inputs.test_run }}
       env:
         REPLAY_API_KEY: ${{ secrets.CY_REPLAY_API_KEY }}
 
-    - name: 📬Generate JUnit/Mocha Report for ${{ matrix.browser }}
+    - name: 📬Generate JUnit/Mocha Report
       if: always()
       run: |
-        bun run ${{ matrix.browser }}:report
-
-    - name: 📦️ Set testExecKey for Jira XRay
-      if: always()
-      id: setTestExecKey
-      run: |
-        if [[ "${{ matrix.browser }}" == "chrome" ]]; then
-          echo "TXID=GX3-1526" >> $GITHUB_OUTPUT
-        elif [[ "${{ matrix.browser }}" == "firefox" ]]; then
-          echo "TXID=GX3-1527" >> $GITHUB_OUTPUT
-        elif [[ "${{ matrix.browser }}" == "edge" ]]; then
-          echo "TXID=GX3-1528" >> $GITHUB_OUTPUT
-        fi
+        bun run chrome:report
 
     - name: ✅Import Test Results to Xray
       if: env.XRAY_CLIENT != '' && env.XRAY_SECRET != '' #? Corre este paso si la variable de entorno está definida
@@ -108,19 +105,18 @@ jobs:
         password: ${{ env.XRAY_SECRET}}
         testFormat: 'junit' #! NO CAMBIAR
         testPaths: 'cypress/tests_results/junit/chrome_regression_report.xml' #! NO CAMBIAR
-        testExecKey: ${{ env.TXID }} #? this is the Regression Test Plan TX
-        projectKey: 'GX3'
+        testExecKey: ${{ github.event.inputs.xray_tx }} #todo: EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+        projectKey: ${{ github.event.inputs.xray_project }} #todo: EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
       env:
-        TXID: ${{ steps.setTestExecKey.outputs.TXID }}
         XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_ID }}
         XRAY_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
 
-    - name: 📊Upload Artifact ${{ matrix.browser }} Mochawesome Report
+    - name: 📊Upload Artifact Mochawesome Report
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: regression-${{ matrix.browser }}-mocha-report
-        path: cypress/tests_reports/${{ matrix.browser }}_mocha_report
+        name: sanity-mocha-report
+        path: cypress/tests_reports/chrome_mocha_report
         retention-days: 15
 
     #* --------------- Allure Report Build ---------------
@@ -136,9 +132,9 @@ jobs:
       uses: simple-elf/allure-report-action@master
       if: always()
       with:
-        gh_pages: gh-pages/regression #? the directory of checkout branch (gh-pages) where the previous allure data will be copied.
+        gh_pages: gh-pages/smoke #? the directory of checkout branch (gh-pages) where the previous allure data will be copied.
         #? this copied data will be combined with the actual allure-report data and generate the allure-history data.
-        subfolder: regression #? the subfolder where the deployed data (allure-history) will be placed. 
+        subfolder: smoke #? the subfolder where the deployed data (allure-history) will be placed. 
         #? If destination_dir is not specified, this subfolder will be saved to the root of the branch. 
         #? Note About the subfolder: Use this if you want to split the reports as different types (i.g smoke, regression, smoke, etc) 
         allure_results: reports/allure-results #? path of the actual allure-results generated by the tests.
@@ -160,7 +156,7 @@ jobs:
         #* -----------------------------------------
 
   Ari-Slack-Notification:
-    needs: [RegressionTesting]
+    needs: [SanityTest]
     if: always() #? will always run after the RegressionTesting job
     runs-on: ubuntu-latest
     steps:
@@ -173,58 +169,3 @@ jobs:
         SLACK_MESSAGE: ':test_tube: (${{ github.repository }}): ${{ github.actor }}🧪 triggered Smoke Test and got Status ${{ job.status }} :rocket:'
         SLACK_COLOR: ${{ job.status }}
         SLACK_ICON: https://image.cdn2.seaart.ai/2023-12-06/clo9g0h4msbc73ac2sog/99e1abc36f32945cd4bacf5ee7448e96194545f7_high.webp
-
-  Create-PullRequest:
-    needs: [RegressionTesting, Ari-Slack-Notification]
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: 💻Checkout
-      uses: actions/checkout@v4
-
-    - name: 🧬 Check for changes
-      id: gitDiff
-      run: |
-        git fetch origin main
-        DIFF=$(git diff --name-only origin/main)
-        if [ "$DIFF" != "" ]; then
-          echo echo "changes=true" >> $GITHUB_OUTPUT
-        fi
-
-    - name: 📦️ Create Pull Request
-      if: steps.gitDiff.outputs.changes == 'true'
-      uses: actions/github-script@v7
-      with:
-        script: |
-          const { repo, owner } = context.repo;
-          const result = await github.rest.pulls.create({
-          title: '✅[QA REGRESSION PASSED]: Ready to Merge into MAIN',
-          owner,
-          repo,
-          head: '${{ github.ref_name }}',
-          base: 'main',
-          body: [
-              'Update branch by Automation Pipeline',
-              '- (CI) Build Test Execution is Done✅',
-              '- (CI) Integration-Regression Report is Done✅',
-              '- (TestResults) No Conflicts in Repo Branch QA✅ '
-          ].join('\n')
-          });
-          github.rest.issues.addLabels({
-          owner,
-          repo,
-          issue_number: result.data.number,
-          labels: ['autoPullRequest']
-          });
-
-  AutoMerge-into-Main:
-    needs: [Create-PullRequest]
-    runs-on: ubuntu-latest
-    steps:
-    - name: 🧬 Merge QA -> MAIN
-      uses: devmasx/merge-branch@master
-      with:
-        type: now
-        label_name: 'autoPullRequest'
-        target_branch: 'main' #ESTE ES LA RAMA PRINCIPAL DEL REPOSITORIO PRESENTE
-        github_token: ${{ github.token }}

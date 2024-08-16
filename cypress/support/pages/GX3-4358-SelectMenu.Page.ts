@@ -1,7 +1,7 @@
 class SelectMenu {
-	get={
+	get = {
 		selectValue: () => cy.get('#withOptGroup'),
-		selectValueOptions:(index) => cy.get(`[id="react-select-2-option-1-${index}"]`),
+		selectValueOptions: (index: number) => cy.get(`[id="react-select-2-option-1-${index}"]`),
 		selectValueOptionsDos:() => cy.get('[class*="option"]'),
 		selectValueText:() => this.get.selectValue().find('[class*="singleValue"]'),
 		//TC2
@@ -64,7 +64,7 @@ class SelectMenu {
 	}
 	selectRandomMultipleValue() {
 		this.clickMultipleValues();
-		let texto=[];
+		let texto: string[] = [];
 		for (let index = 0; index < 2; index++) {
 			this.get.selectMultipleOptions().its('length').then(cantOps4 => {
 				const randomsSel4 =Cypress._.random(0,cantOps4-1);

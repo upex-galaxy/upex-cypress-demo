@@ -1,66 +1,102 @@
 {
-    "[Typescript]": {
-        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-    },
-    "[javascript]": {
-        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-    },
-    "files.associations": {
-		"*.yml": "yaml"
+	// =====================
+	//? File Associations
+	// =====================
+	"files.associations": {
+		"*.yml": "yaml",
+		"*.json": "jsonc"
 	},
-    "[yaml]": {
-        "editor.insertSpaces": true,
-        "editor.tabSize": 2,
-        "editor.autoIndent": "keep",
-        "diffEditor.ignoreTrimWhitespace": false,
-        "editor.defaultFormatter": "kennylong.kubernetes-yaml-formatter",
-        "editor.formatOnSave": true
-    },
-    "cypressHelper.menuItems": {
-        "FindCustomCommandReferences": true,
-        "FindStepDefinitionReferences": true,
-        "GenerateCustomCommandTypes": true,
-        "GoToCustomCommand": false,
-        "OpenCypress": false,
-        "ParseHAR": false,
-        "RunCypress": false,
-        "SchemaGenerator": false,
-        "mockAutocomplete": false
-    },
-    "editor.autoIndent": "advanced",
-    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-    "editor.cursorBlinking": "expand",
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
-    "editor.formatOnPaste": false, // required 
+	// =====================
+	//? Language Specific Settings
+	// =====================
+	"[Typescript]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[yaml]": {
+		"editor.insertSpaces": true,
+		"editor.tabSize": 2,
+		"editor.autoIndent": "keep",
+		"diffEditor.ignoreTrimWhitespace": false,
+		"editor.defaultFormatter": "kennylong.kubernetes-yaml-formatter",
+		"editor.formatOnSave": true
+	},
+	"[github-actions-workflow]": {
+		"editor.defaultFormatter": "kennylong.kubernetes-yaml-formatter"
+	},
+	// =====================
+	//? Editor Settings
+	// =====================
+	"editor.autoIndent": "advanced",
+	"editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+	"editor.cursorBlinking": "expand",
+	"editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
 	"editor.formatOnType": false, // required
-	"editor.formatOnSave": true, // optional 
+	"editor.formatOnPaste": true, // optional
+	"editor.formatOnSave": true, // optional
 	"editor.formatOnSaveMode": "file", // required to format on save
 	"vs-code-prettier-eslint.prettierLast": false, // set as "true" to run 'prettier' last not first
-    "editor.lineHeight": 20,
-    "editor.defaultColorDecorators": true,
+	"editor.lineHeight": 20,
+	"editor.defaultColorDecorators": true,
 	"editor.insertSpaces": false,
 	"editor.tabSize": 4,
-    "editor.detectIndentation": true,
-    "editor.codeActionsOnSave": {
+	"editor.detectIndentation": true,
+	"editor.codeActionsOnSave": {
 		"source.fixAll": "explicit"
 	},
-    "editor.quickSuggestions": {
-        "comments": true,
-        "other": true,
-        "strings": true
-    },
-    "editor.tabCompletion": "on",
-    "eslint.codeAction.showDocumentation": {
-        "enable": true
-    },
-    "eslint.format.enable": true,
-    "eslint.validate": ["typescript", "javascript", "ts", "js"],
-    "explorer.fileNesting.enabled": true,
-    "files.autoSave": "onFocusChange",
-    "git.enableSmartCommit": true,
-    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-    "javascript.updateImportsOnFileMove.enabled": "always",
-    "material-icon-theme.folders.color": "#7cb342",
+	"editor.quickSuggestions": {
+		"comments": true,
+		"other": true,
+		"strings": true
+	},
+	"editor.tabCompletion": "on",
+	"editor.wordWrap": "on",
+	"files.eol": "\n",
+	// =====================
+	//? ESLint Settings
+	// =====================
+	"eslint.codeAction.showDocumentation": {
+		"enable": true
+	},
+	"eslint.format.enable": true,
+	"eslint.validate": ["typescript", "javascript", "ts", "js"],
+	// =====================
+	//? JSON Settings
+	// =====================
+	"json.validate.enable": true,
+	"json.format.enable": true,
+	// =====================
+	//? Explorer Settings
+	// =====================
+	"explorer.fileNesting.enabled": true,
+	"explorer.compactFolders": false,
+	// =====================
+	//? File AutoSave Settings
+	// =====================
+	"files.autoSave": "onFocusChange",
+	// =====================
+	//? Git Settings
+	// =====================
+	"git.enableSmartCommit": true,
+	// =====================
+	//? JavaScript Settings
+	// =====================
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	// =====================
+	//? TypeScript Settings
+	// =====================
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	// =====================
+	//? Material Icon Theme Settings
+	// =====================
+	"material-icon-theme.folders.color": "#7cb342",
 	"material-icon-theme.files.associations": {
 		"tsconfig.json": "svgo",
 		"tsconfig.eslint.json": "eslint",
@@ -74,30 +110,44 @@
 		"cypress.d.ts": "cypress",
 		"*.cy.js": "test-jsx",
 		"*.cy.ts": "test-jsx",
-        "*.Page.js": "3d",
-        "*.Page.ts": "3d",
+		"*.Page.js": "3d",
+		"*.Page.ts": "3d"
 	},
 	"material-icon-theme.folders.associations": {
 		"workflows": "github",
 		"support": "tools"
 	},
-    "testing.alwaysRevealTestOnStateChange": true,
-    "testing.automaticallyOpenPeekViewDuringAutoRun": true,
-    "terminal.integrated.cursorBlinking": true,
-    "terminal.integrated.cursorStyle": "line",
-    "terminal.integrated.defaultProfile.windows": "Git Bash",
-    "terminal.integrated.tabs.defaultColor": "terminal.ansiGreen",
-    "terminal.integrated.tabs.defaultIcon": "source-control",
-    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-    "typescript.updateImportsOnFileMove.enabled": "always",
-    "workbench.colorTheme": "Dracula",
-    "workbench.iconTheme": "material-icon-theme",
-    "workbench.settings.editor": "json",
-    "workbench.tree.enableStickyScroll": true,
-    "[github-actions-workflow]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "cSpell.words": [
-        "Kenly"
-    ]
+	// =====================
+	//? Testing Settings
+	// =====================
+	"testing.alwaysRevealTestOnStateChange": true,
+	"testing.automaticallyOpenPeekViewDuringAutoRun": true,
+	"debug.javascript.autoAttachFilter": "onlyWithFlag",
+	// =====================
+	//? Terminal Settings
+	// =====================
+	"terminal.integrated.cursorBlinking": true,
+	"terminal.integrated.cursorStyle": "line",
+	"terminal.integrated.defaultProfile.windows": "Git Bash",
+	"terminal.integrated.tabs.defaultColor": "terminal.ansiGreen",
+	"terminal.integrated.tabs.defaultIcon": "source-control",
+	"terminal.integrated.enablePersistentSessions": true,
+	// =====================
+	//? Workbench Settings
+	// =====================
+	"workbench.colorTheme": "Winter is Coming (Dark Blue)",
+	"workbench.iconTheme": "material-icon-theme",
+	"workbench.settings.editor": "json",
+	"workbench.tree.enableStickyScroll": true,
+	"files.watcherExclude": {
+		"**/.git/objects/**": true,
+		"**/node_modules/**": true,
+		"**/docs/**": true,
+		"**/test/data/**": true,
+		"**/test/downloads/**": true,
+		"**/test/screenshots/**": true,
+		"**/allure-results/**": true,
+		"**/allure-report/**": true,
+		"**/reports/**": true
+	}
 }

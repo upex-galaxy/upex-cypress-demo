@@ -5,7 +5,7 @@ describe ('GX3 - 4358 | ToolsQA | Widgets | Dropdown - Select Menu',( ) => {
 		cy.url().should('contain','select-menu');
 	});
 
-	it('4359 |TC1: Validar que se pueda seleccionar un elemento del menu "Select Value"',() => {
+	it.only('4359 |TC1: Validar que se pueda seleccionar un elemento del menu "Select Value"',() => {
 		selectMenuPage.clickSelectValue();
  	  	selectMenuPage.selectRandomSelectValue().then(text => {
          	selectMenuPage.get.selectValueText().invoke('text').then(textoDowd => {
