@@ -63,10 +63,10 @@ export default defineConfig({
 				//? So we need to add the extension "AdBlock" to the browser Chrome, in order to avoid the ads and improve the performance.
 				if(browser.family === 'chromium' && browser.name !== 'electron') {
 					const pathToExtension = path.join(__dirname, 'extension/adblock'); //? path to the extension AdBlock (already downloaded in the project)
-					if(!fs.existsSync(pathToExtension)) { throw new Error(`Cannot find extension at ${pathToExtension}`); }
+					if(!fs.existsSync(pathToExtension)) throw new Error(`Cannot find extension at ${pathToExtension}`);
 					launchOptions.args.push(`--disable-extensions-except=${pathToExtension}`);
 					launchOptions.args.push(`--load-extension=${pathToExtension}`);
-					if (process.env.CI) { launchOptions.args.push('--headless=new'); }
+					if (process.env.CI) launchOptions.args.push('--headless=new');
 					// eslint-disable-next-line no-console
 					console.log('✅ AdBlock extension for chrome is loaded');
 					// console.log(launchOptions.args); //? print all current args to check if the extension is being loaded

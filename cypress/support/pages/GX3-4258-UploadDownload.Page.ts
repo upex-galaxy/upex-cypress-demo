@@ -1,8 +1,8 @@
 class UpDownload {
-	get ={
+	get = {
 		downloadButton: () => cy.get('#downloadButton'),
-		uploadFile:() => cy.get('#uploadFile'),
-		uploadedFilePath:() => cy.get('#uploadedFilePath')
+		uploadFile: () => cy.get('#uploadFile'),
+		uploadedFilePath: () => cy.get('#uploadedFilePath')
 	};
 	clickDownloadButton() {
 		this.get.downloadButton().click();

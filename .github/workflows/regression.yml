@@ -1,5 +1,8 @@
 #* 🧙🏻‍♂️BIENVENIDO A LOS PIPELINES DE CONTINUOUS INTEGRATION DE "ARI - Hija de Aurora"!
-name: 🧪 Regression Testing Pipeline to Release
+#! NO NECESITAS MODIFICAR NADA de este archivo...
+#*🚀 Solo necesitas configurar las variables de entorno en el Panel "Run workflow" de GitHub Actions
+#* 🧪 Este PIPELINE ejecutará la Regresión del Repo y subirá los resultados a Jira XRay
+name: 🧪 Regression Testing CI Pipeline
 run-name: ${{github.actor}}👨🏻‍🔬 triggered Regression in ${{github.ref_name}}
 
 on:
@@ -30,19 +33,21 @@ on:
 
 jobs:
   RegressionTesting:
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event.inputs.os }}
     strategy:
       fail-fast: false
       matrix:
-        browser: ['chrome'] #? Runs tests in Chrome
+        browser: ['chrome'] #? Runs tests in Chrome (meaningful for E2E tests)
     environment:
       name: ${{ github.event.inputs.environment }}
+    env:
+      MOCHA_REPORT_DIR: cypress/tests_reports/${{ matrix.browser }}_mocha_report
 
     steps:
-    - name: 💻Checkout
+    - name: 💻 Checkout
       uses: actions/checkout@v4
 
-    - name: 💿Install Node.js
+    - name: 💿 Install Node.js
       uses: actions/setup-node@v4
       with:
         node-version: 20
@@ -50,26 +55,30 @@ jobs:
     - name: 🍙 Bun Setup
       uses: oven-sh/setup-bun@v2
 
-    - name: 🧬Install All Dependencies
+    - name: 🧬 Install All Dependencies
       run: |
         bun install
 
-    - name: 🧪Cypress Run Test Coverage on ${{ matrix.browser }}
+    - name: 🔎 Check Typescript Code
+      run: | #? Corre el linter de TypeScript para verificar errores de sintaxis.
+        bun run check:ts
+
+    - name: 🧪 Cypress Run Test Coverage on ${{ matrix.browser }}
       uses: cypress-io/github-action@v4
       with:
         browser: ${{ matrix.browser }}
         command: |
           bun run regression:${{ matrix.browser }}
 
-    - name: 📬Generate JUnit/Mocha Report for ${{ matrix.browser }}
+    - name: 📬 Generate JUnit/Mocha Report for ${{ matrix.browser }}
       if: always()
       run: |
         bun run ${{ matrix.browser }}:report
 
-    - name: 📦️ Set testExecKey for Jira XRay
+    - name: 📦️ Get Jira Test Execution ID for Regression
       if: always()
-      id: setTestExecKey
-      run: |
+      id: testexec
+      run: | #? para obtener el ID del TX oficial de Regression de Jira
         if [[ "${{ matrix.browser }}" == "chrome" ]]; then
           echo "TXID=GX3-1526" >> $GITHUB_OUTPUT
         elif [[ "${{ matrix.browser }}" == "firefox" ]]; then
@@ -78,63 +87,39 @@ jobs:
           echo "TXID=GX3-1528" >> $GITHUB_OUTPUT
         fi
 
-    - name: ✅Import Test Results to Xray
-      if: env.XRAY_CLIENT != '' && env.XRAY_SECRET != '' #? Corre este paso si la variable de entorno está definida
+    - name: ✅ Import ${{ matrix.browser }} Test Results to Xray
+      if: env.XRAY_CLIENT != '' && env.XRAY_SECRET != ''
       uses: mikepenz/xray-action@v3
       with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
         username: ${{ env.XRAY_CLIENT}}
         password: ${{ env.XRAY_SECRET}}
         testFormat: 'junit' #! NO CAMBIAR
-        testPaths: 'cypress/tests_results/junit/chrome_regression_report.xml' #! NO CAMBIAR
-        testExecKey: ${{ env.TXID }} #? this is the Regression Test Plan TX
-        projectKey: 'GX3'
+        testPaths: 'cypress/tests_results/junit/chrome_junit_report.xml' #! NO CAMBIAR
+        testExecKey: ${{ env.TXID }} #! NO CAMBIAR
+        projectKey: 'GX3' #! NO CAMBIAR
       env:
-        TXID: ${{ steps.setTestExecKey.outputs.TXID }}
+        TXID: ${{ steps.testexec.outputs.TXID }}
         XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_ID }}
         XRAY_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
 
-    - name: 📊Upload Artifact ${{ matrix.browser }} Mochawesome Report
+    - name: 📊 Upload Artifact ${{ matrix.browser }} Mochawesome Report
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: regression-${{ matrix.browser }}-mocha-report
-        path: cypress/tests_reports/${{ matrix.browser }}_mocha_report
+        path: ${{ env.MOCHA_REPORT_DIR }}
         retention-days: 15
 
-    #* --------------- Allure Report Build ---------------
-    - name: 📊 Get Allure Report History
-      uses: actions/checkout@v4
-      if: always()
-      continue-on-error: true
-      with:
-        ref: gh-pages #? the branch used for the GitHub Pages content.
-        path: gh-pages #? this is the directory where the previous allure reports were stored. #? In this case, the path gh-pages means the root of the repository.
-
-    - name: 📊 Build Allure Report
-      uses: simple-elf/allure-report-action@master
-      if: always()
-      with:
-        gh_pages: gh-pages/regression #? the directory of checkout branch (gh-pages) where the previous allure data will be copied.
-        #? this copied data will be combined with the actual allure-report data and generate the allure-history data.
-        subfolder: regression #? the subfolder where the deployed data (allure-history) will be placed. 
-        #? If destination_dir is not specified, this subfolder will be saved to the root of the branch. 
-        #? Note About the subfolder: Use this if you want to split the reports as different types (i.g smoke, regression, smoke, etc) 
-        allure_results: reports/allure-results #? path of the actual allure-results generated by the tests.
-        allure_report: allure-report #? path of the allure-report generated by the tests to be combined with the previous data.
-        allure_history: allure-history #? path of the allure-history to be generated by the action.
-        keep_reports: 15 #? the number of reports to keep in the allure-history.
-
-    - name: 🚀 Deploy Allure Report to GitHub Pages
+    #* --------------- Mochawesome Report Build and Deploy ---------------
+    - name: 🚀 Deploy Mocha Report to GitHub Pages
       if: always()
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages #? the branch used for the GitHub Pages content.
-        # destination_dir: staging #? this is the directory inside the gh-pages branch where the allure-history will be saved.
-        #? Note: If you use a destination_dir i.g 'staging' AND provide a subfolder i.g 'smoke' in the Build Allure Report step,
-        #? the allure-history will be published on the 'staging/smoke' directory.
-        publish_dir: allure-history #? the directory to be published. Must be the same as the allure_history value from the Build Allure Report step
-        keep_files: true #? this is required to work properly with the subfolder option in the Build Allure Report step.
+        #? the regression report will be published in the root of the gh-pages branch.
+        publish_dir: ${{ env.MOCHA_REPORT_DIR }} #? the directory to be published.
+        keep_files: true #? true is required to work properly with the subfolder option in the Build Allure Report step.
         #* -----------------------------------------
 
   Ari-Slack-Notification:
@@ -142,17 +127,17 @@ jobs:
     if: always() #? will always run after the RegressionTesting job
     runs-on: ubuntu-latest
     steps:
-    - name: 🔔Slack Notification
+    - name: 🔔 Slack Notification
       if: env.SLACK_WEBHOOK != '' #? will only run if the SLACK_WEBHOOK secret is provided
       uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_USERNAME: Ari✨
-        SLACK_MESSAGE: ':test_tube: (${{ github.repository }}): ${{ github.actor }}🧪 triggered Smoke Test and got Status ${{ job.status }} :rocket:'
+        SLACK_MESSAGE: '🧪(${{ github.repository }}): ${{ github.actor }} triggered Sanity Test 🚀'
         SLACK_COLOR: ${{ job.status }}
-        SLACK_ICON: https://image.cdn2.seaart.ai/2023-12-06/clo9g0h4msbc73ac2sog/99e1abc36f32945cd4bacf5ee7448e96194545f7_high.webp
+        SLACK_ICON: ${{ secrets.ARI_PROFILE }}
 
-  Create-PullRequest:
+  AutoMerge-into-Main:
     needs: [RegressionTesting, Ari-Slack-Notification]
     runs-on: ubuntu-latest
     steps:
@@ -160,17 +145,7 @@ jobs:
     - name: 💻Checkout
       uses: actions/checkout@v4
 
-    - name: 🧬 Check for changes
-      id: gitDiff
-      run: |
-        git fetch origin main
-        DIFF=$(git diff --name-only origin/main)
-        if [ "$DIFF" != "" ]; then
-          echo echo "changes=true" >> $GITHUB_OUTPUT
-        fi
-
     - name: 📦️ Create Pull Request
-      if: steps.gitDiff.outputs.changes == 'true'
       uses: actions/github-script@v7
       with:
         script: |
@@ -195,14 +170,11 @@ jobs:
           labels: ['autoPullRequest']
           });
 
-  AutoMerge-into-Main:
-    needs: [Create-PullRequest]
-    runs-on: ubuntu-latest
-    steps:
     - name: 🧬 Merge QA -> MAIN
+      if: success()
       uses: devmasx/merge-branch@master
       with:
         type: now
         label_name: 'autoPullRequest'
-        target_branch: 'main' #ESTE ES LA RAMA PRINCIPAL DEL REPOSITORIO PRESENTE
+        target_branch: 'main' #ESTE ES LA RAMA FINAL DEL REPOSITORIO PRESENTE
         github_token: ${{ github.token }}

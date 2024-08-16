@@ -1,5 +1,7 @@
-#*🤖 Ahora puedes usar este PIPELINE directamente desde GitHub Actions!
-#*🚀 Solo necesitas configurar las variables de entorno, keys, ruta de ejecución y ejecutarlo.
+#*🧙🏻‍♂️ Ahora puedes usar este PIPELINE directamente desde GitHub Actions!
+#! NO NECESITAS MODIFICAR NADA de este archivo...
+#*🚀 Solo necesitas configurar las variables de entorno, keys de Jira y tu ruta de archivo de prueba a ejecutar en el Panel "Run workflow" de GitHub Actions
+#* 🧪 Este PIPELINE ejecutará tus pruebas y subirá los resultados a Jira XRay
 
 name: 🧪 Sanity Test CI Pipeline
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
@@ -32,7 +34,7 @@ on:
       test_run:
         description: 🚀Select the Test Suite to Run
         required: true
-        default: 'cypress/e2e/Tests/Elements' #! No modificar este valor, sirve como ejemplo, modificalo en el "Run Workflow" de GitHub.
+        default: 'cypress/e2e/Tests/Elements' #! No modificar, esto es solo un ejemplo.
         type: string
       xray_tx:
         description: 🚀Enter the Test Execution ID
@@ -55,12 +57,14 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.event.inputs.environment }}
+    env:
+      MOCHA_REPORT_DIR: cypress/tests_reports/chrome_mocha_report
 
     steps:
-    - name: 💻Checkout
+    - name: 💻 Checkout
       uses: actions/checkout@v4
 
-    - name: 💿Install Node.js
+    - name: 💿 Install Node.js
       uses: actions/setup-node@v4
       with:
         node-version: 20
@@ -68,91 +72,71 @@ jobs:
     - name: 🍙 Bun Setup
       uses: oven-sh/setup-bun@v2
 
-    - name: 🧬Install All Dependencies
+    - name: 🧬 Install All Dependencies
       run: |
         bun install
 
-    - name: 🧪Cypress Run Test Coverage
+    - name: 🔎 Check Typescript Code
+      run: | #? Corre el linter de TypeScript para verificar errores de sintaxis.
+        bun run check:ts
+
+    - name: 🧪 Cypress Run Test Coverage
       uses: cypress-io/github-action@v4
       with:
         browser: chrome
         command: |
           bun run test:sanity:ci ${{ github.event.inputs.test_run }}
 
-    - name: 📬Generate JUnit/Mocha Report
+    - name: 📬 Generate JUnit/Mocha Report
       if: always()
       run: |
         bun run chrome:report
 
-    - name: ✅Import Test Results to Xray
+    - name: ✅ Import Test Results to Xray
       if: env.XRAY_CLIENT != '' && env.XRAY_SECRET != '' #? Corre este paso si la variable de entorno está definida
       uses: mikepenz/xray-action@v3
       with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
         username: ${{ env.XRAY_CLIENT}}
         password: ${{ env.XRAY_SECRET}}
         testFormat: 'junit' #! NO CAMBIAR
-        testPaths: 'cypress/tests_results/junit/chrome_regression_report.xml' #! NO CAMBIAR
-        testExecKey: ${{ github.event.inputs.xray_tx }} #todo: EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
-        projectKey: ${{ github.event.inputs.xray_project }} #todo: EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
+        testPaths: 'cypress/tests_results/junit/chrome_junit_report.xml' #! NO CAMBIAR
+        testExecKey: ${{ github.event.inputs.xray_tx }} #! NO CAMBIAR
+        projectKey: ${{ github.event.inputs.xray_project }} #! NO CAMBIAR
       env:
         XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_ID }}
         XRAY_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
 
-    - name: 📊Upload Artifact Mochawesome Report
+    - name: 📊 Upload Artifact Mochawesome Report
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: sanity-mocha-report
-        path: cypress/tests_reports/chrome_mocha_report
+        path: ${{ env.MOCHA_REPORT_DIR }}
         retention-days: 15
 
-    #* --------------- Allure Report Build ---------------
-    - name: 📊 Get Allure Report History
-      uses: actions/checkout@v4
-      if: always()
-      continue-on-error: true
-      with:
-        ref: gh-pages #? the branch used for the GitHub Pages content.
-        path: gh-pages #? this is the directory where the previous allure reports were stored. #? In this case, the path gh-pages means the root of the repository.
-
-    - name: 📊 Build Allure Report
-      uses: simple-elf/allure-report-action@master
-      if: always()
-      with:
-        gh_pages: gh-pages/smoke #? the directory of checkout branch (gh-pages) where the previous allure data will be copied.
-        #? this copied data will be combined with the actual allure-report data and generate the allure-history data.
-        subfolder: smoke #? the subfolder where the deployed data (allure-history) will be placed. 
-        #? If destination_dir is not specified, this subfolder will be saved to the root of the branch. 
-        #? Note About the subfolder: Use this if you want to split the reports as different types (i.g smoke, regression, smoke, etc) 
-        allure_results: reports/allure-results #? path of the actual allure-results generated by the tests.
-        allure_report: allure-report #? path of the allure-report generated by the tests to be combined with the previous data.
-        allure_history: allure-history #? path of the allure-history to be generated by the action.
-        keep_reports: 15 #? the number of reports to keep in the allure-history.
-
-    - name: 🚀 Deploy Allure Report to GitHub Pages
+    #* --------------- Mochawesome Report Build and Deploy ---------------
+    - name: 🚀 Deploy Mocha Report to GitHub Pages
       if: always()
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages #? the branch used for the GitHub Pages content.
-        # destination_dir: staging #? this is the directory inside the gh-pages branch where the allure-history will be saved.
-        #? Note: If you use a destination_dir i.g 'staging' AND provide a subfolder i.g 'smoke' in the Build Allure Report step,
-        #? the allure-history will be published on the 'staging/smoke' directory.
-        publish_dir: allure-history #? the directory to be published. Must be the same as the allure_history value from the Build Allure Report step
-        keep_files: true #? this is required to work properly with the subfolder option in the Build Allure Report step.
+        destination_dir: sanity #? this is the directory inside the gh-pages branch where the MOCHA_REPORT_DIR will be saved.
+        publish_dir: ${{ env.MOCHA_REPORT_DIR }} #? the directory to be published.
+        keep_files: true #? true is required to work properly with the subfolder option in the Build Allure Report step.
         #* -----------------------------------------
 
   Ari-Slack-Notification:
-    needs: [SanityTest]
-    if: always() #? will always run after the RegressionTesting job
+    needs: [SanityTest] #? will always run after the SanityTest job
+    if: always()
     runs-on: ubuntu-latest
     steps:
-    - name: 🔔Slack Notification
+    - name: 🔔 Slack Notification
       if: env.SLACK_WEBHOOK != '' #? will only run if the SLACK_WEBHOOK secret is provided
       uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_USERNAME: Ari✨
-        SLACK_MESSAGE: ':test_tube: (${{ github.repository }}): ${{ github.actor }}🧪 triggered Smoke Test and got Status ${{ job.status }} :rocket:'
+        SLACK_MESSAGE: '🧪(${{ github.repository }}): ${{ github.actor }} triggered Regression 🚀'
         SLACK_COLOR: ${{ job.status }}
-        SLACK_ICON: https://image.cdn2.seaart.ai/2023-12-06/clo9g0h4msbc73ac2sog/99e1abc36f32945cd4bacf5ee7448e96194545f7_high.webp
+        SLACK_ICON: ${{ secrets.ARI_PROFILE }}
