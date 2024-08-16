@@ -14,7 +14,7 @@ describe('GX3 - 4699 |ToolsQA | Forms | Practice Form',() => {
 		cy.visit('https://demoqa.com/automation-practice-form');
 		cy.url().should('contain','practice-form');
 	});
-	it('TC1',() => {
+	it('4700 | TC1: Validar que se pueda enviar el registro del estudiante correctamente',() => {
 		formPage.typeFirthName(firstName);
 		formPage.typeLastName(lastName);
 		formPage.typeEmail(email);
