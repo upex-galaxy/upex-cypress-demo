@@ -119,7 +119,7 @@ jobs:
         publish_branch: gh-pages #? the branch used for the GitHub Pages content.
         #? the regression report will be published in the root of the gh-pages branch.
         publish_dir: ${{ env.MOCHA_REPORT_DIR }} #? the directory to be published.
-        keep_files: false #? true is required to work properly with the subfolder option in the Build Allure Report step.
+        keep_files: true #? true is required to work properly with the subfolder option in the Build Allure Report step.
         #* -----------------------------------------
 
   Ari-Slack-Notification:
@@ -137,7 +137,7 @@ jobs:
         SLACK_COLOR: ${{ job.status }}
         SLACK_ICON: ${{ secrets.ARI_PROFILE }}
 
-  Create-PullRequest:
+  AutoMerge-into-Main:
     needs: [RegressionTesting, Ari-Slack-Notification]
     runs-on: ubuntu-latest
     steps:
@@ -145,17 +145,7 @@ jobs:
     - name: 💻Checkout
       uses: actions/checkout@v4
 
-    - name: 🧬 Check for changes
-      id: gitDiff
-      run: |
-        git fetch origin main
-        DIFF=$(git diff --name-only origin/main)
-        if [ "$DIFF" != "" ]; then
-          echo echo "changes=true" >> $GITHUB_OUTPUT
-        fi
-
     - name: 📦️ Create Pull Request
-      if: steps.gitDiff.outputs.changes == 'true'
       uses: actions/github-script@v7
       with:
         script: |
@@ -180,11 +170,8 @@ jobs:
           labels: ['autoPullRequest']
           });
 
-  AutoMerge-into-Main:
-    needs: [Create-PullRequest]
-    runs-on: ubuntu-latest
-    steps:
     - name: 🧬 Merge QA -> MAIN
+      if: success()
       uses: devmasx/merge-branch@master
       with:
         type: now
