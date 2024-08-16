@@ -44,10 +44,10 @@ jobs:
       MOCHA_REPORT_DIR: cypress/tests_reports/${{ matrix.browser }}_mocha_report
 
     steps:
-    - name: 💻 Checkout
+    - name: 💻 Checkout Repo
       uses: actions/checkout@v4
 
-    - name: 💿 Install Node.js
+    - name: 💿 Install Node.js v20
       uses: actions/setup-node@v4
       with:
         node-version: 20
@@ -55,7 +55,7 @@ jobs:
     - name: 🍙 Bun Setup
       uses: oven-sh/setup-bun@v2
 
-    - name: 🧬 Install All Dependencies
+    - name: 🧬 Install Project Dependencies
       run: |
         bun install
 
@@ -63,7 +63,7 @@ jobs:
       run: | #? Corre el linter de TypeScript para verificar errores de sintaxis.
         bun run check:ts
 
-    - name: 🧪 Cypress Run Test Coverage on ${{ matrix.browser }}
+    - name: 🧪 Cypress Run Regression Testing on ${{ matrix.browser }}
       uses: cypress-io/github-action@v4
       with:
         browser: ${{ matrix.browser }}
