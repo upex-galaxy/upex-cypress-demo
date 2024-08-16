@@ -14,6 +14,8 @@ jobs:
   TestSuite:
     # Con runs-on definimos el sistema operativo donde se ejecutará este trabajo
     runs-on: ubuntu-latest
+    #? environment: Se usa para definir un entorno de despliegue y puede incluir políticas de protección y secretos específicos del entorno.
+    #? env: Se usa para definir variables de entorno que estarán disponibles para todos los pasos dentro del job.
 
     # Definimos los pasos (steps) que se ejecutarán en este trabajo
     steps:
