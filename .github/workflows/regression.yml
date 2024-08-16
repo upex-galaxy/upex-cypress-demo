@@ -60,8 +60,6 @@ jobs:
         browser: ${{ matrix.browser }}
         command: |
           bun run regression:${{ matrix.browser }}
-      env:
-        REPLAY_API_KEY: ${{ secrets.CY_REPLAY_API_KEY }}
 
     - name: 📬Generate JUnit/Mocha Report for ${{ matrix.browser }}
       if: always()

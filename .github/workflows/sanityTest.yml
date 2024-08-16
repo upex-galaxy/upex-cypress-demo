@@ -72,17 +72,12 @@ jobs:
       run: |
         bun install
 
-    - name: 🧬Install Replay Chromium
-      run: npx replayio install
-
     - name: 🧪Cypress Run Test Coverage
       uses: cypress-io/github-action@v4
       with:
-        browser: replay-chromium
+        browser: chrome
         command: |
           bun run test:sanity:ci ${{ github.event.inputs.test_run }}
-      env:
-        REPLAY_API_KEY: ${{ secrets.CY_REPLAY_API_KEY }}
 
     - name: 📬Generate JUnit/Mocha Report
       if: always()
