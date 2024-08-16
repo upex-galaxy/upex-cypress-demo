@@ -101,7 +101,7 @@
 		"tsconfig.json": "svgo",
 		"tsconfig.eslint.json": "eslint",
 		"regression.yml": "test-ts",
-		"sanityTemplate.yml": "test-ts",
+		"sanityTest.yml": "test-ts",
 		"cypress.reporter.chrome.json": "auto",
 		"cypress.reporter.firefox.json": "auto",
 		"cypress.reporter.edge.json": "auto",

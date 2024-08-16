@@ -1,5 +1,4 @@
-class Selectable
-{
+class Selectable {
 	get = {
 		listItems: () => cy.get('#verticalListContainer li'),//wrapper
 		gridButton: () => cy.get('#demo-tab-grid'), //Grid button

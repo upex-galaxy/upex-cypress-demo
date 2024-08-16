@@ -1,5 +1,5 @@
 class Droppable {
-	get={
+	get = {
 		dragMeBox :() => cy.get('#draggable'),
 		dropBoxContainerSimpleTap :() => cy.get('#simpleDropContainer #droppable'),
 		//Accept Tab
@@ -67,4 +67,4 @@ class Droppable {
 
 }
 
-export const DroppablePage = new Droppable();
+export const droppablePage = new Droppable();

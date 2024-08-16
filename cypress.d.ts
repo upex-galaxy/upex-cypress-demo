@@ -1,6 +1,5 @@
-import type { SpaceCheckoutPage } from '@pages/SpaceCheckout.Page';
-import type { SpaceLoginPage } from '@pages/SpaceLogin.Page';
-import type { SpaceDestinationPage } from '@pages/SpaceProduct.Page';
+/* eslint-disable no-unused-vars */
+import { defineConfig } from 'cypress';
 declare global {
     namespace Cypress {
         // eslint-disable-next-line no-unused-vars
@@ -15,25 +14,7 @@ declare global {
              *    spaceLoginPage.submitLogin()
              *})
             */
-            page(): Cypress.Chainable<{
-                spaceLoginPage: SpaceLoginPage
-                spaceProductPage: SpaceDestinationPage
-                spaceCheckoutPage: SpaceCheckoutPage
-            }>
-
-            /**
-             * @description
-             * El método react() te permite utilizar y encadenar comandos Cypress a los elementos de ReactJS de tu aplicación bajo prueba.
-             * @example
-             * cy.react('button', { hasText: 'Log in' }).click()
-            */
-            react(dataReactToolbox: string, options?: { hasText: string }): Cypress.Chainable<JQuery<HTMLElement>>
-        }
-        interface CardProps$ {
-            title: string
-            description: string
-            price: string
-            bookButton: JQuery<HTMLElement>
+            // page(): Cypress.Chainable<{}>
         }
     }
 }

@@ -38,4 +38,4 @@ class Selectable {
 	};
 
 };
-export const SelectablePage = new Selectable();
+export const selectablePage = new Selectable();

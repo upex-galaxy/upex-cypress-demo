@@ -1,71 +1,58 @@
-#!ESTE ARCHIVO ES UN TUTORIAL, NO CAMBIARLO EN ABSOLUTO. 
-#! Si Quieres crear tu propio archivo YML, usa el sanityTemplate.yml para copiar y pegar en tu propio archivo yml...
-#! Para crear tu propio archivo yml, usa tu nombre como SUFIJO del nombre del archivo; ejemplo: sanity-ely.yml
-name: 🧪Example Test in CI Pipeline with Cypress
-run-name: ${{github.actor}}👨🏻‍🔬 triggered Test in ${{github.ref_name}}
+#! Este archivo es un tutorial básico para enseñar la sintaxis de YAML en GitHub Actions.
+#todo: Vamos a configurar un pipeline simple para ejecutar pruebas con Cypress.
 
-# on:
-#     push:
-#         branches-ignore: [main, QA]
-#*Esto indica que se ejecutará con PUSH o MERGE en cualquier rama que no sea 'main' ni 'QA'
+# Nombre del pipeline
+name: 🧪 Tutorial Básico de GitHub Actions para Cypress
 
-on: [workflow_dispatch] #Esta opción es para este Tutorial, para que no se ejecute en CI.
+# Aquí se define CUANDO se ejecutará el Pipeline, puedes establecer muchas opciones...
+on: [workflow_dispatch]
+#? La opción "workflow_dispatch"  hace que puedas ejecutarlo manualmente desde el Repositorio Remoto en GitHub, en la pestaña "Actions", seleccionando el Pipeline y luego "Run workflow"
 
+# Definimos los trabajos (jobs) que se ejecutarán en este pipeline
 jobs:
-  #* Este es un Nombre de este Job, puedes dejarlo como está.
+  # Nombre del trabajo (job)
   TestSuite:
-    #* Este parámetro indica que se correrá en un Sistema Operativo. No cambiar.
+    # Con runs-on definimos el sistema operativo donde se ejecutará este trabajo
     runs-on: ubuntu-latest
 
-    #todo: Aquí a continuación vamos a definir qué vamos a correr de Postman:
+    # Definimos los pasos (steps) que se ejecutarán en este trabajo
     steps:
-    #* Este paso, copia y pega literalmente el repo que tenemos.
-    - name: 📘Checkout Repo
-      uses: actions/checkout@v3
-      #* el Name es opcional, e indica el nombre del Step. Uses es la dependencia.
+    # Paso 1: Checkout del repositorio (casi siempre es el primer paso)
+    - name: 📘 Checkout del Repositorio
+      uses: actions/checkout@v4
+      # "uses" indica la acción que se va a utilizar, en este caso, checkout para clonar el repositorio
 
-    - name: 📦Set up Node.js
-      uses: actions/setup-node@v2
+    # Paso 2: Configurar Node.js
+    - name: 📦 Configurar Node.js
+      uses: actions/setup-node@v4
       with:
-        node-version: 16
-        #* El with se usa para indicar qué parámetro se usa con la dependencia.
-        #* Considera que el with dependerá del uso de la dependencia.
+        node-version: 20
+        # with se usa para especificar parámetros para la acción, en este caso, la versión de Node.js
 
-    - name: 💾Installing Dependencies
+    # Paso 3: Instalar dependencias
+    - name: 💾 Instalar Dependencias
       run: |
         npm ci
         npm list
-      #* El CI en npm es buena práctica para instalar dependencias en lugar de npm i, y list es para listar y verlas.
+      # run se usa para ejecutar comandos de shell, en este caso, instalar dependencias y listarlas
 
-      #* Esta dependencia de CI es exclusiva de Cypress que nos permite ejecutar sin necesidad de hacer el build.
-      #! AQUÍ DEBES MODIFICAR el Test Suite a ejecutar.
-      #todo: Agrega el tu path de archivo cypress en el npm run file:
-    - name: 🧪Cypress Run Test Coverage in Chrome
-      uses: cypress-io/github-action@v4
+    # Paso 4: Ejecutar pruebas de Cypress en Chrome
+    - name: 🧪 Ejecutar Pruebas de Cypress en Chrome
+      uses: cypress-io/github-action@v4 # Esta es la acción oficial de Cypress para GitHub Actions
       with:
         browser: chrome
-        command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-          npm run file cypress/e2e/Tests/Elements/GX-10497-Buttons.cy.js
+        command: |
+          npm run test:run cypress/e2e/Tests/Elements
+        # Aquí especificamos el navegador y el comando para ejecutar las pruebas de Cypress
 
-    #* Esto es para guardar el reporte previamente generado y colocarlo en Github.
-    - name: 📊Upload Artifact ☕Mochawesome HTML Report
-      if: always()
+    # Paso 5: Subir el reporte de pruebas a GitHub
+    - name: 📊 Subir Reporte de Pruebas
+      if: always() # el "if" es una condición para ejecutar el paso, en este caso, siempre
       uses: actions/upload-artifact@v3
       with:
-        name: mochaTest-report
+        name: mocha-report
         path: mochawesome-report
-    #* if: always() es un comando YML condicional: Si pasa o no el paso anterior, corre este Paso.
+        # if: always() asegura que este paso se ejecute siempre, sin importar si los pasos anteriores fallaron
+        # uses indica la acción para subir artefactos, y with especifica el nombre y la ruta del reporte
 
-    # #todo: IMPORTING JIRA...
-    # - name: ✅Import Test Results to Xray
-    #   if: always()
-    #   uses: mikepenz/xray-action@v2
-    #   with: #! EDITAR AQUÍ EL TEST EXECUTION (TX) DE JIRA DONDE SE CARGARÁN LOS TESTS:
-    #       username: ${{secrets.XRAY_CLIENT_ID}}
-    #       password: ${{secrets.XRAY_CLIENT_SECRET}}
-    #       testFormat: 'junit'
-    #       testPaths: 'reports/test-results.xml'
-    #       #todo: CAMBIA el TX por tu propio TX de tu tarea.
-    #       testExecKey: 'GX-1'
-    #       #todo: CAMBIA el ID del Proyecto del que pertenece tu tarea.
-    #       projectKey: 'GX'
+# Si quieres aprender más sobre GitHub Actions, visita la documentación oficial

@@ -11,21 +11,20 @@
 		"test:sanity:ci": "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=cypress.reporter.chrome.json --spec",
 		"test:firefox": "cypress run --browser firefox --reporter cypress-multi-reporters --reporter-options configFile=cypress.reporter.firefox.json --spec",
 		"test:edge": "cypress run --browser edge --reporter cypress-multi-reporters --reporter-options configFile=cypress.reporter.edge.json --spec",
-		"regression": "cypress run --browser electron",
-		"regression:chrome": "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=cypress.reporter.chrome.json",
-		"regression:firefox": "cypress run --browser firefox --reporter cypress-multi-reporters --reporter-options configFile=cypress.reporter.firefox.json",
-		"regression:edge": "cypress run --browser edge --reporter cypress-multi-reporters --reporter-options configFile=cypress.reporter.edge.json",
+		"regression": "npm run clean:reports && cypress run --browser electron",
+		"regression:chrome": "npm run clean:reports && cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=cypress.reporter.chrome.json",
 		"junit:rm:report": "rm -rf cypress/tests_results/junit/* || true",
 		"mocha:rm:report": "rm -rf cypress/tests_results/mocha/* || true",
 		"clean:reports": "npm run junit:rm:report && npm run mocha:rm:report",
-		"merge:junit:c:report": "jrm cypress/tests_results/junit/chrome_regression_report.xml \"cypress/tests_results/junit/chrome/*.xml\"",
+		"merge:junit:c:report": "jrm cypress/tests_results/junit/chrome_junit_report.xml \"cypress/tests_results/junit/chrome/*.xml\"",
 		"merge:json:c:report": "mochawesome-merge \"cypress/tests_results/mocha/chrome/*.json\" > \"cypress/tests_results/index.json\"",
 		"gen:mocha:c:report": "marge cypress/tests_results/index.json -o cypress/tests_reports/chrome_mocha_report",
 		"chrome:report": "npm run merge:junit:c:report && npm run merge:json:c:report && npm run gen:mocha:c:report",
 		"prettier:check": "npx prettier --check cypress",
 		"prettier:fix": "npx prettier --write cypress",
 		"lint:check": "npx eslint cypress",
-		"lint:fix": "npx eslint --fix cypress"
+		"lint:fix": "npx eslint --fix cypress",
+		"check:ts": "tsc --noEmit"
 	},
 	"keywords": [
 		"upexgalaxy"
@@ -53,8 +52,10 @@
 		"dotenv": "16.4.1",
 		"esbuild": "0.20.0",
 		"eslint": "8.56.0",
+		"eslint-import-resolver-alias": "^1.1.2",
 		"eslint-plugin-chai-friendly": "0.7.4",
 		"eslint-plugin-cypress": "2.15.1",
+		"eslint-plugin-import": "^2.29.1",
 		"eslint-plugin-only-warn": "1.1.0",
 		"eslint-plugin-prettier": "5.1.3",
 		"junit-report-merger": "6.0.3",
@@ -64,6 +65,9 @@
 		"mochawesome-merge": "4.3.0",
 		"mochawesome-report-generator": "6.2.0",
 		"prettier": "3.2.4",
+		"prettier-eslint": "^16.3.0",
+		"ts-node": "^10.9.2",
+		"tsconfig-paths": "^4.2.0",
 		"typescript": "5.3.3"
 	}
 }
