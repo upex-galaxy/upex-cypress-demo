@@ -1,13 +1,5 @@
-#*🤖Este Pipeline de CI se activa al PUSHEAR o MERGEAR en ramas de tareas que no sean QA ni Main, y consiste en ejecutar los tests de una US e importar los resultados a Jira!🚀
-#*👩🏻‍🔬Para utilizar este Pipeline de Ari, sigue los siguientes pasos:
-#todo: 1 -> Crea tu propio archivo sanity.yml con tu username de GitHub, ejemplo sanity-saiotest.yml
-#todo: 2 -> Copia el contenido de este archivo yml y pégalo en tu nuevo archivo yml con tu username.
-#todo: 3 -> Modifica el trigger del Push en donde dice "TuBranchAqui", coloca tu nombre tal cual de tu rama git.
-#todo: 4 -> Modifica el archivo de prueba a ejectuar en el script del "yarn test" (ver ejemplo en este archivo)
-#todo: 5 -> Modifica la propiedad: "testExecKey" con tu ID del TX de Jira para importar automáticamente el resultado.
-#todo: 6 -> Recuerda modificar el projectKey correspondiente, si estás en L3, debe ser GX3 y así...
-#todo: 7 -> Listo! Guarda los cambios (git add + git commit) y pushea (git push) para ejectutar este Pipeline!
-#*Resultado: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí.
+#*🤖 Ahora puedes usar este PIPELINE directamente desde GitHub Actions!
+#*🚀 Solo necesitas configurar las variables de entorno, keys, ruta de ejecución y ejecutarlo.
 
 name: 🧪 Sanity Test CI Pipeline
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
