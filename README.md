@@ -148,8 +148,8 @@ A continuación se presenta el Plan completo de uso del Repositorio de UPEX. Es 
          git commit -m "test: (GX3-123) add 2 test cases for the login page"
          ```
 
-   > [!TIP]
-   > Recomandamos leer [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/))
+> [!TIP]
+> Recomandamos leer [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/))
 
 3. **Actualiza tu Rama (Git Pull)**
 
@@ -159,9 +159,9 @@ A continuación se presenta el Plan completo de uso del Repositorio de UPEX. Es 
    git pull origin QA
    ```
 
-   > [!TIP]
-   > Esto te permitirá resolver cualquier conflicto que pueda surgir antes de subir tus cambios.
-   > Es importante mantener tu rama actualizada con la rama principal para evitar conflictos y asegurar una integración fluida.
+> [!TIP]
+> Esto te permitirá resolver cualquier conflicto que pueda surgir antes de subir tus cambios.
+> Es importante mantener tu rama actualizada con la rama principal para evitar conflictos y asegurar una integración fluida.
 
 4. **Sube tu Rama al Repositorio Remoto (Git Push)**
 
@@ -171,18 +171,18 @@ A continuación se presenta el Plan completo de uso del Repositorio de UPEX. Es 
    git push origin nombre-de-la-rama
    ```
 
-   > [!NOTE]
-   > Recuerda que es importante subir tu rama al repositorio remoto para que el equipo pueda revisar tus cambios y realizar la integración.
+> [!NOTE]
+> Recuerda que es importante subir tu rama al repositorio remoto para que el equipo pueda revisar tus cambios y realizar la integración.
 
 5. **Crea un Pull Request (PR)**
 
    Una vez que hayas subido tu rama, crea un Pull Request (PR) en GitHub usando el Template predefinido.
    - **Importante**: Cuando crees un PR, se generará automáticamente un template predefinido. Asegúrate de completar todos los campos requeridos en el template para una correcta revisión del PR (El mismo template de Pull Request está disponible en cada repositorio)
 
-   > [!TIP]
-   > Si quieres saber cómo es el template del PR, lo puedes ver en `docs/pull_request_template.md` en el Repo. Sin embargo, no es necesario copiarlo, ya que se generará automáticamente en tu PR.
-   > [!NOTE]
-   > Recuerda agregar una evidencia de tus resultados de prueba en la sección de "Test Results" del PR. Puedes incluir capturas de pantalla o un enlace al reporte de Pruebas o al pipeline de SanityTest.
+> [!TIP]
+> Si quieres saber cómo es el template del PR, lo puedes ver en `docs/pull_request_template.md` en el Repo. Sin embargo, no es necesario copiarlo, ya que se generará automáticamente en tu PR.
+> [!NOTE]
+> Recuerda agregar una evidencia de tus resultados de prueba en la sección de "Test Results" del PR. Puedes incluir capturas de pantalla o un enlace al reporte de Pruebas o al pipeline de SanityTest.
 
 6. **Revisión y Merge**
 
@@ -202,29 +202,29 @@ Este repositorio está configurado para ejecutar pruebas automatizadas mediante 
 
 - **SanityTest** (Activación manual):
 
-  - Esta es una estrategia de ejecución de pruebas para verificar una suite de pruebas específica. Por ejemplo, si solo quieres validar que el conjunto de pruebas para un Módulo de la App funcione como se espera.
-  - **Ejecutar**: cualquier tipo de prueba o suite para verificar módulos específicos de la aplicación.
-  - **Cuándo**:
-    - Se puede activar manualmente desde la interfaz "Run Workflow" de GitHub Actions.
+    - Esta es una estrategia de ejecución de pruebas para verificar una suite de pruebas específica. Por ejemplo, si solo quieres validar que el conjunto de pruebas para un Módulo de la App funcione como se espera.
+    - **Ejecutar**: cualquier tipo de prueba o suite para verificar módulos específicos de la aplicación.
+    - **Cuándo**:
+        - Se puede activar manualmente desde la interfaz "Run Workflow" de GitHub Actions.
 
 - **SmokeTest** (Activación manual o verificación de Pull-Request):
 
-  - Esta es una estrategia de ejecución de pruebas para verificar los módulos principales de la aplicación. Por ejemplo, antes de ejecutar las pruebas de regresión, queremos asegurarnos de que los módulos principales funcionen como se espera (las principales características de la aplicación deberían funcionar).
-  - **Ejecutar**: Pruebas de API o pruebas E2E para verificar los módulos principales de la aplicación.
-  - **Cuándo**:
-    - Se puede activar manualmente desde la interfaz "Run Workflow" de GitHub Actions.
-    - Se puede configurar para que se active automáticamente después de un Deploy de Dev.
+    - Esta es una estrategia de ejecución de pruebas para verificar los módulos principales de la aplicación. Por ejemplo, antes de ejecutar las pruebas de regresión, queremos asegurarnos de que los módulos principales funcionen como se espera (las principales características de la aplicación deberían funcionar).
+    - **Ejecutar**: Pruebas de API o pruebas E2E para verificar los módulos principales de la aplicación.
+    - **Cuándo**:
+        - Se puede activar manualmente desde la interfaz "Run Workflow" de GitHub Actions.
+        - Se puede configurar para que se active automáticamente después de un Deploy de Dev.
 
 - **RegressionTesting** (Activación manual o recomendado después de Smoke):
 
-  - Esta es una estrategia de ejecución de pruebas para verificar todos los módulos de la aplicación. Por ejemplo, después de ejecutar las pruebas de Smoke (los módulos principales funcionan), queremos validar que el resto de las módulos y funcionalidades funcionen como se espera (todos los componentes deberían funcionar).
-  - **Ejecutar**: Todas las pruebas candidatas para verificar la mayoría de las características de la aplicación.
-  - **Cuándo**:
-    - Se puede activar manualmente desde la interfaz "Run Workflow" de GitHub Actions.
-      - Comienza siempre luego de un Job de SmokeTest exitoso en el mismo Pipeline de Regresión
-    - Se puede configurar para que se active automáticamente cuando se abra un Pull-Request para verificar los nuevos cambios antes del merge.
-    - Se puede configurar para que se active automáticamente después de que se hiciera merge los nuevos cambios en la rama principal.
-    - Se puede configurar para ejecutarse en un horario específico.
+    - Esta es una estrategia de ejecución de pruebas para verificar todos los módulos de la aplicación. Por ejemplo, después de ejecutar las pruebas de Smoke (los módulos principales funcionan), queremos validar que el resto de las módulos y funcionalidades funcionen como se espera (todos los componentes deberían funcionar).
+    - **Ejecutar**: Todas las pruebas candidatas para verificar la mayoría de las características de la aplicación.
+    - **Cuándo**:
+        - Se puede activar manualmente desde la interfaz "Run Workflow" de GitHub Actions.
+            - Comienza siempre luego de un Job de SmokeTest exitoso en el mismo Pipeline de Regresión
+        - Se puede configurar para que se active automáticamente cuando se abra un Pull-Request para verificar los nuevos cambios antes del merge.
+        - Se puede configurar para que se active automáticamente después de que se hiciera merge los nuevos cambios en la rama principal.
+        - Se puede configurar para ejecutarse en un horario específico.
 
 #### **> Manual Trigger de los PIPELINES**
 
@@ -308,85 +308,165 @@ Los reportes de Mochawesome se generan y se despliegan automáticamente en GitHu
 #### > Dónde ver el Reporte de Mochawesome en GitHub Pages
 
 - Los reportes se pueden visualizar directamente desde el GitHub Pages del Repo:
-  - **Para ver el Reporte de Regresión**: Debes ir a la URL de GitHub Pages, en la url principal, disponible cuando termine el Pipeline de RegressionTesting y se ejecute el Deploy.
-  - **Para ver el Reporte de SanityTest de tu XRay Test Execution (TX)**: Debes ir al endpoint `sanity/{{xray_tx_id}}` de la URL de GitHub Pages, disponible cuando termine el Pipeline de SanityTest y se ejecute el Deploy.
+    - **Para ver el Reporte de Regresión**: Debes ir a la URL de GitHub Pages, en la url principal, disponible cuando termine el Pipeline de RegressionTesting y se ejecute el Deploy.
+    - **Para ver el Reporte de SanityTest de tu XRay Test Execution (TX)**: Debes ir al endpoint `sanity/{{xray_tx_id}}` de la URL de GitHub Pages, disponible cuando termine el Pipeline de SanityTest y se ejecute el Deploy.
 
 ---
 
-### 🧪 Estrategia y Nomenclatura para Desarrollo de Pruebas (Archivos)
+### 🧪 Estrategias y Nomenclaturas para Desarrollo de Pruebas (Archivos)
 
 Para mantener la consistencia y claridad en los repositorios de UPEX, sigue estas guías de estructura y nomenclatura (Los ejemplos pueden variar dependiendo del Lenguaje de Programación y Framework)
 
-- **Estructura: Page Object Model (POM) (Patrón de Diseño):**
+#### > **Estructura: Page Object Model (POM) (Patrón de Diseño):**
 
-  - Directorio: `.../pageobjects` o `.../pages`
-  - Nomenclatura: **PascalCase** o **snake_case** según el lenguaje:
+- Directorio: `.../pageobjects` o `.../pages`
+- Nomenclatura: **PascalCase** o **snake_case** según el lenguaje:
     - Para Node (JS/TS): `**Page.js` / `**Page.ts` - ejemplo: `LoginPage.ts`
-      - Estructura básica de POM en **Cypress con Typescript:**
+        - Estructura básica de POM en **Cypress con Typescript:**
 
-         ```typescript
-         export class LoginPage {
+          ```typescript
+          export class LoginPage {
             // Tipado de Elementos de la Página
             loginButton: () => Cypress.Chainable<JQuery<HTMLButtonElement>>;
             constructor() {
-               // Elementos de la Página
-               this.loginButton = () => cy.get('[form=login]').contains('button', 'Log in');
+                // Elementos de la Página
+                this.loginButton = () => cy.get('[form=login]').contains('button', 'Log in');
             }
             submitLogin() { // Método de Acción
-               this.loginButton().click();
+                this.loginButton().click();
             }
-         }
-         ```
+          }
+          ```
 
-   > [!TIP]
-   > Localizadores: Procura usar métodos de localización estratégicos para simplificar el uso de selectores del Framework. Apoya tu POM con los métodos de Test Utility (Locators) para mantener un código limpio y reutilizable.
-   > [!TIP]
-   > Métodos de Acción: Manten una nomenclatura clara y descriptiva para los métodos de acción en el POM. Usa verbos en infinitivo para describir las acciones que realiza el método como si fuera una instrucción.
-   > [!TIP]
-   > Shorcuts: Puedes crear un método que realice varias acciones en una sola llamada para simplificar el uso del POM. Por ejemplo, un método `login` que realice el llenado de credenciales y el envío del formulario de login.
+> [!TIP]
+>
+> - **Propiedades de la Clase son equivalentes a Elementos y Atributos del Page**: Procura usar métodos de localización estratégicos para simplificar el uso de selectores del Framework. Apoya tu POM con los métodos de Test Utility (Locators) para mantener un código limpio y reutilizable.
+> - **Métodos de la Clase son equivalentes a Métodos de Acción del Page**: Manten una nomenclatura clara y descriptiva para los métodos de acción en el POM. Usa verbos en infinitivo para describir las acciones que realiza el método como si fuera una instrucción.
+> - **Técnica Shortcut**: Puedes crear un método que realice varias acciones en una sola llamada para simplificar el uso del POM. Por ejemplo, un método `login` que realice el llenado de credenciales y el envío del formulario de login.
 
-- **Estructura: API Modules (Patrón de Diseño):**
+#### > **Estructura: API Modules (Patrón de Diseño):**
 
-  - Directorio: `test/api`
-  - Carpeta de Interfaces Typescript: `test/api/types`
-  - Nomenclatura: **PascalCase** con sufijo `.Api.ts` (ejemplo: `Subscriptions.Api.ts`)
-  - **La Estructura es similar a un Page Object, pero con métodos para realizar peticiones HTTP**.
+- Directorio: `test/api`
+- Carpeta de Interfaces Typescript: `test/api/types`
+- Nomenclatura: **PascalCase** con sufijo `.Api.ts` (ejemplo: `Subscriptions.Api.ts`)
+- **La Estructura es similar a un Page Object, pero con métodos para realizar peticiones HTTP**.
 
-- **Estructura: Archivos de Prueba (E2E o Integration)**
+#### > **Estructura: Test Utility Modules (Locators, Actions, Assertions):**
 
-  - Nomenclatura de Sufijos de Pruebas para E2E o Integration:  
-    - para pruebas generales: `**test.{js,ts}` o `**spec.{js,ts}`
-    - para pruebas de E2E: `**e2e.test.{js,ts}` (JS/TS)
-    - para pruebas de Integration: `**api.test.{js,ts}` (JS/TS)
+- Directorio: `test/utils`
+- Definición de cada Módulo de Utilidad de Prueba:
+      - **Locators**: Métodos para localizar elementos de la página.
+      - **Actions**: Métodos para realizar acciones en la página.
+      - **Assertions**: Métodos para validar resultados y estados de la página.
 
-  - Path de Pruebas:
+> [!NOTE]
+> Los Frameworks modernos como Cypress, Playwright y WebdriverIO tienen métodos y funciones integradas para realizar estas acciones y validaciones, por lo que no es necesario crear módulos de utilidad personalizados a menos que sea necesario para métodos específicos que no estén disponibles en el Framework o requiera más personalización situacional.
+
+#### > **Estructura: Técnicas de Test Management (TestBase, TestPlan):**
+
+- **Técnica "TestBase"**:
+    - Definición: *Es una técnica común en los frameworks de automatización de pruebas, que consiste en tener un archivo que contiene todos los PageObjects y funciones de utilidad para importarlo en cada archivo de prueba y acceder a los POM y utilidades con mayor facilidad.*
+    - Directorio: *Este archivo se puede ubicar en cualquier directorio específico, pero se recomienda en el directorio raíz de pruebas.*
+    - Para Node (JS/TS): `/TestBase.ts` (Playwright/WebdriverIO) o `/commands.ts` (Cypress)
+        - Ejemplo TestBase en **Cypress con Typescript:**
+            - *En Cypress se usa el módulo de Commands.ts como el TestBase.*
+
+            ```typescript
+            import { LoginPage } from '@pages/LoginPage';
+            import { HomePage } from '@pages/HomePage';
+
+            Cypress.Commands.add('page', () => {
+                const page = {
+                    // Se instancian los PageObjects como propiedades de objeto
+                    loginPage: new LoginPage(),
+                    homePage: new HomePage()
+                };
+                return cy.wrap(page); // Se envuelve como un objeto Cypress
+            });
+            // ---- Uso en archivo de prueba ----: 
+            it('test case name', () => {
+                cy.page().loginPage.submitLogin();
+            });
+            ```
+
+> [!NOTE]
+> Este archivo se importa en cada archivo de prueba para acceder a todos los PageObjects (o funciones de utilidad) con mayor facilidad.
+> Además, la creación de cada TestBase para cada framework es diferente, por lo que se debe ajustar según el framework. En Playwright, por ejemplo, se usa la técnica Fixture para armar el TestBase. En Cypress, se usa el Commands.js como el TestBase. Y así sucesivamente.
+
+#### > **Estructura: Archivos de Prueba (E2E o Integration):**
+
+- Nomenclatura de Sufijos de Pruebas para E2E o Integration:  
+    - para pruebas generales: `**.cy.{js,ts}`
+    - para pruebas de E2E: `**.e2e.cy.{js,ts}`
+    - para pruebas de Integration: `**.api.cy.{js,ts}`
+
+- Path de Pruebas:
     - Cypress(TS): `cypress/e2e/specs/<component-name>/*.ts` (ejemplo: `cypress/e2e/specs/payment/payByDebit.cy.ts`)
 
-  - Nomenclatura del Suite de Prueba (describe/class) debería ser:
+- Nomenclatura del Suite de Prueba (describe/class) debería ser:
     - `Jira Story ID` + `Story title`
-      - Ejemplo: `GX3-123: Login Page`
-  - Nomenclatura del Caso de Prueba (it/test/def) debería ser:
+        - Ejemplo: `GX3-123: Login Page`
+- Nomenclatura del Caso de Prueba (it/test/def) debería ser:
     - `Jira Test Set ID` + `TC#` + `TC Title`
-      - Ejemplo: `GX3-234 TC1: Login with valid credentials`
+        - Ejemplo: `GX3-234 TC1: Should not login with invalid credentials`
 
-  - **Estructura Matriz de Prueba Automatizada con modelo (Arrange - Act - Assert)**: Es la forma de organizar y estructurar el código de prueba automatizada para mantener un código limpio y fácil de mantener. La estructura de la prueba se divide en tres secciones principales:
-    - **Arrange**: Declaración de Datos y Variables
-    - **Act**: Acciones del Caso de Prueba
-    - **Assert**: Validaciones y Comprobaciones con los Expect
-    - Ejemplo:
+#### > **Estructura Matriz de Prueba Automatizada con modelo (Arrange - Act - Assert):**
 
-      ```typescript
-         describe('GX3-123: {{Story_title}}', () => {
-            beforeEach(() => {
-               // acciones de precondición de prueba
+- Definición: *Es la forma de organizar y estructurar el código de prueba automatizada para mantener un código limpio y fácil de mantener. La estructura de la prueba se divide en tres secciones principales*
+- Patrón de Diseño: *Arrange - Act - Assert*
+    - **Arrange**: Es la primera sección de la prueba y se utiliza para declarar datos y variables, y configurar el estado inicial de la prueba.
+        - Ejemplo con Cypress:
+
+            ```typescript
+            it('GX3-234 TC1: {{Test_title}}', () => {
+                const username = 'user1';
+                const password = 'password1';
+                // ...
             });
-            it('GX3-234 TC1: {{TC_Title}}', () => {
-               // Arrange: Declaración de datos y variables
-               // Act: Acciones del caso de prueba
-               // Assert: Validaciones y comprobaciones con los expect
+            ```
+
+    - **Act**: Es la segunda sección de la prueba y se utiliza para realizar acciones y operaciones en la aplicación bajo prueba.
+        - Ejemplo con Cypress:
+
+            ```typescript
+            // ...
+               loginPage.open();
+               loginPage.fillUsername(username);
+               loginPage.fillPassword(password);
+               loginPage.submitLogin();
+            // ...
+            ```
+
+    - **Assert**: Es la última sección de la prueba y se utiliza para realizar validaciones y comprobaciones con los expect.
+        - Ejemplo con Cypress:
+
+            ```typescript
+            // ...
+            loginPage.getErrorMessage().should('have.text', 'Invalid credentials');
+            ```
+
+    - Ejemplo Completo de la Estructura de Prueba:
+
+         ```typescript
+         import { loginPage } from '@pages/LoginPage';
+         describe('GX3-123: Login Page', () => {
+            beforeEach(() => {
+                  // acciones de precondición de prueba
+            });
+            it('GX3-234 TC1: Should not login with invalid credentials', () => {
+                  // Arrange
+                  const username = 'user1';
+                  const password = 'password1';
+                  // Act
+                  loginPage.open();
+                  loginPage.fillUsername(username);
+                  loginPage.fillPassword(password);
+                  loginPage.submitLogin();
+                  // Assert
+                  loginPage.getErrorMessage().should('have.text', 'Invalid credentials');
             });
          });
-      ```
+         ```
 
 <!--* MARKDOWN BADGES TEMPLATE (No need to change) -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
