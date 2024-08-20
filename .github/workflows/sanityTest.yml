@@ -1,15 +1,15 @@
 #*🧙🏻‍♂️ Ahora puedes usar este PIPELINE directamente desde GitHub Actions!
 #! NO NECESITAS MODIFICAR NADA de este archivo...
 #*🚀 Solo necesitas configurar las variables de entorno, keys de Jira y tu ruta de archivo de prueba a ejecutar en el Panel "Run workflow" de GitHub Actions
-#* 🧪 Este PIPELINE ejecutará tus pruebas y subirá los resultados a Jira XRay
+#? 🧪 Este PIPELINE ejecutará tus pruebas y subirá los resultados a Jira XRay
 
-name: 🧪 Sanity Test CI Pipeline
+name: 🧪 UPEX CI/CD SanityTest Pipeline
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 
 on:
   workflow_dispatch:
     inputs:
-      os:
+      system:
         description: 🚀Select the OS
         required: true
         default: 'ubuntu-latest'
@@ -34,7 +34,7 @@ on:
       test_run:
         description: 🚀Select the Test Suite to Run
         required: true
-        default: 'cypress/e2e/Tests/Elements' #! No modificar, esto es solo un ejemplo.
+        default: '<ingresa aquí el path Posix de tu test>' #! No modificar, esto es solo un ejemplo.
         type: string
       xray_tx:
         description: 🚀Enter the Test Execution ID
@@ -54,7 +54,8 @@ on:
 
 jobs:
   SanityTest:
-    runs-on: ubuntu-latest
+    #? El Pipeline "Sanity" es una estrategia de prueba perfecta para verificar que un Módulo entero de la App o una funcionalidad específica funcionen como se espera. Se puede realizar pruebas de cualquier nivel (Unit, Integration, E2E) para esta estrategia de pruebas. También se usa como "Story Testing" para ejecuciones de pruebas de cobertura de US (importar resultados a Jira XRay).
+    runs-on: ${{ github.event.inputs.system }}
     environment:
       name: ${{ github.event.inputs.environment }}
     env:
@@ -71,10 +72,11 @@ jobs:
 
     - name: 🍙 Bun Setup
       uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
 
     - name: 🧬 Install Project Dependencies
-      run: |
-        bun install
+      run: bun install
 
     - name: 🔎 Check Typescript Code
       run: | #? Corre el linter de TypeScript para verificar errores de sintaxis.
@@ -89,22 +91,19 @@ jobs:
 
     - name: 📬 Generate JUnit/Mocha Report
       if: always()
-      run: |
-        bun run chrome:report
+      run: bun run chrome:report
 
     - name: ✅ Import Test Results to Xray
-      if: env.XRAY_CLIENT != '' && env.XRAY_SECRET != '' #? Corre este paso si la variable de entorno está definida
+      if: always() #? Corre este paso si la variable de entorno está definida
       uses: mikepenz/xray-action@v3
       with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
-        username: ${{ env.XRAY_CLIENT}}
-        password: ${{ env.XRAY_SECRET}}
+        username: ${{ secrets.XRAY_CLIENT_ID}}
+        password: ${{ secrets.XRAY_CLIENT_SECRET}}
         testFormat: 'junit' #! NO CAMBIAR
         testPaths: 'cypress/tests_results/junit/chrome_junit_report.xml' #! NO CAMBIAR
         testExecKey: ${{ github.event.inputs.xray_tx }} #! NO CAMBIAR
         projectKey: ${{ github.event.inputs.xray_project }} #! NO CAMBIAR
-      env:
-        XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_ID }}
-        XRAY_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
+        testEnvironments: ${{ github.event.inputs.environment }}
 
     - name: 📊 Upload Artifact Mochawesome Report
       if: always()
@@ -114,14 +113,14 @@ jobs:
         path: ${{ env.MOCHA_REPORT_DIR }}
         retention-days: 15
 
-    #* --------------- Mochawesome Report Build and Deploy ---------------
+    #* ------- Mochawesome Report Build and Deploy -------
     - name: 🚀 Deploy Mocha Report to GitHub Pages
       if: always()
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages #? the branch used for the GitHub Pages content.
-        destination_dir: sanity #? this is the directory inside the gh-pages branch where the MOCHA_REPORT_DIR will be saved.
+        destination_dir: sanity/${{ github.event.inputs.xray_tx }} #? this is the directory inside the gh-pages branch where the MOCHA_REPORT_DIR will be saved.
         publish_dir: ${{ env.MOCHA_REPORT_DIR }} #? the directory to be published.
         keep_files: true #? true is required to work properly with the subfolder option in the Build Allure Report step.
         #* -----------------------------------------
@@ -132,11 +131,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: 🔔 Slack Notification
-      if: env.SLACK_WEBHOOK != '' #? will only run if the SLACK_WEBHOOK secret is provided
       uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_USERNAME: Ari✨
-        SLACK_MESSAGE: '🧪(${{ github.repository }}): ${{ github.actor }} triggered Regression 🚀'
-        SLACK_COLOR: ${{ job.status }}
+        SLACK_MESSAGE: '🧪(${{ github.repository }}): ${{ github.actor }} triggered Regression🚀'
+        SLACK_COLOR: ${{ needs.SanityTest.result }}
         SLACK_ICON: ${{ secrets.ARI_PROFILE }}

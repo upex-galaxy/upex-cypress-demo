@@ -20,6 +20,7 @@
 		"esbenp.prettier-vscode",
 		"rvest.vs-code-prettier-eslint",
 		"kennylong.kubernetes-yaml-formatter",
+		"DavidAnson.vscode-markdownlint",
 		//! Git Controls:
 		"mhutchie.git-graph",
 		"donjayamanne.githistory",

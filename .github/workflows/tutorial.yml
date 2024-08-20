@@ -57,4 +57,5 @@ jobs:
         # if: always() asegura que este paso se ejecute siempre, sin importar si los pasos anteriores fallaron
         # uses indica la acción para subir artefactos, y with especifica el nombre y la ruta del reporte
 
-# Si quieres aprender más sobre GitHub Actions, visita la documentación oficial
+# Si quieres aprender más sobre GitHub Actions, visita la documentación oficial:
+# https://docs.github.com/en/actions

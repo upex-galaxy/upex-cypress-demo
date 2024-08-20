@@ -9,6 +9,13 @@
 	// =====================
 	//? Language Specific Settings
 	// =====================
+	"[markdown]": {
+		"editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+		"editor.tabSize": 3,
+		"editor.insertSpaces": true,
+		"editor.formatOnSave": true,
+		"editor.formatOnPaste": true
+	},
 	"[Typescript]": {
 		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
 	},
@@ -47,7 +54,9 @@
 	"editor.tabSize": 4,
 	"editor.detectIndentation": true,
 	"editor.codeActionsOnSave": {
-		"source.fixAll": "explicit"
+		"source.fixAll": "explicit",
+		"source.fixAll.markdownlint": "explicit",
+		"source.fixAll.eslint": "explicit"
 	},
 	"editor.quickSuggestions": {
 		"comments": true,
