@@ -25,12 +25,12 @@ on:
         default: 'QA'
         type: choice
         options: #? Orden de Deployments...
-        - dev #? donde los developers work
-        - sandbox #? donde los QA realizan smoke y exploratory testing.
+        - DEV #? donde los developers work
+        - SANDBOX #? donde los QA realizan smoke y exploratory testing.
         - QA #? donde los QA realizan smoke, sanity y regression testing.
-        - staging #? donde los QA realizan smoke, sanity o regression testing.
-        - uat #? donde los beta testers realizan acceptance testing.
-        - prod #? donde los usuarios finales usan la App.
+        - STAGING #? donde los QA realizan smoke, sanity o regression testing.
+        - UAT #? donde los beta testers realizan acceptance testing.
+        - PROD #? donde los usuarios finales usan la App.
       test_run:
         description: 🚀Select the Test Suite to Run
         required: true
