@@ -135,6 +135,6 @@ jobs:
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_USERNAME: Ari✨
-        SLACK_MESSAGE: '🧪(${{ github.repository }}): ${{ github.actor }} triggered Regression🚀'
+        SLACK_MESSAGE: '🧪(${{ github.repository }}): ${{ github.actor }} triggered SanityTest🚀'
         SLACK_COLOR: ${{ needs.SanityTest.result }}
         SLACK_ICON: ${{ secrets.ARI_PROFILE }}
