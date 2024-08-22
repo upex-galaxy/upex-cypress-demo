@@ -12,7 +12,7 @@ describe('GX3-4847 ToolsQA | Elements | Buttons', () => {
 		cy.get('#rightClickBtn').rightclick();
 		cy.get('#rightClickMessage').should('have.text', 'You have done a right click');
 	});
-	it.only('TC3:Validar hacer click en Button Click Me ', () => {
+	it('TC3:Validar hacer click en Button Click Me ', () => {
 		cy.get('.btn.btn-primary').eq(2).click();
 		cy.get('#dynamicClickMessage').should('have.text', 'You have done a dynamic click');
 	});
