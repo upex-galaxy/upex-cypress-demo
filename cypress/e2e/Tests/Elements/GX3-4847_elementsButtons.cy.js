@@ -4,8 +4,16 @@ describe('GX3-4847 ToolsQA | Elements | Buttons', () => {
 		cy.url().should('include', 'buttons');
 		cy.get('h1.text-center').should('have.text', 'Buttons');
 	});
-	it('TC1:Validar hacer doble click en Button Double click Me ', () => {
+	it('TC1:Validar hacer doble click en Button Double Click Me ', () => {
 		cy.get('#doubleClickBtn').dblclick();
-		//cy.get('span.text-success').should('have.text', 'Yes');
+		cy.get('#doubleClickMessage').should('have.text', 'You have done a double click');
+	});
+	it('TC2:Validar hacer click derecho en Button Right Click Me ', () => {
+		cy.get('#rightClickBtn').rightclick();
+		cy.get('#rightClickMessage').should('have.text', 'You have done a right click');
+	});
+	it('TC3:Validar hacer click en Button Click Me ', () => {
+		cy.get('#uHAT0').click();
+		cy.get('#dynamicClickMessage').should('have.text', 'You have done a dynamic click');
 	});
 });
