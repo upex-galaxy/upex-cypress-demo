@@ -2,9 +2,6 @@
 // ***********************************************
 // https://on.cypress.io/custom-commands
 // ***********************************************
-import { SpaceCheckoutPage } from '@pages/SpaceCheckout.Page';
-import { SpaceLoginPage } from '@pages/SpaceLogin.Page';
-import { SpaceDestinationPage } from '@pages/SpaceProduct.Page';
 import 'cypress-file-upload';
 
 beforeEach(() => {
@@ -12,21 +9,13 @@ beforeEach(() => {
 	cy.intercept({ resourceType: /xhr|fetch/ }, { log: false });
 });
 
-//* Este es el commando principal para usar los Page Object Models sin necesidad de importarlos en cada archivo de test
-Cypress.Commands.add('page', () => {
-	const page = {
-		spaceLoginPage: new SpaceLoginPage(),
-		spaceProductPage: new SpaceDestinationPage(),
-		spaceCheckoutPage: new SpaceCheckoutPage(),
-	};
-	return cy.wrap(page);
-});
-
-Cypress.Commands.add('react', (dataReactToolbox: string, options?: { hasText: string }) => {
-	const selector = `[data-react-toolbox=${dataReactToolbox}]`;
-	if (options?.hasText) {
-		cy.contains(selector, options.hasText);
-	} else {
-		cy.get(selector);
-	}
-});
+// * Este es el Commands cy.page() para usar los Page Object Models sin necesidad de importarlos en cada archivo de test.
+// * Está comentado porque sirve de ejemplo para personalizarlo según las necesidades del proyecto.
+// Cypress.Commands.add('page', () => {
+// 	const page = {
+// 		spaceLoginPage: new SpaceLoginPage(),
+// 		spaceProductPage: new SpaceDestinationPage(),
+// 		spaceCheckoutPage: new SpaceCheckoutPage()
+// 	};
+// 	return cy.wrap(page);
+// });

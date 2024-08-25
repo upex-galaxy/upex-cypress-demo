@@ -2,25 +2,22 @@
 	"extends": ["plugin:cypress/recommended", "plugin:chai-friendly/recommended"],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
-	    "parser": "@babel/eslint-parser",
+		"parser": "@babel/eslint-parser",
 		"ecmaVersion": "latest",
 		"sourceType": "module",
-		"project": "tsconfig.eslint.json"
+		"project": ["./tsconfig.json", "tsconfig.eslint.json"]
 	},
-	"ignorePatterns": [
-		"cypress/tests_reports/**/*.js", 
-		"cypress/tests_results/**/*.js",
-		"cypress/tests_reports/**/*.ts", 
-		"cypress/tests_results/**/*.ts"
-	],
-	"plugins": ["cypress", "chai-friendly", "@typescript-eslint", "only-warn", "prettier"],
+	"ignorePatterns": ["cypress/tests_reports/**/*.js", "cypress/tests_results/**/*.js", "cypress/tests_reports/**/*.ts", "cypress/tests_results/**/*.ts"],
+	"plugins": ["cypress", "chai-friendly", "@typescript-eslint", "only-warn", "prettier", "import"],
 	"rules": {
 		"@typescript-eslint/consistent-type-imports": "error",
+		"@typescript-eslint/no-misused-promises": "error",
 		"@typescript-eslint/naming-convention": ["warn"],
 		"@typescript-eslint/no-unsafe-argument": ["warn"],
 		"@typescript-eslint/no-unsafe-assignment": ["warn"],
-		"arrow-spacing":["warn", { "before": true, "after": true }],
-		"curly": ["error", "all"],
+		"arrow-spacing": ["warn", { "before": true, "after": true }],
+		"brace-style": ["warn", "1tbs", { "allowSingleLine": true }],
+		"curly": ["error", "multi-line"],
 		"cypress/unsafe-to-chain-command": "off",
 		"default-case": "warn",
 		"eqeqeq": "warn",
@@ -30,7 +27,6 @@
 		"indent": ["warn", "tab", { "SwitchCase": 1 }],
 		"linebreak-style": ["off"],
 		"no-await-in-loop": "off",
-		"no-console": "warn",
 		"no-const-assign": "error",
 		"no-continue": "off",
 		"no-dupe-args": "error",
@@ -58,14 +54,17 @@
 		"no-useless-computed-key": "error",
 		"no-useless-return": "error",
 		"object-curly-spacing": ["warn", "always"],
-		"prefer-destructuring": ["warn", { "VariableDeclarator": { "object": true, "array": false  }, "AssignmentExpression": { "object": true, "array": false }}],
+		"prefer-destructuring": ["warn", { "VariableDeclarator": { "object": true, "array": false }, "AssignmentExpression": { "object": true, "array": false } }],
 		"prefer-template": "error",
-		"quotes":["warn", "single"],
+		"quotes": ["warn", "single"],
 		"require-await": "error",
 		"semi": ["warn", "always"],
 		"space-before-blocks": "warn",
 		"space-before-function-paren": ["error", { "anonymous": "always", "named": "never", "asyncArrow": "always" }],
 		"switch-colon-spacing": "error",
+		"import/namespace": "off",
+		"import/no-duplicates": "off",
+		"import/no-unresolved": [2, { "commonjs": true, "amd": false, "caseSensitive": true }],
 		"valid-typeof": "error"
 	},
 	"globals": {
@@ -74,5 +73,17 @@
 	},
 	"env": {
 		"cypress/globals": true
+	},
+	"settings": {
+		"import/resolver": {
+			"alias": {
+				"map": [
+					["@pages", "./cypress/support/pages"],
+					["@helper", "./cypress/support/helper"],
+					["@data", "./cypress/fixtures/data"]
+				],
+				"extensions": [".ts", ".js", ".json"]
+			}
+		}
 	}
 }
