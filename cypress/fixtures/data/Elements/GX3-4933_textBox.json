@@ -1,0 +1,55 @@
+{
+	"FullName": {
+		"inputName": "#userName",
+		"data": {
+			"TC1ValidName": "Gloria Galíndez",
+			"TC2EmptyName": "",
+			"TC3Name": "Giovanna Sira",
+			"TC4Name": "Manuela Quintero",
+			"TC5Name": "Elizabeth Suárez",
+			"TC6Name": "Anahy Galíndez",
+			"TC7Name": "Román Sira"
+		}
+	},
+	"Email": {
+		"inputEmail": "#userEmail",
+		"data": {
+			"TC1ValidEmail": "gloriagalindez@gmail.com",
+			"TC2EmptyEmail": "",
+			"TC3NoArroba": "gloriagalindezgmail.com",
+			"TC4NoUser": "@gmail.com",
+			"TC5NoDom": "gloriagalindez@.com",
+			"TC6NoPunto": "gloriagalindez@gmailcom",
+			"TC7NoExt": "gloriagalindez@gmail."
+		}
+	},
+	"CurrentAddress": {
+		"inputCA": "[placeholder = 'Current Address']",
+		"data": {
+			"TC1ValidCA": "Avenida Inca Garcilaso de la Vega",
+			"TC2EmptyCA": "",
+			"TC3CA": "Avenida Lara",
+			"TC4CA": "Avenida Los Abogados",
+			"TC5CA": "Avenida Venezuela",
+			"TC6CA": "Avenida Morán",
+			"TC7CA": "Avenida La Montañita"
+		}
+	},
+	"PermanentAddress": {
+		"inputPA": "textarea#permanentAddress.form-control",
+		"data": {
+			"TC1ValidPA": "Lara",
+			"TC2EmptyPA": "",
+			"TC3PA": "Caracas",
+			"TC4PA": "Nueva Esparta",
+			"TC5PA": "Aragua",
+			"TC6PA": "Cojedes",
+			"TC7PA": "Mérida"
+		}
+	},
+	"submitButton": "#submit",
+	"name": "#name",
+	"email": "#email",
+	"currentAddress": "p#currentAddress.mb-1",
+	"permanentAddress": "p#permanentAddress.mb-1"
+}
