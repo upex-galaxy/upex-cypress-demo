@@ -1,3 +1,4 @@
+import FillForm from '@data/Elements/GX3-4933_textBox.json'
 describe('GX3-4933 ToolsQA | Elements | Text Box: Fill form and Submit', () => 
 {
 	beforeEach('PRC:El usuario debe estar situado en la pagina de Demo QA', () => {
@@ -7,17 +8,15 @@ describe('GX3-4933 ToolsQA | Elements | Text Box: Fill form and Submit', () =>
 	});
 	it('TC1: Validar registrarse exitosamente', () =>
 	{
-		cy.fixture("cypress/fixtures/data/Elements/GX3-4933_textBox.json").then((the) => 
-		{
-			cy.get(the.FullName.inputName).type(the.FullName.data.TC1ValidName);
-			cy.get(the.Email.inputEmail).type(the.Email.data.TC1ValidEmail);
-			cy.get(the.CurrentAddress.inputCA).type(the.CurrentAddress.data.TC1ValidCA);
-			cy.get(the.PermanentAddress.inputPA).type(the.PermanentAddress.data.TC1ValidPA);
-			cy.get(the.submitButton).click();
-			cy.get(the.name).should('contain.text', the.FullName.data.TC1ValidName);
-			cy.get(the.email).should('contain.text', the.Email.data.TC1ValidEmail);
-			cy.get(the.currentAddress).should('contain.text', the.CurrentAddress.data.TC1ValidCA);
-			cy.get(the.permanentAddress).should('contain.text', the.PermanentAddress.data.TC1ValidPA);
-    	})
+			cy.get('#userName').type(FillForm.FullName.valid1);
+			cy.get('#userEmail').type(FillForm.Email.valid1);
+			cy.get('textarea[id=currentAddress]').type(FillForm.CurrentAddress.valid1);
+			cy.get('textarea[id=permanentAddress]').type(FillForm.PermanentAddress.valid1);
+			cy.get('#submit').click();
+			cy.get('#name').should('contain.text', FillForm.FullName.valid1);
+			cy.get('#email').should('contain.text', FillForm.Email.valid1);
+			cy.get('p#currentAddress.mb-1').should('contain.text', FillForm.CurrentAddress.valid1);
+			cy.get('p#permanentAddress.mb-1').should('contain.text', FillForm.PermanentAddress.valid1);
+    	
 	});
 });
