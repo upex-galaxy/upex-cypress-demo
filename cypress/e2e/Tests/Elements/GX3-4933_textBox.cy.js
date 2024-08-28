@@ -33,7 +33,7 @@ describe('GX3-4933 ToolsQA | Elements | Text Box: Fill form and Submit', () =>
 	it('GX3-4934|TC3: Validar no poder registrarse cuando Email no contiene @', () =>
 	{
 			cy.get('#userName').type(FillForm.FullName.valid3);
-			cy.get('#userEmail').type(FillForm.Email.invalid2);
+			cy.get('#userEmail').type(FillForm.Email.invalid1);
 			cy.get('textarea[id=currentAddress]').type(FillForm.CurrentAddress.valid3);
 			cy.get('textarea[id=permanentAddress]').type(FillForm.PermanentAddress.valid3);
 			cy.get('#submit').click();
@@ -42,7 +42,7 @@ describe('GX3-4933 ToolsQA | Elements | Text Box: Fill form and Submit', () =>
 	it('GX3-4934|TC4: Validar no poder registrarse cuando Email no contiene username', () =>
 	{
 			cy.get('#userName').type(FillForm.FullName.valid4);
-			cy.get('#userEmail').type(FillForm.Email.invalid3);
+			cy.get('#userEmail').type(FillForm.Email.invalid2);
 			cy.get('textarea[id=currentAddress]').type(FillForm.CurrentAddress.valid4);
 			cy.get('textarea[id=permanentAddress]').type(FillForm.PermanentAddress.valid4);
 			cy.get('#submit').click();
@@ -51,7 +51,7 @@ describe('GX3-4933 ToolsQA | Elements | Text Box: Fill form and Submit', () =>
 it('GX3-4934|TC5: Validar no poder registrarse cuando Email no contiene dominio', () =>
 	{
 			cy.get('#userName').type(FillForm.FullName.valid5);
-			cy.get('#userEmail').type(FillForm.Email.invalid4);
+			cy.get('#userEmail').type(FillForm.Email.invalid3);
 			cy.get('textarea[id=currentAddress]').type(FillForm.CurrentAddress.valid5);
 			cy.get('textarea[id=permanentAddress]').type(FillForm.PermanentAddress.valid5);
 			cy.get('#submit').click();
@@ -60,7 +60,7 @@ it('GX3-4934|TC5: Validar no poder registrarse cuando Email no contiene dominio'
 it('GX3-4934|TC6: Validar no poder registrarse cuando Email no contiene punto', () =>
 	{
 			cy.get('#userName').type(FillForm.FullName.valid6);
-			cy.get('#userEmail').type(FillForm.Email.invalid5);
+			cy.get('#userEmail').type(FillForm.Email.invalid4);
 			cy.get('textarea[id=currentAddress]').type(FillForm.CurrentAddress.valid6);
 			cy.get('textarea[id=permanentAddress]').type(FillForm.PermanentAddress.valid6);
 			cy.get('#submit').click();
@@ -69,7 +69,7 @@ it('GX3-4934|TC6: Validar no poder registrarse cuando Email no contiene punto', 
 it('GX3-4934|TC7: Validar no poder registrarse cuando Email no contiene extensión', () =>
 	{
 			cy.get('#userName').type(FillForm.FullName.valid6);
-			cy.get('#userEmail').type(FillForm.Email.invalid6);
+			cy.get('#userEmail').type(FillForm.Email.invalid5);
 			cy.get('textarea[id=currentAddress]').type(FillForm.CurrentAddress.valid6);
 			cy.get('textarea[id=permanentAddress]').type(FillForm.PermanentAddress.valid6);
 			cy.get('#submit').click();

@@ -1,7 +1,6 @@
 {
 	"FullName": {
 		"valid1": "Gloria Galíndez",
-		"invalid": "",
 		"valid2": "Giovanna Sira",
 		"valid3": "Manuela Quintero",
 		"valid4": "Elizabeth Suárez",
@@ -11,16 +10,14 @@
 	"Email": {
 		"valid1": "gloriagalindez@gmail.com",
 		"valid2": "smarty.dev@gmail.com",
-		"invalid1": "",
-		"invalid2": "gloriagalindezgmail.com",
-		"invalid3": "@gmail.com",
-		"invalid4": "gloriagalindez@.com",
-		"invalid5": "gloriagalindez@gmailcom",
-		"invalid6": "gloriagalindez@gmail."
+		"invalid1": "gloriagalindezgmail.com",
+		"invalid2": "@gmail.com",
+		"invalid3": "gloriagalindez@.com",
+		"invalid4": "gloriagalindez@gmailcom",
+		"invalid5": "gloriagalindez@gmail."
 	},
 	"CurrentAddress": {
 		"valid1": "Avenida Inca Garcilaso de la Vega",
-		"invalid": "",
 		"valid2": "Avenida Lara",
 		"valid3": "Avenida Los Abogados",
 		"valid4": "Avenida Venezuela",
@@ -29,7 +26,6 @@
 	},
 	"PermanentAddress": {
 		"valid1": "Lara",
-		"invalid": "",
 		"valid2": "Caracas",
 		"valid3": "Nueva Esparta",
 		"valid4": "Aragua",
