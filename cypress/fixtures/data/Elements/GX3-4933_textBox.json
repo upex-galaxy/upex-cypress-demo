@@ -10,12 +10,13 @@
 	},
 	"Email": {
 		"valid1": "gloriagalindez@gmail.com",
-		"invalid": "",
-		"valid2": "gloriagalindezgmail.com",
-		"valid3": "@gmail.com",
-		"valid4": "gloriagalindez@.com",
-		"valid5": "gloriagalindez@gmailcom",
-		"valid6": "gloriagalindez@gmail."
+		"valid2": "smarty.dev@gmail.com",
+		"invalid1": "",
+		"invalid2": "gloriagalindezgmail.com",
+		"invalid3": "@gmail.com",
+		"invalid4": "gloriagalindez@.com",
+		"invalid5": "gloriagalindez@gmailcom",
+		"invalid6": "gloriagalindez@gmail."
 	},
 	"CurrentAddress": {
 		"valid1": "Avenida Inca Garcilaso de la Vega",
