@@ -3,18 +3,11 @@
 		//! Themes:
 		"miguelsolorio.fluent-icons",
 		"PKief.material-icon-theme",
-		"EliverLara.andromeda",
 		"johnpapa.winteriscoming",
-		"RobbOwen.synthwave-vscode",
-		"dracula-theme.theme-dracula",
-		"zhuangtongfa.material-theme",
 		//! Helper:
 		"leizongmin.node-module-intellisense",
 		"christian-kohler.npm-intellisense",
 		"christian-kohler.path-intellisense",
-		"VisualStudioExptTeam.vscodeintellicode",
-		"streetsidesoftware.code-spell-checker",
-		"streetsidesoftware.code-spell-checker-spanish",
 		"aaron-bond.better-comments",
 		"rssowl.copy-relative-path-posix",
 		"usernamehw.errorlens",
@@ -26,14 +19,13 @@
 		"dbaeumer.vscode-eslint",
 		"esbenp.prettier-vscode",
 		"rvest.vs-code-prettier-eslint",
-		"alexkrechik.cucumberautocomplete",
 		"kennylong.kubernetes-yaml-formatter",
+		"DavidAnson.vscode-markdownlint",
 		//! Git Controls:
 		"mhutchie.git-graph",
 		"donjayamanne.githistory",
 		"eamodio.gitlens",
 		//! General Frameworks:
-		"CucumberOpen.cucumber-official",
 		"ms-vscode.vscode-typescript-next",
 		"xabikos.JavaScriptSnippets",
 		//! Project main Framework Extensions:

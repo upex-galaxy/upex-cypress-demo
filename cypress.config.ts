@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { defineConfig } from 'cypress';
 import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import fs from 'fs';
@@ -11,9 +12,9 @@ const __dirname = dirname(__filename);
 
 type Envs = 'dev' | 'qa' | 'stage' | 'prod';
 const enviroments = {
-	dev: 'https://dev-demoqa.com',
-	qa: 'https://qa-demoqa.com',
-	stage: 'https://stage-demoqa.com',
+	dev: 'https://demoqa.com',
+	qa: 'https://demoqa.com',
+	stage: 'https://demoqa.com',
 	prod: 'https://demoqa.com',
 };
 const cyEnv = process.env.CYPRESS_ENVIRONMENT as Envs;
@@ -21,6 +22,7 @@ const env = process.env.CI ? cyEnv : 'prod' as Envs;
 const baseUrl = enviroments[env];
 
 export default defineConfig({
+	pageLoadTimeout: 20000,
 	// @Ely: CYPRESS DASHBOARD PARA VER NUESTRAS EJECUCIONES EN LA WEB:
 	projectId: '2pw67q', //? ID del proyecto CYPRESS-DEMO-CLOUD. Record Key para usar: "b6bde345-a36c-4fab-ad8c-cddc065d2cba"
 	// @Ely: Link para ver el proyecto Cloud: https://cloud.cypress.io/projects/2pw67q/analytics/runs-over-time
@@ -61,10 +63,10 @@ export default defineConfig({
 				//? So we need to add the extension "AdBlock" to the browser Chrome, in order to avoid the ads and improve the performance.
 				if(browser.family === 'chromium' && browser.name !== 'electron') {
 					const pathToExtension = path.join(__dirname, 'extension/adblock'); //? path to the extension AdBlock (already downloaded in the project)
-					if(!fs.existsSync(pathToExtension)) { throw new Error(`Cannot find extension at ${pathToExtension}`); }
+					if(!fs.existsSync(pathToExtension)) throw new Error(`Cannot find extension at ${pathToExtension}`);
 					launchOptions.args.push(`--disable-extensions-except=${pathToExtension}`);
 					launchOptions.args.push(`--load-extension=${pathToExtension}`);
-					if (process.env.CI) { launchOptions.args.push('--headless=new'); }
+					if (process.env.CI) launchOptions.args.push('--headless=new');
 					// eslint-disable-next-line no-console
 					console.log('✅ AdBlock extension for chrome is loaded');
 					// console.log(launchOptions.args); //? print all current args to check if the extension is being loaded
