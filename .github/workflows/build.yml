@@ -1,6 +1,6 @@
 #* 
-name: 🧪 UPEX Build Check Pipeline
-run-name: ${{github.actor}}👨🏻‍🔬 triggered Build in ${{github.ref_name}}
+name: 🧪 UPEX Test Build Check Pipeline
+run-name: ${{github.actor}}👨🏻‍🔬 triggered TestBuild in ${{github.ref_name}}
 
 on:
   #* 🚀 Ejecuta el PIPELINE cuando se hace un push a la rama main
@@ -10,7 +10,7 @@ on:
     - QA
 
 jobs:
-  Build:
+  TestBuild:
     runs-on: ubuntu-latest
     environment:
       name: QA
