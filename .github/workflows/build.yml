@@ -3,7 +3,7 @@ name: 🧪 UPEX Test Build Check Pipeline
 run-name: ${{github.actor}}👨🏻‍🔬 triggered TestBuild in ${{github.ref_name}}
 
 on:
-  #* 🚀 Ejecuta el PIPELINE cuando se hace un push a la rama main
+  #* 🚀 Ejecuta el PIPELINE cuando se crea un PR apuntando a QA o main
   pull_request:
     branches:
     - main
