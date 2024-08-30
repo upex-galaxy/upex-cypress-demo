@@ -1,0 +1,41 @@
+#* 
+name: 🧪 UPEX Build Check Pipeline
+run-name: ${{github.actor}}👨🏻‍🔬 triggered Build in ${{github.ref_name}}
+
+on:
+  #* 🚀 Ejecuta el PIPELINE cuando se hace un push a la rama main
+  pull_request:
+    branches:
+    - main
+    - QA
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    environment:
+      name: QA
+
+    steps:
+    - name: 📘 Checkout Repo
+      uses: actions/checkout@v4
+
+    - name: 💽 Installing Node.js v20
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: 🍙 Bun Setup
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
+
+    - name: 🧬 Install Project Dependencies
+      run: bun install
+
+    - name: 🔎 Check Typescript Code
+      run: | #? Corre el linter de TypeScript para verificar errores de sintaxis.
+        bun run check:ts
+
+    - name: 🔎 Run Eslint
+      run: | #? Corre el linter de ESLint para verificar errores de sintaxis.
+        bun run eslint:check
