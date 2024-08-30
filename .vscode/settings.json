@@ -116,6 +116,7 @@
 		"tsconfig.eslint.json": "eslint",
 		"regression.yml": "test-ts",
 		"sanityTest.yml": "test-ts",
+		"build.yml": "test-ts",
 		"cypress.reporter.chrome.json": "auto",
 		"cypress.reporter.firefox.json": "auto",
 		"cypress.reporter.edge.json": "auto",
