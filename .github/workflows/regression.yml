@@ -1,0 +1,180 @@
+#*🧙🏻‍♂️ Ahora puedes usar este PIPELINE directamente desde GitHub Actions!
+#! NO NECESITAS MODIFICAR NADA de este archivo...
+#*🚀 Solo necesitas configurar los valores en el Panel "Run workflow" de GitHub Actions
+#* 🧪 Este PIPELINE ejecutará primero un Smoke y luego la Regresión.
+name: 🧪 UPEX CI/CD Regression Pipeline
+run-name: ${{github.actor}}👨🏻‍🔬 triggered Regression in ${{github.ref_name}}
+
+on:
+  #* manual trigger:
+  workflow_dispatch:
+    inputs:
+      system:
+        description: 🚀Select the OS
+        required: true
+        default: 'ubuntu-latest'
+        type: choice
+        options:
+        - ubuntu-latest
+        - ubuntu-22.04
+        - macos-latest
+        - windows-latest
+      environment:
+        description: 🚀Select the Test Environment
+        required: true
+        default: 'QA'
+        type: choice
+        options: #? Orden de Deployments...
+        - DEV #? donde los developers work
+        - SANDBOX #? donde los QA realizan smoke y exploratory testing.
+        - QA #? donde los QA realizan smoke, sanity y regression testing.
+        - STAGING #? donde los QA realizan smoke, sanity o regression testing.
+        - UAT #? donde los beta testers realizan acceptance testing.
+        - PROD #? donde los usuarios finales usan la App.
+
+jobs:
+  SmokeTest:
+    #? El Pipeline "Smoke" es una estrategia de prueba perfecta para verificar que todos los servicios de la aplicación funcionen como se espera después de nuevas implementaciones y lanzamientos, y útil antes de correr una Regresión. Se recomienda pruebas a nivel "Integration" para esta estraegia de pruebas.
+    runs-on: ${{ github.event.inputs.system }}
+    environment:
+      name: ${{ github.event.inputs.environment }}
+    env:
+      MOCHA_REPORT_DIR: cypress/tests_reports/chrome_mocha_report
+
+    steps:
+    - name: 📘 Checkout Repo
+      uses: actions/checkout@v4
+
+    - name: 💽 Installing Node.js v20
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: 🍙 Bun Setup
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
+
+    - name: 🧬 Install Project Dependencies
+      run: bun install
+
+    - name: 🔎 Check Typescript Code
+      run: | #? Corre el linter de TypeScript para verificar errores de sintaxis.
+        bun run check:ts
+
+    - name: 🧪 Cypress Run Sanity Test
+      uses: cypress-io/github-action@v4
+      with:
+        browser: chrome
+        command: |
+          bun run test:smoke:ci
+
+  RegressionTesting:
+    needs: [SmokeTest] #? correrá después de que el SmokeTest haya terminado exitosamente.
+    #? El Pipeline "Regression" es una estrategia de prueba perfecta para verificar que todas las funcionalidades de la aplicación funcionen como se espera después de nuevas implementaciones y lanzamientos. Se recomienda pruebas a nivel "End-to-End" para esta estrategia de pruebas.
+    runs-on: ${{ github.event.inputs.system }}
+    environment:
+      name: ${{ github.event.inputs.environment }}
+    env:
+      MOCHA_REPORT_DIR: cypress/tests_reports/chrome_mocha_report
+
+    steps:
+    - name: 📘 Checkout Repo
+      uses: actions/checkout@v4
+
+    - name: 💽 Installing Node.js v20
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: 🍙 Bun Setup
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
+
+    - name: 🧬 Install Project Dependencies
+      run: bun install
+
+    - name: 🔎 Check Typescript Code
+      run: | #? Corre el linter de TypeScript para verificar errores de sintaxis.
+        bun run check:ts
+
+    - name: 🧪 Cypress Run Sanity Test
+      uses: cypress-io/github-action@v4
+      with:
+        browser: chrome
+        command: |
+          bun run regression:chrome:ci
+
+    - name: 📬 Generate JUnit/Mocha Report
+      if: always()
+      run: bun run chrome:report
+
+    - name: ✅ Import Test Results to Xray
+      if: always()
+      uses: mikepenz/xray-action@v3
+      with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
+        username: ${{ secrets.XRAY_CLIENT_ID}}
+        password: ${{ secrets.XRAY_CLIENT_SECRET}}
+        testFormat: 'junit' #! NO CAMBIAR
+        testPaths: 'cypress/tests_results/junit/chrome_junit_report.xml' #! NO CAMBIAR
+        testExecKey: 'GX3-1526' #! NO CAMBIAR
+        projectKey: 'GX3' #! NO CAMBIAR
+        testEnvironments: ${{ github.event.inputs.environment }}
+
+    - name: 📊 Upload Artifact Mochawesome Report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: sanity-mocha-report
+        path: ${{ env.MOCHA_REPORT_DIR }}
+        retention-days: 15
+
+    #* ------- Allure Report Build and Deploy -------
+    - name: 📊 Get Allure Report History
+      uses: actions/checkout@v4
+      if: always()
+      continue-on-error: true
+      with:
+        ref: gh-pages #? the branch used for the GitHub Pages content.
+        path: gh-pages #? this is the directory where the previous allure reports were stored. #? In this case, the path gh-pages means the root of the repository.
+
+    - name: 📊 Build Allure Report
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      with:
+        gh_pages: gh-pages #? the directory of checkout branch (gh-pages) where the previous allure data will be copied.
+        #? this copied data will be combined with the actual allure-report data and generate the allure-history data.
+        # subfolder: regression #? the subfolder where the deployed data (allure-history) will be placed. 
+        #? If destination_dir is not specified, this subfolder will be saved to the root of the branch. 
+        #? Note: About the subfolder: Use this if you want to split the reports as different types (i.g smoke, regression, smoke, etc) 
+        allure_results: reports/allure-results #? path of the actual allure-results generated by the tests.
+        allure_report: allure-report #? path of the allure-report generated by the tests to be combined with the previous data.
+        allure_history: allure-history #? path of the allure-history to be generated by the action.
+        keep_reports: 15 #? the number of reports to keep in the allure-history.
+
+    - name: 🚀 Deploy Allure Report to GitHub Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages #? the branch used for the GitHub Pages content.
+        # destination_dir: ${{ github.event.inputs.environment }} #? this is the directory inside the gh-pages branch where the allure-history will be saved.
+        #? Note: If you use a destination_dir i.g 'staging' AND provide a subfolder i.g 'smoke' in the Build Allure Report step, the allure-history will be published on the 'staging/smoke' directory.
+        publish_dir: ${{ env.MOCHA_REPORT_DIR }} #? the directory to be published. Must be the same as the allure_history value from the Build Allure Report step
+        keep_files: true #? this is required to work properly with the subfolder option in the Build Allure Report step.
+        #* -----------------------------------------
+
+  Ari-Slack-Notification:
+    needs: [SmokeTest, RegressionTesting]
+    if: always() #? correrá después de que el SmokeTest y RegressionTesting hayan terminado.
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🔔 Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_USERNAME: Ari✨
+        SLACK_MESSAGE: '🧪(${{ github.repository }}): ${{ github.actor }} triggered Regression🚀'
+        SLACK_COLOR: ${{ needs.RegressionTesting.result }}
+        SLACK_ICON: ${{ secrets.ARI_PROFILE }}

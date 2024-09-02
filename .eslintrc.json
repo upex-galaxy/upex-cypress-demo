@@ -1,35 +1,89 @@
 {
-	"env": {
-		"browser": true,
-		"es2021": true,
-		"node": true
-	},
-	"extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-	"overrides": [],
+	"extends": ["plugin:cypress/recommended", "plugin:chai-friendly/recommended"],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
+		"parser": "@babel/eslint-parser",
 		"ecmaVersion": "latest",
-		"sourceType": "module"
+		"sourceType": "module",
+		"project": ["./tsconfig.json", "tsconfig.eslint.json"]
 	},
-	"plugins": ["@typescript-eslint", "only-warn"],
+	"ignorePatterns": ["cypress/tests_reports/**/*.js", "cypress/tests_results/**/*.js", "cypress/tests_reports/**/*.ts", "cypress/tests_results/**/*.ts"],
+	"plugins": ["cypress", "chai-friendly", "@typescript-eslint", "only-warn", "prettier", "import"],
 	"rules": {
+		"@typescript-eslint/consistent-type-imports": "error",
+		"@typescript-eslint/no-misused-promises": "error",
+		"@typescript-eslint/naming-convention": ["warn"],
+		"@typescript-eslint/no-unsafe-argument": ["warn"],
+		"@typescript-eslint/no-unsafe-assignment": ["warn"],
+		"arrow-spacing": ["warn", { "before": true, "after": true }],
+		"brace-style": ["warn", "1tbs", { "allowSingleLine": true }],
+		"curly": ["error", "multi-line"],
+		"cypress/unsafe-to-chain-command": "off",
+		"default-case": "warn",
+		"eqeqeq": "warn",
+		"getter-return": ["warn", { "allowImplicit": true }],
+		"import/no-named-as-default": "off",
+		"import/prefer-default-export": "off",
 		"indent": ["warn", "tab", { "SwitchCase": 1 }],
-		"camelcase": "warn",
-		"linebreak-style": "off",
+		"linebreak-style": ["off"],
+		"no-await-in-loop": "off",
+		"no-const-assign": "error",
+		"no-continue": "off",
+		"no-dupe-args": "error",
+		"no-dupe-keys": "error",
+		"no-duplicate-case": "error",
+		"no-duplicate-imports": "error",
+		"no-extra-boolean-cast": "error",
+		"no-fallthrough": "error",
+		"no-implicit-coercion": "error",
+		"no-invalid-regexp": "error",
+		"no-invalid-this": "off",
+		"no-multi-spaces": ["warn"],
+		"no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
+		"no-negated-condition": "warn",
+		"no-plusplus": "off",
+		"no-restricted-globals": "off",
+		"no-restricted-syntax": ["error", "DebuggerStatement", "LabeledStatement", "WithStatement"],
+		"no-return-await": "error",
+		"no-shadow": "off",
+		"no-template-curly-in-string": "error",
+		"no-trailing-spaces": "warn",
+		"no-unneeded-ternary": "warn",
+		"no-unreachable": "error",
+		"no-unused-vars": ["warn", { "vars": "all", "varsIgnorePattern": "[$]", "args": "none" }],
+		"no-useless-computed-key": "error",
+		"no-useless-return": "error",
+		"object-curly-spacing": ["warn", "always"],
+		"prefer-destructuring": ["warn", { "VariableDeclarator": { "object": true, "array": false }, "AssignmentExpression": { "object": true, "array": false } }],
+		"prefer-template": "error",
 		"quotes": ["warn", "single"],
+		"require-await": "error",
 		"semi": ["warn", "always"],
-		"object-curly-spacing": ["warn", "always"]
+		"space-before-blocks": "warn",
+		"space-before-function-paren": ["error", { "anonymous": "always", "named": "never", "asyncArrow": "always" }],
+		"switch-colon-spacing": "error",
+		"import/namespace": "off",
+		"import/no-duplicates": "off",
+		"import/no-unresolved": [2, { "commonjs": true, "amd": false, "caseSensitive": true }],
+		"valid-typeof": "error"
 	},
 	"globals": {
 		"cy": true,
-		"it": true,
-		"describe": true,
-		"context": true,
-		"beforeEach": true,
-		"before": true,
-		"after": true,
-		"afterEach": true,
-		"expect": true,
 		"Cypress": true
+	},
+	"env": {
+		"cypress/globals": true
+	},
+	"settings": {
+		"import/resolver": {
+			"alias": {
+				"map": [
+					["@pages", "./cypress/support/pages"],
+					["@helper", "./cypress/support/helper"],
+					["@data", "./cypress/fixtures/data"]
+				],
+				"extensions": [".ts", ".js", ".json"]
+			}
+		}
 	}
 }

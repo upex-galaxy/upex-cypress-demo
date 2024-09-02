@@ -1,0 +1,24 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"strict": true,
+		"target": "ESNext",
+		"verbatimModuleSyntax": true,
+		"lib": ["es5", "dom"],
+		"types": ["cypress-file-upload", "cypress-plugin-api", "cypress-plugin-steps", "cypress", "node", "@4tw/cypress-drag-drop"],
+		"baseUrl": ".",
+		"paths": {
+			"@pages/*": ["./cypress/support/pages/*"],
+			"@helper/*": ["./cypress/support/helper/*"],
+			"@data/*": ["./cypress/fixtures/data/*"]
+		}
+	},
+	"include": ["./cypress.config.ts", "./cypress.d.ts", "**/*.ts", "**/*.Page.ts"],
+	"exclude": ["./node_modules", "**/*.js"]
+}
