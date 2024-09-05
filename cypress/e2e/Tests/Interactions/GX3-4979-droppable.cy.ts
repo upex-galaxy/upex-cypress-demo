@@ -1,4 +1,7 @@
-describe("Test Suite 4979", () => {
- 
-})
+describe("Test Suite", () => {
+	beforeEach('Precondición', ()=>{})
 
+	it("First Test Case", () => {
+		console.log("context test");
+	})
+})

@@ -1,9 +1,0 @@
-{
-	"commission": 0.054,
-	"fee": 0.3,
-	"logMessage": {
-		"clearedFieldParaRecibir": "Indica cuánto vas a Recibir",
-		"clearedFieldParaEnviar": "Indica cuánto vas a Enviar",
-		"NotOnlyNumber": "Solo puedes introducir Números"
-	}
-}

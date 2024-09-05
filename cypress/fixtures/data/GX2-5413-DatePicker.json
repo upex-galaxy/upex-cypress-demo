@@ -1,6 +1,0 @@
-{
-	"url": "date-picker",
-	"selectedDay": "react-datepicker__day--selected",
-	"selectedTime": "react-datepicker__time-list-item--selected",
-	"checkMark": "✓"
-}

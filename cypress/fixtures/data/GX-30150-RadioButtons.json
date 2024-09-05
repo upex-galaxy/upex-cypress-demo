@@ -1,9 +1,0 @@
-{
-	"endPoint": "/radio-button",
-	"Response": "You have selected ",
-	"Buttons": {
-		"Yes": "Yes",
-		"Impressive": "Impressive",
-		"No": "No"
-	}
-}
