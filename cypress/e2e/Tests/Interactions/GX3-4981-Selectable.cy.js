@@ -13,7 +13,7 @@ describe('GX3-4981 | ToolsQA | Interactions | Selectable', () => {
 		cy.get('#verticalListContainer > li').each(elements => {
 			cy.wrap(elements).should('be.visible');
 		});
-        	cy.get('#gridContainer').should('not.be.visible');
+		cy.get('#gridContainer').should('not.be.visible');
 	});
 
 	it('4998 | TC03: Validate the action of selecting and unselecting "List" items', () => {
@@ -28,7 +28,7 @@ describe('GX3-4981 | ToolsQA | Interactions | Selectable', () => {
 		});
 	});
 
-	it('4942 | TC04: Validate that the items of tab "Grid" are displayed in a 3 x 3 grid', () => {
+	it('4998 | TC04: Validate that the items of tab "Grid" are displayed in a 3 x 3 grid', () => {
 		cy.get('#demo-tab-grid').click();
 		cy.get('.grid-container .list-group-item')
 			.should('have.length', 9)
