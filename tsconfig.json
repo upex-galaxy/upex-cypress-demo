@@ -31,6 +31,7 @@
     "./cypress.d.ts",
     "**/*.ts",
     "**/*.Page.ts",
+    "cypress/support/pages/GX3-4979-droppable.Page.ts",
   ],
   "exclude": ["./node_modules", "**/*.js"],
 }
