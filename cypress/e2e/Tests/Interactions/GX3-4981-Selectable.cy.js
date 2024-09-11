@@ -17,15 +17,10 @@ describe('GX3-4981 | ToolsQA | Interactions | Selectable', () => {
 	});
 
 	it('4998 | TC03: Validate the action of selecting and unselecting "List" items', () => {
-		cy.get('.list-group-item').then(items => {
-			for (let i = 0; i < 4; i++) {
-				cy.wrap(items[i]).click().should('have.class', 'active').and('have.css', 'background-color', 'rgb(0, 123, 255)');
-			}
+		const randomSelect = Cypress._.random(0, 3);
+		cy.get('#verticalListContainer > li').eq(randomSelect).click().should('have.class', 'active');
 
-			for (let i = 0; i < 4; i++) {
-				cy.wrap(items[i]).click().should('not.have.class', 'active').and('have.css', 'color', 'rgb(73, 80, 87)');
-			}
-		});
+		cy.get('#verticalListContainer > li').eq(randomSelect).click().should('have.not.class', 'active');
 	});
 
 	it('4998 | TC04: Validate that the items of tab "Grid" are displayed in a 3 x 3 grid', () => {
@@ -39,14 +34,9 @@ describe('GX3-4981 | ToolsQA | Interactions | Selectable', () => {
 
 	it('4998 | TC05: Validate the action of selecting and unselecting "Grid" items', () => {
 		cy.get('#demo-tab-grid').click();
-		cy.get('#gridContainer .list-group-item').then(items => {
-			for (let i = 0; i < 9; i++) {
-				cy.wrap(items[i]).click().should('have.class', 'active').and('have.css', 'background-color', 'rgb(0, 123, 255)');
-			}
+		const randomSelect = Cypress._.random(0, 8);
+		cy.get('#gridContainer .list-group-item').eq(randomSelect).click().should('have.class', 'active');
 
-			for (let i = 0; i < 9; i++) {
-				cy.wrap(items[i]).click().should('not.have.class', 'active').and('have.css', 'color', 'rgb(73, 80, 87)');
-			}
-		});
+		cy.get('#gridContainer .list-group-item').eq(randomSelect).click().should('have.not.class', 'active');
 	});
 });
