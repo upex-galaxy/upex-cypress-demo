@@ -17,20 +17,20 @@
       "cypress-plugin-steps",
       "cypress",
       "node",
-      "@4tw/cypress-drag-drop"
+      "@4tw/cypress-drag-drop",
     ],
     "baseUrl": ".",
     "paths": {
       "@pages/*": ["./cypress/support/pages/*"],
       "@helper/*": ["./cypress/support/helper/*"],
-      "@data/*": ["./cypress/fixtures/data/*"]
-    }
+      "@data/*": ["./cypress/fixtures/data/*"],
+    },
   },
   "include": [
     "./cypress.config.ts",
     "./cypress.d.ts",
     "**/*.ts",
-    "**/*.Page.ts"
+    "**/*.Page.ts",
   ],
-  "exclude": ["./node_modules", "**/*.js"]
+  "exclude": ["./node_modules", "**/*.js"],
 }

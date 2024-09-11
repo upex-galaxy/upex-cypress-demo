@@ -3,6 +3,7 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 import 'cypress-file-upload';
+import "@4tw/cypress-drag-drop"
 
 beforeEach(() => {
 	Cypress.on('uncaught:exception', () => false); // returning false here prevents Cypress from failing the test
