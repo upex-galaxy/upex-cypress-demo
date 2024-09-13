@@ -19,7 +19,7 @@
       "node",
       "@4tw/cypress-drag-drop",
     ],
-    "baseUrl": "https://demoqa.com",
+    "baseUrl": ".",
     "paths": {
       "@pages/*": ["./cypress/support/pages/*"],
       "@helper/*": ["./cypress/support/helper/*"],
@@ -31,7 +31,6 @@
     "./cypress.d.ts",
     "**/*.ts",
     "**/*.Page.ts",
-    "cypress/support/pages/GX3-4979-droppable.Page.ts",
   ],
   "exclude": ["./node_modules", "**/*.js"],
 }
