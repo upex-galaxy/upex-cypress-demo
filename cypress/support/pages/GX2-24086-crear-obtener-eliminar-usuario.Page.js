@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 class BookStoreAPIUser {
-	createUser(username, password) {
+	createUser(username, password, status) {
 		return cy
 			.request({
 				failOnStatusCode: false,
@@ -12,8 +13,8 @@ class BookStoreAPIUser {
 				}
 			})
 			.then(response => {
-				expect(response.status).to.equal(201);
-				return response, response.body.userId;
+				expect(response.status).to.equal(status);
+				return response.body.userID;
 			});
 	}
 
@@ -21,20 +22,26 @@ class BookStoreAPIUser {
 		cy.request({
 			failOnStatusCode: false,
 			url: `/Account/v1/User/${userId}`,
-			method: 'GET'
+			method: 'GET',
+			headers: {
+				Authorization: `Bearer ${Cypress.env('token')}`
+			}
 		}).then(response => {
-			expect(response.status).to.equal(200);
+			expect(response.status).to.equal(status);
 			return response, response.body.userId;
 		});
 	}
 
-	deleteUser(userId) {
+	deleteUser(userId, status) {
 		cy.request({
 			failOnStatusCode: false,
 			url: `/Account/v1/User/${userId}`,
-			method: 'DELETE'
+			method: 'DELETE',
+			headers: {
+				Authorization: `Bearer ${Cypress.env('token')}`
+			}
 		}).then(response => {
-			expect(response.status).to.equal(200);
+			expect(response.status).to.equal(status);
 		});
 	}
 
@@ -44,6 +51,9 @@ class BookStoreAPIUser {
 				failOnStatusCode: false,
 				url: '/Account/v1/Authorized',
 				method: 'POST',
+				headers: {
+					Authorization: `Bearer ${Cypress.env('token')}`
+				},
 				body: {
 					userName: username,
 					password: password
@@ -55,7 +65,7 @@ class BookStoreAPIUser {
 			});
 	}
 
-	loginUser(username, password) {
+	loginUser(username, password, status) {
 		return cy
 			.request({
 				failOnStatusCode: false,
@@ -67,8 +77,8 @@ class BookStoreAPIUser {
 				}
 			})
 			.then(response => {
-				expect(response.status).to.equal(200);
-				return response;
+				expect(response.status).to.equal(status);
+				Cypress.env('token', response.body.token);
 			});
 	}
 }
