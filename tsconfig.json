@@ -19,7 +19,7 @@
       "node",
       "@4tw/cypress-drag-drop",
     ],
-    "baseUrl": ".",
+    "baseUrl": "https://demoqa.com",
     "paths": {
       "@pages/*": ["./cypress/support/pages/*"],
       "@helper/*": ["./cypress/support/helper/*"],
