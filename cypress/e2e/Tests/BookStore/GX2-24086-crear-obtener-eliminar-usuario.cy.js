@@ -41,7 +41,7 @@ describe('BookStore | Account | Crear, Obtener y Eliminar Usuario (POST-GET-DELE
 		});
 	});
 
-	it.only('24087 | TC8: Validar que se pueda eliminar un usuario que este logueado', () => {
+	it('24087 | TC8: Validar que se pueda eliminar un usuario que este logueado', () => {
 		bookStoreApiUserPage.createUser(user, passwd, 201).then(userId => {
 			bookStoreApiUserPage.loginUser(user, passwd, 200).then(() => {
 				bookStoreApiUserPage.authorizeUser(user, passwd);
