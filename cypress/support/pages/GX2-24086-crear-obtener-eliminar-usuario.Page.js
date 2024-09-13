@@ -4,7 +4,7 @@ class BookStoreAPIUser {
 		return cy
 			.request({
 				failOnStatusCode: false,
-				url: '/Account/v1/User',
+				url: 'https://demoqa.com/Account/v1/User',
 				method: 'POST',
 
 				body: {
@@ -21,7 +21,7 @@ class BookStoreAPIUser {
 	getUser(userId, status) {
 		cy.request({
 			failOnStatusCode: false,
-			url: `/Account/v1/User/${userId}`,
+			url: `https://demoqa.com/Account/v1/User/${userId}`,
 			method: 'GET',
 			headers: {
 				Authorization: `Bearer ${Cypress.env('token')}`
@@ -35,7 +35,7 @@ class BookStoreAPIUser {
 	deleteUser(userId, status) {
 		cy.request({
 			failOnStatusCode: false,
-			url: `/Account/v1/User/${userId}`,
+			url: `https://demoqa.com/Account/v1/User/${userId}`,
 			method: 'DELETE',
 			headers: {
 				Authorization: `Bearer ${Cypress.env('token')}`
@@ -49,7 +49,7 @@ class BookStoreAPIUser {
 		return cy
 			.request({
 				failOnStatusCode: false,
-				url: '/Account/v1/Authorized',
+				url: 'https://demoqa.com/Account/v1/Authorized',
 				method: 'POST',
 				headers: {
 					Authorization: `Bearer ${Cypress.env('token')}`
@@ -69,7 +69,7 @@ class BookStoreAPIUser {
 		return cy
 			.request({
 				failOnStatusCode: false,
-				url: '/Account/v1/GenerateToken',
+				url: 'https://demoqa.com/Account/v1/GenerateToken',
 				method: 'POST',
 				body: {
 					userName: username,
