@@ -1,25 +1,106 @@
-ACCEPTANCE CRITERIA
+class libroBookStore {
+	createUser(username: string, password: string, status: number) {
+		return cy
+			.request({
+				failOnStatusCode: false,
+				url: 'https://demoqa.com/Account/v1/User',
+				method: 'POST',
+				body: {
+					userName: username,
+					password: password
+				}
+			})
+			.then(response => {
+				expect(response.status).to.equal(status);
+				return response.body.userID;
+			});
+	}
+	loginUser(username: string, password: string, status: number) {
+		return cy
+			.request({
+				failOnStatusCode: false,
+				url: 'https://demoqa.com/Account/v1/GenerateToken',
+				method: 'POST',
+				body: {
+					userName: username,
+					password: password
+				}
+			})
+			.then(response => {
+				expect(response.status).to.equal(status);
+				Cypress.env('token', response.body.token);
+			});
+	}
 
+	getUser(userId: string, status: number) {
+		return cy
+			.request({
+				failOnStatusCode: false,
+				url: `https://demoqa.com/Account/v1/User/${userId}`,
+				method: 'GET',
+				headers: {
+					Authorization: `Bearer ${Cypress.env('token')}`
+				}
+			})
+			.then(response => {
+				expect(response.status).to.equal(status);
+				return [response, response.body.userId];
+			});
+	}
 
+	authorizeUser(username: string, password: string) {
+		return cy
+			.request({
+				failOnStatusCode: false,
+				url: 'https://demoqa.com/Account/v1/Authorized',
+				method: 'POST',
+				headers: {
+					Authorization: `Bearer ${Cypress.env('token')}`
+				},
+				body: {
+					userName: username,
+					password: password
+				}
+			})
+			.then(response => {
+				expect(response.status).to.equal(200);
+				return response;
+			});
+	}
 
-Feature: BookStore
+	getBooks() {
+		return cy
+			.request({
+				url: 'https://demoqa.com/BookStore/v1/Books',
+				method: 'GET'
+			})
+			.then(response => {
+				expect(response.status).to.equal(200);
+				return response;
+			});
+	}
 
-  Background:
-     Given: The user must be registered on the website
-     And: The user must log in to the website
-     And: The user is placed in the "BookStore"
+	addListOfBooks(userId: string, isbn: string) {
+		return cy
+			.request({
+				url: 'https://demoqa.com/BookStore/v1/Books',
+				method: 'POST',
+				headers: {
+					Authorization: `Bearer ${Cypress.env('token')}`
+				},
+				body: {
+					userId: userId,
+					collectionOfIsbns: [
+						{
+							isbn: isbn
+						}
+					]
+				}
+			})
+			.then(response => {
+				expect(response.status).to.equal(201);
+			});
+	}
+}
 
-  Scenario 1: User creates a book from the store
-     When: the user selects a book from the list
-     And: click on the title of the book to create it
-     Then: You should be redirected to the PLP of the selected book
-     API: GET: Books => Status 200
-
-Feature: Get books from store
-   
-  Scenario 2: The user obtains a Book from the Bookstore
-    Given: The user is placed in the PDP of the selected book
-    When: You click the "Add to your collection" button
-    Then: You should add the selected book to the collection.
-    And: A popup should appear saying "The book is already present in your collection"
-    API: POST: Books => Status 200
+export const librosApiPage = new libroBookStore();
