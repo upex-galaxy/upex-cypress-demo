@@ -58,7 +58,6 @@ class DroppablePage {
 		elementoDom.as("dragArea").drag(_element, _target)
 
 	}
-
 }
 
 export const droppablePage = new DroppablePage();
