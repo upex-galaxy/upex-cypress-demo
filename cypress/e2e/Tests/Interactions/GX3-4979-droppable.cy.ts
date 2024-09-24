@@ -2,7 +2,7 @@ import { droppablePage } from "@pages/GX3-4979-droppable.Page";
 
 describe("ToolsQA | Interactions | Droppable", () => {
 	beforeEach('El usuario debe visitar el endpoint mencionado debajo', () => {
-		cy.visit("/droppable");
+		cy.visit("https://demoqa.com/droppable");
 		cy.url().should('contain', '/droppable');
 		cy.get("#droppableContainer > h1").should('be.visible')
 	});  
