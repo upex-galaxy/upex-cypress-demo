@@ -107,7 +107,7 @@ describe("ToolsQA | Interactions | Droppable", () => {
 		})
    })
 
-   it.only("4979 | TC9: Validar NO hacer Drag and Drop en el Tab 'Simple' al mover el 'Drag Me' area fuera del 'Drop here'", () => {
+   it("4979 | TC9: Validar NO hacer Drag and Drop en el Tab 'Simple' al mover el 'Drag Me' area fuera del 'Drop here'", () => {
 	 droppablePage.notDragAndDrop("#draggable + div", {
 			source: {x: 250, y: 30},
 			target: {position: "right"},
