@@ -7,7 +7,6 @@ describe("ToolsQA | Interactions | Droppable", () => {
 		cy.get("#droppableContainer > h1").should('be.visible')
 	});  
 
-
 	it("4979 | TC1: Validar hacer Drag and Drop en el Tab 'Simple'", () => {
 		droppablePage.dragAndDrop("#draggable + div", {
 			source: {x: 110, y: 30},
@@ -15,8 +14,8 @@ describe("ToolsQA | Interactions | Droppable", () => {
 			force: true,
 		}).then((success) => {
 			expect(success).to.be.true
-			droppablePage.droppableParagraph().should('have.text', 'Dropped!');
 		})
+		droppablePage.droppableParagraph().should('have.text', 'Dropped!');
 	})
 
 	it("4979 | TC2: Validar hacer Drag and Drop en el Tab 'Accept' con el 'Acceptable' area", () => {
@@ -27,8 +26,8 @@ describe("ToolsQA | Interactions | Droppable", () => {
 			force: true,
 		}).then((success) => {
 			expect(success).to.be.true
-			droppablePage.droppableElementTwo().contains("p", 'Dropped!').should('be.visible')	
 		})
+		droppablePage.droppableElementTwo().contains("p", 'Dropped!').should('be.visible')	
 	})
 
 
@@ -40,8 +39,8 @@ describe("ToolsQA | Interactions | Droppable", () => {
 			force: true,
 		}).then((success) => {
 		expect(success).to.be.true
-		droppablePage.droppableElementTwo().contains("p", 'Drop here').should('be.visible')
 		})
+		droppablePage.droppableElementTwo().contains("p", 'Drop here').should('be.visible')
 	})
 
 	it("4979 | TC4: Validar hacer Drag and Drop en el Tab 'Propogation' hacia el 'First Outer Droppable'", () => {
@@ -52,8 +51,8 @@ describe("ToolsQA | Interactions | Droppable", () => {
 			force: true,
 		}).then((success) => {
 			expect(success).to.be.true
-			droppablePage.droppableElementThree().contains("p", 'Dropped!').should('be.visible')
 		})
+		droppablePage.droppableElementThree().contains("p", 'Dropped!').should('be.visible')
 	})
 
    it("4979 | TC5: Validar hacer Drag and Drop en el Tab 'Propogation' hacia el área 'not greedy'", () => {
@@ -64,9 +63,9 @@ describe("ToolsQA | Interactions | Droppable", () => {
 			force: true,
 		}).then((success) => {
 			expect(success).to.be.true
-			droppablePage.InnerDropNotGreedyElement().contains("p", 'Dropped!').should('be.visible')
-			droppablePage.droppableElementThree().contains("p", 'Dropped!').should('be.visible')
 		})
+		droppablePage.InnerDropNotGreedyElement().contains("p", 'Dropped!').should('be.visible')
+		droppablePage.droppableElementThree().contains("p", 'Dropped!').should('be.visible')
    })
 
    it("4979 | TC6: Validar hacer Drag and Drop en el Tab 'Propogation' hacia el área 'greedy'", () => {
@@ -77,9 +76,9 @@ describe("ToolsQA | Interactions | Droppable", () => {
 			force: true,
 		}).then((success) => {
 			expect(success).to.be.true
-			droppablePage.InnerDropGreedyElement().contains("p", 'Dropped!').should('be.visible')
-			droppablePage.droppableGreedyParagraph().should('have.text', 'Outer droppable');
 		})
+		droppablePage.InnerDropGreedyElement().contains("p", 'Dropped!').should('be.visible')
+		droppablePage.droppableGreedyParagraph().should('have.text', 'Outer droppable');
    })
 
     it("4979 | TC7: Validar hacer Drag and Drop en el Tab 'Revert' con el 'Will Revert' area hacia el 'Drop Here'", () => {
@@ -90,8 +89,8 @@ describe("ToolsQA | Interactions | Droppable", () => {
 			force: true,
 		}).then((success) => {
 			expect(success).to.be.true
-			droppablePage.droppableElementFour().contains("p", 'Dropped!').should('be.visible')
 		})
+		droppablePage.droppableElementFour().contains("p", 'Dropped!').should('be.visible')
    })
 
 
@@ -103,8 +102,8 @@ describe("ToolsQA | Interactions | Droppable", () => {
 			force: true,
 		}).then((success) => {
 			expect(success).to.be.true
-			droppablePage.droppableElementFour().contains("p", 'Dropped!').should('be.visible')
 		})
+		droppablePage.droppableElementFour().contains("p", 'Dropped!').should('be.visible')
    })
 
    it("4979 | TC9: Validar NO hacer Drag and Drop en el Tab 'Simple' al mover el 'Drag Me' area fuera del 'Drop here'", () => {
@@ -114,7 +113,7 @@ describe("ToolsQA | Interactions | Droppable", () => {
 			force: true,
 	 }).then((success) => {
 		expect(success).to.be.false
-	 	droppablePage.droppableParagraph().should('have.text', 'Drop here');
 	 })
+	 	droppablePage.droppableParagraph().should('have.text', 'Drop here');
    })
 })
