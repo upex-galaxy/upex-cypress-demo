@@ -8,7 +8,7 @@ describe('BookStore | Account | Crear, Obtener y Eliminar Usuario (POST-GET-DELE
 		user = username;
 		passwd = password;
 	});
-	it('24087 | TC1: Validar que se pueda registrar un usuario correctamente ', () => {
+	it('24087 | TC1: Validar el registro exitoso de un usuario.', () => {
 		bookStoreApiUserPage.createUser(user, passwd, 201);
 	});
 	it('24087 | TC2: Validar que no se pueda registrar un usuario cuando el nombre es vacio', () => {
