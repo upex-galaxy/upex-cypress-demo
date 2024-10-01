@@ -2,23 +2,17 @@
 import { defineConfig } from 'cypress';
 import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-import { fileURLToPath } from 'url';
-import path, { dirname } from 'path';
-import fs from 'fs';
 import 'dotenv/config';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 type Envs = 'dev' | 'qa' | 'stage' | 'prod';
 const enviroments = {
 	dev: 'https://demoqa.com',
 	qa: 'https://demoqa.com',
 	stage: 'https://demoqa.com',
-	prod: 'https://demoqa.com',
+	prod: 'https://demoqa.com'
 };
 const cyEnv = process.env.CYPRESS_ENVIRONMENT as Envs;
-const env = process.env.CI ? cyEnv : 'prod' as Envs;
+const env = process.env.CI ? cyEnv : ('prod' as Envs);
 const baseUrl = enviroments[env];
 
 export default defineConfig({
@@ -45,39 +39,21 @@ export default defineConfig({
 	// multi-reporters: one report.xml + mochawesome.json per file.
 	reporter: 'cypress-multi-reporters',
 	reporterOptions: {
-		configFile: 'cypress.reporter.chrome.json',
+		configFile: 'cypress.reporter.chrome.json'
 	},
 	// E2E Testing runner
 	e2e: {
 		baseUrl: baseUrl,
 		// Glob pattern to determine what test files to load:
-		specPattern: [ 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}' ],
-		excludeSpecPattern: [ 'cypress/e2e/**/*.example.cy.js' ],
+		specPattern: ['cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
+		excludeSpecPattern: ['cypress/e2e/**/*.example.cy.js'],
 		// Use Cypress plugins:
 		setupNodeEvents(on, config) {
 			// This is required for the preprocessor to be able to generate JSON reports after each run, and more,
 			on('file:preprocessor', createBundler());
-			on('before:browser:launch', (browser, launchOptions) => {
-				//? About this Solution:
-				//? When browser Chromium was executing test on demoqa, it was having performance issues with the ads before loading the page
-				//? So we need to add the extension "AdBlock" to the browser Chrome, in order to avoid the ads and improve the performance.
-				if(browser.family === 'chromium' && browser.name !== 'electron') {
-					const pathToExtension = path.join(__dirname, 'extension/adblock'); //? path to the extension AdBlock (already downloaded in the project)
-					if(!fs.existsSync(pathToExtension)) throw new Error(`Cannot find extension at ${pathToExtension}`);
-					launchOptions.args.push(`--disable-extensions-except=${pathToExtension}`);
-					launchOptions.args.push(`--load-extension=${pathToExtension}`);
-					if (process.env.CI) launchOptions.args.push('--headless=new');
-					// eslint-disable-next-line no-console
-					console.log('✅ AdBlock extension for chrome is loaded');
-					// console.log(launchOptions.args); //? print all current args to check if the extension is being loaded
-					return launchOptions;
-				}
-			});
 			// Make sure to return the config object as it might have been modified by the plugin.
 			return config;
-		},
+		}
 	},
-	env: {
-
-	},
+	env: {}
 });
