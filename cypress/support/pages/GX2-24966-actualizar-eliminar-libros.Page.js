@@ -17,6 +17,44 @@ class BookStore {
 			});
 	}
 
+	token(username, password, status) {
+		return cy
+			.request({
+				failOnStatusCode: false,
+				url: 'https://demoqa.com/Account/v1/GenerateToken',
+				method: 'POST',
+				body: {
+					userName: username,
+					password: password
+				}
+			})
+			.then(response => {
+				expect(response.status).to.equal(status);
+				Cypress.env('token', response.body.token);
+				return response;
+			});
+	}
+
+	authorizeUser(username, password) {
+		return cy
+			.request({
+				failOnStatusCode: false,
+				url: 'https://demoqa.com/Account/v1/Authorized',
+				method: 'POST',
+				headers: {
+					Authorization: `Bearer ${Cypress.env('token')}`
+				},
+				body: {
+					userName: username,
+					password: password
+				}
+			})
+			.then(response => {
+				expect(response.status).to.equal(200);
+				return response;
+			});
+	}
+
 	getUser(userId, status) {
 		return cy
 			.request({
@@ -45,44 +83,6 @@ class BookStore {
 			});
 	}
 
-	authorizeUser(username, password) {
-		return cy
-			.request({
-				failOnStatusCode: false,
-				url: 'https://demoqa.com/Account/v1/Authorized',
-				method: 'POST',
-				headers: {
-					Authorization: `Bearer ${Cypress.env('token')}`
-				},
-				body: {
-					userName: username,
-					password: password
-				}
-			})
-			.then(response => {
-				expect(response.status).to.equal(200);
-				return response;
-			});
-	}
-
-	loginUser(username, password, status) {
-		return cy
-			.request({
-				failOnStatusCode: false,
-				url: 'https://demoqa.com/Account/v1/GenerateToken',
-				method: 'POST',
-				body: {
-					userName: username,
-					password: password
-				}
-			})
-			.then(response => {
-				expect(response.status).to.equal(status);
-				Cypress.env('token', response.body.token);
-				return response;
-			});
-	}
-
 	addBookList(userId, isbn) {
 		return cy
 			.request({
@@ -106,11 +106,12 @@ class BookStore {
 				return response;
 			});
 	}
-	deleteBook(isbn, userId) {
+
+	deleteBook(isbn, userId, status) {
 		return cy
 			.request({
 				failOnStatusCode: false,
-				url: '/BookStore/v1/Books',
+				url: '/BookStore/v1/Book',
 				method: 'DELETE',
 				headers: {
 					Authorization: `Bearer ${Cypress.env('token')}`
@@ -121,7 +122,7 @@ class BookStore {
 				}
 			})
 			.then(response => {
-				expect(response.status).to.equal(204);
+				expect(response.status).to.equal(status);
 				return response;
 			});
 	}
@@ -130,24 +131,6 @@ class BookStore {
 		cy.request({
 			failOnStatusCode: false,
 			url: `/BookStore/v1/Books/${ISBN}`,
-			method: 'PUT',
-			headers: {
-				Authorization: `Bearer ${Cypress.env('token')}`
-			},
-			body: {
-				userId: userId,
-				isbn: isbn
-			}
-		}).then(response => {
-			expect(response.status).to.equal(status);
-			return response;
-		});
-	}
-
-	ConsultarDatos(userId, ISBN, isbn, status) {
-		cy.request({
-			failOnStatusCode: false,
-			url: /Account/v1/User,
 			method: 'PUT',
 			headers: {
 				Authorization: `Bearer ${Cypress.env('token')}`
