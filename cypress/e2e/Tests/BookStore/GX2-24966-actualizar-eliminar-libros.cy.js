@@ -1,7 +1,7 @@
 import { bookStoreDeleteUpdatePage } from '../../../support/pages/GX2-24966-actualizar-eliminar-libros.Page';
 
 import { faker } from '@faker-js/faker';
-
+//va
 describe('BookStore | Grid | Actualizar y Eliminar Libros de la Tienda', () => {
 	beforeEach('PRC: El usuario deberia estar logueado y tener mas de un libro en la coleccion', () => {
 		const userName = faker.person.firstName();
