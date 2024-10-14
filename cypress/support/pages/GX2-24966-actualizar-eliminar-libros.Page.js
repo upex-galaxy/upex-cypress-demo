@@ -111,7 +111,7 @@ class BookStore {
 		return cy
 			.request({
 				failOnStatusCode: false,
-				url: '/BookStore/v1/Book',
+				url: 'https://demoqa.com/BookStore/v1/Book',
 				method: 'DELETE',
 				headers: {
 					Authorization: `Bearer ${Cypress.env('token')}`
@@ -130,7 +130,7 @@ class BookStore {
 	updateBook(userId, ISBN, isbn, status) {
 		cy.request({
 			failOnStatusCode: false,
-			url: `/BookStore/v1/Books/${ISBN}`,
+			url: `https://demoqa.com/BookStore/v1/Books/${ISBN}`,
 			method: 'PUT',
 			headers: {
 				Authorization: `Bearer ${Cypress.env('token')}`

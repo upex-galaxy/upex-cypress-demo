@@ -24,7 +24,6 @@ describe('BookStore | Grid | Actualizar y Eliminar Libros de la Tienda', () => {
 			});
 		});
 	});
-	//test
 	it('24967 | TC01: Validar que se pueda eliminar un libro de la coleccion', () => {
 		bookStoreDeleteUpdatePage.getUser(Cypress.env('userID'), 200).then(() => {
 			bookStoreDeleteUpdatePage.authorizeUser(Cypress.env('userName'), Cypress.env('password'));
