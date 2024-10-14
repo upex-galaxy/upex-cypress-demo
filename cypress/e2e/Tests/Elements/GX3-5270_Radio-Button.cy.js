@@ -27,7 +27,7 @@ describe('GX3-5270 | ToolsQA | Elements | Radio Buttons', () => {
 		cy.get('.text-success').should('have.text', 'Impressive');
 		cy.contains('You have selected Impressive').should('be.visible');
 	});
-	it.only('GX3 5270 | TC6: Validar que Radio Button "No" no puede ser seleccionado', () => {
+	it('GX3 5270 | TC6: Validar que Radio Button "No" no puede ser seleccionado', () => {
 		cy.get('.custom-control-input.disabled').should('be.disabled');
 	});
 });
