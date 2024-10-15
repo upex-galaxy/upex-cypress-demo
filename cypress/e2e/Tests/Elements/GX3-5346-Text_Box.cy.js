@@ -12,10 +12,10 @@ describe('GX3-5346 | ToolsQA | Elements | Text Box: Fill form and Submit', () =>
 		cy.get('#currentAddress').type(dataForm.CurrentAddress.Data.validData1);
 		cy.get('#permanentAddress').type(dataForm.PermanentAddress.Data.validData1);
 		cy.get('#submit').click();
-		cy.get('#output').contains(dataForm.FullName.Data.validData1);
-		cy.get('#output').contains(dataForm.Email.Data.validData1);
-		cy.get('#output').contains(dataForm.CurrentAddress.Data.validData1);
-		cy.get('#output').contains(dataForm.PermanentAddress.Data.validData1);
+		cy.get('#name').should('contain.text', dataForm.FullName.Data.validData1);
+		cy.get('#email').should('contain.text', dataForm.Email.Data.validData1);
+		cy.get('p#currentAddress.mb-1').should('contain.text', dataForm.CurrentAddress.Data.validData1);
+		cy.get('p#permanentAddress.mb-1').should('contain.text', dataForm.PermanentAddress.Data.validData1);
 	});
 	it('5351| TC2: Validar poder submit el formulario con email valido y todos los demas campos vacios', () => {
 		cy.get('#userEmail').type(dataForm.Email.Data.validData2);
