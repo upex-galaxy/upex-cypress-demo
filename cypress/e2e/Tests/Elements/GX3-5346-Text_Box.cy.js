@@ -1,4 +1,4 @@
-import dataForm from '@data/Elements/GX3-10000-Text_Box.json';
+import dataForm from '@data/Elements/GX3-5346-Text_Box.json';
 
 describe('GX3-5346 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	beforeEach('PRC: Usuario debe estar situado en la web DemoQA', () => {
