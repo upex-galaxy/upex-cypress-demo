@@ -1,0 +1,43 @@
+{
+	"FullName": {
+		"Data": {
+			"validData1": "Carlos",
+			"validData2": "Manuel",
+			"validData3": "Gomez",
+			"validData4": "Ramos",
+			"validData5": "Karl",
+			"validData6": "Domingo"
+		}
+	},
+	"Email": {
+		"Data": {
+			"validData1": "varona@gmail.com",
+			"validData2": "carlos@gmail.com",
+			"invalidData3": "@gmail.com",
+			"invalidData4": "cubgmail.com",
+			"invalidData5": "gomez@.com",
+			"invalidData6": "Karl@gmailcom",
+			"invalidData7": "domingo@gmail."
+		}
+	},
+	"CurrentAddress": {
+		"Data": {
+			"validData1": "8180 rosa",
+			"validData2": "14607 st",
+			"validData3": "3828 N",
+			"validData4": "5350 St N",
+			"validData5": "14502 blvd",
+			"validData6": "5000 dr"
+		}
+	},
+	"PermanentAddress": {
+		"Data": {
+			"validData1": "500 way dr",
+			"validData2": "150 blvd st",
+			"validData3": "300 okeechobe",
+			"validData4": "500 lane way",
+			"validData5": "120 king way",
+			"validData6": "200 st way"
+		}
+	}
+}
