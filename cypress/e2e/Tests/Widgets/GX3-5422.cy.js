@@ -1,4 +1,4 @@
-describe('ToolsQA | Widgets | Dropdown - Select Menu', () => {
+describe('GX3-5422| ToolsQA | Widgets | Dropdown - Select Menu', () => {
 	beforeEach('User is on the website DemoQA', () => {
 		cy.visit('https://demoqa.com/select-menu');
 		cy.url().should('contain', 'select-menu');
