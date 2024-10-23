@@ -1,4 +1,4 @@
-describe('GX3-5375 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
+describe('GX3-5427 | ToolsQA | Elements | Checkbox', () => {
 	beforeEach(() => {
 		cy.visit('https://demoqa.com/checkbox');
 		cy.url().should('include', '/checkbox');
