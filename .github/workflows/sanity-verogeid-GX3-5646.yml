@@ -1,0 +1,140 @@
+#*🧙🏻‍♂️ Ahora puedes usar este PIPELINE directamente desde GitHub Actions!
+#! NO NECESITAS MODIFICAR NADA de este archivo...
+#*🚀 Solo necesitas configurar las variables de entorno, keys de Jira y tu ruta de archivo de prueba a ejecutar en el Panel "Run workflow" de GitHub Actions
+#? 🧪 Este PIPELINE ejecutará tus pruebas y subirá los resultados a Jira XRay
+
+name: 🧪 UPEX CI/CD SanityTest Pipeline
+run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
+
+on:
+  workflow_dispatch:
+    inputs:
+      system:
+        description: 🚀Select the OS
+        required: true
+        default: 'ubuntu-latest'
+        type: choice
+        options:
+        - ubuntu-latest
+        - ubuntu-22.04
+        - macos-latest
+        - windows-latest
+      environment:
+        description: 🚀Select the Test Environment
+        required: true
+        default: 'QA'
+        type: choice
+        options: #? Orden de Deployments...
+        - DEV #? donde los developers work
+        - SANDBOX #? donde los QA realizan smoke y exploratory testing.
+        - QA #? donde los QA realizan smoke, sanity y regression testing.
+        - STAGING #? donde los QA realizan smoke, sanity o regression testing.
+        - UAT #? donde los beta testers realizan acceptance testing.
+        - PROD #? donde los usuarios finales usan la App.
+      test_run:
+        description: 🚀Select the Test Suite to Run
+        required: true
+        default: 'https://upexgalaxy47.atlassian.net/browse/GX3-5646' #! No modificar, esto es solo un ejemplo.
+        type: string
+      xray_tx:
+        description: 🚀Enter the Test Execution ID
+        required: true
+        default: 'GX3-5646' #! No modificar, esto es solo un ejemplo.
+        type: string
+      xray_project:
+        description: 🚀Select the Project Key
+        required: true
+        default: 'GX3' #! No modificar, esto es solo un ejemplo.
+        type: choice
+        options:
+        - GX1
+        - GX2
+        - GX3
+        - GX4
+
+jobs:
+  SanityTest:
+    #? El Pipeline "Sanity" es una estrategia de prueba perfecta para verificar que un Módulo entero de la App o una funcionalidad específica funcionen como se espera. Se puede realizar pruebas de cualquier nivel (Unit, Integration, E2E) para esta estrategia de pruebas. También se usa como "Story Testing" para ejecuciones de pruebas de cobertura de US (importar resultados a Jira XRay).
+    runs-on: ${{ github.event.inputs.system }}
+    environment:
+      name: ${{ github.event.inputs.environment }}
+    env:
+      MOCHA_REPORT_DIR: cypress/tests_reports/chrome_mocha_report
+
+    steps:
+    - name: 💻 Checkout Repo
+      uses: actions/checkout@v4
+
+    - name: 💿 Install Node.js v20
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: 🍙 Bun Setup
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
+
+    - name: 🧬 Install Project Dependencies
+      run: bun install
+
+    - name: 🔎 Check Typescript Code
+      run: | #? Corre el linter de TypeScript para verificar errores de sintaxis.
+        bun run check:ts
+
+    - name: 🧪 Cypress Run Sanity Test
+      uses: cypress-io/github-action@v4
+      with:
+        browser: chrome
+        command: |
+          bun run test:sanity:ci ${{ github.event.inputs.test_run }}
+
+    - name: 📬 Generate JUnit/Mocha Report
+      if: always()
+      run: bun run chrome:report
+
+    - name: ✅ Import Test Results to Xray
+      if: always() #? Corre este paso si la variable de entorno está definida
+      uses: mikepenz/xray-action@v3
+      with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
+        username: ${{ secrets.XRAY_CLIENT_ID}}
+        password: ${{ secrets.XRAY_CLIENT_SECRET}}
+        testFormat: 'junit' #! NO CAMBIAR
+        testPaths: 'cypress/tests_results/junit/chrome_junit_report.xml' #! NO CAMBIAR
+        testExecKey: ${{ github.event.inputs.xray_tx }} #! NO CAMBIAR
+        projectKey: ${{ github.event.inputs.xray_project }} #! NO CAMBIAR
+        testEnvironments: ${{ github.event.inputs.environment }}
+
+    - name: 📊 Upload Artifact Mochawesome Report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: sanity-mocha-report
+        path: ${{ env.MOCHA_REPORT_DIR }}
+        retention-days: 15
+
+    #* ------- Mochawesome Report Build and Deploy -------
+    - name: 🚀 Deploy Mocha Report to GitHub Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages #? the branch used for the GitHub Pages content.
+        destination_dir: sanity/${{ github.event.inputs.xray_tx }} #? this is the directory inside the gh-pages branch where the MOCHA_REPORT_DIR will be saved.
+        publish_dir: ${{ env.MOCHA_REPORT_DIR }} #? the directory to be published.
+        keep_files: true #? true is required to work properly with the subfolder option in the Build Allure Report step.
+        #* -----------------------------------------
+
+  Ari-Slack-Notification:
+    needs: [SanityTest] #? will always run after the SanityTest job
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🔔 Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_USERNAME: Ari✨
+        SLACK_MESSAGE: '🧪(${{ github.repository }}): ${{ github.actor }} triggered SanityTest🚀'
+        SLACK_COLOR: ${{ needs.SanityTest.result }}
+        SLACK_ICON: ${{ secrets.ARI_PROFILE }}
