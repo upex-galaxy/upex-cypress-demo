@@ -43,7 +43,7 @@ jobs:
       with:
         browser: chrome
         command: | #todo: GX3-5590-Dynamic-Properties.cy.js:
-          bun run test:chrome cypress/e2e/Tests/Elements/GX3-5552-Radio-Buttons.cy.js
+          bun run test:chrome cypress/e2e/Tests/Elements/GX3-5590-Dynamic-Properties.cy.js
     - name: 📬Generate JUnit/Mocha Report
       if: always()
       run: |
