@@ -24,7 +24,8 @@ on:
         required: true
         default: 'QA'
         type: choice
-        options: #? Orden de Deployments...
+        options:
+        #? Orden de Deployments...
         - DEV #? donde los developers work
         - SANDBOX #? donde los QA realizan smoke y exploratory testing.
         - QA #? donde los QA realizan smoke, sanity y regression testing.
@@ -60,6 +61,8 @@ jobs:
       name: ${{ github.event.inputs.environment }}
     env:
       MOCHA_REPORT_DIR: cypress/tests_reports/chrome_mocha_report
+      USERNAME: ${{ secrets.USERNAME }}
+      PASSWORD: ${{ secrets.PASSWORD }}
 
     steps:
     - name: 💻 Checkout Repo
@@ -96,7 +99,8 @@ jobs:
     - name: ✅ Import Test Results to Xray
       if: always() #? Corre este paso si la variable de entorno está definida
       uses: mikepenz/xray-action@v3
-      with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
+      with:
+        #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
         username: ${{ secrets.XRAY_CLIENT_ID}}
         password: ${{ secrets.XRAY_CLIENT_SECRET}}
         testFormat: 'junit' #! NO CAMBIAR
@@ -126,7 +130,7 @@ jobs:
         #* -----------------------------------------
 
   Ari-Slack-Notification:
-    needs: [SanityTest] #? will always run after the SanityTest job
+    needs: [ SanityTest ] #? will always run after the SanityTest job
     if: always()
     runs-on: ubuntu-latest
     steps:

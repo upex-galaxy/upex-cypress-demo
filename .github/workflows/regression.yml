@@ -24,7 +24,8 @@ on:
         required: true
         default: 'QA'
         type: choice
-        options: #? Orden de Deployments...
+        options:
+        #? Orden de Deployments...
         - DEV #? donde los developers work
         - SANDBOX #? donde los QA realizan smoke y exploratory testing.
         - QA #? donde los QA realizan smoke, sanity y regression testing.
@@ -40,6 +41,8 @@ jobs:
       name: ${{ github.event.inputs.environment }}
     env:
       MOCHA_REPORT_DIR: cypress/tests_reports/chrome_mocha_report
+      USERNAME: ${{ secrets.USERNAME }}
+      PASSWORD: ${{ secrets.PASSWORD }}
 
     steps:
     - name: 📘 Checkout Repo
@@ -70,7 +73,7 @@ jobs:
           bun run test:smoke:ci
 
   RegressionTesting:
-    needs: [SmokeTest] #? correrá después de que el SmokeTest haya terminado exitosamente.
+    needs: [ SmokeTest ] #? correrá después de que el SmokeTest haya terminado exitosamente.
     #? El Pipeline "Regression" es una estrategia de prueba perfecta para verificar que todas las funcionalidades de la aplicación funcionen como se espera después de nuevas implementaciones y lanzamientos. Se recomienda pruebas a nivel "End-to-End" para esta estrategia de pruebas.
     runs-on: ${{ github.event.inputs.system }}
     environment:
@@ -113,7 +116,8 @@ jobs:
     - name: ✅ Import Test Results to Xray
       if: always()
       uses: mikepenz/xray-action@v3
-      with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
+      with:
+        #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
         username: ${{ secrets.XRAY_CLIENT_ID}}
         password: ${{ secrets.XRAY_CLIENT_SECRET}}
         testFormat: 'junit' #! NO CAMBIAR
@@ -166,7 +170,7 @@ jobs:
         #* -----------------------------------------
 
   Ari-Slack-Notification:
-    needs: [SmokeTest, RegressionTesting]
+    needs: [ SmokeTest, RegressionTesting ]
     if: always() #? correrá después de que el SmokeTest y RegressionTesting hayan terminado.
     runs-on: ubuntu-latest
     steps:
