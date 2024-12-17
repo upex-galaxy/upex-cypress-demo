@@ -3,7 +3,7 @@
 #*🚀 Solo necesitas configurar las variables de entorno, keys de Jira y tu ruta de archivo de prueba a ejecutar en el Panel "Run workflow" de GitHub Actions
 #? 🧪 Este PIPELINE ejecutará tus pruebas y subirá los resultados a Jira XRay
 
-name: 🧪 UPEX CI/CD SanityTest Pipeline
+name: 🧪 UPEX CI/CD SanityTest Pipeline GX3-5565
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 
 on:
@@ -35,12 +35,12 @@ on:
       test_run:
         description: 🚀Select the Test Suite to Run
         required: true
-        default: '<ingresa aquí el path Posix de tu test>' #! No modificar, esto es solo un ejemplo.
+        default: 'cypress/e2e/Tests/Elements/GX3-5565-Buttons.cy.js' #! No modificar, esto es solo un ejemplo.
         type: string
       xray_tx:
         description: 🚀Enter the Test Execution ID
         required: true
-        default: 'GX3-1526' #! No modificar, esto es solo un ejemplo.
+        default: 'GX3-5565' #! No modificar, esto es solo un ejemplo.
         type: string
       xray_project:
         description: 🚀Select the Project Key
