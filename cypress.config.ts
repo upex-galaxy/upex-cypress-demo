@@ -10,17 +10,6 @@ import 'dotenv/config';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-type Envs = 'dev' | 'qa' | 'stage' | 'prod';
-const enviroments = {
-	dev: 'https://demoqa.com',
-	qa: 'https://demoqa.com',
-	stage: 'https://demoqa.com',
-	prod: 'https://demoqa.com'
-};
-const cyEnv = process.env.CYPRESS_ENVIRONMENT as Envs;
-const env = process.env.CI ? cyEnv : ('prod' as Envs);
-const baseUrl = enviroments[env];
-
 const orangeUsername = process.env.USERNAME;
 const orangePassword = process.env.PASSWORD;
 if (!orangePassword || !orangeUsername) {
@@ -55,7 +44,6 @@ export default defineConfig({
 	},
 	// E2E Testing runner
 	e2e: {
-		baseUrl: baseUrl,
 		// Glob pattern to determine what test files to load:
 		specPattern: ['cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
 		excludeSpecPattern: ['cypress/e2e/**/*.example.cy.js'],
