@@ -2,7 +2,7 @@ describe('GX3 - 5963 - tools - qa - elements - buttons', () => {
 	beforeEach('El usuario debe estar situdo en la pagina de Demo QA', () => {
 		cy.visit('https://demoqa.com/buttons');
 		cy.url().should('include', 'buttons');
-		cy.get('h1.text-centre').should('have.text. Buttons');
+		cy.get('h1.text-center').should('have.text', 'Buttons');
 	});
 
 	it('Validar hacer doble click en Buttons Bouble Click Me', () => {
@@ -11,7 +11,7 @@ describe('GX3 - 5963 - tools - qa - elements - buttons', () => {
 	});
 
 	it('Validar hacer click derecho en Buttons Right Click Me', () => {
-		cy.get('#rightClickBtn').rightClick();
-		cy.get('#rightClickMessage').should('have.text', 'You have done a double click');
+		cy.get('#rightClickBtn').rightclick();
+		cy.get('#rightClickMessage').should('have.text', 'You have done a right click');
 	});
 });
