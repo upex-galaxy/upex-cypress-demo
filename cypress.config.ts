@@ -21,7 +21,6 @@ if (!orangePassword || !orangeUsername) {
 // - En el servidor: un admin debe crear los secrets
 const trelloToken = process.env.TRELLO_TOKEN;
 const trelloKey = process.env.TRELLO_KEY;
-console.log('TRELLO_TOKEN:', trelloToken);
 if (!trelloToken || !trelloKey) {
 	throw new Error('MISSING CREDENTIALS: TRELLO_TOKEN OR TRELLO_KEY');
 }
