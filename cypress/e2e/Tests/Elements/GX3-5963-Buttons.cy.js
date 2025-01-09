@@ -14,4 +14,5 @@ describe('GX3 - 5963 - tools - qa - elements - buttons', () => {
 		cy.get('#rightClickBtn').rightclick();
 		cy.get('#rightClickMessage').should('have.text', 'You have done a right click');
 	});
+	it();
 });
