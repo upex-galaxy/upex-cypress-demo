@@ -14,4 +14,9 @@ describe('GX3 - 5963 - tools - qa - elements - buttons', () => {
 		cy.get('#rightClickBtn').rightclick();
 		cy.get('#rightClickMessage').should('have.text', 'You have done a right click');
 	});
+
+	it('Validar hacer click en buttons Click Me y visualizacion de mensaje', () => {
+		cy.get('.btn.btn-primary').eq(2).click();
+		cy.get('#dynamicClickMessage').should('have.text', 'You have done a dynamic click');
+	});
 });
