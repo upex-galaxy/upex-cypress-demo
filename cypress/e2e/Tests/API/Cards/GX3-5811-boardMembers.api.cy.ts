@@ -1,4 +1,5 @@
 import { AuthenticateAPI } from '@helper/Authenticate.api';
+import { AuthType } from '@helper/types/AuthenticateTypes.api';
 
 import { BoardMembersPage } from '@pages/GX3-5811_boardMembersPage.api';
 import { type UserData, type ApiResponse } from '@pages/types/GX3-5811_boardMembersTypes.api';
@@ -26,7 +27,7 @@ describe('GX3-5811 | Trello (API) | Members | API Endpoint: Get the Members of a
 				fixtureData.auth.token = token;
 				fixtureData.auth.key = key;
 
-				authTrello.setCredentials(fixtureData.auth);
+				authTrello.setCredentials(fixtureData.auth, AuthType.bearer);
 
 				const urlGetMemberId = authTrello.buildUrl(fixtureData.url.get.userIdMember, {
 					protocol: fixtureData.url.protocol,

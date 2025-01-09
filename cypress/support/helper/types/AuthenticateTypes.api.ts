@@ -10,3 +10,7 @@ export interface RequestData {
 		[key: string]: any;
 	};
 }
+
+export enum AuthType {
+	bearer = 'Bearer'
+}

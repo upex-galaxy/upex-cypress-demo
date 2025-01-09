@@ -1,6 +1,8 @@
-import { type Auth, type RequestData } from './types/AuthenticateTypes.api';
+import { AuthType, type Auth, type RequestData } from './types/AuthenticateTypes.api';
 
 export class AuthenticateAPI {
+	private authMethod: AuthType = AuthType.bearer;
+
 	private strConnToken: string = '';
 
 	constructor() {}
@@ -16,8 +18,15 @@ export class AuthenticateAPI {
 		return builtUrl;
 	}
 
-	public setCredentials(_auth: Auth) {
-		this.strConnToken = _auth.token;
+	public setCredentials(_auth: Auth, _method?: AuthType) {
+		this.authMethod = _method ?? AuthType.bearer;
+
+		switch (_method) {
+			case AuthType.bearer:
+			default:
+				this.strConnToken = _auth.token;
+				break;
+		}
 	}
 
 	private authenticateWithBearer(): Cypress.Chainable<any> {
@@ -30,6 +39,10 @@ export class AuthenticateAPI {
 	}
 
 	public authenticate(_requestData: RequestData): Cypress.Chainable<any> {
-		return this.authenticateWithBearer();
+		switch (this.authMethod) {
+			case AuthType.bearer:
+			default:
+				return this.authenticateWithBearer();
+		}
 	}
 }
