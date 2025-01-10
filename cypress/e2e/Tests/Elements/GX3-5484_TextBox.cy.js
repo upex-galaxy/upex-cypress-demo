@@ -1,11 +1,17 @@
-import dataForm from '@data/Elements/GX3-5484_TextBox-FillFormAndSubmit.json';
-
 const TXT_RESULT = 'p.mb-1';
 const CLASS_ERROR = '.mr-sm-2.field-error.form-control';
 
 describe('US GX3-5484 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
+	let dataForm;
+
 	cy.on('uncaught:exception', (err, runnable) => {
 		return false;
+	});
+
+	before(() => {
+		cy.fixture('data/Elements/GX3-5484_TextBox.json').then(data => {
+			dataForm = data;
+		});
 	});
 
 	beforeEach('PRC: Abrir la url text-box de ToolsQA', () => {
@@ -28,10 +34,8 @@ describe('US GX3-5484 | ToolsQA | Elements | Text Box: Fill form and Submit', ()
 
 		cy.get('button#submit').should('exist').and('be.enabled').and('be.visible').click();
 
-		//Validar que el mensaje existe
 		cy.get(TXT_RESULT).should('exist').and('be.visible');
 
-		//Validar que los datos en el mensaje son los mismos que se introdujeron
 		cy.get('p#name.mb-1').should('contain.text', VALID_NAME);
 		cy.get('p#email.mb-1').should('contain.text', VALID_EMAIL);
 		cy.get('p#currentAddress.mb-1').should('contain.text', VALID_CURRENT_ADDRESS);
@@ -47,7 +51,6 @@ describe('US GX3-5484 | ToolsQA | Elements | Text Box: Fill form and Submit', ()
 
 		cy.get('button#submit').should('exist').and('be.enabled').and('be.visible').click();
 
-		//Validar que no exista el mensaje
 		cy.get(TXT_RESULT).should('not.exist');
 	});
 
@@ -62,10 +65,8 @@ describe('US GX3-5484 | ToolsQA | Elements | Text Box: Fill form and Submit', ()
 
 		cy.get('button#submit').should('exist').and('be.enabled').and('be.visible').click();
 
-		//Validar que el mensaje existe
 		cy.get(TXT_RESULT).should('exist').and('be.visible');
 
-		//Validar que los datos en el mensaje son los mismos que se introdujeron
 		cy.get('p#name.mb-1').should('contain.text', VALID_NAME);
 		cy.get('p#currentAddress.mb-1').should('contain.text', VALID_CURRENT_ADDRESS);
 		cy.get('p#permanentAddress.mb-1').should('contain.text', VALID_PERMANENT_ADDRESS);
@@ -78,7 +79,6 @@ describe('US GX3-5484 | ToolsQA | Elements | Text Box: Fill form and Submit', ()
 
 		cy.get('button#submit').should('exist').and('be.enabled').and('be.visible').click();
 
-		//Validar que la clase existe
 		cy.get(CLASS_ERROR).should('exist');
 	});
 
@@ -89,7 +89,6 @@ describe('US GX3-5484 | ToolsQA | Elements | Text Box: Fill form and Submit', ()
 
 		cy.get('button#submit').should('exist').and('be.enabled').and('be.visible').click();
 
-		//Validar que la clase existe
 		cy.get(CLASS_ERROR).should('exist');
 	});
 
@@ -100,7 +99,6 @@ describe('US GX3-5484 | ToolsQA | Elements | Text Box: Fill form and Submit', ()
 
 		cy.get('button#submit').should('exist').and('be.enabled').and('be.visible').click();
 
-		//Validar que la clase existe
 		cy.get(CLASS_ERROR).should('exist');
 	});
 
@@ -111,7 +109,6 @@ describe('US GX3-5484 | ToolsQA | Elements | Text Box: Fill form and Submit', ()
 
 		cy.get('button#submit').should('exist').and('be.enabled').and('be.visible').click();
 
-		//Validar que la clase existe
 		cy.get(CLASS_ERROR).should('exist');
 	});
 
@@ -122,7 +119,6 @@ describe('US GX3-5484 | ToolsQA | Elements | Text Box: Fill form and Submit', ()
 
 		cy.get('button#submit').should('exist').and('be.enabled').and('be.visible').click();
 
-		//Validar que la clase existe
 		cy.get(CLASS_ERROR).should('exist');
 	});
 
@@ -133,7 +129,6 @@ describe('US GX3-5484 | ToolsQA | Elements | Text Box: Fill form and Submit', ()
 
 		cy.get('button#submit').should('exist').and('be.enabled').and('be.visible').click();
 
-		//Validar que la clase existe
 		cy.get(CLASS_ERROR).should('exist');
 	});
 
@@ -146,7 +141,6 @@ describe('US GX3-5484 | ToolsQA | Elements | Text Box: Fill form and Submit', ()
 
 		cy.get('button#submit').should('exist').and('be.enabled').and('be.visible').click();
 
-		//Validar que la clase existe
 		cy.get(CLASS_ERROR).should('exist');
 	});
 });
