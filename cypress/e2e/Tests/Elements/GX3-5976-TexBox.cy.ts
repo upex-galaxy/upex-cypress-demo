@@ -4,7 +4,7 @@ describe('GX3-5976 ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		cy.url().should('contain', 'text-box');
 	});
 
-	it.only('TC01 Validar el registro de usuario ingresando data valida', () => {
+	it('TC01 Validar el registro de usuario ingresando data valida', () => {
 		cy.get('input#userName').type('Milagros');
 		cy.get('input#userName').should('have.value', 'Milagros');
 		cy.get('input#userEmail').type('mila@gmail.com');
@@ -22,10 +22,9 @@ describe('GX3-5976 ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		cy.get('#output #permanentAddress').should('contain', 'España');
 	});
 
-	it.only('TC02 Validar No registro dejando campos vacíos', () => {
+	it('TC02 Validar No registro dejando campos vacíos', () => {
 		cy.get('input#userName').should('be.empty');
-		cy.get('input#userEmail').type('mila@gmail.com');
-		cy.get('input#userEmail').should('have.value', 'mila@gmail.com');
+		cy.get('input#userEmail').should('be.empty');
 		cy.get('textarea#currentAddress').should('be.empty');
 		cy.get('textarea#permanentAddress').should('be.empty');
 
@@ -33,17 +32,16 @@ describe('GX3-5976 ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		cy.get('#output').should('not.be.visible');
 	});
 
-	it('TC03 Validar que se muestre mensaje en rojo cuando ingresa data con formato invalido en capo Email (@)', () => {;
-	cy.get('input#userName').type('Milagros');
-	cy.get('input#userName').should('have.value', 'Milagros');
-	cy.get('input#userEmail).type("email");
-	cy.get('input#userEmail').;
-	cy.get('textarea#currentAddress').type('Barcelona');
-	cy.get('textarea#currentAddress').should('have.value', 'Barcelona');
-	cy.get('textarea#permanentAddress').type('España');
-	cy.get('textarea#permanentAddress').should('have.value', 'España');
-
+	it.only('TC03 Validar que se muestre mensaje en rojo cuando ingresa data con formato invalido en capo Email (@)', () => {;
+	
+	cy.get('input#userEmail').type("email");
+	cy.get('input#userEmail').should('have.value', 'email');
 	cy.get('button#submit').click();
-		cy.get(
-	})
+
+	cy.get('input#userEmail').should('have.class', 'field-error');
+	
+	// cy.get('.field-error').should('have.css', 'border', '1px solid red'); 
+	// no funciona porque no se puede validar el color del borde
+	// validar con propiedades CSS no es recomendable, ya que puede cambiar dependiendo del navegador
+	});
 });
