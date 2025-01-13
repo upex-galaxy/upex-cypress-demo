@@ -22,17 +22,28 @@ describe('GX3-5976 ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		cy.get('#output #permanentAddress').should('contain', 'España');
 	});
 
-	it('TC02 Validar No registro ingresando caracteres alfanumericos en campo full Name', () => {
-		cy.get('input#userName["type"="text"]').should('exist').and('be.visible').and('be.enabled');
-		cy.get('input#userName').type('12mil34');
-		cy.get('input#userEmail["type"="email"]').should('exist').and('be.visible').and('be.enabled');
-		cy.get('input#userEmail').type('juan@gmail.com');
-		cy.get('textarea#currentAddress').should('exist').and('be.visible').and('be.enabled');
-		cy.get('textarea#currentAddress').type('Madrid');
-		cy.get('textarea#permanentAddress').should('be.enabled').and('exist').and('be.visible');
-		cy.get('textarea#permanentAddress').type('España');
+	it.only('TC02 Validar No registro dejando campos vacíos', () => {
+		cy.get('input#userName').should('be.empty');
+		cy.get('input#userEmail').type('mila@gmail.com');
+		cy.get('input#userEmail').should('have.value', 'mila@gmail.com');
+		cy.get('textarea#currentAddress').should('be.empty');
+		cy.get('textarea#permanentAddress').should('be.empty');
 
 		cy.get('button#submit').click();
+		cy.get('#output').should('not.be.visible');
 	});
-	it('TC03 Validar No registro ingresando data con formato invalido en capo Email', () => {});
+
+	it('TC03 Validar que se muestre mensaje en rojo cuando ingresa data con formato invalido en capo Email (@)', () => {;
+	cy.get('input#userName').type('Milagros');
+	cy.get('input#userName').should('have.value', 'Milagros');
+	cy.get('input#userEmail).type("email");
+	cy.get('input#userEmail').;
+	cy.get('textarea#currentAddress').type('Barcelona');
+	cy.get('textarea#currentAddress').should('have.value', 'Barcelona');
+	cy.get('textarea#permanentAddress').type('España');
+	cy.get('textarea#permanentAddress').should('have.value', 'España');
+
+	cy.get('button#submit').click();
+		cy.get(
+	})
 });
