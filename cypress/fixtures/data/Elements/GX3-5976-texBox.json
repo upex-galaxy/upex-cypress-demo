@@ -1,0 +1,33 @@
+{
+	"userName": {
+		"userNameValido": "Milagros",
+		"userNameVacio": " ",
+		"userNameValido2": "Maria",
+		"userNameValido3": "Juana"
+	},
+
+	"userEmail": {
+		"userEmailValido": "mili@gmail.com",
+		"userEmailVacio": " ",
+		"userEmailSin@": "mili.com",
+		"userEmailSinPunto": "mili@com",
+		"userEmailSinCom": "mili@."
+	},
+
+	"currentAddress": {
+		"currentAddressValido": "Maracay 104",
+		"currentAddressVacio": " ",
+		"currentAddressValido2": "Barcelona España 100",
+		"currentAddressValido3": "Caracas 104-C"
+	},
+
+	"permanentAddress": {
+		"permanentAddressValido": "Ocumare 10",
+		"permanentAddressVacio": " ",
+		"permanentAddressValido2": "Argentina",
+		"permanentAddressValido3": "Las Bases"
+	},
+	"outPut": {
+		name
+	}
+}

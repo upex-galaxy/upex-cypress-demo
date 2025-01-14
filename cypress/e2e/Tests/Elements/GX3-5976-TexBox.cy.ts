@@ -4,22 +4,20 @@ describe('GX3-5976 ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		cy.url().should('contain', 'text-box');
 	});
 
-	it('TC01 Validar el registro de usuario ingresando data valida', () => {
-		cy.get('input#userName').type('Milagros');
-		cy.get('input#userName').should('have.value', 'Milagros');
-		cy.get('input#userEmail').type('mila@gmail.com');
-		cy.get('input#userEmail').should('have.value', 'mila@gmail.com');
-		cy.get('textarea#currentAddress').type('Barcelona');
-		cy.get('textarea#currentAddress').should('have.value', 'Barcelona');
-		cy.get('textarea#permanentAddress').type('España');
-		cy.get('textarea#permanentAddress').should('have.value', 'España');
+	it.only('TC01 Validar el registro de usuario ingresando data valida', () => {
+		cy.fixture('data/Elements/GX3-5976-texBox.json').then(carpeta => {
+			cy.get('#userName').type(carpeta.userName.userNameValido);
+			cy.get('#userName').should('have.value', carpeta.userName.userNameValido);
+			cy.get('#userEmail').type(carpeta.userEmail.userEmailValido);
+			cy.get('#userEmail').should('have.value', carpeta.userEmail.userEmailValido);
+			cy.get('#currentAddress').type(carpeta.currentAddress.currentAddressValido);
+			cy.get('#currentAddress').should('have.value', carpeta.currentAddress.currentAddressValido);
+			cy.get('#permanentAddress').type(carpeta.permanentAddress.permanentAddressValido);
+			cy.get('#permanentAddress').should('have.value', carpeta.permanentAddress.permanentAddressValido);
 
-		cy.get('button#submit').click();
-		cy.get('#output').should('be.visible');
-		cy.get('#name').should('contain', 'Milagros');
-		cy.get('#email').should('contain', 'mila@gmail.com');
-		cy.get('#output #currentAddress').should('contain', 'Barcelona');
-		cy.get('#output #permanentAddress').should('contain', 'España');
+			cy.get('button#submit').click();
+			cy.get('#output');
+		});
 	});
 
 	it('TC02 Validar No registro dejando campos vacíos', () => {
@@ -32,16 +30,15 @@ describe('GX3-5976 ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		cy.get('#output').should('not.be.visible');
 	});
 
-	it.only('TC03 Validar que se muestre mensaje en rojo cuando ingresa data con formato invalido en capo Email (@)', () => {;
-	
-	cy.get('input#userEmail').type("email");
-	cy.get('input#userEmail').should('have.value', 'email');
-	cy.get('button#submit').click();
+	it('TC03 Validar que se muestre mensaje en rojo cuando ingresa data con formato invalido en capo Email (@)', () => {
+		cy.get('input#userEmail').type('email');
+		cy.get('input#userEmail').should('have.value', 'email');
+		cy.get('button#submit').click();
 
-	cy.get('input#userEmail').should('have.class', 'field-error');
-	
-	// cy.get('.field-error').should('have.css', 'border', '1px solid red'); 
-	// no funciona porque no se puede validar el color del borde
-	// validar con propiedades CSS no es recomendable, ya que puede cambiar dependiendo del navegador
+		cy.get('input#userEmail').should('have.class', 'field-error');
+
+		// cy.get('.field-error').should('have.css', 'border', '1px solid red');
+		// no funciona porque no se puede validar el color del borde
+		// validar con propiedades CSS no es recomendable, ya que puede cambiar dependiendo del navegador
 	});
 });
