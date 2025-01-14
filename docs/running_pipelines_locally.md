@@ -26,7 +26,7 @@ Before running the **Sanity Tests** or **Regression** locally, ensure that you h
    ```plaintext
    TRELLO_TOKEN=your_trello_token_here
    TRELLO_KEY=your_trello_key_here
-   ´´´
+   ```
 
 3. **Run the Sanity Test**:
 
