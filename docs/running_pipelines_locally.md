@@ -6,6 +6,7 @@ Before running the **Sanity Tests** or **Regression** locally, ensure that you h
 
 - **Bun**: This is the JavaScript package manager and task runner used in the project.
 - **Dependencies**: Ensure all project dependencies are installed.
+- **Secrets**: You must create a .env file in the root directory of your project to store the necessary secrets (e.g., Trello API tokens).
 
 ## Steps to Run Sanity Test Locally
 
@@ -18,7 +19,16 @@ Before running the **Sanity Tests** or **Regression** locally, ensure that you h
    bun install
    ```
 
-2. **Run the Sanity Test**:
+2. **Create the `.env` File**:
+
+   In the root directory of your project, create a .env file and add the following secrets (replace the placeholders with your actual Trello API tokens):
+
+   ```plaintext
+   TRELLO_TOKEN=your_trello_token_here
+   TRELLO_KEY=your_trello_key_here
+   ´´´
+
+3. **Run the Sanity Test**:
 
    To execute the sanity tests, use the following command. Replace the path with the appropriate file path if needed:
 
@@ -34,9 +44,9 @@ If you wish to run the **Regression Tests** locally, follow these steps:
 
 1. **Ensure Dependencies Are Installed**:
 
-   Make sure you have installed the project dependencies as described in the previous section.
+2. **Create the `.env` File** (if you haven't already):
 
-2. **Run the Regression Pipeline**:
+3. **Run the Regression Pipeline**:
 
    To execute the Regression Pipeline locally, use the following command:
 
@@ -48,5 +58,5 @@ If you wish to run the **Regression Tests** locally, follow these steps:
 
 ## Notes
 
-Ensure that you have configured any necessary secrets and environment variables (such as Trello credentials or other tokens) before running the tests.
+Make sure to have the necessary secrets configured in your `.env` file in the local environment (like Trello credentials or any other secret) before running the tests.
 This will mimic the behavior of the CI/CD pipeline, but it will execute on your local machine.
