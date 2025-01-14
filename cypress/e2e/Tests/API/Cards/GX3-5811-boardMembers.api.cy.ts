@@ -1,16 +1,3 @@
-/* Instrucciones para ejecutar el workflow Sanity en local
-1. Instala Bun y las dependencias del proyecto:
-   cd upex-cypress-demo
-   bun install
-2. Ejecuta el comando para ejecutar las pruebas de Sanity (cambia la ruta si es necesario):
-   bun run test:sanity:ci cypress/e2e/Tests/API/Cards/GX3-5811-boardMembers.api.cy.ts
-
-* NOTAS
-   - Asegúrate de tener configurados los secretos necesarios en tu entorno local
-     si son requeridos por las pruebas (como las credenciales de Trello o cualquier otro secreto).
-   - Este flujo simula lo que hace el pipeline de CI/CD en GitHub Actions, pero directamente en tu máquina local.
-*/
-
 import { AuthenticateAPI } from '@helper/Authenticate.api';
 import { AuthType } from '@helper/types/AuthenticateTypes.api';
 
