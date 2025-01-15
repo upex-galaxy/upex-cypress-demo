@@ -16,7 +16,10 @@ describe('GX3-5976 ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 			cy.get('#permanentAddress').should('have.value', carpeta.permanentAddress.permanentAddressValido);
 
 			cy.get('button#submit').click();
-			cy.get('#output');
+			cy.get('p#name').should('contain.text', carpeta.userName.userNameValido);
+			cy.get('p#email').should('contain.text', carpeta.userEmail.userEmailValido);
+			cy.get('p#currentAddress.mb-1').eq(1).should('contain.text', carpeta.currentAddress.currentAddressValido);
+			cy.get('p#permanentAddress').eq(1).should('contain.text', carpeta.permanentAddress.permanentAddressValido);
 		});
 	});
 
