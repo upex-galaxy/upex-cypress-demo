@@ -11,12 +11,12 @@ describe('GX3-5376 | TS: ToolsQA | Interactions | Selectable', () => {
 		const randomgird = Cypress._.random(0, 8);
 
 		selectablePage.get.list().should('be.visible');
-		selectablePage.get.listItems().eq(randomList).click();
+		selectablePage.get.listItems().eq(randomList);
 		selectablePage.get.listItems().eq(randomList).should('have.class', 'active');
-		// selectablePage.get.listItems().should('not.have.class', 'active');//esta no corre
+		// selectablePage.get.listItems().should('not.have.class', 'active'); //esta no corre
 		selectablePage.get.buttonsgrid().should('exist');
-		selectablePage.get.buttonsgrid().click();
-		selectablePage.get.gridItems().eq(randomgird).click();
+		selectablePage.get.buttonsgrid();
+		selectablePage.get.gridItems().eq(randomgird);
 		selectablePage.get.gridItems().eq(randomgird).should('have.class', 'active');
 	});
 
