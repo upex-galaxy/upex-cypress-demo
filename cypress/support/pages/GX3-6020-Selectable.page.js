@@ -9,11 +9,11 @@ class Selectable {
 	clickbuttonsgrid() {
 		this.element.buttonsgrid().click();
 	}
-	clicklistItems() {
-		this.element.listItems().click();
+	clickListItems(num) {
+		this.element.listItems().eq(num).click();
 	}
-	clickgridItems() {
-		this.element.gridItems().click();
+	clickgridItems(num) {
+		this.element.gridItems().eq(num).click();
 	}
 }
 export const selectablePage = new Selectable();
