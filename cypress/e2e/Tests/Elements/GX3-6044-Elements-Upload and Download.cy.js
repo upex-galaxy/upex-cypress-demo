@@ -19,6 +19,11 @@ describe('GX3-6044 | Elementos-Cargar y descargar', () => {
 
 	it('Validar la subida de un archivo local', () => {
 		cy.get('#uploadFile').click().selectFile('cypress/fixtures/images/upexlogo.png');
-		cy.get('#uploadFilePath').should('contain', 'upexlogo.png');
+		cy.contains('fakepath').should('be.visible');
+		cy.contains('fakepath')
+			.invoke('text')
+			.then(text => {
+				expect(text).to.contain('upexlogo.png');
+			});
 	});
 });
