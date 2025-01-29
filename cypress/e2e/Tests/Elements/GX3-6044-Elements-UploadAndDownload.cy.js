@@ -5,20 +5,20 @@ describe('GX3-6044 | Elementos-Cargar y descargar', () => {
 		cy.get('h1').should('contain.text', 'Upload and Download');
 	});
 
+	it('Validar la subida de un archivo local', () => {
+		cy.get('#uploadFile').click().selectFile('cypress/fixtures/images/upexlogo.png');
+		cy.contains('fakepath').should('be.visible');
+		cy.contains('fakepath')
+			.invoke('text')
+			.then(text => {
+				expect(text).to.contain('upexlogo.png');
+			});
+	});
+
 	it('Validar seleccionar download para descargar una imagen', () => {
 		uploadPage.clickDownload();
 		cy.readFile('cypress/downloads/sampleFile.jpeg').then(file => {
 			expect(file).to.exist;
-		});
-
-		it('Validar la subida de un archivo local', () => {
-			cy.get('#uploadFile').click().selectFile('cypress/fixtures/images/upexlogo.png');
-			cy.contains('fakepath').should('be.visible');
-			cy.contains('fakepath')
-				.invoke('text')
-				.then(text => {
-					expect(text).to.contain('upexlogo.png');
-				});
 		});
 	});
 });
