@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker';
+import { formsPage } from '@pages/GX3-6075-Forms.Page';
 describe('GX3-6075: ToolsQA | Forms | Practice Form', () => {
 	beforeEach('Visitar la pagina de saucedemo', () => {
 		cy.visit('https://demoqa.com/automation-practice-form');
@@ -5,12 +7,23 @@ describe('GX3-6075: ToolsQA | Forms | Practice Form', () => {
 	});
 
 	it('Validar rellenar el formulario de forma exitosa', () => {
-		cy.get('#firstName').type('Milagros');
-		cy.get('#lastName').type('Gonzalez');
-		cy.get('#userEmail-wrapper').type('mili@gmail.com');
-		cy.get('label[for="gender-radio-1"]').click();
-		cy.get('label[for="gender-radio-2"]').click();
-		cy.get('label[for="gender-radio-3"]').click();
-		cy.get('#userNumber').type('1234567890');
+		const inputFirstName = faker.person.firstName();
+		const inputLastName = faker.person.lastName();
+		const inputEmail = faker.internet.email();
+		const inputMobilNumber = faker.string.numeric({ length: 10, exclude: ['0'] });
+
+		formsPage.typeInputFirstName(inputFirstName);
+		formsPage.elementos.firstName().should('have.value', inputFirstName);
+
+		formsPage.typeInputLastName(inputLastName);
+		formsPage.elementos.lastName().should('have.value', inputLastName);
+
+		formsPage.typeInputEmail(inputEmail);
+		formsPage.elementos.email().should('have.value', inputEmail);
+
+		formsPage.typeMobilNumber(inputMobilNumber);
+		formsPage.elementos.mobilNumber().should('have.value', inputMobilNumber);
+
+		cy.get('#subjectsContainer').type('hola');
 	});
 });
