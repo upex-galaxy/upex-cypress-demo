@@ -11,6 +11,7 @@ describe('GX3-6075: ToolsQA | Forms | Practice Form', () => {
 		const inputLastName = faker.person.lastName();
 		const inputEmail = faker.internet.email();
 		const inputMobilNumber = faker.string.numeric({ length: 10, exclude: ['0'] });
+		const currentAddress = faker.location.streetAddress();
 
 		formsPage.typeInputFirstName(inputFirstName);
 		formsPage.elementos.firstName().should('have.value', inputFirstName);
@@ -24,6 +25,10 @@ describe('GX3-6075: ToolsQA | Forms | Practice Form', () => {
 		formsPage.typeMobilNumber(inputMobilNumber);
 		formsPage.elementos.mobilNumber().should('have.value', inputMobilNumber);
 
-		cy.get('#subjectsContainer').type('hola');
+		formsPage.openDatePicker();
+		formsPage.selectDatePicker(10, 2000, 8);
+
+		formsPage.typeCurrentAddress(currentAddress);
+		formsPage.elementos.textareaCurrentAddress().should('have.value', currentAddress);
 	});
 });
