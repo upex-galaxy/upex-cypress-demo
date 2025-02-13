@@ -4,9 +4,8 @@ class FormsPage {
 		lastName: () => cy.get('#lastName'),
 
 		email: () => cy.get('#userEmail'),
-		gender1: () => cy.get('label[for="gender-radio-1"]'), //no lo se usar
-		gender2: () => cy.get('label[for="gender-radio-2"]'), //no lo se usar
-		gender3: () => cy.get('label[for="gender-radio-3"]'), //no lo se usar
+		genderRadio: () => cy.get('[class*=custom-radio]'),
+		genders: () => cy.get('[type="radio"]'),
 
 		mobilNumber: () => cy.get('#userNumber'),
 
@@ -32,6 +31,10 @@ class FormsPage {
 	typeInputEmail(inputEmail) {
 		this.elementos.email().type(inputEmail);
 	}
+	checkRadioGender() {
+		this.elementos.genderRadio();
+		this.genderRadio.genders().check();
+	}
 	typeMobilNumber(inputMobilNumber) {
 		this.elementos.mobilNumber().type(inputMobilNumber);
 	}
@@ -46,25 +49,18 @@ class FormsPage {
 		this.elementos.reacPicker().should('be.visible');
 	}
 
-	selectDatePicker(month, year, day) {
-		const monthIndex = month - 1; // Ajuste porque los meses en JavaScript van de 0 a 11
-		const yearValue = year.toString(); // Convertimos el año a string
-		const dayValue = day.toString(); // Convertimos el día a string
+	selectDatePicker(year, month, day) {
+		const yearValue = year.toString();
+		const monthIndex = month - 1;
+		const dayValue = day.toString();
 
-		// Seleccionamos el mes en el select
 		this.elementos.selectDateMonth().select(monthIndex.toString());
-
-		// Seleccionamos el año en el select
 		this.elementos.selectDateYear().select(yearValue);
-
-		// Buscamos el día en el calendario y hacemos clic
 		return this.elementos
 			.selectDateDay()
 			.contains(dayValue)
 			.then(day => {
 				cy.wrap(day).click();
-
-				// Extraemos el atributo "aria-label" del día seleccionado
 				return cy
 					.wrap(day)
 					.invoke('attr', 'aria-label')

@@ -1,0 +1,40 @@
+# ⚡️ToolsQA | Forms | Practice Form
+
+[GX3-6075] <https://upexgalaxy-v10.atlassian.net/browse/GX3-6075>
+
+```
+✅ACCEPTANCE CRITERIA
+As a QA learner,
+
+I want to test:
+
+Filling out a form with:
+
+First Name
+
+Last Name
+
+Email
+
+Mobile Number
+
+Subjects
+
+Current Address
+
+Radio Buttons to choose Gender
+
+Date Picker
+
+Check Boxes to choose Hobbies 
+
+Upload picture
+
+Select menu to chooise State and City
+
+Button Register
+
+And Submit it.
+
+So that I can improve my testing skills for this scenario.
+```
