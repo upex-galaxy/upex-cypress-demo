@@ -49,7 +49,7 @@
 	"editor.formatOnSaveMode": "file", // required to format on save
 	"vs-code-prettier-eslint.prettierLast": false, // set as "true" to run 'prettier' last not first
 	"editor.lineHeight": 20,
-	"editor.defaultColorDecorators": true,
+	"editor.defaultColorDecorators": "auto",
 	"editor.insertSpaces": false,
 	"editor.tabSize": 4,
 	"editor.detectIndentation": true,
