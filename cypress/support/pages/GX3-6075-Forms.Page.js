@@ -4,7 +4,7 @@ class FormsPage {
 		lastName: () => cy.get('#lastName'),
 
 		email: () => cy.get('#userEmail'),
-		genderRadio: () => cy.get('[class*=custom-radio]'),
+		genderRadio: () => cy.get('[class*=col-md-9] [type="radio"]'),
 		genders: () => cy.get('[type="radio"]'),
 
 		mobilNumber: () => cy.get('#userNumber'),
@@ -32,9 +32,13 @@ class FormsPage {
 		this.elementos.email().type(inputEmail);
 	}
 	checkRadioGender() {
-		this.elementos.genderRadio();
-		this.genderRadio.genders().check();
+		this.elementos.genderRadio().then(array => {
+			const arrayRandom = Math.floor(Math.random() * (array.length - 1 - 0 + 1));
+			cy.wrap(array).eq(arrayRandom).check({ force: true });
+		});
+		return this.elementos.genderRadio().its('length');
 	}
+
 	typeMobilNumber(inputMobilNumber) {
 		this.elementos.mobilNumber().type(inputMobilNumber);
 	}
@@ -51,7 +55,7 @@ class FormsPage {
 
 	selectDatePicker(year, month, day) {
 		const yearValue = year.toString();
-		const monthIndex = month - 1;
+		const monthIndex = month;
 		const dayValue = day.toString();
 
 		this.elementos.selectDateMonth().select(monthIndex.toString());

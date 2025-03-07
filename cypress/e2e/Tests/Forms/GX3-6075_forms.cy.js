@@ -26,10 +26,15 @@ describe('GX3-6075: ToolsQA | Forms | Practice Form', () => {
 		formsPage.typeInputEmail(randomEmail);
 		formsPage.elementos.email().should('have.value', randomEmail);
 
-		cy.get('[type="radio"] ').check();
-
 		formsPage.typeMobilNumber(randomNumberMobil);
 		formsPage.elementos.mobilNumber().should('have.value', randomNumberMobil);
+
+		// cy.get('[class*=col-md-9] [type="radio"]').should('exist');
+		// cy.get('[class*=col-md-9] [type="radio"]').eq(0).check();
+		// formsPage.checkRadioGender();
+		formsPage.checkRadioGender();
+		// formsPage.checkRadioGender(1);
+		// formsPage.checkRadioGender(2);
 
 		formsPage.openDatePicker();
 		cy.log('test random Date');
