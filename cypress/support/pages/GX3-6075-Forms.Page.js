@@ -1,3 +1,5 @@
+import { constants } from 'fs';
+
 class FormsPage {
 	elementos = {
 		firstName: () => cy.get('#firstName'),
@@ -16,6 +18,7 @@ class FormsPage {
 		selectDateDay: () => cy.get('[role="listbox"] [role="option"]:not([class*= --outside-month])'),
 
 		subjects: () => cy.get('#subjectsContainer'),
+		hobbies: () => cy.get('input[type="checkbox"]'),
 
 		selectArchivo: () => cy.get('#uploadPicture'),
 
@@ -69,6 +72,16 @@ class FormsPage {
 					.wrap(day)
 					.invoke('attr', 'aria-label')
 					.then(labelText => labelText);
+			});
+	}
+
+	checkHobbies() {
+		return this.elementos
+			.hobbies()
+			.its('length')
+			.then(arrayHobbies => {
+				cy.log(`Cantidad de hobbies encontrados: ${arrayHobbies}`);
+				return arrayHobbies;
 			});
 	}
 }
