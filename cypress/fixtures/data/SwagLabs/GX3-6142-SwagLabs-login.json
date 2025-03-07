@@ -1,0 +1,62 @@
+[
+	{
+		"tc": "TC1 | Validate to be able to login successfully",
+		"username": "standard_user",
+		"password": "secret_sauce",
+		"errorMessage": null
+	},
+	{
+		"tc": "TC2 | Validate to be able to login successfully with problem user",
+		"username": "problem_user",
+		"password": "secret_sauce",
+		"errorMessage": null
+	},
+	{
+		"tc": "TC3 | Validate to be able to login successfully with performance glitch user",
+		"username": "performance_glitch_user",
+		"password": "secret_sauce",
+		"errorMessage": null
+	},
+	{
+		"tc": "TC4 | Validate not be able to login with locked out user",
+		"username": "locked_out_user",
+		"password": "secret_sauce",
+		"errorMessage": "Epic sadface: Sorry, this user has been locked out."
+	},
+	{
+		"tc": "TC5 | Validate not be able to login with username and password nulls",
+		"username": null,
+		"password": null,
+		"errorMessage": "Epic sadface: Username is required"
+	},
+	{
+		"tc": "TC6 | Validate to be able to login with username null",
+		"username": null,
+		"password": "secret_sauce",
+		"errorMessage": "Epic sadface: Username is required"
+	},
+	{
+		"tc": "TC7 | Validate to be able to login with password null",
+		"username": "standard_user",
+		"password": null,
+		"errorMessage": "Epic sadface: Password is required"
+	},
+	{
+		"tc": "TC8 | Validate to be able to login with username and password invalids",
+		"username": "invalid_user",
+		"password": "invalid_password",
+		"errorMessage": "Epic sadface: Username and password do not match any user in this service"
+	},
+	{
+		"tc": "TC9 | Validate to be able to login with username invalid",
+		"username": "invalid_user",
+		"password": "secret_sauce",
+		"errorMessage": "Epic sadface: Username and password do not match any user in this service"
+	},
+	{
+		"tc": "TC10 | Validate to be able to login with password invalid",
+		"username": "standard_user",
+		"password": "invalid_password",
+		"errorMessage": "Epic sadface: Username and password do not match any user in this service"
+	}
+]

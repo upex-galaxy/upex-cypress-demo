@@ -1,0 +1,27 @@
+[
+	{
+		"tc": "TC11 | Validate not be able to access /inventory.html when you are not logged in",
+		"url": "https://www.saucedemo.com/inventory.html",
+		"errorMessage": "Epic sadface: You can only access '/inventory.html' when you are logged in."
+	},
+	{
+		"tc": "TC12 | Validate not be able to access /cart.html when you are not logged in",
+		"url": "https://www.saucedemo.com/cart.html",
+		"errorMessage": "Epic sadface: You can only access '/cart.html' when you are logged in."
+	},
+	{
+		"tc": "TC13 | Validate not be able to access /checkout-step-one.html when you are not logged in",
+		"url": "https://www.saucedemo.com/checkout-step-one.html",
+		"errorMessage": "Epic sadface: You can only access '/checkout-step-one.html' when you are logged in."
+	},
+	{
+		"tc": "TC14 | Validate not be able to access /checkout-step-two.html when you are not logged in",
+		"url": "https://www.saucedemo.com/checkout-step-two.html",
+		"errorMessage": "Epic sadface: You can only access '/checkout-step-two.html' when you are logged in."
+	},
+	{
+		"tc": "TC15 | Validate not be able to access /checkout-complete.html when you are not logged in",
+		"url": "https://www.saucedemo.com/checkout-complete.html",
+		"errorMessage": "Epic sadface: You can only access '/checkout-complete.html' when you are logged in."
+	}
+]
