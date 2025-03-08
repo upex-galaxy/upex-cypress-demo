@@ -29,7 +29,7 @@ describe('GX3-6105 TOOLSQA ELEMENTS BUTTONS', () => {
 		cy.get('p[id=rightClickMessage]').should('be.visible').and('contain', 'You have done a right click');
 	});
 
-	it('US GX3-6105 | TC 6 | VALIDAR QUE SE MUESTRE MENSAJE DE "BOTON  "CLICK ME" ', () => {
+	it('US GX3-6105 | TC 6 | VALIDAR QUE SE MUESTRE MENSAJE DE BOTON  "CLICK ME" ', () => {
 		cy.get('.btn.btn-primary:not(#doubleClickBtn):not(#rightClickBtn)').should('be.visible').and('be.enabled').click();
 		cy.get('p#dynamicClickMessage').should('contain', 'You have done a dynamic click');
 	});
