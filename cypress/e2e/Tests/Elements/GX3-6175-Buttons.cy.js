@@ -3,7 +3,7 @@ describe('GX3-6175 TOOLSQA ELEMENTS BUTTONS', () => {
 		cy.visit('https://demoqa.com/buttons');
 	});
 
-	it('US GX3-6175 | TC 1 | VALIDAR HACER CLICK EN EL BOTÓN  DOUBLE CLICK', () => {
+	it('US GX3-6175 | TC 1 | VALIDAR HACER CLICK EN EL BOTON  DOUBLE CLICK', () => {
 		cy.get('#doubleClickBtn').should('be.visible').and('be.enabled').dblclick();
 	});
 
