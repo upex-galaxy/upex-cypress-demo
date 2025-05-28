@@ -1,0 +1,18 @@
+{
+	"FullName": {
+		"namevalid": "Samuel",
+		"namevalid2": "Samuel123",
+		"namevalid3": "Eduardo",
+		"namevalid4": "Daryelin",
+		"namevalid5": "Isabel",
+		"namevalid6": "Miguel"
+	},
+	"Email": {
+		"emailTC1": "sam123@gmail.com",
+		"emailTC2": "sam123$gmail.com",
+		"emailTC3": "@gmail.com ",
+		"emailTC4": "sam123@.com",
+		"emailTC5": "sam123@gmailcom",
+		"emailTC6": "sam123@gmail.x"
+	}
+}
